@@ -39,5 +39,32 @@ class UserIntegrationTests {
         assertEquals 'nuevaPass', editedUser.password
     }
 
+    @Test
+    void testSaveThenDelete() {
+        def user = new User(userId: 'oscar', password: 'fiuba')
+        assertNotNull user.save()
+        
+        def foundUser = User.get(user.id)
+        foundUser.delete()
+        
+        assertFalse User.exists(foundUser.id)
+    }
+
+    @Test
+    void testEvilSave() {
+        def user = new User(userId: 'oscar',password: 'no')
+        assertFalse user.validate()
+        assertTrue user.hasErrors()
+        def errors = user.errors
+        assertEquals "size.toosmall", errors.getFieldError("password").code
+        assertEquals "no", errors.getFieldError("password").rejectedValue
+        
+        // Campo valido no esta en el objeto errors
+        assertNull errors.getFieldError("userId")
+        
+    }
+
+
+
 
 }
