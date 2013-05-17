@@ -8,5 +8,7 @@ class User {
 
 
     static constraints = {
-    }
+    	userId(size:3..20, unique: true)
+		password(size: 5..8)
+	}
 }
