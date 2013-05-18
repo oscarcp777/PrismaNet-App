@@ -7,7 +7,7 @@ package com.prismanet
  */
 class Account {
 
-	static belongsTo = {user:User}
+	static belongsTo = [user:User]
 	
     static constraints = {
     }

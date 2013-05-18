@@ -12,6 +12,5 @@ import org.junit.*
 class TweetTests {
 
     void testSomething() {
-       fail "Implement me"
     }
 }

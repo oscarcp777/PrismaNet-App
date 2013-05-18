@@ -13,7 +13,7 @@ class Concept {
 	Date dateCreated
 	Date lastUpdated
 	
-	static hasMany = {tweets:Tweet; posts:Post}
+	static hasMany = [tweets:Tweet, posts:Post]
 
     static constraints = {
     }

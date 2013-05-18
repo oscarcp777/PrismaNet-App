@@ -1,5 +1,7 @@
 package com.prismanet
 
+import com.sun.istack.internal.Nullable;
+
 /**
  * Usuario del sistema
  * @author santiago
@@ -11,10 +13,12 @@ class User {
 	String password
 	Date dateCreated
 	Account account
-	static hasMany = { concepts : Concept }
+	static hasMany = [ concepts : Concept ]
 
     static constraints = {
     	userId(size:3..20, unique: true)
 		password(size: 5..8)
+		account(nullable:true)
+		concepts(nullable:true)
 	}
 }

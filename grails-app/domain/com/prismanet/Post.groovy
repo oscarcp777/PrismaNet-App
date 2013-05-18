@@ -3,7 +3,7 @@ package com.prismanet
 class Post {
 	
 	String author
-	String text
+	String content
 
     static constraints = {
     }

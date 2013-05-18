@@ -3,7 +3,7 @@ package com.prismanet
 class Tweet {
 	
 	String author
-	String text
+	String content
 	Boolean retweet
 	
 
