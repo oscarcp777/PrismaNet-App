@@ -1,2 +1,4 @@
 target/
 web-app/WEB-INF/tld/
+target-eclipse/
+.settings/
