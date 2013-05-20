@@ -8,13 +8,18 @@ package com.prismanet
 class Concept {
 	
 	String conceptName
-	//Palabras clave
-	String[] keywords
 	Date dateCreated
 	Date lastUpdated
 	
-	static hasMany = [tweets:Tweet, posts:Post]
+	static hasMany = [keywords: Keyword, twitterAccounts:TwitterAccount, 
+							tweets:Tweet, posts:Post]
 
     static constraints = {
+		conceptName()
+		keywords(nullable:true)
+		twitterAccounts(nullable:true)
+		tweets(nullable:true)
+		posts(nullable:true)
     }
+	
 }
