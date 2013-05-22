@@ -60,21 +60,15 @@ class ConceptIntegrationTests {
         assertFalse Concept.exists(foundConcept.id)
     }
 
-//    @Test
-//    void testEvilSave() {
-//        def concept = new Concept(conceptName: 'Filmus')
-//		concept.addToKeywords(new Keyword(word:'filmus'))
-//		concept.addToKeywords(new Keyword(word:'politica'))
-//		concept.addToTwitterAccounts(new TwitterAccount(name:'Twitter Invalido'))
-//						
-//		assertFalse concept.validate()
-//        assertTrue concept.hasErrors()
-//        def errors = concept.errors
-//        assertEquals "Twitter invalido", errors.getFieldError("twitterAccounts").rejectedValue
-//        
-//        // Campo valido no esta en el objeto errors
-//        assertNull errors.getFieldError("conceptName")
-//        
-//    }
+    @Test
+    void testEvilSave() {
+        def concept = new Concept()
+						
+		assertFalse concept.validate()
+        assertTrue concept.hasErrors()
+        def errors = concept.errors
+		assertEquals "nullable", errors.getFieldError("conceptName").code
+        
+    }
 
 }
