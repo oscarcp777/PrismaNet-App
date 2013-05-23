@@ -18,7 +18,8 @@ class UserIntegrationTests {
 
     @Test
     void testFirstSaveEver() {
-        def user = new User(userId: 'oscar', password: 'fiuba')
+		def account = new AccountType(type:'free').save()
+        def user = new User(userId: 'oscar', password: 'fiuba', account:account)
         assertNotNull user.save()
         assertNotNull user.id
 
@@ -28,7 +29,8 @@ class UserIntegrationTests {
 
     @Test
     void testSaveAndUpdate() {
-        def user = new User(userId: 'oscar', password: 'fiuba')
+		def account = new AccountType(type:'free').save()
+        def user = new User(userId: 'oscar', password: 'fiuba', account:account)
         assertNotNull user.save()
 
         def foundUser = User.get(user.id)
@@ -41,7 +43,8 @@ class UserIntegrationTests {
 
     @Test
     void testSaveThenDelete() {
-        def user = new User(userId: 'oscar', password: 'fiuba')
+		def account = new AccountType(type:'free').save()
+        def user = new User(userId: 'oscar', password: 'fiuba', account:account)
         assertNotNull user.save()
         
         def foundUser = User.get(user.id)
@@ -52,7 +55,8 @@ class UserIntegrationTests {
 
     @Test
     void testEvilSave() {
-        def user = new User(userId: 'oscar',password: 'no')
+		def account = new AccountType(type:'free').save()
+        def user = new User(userId: 'oscar',password: 'no', account:account)
         assertFalse user.validate()
         assertTrue user.hasErrors()
         def errors = user.errors
@@ -63,8 +67,6 @@ class UserIntegrationTests {
         assertNull errors.getFieldError("userId")
         
     }
-
-
 
 
 }

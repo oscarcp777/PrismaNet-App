@@ -10,16 +10,16 @@ class Concept {
 	String conceptName
 	Date dateCreated
 	Date lastUpdated
-	
-	static hasMany = [keywords: Keyword, twitterAccounts:TwitterAccount, 
-							tweets:Tweet, posts:Post]
+	TwitterSetup twitterSetup
+	FacebookSetup facebookSetup
+	static hasMany = [tweets:Tweet, posts:Post]
 
     static constraints = {
 		conceptName()
-		keywords(nullable:true)
-		twitterAccounts(nullable:true)
 		tweets(nullable:true)
 		posts(nullable:true)
+		twitterSetup(nullable:true)
+		facebookSetup(nullable:true)
     }
 	
 }

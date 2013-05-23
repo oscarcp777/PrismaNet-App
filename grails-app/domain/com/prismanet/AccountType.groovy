@@ -5,10 +5,9 @@ package com.prismanet
  * @author santiago
  *
  */
-class Account {
+class AccountType {
 
-	static belongsTo = [user:User]
-	
-    static constraints = {
+	String type
+	static constraints = {
     }
 }

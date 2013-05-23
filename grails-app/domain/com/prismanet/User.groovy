@@ -12,13 +12,13 @@ class User {
 	String userId
 	String password
 	Date dateCreated
-	Account account
-	static hasMany = [ concepts : Concept ]
+	AccountType account
+	static hasMany = [ concepts : Concept, twitterAccounts:TwitterAccount ]
 
     static constraints = {
     	userId(size:3..20, unique: true)
 		password(size: 5..8)
-		account(nullable:true)
 		concepts(nullable:true)
+		twitterAccounts(nullable:true)
 	}
 }

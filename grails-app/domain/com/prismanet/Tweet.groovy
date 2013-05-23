@@ -2,10 +2,10 @@ package com.prismanet
 
 class Tweet {
 	
-	String author
 	String content
 	Boolean retweet
 	
+	static belongsTo = [author:Author]
 
     static constraints = {
     }

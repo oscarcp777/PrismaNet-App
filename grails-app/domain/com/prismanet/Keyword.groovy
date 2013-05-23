@@ -4,9 +4,8 @@ class Keyword {
 	
 	String word
 	
-	static belongsTo = [concept:Concept]
+	static belongsTo = [TwitterSetup,FacebookSetup] 
 
     static constraints = {
-		
-    }
+	}
 }

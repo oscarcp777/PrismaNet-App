@@ -1,12 +1,17 @@
 package com.prismanet
 
+import java.util.Date;
+
 class TwitterAccount {
 	
-	String name
-	
-	static belongsTo = [concept:Concept]
+	String accountName
+	Date dateCreated
+	Date lastUpdated
+	static hasMany = [authors:Author, changes:HistoricalTwitterAccount]
 
     static constraints = {
-		name(matches:'@.*')
+		accountName(matches:'@.*')
+		authors(nullable:true)
+		changes(nullable:true)
     }
 }

@@ -18,10 +18,7 @@ class ConceptIntegrationTests {
      @Test
     void testFirstSaveEver() {
 		def concept = new Concept(conceptName: 'Filmus')
-		concept.addToKeywords(new Keyword(word:'filmus'))
-		concept.addToKeywords(new Keyword(word:'politica'))
-		concept.addToTwitterAccounts(new TwitterAccount(name:'@Filmus'))
-        assertNotNull concept.save()
+		assertNotNull concept.save()
         assertNotNull concept.id
 
         def foundConcept = Concept.get(concept.id)
@@ -31,28 +28,21 @@ class ConceptIntegrationTests {
     @Test
     void testSaveAndUpdate() {
         def concept = new Concept(conceptName: 'Filmus')
-		concept.addToKeywords(new Keyword(word:'filmus'))
-		concept.addToKeywords(new Keyword(word:'politica'))
-		concept.addToTwitterAccounts(new TwitterAccount(name:'@Filmus'))
 		assertNotNull concept.save()
 
         def foundConcept = Concept.get(concept.id)
 		def keyword = new Keyword(word:'Cristina')
-        foundConcept.addToKeywords(keyword)
+        foundConcept.conceptName = "Daniel Filmus"
         foundConcept.save()
 
         def editedConcept = Concept.get(concept.id)
-        assertTrue editedConcept.keywords.contains(keyword)
+        assertTrue editedConcept.conceptName == "Daniel Filmus"
     }
 
     @Test
     void testSaveThenDelete() {
         def concept = new Concept(conceptName: 'Filmus')
-		concept.addToKeywords(new Keyword(word:'filmus'))
-		concept.addToKeywords(new Keyword(word:'politica'))
-		concept.addToTwitterAccounts(new TwitterAccount(name:'@Filmus'))
-		
-        assertNotNull concept.save()
+		assertNotNull concept.save()
         
         def foundConcept = Concept.get(concept.id)
         foundConcept.delete()
