@@ -21,8 +21,7 @@ class TwitterSetupIntegrationTests {
 		assertNotNull twitterConfig.save()
 		twitterConfig.addToKeywords(new Keyword(word:'filmus'))
 		twitterConfig.addToKeywords(new Keyword(word:'politica'))
-		twitterConfig.addToTwitterAccounts(new TwitterAccount(name:'@Filmus'))
-        
+		
         assertNotNull twitterConfig.id
 
         def foundConfig = TwitterSetup.get(twitterConfig.id)
@@ -37,7 +36,6 @@ class TwitterSetupIntegrationTests {
 		assertNotNull twitterConfig.save()
 		twitterConfig.addToKeywords(new Keyword(word:'filmus'))
 		twitterConfig.addToKeywords(new Keyword(word:'politica'))
-		twitterConfig.addToTwitterAccounts(new TwitterAccount(name:'@Filmus'))
 		
 
         def foundConfig = TwitterSetup.get(twitterConfig.id)
@@ -56,7 +54,6 @@ class TwitterSetupIntegrationTests {
 		assertNotNull twitterConfig.save()
 		twitterConfig.addToKeywords(new Keyword(word:'filmus'))
 		twitterConfig.addToKeywords(new Keyword(word:'politica'))
-		twitterConfig.addToTwitterAccounts(new TwitterAccount(name:'@Filmus'))
 		
         def foundConfig = TwitterSetup.get(twitterConfig.id)
         foundConfig.delete()
