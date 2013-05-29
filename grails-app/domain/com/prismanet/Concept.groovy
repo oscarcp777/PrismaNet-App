@@ -21,5 +21,11 @@ class Concept {
 		twitterSetup(nullable:true)
 		facebookSetup(nullable:true)
     }
+
+	@Override
+	public String toString() {
+		return conceptName;
+	}	
+	
 	
 }
