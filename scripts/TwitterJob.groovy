@@ -33,7 +33,7 @@ def mThread(){
     try{
       def js = new groovy.json.JsonSlurper().parseText(it)
       def text = js
-      if(js.user?.lang == 'en')
+      if(js.user?.lang == 'es' /*&& js.text.contains('bianchi')*/)
        out( " -> " + ++count + ":"  +text )
     } catch (Exception e) {
       out( e.toString() )
