@@ -53,12 +53,42 @@ class ConceptIntegrationTests {
     @Test
     void testEvilSave() {
         def concept = new Concept()
-						
 		assertFalse concept.validate()
         assertTrue concept.hasErrors()
         def errors = concept.errors
 		assertEquals "nullable", errors.getFieldError("conceptName").code
-        
     }
+	
+	@Test
+	void testTweetValidator(){
+		def twitterConfig = new TwitterSetup(includedAccounts:"@twitter1,@twitter2",
+		keywords:"politica,filmus")
+		
+		def concept = new Concept(conceptName:"Filmus",twitterSetup:twitterConfig)
+		def tweet1 = new Tweet(content:"El @twitter1 no existe")
+		def tweet2 = new Tweet(content:"El @twitter2 no existe")
+		concept.addToTweets(tweet1)
+		concept.addToTweets(tweet2)
+
+		assertTrue concept.validate()
+		assertFalse concept.hasErrors()
+		
+	}
+	
+//	@Test
+//	void testTweetValidator2(){
+//		def twitterConfig = new TwitterSetup(includedAccounts:"@CFKArgentina,@twitter2",
+//		keywords:"politica,filmus")
+//		def tweet1 = new Tweet(content:"La cristi ta loca")
+//		def tweet2 = new Tweet(content:"El @CFKArgentina no existe")
+//
+//		def concept = new Concept(conceptName: 'Filmus',twitterSetup:twitterConfig)
+//		concept.addToTweets(tweet1)
+//		concept.addToTweets(tweet2)
+//		assertFalse concept.validate()
+//		assertTrue concept.hasErrors()
+//		def errors = concept.errors
+//		assertEquals "concept.tweets.invalid", errors.getFieldError("tweets").code
+//	}
 
 }

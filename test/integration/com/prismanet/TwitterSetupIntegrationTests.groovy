@@ -75,20 +75,20 @@ class TwitterSetupIntegrationTests {
 		assertFalse twitterConfig.validate()
 		assertTrue twitterConfig.hasErrors()
 		def errors = twitterConfig.errors
-		assertEquals "validator.invalid", errors.getFieldError("includedAccounts").code
+		assertEquals "twitterAccount.invalid", errors.getFieldError("includedAccounts").code
 		
 		twitterConfig =  new TwitterSetup(excludedAccounts:"234141")
 		assertFalse twitterConfig.validate()
 		assertTrue twitterConfig.hasErrors()
 		errors = twitterConfig.errors
-		assertEquals "validator.invalid", errors.getFieldError("excludedAccounts").code
+		assertEquals "twitterAccount.invalid", errors.getFieldError("excludedAccounts").code
 		
 		
 		twitterConfig =  new TwitterSetup(excludedAccounts:"@Osqui, no anda")
 		assertFalse twitterConfig.validate()
 		assertTrue twitterConfig.hasErrors()
 		errors = twitterConfig.errors
-		assertEquals "validator.invalid", errors.getFieldError("excludedAccounts").code
+		assertEquals "twitterAccount.invalid", errors.getFieldError("excludedAccounts").code
 		
 		twitterConfig =  new TwitterSetup(keywords:"palabra valida, no@valida")
 		assertFalse twitterConfig.validate()
