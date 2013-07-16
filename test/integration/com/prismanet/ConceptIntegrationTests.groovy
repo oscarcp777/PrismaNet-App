@@ -1,6 +1,9 @@
 package com.prismanet
 
 import static org.junit.Assert.*
+
+import java.awt.print.Printable;
+
 import org.junit.*
 
 class ConceptIntegrationTests {
@@ -73,6 +76,19 @@ class ConceptIntegrationTests {
 		assertTrue concept.validate()
 		assertFalse concept.hasErrors()
 		
+	}
+	
+	@Test
+	void testCategorizationService(){
+		def conceptService = new ConceptService()
+		
+		def categoryList = conceptService.categoryStore();
+		int j = 1
+		for (i in categoryList) {
+			 println j + "- Sexo: " + i[0] + ", Valor: " + i[1]
+			 j++ 
+		}
+				
 	}
 	
 //	@Test
