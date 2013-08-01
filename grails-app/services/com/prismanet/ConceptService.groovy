@@ -8,14 +8,24 @@ class ConceptException extends RuntimeException {
 class ConceptService {
 		
 
-    def categoryStore(/*def categories, def filters*/) {
+    def categoryStore(Concept entity, def groups/*, def filters*/) {
 		
 		def tagList = Concept.withCriteria {
 			createAlias("tweets", "t")
-			createAlias("tweets.author", "a")
-//			eq("u.userId", "glen")
+			int i = 0
+			for (item in groups){
+				createAlias(item,"a"+i)
+				i++
+			}
+//			createAlias("tweets.author", "a")
+			eq("id", entity.id)
 			projections {
-				groupProperty("a.sex")
+//				groupProperty("id")
+				int j = 0
+				for (item in groups){
+					groupProperty("a"+j+".sex")
+					j++
+				}	
 				count("t.id")
 			}
 		}

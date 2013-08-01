@@ -5,9 +5,11 @@ class ConceptController {
 	def scaffold = true
 	def conceptService
 	
-	def listBySex = {
-		def categoryList = conceptService.categoryStore();
-		[ categoryList : categoryList]
+	def stats = {
+		Concept concept = Concept.findById(params.id)
+		def groupList = ["tweets.author"]
+		def sexList = conceptService.categoryStore(concept, groupList);
+		[concept : concept, sexList : sexList]
 	}
 		
     
