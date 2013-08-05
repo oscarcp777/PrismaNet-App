@@ -1,5 +1,7 @@
 package com.prismanet
 
+import com.prismanet.context.ConceptAttributeContext;
+
 class ConceptException extends RuntimeException {
 	String message
 	Concept concept
@@ -7,28 +9,36 @@ class ConceptException extends RuntimeException {
 
 class ConceptService {
 		
-
+	ConceptAttributeContext context
+	
+	ConceptService(){
+		context = new ConceptAttributeContext()
+	}
+	
     def categoryStore(Concept entity, def groups/*, def filters*/) {
 		
-		def tagList = Concept.withCriteria {
-			createAlias("tweets", "t")
-			int i = 0
+		def criteria = Concept.createCriteria();
+		def resultList = criteria {
+			
+			context.clearDefinedAlias()
 			for (item in groups){
-				createAlias(item,"a"+i)
-				i++
-			}
-//			createAlias("tweets.author", "a")
+				if(context.getEntityNameFor(item)!=null)
+					context.createAliasFor(criteria, item)
+			}	
 			eq("id", entity.id)
 			projections {
-//				groupProperty("id")
-				int j = 0
 				for (item in groups){
-					groupProperty("a"+j+".sex")
-					j++
-				}	
-				count("t.id")
+					if(context.getEntityNameFor(item)!=null)
+						groupProperty(context.getAliasNameForProperty(item)+"." + context.getAttributePropertyName(item))
+					else
+						groupProperty(context.getAttributePropertyName(item))
+				}
+				if (context.getAliasNameForEntityPath("tweets") == null)
+					context.createAliasFor(criteria, "tweetsId")
+					
+				count(context.getAliasNameForEntityPath("tweets") + ".id")
 			}
 		}
-		return tagList
+		return resultList
 	}
 }
