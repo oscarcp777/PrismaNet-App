@@ -9,7 +9,8 @@ class ConceptController extends GenericService {
 		Concept concept = Concept.findById(params.id)
 		def groupList = ["sex"]
 		def sexList = conceptService.categoryStore(concept, groupList);
-		
+		print 'Sex List'
+		print sexList
 		groupList = ["tweetCreated"]
 		def dateList = conceptService.categoryStore(concept, groupList);
 		
