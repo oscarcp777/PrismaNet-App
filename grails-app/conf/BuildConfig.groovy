@@ -36,12 +36,17 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+		  mavenRepo "http://twitter4j.org/maven2"
     }
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
 
         runtime 'mysql:mysql-connector-java:5.1.22'
+		compile 'org.twitter4j:twitter4j-core:3.0.4-SNAPSHOT'
+		compile 'org.twitter4j:twitter4j-async:3.0.4-SNAPSHOT'
+		compile 'org.twitter4j:twitter4j-stream:3.0.4-SNAPSHOT'
+		compile 'org.twitter4j:twitter4j-media-support:3.0.4-SNAPSHOT'
     }
 
     plugins {
@@ -63,5 +68,9 @@ grails.project.dependency.resolution = {
 		compile ":create-domain-uml:0.5"
 		
 		compile ":constraints:0.8.0"
+		
+		compile ":quartz:1.0-RC9"
+		
+		compile ":mongodb:1.3.0"
     }
 }
