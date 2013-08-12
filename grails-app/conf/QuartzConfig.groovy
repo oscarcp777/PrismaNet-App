@@ -1,8 +1,8 @@
 
 quartz {
-	autoStartup = true
+	autoStartup = false
 	jdbcStore = false
-	waitForJobsToCompleteOnShutdown = false
+	waitForJobsToCompleteOnShutdown = true
 	exposeSchedulerInRepository = false
 
 	props {
@@ -21,7 +21,7 @@ environments {
 		quartz {
 			// Toggle scheduled tasks for local "run-app" environment
 
-			autoStartup = true
+			autoStartup = false
 			jdbcStore = false
 			props(jdbcProps)
 		}
@@ -29,7 +29,7 @@ environments {
 	production {
 		quartz {
 			jdbcStore = false
-			autoStartup = true
+			autoStartup = false
 			props(jdbcProps)
 		}
 	}

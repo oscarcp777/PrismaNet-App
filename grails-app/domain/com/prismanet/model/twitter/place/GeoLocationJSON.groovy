@@ -1,4 +1,4 @@
-package com.prisma.net.twitter.model
+package com.prismanet.model.twitter.place
 
 class GeoLocationJSON {
 	static mapWith = "mongo"
@@ -6,4 +6,7 @@ class GeoLocationJSON {
 	Double longitude;
 	static constraints = {
 	}
+	static mapping ={
+		version false
+  }
 }

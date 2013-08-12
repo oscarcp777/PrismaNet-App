@@ -19,7 +19,7 @@ grails.project.dependency.resolution = {
     }
     log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
-    legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
+    legacyResolve true // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
 
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
@@ -72,5 +72,7 @@ grails.project.dependency.resolution = {
 		compile ":quartz:1.0-RC9"
 		
 		compile ":mongodb:1.3.0"
+		
+		compile ':gson:1.1.4'
     }
 }

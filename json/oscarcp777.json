@@ -41,9 +41,10 @@
         "coordinates": null,
         "created_at": "Tue Jun 25 01:07:04 +0000 2013",
         "entities": {
-            "hashtags": [],
-            "symbols": [],
-            "urls": [],
+            "hashtags":[{"indices":[32,36],"text":"lol"}],
+            "symbols": [{  "text": "PEP","indices": [  114,118] },
+      					{"text": "COKE","indices": [128,133] } ],
+            "urls":[{"indices":[32,52], "url":"http:\/\/t.co\/IOwBrTZR", "display_url":"youtube.com\/watch?v=oHg5SJ\u2026", "expanded_url":"http:\/\/www.youtube.com\/watch?v=oHg5SJYRHA0"}],
             "user_mentions": [
                 {
                     "id": 1523291540,
