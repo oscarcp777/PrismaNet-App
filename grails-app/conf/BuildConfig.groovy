@@ -51,9 +51,12 @@ grails.project.dependency.resolution = {
 
     plugins {
         runtime ":hibernate:$grailsVersion"
-        runtime ":jquery:1.8.3"
-        runtime ":resources:1.1.6"
-
+        runtime ":jquery:1.10.2"
+        runtime ":resources:1.2.RC2"
+		compile ":fields:1.3"
+		compile ":twitter-bootstrap:2.3.2"
+		compile ":less-resources:1.3.3.2"
+		
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
         //runtime ":cached-resources:1.0"
@@ -74,5 +77,7 @@ grails.project.dependency.resolution = {
 		compile ":mongodb:1.3.0"
 		
 		compile ':gson:1.1.4'
+		
+		
     }
 }

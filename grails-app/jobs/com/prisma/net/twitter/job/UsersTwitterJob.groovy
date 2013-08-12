@@ -13,7 +13,7 @@ class UsersTwitterJob {
 	
 	UserJSONService userJSONService;
     static triggers = {
-      simple repeatInterval: 60000l, repeatCount:-1 , startDelay: 50000// execute job once in 5 seconds
+      simple repeatInterval: 600000l, repeatCount:-1 , startDelay: 50000// execute job once in 5 seconds
 	  
 	  }
 
