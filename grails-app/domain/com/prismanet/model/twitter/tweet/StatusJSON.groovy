@@ -7,6 +7,8 @@ import com.prismanet.model.twitter.place.PlaceJSON
 class StatusJSON {
 	static mapWith = "mongo"
 	static embedded = ['contributors',"coordinates","entities","geo","place"]
+	
+	Date dateCreated;
 	List<Long> contributors;
 	GeoLocationJSON coordinates;
 	Date created_at;
