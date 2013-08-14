@@ -10,7 +10,7 @@ class TwitterAccount {
 	static hasMany = [authors:Author, changes:HistoricalTwitterAccount]
 
     static constraints = {
-		accountName(matches:'@.*')
+		accountName(twitterAccount:true)
 		authors(nullable:true)
 		changes(nullable:true)
     }

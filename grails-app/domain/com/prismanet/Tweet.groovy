@@ -6,6 +6,7 @@ class Tweet {
 	String content
 	Boolean retweet
 	Date created
+	Integer month
 	//TODO con el atributo created tengo solo la fecha falta la hora ver de agregar como
 	// timestamp y antes de guardar dividir dia de hora
 	static belongsTo = [author:Author]
@@ -13,6 +14,11 @@ class Tweet {
     static constraints = {
 		content(maxLength:140) 
     }
+	
+	void setCreated(Date date){
+		month = date.getMonth()
+		created = date
+	}
 	
 	@Override
 	public String toString() {

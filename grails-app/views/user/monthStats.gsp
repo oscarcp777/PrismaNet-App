@@ -1,0 +1,14 @@
+<html>
+<head>
+	<title>Resultados de la Consulta</title>
+<meta name="layout" content="main" />
+</head>
+<body>
+	<h2>Resultados Usuario: "${user.userId}"</h2>
+	<h1>Tweets por Fecha</h1>
+	<g:each var="item" in="${statsList}">
+		<li>Concepto: ${item[0]} -  Tweets: ${item[1]} -  Autores: ${item[2]}</li>
+	</g:each>
+	<g:link action='monthStats' id="${user.id}">Nueva Busqueda</g:link>
+</body>
+</html>

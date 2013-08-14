@@ -67,7 +67,7 @@ class ConceptIntegrationTests {
 		def twitterConfig = new TwitterSetup(includedAccounts:"@twitter1,@twitter2",
 		keywords:"politica,filmus")
 		
-		def concept = new Concept(conceptName:"Filmus",twitterSetup:twitterConfig)
+		def concept = new Concept(conceptName:"Filmus",twitterSetup:twitterConfig).save()
 		def tweet1 = new Tweet(content:"El @twitter1 no existe")
 		def tweet2 = new Tweet(content:"El @twitter2 no existe")
 		concept.addToTweets(tweet1)
@@ -78,18 +78,18 @@ class ConceptIntegrationTests {
 		
 	}
 	
-	@Test
-	void testCategorizationService(){
-		def conceptService = new ConceptService()
-		
-		def categoryList = conceptService.categoryStore();
-		int j = 1
-		for (i in categoryList) {
-			 println j + "- Sexo: " + i[0] + ", Valor: " + i[1]
-			 j++ 
-		}
-				
-	}
+//	@Test
+//	void testCategorizationService(){
+//		def conceptService = new ConceptService()
+//		
+//		def categoryList = conceptService.categoryStore();
+//		int j = 1
+//		for (i in categoryList) {
+//			 println j + "- Sexo: " + i[0] + ", Valor: " + i[1]
+//			 j++ 
+//		}
+//				
+//	}
 	
 //	@Test
 //	void testTweetValidator2(){

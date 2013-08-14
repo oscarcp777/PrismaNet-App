@@ -18,7 +18,7 @@ class Concept {
 
     static constraints = {
 		conceptName()
-		tweets(nullable:true
+		tweets(
 //			, 
 //			validator:{value, concept, errors ->
 //			// Validacion agregado de tweets al concepto
@@ -52,7 +52,7 @@ class Concept {
 //			return true
 //		}
 			)
-		posts(nullable:true)
+		posts()
 		twitterSetup(nullable:true)
 		facebookSetup(nullable:true)
     }
