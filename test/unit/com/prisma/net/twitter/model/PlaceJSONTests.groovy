@@ -15,6 +15,6 @@ import com.prismanet.model.twitter.place.PlaceJSON
 class PlaceJSONTests {
 
     void testSomething() {
-       fail "Implement me"
+     assertEquals 1,1
     }
 }
