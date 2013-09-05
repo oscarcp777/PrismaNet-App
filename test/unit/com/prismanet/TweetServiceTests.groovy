@@ -1,4 +1,4 @@
-package com.prismanet.twitter.service
+package com.prismanet
 
 
 
@@ -8,10 +8,10 @@ import org.junit.*
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
-@TestFor(UserJSONService)
-class UserJSONServiceTests {
+@TestFor(TweetService)
+class TweetServiceTests {
 
     void testSomething() {
-        assertEquals 1,1
+        fail "Implement me"
     }
 }

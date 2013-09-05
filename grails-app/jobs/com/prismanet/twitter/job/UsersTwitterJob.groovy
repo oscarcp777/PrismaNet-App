@@ -1,4 +1,4 @@
-package com.prisma.net.twitter.job
+package com.prismanet.twitter.job
 
 import twitter4j.*
 import twitter4j.json.DataObjectFactory

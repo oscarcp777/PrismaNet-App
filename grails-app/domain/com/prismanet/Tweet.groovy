@@ -16,7 +16,8 @@ class Tweet {
     }
 	
 	void setCreated(Date date){
-		month = date.getMonth()
+		if (date != null)
+			month = date.getMonth()
 		created = date
 	}
 	

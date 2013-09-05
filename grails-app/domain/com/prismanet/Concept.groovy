@@ -17,7 +17,7 @@ class Concept {
 	static hasMany = [tweets:Tweet, posts:Post]
 
     static constraints = {
-		conceptName()
+		conceptName(nullable:false)
 		tweets(
 //			, 
 //			validator:{value, concept, errors ->

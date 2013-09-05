@@ -1,20 +1,15 @@
-package com.prisma.net.twitter.model
-
-
-
-
+@artifact.package@
 
 import grails.test.mixin.*
-
-import com.prismanet.model.twitter.place.PlaceJSON
+import org.junit.*
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(PlaceJSON)
-class PlaceJSONTests {
+@TestFor(@artifact.testclass@)
+class @artifact.name@ {
 
     void testSomething() {
-     assertEquals 1,1
+       fail "Implement me"
     }
 }
