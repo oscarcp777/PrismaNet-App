@@ -1,5 +1,6 @@
 package com.prismanet
 
+import com.prismanet.model.security.SecUser
 import com.sun.istack.internal.Nullable;
 
 /**
@@ -7,17 +8,17 @@ import com.sun.istack.internal.Nullable;
  * @author santiago
  *
  */
-class User {
-
-	String userId
-	String password
+class User extends SecUser{
+	
+	String firstName
+	String lastName
 	Date dateCreated
 	AccountType account
 	static hasMany = [ concepts : Concept, twitterAccounts:TwitterAccount ]
 
     static constraints = {
-    	userId(size:3..20, unique: true)
-		password(size: 5..8)
+		firstName(blank:false)
+		lastName(blank:false)
 		concepts(nullable:true)
 		twitterAccounts(nullable:true)
 	}

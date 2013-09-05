@@ -7,6 +7,9 @@ import com.prismanet.Sex
 import com.prismanet.Tweet
 import com.prismanet.TwitterSetup
 import com.prismanet.User
+import com.prismanet.model.security.SecRole
+import com.prismanet.model.security.SecUserSecRole;
+
 import groovy.time.TimeCategory
 
 class BootStrap {
@@ -24,18 +27,44 @@ class BootStrap {
 	def destroy = {
 	}
 
+	
+	void createSystemUser(){
+		// Tipos de Cuenta
+		def trialAccount = new AccountType(type:'trial').save()
+		def premiumAccount = new AccountType(type:'premium').save()
+
+		def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)
+		def userRole = SecRole.findByAuthority('ROLE_USER') ?: new SecRole(authority: 'ROLE_USER').save(failOnError: true)
+
+		def user1 = User.findByUsername('oscarcp777') ?: new User(username: 'oscarcp777', account:trialAccount,enabled: true, password: 'pass', firstName: 'Oscar', lastName: 'C‡ceres').save(failOnError: true)
+		if (!user1.authorities.contains(userRole)) {
+			SecUserSecRole.create user1, userRole, true
+		}
+		def user3 = User.findByUsername('sdonik') ?: new User(username: 'sdonik', account:trialAccount,enabled: true, password: 'pass', firstName: 'Santiago', lastName: 'Dinikian').save(failOnError: true)
+		if (!user3.authorities.contains(userRole)) {
+			SecUserSecRole.create user3, userRole, true
+		}
+		def user2 = User.findByUsername('admin') ?: new User(username: 'admin', account:premiumAccount,enabled: true, password: 'pass', firstName: 'Admin', lastName: 'Admin').save(failOnError: true)
+		if (!user2.authorities.contains(userRole)) {
+			SecUserSecRole.create user2, userRole, true
+		}
+		if (!user2.authorities.contains(adminRole)) {
+			SecUserSecRole.create user2, adminRole, true
+		}
+
+		assert User.count() == 3
+		assert SecRole.count() == 2
+		assert SecUserSecRole.count() == 4
+	}
 
 	void createAdminUserIfRequired() {
 		use ( TimeCategory ) {
-			if (!User.findByUserId("admin")) {
-				println "Fresh Database. Creating ADMIN user."
-
-				// Tipos de Cuenta
-				def trialAccount = new AccountType(type:'trial').save()
-				def premiumAccount = new AccountType(type:'premium').save()
-
+			if (!User.findByUsername("admin")) {
+				println "Fresh Database. Creating  users."
+				createSystemUser();
+				
 				// Usuario
-				def user = new User(userId: 'admin', password: 'admin', account:trialAccount).save()
+				def user = User.findByUsername("admin");
 
 				// Twitter's Setup
 				def twitterConfigIns = new TwitterSetup(includedAccounts:"@minsaurralde",keywords:"politica,filmus").save()

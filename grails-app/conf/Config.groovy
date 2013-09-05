@@ -11,9 +11,9 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
-grails.project.groupId = com.prismanet // change this to alter the default package name and Maven publishing destination
+grails.project.groupId = 'com.prismanet' // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
-grails.mime.use.accept.header = true
+grails.mime.use.accept.header = false
 grails.mime.types = [
     all:           '*/*',
     atom:          'application/atom+xml',
@@ -36,7 +36,7 @@ grails.mime.types = [
 grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
 
 // The default codec used to encode data with ${}
-grails.views.default.codec = "none" // none, html, base64
+grails.views.default.codec = "html" // none, html, base64
 grails.views.gsp.encoding = "UTF-8"
 grails.converters.encoding = "UTF-8"
 // enable Sitemesh preprocessing of GSP pages
@@ -91,3 +91,10 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.prismanet.model.security.SecUser'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.prismanet.model.security.SecUserSecRole'
+grails.plugins.springsecurity.authority.className = 'com.prismanet.model.security.SecRole'
+grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/home'
+grails.plugins.springsecurity.securityConfigType = "Annotation"

@@ -51,28 +51,24 @@ grails.project.dependency.resolution = {
 
 	plugins {
 		runtime ":hibernate:$grailsVersion"
-		runtime ":jquery:1.8.3"
-		runtime ":resources:1.1.6"
-
-		// Uncomment these (or add new ones) to enable additional resources capabilities
-		//runtime ":zipped-resources:1.0"
-		//runtime ":cached-resources:1.0"
-		//runtime ":yui-minify-resources:0.1.5"
-
+		runtime ":jquery:1.10.2"
+		compile ":jquery-ui:1.8.24"
+		runtime ":resources:1.2.RC2"
 		build ":tomcat:$grailsVersion"
-
 		runtime ":database-migration:1.3.2"
-
 		compile ':cache:1.0.1'
-		
 		compile ":create-domain-uml:0.5"
-		
 		compile ":constraints:0.8.0"
-		
 		compile ":quartz:1.0-RC9"
-		
 		compile ":mongodb:1.3.0"
-		
 		compile ':gson:1.1.4'
+		runtime ":zipped-resources:1.0"
+		runtime ":cached-resources:1.0"
+		runtime ":yui-minify-resources:0.1.5"
+		runtime ":cache-headers:1.1.5"
+		compile ":mail:1.0.1"
+		runtime ":famfamfam:1.0.1"
+		compile ":spring-security-core:1.2.7.3"
+		compile ":spring-security-ui:0.2"
 	}
 }
