@@ -6,13 +6,12 @@
 <title><g:layoutTitle default="Prisma-Net" /></title>
 <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.gif')}" type="image/gif">
 <link rel="icon" href="${resource(dir: 'images', file: 'favicon.gif')}" type="image/gif">
-<r:require module="corecss" />
+<r:require module="core" />
 <g:layoutHead />
 <r:layoutResources />
 </head>
 <body>
      <g:layoutBody/>
-	<r:require modules="corejs" />
 	<r:layoutResources />
 </body>
 </html>

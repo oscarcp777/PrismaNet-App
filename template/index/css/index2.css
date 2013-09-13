@@ -88,14 +88,6 @@
 		format('woff');
 }
 
-@font-face {
-	font-family: 'prisma font';
-	font-style: normal;
-	font-weight: 700;
-	src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'),
-		url(http://themes.googleusercontent.com/static/fonts/sourcesanspro/v5/toadOcfmlt9b38dHJxOBGIqjGYJUyOXcBwUQbRaNH6c.woff)
-		format('woff');
-}
 
 @font-face {
 	font-family: 'Arista';
@@ -123,19 +115,16 @@ a:hover {
 	color: #e94000;
 	text-decoration: none
 }
-#wrap {
+#section1 {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
 	margin: 0 auto -45px;
 }
 
-#wrap>.hd_wrapInner {
-	padding-top: 60px;
-}
 
 ::selection {
-	background: #ea2f7c;
+	background: #1abc9c;
 	color: #ffffff;
 }
 
@@ -167,9 +156,9 @@ a:hover {
 }
 
 .hd_navbar {
-	background: #ffffff;
-	padding: 6px 0 6px 0;
-	border-top: 8px solid #ea2f7c;
+	background-color:#ffffff;
+	margin-left:50px;
+	border-top: 8px solid #16a085;
 	border-bottom: 1px solid #cccccc;
 	opacity: 0.0096;
 	filter: alpha(opacity =  0.96);
@@ -183,7 +172,7 @@ a:hover {
 }
 
 .hd_navbar .brand {
-	margin-left: 0;
+	margin-top:15px;
 	position: relative;
 	color: #000000;
 	font-size: 50px;
@@ -199,18 +188,19 @@ a:hover {
 }
 
 .hd_navbar .brand .logoHolder {
-	font-family: 'Arista', 'Arial', sans-serif;
+	font-family: "arista";
+	font-weight:600;
 	position: absolute;
 	text-shadow: 0 0.032em 0 #b0b0b0, 0px 0.15em 0.11em rgba(0, 0, 0, 0.15),
 		0px 0.25em 0.021em rgba(0, 0, 0, 0.1), 0px 0.32em 0.32em
 		rgba(0, 0, 0, 0.1);
-	color: #000000;
-	width: 250px;
+	color: #1abc9c;
+	width: 500px;
 	text-decoration: none;
 }
 
 .hd_navbar .brand .logoFirst {
-	color: #16a085;
+	color: #000000;
 }
 
 .hd_navbar .brand .logoI {
@@ -218,10 +208,10 @@ a:hover {
 }
 
 .hd_navbar .brand .logoDot {
-	color: #16a085;
+	color: #000000;
 	position: absolute;
 	z-index: 10;
-	top:11px;
+/* 	top:11px; */
 	left: 119px;
 	font-size: 35px;
 }
@@ -239,7 +229,7 @@ a:hover {
 }
 
 .hd_navbar .nav li a:hover {
-	border-top: 3px solid #ea2f7c;
+	border-top: 3px solid #16a085;
 }
 
 .hd_navbar .btn-navbar {
@@ -274,6 +264,7 @@ a:hover {
 }
 .nav{
 	text-align: center;
+	padding-top: 10px;
 }
 .nav .sep {
 	border-left: 1px solid #ddd;
@@ -284,7 +275,9 @@ a:hover {
 
 .nav .signup {
 	box-shadow: 0 0 0 2px #dee0e5 inset;
-	border-radius: 4px
+	border-radius: 4px;
+	font-weight: bold;
+	color: #000000;
 }
 .hd_navbarSub {
 	background: #f1f1f1;
@@ -300,7 +293,7 @@ a:hover {
 }
 
 .hd_navbarSub .nav li a {
-	color: #b2b2b2;
+	color: #000000;
 }
 
 .hd_navbarSub .nav li a:hover {
@@ -316,7 +309,7 @@ a:hover {
 }
 
 .hd_hero h1 {
-	margin: 50px 0 20px 0;
+	margin: 0 0 0 0;
 	color: #000000;
 	font-size: 44px;
 	font-weight: 700;
@@ -422,13 +415,13 @@ a:hover {
 	width: 40px;
 	text-align: center;
 	border-radius: 100px;
-	margin: 0 10px 0 0;
+	margin: 0 0 0 0;
 	font-size: 2rem;
 	-webkit-transition: 100ms all linear
 }
 
 .rslides_tabs li.rslides_here  {
-	background: #ed4c2a;
+	background: #16a085;
 	color: #fff;
 	height: 40px;
 	width: 40px;
