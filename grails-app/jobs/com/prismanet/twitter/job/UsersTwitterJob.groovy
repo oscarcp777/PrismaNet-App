@@ -18,9 +18,9 @@ class UsersTwitterJob {
 	  }
 
     def execute() {
-		def json =loadUserTwitter("oscarcp777")
-		UserJSON userJson = parserUser(json)
-        userJSONService.saveUserJSON(userJson);
+//		def json =loadUserTwitter("oscarcp777")
+//		UserJSON userJson = parserUser(json)
+//        userJSONService.saveUserJSON(userJson);
 
        println "Running Job!"+new Date()
     }

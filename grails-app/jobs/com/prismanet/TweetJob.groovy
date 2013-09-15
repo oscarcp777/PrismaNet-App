@@ -18,7 +18,7 @@ class TweetJob implements StatusListener{
 
 	def execute() {
 		print "Starting the Tweets job."
-		tweetService.streamConection(this)
+//		tweetService.streamConection(this)
 		println "Running Job!" + new Date()
 	}
 	

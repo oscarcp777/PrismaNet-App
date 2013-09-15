@@ -1,7 +1,8 @@
 <html>
 <head>
-	<meta name='layout' content='main'/>
+	<meta name='layout' content='home'/>
 	<title>Welcome to Grails</title>
+	<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 	<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;

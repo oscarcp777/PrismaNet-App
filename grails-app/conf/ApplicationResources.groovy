@@ -1,5 +1,7 @@
 modules = {
-	
+	    application {
+	        resource url:'js/application.js'
+	    }
 	core {
 		resource url:'css/bootstrap.css', disposition: 'head'
 		resource url:'js/jquery.js', disposition: 'head'
