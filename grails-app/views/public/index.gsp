@@ -47,7 +47,9 @@
 
 									<div class="brand">
 										<a class="logoHolder" title="return to home page" href="#">
-											<span class="logoFirst">Prisma</span>-Net
+											<span class="logoFirst">
+											<i class="icon-rombo" style="font-weight:bold;font-size:0.9em;"></i>
+											Prisma</span>-Net
 											
 										</a>
 									</div>

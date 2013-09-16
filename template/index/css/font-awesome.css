@@ -696,6 +696,9 @@ a .icon-flip-vertical:before {
 .icon-eye-open:before {
   content: "\f06e";
 }
+.icon-rombo:before {
+  content: "\25C8";
+}
 .icon-eye-close:before {
   content: "\f070";
 }
