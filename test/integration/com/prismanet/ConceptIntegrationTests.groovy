@@ -78,18 +78,37 @@ class ConceptIntegrationTests {
 		
 	}
 	
-//	@Test
-//	void testCategorizationService(){
-//		def conceptService = new ConceptService()
-//		
-//		def categoryList = conceptService.categoryStore();
-//		int j = 1
-//		for (i in categoryList) {
-//			 println j + "- Sexo: " + i[0] + ", Valor: " + i[1]
-//			 j++ 
-//		}
-//				
-//	}
+	@Test
+	void testCategorizationByAuthorSexService(){
+		def conceptService = new ConceptService()
+		def concept = new Concept(conceptName: 'Filmus')
+		assertNotNull concept.save()
+		def groupList = ["sex"]
+		def categoryList = conceptService.categoryStore(concept, groupList);
+		int j = 1
+		for (i in categoryList) {
+			 println j + "- Sexo: " + i[0] + ", Valor: " + i[1]
+			 j++ 
+		}
+				
+	}
+	
+	
+	@Test
+	void testCategorizationByTweetDateService(){
+		def conceptService = new ConceptService()
+		def concept = new Concept(conceptName: 'Filmus')
+		assertNotNull concept.save()
+		def groupList = ["tweetCreated"]
+		def categoryList = conceptService.categoryStore(concept, groupList);
+		int j = 1
+		for (i in categoryList) {
+			 println j + "- Sexo: " + i[0] + ", Valor: " + i[1]
+			 j++
+		}
+				
+	}
+
 	
 //	@Test
 //	void testTweetValidator2(){
