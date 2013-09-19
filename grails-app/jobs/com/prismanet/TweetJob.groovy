@@ -13,12 +13,12 @@ class TweetJob implements StatusListener{
 	def group = "tweetsJobs"
 
 	static triggers = {
-		simple repeatInterval: 600000l, repeatCount:-1 , startDelay: 10000
+		simple repeatInterval: 600000l, repeatCount:-1 , startDelay: 30000
 	}
 
 	def execute() {
 		print "Starting the Tweets job."
-//		tweetService.streamConection(this)
+		tweetService.streamConection(this)
 		println "Running Job!" + new Date()
 	}
 	

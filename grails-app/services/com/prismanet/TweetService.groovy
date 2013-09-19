@@ -23,24 +23,54 @@ class TweetService{
 	
 	@Transactional
 	def saveTweet(Status status){
-		println "Tweet NO guardado"
-		Tweet tweet = new Tweet(content:status.getText());
-		println "Llega"
+
+		println ""
+		println ""
+//		print "nombre: " + status.getUser().getScreenName()
+//		print "seguidores: " + status.getUser().getFollowersCount()  
+//		print "fecha creacion: " + status.getUser().getCreatedAt()
+		Author author = Author.findByAccountName("@"+status.getUser().getScreenName())
+		if (!author)
+			author = new Author(accountName:"@"+status.getUser().getScreenName(), followers:status.getUser().getFollowersCount(), sex: Sex.M, userSince:status.getUser().getCreatedAt()).save()
+			
+		Tweet tweet = new Tweet(content:status.getText(),author:author, created:status.getCreatedAt())
 		try {
-			tweet.save(flush: true)
+			def List<Concept> concepts = Concept.list()
+			for (Concept concept in concepts){
+				if (concept.testAddTweet(tweet)){
+					print "valido para concepto: " +  concept
+					tweet.save()
+					concept.addToTweets(tweet)
+					println "Llega2"
+					println "Tweet guardado con ID :  " + tweet.id
+					break
+				}
+			}
 		} catch (Exception e) {
-			print e.getMessage()
+			print e.getStackTrace()
+//			tweet.delete()
 		}
-		println "Llega2"
-		println "Tweet guardado con ID :  " + tweet.id
+		
 	}
 	
 	
 	
 	
 	def streamConection(StatusListener listener){
-		String args = "@CFKArgentina"
-		
+		String args;
+		Concept.withTransaction{
+			def List<Concept> concepts = Concept.list()
+			for (Concept concept in concepts){
+				for (String twitterAccount in concept.twitterSetup.includedAccounts.split(',')) {
+					if (!args)
+						args = twitterAccount
+					else
+						args += "," + twitterAccount
+				}
+
+			}
+			print "Args: " + args
+		}
 		TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
 		twitterStream.addListener(listener);
 		ArrayList<Long> follow = new ArrayList<Long>();

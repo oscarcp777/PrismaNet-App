@@ -36,7 +36,7 @@ class BootStrap {
 		def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)
 		def userRole = SecRole.findByAuthority('ROLE_USER') ?: new SecRole(authority: 'ROLE_USER').save(failOnError: true)
 
-		def user1 = User.findByUsername('oscarcp777') ?: new User(username: 'oscarcp777', account:trialAccount,enabled: true, password: 'pass', firstName: 'Oscar', lastName: 'C‡ceres').save(failOnError: true)
+		def user1 = User.findByUsername('oscarcp777') ?: new User(username: 'oscarcp777', account:trialAccount,enabled: true, password: 'pass', firstName: 'Oscar', lastName: 'Cï¿½ceres').save(failOnError: true)
 		if (!user1.authorities.contains(userRole)) {
 			SecUserSecRole.create user1, userRole, true
 		}
@@ -70,6 +70,7 @@ class BootStrap {
 				def twitterConfigIns = new TwitterSetup(includedAccounts:"@minsaurralde",keywords:"politica,filmus").save()
 				def twitterConfigMass = new TwitterSetup(includedAccounts:"@SergioMassa").save()
 				def twitterConfigColo = new TwitterSetup(includedAccounts:"@denarvaez").save()
+				def twitterConfigPresi = new TwitterSetup(includedAccounts:"@CFKArgentina").save()
 
 				// Autores
 				def author1 = new Author(accountName:"@oscar", followers:10, userSince:new Date(), sex: Sex.M).save()
@@ -82,9 +83,9 @@ class BootStrap {
 				def conceptIns = new Concept(conceptName: 'Insaurralde',twitterSetup:twitterConfigIns).save()
 				def conceptMass = new Concept(conceptName: 'Massa',twitterSetup:twitterConfigMass).save()
 				def conceptColo = new Concept(conceptName: 'De Narvaez',twitterSetup:twitterConfigColo).save()
+				def conceptPresi = new Concept(conceptName: 'CFK',twitterSetup:twitterConfigPresi).save()
 
 				// Tweets
-
 				def tweetIns1 = new Tweet(created:new Date()-3.days, content:"@minsaurralde bastante bien pero perdio", retweet: false, author:author1).save()
 				def tweetIns2 = new Tweet(created:new Date()-2.days, content:"@minsaurralde pelado boton", retweet: false, author:author2).save()
 				def tweetIns3 = new Tweet(created:new Date()-1.days, content:"@minsaurralde con cristina", retweet: false,  author:author3).save()
@@ -129,6 +130,7 @@ class BootStrap {
 				user.addToConcepts(conceptIns)
 				user.addToConcepts(conceptMass)
 				user.addToConcepts(conceptColo)
+				user.addToConcepts(conceptPresi)
 
 
 			} else {
