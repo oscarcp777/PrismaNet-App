@@ -6,7 +6,8 @@ class ConceptController extends GenericService {
 	def conceptService
 	
 	def stats = {
-		Concept concept = Concept.findById(params.id)
+		Concept concept = Concept.findByConceptName(params.id)
+		//TODO agregar mensaje de error o 404 si no encuentra el concept
 		def groupList = ["sex"]
 		def sexList = conceptService.categoryStore(concept, groupList);
 		groupList = ["tweetCreated"]

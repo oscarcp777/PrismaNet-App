@@ -13,6 +13,6 @@
 	<g:each var="item" in="${sexList}">
 		<li>Sexo: ${item[0]} -  Valor: ${item[1]}</li>
 	</g:each>
-	<g:link action='stats' id="${concept.id}">Nueva Busqueda</g:link>
+	<g:link action='stats' conceptName="${concept.conceptName}">Nueva Busqueda</g:link>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <meta name="layout" content="main" />
 </head>
 <body>
-	<h2>Resultados Usuario: "${user.userId}"</h2>
+	<h2>Resultados Usuario: "${user.username}"</h2>
 	<h1>Tweets por Fecha</h1>
 	<g:each var="item" in="${dateList}">
 		<li>Fecha: ${item[0]} -  Concepto: ${item[1]} -  Valor: ${item[2]}</li>

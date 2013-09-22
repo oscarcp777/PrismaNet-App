@@ -15,72 +15,51 @@ class Concept {
 	TwitterSetup twitterSetup
 	FacebookSetup facebookSetup
 	static hasMany = [tweets:Tweet, posts:Post]
+//	TreeSet tweets
 
     static constraints = {
 		conceptName(nullable:false)
-		tweets(
-//			, 
-//			validator:{value, concept, errors ->
-//			// Validacion agregado de tweets al concepto
-//			if (value == null)
-//				return true
-////			def valid = true	
-//			value.every {
-//				def add = false
-//				for (String twitterAccount in concept.twitterSetup.includedAccounts.split(',')) {
-//					log.info twitterAccount
-//					if (it.content.contains(twitterAccount))
-//						add = true
-//				}
-//				for (String keyword in concept.twitterSetup.keywords.split(',')) {
-//					if (it.content.contains(keyword))
-//						add = true
-//				}
-//				if (add == false){
-//					errors.reject(
-//							'concept.tweets.invalid',
-//							['tweets', 'class Concept'] as Object[],
-//							'[Property [{0}] of class [{1}] is invalid]')
-//
-//					// The following helps with field highlighting in your view
-//					errors.rejectValue(
-//							'tweets',
-//							'concept.tweets.invalid')
-//					return false
-//				}
-//			}
-//			return true
-//		}
-			)
+		tweets()
 		posts()
 		twitterSetup(nullable:true)
 		facebookSetup(nullable:true)
     }
 	
 	
-//	public void addToTweets(Tweet tweet){
-//		def add = false
-//		for (String twitterAccount in this.twitterSetup.includedAccounts.split(',')) {
-//			if (tweet.content.contains(twitterAccount))
-//				add = true
-//		}
-//		for (String keyword in this.twitterSetup.keywords.split(',')) {
-//			if (tweet.content.contains(keyword))
-//				add = true
-//		}
-//		if (add == false){
+	public void addToTweets(Tweet tweet){
+		def add = testAddTweet(tweet)
+		if (add == false){
 //			this.errors.reject(
 //					'concept.tweets.invalid',
 //					['tweets', 'class Concept'] as Object[],
 //					'[Property [{0}] of class [{1}] is invalid]')
-//
-//			// The following helps with field highlighting in your view
-//			this.errors.rejectValue(
-//					'tweets',
-//					'concept.tweets.invalid')
-//		}
-//		
-//	}
+
+			// The following helps with field highlighting in your view
+			this.errors.rejectValue(
+					'tweets',
+					'concept.tweets.invalid')
+		}else{
+			if (!tweets)
+				tweets = new ArrayList<Tweet>()
+			tweets.add(tweet);
+		}
+
+	}
+	
+	public boolean testAddTweet(Tweet tweet){
+		def add = false
+		for (String twitterAccount in this.twitterSetup?.includedAccounts?.split(',')) {
+			if (tweet.content.contains(twitterAccount)){
+				add = true
+			}
+		}
+		for (String keyword in this.twitterSetup?.keywords?.split(',')) {
+			if (tweet.content.contains(keyword)){
+				add = true
+			}
+		}
+		return add
+	}
 	
 	@Override
 	public String toString() {

@@ -78,33 +78,77 @@ class ConceptIntegrationTests {
 		
 	}
 	
-//	@Test
-//	void testCategorizationService(){
-//		def conceptService = new ConceptService()
-//		
-//		def categoryList = conceptService.categoryStore();
-//		int j = 1
-//		for (i in categoryList) {
-//			 println j + "- Sexo: " + i[0] + ", Valor: " + i[1]
-//			 j++ 
-//		}
-//				
-//	}
+	@Test
+	void testCategorizationByAuthorSexService(){
+		def conceptService = new ConceptService()
+		def concept = new Concept(conceptName: 'Filmus')
+		assertNotNull concept.save()
+		def groupList = ["sex"]
+		def categoryList = conceptService.categoryStore(concept, groupList);
+		int j = 1
+		for (i in categoryList) {
+			 println j + "- Sexo: " + i[0] + ", Valor: " + i[1]
+			 j++ 
+		}
+				
+	}
 	
-//	@Test
-//	void testTweetValidator2(){
-//		def twitterConfig = new TwitterSetup(includedAccounts:"@CFKArgentina,@twitter2",
-//		keywords:"politica,filmus")
-//		def tweet1 = new Tweet(content:"La cristi ta loca")
-//		def tweet2 = new Tweet(content:"El @CFKArgentina no existe")
-//
-//		def concept = new Concept(conceptName: 'Filmus',twitterSetup:twitterConfig)
-//		concept.addToTweets(tweet1)
-//		concept.addToTweets(tweet2)
-//		assertFalse concept.validate()
-//		assertTrue concept.hasErrors()
-//		def errors = concept.errors
-//		assertEquals "concept.tweets.invalid", errors.getFieldError("tweets").code
-//	}
+	
+	@Test
+	void testCategorizationByTweetDateService(){
+		def conceptService = new ConceptService()
+		def concept = new Concept(conceptName: 'Filmus')
+		assertNotNull concept.save()
+		def groupList = ["tweetCreated"]
+		def categoryList = conceptService.categoryStore(concept, groupList);
+		int j = 1
+		for (i in categoryList) {
+			 println j + "- Sexo: " + i[0] + ", Valor: " + i[1]
+			 j++
+		}
+				
+	}
+
+	
+	@Test
+	void testTweetValidator2(){
+		def twitterConfig = new TwitterSetup(includedAccounts:"@CFKArgentina,@twitter2",
+		keywords:"politica,filmus")
+		def author1 = new Author(accountName:"@oscar", followers:10, userSince:new Date(), sex: Sex.M)
+		def tweet1 = new Tweet(content:"La cristi ta loca", author:author1)
+		def tweet2 = new Tweet(content:"El @CFKArgentina no existe", author:author1)
+		
+		def concept = new Concept(conceptName: 'Filmus',twitterSetup:twitterConfig)
+		concept.addToTweets(tweet1)
+		concept.addToTweets(tweet2)
+		
+		assertTrue concept.hasErrors()
+		def errors = concept.errors
+		assertEquals "concept.tweets.invalid", errors.getFieldError("tweets").code
+	}
+	
+	
+	void testExistingAuthor(){
+		// Twitter's Setup
+		def twitterConfigIns = new TwitterSetup(includedAccounts:"@minsaurralde",keywords:"politica,filmus").save()
+		// Autor
+//		def author = new Author(accountName:"@oscar", followers:10, userSince:new Date(), sex: Sex.M).save()
+		// Concepto
+		def conceptIns = new Concept(conceptName: 'Insaurralde',twitterSetup:twitterConfigIns)
+		
+		Author testAuthor = Author.findByAccountName("@oscar")
+		if (!testAuthor)
+			testAuthor = new Author(accountName:"@oscar", followers:10, userSince:new Date(), sex: Sex.M)
+		// Tweets
+		def tweetIns1 = new Tweet(created:new Date(), content:"@minsaurralde bastante bien pero perdio", retweet: false, author:testAuthor)
+		
+		testAuthor.save()
+		tweetIns1.save()
+		conceptIns.addToTweets(tweetIns1)
+		conceptIns.save()
+	}
+
+	
+	
 
 }

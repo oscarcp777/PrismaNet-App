@@ -12,7 +12,7 @@ class SecUser {
 	boolean passwordExpired
 
 	static constraints = {
-		username blank: false, unique: true
+		username blank: false, unique: true, size:3..20
 		password blank: false
 	}
 

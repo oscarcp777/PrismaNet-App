@@ -8,7 +8,8 @@ class UserController {
 	def userService
 	
 	def stats = {
-		User user = User.findById(params.id)
+		User user = User.findByUsername(params.id)
+		//TODO agregar mensaje de error o 404 si no encuentra el user
 		def groupList = ["sex"]
 		def sexList = userService.categoryStore(user, groupList);
 		groupList = ["tweetCreated","conceptsId"]
@@ -19,7 +20,8 @@ class UserController {
 	
 	
 	def monthStats = {
-		User user = User.findById(params.id)
+		User user = User.findByUsername(params.id)
+		//TODO agregar mensaje de error o 404 si no encuentra el user
 		def groupList = ["conceptsId"]
 		def criteria = User.createCriteria();
 		def filters = ["id" : user.id]
