@@ -1,12 +1,20 @@
 modules = {
 	    application {
-	        resource url:'js/application.js'
+	        resource url:'js/jquery.slimscroll.js'
 	    }
 	core {
 		resource url:'css/bootstrap.css', disposition: 'head'
 		resource url:'js/jquery.js', disposition: 'head'
 		resource url:'js/bootstrap.js' 
 		resource url:'css/font-awesome.css'
+	}
+	ace{
+		resource url:'css/ace/ace.css'
+		resource url:'css/ace/ace-skin.css'
+		resource url:'js/ace/ace.js'
+		resource url:'js/ace/ace-extra.js'
+		resource url:'js/ace/ace-elements.js'
+		resource url:'js/jquery.slimscroll.js'
 	}
 	indexcss {
 		dependsOn 'core'

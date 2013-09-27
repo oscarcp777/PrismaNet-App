@@ -61,6 +61,8 @@ grails.hibernate.cache.queries = false
 grails.gorm.default.constraints = {
 	'*'(nullable: true)
 }
+grails.jobs.disable = true
+
 environments {
     development {
         grails.logging.jul.usebridge = true

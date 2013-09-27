@@ -11,11 +11,12 @@
    
 	<div id='login' >
 	
-	    <div class="logo">
-				<a class="logoHolder" title="return to home page" href="#"> <span
-					class="logoFirst">Prism&Delta;</span>-net<span class="logoDot">&bull;</span>
-				</a>
-		</div>
+				<div class="logo">
+					<a class="logoHolder" title="return to home page" href="#"> <span class="logoFirst"> 
+					<i class="icon-rombo" style="font-weight: bold; font-size: 0.9em;"></i> Prisma
+					</span>-Net
+					</a>
+				</div>
 		<div class='container'>
 
 

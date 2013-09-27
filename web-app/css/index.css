@@ -939,7 +939,7 @@ a:hover {
 .hd_navbar {
 	background-color:#ffffff;
 	margin-left:50px;
-	border-top: 8px solid #16a085;
+/* 	border-top: 8px solid #16a085; */
 	border-bottom: 1px solid #cccccc;
 	opacity: 0.0096;
 	filter: alpha(opacity =  0.96);
@@ -1178,44 +1178,51 @@ a:hover {
 	margin: 40px 0;
 	max-width: 100%;
 }
-.rslides_tabs {
-	position: absolute;
-	z-index: 10;
-	margin-left: 15%;
-	float: left;
+
+.carousel-indicators {
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  z-index: 15;
+  width: 10%;
+  padding-left: 0;
+  margin-left:15%;
+  text-align: center;
+  list-style: none;
 }
 
-.rslides_tabs li {
+.carousel-indicators li {
 	display: inline-block;
+	height: 40px;
+	width: 40px;
 	margin-left: 15px;
 	display: inline-block;
 	font-weight: bold;
 	color: #3e4248;
 	background-color: #fff;
-	height: 40px;
-	width: 40px;
 	text-align: center;
 	border-radius: 100px;
 	margin: 0 0 0 0;
 	font-size: 2rem;
-	-webkit-transition: 100ms all linear
+	-webkit-transition: 100ms all linear;
+	text-indent: 0;
+	cursor: pointer;
+	border: none;
 }
-
-.rslides_tabs li.rslides_here  {
-	background: #16a085;
-	color: #fff;
-	height: 40px;
-	width: 40px;
-	-webkit-transition: 100ms all linear
-}
-
-
-
- .rslides_tabs li:hover {
-	background: #000;
+.carousel-indicators  li:hover {
+	background: #2c3e50;
 	color: #fff;
 	-webkit-transition: 100ms all linear
 }
+.carousel-indicators .active {
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  color: #fff;
+  background-color: #16a085;
+  -webkit-transition: 100ms all linear
+}
+
 .landing footer {
 	background: #040915;
 	padding: 80px 0;

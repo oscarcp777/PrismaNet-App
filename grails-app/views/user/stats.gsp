@@ -1,7 +1,7 @@
 <html>
 <head>
 	<title>Resultados de la Consulta</title>
-<meta name="layout" content="main" />
+<meta name="layout" content="home" />
 </head>
 <body>
 	<h2>Resultados Usuario: "${user.username}"</h2>

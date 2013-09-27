@@ -1,5 +1,6 @@
 package com.prismanet
 
+import grails.util.Holders;
 import groovy.time.TimeCategory
 
 import org.codehaus.groovy.grails.web.json.JSONObject
@@ -19,7 +20,7 @@ import com.mongodb.MongoClient
 import com.mongodb.MongoClientURI
 
 class TweetJob {
-
+	def grailsApplication
 	def tweetService
 	def group = "tweetsJobs"
 	
@@ -30,11 +31,16 @@ class TweetJob {
 	}
 
 	static triggers = {
-		simple repeatInterval: 60000l, repeatCount:-1 , startDelay: 30000
+		simple repeatInterval: 6000000l, repeatCount:-1 , startDelay: 30000
 	}
 
 	def execute() {
 		print "Starting the Tweets job."
+		
+		if(grailsApplication.config.grails.jobs.disable)
+		 return
+		
+		
 		DB db = client.getDB("prismanet")
 		DBCollection tweets = db.getCollection("tweets")
 		use ( TimeCategory ) {

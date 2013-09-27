@@ -60,7 +60,7 @@
 									<ul class="nav navbar-nav navbar-right">
 
 										<li>
-										 <g:link class="signup" controller='login' action='auth'>Login</g:link>
+										 <g:link class="btn btn-success" controller='login' action='auth'>Login</g:link>
 										</li>
 
 									</ul>

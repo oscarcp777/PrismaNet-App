@@ -18,9 +18,11 @@ class UsersTwitterJob {
 	  }
 
     def execute() {
-//		def json =loadUserTwitter("oscarcp777")
-//		UserJSON userJson = parserUser(json)
-//        userJSONService.saveUserJSON(userJson);
+		if(grailsApplication.config.grails.jobs.disable)
+		return
+		def json =loadUserTwitter("oscarcp777")
+		UserJSON userJson = parserUser(json)
+        userJSONService.saveUserJSON(userJson);
 
        println "Running Job!"+new Date()
     }
