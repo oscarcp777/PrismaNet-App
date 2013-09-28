@@ -10,7 +10,7 @@ import com.prismanet.model.twitter.user.UserJSON
 import com.prismanet.twitter.service.UserJSONService
 
 class UsersTwitterJob {
-	
+	def grailsApplication
 	UserJSONService userJSONService;
     static triggers = {
       simple repeatInterval: 600000l, repeatCount:-1 , startDelay: 50000000// execute job once in 5 seconds

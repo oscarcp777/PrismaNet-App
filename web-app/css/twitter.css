@@ -1,0 +1,153 @@
+.tweet-group {
+	padding: 2px;
+}
+
+.tweets {
+	margin: 0;
+}
+
+.tweets li {
+	padding: 2px 0;
+	margin: 2px auto;
+}
+
+.tweets li img.avatar {
+/* 	height: 60px; */
+/* 	width: 60px; */
+/* 	-webkit-border-radius: 2px; */
+/* 	-moz-border-radius: 2px; */
+/* 	border-radius: 2px; */
+/* 	padding: 4px; */
+/* 	background: #fafafa; */
+/* 	border: 1px solid #d9d9d9; */
+	
+	margin:-4px 4px 0 0;
+    border-radius:100%;
+    border:2px solid #FFF;
+    max-width:70px
+}
+
+.tweets li.in img.avatar {
+	margin-right: 10px;
+	float: left;
+}
+
+.tweets li .name {
+	color: #e89344;
+	font-size: 13px;
+	font-weight: 400;
+}
+
+.tweets li .date-time {
+	color: #1a1a1a;
+	font-size: 11px;
+	font-weight: 400;
+}
+
+.tweets li.out img.avatar {
+	float: left;
+	margin-left: 10px;
+	padding: 4px;
+	background: #fafafa;
+	border: 1px solid #d9d9d9;
+}
+
+.tweets li .message {
+	display: block;
+	padding: 5px 15px;
+	position: relative;
+	background: #e9f2f9;
+}
+
+.tweets li.in .message {
+	text-align: left;
+	margin-left: 80px;
+}
+
+.tweets li.in .message hr {
+	margin: 10px 0;
+	border: 0;
+	border-top: 1px solid #eeeeee;
+	border-bottom: 1px solid white;
+}
+
+.tweets li.out .message {
+	margin-left: 90px;
+	background: #e9f2f9;
+}
+
+.tweets li.out .message .up-arrow {
+	display: block;
+	position: absolute;
+	top: 10px;
+	left: -10px;
+	width: 0px;
+	height: 0px;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	border-right: 10px solid #e9f2f9;
+}
+
+.tweets li.out .message hr {
+	margin: 7px 0;
+	border: 0;
+/* 	border-top: 1px solid #f5f9fc; */
+	border-bottom: 1px solid white;
+}
+
+.tweets li.out .name {
+	color: #428bca;
+}
+
+.tweets li.out .delete-icon .fs1 {
+	font-size: 18px;
+	color: #e89344;
+}
+
+.tweets li .message .body {
+	display: block;
+}
+
+.tweets li:last-child {
+	margin-bottom: 0;
+}
+
+.tweets li:first-child {
+	margin-top: 0;
+}
+
+.tweets li .reply-icons a.icon {
+	float: left;
+	margin: 0 7px;
+	color: #404040;
+}
+
+.tweets li .reply-icons a.icon .fs1 {
+	font-size: 18px;
+}
+
+.tweets li .reply-icons a.icon:hover {
+	color: #e89344;
+}
+
+.tweets li .reply-icons a.icon.selected {
+	color: #e89344;
+}
+
+.tweets li .reply-icons a.icon.more {
+	position: relative;
+	margin-right: 0;
+}
+
+.tweets li .reply-icons a.icon .overlay {
+	background: #f7f7f7;
+	width: 8px;
+	height: 8px;
+	position: absolute;
+	top: 6px;
+	right: 0;
+}
+
+.tweets li .reply-icons a.last {
+	margin-right: 0px;
+}

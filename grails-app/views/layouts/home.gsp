@@ -8,7 +8,7 @@
 	href="${resource(dir: 'images', file: 'favicon.gif')}" type="image/gif">
 <link rel="icon" href="${resource(dir: 'images', file: 'favicon.gif')}"
 	type="image/gif">
-	<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
+
 <r:require modules="core,ace" />
 
 <g:layoutHead />
@@ -118,8 +118,8 @@
 					<!-- #sidebar-shortcuts -->
 
 					<ul class="nav nav-list">
-						<li class="active"><a href="#"> <i class="icon-home"></i>
-								<span class="menu-text">Inicio</span>
+						<li class="active"><a href="#"> <i class="icon-dashboard"></i>
+								<span class="menu-text">Dashboard</span>
 						</a></li>
 						<li><g:link controller='tweet' action="list"> <i class="icon-twitter"></i> <span
 								class="menu-text">Ver Tweets</span>
@@ -131,9 +131,11 @@
 						</a>
 
 							<ul class="submenu">
-								<li><a href="#"> <i class="icon-double-angle-right"></i>
+								<li><a href="#">
+								 <i class="icon-double-angle-right"></i>
 										Real Time
-								</a></li>
+								</a>
+								</li>
 
 								<li><a href="#"> <i class="icon-double-angle-right"></i>
 										jqGrid plugin
