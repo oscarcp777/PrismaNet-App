@@ -58,7 +58,7 @@
 								<li class="divider"></li>
 
 								<li><sec:ifLoggedIn>
-										
+
 										<g:link controller='logout'>
 											<i class="icon-off"></i>Log Out</g:link>
 									</sec:ifLoggedIn></li>
@@ -80,135 +80,135 @@
 				<a class="menu-toggler" id="menu-toggler" href="#"> <span
 					class="menu-text"></span>
 				</a>
-
-				<div class="sidebar sidebar-fixed" id="sidebar">
-					<script type="text/javascript">
-						try {
-							ace.settings.check('sidebar', 'fixed')
-						} catch (e) {
-						}
-					</script>
-
-					<div class="sidebar-shortcuts" id="sidebar-shortcuts">
-						<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-							<button class="btn btn-success">
-								<i class="icon-signal"></i>
-							</button>
-
-							<button class="btn btn-info">
-								<i class="icon-pencil"></i>
-							</button>
-
-							<button class="btn btn-warning">
-								<i class="icon-group"></i>
-							</button>
-
-							<button class="btn btn-danger">
-								<i class="icon-cogs"></i>
-							</button>
-						</div>
-
-						<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-							<span class="btn btn-success"></span> <span class="btn btn-info"></span>
-
-							<span class="btn btn-warning"></span> <span
-								class="btn btn-danger"></span>
-						</div>
-					</div>
-					<!-- #sidebar-shortcuts -->
-
-					<ul class="nav nav-list">
-						<li class="active"><a href="#"> <i class="icon-dashboard"></i>
-								<span class="menu-text">Dashboard</span>
-						</a></li>
-						<li><g:link controller='tweet' action="list"> <i class="icon-twitter"></i> <span
-								class="menu-text">Ver Tweets</span>
-						</g:link></li>
-						<li><a href="#" class="dropdown-toggle"> <i
-								class="icon-bar-chart"></i> <span class="menu-text">Graficos</span>
-
-								<b class="arrow icon-angle-down"></b>
-						</a>
-
-							<ul class="submenu">
-								<li><a href="#">
-								 <i class="icon-double-angle-right"></i>
-										Real Time
-								</a>
-								</li>
-
-								<li><a href="#"> <i class="icon-double-angle-right"></i>
-										jqGrid plugin
-								</a></li>
-							</ul></li>
-						<li><a href="#"> <i class="icon-facebook"></i> <span
-								class="menu-text">Facebook</span>
-						</a></li>
-						<li><a href="#"> <i class="icon-flickr"></i> <span
-								class="menu-text">Flickr</span>
-						</a></li>
-						<li><a href="#"> <i class="icon-book"></i> <span
-								class="menu-text">Bloqs</span>
-						</a></li>
-						<li><a href="#"> <i class="icon-cloud"></i> <span
-								class="menu-text">Diarios</span>
-						</a></li>
-						<li><a href="#"> <i class="icon-rss-sign"></i> <span
-								class="menu-text">Otros</span>
-						</a></li>
-					</ul>
-					<!-- /.nav-list -->
-
-					<div class="sidebar-collapse" id="sidebar-collapse">
-						<i class="icon-double-angle-left"
-							data-icon1="icon-double-angle-left"
-							data-icon2="icon-double-angle-right"></i>
-					</div>
-
-					<script type="text/javascript">
-						try {
-							ace.settings.check('sidebar', 'collapsed')
-						} catch (e) {
-						}
-					</script>
-				</div>
-				<div class="main-content">
-					<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+				<nav>
+					<div class="sidebar sidebar-fixed" id="sidebar">
 						<script type="text/javascript">
 							try {
-								ace.settings.check('breadcrumbs', 'fixed')
+								ace.settings.check('sidebar', 'fixed')
 							} catch (e) {
 							}
 						</script>
 
-						<ul class="breadcrumb">
-							<li><i class="icon-home home-icon"></i> 
-							<g:link controller="home" action="index">Home</g:link>
-							</li>
-							<li class="active">Principal</li>
-						</ul>
-						<!-- .breadcrumb -->
+						<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+							<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+								<button class="btn btn-success">
+									<i class="icon-signal"></i>
+								</button>
 
-					</div>
+								<button class="btn btn-info">
+									<i class="icon-pencil"></i>
+								</button>
 
-					<div class="page-content">
-						<div class="row">
-							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->
-								<div class="space-32"></div>
-								<div class="space-32"></div>
-								<g:layoutBody />
-								<r:layoutResources />
-								<!-- PAGE CONTENT ENDS -->
+								<button class="btn btn-warning">
+									<i class="icon-group"></i>
+								</button>
+
+								<button class="btn btn-danger">
+									<i class="icon-cogs"></i>
+								</button>
 							</div>
-							<!-- /.col -->
-						</div>
-						<!-- /.row -->
-					</div>
-					<!-- /.page-content -->
-				</div>
-				<!-- /.main-content -->
 
+							<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+								<span class="btn btn-success"></span> <span class="btn btn-info"></span>
+
+								<span class="btn btn-warning"></span> <span
+									class="btn btn-danger"></span>
+							</div>
+						</div>
+						<!-- #sidebar-shortcuts -->
+
+						<ul class="nav nav-list">
+							<li class="active"><a href="#"> <i
+									class="icon-dashboard"></i> <span class="menu-text">Dashboard</span>
+							</a></li>
+							<li><g:link controller='tweet' action="list">
+									<i class="icon-twitter"></i>
+									<span class="menu-text">Ver Tweets</span>
+								</g:link></li>
+							<li><a href="#" class="dropdown-toggle"> <i
+									class="icon-bar-chart"></i> <span class="menu-text">Graficos</span>
+
+									<b class="arrow icon-angle-down"></b>
+							</a>
+
+								<ul class="submenu">
+									<li><a href="#"> <i class="icon-double-angle-right"></i>
+											Real Time
+									</a></li>
+
+									<li><a href="#"> <i class="icon-double-angle-right"></i>
+											jqGrid plugin
+									</a></li>
+								</ul></li>
+							<li><a href="#"> <i class="icon-facebook"></i> <span
+									class="menu-text">Facebook</span>
+							</a></li>
+							<li><a href="#"> <i class="icon-flickr"></i> <span
+									class="menu-text">Flickr</span>
+							</a></li>
+							<li><a href="#"> <i class="icon-book"></i> <span
+									class="menu-text">Bloqs</span>
+							</a></li>
+							<li><a href="#"> <i class="icon-cloud"></i> <span
+									class="menu-text">Diarios</span>
+							</a></li>
+							<li><a href="#"> <i class="icon-rss-sign"></i> <span
+									class="menu-text">Otros</span>
+							</a></li>
+						</ul>
+						<!-- /.nav-list -->
+
+						<div class="sidebar-collapse" id="sidebar-collapse">
+							<i class="icon-double-angle-left"
+								data-icon1="icon-double-angle-left"
+								data-icon2="icon-double-angle-right"></i>
+						</div>
+
+						<script type="text/javascript">
+							try {
+								ace.settings.check('sidebar', 'collapsed')
+							} catch (e) {
+							}
+						</script>
+					</div>
+				</nav>
+				<section>
+					<div class="main-content">
+						<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+							<script type="text/javascript">
+								try {
+									ace.settings.check('breadcrumbs', 'fixed')
+								} catch (e) {
+								}
+							</script>
+
+							<ul class="breadcrumb">
+								<li><i class="icon-home home-icon"></i> <g:link
+										controller="home" action="index">Home</g:link></li>
+								<li class="active">Principal</li>
+							</ul>
+							<!-- .breadcrumb -->
+
+						</div>
+
+						<div class="page-content">
+							<div class="row">
+								<div class="col-xs-12">
+									<!-- PAGE CONTENT BEGINS -->
+									<div class="space-32"></div>
+									<div class="space-32"></div>
+									<g:layoutBody />
+									<r:layoutResources />
+									<!-- PAGE CONTENT ENDS -->
+								</div>
+								<!-- /.col -->
+							</div>
+							<!-- /.row -->
+						</div>
+						<!-- /.page-content -->
+					</div>
+					<!-- /.main-content -->
+				</section>
 
 			</div>
 			<!-- /.main-container-inner -->
@@ -226,20 +226,22 @@
 
 
 
-<script type="text/javascript">
-	$(function(){
-	    $('#scroll').slimScroll({
-	    	    height: '200px',
-	    	    railVisible: true,
-	    	    alwaysVisible: true
-	    });
-	});
-</script>
+	<script type="text/javascript">
+		$(function() {
+			$('#scroll').slimScroll({
+				height : '200px',
+				railVisible : true,
+				alwaysVisible : true
+			});
+		});
+	</script>
 
 
 	<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>
+		if ("ontouchend" in document)
+			document.write("<script src='js/jquery.mobile.custom.min.js'>"
+					+ "<"+"/script>");
+	</script>
 
 </body>
 </html>

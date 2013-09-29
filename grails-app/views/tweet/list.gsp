@@ -23,7 +23,7 @@
 				<ul class="tweets tweet-group list-unstyled">
 					<g:each in="${tweetInstanceList}" status="i" var="tweetInstance">
 						<li class="out"><img class="avatar" alt=""
-							src="${resource(dir: 'img', file: 'oscar.png')}">
+							src="${tweetInstance.author?.profileImage}">
 							<div class="message">
 								<span class="up-arrow"></span> <span class="arrow"></span>
 								<div>
@@ -36,6 +36,10 @@
 								</p>
 								<hr>
 								<div class="reply-icons pull-right">
+								  <a href="" class="icon"
+										data-original-title=""> <i class="icon-reply fs1"
+										title="retweet"></i>
+									</a>
 									<a href="" class="icon hide_tweet selected"
 										data-original-title=""> <i class="icon-retweet fs1"
 										title="retweet"></i>

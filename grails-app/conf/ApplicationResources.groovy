@@ -11,7 +11,7 @@ modules = {
 	ace{
 		resource url:'css/ace/ace.css'
 		resource url:'css/ace/ace-skin.css'
-		resource url:'js/ace/ace.js'
+		resource url:'js/ace/ace.js', nominify: true
 		resource url:'js/ace/ace-extra.js'
 		resource url:'js/ace/ace-elements.js'
 		resource url:'js/jquery.slimscroll.js'
