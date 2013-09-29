@@ -1,3 +1,4 @@
+<%@ page import="com.prismanet.Concept" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,8 +7,7 @@
 <title><g:layoutTitle default="Prisma-Net" /></title>
 <link rel="shortcut icon"
 	href="${resource(dir: 'images', file: 'favicon.gif')}" type="image/gif">
-<link rel="icon" href="${resource(dir: 'images', file: 'favicon.gif')}"
-	type="image/gif">
+<link rel="icon" href="${resource(dir: 'images', file: 'favicon.gif')}" type="image/gif">
 
 <r:require modules="core,ace" />
 
@@ -80,7 +80,6 @@
 				<a class="menu-toggler" id="menu-toggler" href="#"> <span
 					class="menu-text"></span>
 				</a>
-				<nav>
 					<div class="sidebar sidebar-fixed" id="sidebar">
 						<script type="text/javascript">
 							try {
@@ -117,42 +116,63 @@
 						</div>
 						<!-- #sidebar-shortcuts -->
 
-						<ul class="nav nav-list">
-							<li class="active"><a href="#"> <i
+						<ul class="nav nav-list" id="menuIzquierdo">
+							<li class="active" id="Dashboard"><g:link
+										controller="home" action="index"> <i
 									class="icon-dashboard"></i> <span class="menu-text">Dashboard</span>
-							</a></li>
-							<li><g:link controller='tweet' action="list">
+							</g:link></li>
+							<li id="tweets"><g:link controller='tweet' action="list">
 									<i class="icon-twitter"></i>
 									<span class="menu-text">Ver Tweets</span>
 								</g:link></li>
-							<li><a href="#" class="dropdown-toggle"> <i
-									class="icon-bar-chart"></i> <span class="menu-text">Graficos</span>
+							<li id="chart"><a href="#" class="dropdown-toggle"> <i
+									class="icon-bar-chart"></i> <span class="menu-text">Estadisticas</span>
 
 									<b class="arrow icon-angle-down"></b>
 							</a>
 
 								<ul class="submenu">
-									<li><a href="#"> <i class="icon-double-angle-right"></i>
-											Real Time
-									</a></li>
+									<li><g:link controller='user' action="stats">
+									<i class="icon-double-angle-right"></i>
+											General
+									</g:link> 
+									</li>
 
-									<li><a href="#"> <i class="icon-double-angle-right"></i>
-											jqGrid plugin
-									</a></li>
-								</ul></li>
-							<li><a href="#"> <i class="icon-facebook"></i> <span
+									<li><g:link controller='user' action="monthStats"><i class="icon-double-angle-right"></i>
+											Mensual
+									</g:link> 
+									</li>
+								</ul>
+							</li>
+							<li id="concepts">
+							<a href="#" class="dropdown-toggle"> 
+							  <i class="icon-tags"></i> <span class="menu-text">Conceptos</span>
+									<b class="arrow icon-angle-down"></b>
+							</a>
+								<ul class="submenu">
+								<g:each in="${session.user.concepts}" status="i" var="conceptInstance">
+									<li id="${conceptInstance.id}">
+									<g:link controller="concept" action="stats" id="${conceptInstance.conceptName}">
+									${fieldValue(bean: conceptInstance, field: "conceptName")}
+									<i class="icon-double-angle-right"></i>
+									</g:link>
+									</li>
+									</g:each>
+								</ul>
+							</li>							
+							<li id="facebook"><a href="#"> <i class="icon-facebook"></i> <span
 									class="menu-text">Facebook</span>
 							</a></li>
-							<li><a href="#"> <i class="icon-flickr"></i> <span
+							<li id="Flickr"><a href="#"> <i class="icon-flickr"></i> <span
 									class="menu-text">Flickr</span>
 							</a></li>
-							<li><a href="#"> <i class="icon-book"></i> <span
+							<li id="Bloqs"><a href="#"> <i class="icon-book"></i> <span
 									class="menu-text">Bloqs</span>
 							</a></li>
-							<li><a href="#"> <i class="icon-cloud"></i> <span
+							<li id="Diarios"><a href="#"> <i class="icon-cloud"></i> <span
 									class="menu-text">Diarios</span>
 							</a></li>
-							<li><a href="#"> <i class="icon-rss-sign"></i> <span
+							<li id="Otros"><a href="#"> <i class="icon-rss-sign"></i> <span
 									class="menu-text">Otros</span>
 							</a></li>
 						</ul>
@@ -171,8 +191,6 @@
 							}
 						</script>
 					</div>
-				</nav>
-				<section>
 					<div class="main-content">
 						<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
 							<script type="text/javascript">
@@ -208,7 +226,6 @@
 						<!-- /.page-content -->
 					</div>
 					<!-- /.main-content -->
-				</section>
 
 			</div>
 			<!-- /.main-container-inner -->

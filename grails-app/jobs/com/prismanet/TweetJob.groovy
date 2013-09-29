@@ -31,7 +31,7 @@ class TweetJob {
 	}
 
 	static triggers = {
-		simple repeatInterval: 6000000l, repeatCount:-1 , startDelay: 30000
+		simple repeatInterval: 60000l, repeatCount:-1 , startDelay: 30000
 	}
 
 	def execute() {

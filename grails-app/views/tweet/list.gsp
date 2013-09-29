@@ -60,6 +60,8 @@
 			</div>
 		</div>
 	</div>
-
+	<script type="text/javascript">
+	  activeItemMenu('tweets',"",1);
+	</script>
 </body>
 </html>

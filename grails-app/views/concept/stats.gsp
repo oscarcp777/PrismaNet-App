@@ -14,5 +14,8 @@
 		<li>Sexo: ${item[0]} -  Valor: ${item[1]}</li>
 	</g:each>
 	<g:link action='stats' conceptName="${concept.conceptName}">Nueva Busqueda</g:link>
+	<script type="text/javascript">
+	  activeItemMenu('concepts',"${concept.id}",2);
+	</script>
 </body>
 </html>

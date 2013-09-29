@@ -8,27 +8,25 @@ class UserController {
 	def userService
 	
 	def stats = {
-		User user = User.findByUsername(params.id)
 		//TODO agregar mensaje de error o 404 si no encuentra el user
 		def groupList = ["sex"]
-		def sexList = userService.categoryStore(user, groupList);
+		def sexList = userService.categoryStore(session.user, groupList);
 		groupList = ["tweetCreated","conceptsId"]
-		def dateList = userService.categoryStore(user, groupList);
+		def dateList = userService.categoryStore(session.user, groupList);
 		
-		[user: user, sexList : sexList, dateList : dateList]
+		[user: session.user, sexList : sexList, dateList : dateList]
 	}
 	
 	
 	def monthStats = {
-		User user = User.findByUsername(params.id)
 		//TODO agregar mensaje de error o 404 si no encuentra el user
 		def groupList = ["conceptsId"]
 		def criteria = User.createCriteria();
-		def filters = ["id" : user.id]
+		def filters = ["id" : session.user.id]
 		def projection = ["tweetsId" : ProjectionType.COUNT, "authorId" : ProjectionType.COUNT]
 		def statsList = userService.categoriesService(criteria, groupList, filters, projection)
 		
-		[user: user, statsList : statsList]
+		[user: session.user, statsList : statsList]
 	}
     
 }

@@ -36,7 +36,7 @@ class BootStrap {
 		def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)
 		def userRole = SecRole.findByAuthority('ROLE_USER') ?: new SecRole(authority: 'ROLE_USER').save(failOnError: true)
 
-		def user1 = User.findByUsername('oscarcp777') ?: new User(username: 'oscarcp777', account:trialAccount,enabled: true, password: 'pass', firstName: 'Oscar', lastName: 'Cï¿½ceres').save(failOnError: true)
+		def user1 = User.findByUsername('oscarcp777') ?: new User(username: 'oscarcp777', account:trialAccount,enabled: true, password: 'pass', firstName: 'Oscar', lastName: 'C‡ceres').save(failOnError: true)
 		if (!user1.authorities.contains(userRole)) {
 			SecUserSecRole.create user1, userRole, true
 		}
@@ -126,12 +126,15 @@ class BootStrap {
 				conceptColo.addToTweets(tweetColo1)
 				conceptColo.addToTweets(tweetColo2)
 
-
-				user.addToConcepts(conceptIns)
-				user.addToConcepts(conceptMass)
-				user.addToConcepts(conceptColo)
-				user.addToConcepts(conceptPresi)
-
+				def concepts=[conceptIns,conceptMass,conceptColo,conceptPresi]
+				user.concepts=concepts
+				user.save(flush: true)
+				user = User.findByUsername("oscarcp777");
+				user.concepts=concepts
+				user.save(flush: true)
+				user = User.findByUsername("sdonik");
+				user.concepts=concepts
+				user.save(flush: true)
 
 			} else {
 				println "Existing admin user, skipping creation"
