@@ -30,9 +30,9 @@ class TweetService{
 //		print "seguidores: " + status.getUser().getFollowersCount()  
 //		print "fecha creacion: " + status.getUser().getCreatedAt()
 		Author author = Author.findByAccountName("@"+status.getUser().getScreenName())
-		if (!author)
-			author = new Author(accountName:"@"+status.getUser().getScreenName(), followers:status.getUser().getFollowersCount(), sex: Sex.M, userSince:status.getUser().getCreatedAt()).save()
-			
+		if (!author){
+			author = new Author(accountName:"@"+status.getUser().getScreenName(), followers:status.getUser().getFollowersCount(), sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()).save()
+		}
 		Tweet tweet = new Tweet(content:status.getText(),author:author, created:status.getCreatedAt())
 		try {
 			def List<Concept> concepts = Concept.list()

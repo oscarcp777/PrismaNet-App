@@ -47,7 +47,7 @@ class TweetJob {
 			Date filteredDate = new Date()-1.minute
 			print "fecha a filtrar: " + filteredDate
 			def filters = [created_at:['$gte': filteredDate]]
-			DBCursor cursor = tweets.find(filters as BasicDBObject)
+			DBCursor cursor = tweets.find(/*filters as BasicDBObject*/)
 			for (BasicDBObject tweet : cursor){
 				JSONObject obj = new JSONObject(tweet)
 				Status status = new StatusJSONImpl(obj)
