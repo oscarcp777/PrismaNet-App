@@ -23,7 +23,7 @@
 				<ul class="tweets tweet-group list-unstyled">
 					<g:each in="${tweetInstanceList}" status="i" var="tweetInstance">
 						<li class="out"><img class="avatar" alt=""
-							src="${resource(dir: 'img', file: 'oscar.png')}">
+							src="${tweetInstance.author?.profileImage}">
 							<div class="message">
 								<span class="up-arrow"></span> <span class="arrow"></span>
 								<div>
