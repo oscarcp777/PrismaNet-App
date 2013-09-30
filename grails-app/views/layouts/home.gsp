@@ -9,7 +9,7 @@
 	href="${resource(dir: 'images', file: 'favicon.gif')}" type="image/gif">
 <link rel="icon" href="${resource(dir: 'images', file: 'favicon.gif')}" type="image/gif">
 
-<r:require modules="core,ace" />
+<r:require modules="core,ace,chartPie" />
 
 <g:layoutHead />
 <r:layoutResources />

@@ -17,6 +17,12 @@ modules = {
 		resource url:'js/jquery.slimscroll.js'
 		resource url:'js/home.js',disposition: 'head'
 	}
+	chartPie{
+		resource url:'js/chart/jquery.flot.js'
+		resource url:'js/chart/jquery.flot.pie.js'
+		resource url:'js/chart/jquery.flot.resize.js'
+		
+	}
 	indexcss {
 		dependsOn 'core'
 		resource url:'css/index.css'

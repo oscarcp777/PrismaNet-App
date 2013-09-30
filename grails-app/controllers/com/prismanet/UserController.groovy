@@ -1,6 +1,7 @@
 package com.prismanet
-
+import grails.converters.*
 import com.prismanet.GenericService.ProjectionType
+import com.prismanet.chart.json.ChartPieData
 
 class UserController {
 	
@@ -10,11 +11,15 @@ class UserController {
 	def stats = {
 		//TODO agregar mensaje de error o 404 si no encuentra el user
 		def groupList = ["sex"]
+		def conceptTweets=[];
 		def sexList = userService.categoryStore(session.user, groupList);
 		groupList = ["tweetCreated","conceptsId"]
 		def dateList = userService.categoryStore(session.user, groupList);
-		
-		[user: session.user, sexList : sexList, dateList : dateList]
+		def dataChartList = userService.categoryStore(session.user, ["conceptsId"])
+		dataChartList.each { item ->
+			conceptTweets.add(new ChartPieData(label:item[0],data:item[1]))
+		}
+		[user: session.user, sexList : sexList, dateList : dateList,dataChart:conceptTweets as JSON]
 	}
 	
 	
@@ -28,5 +33,13 @@ class UserController {
 		
 		[user: session.user, statsList : statsList]
 	}
-    
+	def conceptTweetsJson ={
+		def conceptTweets=[];
+		def dateList = userService.categoryStore(session.user, ["conceptsId"])
+		dateList.each { item ->
+			conceptTweets.add(new ChartPieData(label:item[0],data:item[1]))
+		}
+		render conceptTweets as JSON
+	}
+	
 }

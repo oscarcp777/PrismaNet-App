@@ -1,10 +1,10 @@
 package com.prismanet
-
+import grails.converters.*
 class ConceptController extends GenericService {
-	
+
 	def scaffold = true
 	def conceptService
-	
+
 	def stats = {
 		Concept concept = Concept.findByConceptName(params.id)
 		//TODO agregar mensaje de error o 404 si no encuentra el concept
@@ -12,9 +12,13 @@ class ConceptController extends GenericService {
 		def sexList = conceptService.categoryStore(concept, groupList);
 		groupList = ["tweetCreated"]
 		def dateList = conceptService.categoryStore(concept, groupList);
-		
+
 		[concept : concept, sexList : sexList, dateList : dateList]
 	}
-		
-    
+
+	def conceptsJson={
+		def listJson=Concept.list();
+		render listJson as JSON
+	}
+	
 }
