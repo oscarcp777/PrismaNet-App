@@ -62,7 +62,7 @@ grails.hibernate.cache.queries = false
 grails.gorm.default.constraints = {
 	'*'(nullable: true)
 }
-grails.jobs.disable = true
+grails.jobs.disable = false
 
 environments {
     development {

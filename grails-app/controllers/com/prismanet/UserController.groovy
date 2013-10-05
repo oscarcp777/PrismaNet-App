@@ -11,15 +11,12 @@ class UserController {
 	def stats = {
 		//TODO agregar mensaje de error o 404 si no encuentra el user
 		def groupList = ["sex"]
-		def conceptTweets=[];
 		def sexList = userService.categoryStore(session.user, groupList);
 		groupList = ["tweetCreated","conceptsId"]
 		def dateList = userService.categoryStore(session.user, groupList);
 		def dataChartList = userService.categoryStore(session.user, ["conceptsId"])
-		dataChartList.each { item ->
-			conceptTweets.add(new ChartPieData(label:item[0],data:item[1]))
-		}
-		[user: session.user, sexList : sexList, dateList : dateList,dataChart:conceptTweets as JSON]
+		
+		[user: session.user, sexList : sexList, dateList : dateList]
 	}
 	
 	

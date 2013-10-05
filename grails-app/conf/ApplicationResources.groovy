@@ -18,9 +18,11 @@ modules = {
 		resource url:'js/home.js',disposition: 'head'
 	}
 	chartPie{
-		resource url:'js/chart/jquery.flot.js'
+		resource url:'js/chart/jquery.flot.js',disposition: 'head'
 		resource url:'js/chart/jquery.flot.pie.js'
 		resource url:'js/chart/jquery.flot.resize.js'
+		resource url:'js/chart/jquery.easy-pie-chart.js'
+		resource url:'js/jquery-ui-1.10.3.custom.min.js'
 		
 	}
 	indexcss {
