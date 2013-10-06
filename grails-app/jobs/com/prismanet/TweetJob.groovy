@@ -48,6 +48,7 @@ class TweetJob {
 			print "fecha a filtrar: " + filteredDate
 			def filters = [created_at:['$gte': filteredDate]]
 			DBCursor cursor = tweets.find(/*filters as BasicDBObject*/)
+			cursor.addOption(com.mongodb.Bytes.QUERYOPTION_NOTIMEOUT)
 			for (BasicDBObject tweet : cursor){
 				JSONObject obj = new JSONObject(tweet)
 				Status status = new StatusJSONImpl(obj)
