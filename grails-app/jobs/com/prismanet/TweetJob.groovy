@@ -31,11 +31,11 @@ class TweetJob {
 	}
 
 	static triggers = {
-		simple repeatInterval: 60000000000000l, repeatCount:-1 , startDelay: 120000
+		simple repeatInterval: 60000000000000l, repeatCount:-1 , startDelay: 60000
 	}
 
 	def execute() {
-		print "Starting the Tweets job."
+		println "TweetJob ejecutado: " + new Date()
 		
 		if(grailsApplication.config.grails.jobs.disable)
 		 return
@@ -57,7 +57,7 @@ class TweetJob {
 			}
 			cursor.close()
 		}
-		println "Running Job!" + new Date()
+		
 	}
 	
 	

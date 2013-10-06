@@ -33,7 +33,7 @@ class TweetService{
 		if (!author){
 			author = new Author(accountName:"@"+status.getUser().getScreenName(), followers:status.getUser().getFollowersCount(), sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()).save()
 		}
-		Tweet tweet = new Tweet(content:status.getText(),author:author, created:status.getCreatedAt())
+		Tweet tweet = new Tweet(content:status.getText(),author:author, created:status.getCreatedAt(), tweetId:status.getId())
 		try {
 			def List<Concept> concepts = Concept.list()
 			for (Concept concept in concepts){

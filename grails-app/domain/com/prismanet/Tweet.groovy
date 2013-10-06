@@ -5,6 +5,7 @@ class Tweet {
 	// cualquier otro lugar
 	String content
 	Boolean retweet
+	Long tweetId
 	Date created
 	Integer month
 	Integer year
@@ -14,7 +15,8 @@ class Tweet {
 	static belongsTo = [author:Author]
 
     static constraints = {
-		content(maxLength:140) 
+		content(maxLength:140)
+		tweetId unique:true  
     }
 	
 	void setCreated(Date date){
