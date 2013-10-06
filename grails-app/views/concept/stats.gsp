@@ -37,7 +37,67 @@
 								<div class="widget-body-inner" style="display: block;">
 									<div class="widget-main">
 										<g:each var="item" in="${dateList}">
-											<li>Fecha: ${item[0]} - Valor: ${item[1]}</li>
+											<li>${item[0]} - ${item[1]} tweets</li>
+										</g:each>
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+						
+						
+						
+						<div class="widget-box">
+							<div class="widget-header header-color-red">
+								<h5>
+									<span class="glyphicon glyphicon-stats"> </span> Tweets por
+									Hora
+								</h5>
+
+								<div class="widget-toolbar">
+									<a href="#" data-action="collapse"> <i
+										class="1 bigger-125 icon-chevron-up"></i>
+									</a>
+								</div>
+
+
+							</div>
+
+							<div class="widget-body">
+								<div class="widget-body-inner" style="display: block;">
+									<div class="widget-main">
+										<g:each var="item" in="${hourList}">
+											<li>${item[0]}hs - ${item[1]} tweets</li>
+										</g:each>
+									</div>
+
+
+								</div>
+							</div>
+							
+							
+							<div class="widget-box">
+							<div class="widget-header header-color-red">
+								<h5>
+									<span class="glyphicon glyphicon-stats"> </span> Tweets por
+									Minuto
+								</h5>
+
+								<div class="widget-toolbar">
+									<a href="#" data-action="collapse"> <i
+										class="1 bigger-125 icon-chevron-up"></i>
+									</a>
+								</div>
+
+
+							</div>
+
+							<div class="widget-body">
+								<div class="widget-body-inner" style="display: block;">
+									<div class="widget-main">
+										<g:each var="item" in="${minuteList}">
+											<li>${item[0]}hs - ${item[1]} tweets</li>
 										</g:each>
 									</div>
 

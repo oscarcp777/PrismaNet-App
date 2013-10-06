@@ -15,9 +15,8 @@ class ConceptService extends GenericService {
 		context = new ConceptAttributeContext()
 	}
 	
-    def categoryStore(Concept entity, def groups/*, def filters*/) {
+    def categoryStore(Concept entity, def groups, def filters) {
 		def criteria = Concept.createCriteria();
-		def filters = ["id" : entity.id]
 		def projection = ["tweetsId" : ProjectionType.COUNT]
 		return categoriesService(criteria, groups, filters, projection)
 	}
