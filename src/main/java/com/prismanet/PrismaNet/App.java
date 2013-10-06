@@ -102,7 +102,7 @@ public class App implements StatusListener
 	private void saveTweet(Status status){
 		DBObject tweet = (DBObject) JSON.parse(DataObjectFactory.getRawJSON(status));
 		Object id = tweet.get("id");
-		tweet.removeField("id");
+//		tweet.removeField("id");
 		tweet.put("_id",id);
 
 
