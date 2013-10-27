@@ -35,24 +35,27 @@ class TweetJob {
 	}
 
 	def execute() {
-		println "TweetJob ejecutado: " + new Date()
-		
 		if(grailsApplication.config.grails.jobs.disable)
 		 return
+		 
+		println "TweetJob ejecutado: " + new Date()
 		
 		
 		DB db = client.getDB("prismanet")
 		DBCollection tweets = db.getCollection("tweets")
 		use ( TimeCategory ) {
-			Date filteredDate = new Date()-1.minute
+			
+			def newyears = new GregorianCalendar(2013, Calendar.SEPTEMBER, 29,16,0)
+			
+			Date filteredDate = newyears.time
 			print "fecha a filtrar: " + filteredDate
 			def filters = [created_at:['$gte': filteredDate]]
-			DBCursor cursor = tweets.find(/*filters as BasicDBObject*/)
+			DBCursor cursor = tweets.find(filters as BasicDBObject)
 			cursor.addOption(com.mongodb.Bytes.QUERYOPTION_NOTIMEOUT)
 			for (BasicDBObject tweet : cursor){
 				JSONObject obj = new JSONObject(tweet)
 				Status status = new StatusJSONImpl(obj)
-				System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
+//				System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
 				tweetService.saveTweet(status)
 			}
 			cursor.close()

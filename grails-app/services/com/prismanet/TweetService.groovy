@@ -14,6 +14,8 @@ import com.prismanet.twitter.job.TweetsTwitterJob
 
 class TweetService{
 
+	def sessionFactory
+	def propertyInstanceMap = org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
 	
 	
 	/*def executeJob(StatusListener listener){
@@ -29,22 +31,29 @@ class TweetService{
 //		print "nombre: " + status.getUser().getScreenName()
 //		print "seguidores: " + status.getUser().getFollowersCount()  
 //		print "fecha creacion: " + status.getUser().getCreatedAt()
+		def start = System.currentTimeMillis()
 		Author author = Author.findByAccountName("@"+status.getUser().getScreenName())
 		if (!author){
 			author = new Author(accountName:"@"+status.getUser().getScreenName(), followers:status.getUser().getFollowersCount(), sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()).save()
 		}
+		print "Tiempo autor: " + (start - System.currentTimeMillis())/1000 + " segundos"
+		start = System.currentTimeMillis()
 		Tweet tweet = new Tweet(content:status.getText(),author:author, created:status.getCreatedAt(), tweetId:status.getId())
 		try {
 			def List<Concept> concepts = Concept.list()
-			for (Concept concept in concepts){
+			concepts.eachWithIndex(){ obj, index ->
+				concept = obj as Concept
 				if (concept.testAddTweet(tweet)){
 					print "valido para concepto: " +  concept
 					tweet.save()
+					print "Tiempo tweet: " + (start - System.currentTimeMillis())/1000 + " segundos"
+					start = System.currentTimeMillis()
 					concept.addToTweets(tweet)
-					println "Llega2"
+					print "Tiempo concept: " + (start - System.currentTimeMillis())/1000 + " segundos"
 					println "Tweet guardado con ID :  " + tweet.id
-					break
 				}
+				if (index % 20 == 0) cleanUpGorm()
+				
 			}
 		} catch (Exception e) {
 			print e.getStackTrace()
@@ -53,6 +62,14 @@ class TweetService{
 		
 	}
 	
+	
+	def cleanUpGorm() {
+		def session = sessionFactory.currentSession
+		session.flush()
+		session.clear()
+		propertyInstanceMap.get().clear()
+	}
+
 	
 	
 	
