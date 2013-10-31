@@ -16,7 +16,7 @@ class Author {
 		profileImage(url:true)
 		accountName(unique:true, validator:{value ->
 			// Validacion cadena de cuentas de twitter
-			if (!value.matches("^@[0-9A-Za-z]+")) {
+			if (!value.matches("^@[0-9A-Za-z_]+")) {
 				return false
 			}
 
