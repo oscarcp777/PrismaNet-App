@@ -84,7 +84,7 @@ class ConceptIntegrationTests {
 		def concept = new Concept(conceptName: 'Filmus')
 		assertNotNull concept.save()
 		def groupList = ["sex"]
-		def categoryList = conceptService.categoryStore(concept, groupList);
+		def categoryList = conceptService.categoryStore(concept, groupList, null);
 		int j = 1
 		for (i in categoryList) {
 			 println j + "- Sexo: " + i[0] + ", Valor: " + i[1]
@@ -100,7 +100,7 @@ class ConceptIntegrationTests {
 		def concept = new Concept(conceptName: 'Filmus')
 		assertNotNull concept.save()
 		def groupList = ["tweetCreated"]
-		def categoryList = conceptService.categoryStore(concept, groupList);
+		def categoryList = conceptService.categoryStore(concept, groupList, null);
 		int j = 1
 		for (i in categoryList) {
 			 println j + "- Sexo: " + i[0] + ", Valor: " + i[1]
