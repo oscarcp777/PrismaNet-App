@@ -1,21 +1,17 @@
 package com.prismanet
 
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Transactional
 
 import twitter4j.FilterQuery
-import twitter4j.StallWarning;
-import twitter4j.Status;
-import twitter4j.StatusDeletionNotice;
+import twitter4j.Status
 import twitter4j.StatusListener
 import twitter4j.TwitterStream
 import twitter4j.TwitterStreamFactory
 
-import com.prismanet.twitter.job.TweetsTwitterJob
-
 class TweetService{
 
 	def sessionFactory
-	def propertyInstanceMap = org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
+//	def propertyInstanceMap = org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
 	
 	
 	/*def executeJob(StatusListener listener){
@@ -34,41 +30,43 @@ class TweetService{
 		def start = System.currentTimeMillis()
 		Author author = Author.findByAccountName("@"+status.getUser().getScreenName())
 		if (!author){
-			author = new Author(accountName:"@"+status.getUser().getScreenName(), followers:status.getUser().getFollowersCount(), sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()).save()
+			author = new Author(accountName:"@"+status.getUser().getScreenName(), followers:status.getUser().getFollowersCount(), sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()).save(flush:true)
 		}
 		print "Tiempo autor: " + (start - System.currentTimeMillis())/1000 + " segundos"
 		start = System.currentTimeMillis()
 		Tweet tweet = new Tweet(content:status.getText(),author:author, created:status.getCreatedAt(), tweetId:status.getId())
 		try {
 			def List<Concept> concepts = Concept.list()
-			concepts.eachWithIndex(){ obj, index ->
-				concept = obj as Concept
+			concepts.eachWithIndex(){ concept, index ->
 				if (concept.testAddTweet(tweet)){
 					print "valido para concepto: " +  concept
-					tweet.save()
+					tweet.save(flush:true)
+					if (!tweet.id)
+						throw RuntimeException("Tweet no guardado")
 					print "Tiempo tweet: " + (start - System.currentTimeMillis())/1000 + " segundos"
 					start = System.currentTimeMillis()
-					concept.addToTweets(tweet)
+					concept.doAddToTweets(tweet)
 					print "Tiempo concept: " + (start - System.currentTimeMillis())/1000 + " segundos"
 					println "Tweet guardado con ID :  " + tweet.id
 				}
-				if (index % 20 == 0) cleanUpGorm()
+//				if (index % 20 == 0) cleanUpGorm()
 				
 			}
 		} catch (Exception e) {
-			print e.getStackTrace()
+			print e.getCause()
+			print "Tweet Fallido: " + status.getId() +"-"+status.getText()
 //			tweet.delete()
 		}
 		
 	}
 	
 	
-	def cleanUpGorm() {
-		def session = sessionFactory.currentSession
-		session.flush()
-		session.clear()
-		propertyInstanceMap.get().clear()
-	}
+//	def cleanUpGorm() {
+//		def session = sessionFactory.currentSession
+//		session.flush()
+//		session.clear()
+//		propertyInstanceMap.clear()
+//	}
 
 	
 	

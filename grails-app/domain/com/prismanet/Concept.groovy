@@ -39,11 +39,15 @@ class Concept {
 					'tweets',
 					'concept.tweets.invalid')
 		}else{
-			if (!tweets)
-				tweets = new ArrayList<Tweet>()
-			tweets.add(tweet);
+			doAddToTweets(tweet)
 		}
-
+			
+	}
+	
+	public doAddToTweets(Tweet tweet){
+		if (!tweets)
+			tweets = new ArrayList<Tweet>()
+		tweets.add(tweet);
 	}
 	
 	public boolean testAddTweet(Tweet tweet){

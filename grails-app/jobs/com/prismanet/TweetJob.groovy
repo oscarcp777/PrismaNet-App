@@ -1,5 +1,7 @@
 package com.prismanet
 
+import org.springframework.transaction.annotation.Transactional;
+
 import grails.util.Holders;
 import groovy.time.TimeCategory
 
@@ -31,7 +33,7 @@ class TweetJob {
 	}
 
 	static triggers = {
-		simple repeatInterval: 60000000000000l, repeatCount:-1 , startDelay: 60000
+		simple repeatInterval: 60000, repeatCount:-1 , startDelay: 60000
 	}
 
 	def execute() {
@@ -45,13 +47,14 @@ class TweetJob {
 		DBCollection tweets = db.getCollection("tweets")
 		use ( TimeCategory ) {
 			
-			def newyears = new GregorianCalendar(2013, Calendar.SEPTEMBER, 29,16,0)
-			
-			Date filteredDate = newyears.time
+			def newyears = new GregorianCalendar(2013, Calendar.OCTOBER, 14,1,35)
+			Date filteredDate = new Date()-1.minute
+//			Date filteredDate = newyears.time
 			print "fecha a filtrar: " + filteredDate
 			def filters = [created_at:['$gte': filteredDate]]
 			DBCursor cursor = tweets.find(filters as BasicDBObject)
 			cursor.addOption(com.mongodb.Bytes.QUERYOPTION_NOTIMEOUT)
+//			def List<Concept> concepts = new ConceptService().listConcept()
 			for (BasicDBObject tweet : cursor){
 				JSONObject obj = new JSONObject(tweet)
 				Status status = new StatusJSONImpl(obj)
