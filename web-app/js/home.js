@@ -1,7 +1,7 @@
 /**
  *Jquery para marcar como active un elemento del menu lateral 
  */
-function activeItemMenu(item,subItem,level){
+function activeItemMenu(item,subItem,level,nameItem){
 	if(level==1){
 		editClassItem(item,'active');
 	}else{
@@ -9,6 +9,7 @@ function activeItemMenu(item,subItem,level){
 		$("#"+item).addClass('active open');
 		editClassItem(subItem,'active');
 	}
+	$('#nameItem').text(nameItem);
 }
 function editClassItem(item,clas){
 	$("#"+item).siblings('.'+clas).removeClass(clas);

@@ -6,3 +6,5 @@ target-eclipse/
 .DS_Store
 .classpath
 .project
+/.metadata
+/Servers

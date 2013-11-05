@@ -9,13 +9,13 @@
 	href="${resource(dir: 'images', file: 'favicon.gif')}" type="image/gif">
 <link rel="icon" href="${resource(dir: 'images', file: 'favicon.gif')}" type="image/gif">
 
-<r:require modules="core,ace,chartPie" />
+<r:require modules="core,ace,chartPie,highcharts" />
 
 <g:layoutHead />
 <r:layoutResources />
 </head>
 <body>
-
+<g:set var="scService" bean="springSecurityService"/>
 	<div class="navbar-fixed breadcrumbs-fixed skin-1">
 		<div class="navbar navbar-default navbar-fixed-top" id="navbar">
 			<script type="text/javascript">
@@ -117,28 +117,33 @@
 						<!-- #sidebar-shortcuts -->
 
 						<ul class="nav nav-list" id="menuIzquierdo">
-							<li class="active" id="Dashboard"><g:link
-										controller="home" action="index"> <i
-									class="icon-dashboard"></i> <span class="menu-text">Dashboard</span>
-							</g:link></li>
-							<li id="tweets"><g:link controller='tweet' action="list">
+							<li class="active" id="Dashboard">
+							<g:link	controller="home" action="index"> 
+								<i class="icon-dashboard"></i> 
+								<span class="menu-text" >Dashboard</span>
+							   </g:link>
+							</li>
+							<li id="tweets">
+								<g:link controller='tweet' action="list">
 									<i class="icon-twitter"></i>
 									<span class="menu-text">Ver Tweets</span>
-								</g:link></li>
-							<li id="chart"><a href="#" class="dropdown-toggle"> <i
+								</g:link>
+								</li>
+							<li id="chart">
+							   <a href="#" class="dropdown-toggle"> <i
 									class="icon-bar-chart"></i> <span class="menu-text">Estadisticas</span>
 
 									<b class="arrow icon-angle-down"></b>
 							</a>
 
 								<ul class="submenu">
-									<li><g:link controller='user' action="stats">
+									<li id="general"><g:link controller='user' action="stats" >
 									<i class="icon-double-angle-right"></i>
 											General
 									</g:link> 
 									</li>
 
-									<li><g:link controller='user' action="monthStats"><i class="icon-double-angle-right"></i>
+									<li id="mensual"><g:link controller='user' action="monthStats" ><i class="icon-double-angle-right"></i>
 											Mensual
 									</g:link> 
 									</li>
@@ -150,7 +155,7 @@
 									<b class="arrow icon-angle-down"></b>
 							</a>
 								<ul class="submenu">
-								<g:each in="${session.user.concepts}" status="i" var="conceptInstance">
+								<g:each in="${scService.currentUser.concepts}" status="i" var="conceptInstance">
 									<li id="${conceptInstance.id}">
 									<g:link controller="concept" action="stats" id="${conceptInstance.conceptName}">
 									${fieldValue(bean: conceptInstance, field: "conceptName")}
@@ -203,7 +208,7 @@
 							<ul class="breadcrumb">
 								<li><i class="icon-home home-icon"></i> <g:link
 										controller="home" action="index">Home</g:link></li>
-								<li class="active">Principal</li>
+								<li class="active" ><small id="nameItem" style="font-size: 13px;">Dashboard</small></li>
 							</ul>
 							<!-- .breadcrumb -->
 

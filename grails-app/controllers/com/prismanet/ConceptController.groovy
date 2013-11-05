@@ -2,6 +2,8 @@ package com.prismanet
 import grails.converters.*
 
 import java.text.SimpleDateFormat
+import grails.plugins.springsecurity.Secured
+@Secured(['ROLE_USER'])
 class ConceptController extends GenericService {
 
 	def scaffold = true

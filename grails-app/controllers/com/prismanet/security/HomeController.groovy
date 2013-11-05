@@ -7,9 +7,8 @@ import grails.plugins.springsecurity.SpringSecurityService
 class HomeController {
 	SpringSecurityService springSecurityService;
     def index() {
-		session.user=springSecurityService.currentUser;
+		
 	}
-	
 	
 	@Secured(['ROLE_ADMIN'])
 	def onlyAdmin(){render 'admin'}

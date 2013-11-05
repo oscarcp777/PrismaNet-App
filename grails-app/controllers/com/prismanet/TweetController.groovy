@@ -6,7 +6,8 @@ import twitter4j.StallWarning;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
 import twitter4j.StatusListener;
-
+import grails.plugins.springsecurity.Secured
+@Secured(['ROLE_USER'])
 class TweetController {
 	static scaffold = true
 

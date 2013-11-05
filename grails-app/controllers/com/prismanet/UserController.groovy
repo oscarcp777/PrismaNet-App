@@ -1,13 +1,20 @@
 package com.prismanet
 import grails.converters.*
+
 import com.prismanet.GenericService.ProjectionType
 import com.prismanet.chart.json.ChartPieData
 
+import grails.plugins.springsecurity.Secured
+import grails.plugins.springsecurity.SpringSecurityService;
+@Secured(['ROLE_USER'])
 class UserController {
 	
 	def scaffold = true
 	def userService
-	
+	SpringSecurityService springSecurityService;
+	def beforeInterceptor = {
+		session.user=springSecurityService.currentUser
+	}
 	def stats = {
 		//TODO agregar mensaje de error o 404 si no encuentra el user
 		def groupList = ["sex"]

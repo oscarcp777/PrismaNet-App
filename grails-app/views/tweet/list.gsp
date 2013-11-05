@@ -61,7 +61,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	  activeItemMenu('tweets',"",1);
+	  activeItemMenu('tweets',"",1,'Tweets');
 	</script>
 </body>
 </html>

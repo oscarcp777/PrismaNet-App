@@ -25,6 +25,10 @@ modules = {
 		resource url:'js/jquery-ui-1.10.3.custom.min.js'
 		
 	}
+	highcharts {
+		dependsOn 'core'
+		resource url:'js/chart/highcharts.js'
+	}
 	indexcss {
 		dependsOn 'core'
 		resource url:'css/index.css'
