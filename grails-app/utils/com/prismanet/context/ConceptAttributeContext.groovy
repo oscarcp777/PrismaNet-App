@@ -17,6 +17,7 @@ class ConceptAttributeContext extends AttributeContext {
 		addPropertyRelation("tweetTime", "time", null, "tweets");
 		addPropertyRelation("tweetDay", "day", null, "tweets");
 		addPropertyRelation("tweetsId", "id", null, "tweets");
+		addPropertyRelation("created", "created", null, "tweets");
 	}
 
 	

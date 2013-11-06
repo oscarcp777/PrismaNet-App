@@ -155,7 +155,7 @@
 									<b class="arrow icon-angle-down"></b>
 							</a>
 								<ul class="submenu">
-								<g:each in="${scService.currentUser.concepts}" status="i" var="conceptInstance">
+								<g:each in="${scService.currentUser.concepts.sort{it.conceptName}}" status="i" var="conceptInstance">
 									<li id="${conceptInstance.id}">
 									<g:link controller="concept" action="stats" id="${conceptInstance.conceptName}">
 									${fieldValue(bean: conceptInstance, field: "conceptName")}
