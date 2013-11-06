@@ -2,15 +2,25 @@ package com.prismanet
 
 import static org.junit.Assert.*
 
-import java.awt.print.Printable;
-
 import org.junit.*
+
+import com.prismanet.GenericService.ProjectionType
+
 
 class ConceptIntegrationTests {
 
     @Before
     void setUp() {
-        // Setup logic here
+		def d1 = new GregorianCalendar(2013, Calendar.OCTOBER, 14,1,35)
+        def twitterConfig = new TwitterSetup(includedAccounts:"@CFKArgentina,@twitter2",
+		keywords:"politica,filmus").save()
+		def author1 = new Author(accountName:"@oscar", followers:10, userSince:new Date(), sex: Sex.M).save()
+		def tweet1 = new Tweet(content:"@CFKArgentina", author:author1, created:d1.time).save()
+		
+		
+		def concept = new Concept(conceptName: 'Filmus',twitterSetup:twitterConfig)
+		concept.addToTweets(tweet1)
+		concept.save()
     }
 
     @After
@@ -80,11 +90,12 @@ class ConceptIntegrationTests {
 	
 	@Test
 	void testCategorizationByAuthorSexService(){
+		def quantityProjection = ["tweetsId" : ProjectionType.COUNT]
 		def conceptService = new ConceptService()
 		def concept = new Concept(conceptName: 'Filmus')
 		assertNotNull concept.save()
 		def groupList = ["sex"]
-		def categoryList = conceptService.categoryStore(concept, groupList, null);
+		def categoryList = conceptService.categoryStore(groupList, null, quantityProjection);
 		int j = 1
 		for (i in categoryList) {
 			 println j + "- Sexo: " + i[0] + ", Valor: " + i[1]
@@ -96,14 +107,15 @@ class ConceptIntegrationTests {
 	
 	@Test
 	void testCategorizationByTweetDateService(){
+		def quantityProjection = ["tweetsId" : ProjectionType.COUNT]
 		def conceptService = new ConceptService()
-		def concept = new Concept(conceptName: 'Filmus')
-		assertNotNull concept.save()
 		def groupList = ["tweetCreated"]
-		def categoryList = conceptService.categoryStore(concept, groupList, null);
+		def list = Concept.list()
+		def categoryList = conceptService.categoryStore(groupList, null, quantityProjection);
 		int j = 1
 		for (i in categoryList) {
-			 println j + "- Sexo: " + i[0] + ", Valor: " + i[1]
+			 println j + "- Fecha: " + i[0] + ", Valor: " + i[1]
+			 
 			 j++
 		}
 				
