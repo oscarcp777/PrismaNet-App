@@ -25,7 +25,6 @@ modules = {
 	highcharts {
 		dependsOn 'core'
 		resource url:'js/chart/highstock.js'
-		resource url:'js/chart/highcharts.js'
 	}
 	indexcss {
 		dependsOn 'core'
