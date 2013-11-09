@@ -1,11 +1,11 @@
 package com.prismanet
 import grails.converters.*
-
-import com.prismanet.GenericService.ProjectionType
-import com.prismanet.chart.json.ChartPieData
-
 import grails.plugins.springsecurity.Secured
-import grails.plugins.springsecurity.SpringSecurityService;
+import grails.plugins.springsecurity.SpringSecurityService
+
+import com.prismanet.GenericService.FilterType
+import com.prismanet.GenericService.ProjectionType
+import com.prismanet.context.Filter
 @Secured(['ROLE_USER'])
 class UserController {
 	
@@ -26,7 +26,7 @@ class UserController {
 		//TODO agregar mensaje de error o 404 si no encuentra el user
 		def groupList = ["conceptsId"]
 		def criteria = User.createCriteria();
-		def filters = ["id" : session.user.id]
+		def filters = [new Filter(attribute:"id",value: session.user.id, type:FilterType.EQ)]
 		def projection = ["tweetsId" : ProjectionType.COUNT, "authorId" : ProjectionType.COUNT]
 		def statsList = userService.categoriesService(criteria, groupList, filters, projection)
 		

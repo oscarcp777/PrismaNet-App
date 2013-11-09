@@ -14,12 +14,35 @@ class GenericService {
 	
 	def categoriesService(HibernateCriteriaBuilder criteria, def groups, def filters, def projection){
 		def resultList = criteria {
-
+			
 			context.clearDefinedAlias()
-			filters.each {
-				eq(getPropertyName(criteria, it.key), it.value)
-			}
-			projections {
+			and{	
+				filters.each {
+					if (it.type)
+						switch (it.type) {
+							case FilterType.EQ:
+								eq(getPropertyName(criteria, it.attribute), it.value)
+							break
+							case FilterType.GT:
+								gt(getPropertyName(criteria, it.attribute), it.value)
+							break
+							case FilterType.GE:
+								ge(getPropertyName(criteria, it.attribute), it.value)
+							break
+							case FilterType.LT:
+								lt(getPropertyName(criteria, it.attribute), it.value)
+							break	
+							case FilterType.LE:
+								le(getPropertyName(criteria, it.attribute), it.value)
+							break	
+							default:
+								eq(getPropertyName(criteria, it.attribute), it.value)
+						}
+					else
+						eq(getPropertyName(criteria, it.attribute), it.value)
+				}
+		}	
+		projections {
 				for (item in groups){
 					groupProperty(getPropertyName(criteria, item))
 				}
@@ -70,6 +93,19 @@ class GenericService {
 	
 	
 	
+	
+	/**
+	 * Enumeracion que contiene los distintos tipos de Operadores de Filtros. 
+	 *
+	 */
+	protected enum FilterType{
+		EQ,			// Igual a
+		GT, 		// Mayor que
+		GE, 		// Mayor o Igual que
+		LT,			// Menor que
+		LE;			// Menor o Igual que
+		
+	}
     
 	
 	/**
