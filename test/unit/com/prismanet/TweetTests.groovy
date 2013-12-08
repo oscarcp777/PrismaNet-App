@@ -11,18 +11,24 @@ class TweetTests extends GrailsUnitTestCase{
 		gC.set(2013, 0, 20, 22, 9, 33);
 		
 		Tweet tweet = new Tweet()
-		def resultMap = tweet.parseDate(gC.getTime())
+		tweet.setCreated(gC.getTime())
 		
-		assertEquals resultMap['year'],2013
-		assertEquals resultMap['month'],1
-		assertEquals resultMap['day'],20
-		assertEquals resultMap['period'],"201301"
-		assertEquals resultMap['time'],"22:09:33"
-		assertEquals resultMap['date'],"20/01/2013"
-		assertEquals resultMap['hour'],22
-		assertEquals resultMap['minute'],"22:09"
-		
-
+		assertEquals tweet.year,2013
+		assertEquals tweet.month,1
+		assertEquals tweet.day,20
+		assertEquals tweet.period,"201301"
+		assertEquals tweet.time,"22:09:33"
+		assertEquals tweet.date,"20/01/2013"
+		assertEquals tweet.hour,22
+		assertEquals tweet.minute,"22:09"
+		assertEquals tweet.dateByHour,"20/01/2013 22"
+		assertEquals tweet.dateByMinute,"20/01/2013 22:09"
+	}
+	
+	
+	void testMentionType() {
+		Tweet tweet = new Tweet()
+		assertEquals tweet.mentionType,MentionType.TWITTER
 	}
 	
 	

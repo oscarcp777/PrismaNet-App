@@ -1,5 +1,6 @@
 package com.prismanet
 
+import org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin
 import org.springframework.transaction.annotation.Transactional
 
 import twitter4j.FilterQuery
@@ -11,7 +12,6 @@ import twitter4j.TwitterStreamFactory
 class TweetService{
 
 	def sessionFactory
-//	def propertyInstanceMap = org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
 	
 	
 	/*def executeJob(StatusListener listener){
@@ -49,7 +49,7 @@ class TweetService{
 					print "Tiempo concept: " + (start - System.currentTimeMillis())/1000 + " segundos"
 					println "Tweet guardado con ID :  " + tweet.id
 				}
-//				if (index % 20 == 0) cleanUpGorm()
+				if (index % 20 == 0) cleanUpGorm()
 				
 			}
 		} catch (Exception e) {
@@ -61,12 +61,11 @@ class TweetService{
 	}
 	
 	
-//	def cleanUpGorm() {
-//		def session = sessionFactory.currentSession
-//		session.flush()
-//		session.clear()
-//		propertyInstanceMap.clear()
-//	}
+	def cleanUpGorm() {
+		sessionFactory.currentSession.flush()
+//		sessionFactory.currentSession.clear()
+//		DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP?.get()?.clear()
+	}
 
 	
 	
