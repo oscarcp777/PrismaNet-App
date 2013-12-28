@@ -19,7 +19,5 @@ class User extends SecUser{
     static constraints = {
 		firstName(blank:false)
 		lastName(blank:false)
-		concepts(nullable:true)
-		twitterAccounts(nullable:true)
 	}
 }

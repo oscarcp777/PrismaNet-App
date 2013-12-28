@@ -11,7 +11,7 @@ dataSource {
     driverClassName = "org.h2.Driver"
     username = "sa"
     password = ""
-	logSql = false
+	logSql = true
 }
 hibernate {
 	cache.use_second_level_cache = true
@@ -25,7 +25,7 @@ environments {
 			pooled = true
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://localhost:3306/prismanet"
+            url = "jdbc:mysql://localhost:3306/prismanet2"
 			driverClassName = "com.mysql.jdbc.Driver"
 			username = "root"
 			password = "fiuba"

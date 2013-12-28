@@ -7,14 +7,15 @@ import grails.test.mixin.support.*
 class ConceptTests extends GrailsUnitTestCase{
 
 	void testConstraints() {
-		def concept = new Concept(conceptName : 'Comida')
+		def concept = new Concept(conceptName : 'Comida', user: new User())
 		mockForConstraintsTests(Concept, [concept])
 		assertTrue concept.validate()
 
 		def testConcept = new Concept()
 		assertFalse testConcept.validate()
-		assertEquals testConcept.errors.getErrorCount(),1
+		assertEquals testConcept.errors.getErrorCount(),2
 		assertEquals "nullable", testConcept.errors["conceptName"]
+		assertEquals "nullable", testConcept.errors["user"]
 
 	}
 	

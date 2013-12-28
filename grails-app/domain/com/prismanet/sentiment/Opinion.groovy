@@ -12,13 +12,11 @@ enum OpinionValue {
 
 class Opinion {
 	
-	User user
 	Tweet tweet
 	Concept concept
 	OpinionValue value
 
      static constraints = {
-		user(nullable:false)
 		tweet(nullable:false)
 		concept(nullable:false)
 		value(nullable:false)

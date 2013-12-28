@@ -28,7 +28,7 @@ class UserController {
 		def criteria = User.createCriteria();
 		def filters = [new Filter(attribute:"id",value: session.user.id, type:FilterType.EQ)]
 		def projection = ["tweetsId" : ProjectionType.COUNT, "authorId" : ProjectionType.COUNT]
-		def statsList = userService.categoriesService(criteria, groupList, filters, projection)
+		def statsList = userService.groupBy(groupList, filters, projection)
 		
 		[user: session.user, statsList : statsList]
 	}

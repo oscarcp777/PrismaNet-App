@@ -1,0 +1,72 @@
+
+<%@ page import="com.prismanet.sentiment.Opinion" %>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="layout" content="home">
+		<g:set var="entityName" value="${message(code: 'opinion.label', default: 'Opinion')}" />
+		<title><g:message code="default.show.label" args="[entityName]" /></title>
+	</head>
+	<body>
+		<a href="#show-opinion" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<div class="nav" role="navigation">
+			<ul>
+				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+			</ul>
+		</div>
+		<div id="show-opinion" class="content scaffold-show" role="main">
+			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+			<g:if test="${flash.message}">
+			<div class="message" role="status">${flash.message}</div>
+			</g:if>
+			<ol class="property-list opinion">
+			
+				<g:if test="${opinionInstance?.user}">
+				<li class="fieldcontain">
+					<span id="user-label" class="property-label"><g:message code="opinion.user.label" default="User" /></span>
+					
+						<span class="property-value" aria-labelledby="user-label"><g:link controller="user" action="show" id="${opinionInstance?.user?.id}">${opinionInstance?.user?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${opinionInstance?.tweet}">
+				<li class="fieldcontain">
+					<span id="tweet-label" class="property-label"><g:message code="opinion.tweet.label" default="Tweet" /></span>
+					
+						<span class="property-value" aria-labelledby="tweet-label"><g:link controller="tweet" action="show" id="${opinionInstance?.tweet?.id}">${opinionInstance?.tweet?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${opinionInstance?.concept}">
+				<li class="fieldcontain">
+					<span id="concept-label" class="property-label"><g:message code="opinion.concept.label" default="Concept" /></span>
+					
+						<span class="property-value" aria-labelledby="concept-label"><g:link controller="concept" action="show" id="${opinionInstance?.concept?.id}">${opinionInstance?.concept?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${opinionInstance?.value}">
+				<li class="fieldcontain">
+					<span id="value-label" class="property-label"><g:message code="opinion.value.label" default="Value" /></span>
+					
+						<span class="property-value" aria-labelledby="value-label"><g:fieldValue bean="${opinionInstance}" field="value"/></span>
+					
+				</li>
+				</g:if>
+			
+			</ol>
+			<g:form>
+				<fieldset class="buttons">
+					<g:hiddenField name="id" value="${opinionInstance?.id}" />
+					<g:link class="edit" action="edit" id="${opinionInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+				</fieldset>
+			</g:form>
+		</div>
+	</body>
+</html>

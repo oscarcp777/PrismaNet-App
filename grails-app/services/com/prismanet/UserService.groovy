@@ -8,15 +8,13 @@ import com.prismanet.context.UserAttributeContext
 class UserService extends GenericService {
 
    	UserService(){
-		super()
-		context = new UserAttributeContext()
+		super(User, new UserAttributeContext())
 	}
 	
     def categoryStore(User entity, def groups/*, def filters*/) {
-		def criteria = User.createCriteria();
 		def filters = [new Filter(attribute:"id",value: entity.id, type:FilterType.EQ)]
 		def projection = ["tweetsId" : ProjectionType.COUNT]
-		return categoriesService(criteria, groups, filters, projection)
+		return groupBy(groups, filters, projection)
 	}
 
 }

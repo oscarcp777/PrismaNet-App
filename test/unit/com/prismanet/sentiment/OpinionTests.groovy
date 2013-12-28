@@ -17,7 +17,6 @@ class OpinionTests {
     void testConstraints() {
 		
 		def existingOpinion = new Opinion(
-			user: new User(),
 			tweet: new Tweet(),
 			concept: new Concept(),
 			value: OpinionValue.POSITIVE,
@@ -28,7 +27,7 @@ class OpinionTests {
 		def opinion = new Opinion()
 		
 		assert !opinion.validate()
-		assert "nullable" == opinion.errors["user"]
+		assertEquals opinion.errors.getErrorCount(),3
 		assert "nullable" == opinion.errors["concept"]
 		assert "nullable" == opinion.errors["tweet"]
 		assert "nullable" == opinion.errors["value"]

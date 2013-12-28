@@ -4,6 +4,7 @@ package com.prismanet.sentiment
 
 import org.junit.*
 import grails.test.mixin.*
+import com.prismanet.*
 
 @TestFor(OpinionController)
 @Mock(Opinion)
@@ -11,8 +12,9 @@ class OpinionControllerTests {
 
     def populateValidParams(params) {
         assert params != null
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
+        params["concept"] = new Concept(conceptName:"presi")
+		params["tweet"] = new Tweet(content:"prueba",tweetId:1000000l)
+		params["value"] = OpinionValue.POSITIVE
     }
 
     void testIndex() {
@@ -101,7 +103,7 @@ class OpinionControllerTests {
 
         // test invalid parameters in update
         params.id = opinion.id
-        //TODO: add invalid values to params object
+        params.concept = null
 
         controller.update()
 

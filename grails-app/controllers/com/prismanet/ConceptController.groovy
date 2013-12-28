@@ -9,7 +9,7 @@ import com.prismanet.GenericService.ProjectionType
 import com.prismanet.context.Filter
 
 @Secured(['ROLE_USER'])
-class ConceptController extends GenericService {
+class ConceptController{
 
 	def scaffold = true
 	def conceptService

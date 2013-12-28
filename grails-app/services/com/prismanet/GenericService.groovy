@@ -7,47 +7,94 @@ import grails.orm.HibernateCriteriaBuilder
 
 class GenericService {
 	
-	protected AttributeContext context
+	AttributeContext context
+	def domainClass 
 	
-	GenericService(){
+	GenericService(def domainClass,AttributeContext context){
+		this.domainClass = domainClass
+		this.context = context
 	}
 	
-	def categoriesService(HibernateCriteriaBuilder criteria, def groups, def filters, def projection){
+	
+	
+	def list(filters){
+		list(domainClass, context, filters)
+	}
+	
+	def list(domainClass, context, filters) {
+		def criteria = domainClass.createCriteria()
+		def results = criteria.list() {
+			and {
+				filters.each{
+					if (it.type)
+						switch (it.type) {
+							case FilterType.EQ:
+								eq(getPropertyName(context, criteria, it.attribute), it.value)
+								break
+							case FilterType.GT:
+								gt(getPropertyName(context, criteria, it.attribute), it.value)
+								break
+							case FilterType.GE:
+								ge(getPropertyName(context, criteria, it.attribute), it.value)
+								break
+							case FilterType.LT:
+								lt(getPropertyName(context, criteria, it.attribute), it.value)
+								break
+							case FilterType.LE:
+								le(getPropertyName(context, criteria, it.attribute), it.value)
+								break
+							default:
+								eq(getPropertyName(context, criteria, it.attribute), it.value)
+						}
+					else
+						eq(getPropertyName(context, criteria, it.attribute), it.value)
+				}
+			}
+		}
+		results
+	}
+	
+	def groupBy(groups, filters, projection){
+		groupBy(domainClass, context, groups, filters, projection)
+	}
+	
+	def groupBy(domainClass, context, groups, filters, projection){
+		def criteria = domainClass.createCriteria()
+		
 		def resultList = criteria {
-			
 			context.clearDefinedAlias()
-			and{	
+			and{
 				filters.each {
 					if (it.type)
 						switch (it.type) {
 							case FilterType.EQ:
-								eq(getPropertyName(criteria, it.attribute), it.value)
-							break
+								eq(getPropertyName(context, criteria, it.attribute), it.value)
+								break
 							case FilterType.GT:
-								gt(getPropertyName(criteria, it.attribute), it.value)
-							break
+								gt(getPropertyName(context, criteria, it.attribute), it.value)
+								break
 							case FilterType.GE:
-								ge(getPropertyName(criteria, it.attribute), it.value)
-							break
+								ge(getPropertyName(context, criteria, it.attribute), it.value)
+								break
 							case FilterType.LT:
-								lt(getPropertyName(criteria, it.attribute), it.value)
-							break	
+								lt(getPropertyName(context, criteria, it.attribute), it.value)
+								break
 							case FilterType.LE:
-								le(getPropertyName(criteria, it.attribute), it.value)
-							break	
+								le(getPropertyName(context, criteria, it.attribute), it.value)
+								break
 							default:
-								eq(getPropertyName(criteria, it.attribute), it.value)
+								eq(getPropertyName(context, criteria, it.attribute), it.value)
 						}
 					else
-						eq(getPropertyName(criteria, it.attribute), it.value)
+						eq(getPropertyName(context, criteria, it.attribute), it.value)
 				}
-		}	
-		projections {
+			}
+			projections {
 				for (item in groups){
-					groupProperty(getPropertyName(criteria, item))
+					groupProperty(getPropertyName(context, criteria, item))
 				}
 				projection.each{
-					String property = getPropertyName(criteria, it.key)
+					String property = getPropertyName(context, criteria, it.key)
 
 					switch(it.value){
 						case ProjectionType.SUM:
@@ -68,7 +115,7 @@ class GenericService {
 		return resultList
 	}
 	
-	private String getPropertyName(HibernateCriteriaBuilder criteria, String attr){
+	private String getPropertyName(AttributeContext context, HibernateCriteriaBuilder criteria, String attr){
 		String propertyName = context.getAttributePropertyName(attr)
 		String propertyAliasName = null;
 		if(context.getEntityNameFor(attr)!=null){

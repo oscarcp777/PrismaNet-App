@@ -1,6 +1,5 @@
 package com.prismanet
 
-import org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin
 import org.springframework.transaction.annotation.Transactional
 
 import twitter4j.FilterQuery
@@ -9,10 +8,19 @@ import twitter4j.StatusListener
 import twitter4j.TwitterStream
 import twitter4j.TwitterStreamFactory
 
-class TweetService{
+import com.prismanet.GenericService.FilterType
+import com.prismanet.context.Filter
+import com.prismanet.context.TweetAttributeContext
+import com.prismanet.sentiment.Opinion
+import com.prismanet.sentiment.OpinionValue
+
+class TweetService extends GenericService{
 
 	def sessionFactory
 	
+	TweetService(){
+		super(Tweet, new TweetAttributeContext())
+	}
 	
 	/*def executeJob(StatusListener listener){
 		TweetsTwitterJob job = new TweetsTwitterJob()
@@ -67,7 +75,13 @@ class TweetService{
 //		DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP?.get()?.clear()
 	}
 
-	
+	def OpinionValue getOpinion(User user, Concept concept){
+		def opinion = Opinion.findByUserandConcept(user,concept)
+		if (!opinion)
+			return OpinionValue.NEUTRAL
+		
+		opinion.value
+	}
 	
 	
 	def streamConection(StatusListener listener){
@@ -109,6 +123,10 @@ class TweetService{
 	}
 	
 	
+	
+	
+	
+	
 	private boolean isNumericalArgument(String argument) {
 		def String arguments = argument.split(",");
 		boolean isNumericalArgument = true;
@@ -121,6 +139,23 @@ class TweetService{
 			}
 		}
 		return isNumericalArgument;
+	}
+	
+	
+	def getTweets(conceptId){
+		Concept concept = Concept.get(conceptId)
+//		Filter filter = new Filter(attribute:"conceptsId",value: conceptId, type:FilterType.EQ)
+//		filters << filter
+		def resultList = []
+		for (tweet in concept.getTweets()){
+			Opinion op = Opinion.findByTweetAndConcept(tweet,concept)
+			def opValue = OpinionValue.NEUTRAL
+			if (op)
+				opValue = op.value
+			resultList << [tweet:tweet, value:opValue]
+		}
+		resultList
+		
 	}
 	
 }

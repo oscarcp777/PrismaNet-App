@@ -36,7 +36,7 @@ class BootStrap {
 		def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)
 		def userRole = SecRole.findByAuthority('ROLE_USER') ?: new SecRole(authority: 'ROLE_USER').save(failOnError: true)
 
-		def user1 = User.findByUsername('oscarcp777') ?: new User(username: 'oscarcp777', account:trialAccount,enabled: true, password: 'pass', firstName: 'Oscar', lastName: 'C‡ceres').save(failOnError: true)
+		def user1 = User.findByUsername('oscarcp777') ?: new User(username: 'oscarcp777', account:trialAccount,enabled: true, password: 'pass', firstName: 'Oscar', lastName: 'Cï¿½ceres').save(failOnError: true)
 		if (!user1.authorities.contains(userRole)) {
 			SecUserSecRole.create user1, userRole, true
 		}
@@ -80,74 +80,83 @@ class BootStrap {
 				def twitterConfigSota= new TwitterSetup(includedAccounts:"@DelaSotaOk").save()
 				def twitterConfigCobos= new TwitterSetup(includedAccounts:"@juliocobos").save()
 
-//				// Autores
-//				def author1 = new Author(accountName:"@oscar", followers:10, userSince:new Date(), sex: Sex.M).save()
-//				def author2 = new Author(accountName:"@santiago", followers:20, userSince:new Date(), sex: Sex.M).save()
-//				def author3 = new Author(accountName:"@raquel", followers:30, userSince:new Date(), sex: Sex.F).save()
-//				def author4 = new Author(accountName:"@naty", followers:40, userSince:new Date(), sex: Sex.F).save()
+				// Autores
+				def author1 = new Author(accountName:"@oscar", followers:10, userSince:new Date(), sex: Sex.M).save()
+				def author2 = new Author(accountName:"@santiago", followers:20, userSince:new Date(), sex: Sex.M).save()
+				def author3 = new Author(accountName:"@raquel", followers:30, userSince:new Date(), sex: Sex.F).save()
+				def author4 = new Author(accountName:"@naty", followers:40, userSince:new Date(), sex: Sex.F).save()
 
 
 				// Conceptos
-				def conceptIns = new Concept(conceptName: 'Insaurralde',twitterSetup:twitterConfigIns).save()
-				def conceptMass = new Concept(conceptName: 'Massa',twitterSetup:twitterConfigMass).save()
-				def conceptColo = new Concept(conceptName: 'De Narvaez',twitterSetup:twitterConfigColo).save()
-				def conceptPresi = new Concept(conceptName: 'CFK',twitterSetup:twitterConfigPresi).save()
+				def conceptIns = new Concept(conceptName: 'Insaurralde',twitterSetup:twitterConfigIns, user:user).save()
+				def conceptMass = new Concept(conceptName: 'Massa',twitterSetup:twitterConfigMass, user:user).save()
+				def conceptColo = new Concept(conceptName: 'De Narvaez',twitterSetup:twitterConfigColo, user:user).save()
+				def conceptPresi = new Concept(conceptName: 'CFK',twitterSetup:twitterConfigPresi, user:user).save()
 				
-				def conceptStolb= new Concept(conceptName: 'Stolbizer',twitterSetup:twitterConfigsStolb).save()
-				def conceptScioli = new Concept(conceptName: 'Scioli',twitterSetup:twitterConfigScioli).save()
-				def conceptBinner= new Concept(conceptName: 'Binner',twitterSetup:twitterConfigBinner).save()
-				def conceptMacri = new Concept(conceptName: 'Macri',twitterSetup:twitterConfigMacri).save()
-				def conceptCarrio = new Concept(conceptName: 'Carrio',twitterSetup:twitterConfigCarrio).save()
-				def conceptSota = new Concept(conceptName: 'De la Sota',twitterSetup:twitterConfigSota).save()
-				def conceptCobos = new Concept(conceptName: 'Cobos',twitterSetup:twitterConfigCobos).save()
+				def conceptStolb= new Concept(conceptName: 'Stolbizer',twitterSetup:twitterConfigsStolb, user:user).save()
+				def conceptScioli = new Concept(conceptName: 'Scioli',twitterSetup:twitterConfigScioli, user:user).save()
+				def conceptBinner= new Concept(conceptName: 'Binner',twitterSetup:twitterConfigBinner, user:user).save()
+				def conceptMacri = new Concept(conceptName: 'Macri',twitterSetup:twitterConfigMacri, user:user).save()
+				def conceptCarrio = new Concept(conceptName: 'Carrio',twitterSetup:twitterConfigCarrio, user:user).save()
+				def conceptSota = new Concept(conceptName: 'De la Sota',twitterSetup:twitterConfigSota, user:user).save()
+				def conceptCobos = new Concept(conceptName: 'Cobos',twitterSetup:twitterConfigCobos, user:user).save()
 
 				// Tweets
-//				def tweetIns1 = new Tweet(created:new Date()-3.days, content:"@minsaurralde bastante bien pero perdio", retweet: false, author:author1).save()
-//				def tweetIns2 = new Tweet(created:new Date()-2.days, content:"@minsaurralde pelado boton", retweet: false, author:author2).save()
-//				def tweetIns3 = new Tweet(created:new Date()-1.days, content:"@minsaurralde con cristina", retweet: false,  author:author3).save()
-//
-//				def tweetMass1 = new Tweet(created:new Date()-3.days, content:"ojo con el boludo de @SergioMassa", retweet: false, author:author1).save()
-//				def tweetMass2 = new Tweet(created:new Date()-2.days, content:"@SergioMassa presidente", retweet: false, author:author2).save()
-//				def tweetMass3 = new Tweet(created:new Date()-1.days, content:"@SergioMassa ta con @macri", retweet: false, author:author3).save()
-//				def tweetMass4 = new Tweet(created:new Date()-3.days, content:"@SergioMassa gilll", retweet: false, author:author4).save()
-//
-//				def tweetColo1 = new Tweet(created:new Date()-2.days, content:"@denarvaez muertoooo", retweet: false, author:author1).save()
-//				def tweetColo2 = new Tweet(created:new Date()-1.days, content:"@denarvaez vagoooo", retweet: false, author:author1).save()
+				def tweetIns1 = new Tweet(created:new Date()-3.days, content:"@minsaurralde bastante bien pero perdio", retweet: false, author:author1, tweetId:1l).save()
+				def tweetIns2 = new Tweet(created:new Date()-2.days, content:"@minsaurralde pelado boton", retweet: false, author:author2, tweetId:2l).save()
+				def tweetIns3 = new Tweet(created:new Date()-1.days, content:"@minsaurralde con cristina", retweet: false,  author:author3, tweetId:3l).save()
+
+				def tweetMass1 = new Tweet(created:new Date()-3.days, content:"ojo con el boludo de @SergioMassa", retweet: false, author:author1, tweetId:4l).save()
+				def tweetMass2 = new Tweet(created:new Date()-2.days, content:"@SergioMassa presidente", retweet: false, author:author2, tweetId:5l).save()
+				def tweetMass3 = new Tweet(created:new Date()-1.days, content:"@SergioMassa ta con @macri", retweet: false, author:author3, tweetId:6l).save()
+				def tweetMass4 = new Tweet(created:new Date()-3.days, content:"@SergioMassa gilll", retweet: false, author:author4, tweetId:7l).save()
+
+				def tweetColo1 = new Tweet(created:new Date()-2.days, content:"@denarvaez muertoooo", retweet: false, author:author1, tweetId:8l).save()
+				def tweetColo2 = new Tweet(created:new Date()-1.days, content:"@denarvaez vagoooo", retweet: false, author:author1, tweetId:9l).save()
 
 
-//				author1.addToTweets(tweetIns1)
-//				author1.addToTweets(tweetMass1)
-//				author1.addToTweets(tweetColo1)
-//				author1.addToTweets(tweetColo2)
-//				author2.addToTweets(tweetIns2)
-//				author2.addToTweets(tweetMass2)
-//				author3.addToTweets(tweetIns3)
-//				author3.addToTweets(tweetMass3)
-//				author4.addToTweets(tweetMass4)
+				author1.addToTweets(tweetIns1)
+				author1.addToTweets(tweetMass1)
+				author1.addToTweets(tweetColo1)
+				author1.addToTweets(tweetColo2)
+				author2.addToTweets(tweetIns2)
+				author2.addToTweets(tweetMass2)
+				author3.addToTweets(tweetIns3)
+				author3.addToTweets(tweetMass3)
+				author4.addToTweets(tweetMass4)
 
 
-//
-//				conceptIns.addToTweets(tweetIns1)
-//				conceptIns.addToTweets(tweetIns2)
-//				conceptIns.addToTweets(tweetIns3)
-//				conceptMass.addToTweets(tweetMass1)
-//				conceptMass.addToTweets(tweetMass2)
-//				conceptMass.addToTweets(tweetMass3)
-//				conceptMass.addToTweets(tweetMass4)
-//				conceptColo.addToTweets(tweetColo1)
-//				conceptColo.addToTweets(tweetColo2)
 
-				def concepts=[conceptIns,conceptMass,conceptColo,conceptPresi,conceptStolb
-					,conceptScioli,conceptBinner,conceptMacri,conceptCarrio,conceptSota ,conceptCobos ]
-				user.concepts=concepts
-				user.save(flush: true)
+				conceptIns.addToTweets(tweetIns1)
+				conceptIns.addToTweets(tweetIns2)
+				conceptIns.addToTweets(tweetIns3)
+				conceptMass.addToTweets(tweetMass1)
+				conceptMass.addToTweets(tweetMass2)
+				conceptMass.addToTweets(tweetMass3)
+				conceptMass.addToTweets(tweetMass4)
+				conceptColo.addToTweets(tweetColo1)
+				conceptColo.addToTweets(tweetColo2)
+				
+				
+
+				
 				user = User.findByUsername("oscarcp777");
-				user.concepts=concepts
-				user.save(flush: true)
+				def concepts=[conceptIns.clone(),conceptMass.clone(),conceptColo.clone(),conceptPresi.clone(),conceptStolb.clone()
+					,conceptScioli.clone(),conceptBinner.clone(),conceptMacri.clone(),conceptCarrio.clone(),conceptSota.clone() ,conceptCobos.clone() ]
+				concepts.each { 				
+					it.user = user
+					it.save()
+				}
+				
+				
 				user = User.findByUsername("sdonik");
-				user.concepts=concepts
-				user.save(flush: true)
-
+				concepts=[conceptIns.clone(),conceptMass.clone(),conceptColo.clone(),conceptPresi.clone(),conceptStolb.clone()
+					,conceptScioli.clone(),conceptBinner.clone(),conceptMacri.clone(),conceptCarrio.clone(),conceptSota.clone() ,conceptCobos.clone() ]
+				concepts.each {
+					it.user = user
+					it.save()
+				}
+				
 			} else {
 				println "Existing admin user, skipping creation"
 			}

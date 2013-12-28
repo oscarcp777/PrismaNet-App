@@ -7,18 +7,17 @@ package com.prismanet
  */
 class Concept {
 	
-	// No marco la relacion de pertenencia a User porque no quiero delete en cascada
-	
 	String conceptName
 	Date dateCreated
 	Date lastUpdated
 	TwitterSetup twitterSetup
 	FacebookSetup facebookSetup
 	static hasMany = [tweets:Tweet, posts:Post]
-//	TreeSet tweets
+	User user
 
     static constraints = {
 		conceptName(nullable:false)
+		user()
 		tweets()
 		posts()
 		twitterSetup(nullable:true)
@@ -69,6 +68,18 @@ class Concept {
 	public String toString() {
 		return conceptName;
 	}	
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		Concept newConcept = new Concept()
+		newConcept.conceptName = conceptName
+		newConcept.twitterSetup = twitterSetup
+		newConcept.facebookSetup = facebookSetup
+		newConcept.user = user
+		return newConcept;
+	}
+	
+	
 	
 	
 }

@@ -5,9 +5,9 @@ class Tweet extends Mention{
 	String content
 	Boolean retweet
 	Long tweetId
-	
-	
-	static belongsTo = [author:Author]
+	static hasMany = [concepts:Concept]
+	Author author
+	static belongsTo = Concept
 
     static constraints = {
 		content(maxLength:140)
