@@ -2,14 +2,6 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: opinionInstance, field: 'user', 'error')} required">
-	<label for="user">
-		<g:message code="opinion.user.label" default="User" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="user" name="user.id" from="${com.prismanet.User.list()}" optionKey="id" required="" value="${opinionInstance?.user?.id}" class="many-to-one"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: opinionInstance, field: 'tweet', 'error')} required">
 	<label for="tweet">
 		<g:message code="opinion.tweet.label" default="Tweet" />

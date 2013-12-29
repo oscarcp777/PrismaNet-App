@@ -24,8 +24,6 @@
 				<thead>
 					<tr>
 					
-						<th><g:message code="opinion.user.label" default="User" /></th>
-					
 						<th><g:message code="opinion.tweet.label" default="Tweet" /></th>
 					
 						<th><g:message code="opinion.concept.label" default="Concept" /></th>
@@ -38,9 +36,7 @@
 				<g:each in="${opinionInstanceList}" status="i" var="opinionInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${opinionInstance.id}">${fieldValue(bean: opinionInstance, field: "user")}</g:link></td>
-					
-						<td>${fieldValue(bean: opinionInstance, field: "tweet")}</td>
+						<td><g:link action="show" id="${opinionInstance.id}">${fieldValue(bean: opinionInstance, field: "tweet")}</g:link></td>
 					
 						<td>${fieldValue(bean: opinionInstance, field: "concept")}</td>
 					

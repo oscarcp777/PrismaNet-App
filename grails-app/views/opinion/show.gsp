@@ -23,15 +23,6 @@
 			</g:if>
 			<ol class="property-list opinion">
 			
-				<g:if test="${opinionInstance?.user}">
-				<li class="fieldcontain">
-					<span id="user-label" class="property-label"><g:message code="opinion.user.label" default="User" /></span>
-					
-						<span class="property-value" aria-labelledby="user-label"><g:link controller="user" action="show" id="${opinionInstance?.user?.id}">${opinionInstance?.user?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${opinionInstance?.tweet}">
 				<li class="fieldcontain">
 					<span id="tweet-label" class="property-label"><g:message code="opinion.tweet.label" default="Tweet" /></span>
