@@ -142,19 +142,30 @@ class TweetService extends GenericService{
 	}
 	
 	
-	def getTweets(conceptId){
-		Concept concept = Concept.get(conceptId)
-//		Filter filter = new Filter(attribute:"conceptsId",value: conceptId, type:FilterType.EQ)
-//		filters << filter
+	def getTweets(filters, parameters){
+		def conceptId
+		filters.each {
+			if (it.attribute == "conceptsId" && it.type ==  FilterType.EQ)
+				conceptId = it.value
+		}
 		def resultList = []
-		for (tweet in concept.getTweets()){
-			Opinion op = Opinion.findByTweetAndConcept(tweet,concept)
-			def opValue = OpinionValue.NEUTRAL
-			if (op)
-				opValue = op.value
+		Concept concept
+		if (conceptId)
+			concept = Concept.get(conceptId)
+			
+		def auxList =	list(filters, parameters)
+		for (tweet in auxList.results){
+			def opValue
+			if (conceptId){
+				opValue = OpinionValue.NEUTRAL
+				Opinion op = Opinion.findByTweetAndConcept(tweet,concept)
+				if (op)
+					opValue = op.value
+			}
 			resultList << [tweet:tweet, value:opValue]
 		}
-		resultList
+		
+		[resultList:resultList,totalCount:auxList.totalCount]
 		
 	}
 	

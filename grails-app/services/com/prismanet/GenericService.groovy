@@ -17,13 +17,13 @@ class GenericService {
 	
 	
 	
-	def list(filters){
-		list(domainClass, context, filters)
+	def list(filters, parameters){
+		list(domainClass, context, filters, parameters)
 	}
 	
-	def list(domainClass, context, filters) {
+	def list(domainClass, context, filters, parameters) {
 		def criteria = domainClass.createCriteria()
-		def results = criteria.list() {
+		def results = criteria.list(parameters) {
 			and {
 				filters.each{
 					if (it.type)
@@ -51,7 +51,8 @@ class GenericService {
 				}
 			}
 		}
-		results
+		[results: results, totalCount: results.totalCount]
+		
 	}
 	
 	def groupBy(groups, filters, projection){

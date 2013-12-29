@@ -28,5 +28,12 @@ class TweetController {
 		}
 		return [ status: status ]
 	}
+	
+	
+	def list(Integer max) {
+		params.max = Math.min(max ?: 3, 100)
+		def tweets = tweetService.getTweets([],params)
+		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount]
+	}
 
 }
