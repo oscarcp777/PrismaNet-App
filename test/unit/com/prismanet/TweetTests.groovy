@@ -30,7 +30,20 @@ class TweetTests extends GrailsUnitTestCase{
 		Tweet tweet = new Tweet()
 		assertEquals tweet.mentionType,MentionType.TWITTER
 	}
-	
+	void testContentHtml(){
+		
+		Tweet tweet = new Tweet()
+		tweet.content="#TodosenOctubre"
+		assertEquals tweet.contentHtml," <a href='https://twitter.com/search?q=%23TodosenOctubre&src=hash' target='_blanck'>#TodosenOctubre</a> "
+		tweet.content="http://t.co/oySTCUHGze"
+		assertEquals tweet.contentHtml," <a href='http://t.co/oySTCUHGze' target='_blanck'>http://t.co/oySTCUHGze</a> "
+		tweet.content="https://t.co/oySTCUHGze"
+		assertEquals tweet.contentHtml," <a href='https://t.co/oySTCUHGze' target='_blanck'>https://t.co/oySTCUHGze</a> "
+		tweet.content="@ucrmendoza"
+		assertEquals tweet.contentHtml," <a href='https://twitter.com/ucrmendoza' target='_blanck'>@ucrmendoza</a> "
+		tweet.content="#NochesArgentinas no lo asusten a Robertito jajajajajajaja @LucioDiMatteo"
+		assertEquals tweet.contentHtml," <a href='https://twitter.com/search?q=%23NochesArgentinas&src=hash' target='_blanck'>#NochesArgentinas</a> no lo asusten a Robertito jajajajajajaja  <a href='https://twitter.com/LucioDiMatteo' target='_blanck'>@LucioDiMatteo</a> "
+	}
 	
 	
 	

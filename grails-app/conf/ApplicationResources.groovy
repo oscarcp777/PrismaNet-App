@@ -19,7 +19,7 @@ modules = {
 	}
 	chartPie{
 		resource url:'js/chart/jquery.easy-pie-chart.js'
-		resource url:'js/jquery-ui-1.10.3.custom.min.js'
+		resource url:'js/jquery-ui-1.10.3.full.min.js',disposition: 'head'
 		
 	}
 	highcharts {

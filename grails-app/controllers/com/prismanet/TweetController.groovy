@@ -1,12 +1,9 @@
 package com.prismanet
 
-import org.springframework.transaction.annotation.Transactional;
-
-import twitter4j.StallWarning;
-import twitter4j.Status;
-import twitter4j.StatusDeletionNotice;
-import twitter4j.StatusListener;
 import grails.plugins.springsecurity.Secured
+
+import com.prismanet.GenericService.FilterType
+import com.prismanet.context.Filter
 @Secured(['ROLE_USER'])
 class TweetController {
 	static scaffold = true
@@ -31,9 +28,11 @@ class TweetController {
 	
 	
 	def list(Integer max) {
-		params.max = Math.min(max ?: 3, 100)
+		params.max = Math.min(max ?: 6, 100)
 		def tweets = tweetService.getTweets([],params)
+		if(!grailsApplication.config.grails.twitter.offline)
+		tweetService.loadAvatarUsers(tweets.resultList)
 		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount]
 	}
-
+	
 }

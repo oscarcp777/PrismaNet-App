@@ -3,13 +3,15 @@ package com.prismanet
 import org.springframework.transaction.annotation.Transactional
 
 import twitter4j.FilterQuery
+import twitter4j.ResponseList
 import twitter4j.Status
 import twitter4j.StatusListener
+import twitter4j.Twitter
+import twitter4j.TwitterFactory
 import twitter4j.TwitterStream
 import twitter4j.TwitterStreamFactory
 
 import com.prismanet.GenericService.FilterType
-import com.prismanet.context.Filter
 import com.prismanet.context.TweetAttributeContext
 import com.prismanet.sentiment.Opinion
 import com.prismanet.sentiment.OpinionValue
@@ -168,5 +170,20 @@ class TweetService extends GenericService{
 		[resultList:resultList,totalCount:auxList.totalCount]
 		
 	}
-	
+	def loadAvatarUsers(tweets){
+		
+		def usersName=[]
+		def tweetsTemp=[]
+		tweets.each {it -> 
+			usersName.add(it.tweet.author.accountNameSingle)
+			tweetsTemp.add(it.tweet)
+		}
+		println usersName.toListString()
+		Twitter twitter = new TwitterFactory().getInstance();
+		ResponseList<twitter4j.User> users = twitter.lookupUsers((String[])usersName.toArray());
+		for (twitter4j.User user : users) {
+			Tweet tweet=tweetsTemp.find {it.author.accountNameSingle == user.screenName}
+			tweet.author.profileImage=user.profileImageURL
+		}
+	}
 }

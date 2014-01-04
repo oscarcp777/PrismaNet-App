@@ -157,10 +157,25 @@
 								<ul class="submenu">
 								<g:each in="${scService.currentUser.concepts.sort{it.conceptName}}" status="i" var="conceptInstance">
 									<li id="${conceptInstance.id}">
-									<g:link controller="concept" action="stats" id="${conceptInstance.conceptName}">
-									${fieldValue(bean: conceptInstance, field: "conceptName")}
+									<a href="#" class="dropdown-toggle">
 									<i class="icon-double-angle-right"></i>
-									</g:link>
+									${fieldValue(bean: conceptInstance, field: "conceptName")}
+									<b class="arrow icon-angle-down"></b>
+									</a>
+									<ul class="submenu">
+									    <li>
+									    	<g:link controller='tweet' action="list" id="${conceptInstance.id}" class="dropdown-toggle">
+											<i class="icon-twitter"></i>
+											<span class="menu-text">Tweets</span>
+											</g:link>
+									    </li>
+									    <li>
+									    <g:link controller="concept" action="stats" id="${conceptInstance.conceptName}" class="dropdown-toggle">
+											<span class="glyphicon glyphicon-stats"> </span>
+											<span class="menu-text">Graficos</span>
+										</g:link>
+									    </li>
+									</ul>
 									</li>
 									</g:each>
 								</ul>

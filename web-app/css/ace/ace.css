@@ -7,8 +7,7 @@ body {
     padding-bottom:0;
     background-color:#e4e6e9;
     min-height:100%;
-    font-family:'Open Sans';
-    font-size:13px;
+    font-size:14px;
     color:#393939;
     line-height:1.5
 }
@@ -238,9 +237,7 @@ blockquote, blockquote.pull-right {
 .modal-header .close {
     font-size:32px
 }
-.well {
-    border-radius:0
-}
+
 .well h1, .well h2, .well h3, .well h4, .well h5, .well h6 {
     margin-top:0
 }

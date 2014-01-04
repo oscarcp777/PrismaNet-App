@@ -8,7 +8,7 @@ class Tweet extends Mention{
 	static hasMany = [concepts:Concept]
 	Author author
 	static belongsTo = Concept
-
+	static transients = ['contentHtml']
     static constraints = {
 		content(maxLength:140)
 		tweetId unique:true  
@@ -24,6 +24,30 @@ class Tweet extends Mention{
 		return author?.accountName + "-" + content;
 	}
 	
+	
+	def getContentHtml(){
+		def listWords = content.tokenize(' ')
+		def contentHtml=""
+		listWords.each {it -> 
+			
+			if(it.contains("@")){
+				def name=it.replace("@","")
+			    contentHtml+=" <a href='https://twitter.com/${name}' target='_blanck'>${it}</a> "
+			}
+			else if(it.contains("http")|| it.contains("https")){
+				contentHtml+=" <a href='${it}' target='_blanck'>${it}</a> "
+			}
+			else if(it.contains("#")){
+				def name=it.replace("#","")
+				contentHtml+=" <a href='https://twitter.com/search?q=%23${name}&src=hash' target='_blanck'>${it}</a> "
+			}
+			else{
+				contentHtml+=it+" "
+			}
+			
+		}
+		contentHtml
+	}
 	
 	
 }

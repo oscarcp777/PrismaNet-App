@@ -15,3 +15,16 @@ function editClassItem(item,clas){
 	$("#"+item).siblings('.'+clas).removeClass(clas);
 	$("#"+item).addClass(clas);
 }
+
+function changeState(id){
+	var parent=id.substring(0,id.length-3);
+	var className = $("#"+id).attr('class');
+	if(className=="icon last tooltips selected"){
+		$("#"+id).removeClass("selected")
+	}else{
+		$("#"+parent +" > a").removeClass("selected")
+		$("#"+id).addClass("selected");
+		
+	}
+	
+}

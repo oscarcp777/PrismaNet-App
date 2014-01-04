@@ -9,6 +9,7 @@ class Author {
 	String profileImage
 	Integer followers
 	Sex sex
+	static transients = ['accountNameSingle']
 	
 	static hasMany = [tweets:Tweet, posts:Post]
 	
@@ -27,7 +28,9 @@ class Author {
 		tweets(nullable:true)
 		posts(nullable:true)
     }
-	
+	def getAccountNameSingle(){
+		accountName.replace("@","")
+	}
 	@Override
 	public String toString() {
 		return accountName;

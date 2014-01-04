@@ -4,27 +4,35 @@
 
 .tweets {
 	margin: 0;
+	font-size: 16px;
+}
+.box-user-twitter{
+	border-top: 1px solid #e8e8e8;
+	border-radius: 5px 5px 5px 5px;
+	background: #ffffff;
+}
+.avatar {
+	border-top: 1px solid #e8e8e8;
+	border-radius: 5px 5px 5px 5px;
+	background: #ffffff;
+	width: 64px;
+	height: 64px;
+	float: left;
+	margin: 0px 10px 0px 10px;
 }
 
 .tweets li {
-	padding: 2px 0;
-	margin: 2px auto;
+	/* 	padding: 2px 0; */
+	/* 	margin: 2px auto; */
+	border-top: 1px solid #e8e8e8;
+	border-radius: 5px 5px 5px 5px;
+	background: #ffffff;
 }
-
-.tweets li img.avatar {
-/* 	height: 60px; */
-/* 	width: 60px; */
-/* 	-webkit-border-radius: 2px; */
-/* 	-moz-border-radius: 2px; */
-/* 	border-radius: 2px; */
-/* 	padding: 4px; */
-/* 	background: #fafafa; */
-/* 	border: 1px solid #d9d9d9; */
-	
-	margin:-4px 4px 0 0;
-    border-radius:100%;
-    border:2px solid #FFF;
-    max-width:70px
+.tweets li:hover{
+	background: #f9f9f9;
+}
+.tweets li a {
+	color: #428bca;
 }
 
 .tweets li.in img.avatar {
@@ -34,34 +42,39 @@
 
 .tweets li .name {
 	color: #e89344;
-	font-size: 13px;
 	font-weight: 400;
 }
 
 .tweets li .date-time {
 	color: #1a1a1a;
-	font-size: 11px;
+	font-size: 14px;
 	font-weight: 400;
+	float: right;
 }
 
 .tweets li.out img.avatar {
 	float: left;
-	margin-left: 10px;
-	padding: 4px;
+	border-radius: 5px;
+	width: 64px;
+	height: 64px;
+	margin-left: 20px;
+	margin-top: 20px;
 	background: #fafafa;
-	border: 1px solid #d9d9d9;
 }
 
 .tweets li .message {
 	display: block;
 	padding: 5px 15px;
 	position: relative;
-	background: #e9f2f9;
+}
+
+.tweets li .content {
+	font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
 .tweets li.in .message {
 	text-align: left;
-	margin-left: 80px;
+	margin-left: 10px;
 }
 
 .tweets li.in .message hr {
@@ -73,7 +86,7 @@
 
 .tweets li.out .message {
 	margin-left: 90px;
-	background: #e9f2f9;
+	/* 	background: #e9f2f9; */
 }
 
 .tweets li.out .message .up-arrow {
@@ -91,12 +104,12 @@
 .tweets li.out .message hr {
 	margin: 7px 0;
 	border: 0;
-/* 	border-top: 1px solid #f5f9fc; */
-	border-bottom: 1px solid white;
+		border-top: 1px solid #eee;
 }
 
 .tweets li.out .name {
 	color: #428bca;
+	font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
 .tweets li.out .delete-icon .fs1 {
