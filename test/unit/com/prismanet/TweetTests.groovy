@@ -5,6 +5,24 @@ import grails.test.mixin.*
 import grails.test.mixin.support.*
 
 class TweetTests extends GrailsUnitTestCase{
+	
+	void testConstraints() {
+		def tweet = new Tweet(content:"texto",author:new Author(), created:new Date(), tweetId:1l, retweet:false)
+//		def concept = new Concept(conceptName : 'Comida', user: new User())
+//		tweet.addToConcepts(concept)
+		mockForConstraintsTests(Tweet, [tweet])
+		boolean res = tweet.validate()
+		assertTrue res
+
+		def testTweet = new Tweet(created:new Date())
+		assertFalse testTweet.validate()
+		assertEquals testTweet.errors.getErrorCount(),4
+		assertEquals "nullable", testTweet.errors["content"]
+		assertEquals "nullable", testTweet.errors["author"]
+		assertEquals "nullable", testTweet.errors["retweet"]
+		assertEquals "nullable", testTweet.errors["tweetId"]
+
+	}
 
 	void testParseDate() {
 		GregorianCalendar gC = new GregorianCalendar()

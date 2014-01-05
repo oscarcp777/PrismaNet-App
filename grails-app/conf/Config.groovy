@@ -53,6 +53,16 @@ grails.spring.bean.packages = []
 // whether to disable processing of multi part requests
 grails.web.disable.multipart=false
 
+
+/*
+grails.gorm.failOnError=true
+grails.gorm.autoFlush=false
+
+grails.gorm.default.mapping = {
+ (...) 
+  dynamicUpdate true
+}*/
+
 grails.resources.mappers.yuijsminify.disable=true
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
