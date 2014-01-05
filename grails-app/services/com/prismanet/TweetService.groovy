@@ -8,6 +8,7 @@ import twitter4j.Twitter
 import twitter4j.TwitterFactory
 import twitter4j.TwitterStream
 import twitter4j.TwitterStreamFactory
+import twitter4j.examples.tweets.RetweetStatus;
 import twitter4j.internal.json.StatusJSONImpl
 import twitter4j.internal.org.json.JSONObject
 
@@ -37,7 +38,7 @@ class TweetService extends GenericService{
 				JSONObject obj = new JSONObject(tweetObj)
 				Status status = new StatusJSONImpl(obj)
 				index++
-
+				
 				def start = System.currentTimeMillis()
 				Author author = Author.findByAccountName("@"+status.getUser().getScreenName())
 				if (!author){
@@ -46,11 +47,22 @@ class TweetService extends GenericService{
 					author.followers = status.getUser().getFollowersCount()
 					author.profileImage = status.getUser().getProfileImageURL()
 				}
+				
 //				print "Tiempo autor: " + (start - System.currentTimeMillis())/1000 + " segundos"
 //				start = System.currentTimeMillis()
-
-				Tweet tweet = new Tweet(content:status.getText(),author:author, created:status.getCreatedAt(), tweetId:status.getId())
-
+				def retCount = 0
+				def favCount = 0
+				if (status.getRetweetedStatus()){
+					retCount = status.getRetweetedStatus().getRetweetCount()
+					favCount = status.getRetweetedStatus().getFavoriteCount()
+				}	
+				Tweet tweet = new Tweet(content:status.getText(),
+										author:author, 
+										created:status.getCreatedAt(), 
+										tweetId:status.getId(), 
+										retweetCount:retCount, 
+										favoriteCount:favCount)
+				
 				def List<Concept> concepts = Concept.list()
 				concepts.each(){ concept->
 					if (concept.testAddTweet(tweet)){

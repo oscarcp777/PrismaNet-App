@@ -4,6 +4,8 @@ package com.prismanet
 class Tweet extends Mention{
 	String content
 	Boolean retweet
+	Long retweetCount = 0
+	Long favoriteCount = 0
 	Long tweetId
 	static hasMany = [concepts:Concept]
 	Author author

@@ -8,12 +8,9 @@ class TweetTests extends GrailsUnitTestCase{
 	
 	void testConstraints() {
 		def tweet = new Tweet(content:"texto",author:new Author(), created:new Date(), tweetId:1l, retweet:false)
-//		def concept = new Concept(conceptName : 'Comida', user: new User())
-//		tweet.addToConcepts(concept)
 		mockForConstraintsTests(Tweet, [tweet])
-		boolean res = tweet.validate()
-		assertTrue res
-
+		assertTrue tweet.validate()
+		
 		def testTweet = new Tweet(created:new Date())
 		assertFalse testTweet.validate()
 		assertEquals testTweet.errors.getErrorCount(),4
