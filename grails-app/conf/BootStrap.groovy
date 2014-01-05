@@ -81,10 +81,10 @@ class BootStrap {
 				def twitterConfigCobos= new TwitterSetup(includedAccounts:"@juliocobos").save()
 
 				// Autores
-				def author1 = new Author(accountName:"@oscar", followers:10, userSince:new Date(), sex: Sex.M).save()
-				def author2 = new Author(accountName:"@santiago", followers:20, userSince:new Date(), sex: Sex.M).save()
-				def author3 = new Author(accountName:"@raquel", followers:30, userSince:new Date(), sex: Sex.F).save()
-				def author4 = new Author(accountName:"@naty", followers:40, userSince:new Date(), sex: Sex.F).save()
+				def author1 = new Author(accountName:"@oscarcp777", followers:10, userSince:new Date(), sex: Sex.M).save()
+				def author2 = new Author(accountName:"@SLDbacktoF2", followers:20, userSince:new Date(), sex: Sex.M).save()
+				def author3 = new Author(accountName:"@oscarcp78", followers:30, userSince:new Date(), sex: Sex.F).save()
+				def author4 = new Author(accountName:"@OscarCP7", followers:40, userSince:new Date(), sex: Sex.F).save()
 
 
 				// Conceptos
