@@ -24,6 +24,7 @@ class GenericService {
 	def list(domainClass, context, filters, parameters) {
 		def criteria = domainClass.createCriteria()
 		def results = criteria.list(parameters) {
+			context.clearDefinedAlias()
 			and {
 				filters.each{
 					if (it.type)
