@@ -26,6 +26,8 @@ class DateUtils {
 		new SimpleDateFormat(format).format(date)
 	}
 	
-	
+	static def parseDate(String format, String date){
+		new SimpleDateFormat(format).parse(date)
+	}
 
 }

@@ -6,6 +6,7 @@ class ConceptAttributeContext extends AttributeContext {
 	@Override
 	protected void initializeRelations() {
 		addPropertyRelation("id", "id", null, null);
+		addPropertyRelation("conceptName", "conceptName", null, null);
 		addPropertyRelation("sex", "sex", null, "tweets.author");
 		addPropertyRelation("authorFollowers", "followers", null, "tweets.author");
 		addPropertyRelation("tweetCreated", "date", null, "tweets");

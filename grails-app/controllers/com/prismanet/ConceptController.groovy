@@ -1,12 +1,15 @@
 package com.prismanet
 import grails.converters.*
 import grails.plugins.springsecurity.Secured
+import groovy.time.TimeCategory
 
 import java.text.SimpleDateFormat
 
 import com.prismanet.GenericService.FilterType
 import com.prismanet.GenericService.ProjectionType
 import com.prismanet.context.Filter
+import com.prismanet.utils.DateTypes
+import com.prismanet.utils.DateUtils
 
 @Secured(['ROLE_USER'])
 class ConceptController{
@@ -83,6 +86,25 @@ class ConceptController{
 		render dateValueList as JSON
 	}
 	
+	def conceptsRealTime={
+		Concept concept = Concept.findByConceptName(params.id)
+		Date filteredDate
+		use ( TimeCategory ) {
+			filteredDate = new Date()-20.minutes
+		}
 		
+		def dateList = conceptService.categoryStore(["conceptName","tweetMinute"], [new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),
+			new Filter(attribute:"created",value:filteredDate, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT]);
+		
+		
+		def dateValueList = [:]
+		dateList.each{ i ->
+			if (!dateValueList[i.getAt(0)])
+				dateValueList[i.getAt(0)] = []
+			dateValueList[i.getAt(0)].add([DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2)])	}
+		
+		render dateValueList as JSON
+		
+	}	
 	
 }
