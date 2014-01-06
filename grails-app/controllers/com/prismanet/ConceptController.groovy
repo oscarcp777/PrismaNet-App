@@ -25,7 +25,8 @@ class ConceptController{
 	}
 
 	def stats = {
-		Concept concept = Concept.findByConceptName(params.id)
+		Concept concept = Concept.get(params.id)
+		println concept
 		[concept : concept]
 	}
 	
@@ -104,7 +105,6 @@ class ConceptController{
 			dateValueList[i.getAt(0)].add([DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2)])	}
 		
 		render dateValueList as JSON
-		
-	}	
+	}
 	
 }

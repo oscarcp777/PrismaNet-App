@@ -29,7 +29,13 @@ class TweetController {
 	
 	def list(Integer max) {
 		params.max = Math.min(max ?: 6, 100)
-		def tweets = tweetService.getTweets([],params)
+		def filters=[]
+		if(params?.id){
+			Filter filter = new Filter(attribute:"conceptsId",value: params.id.toLong(), type:FilterType.EQ)
+			filters.add(filter)
+			}
+		def tweets = tweetService.getTweets(filters,params)
+		
 		if(!grailsApplication.config.grails.twitter.offline)
 		tweetService.loadAvatarUsers(tweets.resultList)
 		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount]

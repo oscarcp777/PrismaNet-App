@@ -198,6 +198,7 @@ class TweetService extends GenericService{
 		[resultList:resultList,totalCount:auxList.totalCount]
 		
 	}
+	
 	def loadAvatarUsers(tweets){
 		
 		def usersName=[]
@@ -212,6 +213,11 @@ class TweetService extends GenericService{
 		for (twitter4j.User user : users) {
 			Tweet tweet=tweetsTemp.find {it.author.accountNameSingle == user.screenName}
 			tweet.author.profileImage=user.profileImageURL
+			tweet.author.followers=user.followersCount
+			tweet.author.following=user.friendsCount
+			tweet.author.tweetsCount=user.statusesCount
+			tweet.author.name=user.name
+			tweet.save(flush:true)
 		}
 	}
 }

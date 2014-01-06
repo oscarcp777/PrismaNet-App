@@ -11,7 +11,7 @@
 	</g:each>
 	<g:link action='monthStats' id="${user.id}">Nueva Busqueda</g:link>
 	<script type="text/javascript">
-   activeItemMenu('chart','mensual', 2,'Estadisticas > Mensual');
+   activeItemMenuLevel2('chart','mensual','Estadisticas > Mensual');
 </script>
 </body>
 

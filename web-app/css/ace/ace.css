@@ -6301,10 +6301,17 @@ th .lbl:only-child, td .lbl:only-child {
 }
 .header-color-grey {
     background:#848484;
-    border-color:#989898
+    border-color:#46c9af
 }
 .header-color-grey+.widget-body {
     border-color:#aaa
+}
+.header-color-green4 {
+    background:#18bc9c;
+    border-color:#989898
+}
+.header-color-green4+.widget-body {
+    border-color:#15a98c
 }
 .widget-box.light-border>[class*="header-color-"]+.widget-body {
     border-color:#d6d6d6!important

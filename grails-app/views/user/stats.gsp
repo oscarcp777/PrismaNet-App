@@ -115,7 +115,7 @@
 		
 
 		$(document).ready(function() {
-			activeItemMenu('chart', 'general', 2, 'Estadisticas > General');
+			activeItemMenuLevel2('chart', 'general', 'Estadisticas > General');
 			paintCharGender();
 			$.getJSON("http://localhost:8080/PrismaNet/user/conceptTweetsJson",
 					function(json) {

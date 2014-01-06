@@ -56,16 +56,57 @@
 
 				<ul class="tweets tweet-group list-unstyled">
 					<g:each in="${tweetInstanceList}" status="i" var="tweetInstance">
-						<li class="out"><img class="avatar" alt=""
-							src="${tweetInstance.tweet.author?.profileImage}">
+						<li class="out">
+							<div class="author">
+								<img class="avatar" alt=""
+									src="${tweetInstance.tweet.author?.profileImage}">
+
+								<div class="clearfix center">
+									<div>
+										<div class="inline position-relative">
+											<a href="#" class="btn btn-link dropdown-toggle"
+												data-toggle="dropdown"> <i
+												class="icon-plus-sign bigger-120 blue"></i> M&aacute;s Datos
+											</a>
+
+											
+													<div class="clearfix center dropdown-menu dropdown-caret dropdown-lighter" 
+													      style="width: 400px;">
+														<div class="grid3">
+															<span class="line-height-1 bigger-110 "> ${fieldValue(bean: tweetInstance.tweet.author, field: "tweetsCount")} </span> <br>
+															<span class="line-height-1 bigger-100 grey">
+																TWEETS </span>
+														</div>
+
+														<div class="grid3">
+
+															<span class="line-height-1 bigger-110 "> ${fieldValue(bean: tweetInstance.tweet.author, field: "followers")}  </span> <br>
+															<span class="line-height-1 bigger-100 grey">
+																SIGUIENDO </span>
+														</div>
+
+														<div class="grid3">
+
+															<span class="line-height-1 bigger-110 "> ${fieldValue(bean: tweetInstance.tweet.author, field: "following")}  </span> <br>
+															<span class="line-height-1 bigger-100 grey">
+																SEGUIDORES </span>
+														</div>
+													</div>
+										</div>
+									</div>
+								</div>
+							</div>
 							<div class="message">
 								<span class="arrow"></span>
 								<div>
 
 									<a
 										href="https://twitter.com/${fieldValue(bean: tweetInstance.tweet.author, field: "accountNameSingle")}"
-										target="_blanck" class="name" data-original-title=""> ${fieldValue(bean: tweetInstance.tweet.author, field: "accountNameSingle")}
-									</a> <span class="date-time widget-toolbar no-border"> <g:formatDate
+										target="_blanck" class="name" data-original-title=""> 
+										<span class="bigger lighter descrip">${fieldValue(bean: tweetInstance.tweet.author, field: "name")}</span>
+										${fieldValue(bean: tweetInstance.tweet.author, field: "accountName")}
+									</a>
+									 <span class="date-time widget-toolbar no-border"> <g:formatDate
 											date="${tweetInstance.tweet.created}" type="datetime"
 											style="short" />
 									</span>
@@ -74,33 +115,42 @@
 								<p class="body no-margin content">
 									${tweetInstance.tweet.contentHtml}
 								</p>
-								<hr>
+								<div class="hr hr8 hr-double"></div>
 								<div class="clearfix ">
 									<div class="grid3">
-										<div class="reply-icons pull-right" style="font-size:2em;" id="${tweetInstance.tweet.id}">
-											 <a href="#" id="${tweetInstance.tweet.id}Pos" class="icon last tooltips" onclick="changeState('${tweetInstance.tweet.id}Pos');"  data-original-title="" title="Positivo"> 
-												<i class="icon-check-sign" title="Positivo" ></i>
-											</a>
-											<a href="#"  id="${tweetInstance.tweet.id}Neg" class="icon last tooltips" onclick="changeState('${tweetInstance.tweet.id}Neg');" data-original-title="" title="Negativo"> 
-												<i class="icon-minus-sign-alt" ></i>
-											</a>
-			     							<a href="#" id="${tweetInstance.tweet.id}Que" class="icon last tooltips" onclick="changeState('${tweetInstance.tweet.id}Que');" data-original-title="" title="Indefinido"> 
-												<i class="icon-question-sign"></i>
+										<div class="reply-icons pull-right" style="font-size: 2em;"
+											id="${tweetInstance.tweet.id}">
+											<a href="#" id="${tweetInstance.tweet.id}Pos"
+												class="icon last tooltips"
+												onclick="changeState('${tweetInstance.tweet.id}Pos');"
+												data-original-title="" title="Positivo"> <i
+												class="icon-check-sign" title="Positivo"></i>
+											</a> <a href="#" id="${tweetInstance.tweet.id}Neg"
+												class="icon last tooltips"
+												onclick="changeState('${tweetInstance.tweet.id}Neg');"
+												data-original-title="" title="Negativo"> <i
+												class="icon-minus-sign-alt"></i>
+											</a> <a href="#" id="${tweetInstance.tweet.id}Que"
+												class="icon last tooltips"
+												onclick="changeState('${tweetInstance.tweet.id}Que');"
+												data-original-title="" title="Indefinido"> <i
+												class="icon-question-sign"></i>
 											</a>
 										</div>
 									</div>
 									<div class="grid3 pull-right">
-									<div class="reply-icons pull-right">
+										<div class="reply-icons pull-right">
 
 											<a href="" class="icon hide_tweet" data-original-title="">
-												 28 <i class="icon-retweet fs1" title="retweet"></i>
-											</a> <a href="" class="icon last" data-original-title="">
-												29 <i class="icon-star fs1" title="favorito"></i>
+												28 <i class="icon-retweet fs1" title="retweet"></i>
+											</a> <a href="" class="icon last" data-original-title=""> 29
+												<i class="icon-star fs1" title="favorito"></i>
 											</a>
 										</div>
 									</div>
 								</div>
-							</div></li>
+							</div>
+						</li>
 					</g:each>
 
 				</ul>
@@ -114,7 +164,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	  activeItemMenu('tweets',"",1,'Tweets');
+	  activeItemMenuLevel1('tweets','Tweets');
 	  jQuery(function($) {
 		  $(".tooltips").tooltip();
 		  });

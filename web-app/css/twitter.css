@@ -45,13 +45,23 @@
 	font-weight: 400;
 }
 
+.tweets li .name .descrip{
+	color: black;
+	font-weight: bold;
+	text-decoration: none;
+}
 .tweets li .date-time {
 	color: #1a1a1a;
 	font-size: 14px;
 	font-weight: 400;
 	float: right;
 }
-
+.tweets li.out .author{
+	float: left;
+}
+.tweets li.out .author .info{
+	font-size: 10px;
+}
 .tweets li.out img.avatar {
 	float: left;
 	border-radius: 5px;
@@ -70,6 +80,7 @@
 
 .tweets li .content {
 	font-family: "Helvetica Neue", Arial, sans-serif;
+	min-height:55px;
 }
 
 .tweets li.in .message {

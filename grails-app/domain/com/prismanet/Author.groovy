@@ -8,6 +8,9 @@ class Author {
 	String accountName
 	String profileImage
 	Integer followers
+	Integer following
+	Integer tweetsCount
+	String name
 	Sex sex
 	static transients = ['accountNameSingle']
 	
@@ -23,6 +26,8 @@ class Author {
 
 		})
 		followers(min: 0)
+		following(min: 0)
+		tweetsCount(min: 0)
 		sex()
 		userSince()  
 		tweets(nullable:true)
