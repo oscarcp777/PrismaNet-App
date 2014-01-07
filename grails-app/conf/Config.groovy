@@ -62,8 +62,11 @@ grails.gorm.default.mapping = {
  (...) 
   dynamicUpdate true
 }*/
-
+grails.resources.debug=true
+grails.resources.processing.enabled = false
 grails.resources.mappers.yuijsminify.disable=true
+grails.resources.mappers.bundle.enabled = false
+grails.resources.mappers.hashandcache.enabled = false
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
 

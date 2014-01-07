@@ -67,7 +67,6 @@ grails.project.dependency.resolution = {
 		runtime ":yui-minify-resources:0.1.5"
 		runtime ":cache-headers:1.1.5"
 		compile ":mail:1.0.1"
-		runtime ":famfamfam:1.0.1"
 		compile ":spring-security-core:1.2.7.3"
 		compile ":spring-security-ui:0.2"
 	}

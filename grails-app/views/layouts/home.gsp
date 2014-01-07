@@ -123,12 +123,6 @@
 								<span class="menu-text" >Dashboard</span>
 							   </g:link>
 							</li>
-							<li id="tweets">
-								<g:link controller='tweet' action="list">
-									<i class="icon-twitter"></i>
-									<span class="menu-text">Ver Tweets</span>
-								</g:link>
-								</li>
 							<li id="chart">
 							   <a href="#" class="dropdown-toggle"> <i
 									class="icon-bar-chart"></i> <span class="menu-text">Estadisticas</span>

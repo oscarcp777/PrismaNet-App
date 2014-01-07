@@ -15,7 +15,7 @@
 		<div class="page-header">
 			<h1>
 				<i class="icon-twitter"></i>
-				<g:message code="tweets.title" />
+				<g:message code="tweets.title" /> del Concepto: "${concept.conceptName}"
 			</h1>
 		</div>
 		<div class="row well">
@@ -157,14 +157,14 @@
 
 				<div class="col-lg-8" style="text-align: center;">
 					<ul class="pagination pagination-sm">
-						<li><g:paginate total="${tweetInstanceTotal}" /></li>
+						<li><g:paginate total="${tweetInstanceTotal}" id="${concept.id}" /></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
-	  activeItemMenuLevel1('tweets','Tweets');
+	  activeItemMenuLevel3('concepts','${concept.id}','${concept.id}-tweet','Tweets > '+"${concept.conceptName}");
 	  jQuery(function($) {
 		  $(".tooltips").tooltip();
 		  });
