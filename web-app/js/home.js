@@ -21,15 +21,38 @@ function editClassItem(item,classRemove,classNew){
 	$("#"+item).addClass(classNew);
 }
 
-function changeState(id){
-	var parent=id.substring(0,id.length-3);
+function changeState(id, url, tweetId, conceptId, value){
 	var className = $("#"+id).attr('class');
 	if(className=="icon last tooltips selected"){
-		$("#"+id).removeClass("selected")
-	}else{
-		$("#"+parent +" > a").removeClass("selected")
-		$("#"+id).addClass("selected");
-
+		return
 	}
-
+	$('.icon.last.tooltips').removeClass("selected")
+	$("#"+id).addClass("selected");
+	data = {'conceptId': conceptId, 'tweetId': tweetId, 'value':value}
+    doRequest(url, data, null, null, "POST");
 }
+
+function activeOpinion(id, value){
+	if(value == "POSITIVE"){
+		$("#"+id+"Pos").addClass("selected");
+	}
+	if(value == "NEGATIVE"){
+		$("#"+id+"Neg").addClass("selected");
+	}
+	if(value == "NEUTRAL"){
+		$("#"+id+"Que").addClass("selected");
+	}
+		
+}
+
+function doRequest(url,data,callback, errorHandler, method) {
+    $.ajax({
+            url: url,
+            type: method,
+            data: data,
+            cache: false,
+            success: callback,
+            error: errorHandler
+          });
+};
+

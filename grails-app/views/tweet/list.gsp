@@ -55,7 +55,11 @@
 
 
 				<ul class="tweets tweet-group list-unstyled">
+					<g:if test="${flash.message}">
+						<div class="message" role="status">${flash.message}</div>
+					</g:if>
 					<g:each in="${tweetInstanceList}" status="i" var="tweetInstance">
+						
 						<li class="out">
 							<div class="author">
 								<img class="avatar" alt=""
@@ -117,24 +121,29 @@
 								</p>
 								<div class="hr hr8 hr-double"></div>
 								<div class="clearfix ">
-									<div class="grid3">
+									<div class="btn-group">
 										<div class="reply-icons pull-right" style="font-size: 2em;"
 											id="${tweetInstance.tweet.id}">
-											<a href="#" id="${tweetInstance.tweet.id}Pos"
-												class="icon last tooltips"
-												onclick="changeState('${tweetInstance.tweet.id}Pos');"
-												data-original-title="" title="Positivo"> <i
-												class="icon-check-sign" title="Positivo"></i>
-											</a> <a href="#" id="${tweetInstance.tweet.id}Neg"
-												class="icon last tooltips"
-												onclick="changeState('${tweetInstance.tweet.id}Neg');"
-												data-original-title="" title="Negativo"> <i
-												class="icon-minus-sign-alt"></i>
-											</a> <a href="#" id="${tweetInstance.tweet.id}Que"
-												class="icon last tooltips"
-												onclick="changeState('${tweetInstance.tweet.id}Que');"
-												data-original-title="" title="Indefinido"> <i
-												class="icon-question-sign"></i>
+											<a href="#"  id="${tweetInstance.tweet.id}Pos" 
+												class="icon last tooltips" 
+												onclick="changeState('${tweetInstance.tweet.id}Pos','${createLink(controller:'tweet', action:'saveOpinion')}','${tweetInstance.tweet.id}','${concept.id}', 'POS');"  
+												data-original-title="" 
+												title="Positivo"> 
+												<i class="icon-check-sign" title="Positivo" ></i>
+											</a>
+											<a href="#"  id="${tweetInstance.tweet.id}Neg" 
+												class="icon last tooltips" 
+												onclick="changeState('${tweetInstance.tweet.id}Neg', '${createLink(controller:'tweet', action:'saveOpinion')}','${tweetInstance.tweet.id}','${concept.id}','NEG');" 
+												data-original-title="" 
+												title="Negativo"> 
+												<i class="icon-minus-sign-alt" ></i>
+											</a>
+			     							<a href="#" id="${tweetInstance.tweet.id}Que" 
+			     								class="icon last tooltips" 
+			     								onclick="changeState('${tweetInstance.tweet.id}Que', '${createLink(controller:'tweet', action:'saveOpinion')}','${tweetInstance.tweet.id}','${concept.id}','NEU');" 
+			     								data-original-title="" 
+			     								title="Indefinido"> 
+												<i class="icon-question-sign"></i>
 											</a>
 										</div>
 									</div>
@@ -142,15 +151,18 @@
 										<div class="reply-icons pull-right">
 
 											<a href="" class="icon hide_tweet" data-original-title="">
-												28 <i class="icon-retweet fs1" title="retweet"></i>
-											</a> <a href="" class="icon last" data-original-title=""> 29
-												<i class="icon-star fs1" title="favorito"></i>
+												${tweetInstance.tweet.retweetCount} <i class="icon-retweet fs1" title="retweet"></i>
+											</a> <a href="" class="icon last" data-original-title=""> 
+												${tweetInstance.tweet.favoriteCount}<i class="icon-star fs1" title="favorito"></i>
 											</a>
 										</div>
 									</div>
 								</div>
 							</div>
 						</li>
+						<script type="text/javascript">
+							activeOpinion('${tweetInstance.tweet.id}','${tweetInstance.value}');
+	  					</script>
 					</g:each>
 
 				</ul>
@@ -160,6 +172,7 @@
 						<li><g:paginate total="${tweetInstanceTotal}" id="${concept.id}" /></li>
 					</ul>
 				</div>
+				
 			</div>
 		</div>
 	</div>
