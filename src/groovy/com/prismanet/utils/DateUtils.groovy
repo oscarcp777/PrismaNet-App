@@ -1,5 +1,7 @@
 package com.prismanet.utils
 
+import groovy.time.TimeCategory
+
 import java.text.SimpleDateFormat
 
 enum DateTypes {
@@ -29,5 +31,19 @@ class DateUtils {
 	static def parseDate(String format, String date){
 		new SimpleDateFormat(format).parse(date)
 	}
-
+    static def loadZerosForMinute(mapData,from,to){
+		def results=[]
+		while (from!=to) {
+			use ( TimeCategory ) {
+			if(mapData.containsKey(from.time))
+			 results.add([ from.time, mapData.from])
+			else
+				results.add([ from.time,0])
+				
+			from=from+1.minutes
+			}
+		}
+		
+		results
+	}
 }

@@ -88,23 +88,22 @@ class ConceptController{
 	}
 	
 	def conceptsRealTime={
-		Concept concept = Concept.findByConceptName(params.id)
-		Date filteredDate
+		Concept concept = Concept.get(params.id)
+		Date from
+		Date to=new Date()
 		use ( TimeCategory ) {
-			filteredDate = new Date()-20.minutes
+			to = new GregorianCalendar(2013, Calendar.OCTOBER, 10,20,41)//TODO poner fecha actual new Date()
+			from = to.time-20.minutes
 		}
 		
 		def dateList = conceptService.categoryStore(["conceptName","tweetMinute"], [new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),
-			new Filter(attribute:"created",value:filteredDate, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT]);
-		
-		
+			new Filter(attribute:"created",value:from, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT]);
 		def dateValueList = [:]
 		dateList.each{ i ->
-			if (!dateValueList[i.getAt(0)])
-				dateValueList[i.getAt(0)] = []
-			dateValueList[i.getAt(0)].add([DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2)])	}
+			dateValueList.put(DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2))	
+		}
 		
-		render dateValueList as JSON
+		render DateUtils.loadZerosForMinute(dateValueList,from,to) as JSON
 	}
 	
 }
