@@ -28,6 +28,11 @@ class DateUtilsTests {
 			def data=DateUtils.loadZerosForMinute(dateValueList,from,to)
 			assertEquals data.size(),20
 			assertEquals data.get(1).get(0),minOne.time
+			assertEquals data.get(1).get(1),12
+			assertEquals data.get(3).get(0),mintree.time
+			assertEquals data.get(3).get(1),14
+			assertEquals data.get(10).get(0),minten.time
+			assertEquals data.get(10).get(1),45
 			println data
 			println dateValueList
 		}

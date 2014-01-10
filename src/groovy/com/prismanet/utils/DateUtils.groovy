@@ -33,13 +33,15 @@ class DateUtils {
 	}
     static def loadZerosForMinute(mapData,from,to){
 		def results=[]
+		use ( TimeCategory ) {
+		
 		while (from!=to) {
-			use ( TimeCategory ) {
-			if(mapData.containsKey(from.time))
-			 results.add([ from.time, mapData.from])
-			else
+			println mapData.containsKey(from.time)
+			if(mapData.containsKey(from.time)){
+			 results.add([ from.time, mapData.get(from.time)])
+			}else{
 				results.add([ from.time,0])
-				
+			}
 			from=from+1.minutes
 			}
 		}

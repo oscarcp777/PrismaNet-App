@@ -161,7 +161,7 @@
 		  activeItemMenuLevel3('concepts','${concept.id}','${concept.id}-stats','Conceptos > '+"${concept.conceptName}");
 		  $.getJSON('http://localhost:8080/PrismaNet/concept/conceptsRealTime/'+"${concept.id}", 
 			function(data) {
-			  printRealTimeChar(data);
+			  printRealTimeChar(data,'realTimeChar');
 		});
 <%-- 			$.getJSON('http://localhost:8080/PrismaNet/concept/conceptsDateJson/'+"${concept.conceptName}",  --%>
 // 				function(data) {

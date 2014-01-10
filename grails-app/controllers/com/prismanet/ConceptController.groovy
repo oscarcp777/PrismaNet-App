@@ -86,11 +86,13 @@ class ConceptController{
 		
 		render dateValueList as JSON
 	}
-	
+	/**
+	 * formato que se necesita la lista [[1381448400000,9],[1381448400000,0]]
+	 */
 	def conceptsRealTime={
 		Concept concept = Concept.get(params.id)
 		Date from
-		Date to=new Date()
+		def to
 		use ( TimeCategory ) {
 			to = new GregorianCalendar(2013, Calendar.OCTOBER, 10,20,41)//TODO poner fecha actual new Date()
 			from = to.time-20.minutes
@@ -103,7 +105,7 @@ class ConceptController{
 			dateValueList.put(DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2))	
 		}
 		
-		render DateUtils.loadZerosForMinute(dateValueList,from,to) as JSON
+		render DateUtils.loadZerosForMinute(dateValueList,from,to.time) as JSON
 	}
 	
 }
