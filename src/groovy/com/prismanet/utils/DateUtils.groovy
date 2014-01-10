@@ -36,7 +36,6 @@ class DateUtils {
 		use ( TimeCategory ) {
 		
 		while (from!=to) {
-			println mapData.containsKey(from.time)
 			if(mapData.containsKey(from.time)){
 			 results.add([ from.time, mapData.get(from.time)])
 			}else{

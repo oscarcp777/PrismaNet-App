@@ -158,10 +158,11 @@
 	<script type="text/javascript">
 	 
 	  $(function() {
-		  activeItemMenuLevel3('concepts','${concept.id}','${concept.id}-stats','Conceptos > '+"${concept.conceptName}");
-		  $.getJSON('http://localhost:8080/PrismaNet/concept/conceptsRealTime/'+"${concept.id}", 
+		  var id='${concept.id}';
+		  activeItemMenuLevel3('concepts',id,id+'-stats','Conceptos > '+"${concept.conceptName}");
+		  $.getJSON('http://localhost:8080/PrismaNet/concept/conceptsRealTime/'+id, 
 			function(data) {
-			  printRealTimeChar(data,'realTimeChar');
+			  printRealTimeChar(data,'realTimeChar',id);
 		});
 <%-- 			$.getJSON('http://localhost:8080/PrismaNet/concept/conceptsDateJson/'+"${concept.conceptName}",  --%>
 // 				function(data) {
