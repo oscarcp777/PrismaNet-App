@@ -96,43 +96,45 @@ class ConceptController{
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(to);
 		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 		to=calendar.getTime();
 		def dateValueList = [:]
 		use ( TimeCategory ) {
+//			to=to+1.minutes
 			from = to-20.minutes
-//		def dateList = conceptService.categoryStore(["conceptName","tweetMinute"], [new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),new Filter(attribute:"created",value:from, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT]);
-//		dateList.each{ i ->
-//			dateValueList.put(DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2))	
-//		}
+			def dateList = conceptService.categoryStore(["conceptName","tweetMinute"], [new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),new Filter(attribute:"created",value:from, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT]);
+			dateList.each{ i ->
+				dateValueList.put(DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2))	
+			}
 		//TODO MOCK de datos posta de CFK despues comentar
-		dateValueList= [(from.time):3,((from+1.minutes).time):3,((from+2.minutes).time):1,((from+3.minutes).time):5,((from+4.minutes).time):1,
-			           ((from+5.minutes).time):1,((from+6.minutes).time):1,((from+7.minutes).time):1,((from+8.minutes).time):4,((from+9.minutes).time):2,
-					   ((from+10.minutes).time):2,((from+11.minutes).time):3,((from+12.minutes).time):13,((from+13.minutes).time):8,((from+14.minutes).time):5,
-					   ((from+15.minutes).time):0,((from+16.minutes).time):1,((from+17.minutes).time):0,((from+18.minutes).time):2,((from+19.minutes).time):10,((from+20.minutes).time):5]
+//		dateValueList= [(from.time):3,((from+1.minutes).time):3,((from+2.minutes).time):1,((from+3.minutes).time):5,((from+4.minutes).time):1,
+//			           ((from+5.minutes).time):1,((from+6.minutes).time):1,((from+7.minutes).time):1,((from+8.minutes).time):4,((from+9.minutes).time):2,
+//					   ((from+10.minutes).time):2,((from+11.minutes).time):3,((from+12.minutes).time):13,((from+13.minutes).time):8,((from+14.minutes).time):5,
+//					   ((from+15.minutes).time):0,((from+16.minutes).time):1,((from+17.minutes).time):0,((from+18.minutes).time):2,((from+19.minutes).time):10,((from+20.minutes).time):5]
 		}
 		render DateUtils.loadZerosForMinute(dateValueList,from,to) as JSON
 	}
 	def conceptsRealTimeForOneMinute={
-//		Concept concept = Concept.get(params.id)
+		Concept concept = Concept.get(params.id)
 		def dateValueList = []
 		Date now=new Date()
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(now);
 		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 		now=calendar.getTime();
 		use ( TimeCategory ) {
-//			def dateList = conceptService.categoryStore(["conceptName","tweetMinute"],
-//			[new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),
-//				new Filter(attribute:"created",value:new Date()-1.minutes, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT]);
-//
-//			dateList.each{ i ->
-//				dateValueList.add([DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2)])
-//			}
-			Random rand = new Random()
-			dateValueList = [now.time,rand.nextInt(10+1)]
+			def dateList = conceptService.categoryStore(["conceptName","tweetMinute"],
+			[new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),
+				new Filter(attribute:"created",value:now-2.minutes, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT]);
+
+			dateList.each{ i ->
+				dateValueList.add([DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2)])
+			}
+			println dateList
+//			Random rand = new Random()
+//			dateValueList = [now.time,rand.nextInt(10+1)]
 		}
-		println now
-		println dateValueList
 		render  dateValueList as JSON
 	}
 }
