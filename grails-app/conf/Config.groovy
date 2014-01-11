@@ -76,7 +76,7 @@ grails.gorm.default.constraints = {
 	'*'(nullable: true)
 }
 grails.jobs.disable = true
-grails.twitter.offline = false
+grails.twitter.offline = true
 environments {
     development {
         grails.logging.jul.usebridge = true

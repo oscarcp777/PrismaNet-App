@@ -16,7 +16,14 @@ class DateUtilsTests {
     void testLoadZerosForMinute() {
 		
 		use ( TimeCategory ) {
+			
 			Date from=new Date();
+			println from
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(from);
+			calendar.set(Calendar.SECOND, 0);
+            from=calendar.getTime();
+			println from
 			Date to=from + 20.minutes
 			def minOne=from+ 1.minutes
 			def mintree=from+ 3.minutes

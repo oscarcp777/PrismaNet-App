@@ -8,9 +8,10 @@ function printRealTimeChar(dataJson,container,id){
 	        var chart;
 	        $('#'+container).highcharts({
 	            chart: {
-	                type: 'area',
+	                type: 'spline',
 	                animation: Highcharts.svg, // don't animate in old IE
-	                marginRight: 10,
+	                plotShadow: true,
+	                plotBorderWidth: 2,
 	                events: {
 	                    load: function() {
 	    
@@ -32,6 +33,9 @@ function printRealTimeChar(dataJson,container,id){
 	                text: 'Actualizaci\u00f3n en tiempo Real de la cantidad de Tweets'
 	            },
 	            xAxis: {
+	            	gridLineWidth: 1,
+	                lineColor: '#1ABC9C',
+	                tickColor: '#1ABC9C',
 	            	title: {
 	                    text: 'Minutos'
 	                },
@@ -49,21 +53,23 @@ function printRealTimeChar(dataJson,container,id){
 	            },
 	            tooltip: {
 	                formatter: function() {
-	                        return '<b> '+this.y+'<b> tweets a las '+ Highcharts.dateFormat('%H:%M', this.x) ;
-	                }
+	                        return '<b> '+this.y+'<b> tweets a las '+ Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) ;
+	                },
+	                crosshairs: true,
+			        shared: true
 	            },
 	            legend: {
-	                enabled: false
+	                enabled: true
 	            },
 	            exporting: {
-	                enabled: false
+	                enabled: true
 	            },
 	            plotOptions: {
 	                spline: {
 	                    lineWidth: 4,
 	                    states: {
 	                        hover: {
-	                            lineWidth: 5
+	                            lineWidth: 6
 	                        }
 	                    },
 	                    pointInterval: 60000, // one hour
@@ -71,7 +77,13 @@ function printRealTimeChar(dataJson,container,id){
 	            },
 	            series: [{
 	                name: 'Tweets por minuto',
-	                data: dataJson
+	                data: dataJson,
+			    	marker: {
+			    		fillColor: 'white',
+			    		lineWidth: 3,
+			    		lineColor: Highcharts.getOptions().colors[0]
+			    	},
+			    	zIndex: 2
 	            }
 	            ]
 	        });

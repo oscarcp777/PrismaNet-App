@@ -20,31 +20,65 @@
 		</div>
 		<div class="row well">
 			<div class="col-lg-4">
-				<div class="widget-body box-user-twitter">
+				<div class="widget-body box-user-twitter" style="background: white;">
+					<div class="widget-header header-color-green4">
+						<h4 class="lighter">
+							<i class="icon-cloud"></i> Concepto
+						</h4>
+					</div>
 					<div class="widget-main">
-						<div class="btn-group" style="width: 100%;">
-							<img class="avatar" alt=""
-								src="http://pbs.twimg.com/profile_images/2670960637/379fb2e81c5d384d551b304edcfa1242_normal.jpeg">
-							<h5 class="bigger">Oscar Caceres Paredes</h5>
-							<h5 class="bigger">@oscarcp777</h5>
+						<div class="profile-user-info profile-user-info-striped">
+							<div class="profile-info-row">
+								<div class="profile-info-name">Nombre concepto</div>
+
+								<div class="profile-info-value">
+									<span >CFK</span>
+								</div>
+							</div>
+
+
+							<div class="profile-info-row">
+								<div class="profile-info-name">Inicio Seguimiento</div>
+
+								<div class="profile-info-value">
+									<span >20/06/2010 00:00</span>
+								</div>
+							</div>
+
+							<div class="profile-info-row">
+								<div class="profile-info-name">Fin seguimiento</div>
+
+								<div class="profile-info-value">
+									<span >20/06/2010 12:00</span>
+								</div>
+							</div>
+
 						</div>
+						
 						<div class="hr hr8 hr-double"></div>
-						<div class="clearfix center">
-							<div class="grid3">
-								<span class="line-height-1 bigger-110 "> 12200 </span> <br>
-								<span class="line-height-1 bigger-100 grey"> TWEETS </span>
+						<div class="clearfix center grey">
+							<div class="grid3 ">
+								<span class="grey"> <i
+									class="icon-facebook-sign icon-2x blue"></i> 
+								</span>
+								<h4 >Post</h4>
+								<h4 class="bigger">1,255</h4>
 							</div>
 
 							<div class="grid3">
-
-								<span class="line-height-1 bigger-110 "> 2003 </span> <br>
-								<span class="line-height-1 bigger-100 grey"> SIGUIENDO </span>
+								<span class="grey"> <i
+									class="icon-twitter-sign icon-2x purple"></i> 
+								</span>
+								<h4 >Tweets</h4>
+								<h4 class="bigger">941</h4>
 							</div>
 
 							<div class="grid3">
-
-								<span class="line-height-1 bigger-110 "> 12999 </span> <br>
-								<span class="line-height-1 bigger-100 grey"> SEGUIDORES </span>
+								<span class="grey"> <i
+									class="icon-comment icon-2x red"></i>
+								</span>
+								<h4 >Menciones</h4>
+								<h4 class="bigger ">1,050</h4>
 							</div>
 						</div>
 					</div>

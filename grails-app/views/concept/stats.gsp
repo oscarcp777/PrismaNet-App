@@ -34,7 +34,7 @@
 							<div class="widget-body">
 								<div class="widget-body-inner" style="display: block;">
 									<div class="widget-main">
-										<div id="realTimeChar" style="height: 500px; min-width: 310px"></div>
+										<div id="realTimeChar" style="height:400px; min-width: 310px"></div>
 									</div>
 
 
