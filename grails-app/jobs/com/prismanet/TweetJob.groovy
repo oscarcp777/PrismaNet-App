@@ -19,7 +19,7 @@ class TweetJob {
 	def group = "tweetsJobs"
 	
 	static triggers = {
-		simple repeatInterval: 60000000, repeatCount:-1 , startDelay: 60000
+		simple repeatInterval: 60000, repeatCount:-1 , startDelay: 60000
 	}
 
 	def execute() {
@@ -36,8 +36,8 @@ class TweetJob {
 			Date filteredDate = new Date()-1.minute
 			
 			def dates = [:]
-//			dates.put("dateFrom",filteredDate)
-			dates.put("dateFrom",d1.time)
+			dates.put("dateFrom",filteredDate)
+//			dates.put("dateFrom",d1.time)
 //			dates.put("dateTo",d2.time)
 			
 			print "filtros: " + dates
@@ -52,9 +52,9 @@ class TweetJob {
 			while (iterator.hasNext()){
 				partialList.add(iterator.next())
 				i++
-//				print i
+				print i
 				if (i % 100 == 0){
-//					println "Nuevo Lote" 
+					println "Nuevo Lote" 
 					i = 0
 					tweetService.saveTweets(partialList)
 					partialList = []
