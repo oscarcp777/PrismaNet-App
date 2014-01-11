@@ -17,11 +17,11 @@ class GenericService {
 	
 	
 	
-	def list(filters, parameters){
-		list(domainClass, context, filters, parameters)
+	def list(filters, parameters, orders){
+		list(domainClass, context, filters, parameters, orders)
 	}
 	
-	def list(domainClass, context, filters, parameters) {
+	def list(domainClass, context, filters, parameters, orders) {
 		def criteria = domainClass.createCriteria()
 		def results = criteria.list(parameters) {
 			context.clearDefinedAlias()
@@ -59,6 +59,17 @@ class GenericService {
 						eq(getPropertyName(context, criteria, it.attribute), it.value)
 				}
 			}
+			orders.each{
+				switch (it.value) {
+					case OrderType.ASC:
+						order(getPropertyName(context, criteria, it.attribute), "asc")
+						break
+					case OrderType.DESC:
+						order(getPropertyName(context, criteria, it.attribute), "desc")
+						break
+				}
+			}
+			
 		}
 		[results: results, totalCount: results.totalCount]
 		
@@ -171,6 +182,16 @@ class GenericService {
 		LE,			// Menor o Igual que
 		IN,			// Lista de valores discretos incluidos
 		NOTIN;		// Lista de valores discretos excluidos
+	}
+	
+	
+	/**
+	 * Enumeracion que contiene los distintos tipos de orden que se puede aplicar
+	 *
+	 */
+	protected enum OrderType{
+		ASC,	// Ascendente
+		DESC;	// Descendente
 	}
     
 	

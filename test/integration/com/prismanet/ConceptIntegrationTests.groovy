@@ -171,7 +171,7 @@ class ConceptIntegrationTests {
 	@Test
 	void testList(){
 		def conceptService = new ConceptService()
-		def conceptList = conceptService.list(null,[:])
+		def conceptList = conceptService.list(null,[:],[])
 		assert conceptList.results.size() == 1
 	}
 	

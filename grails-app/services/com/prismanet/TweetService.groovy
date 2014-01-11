@@ -8,12 +8,12 @@ import twitter4j.Twitter
 import twitter4j.TwitterFactory
 import twitter4j.TwitterStream
 import twitter4j.TwitterStreamFactory
-import twitter4j.examples.tweets.RetweetStatus;
 import twitter4j.internal.json.StatusJSONImpl
 import twitter4j.internal.org.json.JSONObject
 
 import com.mongodb.BasicDBObject
 import com.prismanet.GenericService.FilterType
+import com.prismanet.GenericService.OrderType
 import com.prismanet.context.TweetAttributeContext
 import com.prismanet.sentiment.Opinion
 import com.prismanet.sentiment.OpinionValue
@@ -30,13 +30,14 @@ class TweetService extends GenericService{
 	
 	def saveTweets(def tweets){
 		def index = 0
-
+		def error = false
 
 		for (BasicDBObject tweetObj : tweets){
 
+			JSONObject obj = new JSONObject(tweetObj)
+			Status status = new StatusJSONImpl(obj)
 			try {
-				JSONObject obj = new JSONObject(tweetObj)
-				Status status = new StatusJSONImpl(obj)
+				
 				index++
 				
 				def start = System.currentTimeMillis()
@@ -80,15 +81,19 @@ class TweetService extends GenericService{
 						
 					}
 				}
-				if (index % 50 == 0) cleanUpGorm()
+//				if (index % 20 == 0) cleanUpGorm()
 
 			} catch (Exception e) {
-				print e.getCause()
+				error = true
 				print "Tweet Fallido: " + status.getId() +"-"+status.getText()
-				//			tweet.delete()
+				print e.getCause()
+				print e.getStackTrace()
+				
+				
 			}
 		}
-		cleanUpGorm()
+		if (!error)
+			cleanUpGorm()
 	}
 	
 	
@@ -183,7 +188,7 @@ class TweetService extends GenericService{
 		if (conceptId)
 			concept = Concept.get(conceptId)
 			
-		def auxList =	list(filters, parameters)
+		def auxList =	list(filters, parameters, [[attribute:"id",value:OrderType.DESC]])
 		for (tweet in auxList.results){
 			def opValue
 			if (conceptId){
