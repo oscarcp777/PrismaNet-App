@@ -16,15 +16,15 @@ class UserController {
 		session.user=springSecurityService.currentUser
 	}
 	def stats = {
-		def groupList = ["tweetCreated","conceptsId"]
-		def dateList = userService.categoryStore(session.user, groupList);
+		def groupList = ["tweetCreated","conceptsName"]
+		def dateList = userService.categoryStore(session.user, groupList, []);
 		[user: session.user,  dateList : dateList]
 	}
 	
 	
 	def monthStats = {
 		//TODO agregar mensaje de error o 404 si no encuentra el user
-		def groupList = ["conceptsId"]
+		def groupList = ["conceptsName"]
 		def criteria = User.createCriteria();
 		def filters = [new Filter(attribute:"id",value: session.user.id, type:FilterType.EQ)]
 		def projection = ["tweetsId" : ProjectionType.COUNT, "authorId" : ProjectionType.COUNT]
@@ -33,7 +33,7 @@ class UserController {
 		[user: session.user, statsList : statsList]
 	}
 	def conceptTweetsJson ={
-		def dateList = userService.categoryStore(session.user, ["conceptsId"]).sort{a,b -> a[1] <=> b[1] }
+		def dateList = userService.categoryStore(session.user, ["conceptsName"], []).sort{a,b -> a[1] <=> b[1] }
 		render dateList as JSON
 	}
 	

@@ -6,7 +6,8 @@ class UserAttributeContext extends AttributeContext {
 	@Override
 	protected void initializeRelations() {
 		addPropertyRelation("id", "id", null, null);
-		addPropertyRelation("conceptsId", "conceptName", null, "concepts");
+		addPropertyRelation("conceptsId", "id", null, "concepts");
+		addPropertyRelation("conceptsName", "conceptName", null, "concepts");
 		addPropertyRelation("authorId", "id", null, "concepts.tweets.author");
 		addPropertyRelation("sex", "sex", null, "concepts.tweets.author");
 		addPropertyRelation("tweetCreated", "date", null, "concepts.tweets");

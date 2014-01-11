@@ -27,25 +27,33 @@ class GenericService {
 			context.clearDefinedAlias()
 			and {
 				filters.each{
+					def property = getPropertyName(context, criteria, it.attribute)
+					def value = it.value
 					if (it.type)
 						switch (it.type) {
 							case FilterType.EQ:
-								eq(getPropertyName(context, criteria, it.attribute), it.value)
+								eq(property, value)
 								break
 							case FilterType.GT:
-								gt(getPropertyName(context, criteria, it.attribute), it.value)
+								gt(property, value)
 								break
 							case FilterType.GE:
-								ge(getPropertyName(context, criteria, it.attribute), it.value)
+								ge(property, value)
 								break
 							case FilterType.LT:
-								lt(getPropertyName(context, criteria, it.attribute), it.value)
+								lt(property, value)
 								break
 							case FilterType.LE:
-								le(getPropertyName(context, criteria, it.attribute), it.value)
+								le(property, value)
+								break
+							case FilterType.IN:
+								'in'(property, value)
+								break
+							case FilterType.NOTIN:
+								not{'in'(property, value)}
 								break
 							default:
-								eq(getPropertyName(context, criteria, it.attribute), it.value)
+								eq(property, value)
 						}
 					else
 						eq(getPropertyName(context, criteria, it.attribute), it.value)
@@ -67,28 +75,36 @@ class GenericService {
 			context.clearDefinedAlias()
 			and{
 				filters.each {
+					def property = getPropertyName(context, criteria, it.attribute)
+					def value = it.value
 					if (it.type)
 						switch (it.type) {
 							case FilterType.EQ:
-								eq(getPropertyName(context, criteria, it.attribute), it.value)
+								eq(property, value)
 								break
 							case FilterType.GT:
-								gt(getPropertyName(context, criteria, it.attribute), it.value)
+								gt(property, value)
 								break
 							case FilterType.GE:
-								ge(getPropertyName(context, criteria, it.attribute), it.value)
+								ge(property, value)
 								break
 							case FilterType.LT:
-								lt(getPropertyName(context, criteria, it.attribute), it.value)
+								lt(property, value)
 								break
 							case FilterType.LE:
-								le(getPropertyName(context, criteria, it.attribute), it.value)
+								le(property, value)
+								break
+							case FilterType.IN:
+								'in'(property, value)
+								break
+							case FilterType.NOTIN:
+								not{'in'(property, value)}
 								break
 							default:
-								eq(getPropertyName(context, criteria, it.attribute), it.value)
+								eq(property, value)
 						}
 					else
-						eq(getPropertyName(context, criteria, it.attribute), it.value)
+						eq(property, value)
 				}
 			}
 			projections {
@@ -152,8 +168,9 @@ class GenericService {
 		GT, 		// Mayor que
 		GE, 		// Mayor o Igual que
 		LT,			// Menor que
-		LE;			// Menor o Igual que
-		
+		LE,			// Menor o Igual que
+		IN,			// Lista de valores discretos incluidos
+		NOTIN;		// Lista de valores discretos excluidos
 	}
     
 	
