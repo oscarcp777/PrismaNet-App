@@ -1,4 +1,5 @@
 /**
+
  *Jquery para marcar como active un elemento del menu lateral 
  */
 function activeItemMenuLevel2(item,subItem,nameItem){
@@ -22,25 +23,37 @@ function editClassItem(item,classRemove,classNew){
 }
 
 function changeState(id, url, tweetId, conceptId, value){
+	var parent=id.substring(0,id.length-3);
 	var className = $("#"+id).attr('class');
-	if(className=="icon last tooltips selected"){
-		return
+	if(className.indexOf("selected")!=-1){
+		$("#"+id).removeClass("selectedPOS")
+		$("#"+id).removeClass("selectedNEQ")
+		$("#"+id).removeClass("selectedNEU")
+	}else{
+		$("#"+parent +" > a").removeClass("selectedPOS")
+		$("#"+parent +" > a").removeClass("selectedNEQ")
+		$("#"+parent +" > a").removeClass("selectedNEU")
+		if(value=="POS")
+			$("#"+id).addClass("selectedPOS");
+		if(value=="NEG")
+			$("#"+id).addClass("selectedNEQ");
+		if(value=="NEU")
+			$("#"+id).addClass("selectedNEU");
+		
 	}
-	$('.icon.last.tooltips').removeClass("selected")
-	$("#"+id).addClass("selected");
 	data = {'conceptId': conceptId, 'tweetId': tweetId, 'value':value}
     doRequest(url, data, null, null, "POST");
 }
 
 function activeOpinion(id, value){
 	if(value == "POSITIVE"){
-		$("#"+id+"Pos").addClass("selected");
+		$("#"+id+"Pos").addClass("selectedPOS");
 	}
 	if(value == "NEGATIVE"){
-		$("#"+id+"Neg").addClass("selected");
+		$("#"+id+"Neg").addClass("selectedNEQ");
 	}
 	if(value == "NEUTRAL"){
-		$("#"+id+"Que").addClass("selected");
+		$("#"+id+"Que").addClass("selectedNEU");
 	}
 		
 }

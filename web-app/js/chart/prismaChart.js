@@ -20,7 +20,11 @@ function printRealTimeChar(dataJson,container,id){
 	                        setInterval(function() {
 	                             $.getJSON('http://localhost:8080/PrismaNet/concept/conceptsRealTimeForOneMinute/'+id, 
 	                            		 	function(data) {
-	                            	 		series.addPoint(data, true, true);
+	                            	        for ( var int = 0; int < data.length; int++) {
+												var element = data[int];
+												series.addPoint(element, true, true);
+											}
+	                            	 		
 	                             });
 	                        }, 60000);
 	                    }

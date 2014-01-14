@@ -116,25 +116,28 @@ class ConceptController{
 	}
 	def conceptsRealTimeForOneMinute={
 		Concept concept = Concept.get(params.id)
-		def dateValueList = []
-		Date now=new Date()
+		def dateValueList = [:]
+		Date from
+		Date to=new Date()
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(now);
+		calendar.setTime(to);
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
-		now=calendar.getTime();
+		to=calendar.getTime();
 		use ( TimeCategory ) {
+			from = to-2.minutes
 			def dateList = conceptService.categoryStore(["conceptName","tweetMinute"],
 			[new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),
-				new Filter(attribute:"created",value:now-2.minutes, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT]);
+				new Filter(attribute:"created",value:from, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT]);
 
 			dateList.each{ i ->
-				dateValueList.add([DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2)])
+				dateValueList.put(DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2))	
 			}
-			println dateList
 //			Random rand = new Random()
 //			dateValueList = [now.time,rand.nextInt(10+1)]
 		}
-		render  dateValueList as JSON
+		println dateValueList
+		println DateUtils.loadZerosForMinute(dateValueList,from,to)
+		render DateUtils.loadZerosForMinute(dateValueList,from,to) as JSON
 	}
 }

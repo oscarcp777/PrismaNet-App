@@ -102,7 +102,7 @@
 								<div class="clearfix center">
 									<div>
 										<div class="inline position-relative">
-											<a href="#" class="btn btn-link dropdown-toggle"
+											<a href=" javascript:void(0);" class="btn btn-link dropdown-toggle"
 												data-toggle="dropdown"> <i
 												class="icon-plus-sign bigger-120 blue"></i> M&aacute;s Datos
 											</a>
@@ -158,21 +158,21 @@
 									<div class="btn-group">
 										<div class="reply-icons pull-right" style="font-size: 2em;"
 											id="${tweetInstance.tweet.id}">
-											<a href="#"  id="${tweetInstance.tweet.id}Pos" 
+											<a href=" javascript:void(0);"  id="${tweetInstance.tweet.id}Pos" 
 												class="icon last tooltips" 
 												onclick="changeState('${tweetInstance.tweet.id}Pos','${createLink(controller:'tweet', action:'saveOpinion')}','${tweetInstance.tweet.id}','${concept.id}', 'POS');"  
 												data-original-title="" 
 												title="Positivo"> 
 												<i class="icon-check-sign" title="Positivo" ></i>
 											</a>
-											<a href="#"  id="${tweetInstance.tweet.id}Neg" 
+											<a href=" javascript:void(0);"  id="${tweetInstance.tweet.id}Neg" 
 												class="icon last tooltips" 
 												onclick="changeState('${tweetInstance.tweet.id}Neg', '${createLink(controller:'tweet', action:'saveOpinion')}','${tweetInstance.tweet.id}','${concept.id}','NEG');" 
 												data-original-title="" 
 												title="Negativo"> 
 												<i class="icon-minus-sign-alt" ></i>
 											</a>
-			     							<a href="#" id="${tweetInstance.tweet.id}Que" 
+			     							<a href="javascript:void(0);" id="${tweetInstance.tweet.id}Que" 
 			     								class="icon last tooltips" 
 			     								onclick="changeState('${tweetInstance.tweet.id}Que', '${createLink(controller:'tweet', action:'saveOpinion')}','${tweetInstance.tweet.id}','${concept.id}','NEU');" 
 			     								data-original-title="" 

@@ -150,14 +150,19 @@
 	font-size: 18px;
 }
 
-.tweets li .reply-icons a.icon:hover {
+.tweets li .reply-icons a.icon .fs1:hover {
 	color: #e89344;
 }
 
-.tweets li .reply-icons a.icon.selected {
-	color: #e89344;
+.tweets li .reply-icons a.icon.selectedPOS {
+	color:#18bc9c!important;
 }
-
+.tweets li .reply-icons a.icon.selectedNEQ {
+	 color:#f77!important
+}
+.tweets li .reply-icons a.icon.selectedNEU {
+	color:#478fca!important;
+}
 .tweets li .reply-icons a.icon.more {
 	position: relative;
 	margin-right: 0;
