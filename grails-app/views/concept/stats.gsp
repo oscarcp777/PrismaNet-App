@@ -163,7 +163,7 @@
 		  $.getJSON('http://localhost:8080/PrismaNet/concept/conceptsRealTime/'+id, 
 			function(data) {
 			  printRealTimeChar(data,'realTimeChar',id);
-		});
+			});
 <%-- 			$.getJSON('http://localhost:8080/PrismaNet/concept/conceptsDateJson/'+"${concept.conceptName}",  --%>
 // 				function(data) {
 // 				printCharDate(data);
