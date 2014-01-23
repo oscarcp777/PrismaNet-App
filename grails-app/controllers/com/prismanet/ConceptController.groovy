@@ -26,7 +26,6 @@ class ConceptController{
 
 	def stats = {
 		Concept concept = Concept.get(params.id)
-		println concept
 		[concept : concept]
 	}
 	
@@ -56,34 +55,41 @@ class ConceptController{
 	}
 	
 	def conceptsDayJson={
-		Concept concept = Concept.findByConceptName(params.id)
+		def container = params.div
+		Concept concept = Concept.get(params.id)
 		def dateValueList = []
 		def dateList = conceptService.categoryStore(["tweetCreated"], [new Filter(attribute:"id",value: concept.id, type:FilterType.EQ)], ["tweetsId" : ProjectionType.COUNT]);
 		dateList.each{ i -> dateValueList << i.getAt(0)}
-		def json =["data":dateList,"cat":dateValueList]
+		def json = ["data":dateList,"cat":dateValueList, "container": container, "title":'Tweets por dia',"titleY":'Cantidad de tweets',"titleX":'Tweets']
 		render json as JSON
 	}
 	def conceptsHourJson={
-		Concept concept = Concept.findByConceptName(params.id)
+		def container = params.div
+		Concept concept = Concept.get(params.id)
+		def dateValueList = []
 		def listHour=conceptService.getConceptsHourJson(concept,params.day);
-		render listHour as JSON
+		listHour.each{ i -> dateValueList << i.getAt(0)}
+		def json = ["data":listHour,"cat":dateValueList, "container": container, "title":'Tweets por hora',"titleY":'Cantidad de tweets',"titleX":'Tweets']
+		render json as JSON
 	}
 	def conceptsMinuteJson={
-		Concept concept = Concept.findByConceptName(params.id)
+		def container = params.div
+		Concept concept = Concept.get(params.id)
 		def dateValueList = []
 		def dateList = conceptService.categoryStore(["tweetMinute"], [new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),
 			new Filter(attribute:"tweetPeriod",value:"201309", type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT]);
 		dateList.each{ i -> dateValueList << i.getAt(0)}
-		def json =["data":dateList,"cat":dateValueList]
+		def json =["data":dateList,"cat":dateValueList, "container": container, "title":'Tweets por hora', "subtitle":"Cantidad de tweets de las ultimas 24 horas" ,"titleY":'Cantidad de tweets',"titleX":'Tweets']
 		render json as JSON
 	}
 	def conceptsDateJson={
-		Concept concept = Concept.findByConceptName(params.id)
+		def container = params.div
+		Concept concept = Concept.get(params.id)
 		def dateList = conceptService.categoryStore(["created"], [new Filter(attribute:"id",value : concept.id, type:FilterType.EQ)], ["tweetsId" : ProjectionType.COUNT]);
 		def dateValueList = []
 		dateList.each{ i -> dateValueList << [i.getAt(0).time,i.getAt(1)]	}
-		
-		render dateValueList as JSON
+		def json =["data":dateList,"cat":dateValueList, "container": container, "title":'Tweets por fecha', "titleY":'Cantidad de tweets',"titleX":'Tweets']
+		render json as JSON
 	}
 	/**
 	 * formato que se necesita la lista [[1381448400000,9],[1381448400000,0]]

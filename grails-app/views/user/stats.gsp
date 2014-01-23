@@ -113,8 +113,8 @@
 		$(document).ready(function() {
 			activeItemMenuLevel2('chart', 'general', 'Estadisticas > General');
 			paintCharGender();
-			getCharPie();
-			$('#refreshCharPie').click(getCharPie);
+			getTweetCharPie();
+			$('#refreshCharPie').click(getTweetCharPie);
 		});
 	</script>
 </body>
