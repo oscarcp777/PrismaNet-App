@@ -1,3 +1,15 @@
+var doRequest = function(url,data,callback, errorHandler, method) {
+	      $.ajax({
+	              url: url,
+	              type: method,
+	              data: data,
+	              cache: false,
+	              success: callback,
+	              error: errorHandler
+	            });
+};
+
+
 function printRealTimeChar(dataJson,container,id){
 	        Highcharts.setOptions({
 	            global: {
@@ -94,11 +106,7 @@ function printRealTimeChar(dataJson,container,id){
 	  }
 
 function getCharPie(){
-	$.ajax({
-        type: 'GET',
-        url: 'conceptTweetsJson',
-        success: paintCharPie
-    })
+	doRequest('conceptTweetsJson',null,paintCharPie, null, 'GET');
 }
 
 
