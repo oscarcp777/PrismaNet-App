@@ -105,8 +105,28 @@ function printRealTimeChar(dataJson,container,id){
 	        });
 	  }
 
-function getCharPie(){
+function getTweetCharPie(){
 	doRequest('conceptTweetsJson',null,paintCharPie, null, 'GET');
+}
+
+function getConceptCharDay(id, div){
+	var data = {"id":id, "div":div}
+	doRequest('../conceptsDayJson',data,paintCharLine, null, 'GET');
+}
+
+function getConceptCharDate(id, div){
+	var data = {"id":id, "div":div}
+	doRequest('../conceptsDateJson',data,paintCharLine, null, 'GET');
+}
+
+function getConceptCharHour(id, div){
+	var data = {"id":id, "div":div}
+	doRequest('../conceptsHourJson',data,paintCharLine, null, 'GET');
+}
+
+function getConceptCharMinute(id, div){
+	var data = {"id":id, "div":div}
+	doRequest('../conceptsMinuteJson',data,paintCharLine, null, 'GET');
 }
 
 
@@ -169,6 +189,44 @@ function paintCharPie(dataJson) {
 						} ]
 					});
 
+}
+
+
+function paintCharLine(data){
+	  $(data.container).highcharts({
+          chart: {
+              type: 'spline'
+          },
+          title: {
+              text: data.title
+          },
+          subtitle: {
+        	  text: data.subtitle  
+          },
+          yAxis: {
+              title: {
+                  text: data.titleY
+              },
+              labels: {
+                  formatter: function() {
+                      return this.value ;
+                  }
+              }
+          },
+          xAxis: {
+              categories:data.cat
+          },
+          tooltip: {
+              formatter: function() {
+              	 return '<b>'+ this.series.name +'</b> '+ this.y;
+              }
+          },
+          
+          series: [{
+              name: data.titleX,
+              data: data.data
+          } ]
+      });
 }
 
 
