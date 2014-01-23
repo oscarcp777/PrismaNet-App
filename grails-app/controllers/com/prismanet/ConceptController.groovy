@@ -57,14 +57,19 @@ class ConceptController{
 	def conceptsDayJson={
 		def container = params.div
 		Concept concept = Concept.get(params.id)
-		def dateValueList = []
+		def dateValueList = [:]
 		def dateList = conceptService.categoryStore(["tweetCreated"], [new Filter(attribute:"id",value: concept.id, type:FilterType.EQ)], ["tweetsId" : ProjectionType.COUNT]);
-		dateList.each{ i -> dateValueList << i.getAt(0)}
+	   	dateList.each{ i ->
+				dateValueList.put(DateUtils.parseDate(DateTypes.HOUR_PERIOD, i.getAt(0)).time,i.getAt(1))
+			}
+		   //TODO habria 	que llenarlo de ceros y que muestre el ultimo mes
+//		dateList=DateUtils.loadZerosForMinute(dateValueList,from,to)
 		def json = ["data":dateList,"cat":dateValueList, "container": container, "title":'Tweets por dia',"titleY":'Cantidad de tweets',"titleX":'Tweets']
 		render json as JSON
 	}
 	def conceptsHourJson={
 		def container = params.div
+		params.day=DateUtils.getDateFormat(DateTypes.DAY_PERIOD, new Date()) ;
 		Concept concept = Concept.get(params.id)
 		def dateValueList = []
 		def listHour=conceptService.getConceptsHourJson(concept,params.day);
@@ -96,8 +101,10 @@ class ConceptController{
 	 */
 	def conceptsRealTime={
 		Concept concept = Concept.get(params.id)
+		def container = params.div
 		def listRealTime=conceptService.getConceptsRealTime(concept)
-		render listRealTime as JSON
+		def json =["data":listRealTime,"container":container,"id":params.id, "title":'Tweets por minuto',"subTitle":"Actualización en tiempo Real de la cantidad de Tweets" ,"titleY":'Cantidad de tweets',"titleX":'Minutos']
+		render json as JSON
 	}
 	def conceptsRealTimeForOneMinute={
 		Concept concept = Concept.get(params.id)
@@ -110,7 +117,7 @@ class ConceptController{
 		calendar.set(Calendar.MILLISECOND, 0);
 		to=calendar.getTime();
 		use ( TimeCategory ) {
-			from = to-2.minutes
+			from = to-1.minutes
 			def dateList = conceptService.categoryStore(["conceptName","tweetMinute"],
 			[new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),
 				new Filter(attribute:"created",value:from, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT]);

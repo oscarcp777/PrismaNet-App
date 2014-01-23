@@ -42,33 +42,7 @@
 							</div>
 						</div>
 				</div>
-					<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
-						<div class="widget-box">
-							<div class="widget-header header-color-green4">
-								<h5>
-									<span class="glyphicon glyphicon-stats"> </span> Tweets por Fecha
-								</h5>
 
-								<div class="widget-toolbar">
-									<a href="#" data-action="collapse"> <i
-										class="1 bigger-125 icon-chevron-up"></i>
-									</a>
-								</div>
-
-
-							</div>
-
-							<div class="widget-body">
-								<div class="widget-body-inner" style="display: block;">
-									<div class="widget-main">
-										<div id="container1" style="height: 500px; min-width: 310px"></div>
-									</div>
-
-
-								</div>
-							</div>
-						</div>
-				</div>
 					<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
 						<div class="widget-box">
 							<div class="widget-header header-color-green4">
@@ -88,7 +62,7 @@
 							<div class="widget-body">
 								<div class="widget-body-inner" style="display: block;">
 									<div class="widget-main">
-										<div id="container2" style="height: 500px; min-width: 310px"></div>
+										<div id="container2" style="height: 400px; min-width: 310px"></div>
 									</div>
 
 
@@ -115,7 +89,7 @@
 							<div class="widget-body">
 								<div class="widget-body-inner" style="display: block;">
 									<div class="widget-main">
-										<div id="container3" style="height: 500px; min-width: 310px"></div>
+										<div id="container3" style="height: 400px; min-width: 310px"></div>
 									</div>
 
 
@@ -123,33 +97,7 @@
 							</div>
 						</div>
 				</div>
-									<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
-						<div class="widget-box">
-							<div class="widget-header header-color-green4">
-								<h5>
-									<span class="glyphicon glyphicon-stats"> </span> Tweets por Minuto
-								</h5>
-
-								<div class="widget-toolbar">
-									<a href="#" data-action="collapse"> <i
-										class="1 bigger-125 icon-chevron-up"></i>
-									</a>
-								</div>
-
-
-							</div>
-
-							<div class="widget-body">
-								<div class="widget-body-inner" style="display: block;">
-									<div class="widget-main">
-										<div id="container4" style="height: 500px; min-width: 310px"></div>
-									</div>
-
-
-								</div>
-							</div>
-						</div>
-				</div>
+									
 				</div>
 			</div>
 		</div>
@@ -160,14 +108,11 @@
 	  $(function() {
 		  var id='${concept.id}';
 		  activeItemMenuLevel3('concepts',id,id+'-stats','Conceptos > '+"${concept.conceptName}");
-		  $.getJSON('http://localhost:8080/PrismaNet/concept/conceptsRealTime/'+id, 
-			function(data) {
-			  printRealTimeChar(data,'realTimeChar',id);
-			});
+		  getConceptRealTime(${concept.id}, '#realTimeChar');
 		  getConceptCharDay(${concept.id}, '#container2');
 		  getConceptCharHour(${concept.id},'#container3');
-		  getConceptCharDate(${concept.id}, '#container1');
-		  getConceptCharMinute(${concept.id}, '#container4');
+<%--		  getConceptCharDate(${concept.id}, '#container1');--%>
+<%-- 		  getConceptCharMinute(${concept.id}, '#container4'); --%>
 		});
 	</script>
 </body>

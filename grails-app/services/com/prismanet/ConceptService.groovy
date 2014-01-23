@@ -1,5 +1,7 @@
 package com.prismanet
 
+import org.springframework.transaction.annotation.Transactional;
+
 import groovy.time.TimeCategory
 
 import com.prismanet.GenericService.FilterType
@@ -19,11 +21,11 @@ class ConceptService extends GenericService {
 	ConceptService(){
 		super(Concept, new ConceptAttributeContext())
 	}
-	
+	@Transactional(readOnly = true)
     def categoryStore(def groups, def filters, def projection) {
 		return groupBy(groups, filters, projection)
 	}
-	
+	 @Transactional(readOnly = true)
 	def getConceptsRealTime(Concept concept){
 		Date from
 		Date to=new Date()
@@ -42,6 +44,7 @@ class ConceptService extends GenericService {
 		}
 		DateUtils.loadZerosForMinute(dateValueList,from,to)
 	}
+	@Transactional(readOnly = true)
 	def getConceptsHourJson(Concept concept,def day){
 		def dateList = categoryStore(["tweetHour"], [new Filter(attribute:"id",value:concept.id, type:FilterType.EQ),
 			new Filter(attribute:"tweetPeriod",value:day, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT]);

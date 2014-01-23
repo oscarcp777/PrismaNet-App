@@ -31,7 +31,7 @@
 /* Customize container */
 @media (min-width: 768px) {
   .container {
-    max-width: 500px;
+    max-width:450px;
   }
   .container .jumbotron{
 	margin: 0 auto;
@@ -88,9 +88,8 @@
 }
 
 .logo {
-	padding-top: 50px;
-	
-	margin-bottom: 45px;
+	padding-top: 20px;
+	margin-bottom:20px;
 	margin-left: 0;
 	position: relative;
 	color: #000000;

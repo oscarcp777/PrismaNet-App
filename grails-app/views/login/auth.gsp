@@ -20,7 +20,7 @@
 		<div class='container'>
 
 
-			<div class="jumbotron">
+			<div class="jumbotron" style="padding-top:10px;padding-bottom:20px;">
 
 			<form action='${postUrl}' method='POST' id='loginForm'
 				class='form-signin' autocomplete='off'  role="form">
