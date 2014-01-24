@@ -23,9 +23,10 @@
 								</h5>
 
 								<div class="widget-toolbar">
-									<span id="refreshCharPie" data-action="reload"> <i class="icon-refresh"></i></span> 
-									<a href="#" data-action="collapse"> <i class="icon-chevron-up"></i></a> 
-									<a href="#" data-action="close"> <i class="icon-remove"></i></a>
+									<a href="javascript:void(0);" id="refreshCharPie">
+									<span  data-action="reload"> <i class="icon-refresh"></i></span> </a>
+									<a href="javascript:void(0);" data-action="collapse"> <i class="icon-chevron-up"></i></a> 
+									<a href="javascript:void(0);" data-action="close"> <i class="icon-remove"></i></a>
 								</div>
 							</div>
 
@@ -108,13 +109,15 @@
 			
 		</div>
 	</div>
- 	<script type="text/javascript" src="${resource(dir: 'js/chart', file: 'prismaChart.js')}"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			inicializeColorChar();
 			activeItemMenuLevel2('chart', 'general', 'Estadisticas > General');
 			paintCharGender();
 			getTweetCharPie();
-			$('#refreshCharPie').click(getTweetCharPie);
+			$('#refreshCharPie').click(function() {
+				getTweetCharPie();
+			});
 		});
 	</script>
 </body>
