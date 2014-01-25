@@ -13,8 +13,10 @@ class ConceptAttributeContext extends AttributeContext {
 		addPropertyRelation("tweetPeriod", "period", null, "tweets");
 		addPropertyRelation("tweetYear", "year", null, "tweets");
 		addPropertyRelation("tweetMonth", "month", null, "tweets");
-		addPropertyRelation("tweetHour", "dateByHour", null, "tweets");
-		addPropertyRelation("tweetMinute", "dateByMinute", null, "tweets");
+		addPropertyRelation("tweetHour", "hour", null, "tweets");
+		addPropertyRelation("tweetMinute", "minute", null, "tweets");
+		addPropertyRelation("tweetByHour", "dateByHour", null, "tweets");
+		addPropertyRelation("tweetByMinute", "dateByMinute", null, "tweets");
 		addPropertyRelation("tweetTime", "time", null, "tweets");
 		addPropertyRelation("tweetDay", "day", null, "tweets");
 		addPropertyRelation("tweetsId", "id", null, "tweets");

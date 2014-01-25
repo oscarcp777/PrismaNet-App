@@ -216,17 +216,7 @@ function paintCharLine(data){
 	            text: data.subTitle
 	        },
 	        xAxis: {
-	        	gridLineWidth: 1,
-	            lineColor: '#1ABC9C',
-	            tickColor: '#1ABC9C',
-	        	title: {
-	                text:data.titleX
-	            },
-	            type: 'datetime',
-	            tickPixelInterval:3600,
-	            plotLines: [{
-	                value:0,
-	            }]
+	        	categories: [data.xCategories]
 	        },
 	        yAxis: {
 	            title: {
@@ -236,7 +226,7 @@ function paintCharLine(data){
 	        },
 	        tooltip: {
 	            formatter: function() {
-	                    return '<b> '+this.y+'<b> tweets a las '+ Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) ;
+	                    return '<b> '+this.y+'<b> tweets a las '+ this.x ;
 	            },
 	            crosshairs: true,
 		        shared: true

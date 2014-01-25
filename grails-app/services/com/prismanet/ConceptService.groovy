@@ -47,7 +47,7 @@ class ConceptService extends GenericService {
 	@Transactional(readOnly = true)
 	def getConceptsHourJson(Concept concept,def day){
 		def dateList = categoryStore(["tweetHour"], [new Filter(attribute:"id",value:concept.id, type:FilterType.EQ),
-			new Filter(attribute:"tweetPeriod",value:day, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT]);
+			new Filter(attribute:"tweetCreated",value:day, type:FilterType.EQ)], ["tweetsId" : ProjectionType.COUNT]);
 		dateList
 	}
 }

@@ -69,12 +69,14 @@ class ConceptController{
 	}
 	def conceptsHourJson={
 		def container = params.div
-		params.day=DateUtils.getDateFormat(DateTypes.DAY_PERIOD, new Date()) ;
+		def cal = new GregorianCalendar(2013, Calendar.OCTOBER, 27)
+		params.day=DateUtils.getDateFormat(DateTypes.DAY_PERIOD, cal.time) ;
 		Concept concept = Concept.get(params.id)
 		def dateValueList = []
 		def listHour=conceptService.getConceptsHourJson(concept,params.day);
 		listHour.each{ i -> dateValueList << i.getAt(0)}
-		def json = ["data":listHour,"cat":dateValueList, "container": container, "title":'Tweets por hora',"titleY":'Cantidad de tweets',"titleX":'Tweets']
+		def json = ["data":listHour,"cat":dateValueList, "container": container, "title":"Tweets por hora - [" +params.day + "]",
+			"titleY":'Cantidad de tweets',"titleX":'Tweets',xCategories:[0..23]]
 		render json as JSON
 	}
 	def conceptsMinuteJson={
@@ -82,9 +84,11 @@ class ConceptController{
 		Concept concept = Concept.get(params.id)
 		def dateValueList = []
 		def dateList = conceptService.categoryStore(["tweetMinute"], [new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),
-			new Filter(attribute:"tweetPeriod",value:"201309", type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT]);
+			new Filter(attribute:"tweetByHour",value:"", type:FilterType.EQ)], ["tweetsId" : ProjectionType.COUNT]);
 		dateList.each{ i -> dateValueList << i.getAt(0)}
-		def json =["data":dateList,"cat":dateValueList, "container": container, "title":'Tweets por hora', "subtitle":"Cantidad de tweets de las ultimas 24 horas" ,"titleY":'Cantidad de tweets',"titleX":'Tweets']
+		def json =["data":dateList,"cat":dateValueList, "container": container, "title":'Tweets por minuto', 
+			"subtitle":"Cantidad de tweets de las ultimas 24 horas" ,
+			"titleY":'Cantidad de tweets',"titleX":'Tweets']
 		render json as JSON
 	}
 	def conceptsDateJson={
