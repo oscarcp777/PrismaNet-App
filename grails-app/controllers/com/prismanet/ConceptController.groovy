@@ -165,18 +165,17 @@ class ConceptController{
 	def conceptsRealTimeForOneMinute={
 		Concept concept = Concept.get(params.id)
 		def dateValueList = [:]
-		Date from
-		Date to=new Date()
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(to);
+		Date from,to
+		Calendar calendar = new GregorianCalendar()
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
 		to=calendar.getTime();
 		use ( TimeCategory ) {
 			from = to-1.minutes
+			print from
 			def dateList = conceptService.categoryStore(["conceptName","tweetByMinute"],
 			[new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),
-				new Filter(attribute:"created",value:from, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT], null);
+				new Filter(attribute:"created",value:from, type:FilterType.EQ)], ["tweetsId" : ProjectionType.COUNT], null);
 
 			dateList.each{ i ->
 				dateValueList.put(DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2))	
