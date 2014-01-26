@@ -174,7 +174,7 @@ class ConceptController{
 		to=calendar.getTime();
 		use ( TimeCategory ) {
 			from = to-1.minutes
-			def dateList = conceptService.categoryStore(["conceptName","tweetMinute"],
+			def dateList = conceptService.categoryStore(["conceptName","tweetByMinute"],
 			[new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),
 				new Filter(attribute:"created",value:from, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT], null);
 
