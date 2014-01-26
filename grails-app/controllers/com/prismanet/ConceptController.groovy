@@ -172,10 +172,10 @@ class ConceptController{
 		to=calendar.getTime();
 		use ( TimeCategory ) {
 			from = to-1.minutes
-			print from
+			def tweetByMinute=DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, cal.time)
 			def dateList = conceptService.categoryStore(["conceptName","tweetByMinute"],
 			[new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),
-				new Filter(attribute:"created",value:from, type:FilterType.EQ)], ["tweetsId" : ProjectionType.COUNT], null);
+				new Filter(attribute:"tweetByMinute",value:tweetByMinute, type:FilterType.EQ)], ["tweetsId" : ProjectionType.COUNT], null);
 
 			dateList.each{ i ->
 				dateValueList.put(DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2))	
