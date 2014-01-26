@@ -176,7 +176,7 @@ class ConceptController{
 			from = to-1.minutes
 			def dateList = conceptService.categoryStore(["conceptName","tweetMinute"],
 			[new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),
-				new Filter(attribute:"created",value:from, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT]);
+				new Filter(attribute:"created",value:from, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT], null);
 
 			dateList.each{ i ->
 				dateValueList.put(DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2))	
