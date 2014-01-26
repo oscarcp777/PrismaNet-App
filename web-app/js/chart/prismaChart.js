@@ -216,7 +216,20 @@ function paintCharLine(data){
 	            text: data.subTitle
 	        },
 	        xAxis: {
-	        	categories: [data.xCategories]
+//	        	gridLineWidth: 1,
+//	            lineColor: '#1ABC9C',
+//	            tickColor: '#1ABC9C',
+	        	title: {
+	                text:data.titleX
+	            },
+	            type: 'datetime',
+                labels: {
+                    overflow: 'justify'
+                }
+//	            tickPixelInterval:3600,
+//	            plotLines: [{
+//	                value:0,
+//	            }]
 	        },
 	        yAxis: {
 	            title: {
@@ -226,7 +239,7 @@ function paintCharLine(data){
 	        },
 	        tooltip: {
 	            formatter: function() {
-	                    return '<b> '+this.y+'<b> tweets a las '+ this.x ;
+	                    return '<b> '+this.y+' tweets <b><br>'+ Highcharts.dateFormat('%d/%m/%Y--%H:%M', this.x) ;
 	            },
 	            crosshairs: true,
 		        shared: true
@@ -237,7 +250,7 @@ function paintCharLine(data){
 	        exporting: {
 	            enabled: true
 	        },
-	        plotOptions: {
+	      /*  plotOptions: {
 	            spline: {
 	                lineWidth: 4,
 	                states: {
@@ -245,20 +258,25 @@ function paintCharLine(data){
 	                        lineWidth: 6
 	                    }
 	                },
-	                pointInterval: 3600000, // one hour
+	                marker: {
+                        enabled: true
+                    },
+	                pointInterval: data.interval,
+	                pointStart: Date.UTC(data.year, data.month, data.day, data.hour, 0, 0)
 	            }
-	        },
-	        series: [{
-	            name: data.title,
-	            data:data.data,
-		    	marker: {
-		    		fillColor: 'white',
-		    		lineWidth: 3,
-		    		lineColor: Highcharts.getOptions().colors[0]
-		    	},
-		    	zIndex: 2
-	        }
-	        ]
+	        },*/
+	        series: data.series
+//	        series: [{
+//	            name: data.title,
+//	            data:data.data,
+//		    	marker: {
+//		    		fillColor: 'white',
+//		    		lineWidth: 3,
+//		    		lineColor: Highcharts.getOptions().colors[0]
+//		    	},
+//		    	zIndex: 2
+//	        }
+//	        ]
 	    });
 }
 

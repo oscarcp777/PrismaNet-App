@@ -75,11 +75,11 @@ class GenericService {
 		
 	}
 	
-	def groupBy(groups, filters, projection){
-		groupBy(domainClass, context, groups, filters, projection)
+	def groupBy(groups, filters, projection, orders){
+		groupBy(domainClass, context, groups, filters, projection, orders)
 	}
 	
-	def groupBy(domainClass, context, groups, filters, projection){
+	def groupBy(domainClass, context, groups, filters, projection, orders){
 		def criteria = domainClass.createCriteria()
 		
 		def resultList = criteria {
@@ -138,6 +138,16 @@ class GenericService {
 							count(property)
 
 					}
+				}
+			}
+			orders.each{
+				switch (it.value) {
+					case OrderType.ASC:
+						order(getPropertyName(context, criteria, it.attribute), "asc")
+						break
+					case OrderType.DESC:
+						order(getPropertyName(context, criteria, it.attribute), "desc")
+						break
 				}
 			}
 		}

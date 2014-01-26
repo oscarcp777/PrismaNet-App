@@ -217,12 +217,16 @@ class TweetService extends GenericService{
 		ResponseList<twitter4j.User> users = twitter.lookupUsers((String[])usersName.toArray());
 		for (twitter4j.User user : users) {
 			Tweet tweet=tweetsTemp.find {it.author.accountNameSingle == user.screenName}
-			tweet.author.profileImage=user.profileImageURL
-			tweet.author.followers=user.followersCount
-			tweet.author.following=user.friendsCount
-			tweet.author.tweetsCount=user.statusesCount
-			tweet.author.name=user.name
-			tweet.save(flush:true)
+			if (tweet && tweet.author){
+				tweet.author.profileImage=user.profileImageURL
+				tweet.author.followers=user.followersCount
+				tweet.author.following=user.friendsCount
+				tweet.author.tweetsCount=user.statusesCount
+				tweet.author.name=user.name
+			}
+			if (tweet)
+				tweet.save(flush:true)
+			
 		}
 	}
 }
