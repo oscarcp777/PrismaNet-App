@@ -47,4 +47,48 @@ class DateUtils {
 		
 		results
 	}
+	
+	static def getMilisecondsInterval(def dateType){
+		switch(dateType){
+			case DateTypes.YEAR:
+				return 365 * 24 * 3600 *1000
+			case DateTypes.MONTH:
+			case DateTypes.MONTH_PERIOD:
+				return 30 * 24 * 3600 *1000
+			case DateTypes.DAY:
+			case DateTypes.DAY_PERIOD:
+				return 24 * 3600 *1000
+			case DateTypes.HOUR:
+			case DateTypes.HOUR_PERIOD:
+				return 3600 *1000
+			case DateTypes.MINUTE:
+			case DateTypes.MINUTE_PERIOD:
+				return 60 *1000
+			default:
+				return 60 *1000
+		}
+	}
+	
+	static def loadZeros(data,from,to,interval){
+		def series = []
+		def results=[]
+		data.each { serie ->
+			def actualTime = from.time
+			serie.data.each { value ->
+				print "value.x = " + value.x
+				print "actualTime = " + actualTime
+				while (actualTime<value.x) {
+					print "ENTROOO"
+					results.add([x: actualTime, y:0])
+					actualTime=actualTime + DateUtils.getMilisecondsInterval(interval)
+					print "actualTime = " + actualTime
+				}
+				results.add(value)
+				actualTime=actualTime + DateUtils.getMilisecondsInterval(interval)
+			}
+			print "resultado: " + results
+			series << [name:serie.name,data:results]
+		}
+		series
+	}
 }

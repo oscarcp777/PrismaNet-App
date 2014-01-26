@@ -141,12 +141,14 @@ class ConceptController{
 		serviceResultList.each{ i ->
 			dateValueList.add([x:DateUtils.parseDate(interval, i.getAt(0)).getTime(),y:i.getAt(1)])
 		}
-//		def from = DateUtils.parseDate(interval,serviceResultList.get(0).getAt(0))
-//		def to = DateUtils.parseDate(interval,serviceResultList.get(serviceResultList.size()-1).getAt(0))
-//		dateValueList=DateUtils.loadZerosForMinute(dateValueList,from,to)
-	   def series = []
-	   series << [name:conceptName,data:dateValueList]
-	   print "Formato parseado para grafico: " + series
+		def from = DateUtils.parseDate(interval,serviceResultList.get(0).getAt(0))
+		def to = DateUtils.parseDate(interval,serviceResultList.get(serviceResultList.size()-1).getAt(0))
+		def series = []
+		series << [name:conceptName,data:dateValueList]
+		print "Formato parseado para grafico: " + series
+		series=DateUtils.loadZeros(series,from,to, interval)
+	  
+//	   print "Formato parseado para grafico: " + series
 	   [series:series, 
 //		   year:year as Integer, month:month as Integer, day:day as Integer, hour:hour as Integer,
 		   container: container, /*interval:interval,*/
