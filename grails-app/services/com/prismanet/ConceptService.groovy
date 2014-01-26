@@ -38,7 +38,7 @@ class ConceptService extends GenericService {
 		def dateValueList = [:]
 		use ( TimeCategory ) {
 			from = to-20.minutes
-			def dateList = categoryStore(["conceptName","tweetMinute"], [new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),new Filter(attribute:"created",value:from, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT],null);
+			def dateList = categoryStore(["conceptName","tweetByMinute"], [new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),new Filter(attribute:"created",value:from, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT],null);
 			dateList.each{ i ->
 				dateValueList.put(DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2))
 			}
