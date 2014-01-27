@@ -99,16 +99,10 @@ function printRealTimeChar(data){
         },
         xAxis: {
         	gridLineWidth: 1,
-            lineColor: '#1ABC9C',
-            tickColor: '#1ABC9C',
         	title: {
                 text:data.titleX
             },
-            type: 'datetime',
-            tickPixelInterval:60,
-            plotLines: [{
-                value:0,
-            }]
+            type: 'datetime'
         },
         yAxis: {
             title: {
@@ -118,7 +112,7 @@ function printRealTimeChar(data){
         },
         tooltip: {
             formatter: function() {
-                    return '<b> '+this.y+'<b> tweets a las '+ Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) ;
+                    return "Click para ver los <b> "+this.y+'</b> tweets de las '+ Highcharts.dateFormat('%H:%M', this.x) ;
             },
             crosshairs: true,
 	        shared: true
@@ -129,26 +123,39 @@ function printRealTimeChar(data){
         exporting: {
             enabled: true
         },
+        
         plotOptions: {
-            spline: {
+        	spline: {
                 lineWidth: 4,
                 states: {
                     hover: {
                         lineWidth: 6
                     }
+                }
+            },
+            series: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function() {
+                        	window.location.href="../../tweet/list/"+data.id+"?date="+this.x;
+                        }
+                    }
                 },
-                pointInterval: 60000, // one hour
+                marker: {
+		    		fillColor: 'white',
+		    		lineWidth: 3,
+		    		lineColor: Highcharts.getOptions().colors[0]
+		    	},
+		    	zIndex: 2
             }
         },
+        
+       
         series: [{
             name: data.title,
-            data:data.data,
-	    	marker: {
-	    		fillColor: 'white',
-	    		lineWidth: 3,
-	    		lineColor: Highcharts.getOptions().colors[0]
-	    	},
-	    	zIndex: 2
+            data:data.data
+	    	
         }
         ]
     });
@@ -164,9 +171,9 @@ function paintCharPie(dataJson) {
 			.highcharts(
 					{
 						chart : {
-							plotBackgroundColor : null,
-							plotBorderWidth : null,
-							plotShadow : false
+							 animation: Highcharts.svg, // don't animate in old IE
+					            plotShadow: true,
+					            plotBorderWidth: 2
 						},
 						title : {
 							text : 'Porcentajes de tweets por Concepto'
@@ -202,12 +209,17 @@ function paintCharPie(dataJson) {
 
 
 function paintCharLine(data){
+	Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
+    });
 	 $(data.container).highcharts({
 	        chart: {
 	            type: 'spline',
 	            animation: Highcharts.svg, // don't animate in old IE
 	            plotShadow: true,
-	            plotBorderWidth: 2,
+	            plotBorderWidth: 2
 	        },
 	        title: {
 	            text:data.title
@@ -216,7 +228,7 @@ function paintCharLine(data){
 	            text: data.subTitle
 	        },
 	        xAxis: {
-//	        	gridLineWidth: 1,
+	        	gridLineWidth: 1,
 //	            lineColor: '#1ABC9C',
 //	            tickColor: '#1ABC9C',
 	        	title: {
@@ -239,7 +251,7 @@ function paintCharLine(data){
 	        },
 	        tooltip: {
 	            formatter: function() {
-	                    return '<b> '+this.y+' tweets <b><br>'+ Highcharts.dateFormat('%d/%m/%Y--%H:%M', this.x) ;
+                    return "Click para ver los <b> "+this.y+'</b> tweets de las '+ Highcharts.dateFormat('%d/%m/%Y--%H:%M', this.x) ;
 	            },
 	            crosshairs: true,
 		        shared: true
@@ -250,21 +262,32 @@ function paintCharLine(data){
 	        exporting: {
 	            enabled: true
 	        },
-	      /*  plotOptions: {
-	            spline: {
+	        plotOptions: {
+	        	spline: {
 	                lineWidth: 4,
 	                states: {
 	                    hover: {
 	                        lineWidth: 6
 	                    }
+	                }
+	            },
+	            series: {
+	                cursor: 'pointer',
+	                point: {
+	                    events: {
+	                        click: function() {
+	                        	window.location.href="../../tweet/list/"+data.id+"?date="+this.x;
+	                        }
+	                    }
 	                },
 	                marker: {
-                        enabled: true
-                    },
-	                pointInterval: data.interval,
-	                pointStart: Date.UTC(data.year, data.month, data.day, data.hour, 0, 0)
+			    		fillColor: 'white',
+			    		lineWidth: 3,
+			    		lineColor: Highcharts.getOptions().colors[0]
+			    	},
+			    	zIndex: 2
 	            }
-	        },*/
+	        },
 	        series: data.series
 //	        series: [{
 //	            name: data.title,

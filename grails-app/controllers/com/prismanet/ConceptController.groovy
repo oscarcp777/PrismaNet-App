@@ -79,7 +79,7 @@ class ConceptController{
 			new Filter(attribute:"tweetCreated",value:day, type:FilterType.EQ)], ["tweetsId" : ProjectionType.COUNT], [[attribute:"created",value:OrderType.ASC]]);
 		
 //		def interval = 60 * 1000
-		def resultMap = getChartLineFormat(concept.conceptName, dateList, container, DateTypes.HOUR_PERIOD, 'Tweets por hora','Cantidad de tweets','Tweets')
+		def resultMap = getChartLineFormat(concept, dateList, container, DateTypes.HOUR_PERIOD, 'Tweets por hora','Cantidad de tweets','Tweets')
 		render resultMap as JSON
 	}
 	def conceptsMinuteJson={
@@ -101,7 +101,7 @@ class ConceptController{
 //		month = DateUtils.getDateFormat(DateTypes.MONTH, cal.time)
 //		year = DateUtils.getDateFormat(DateTypes.YEAR, cal.time) ;
 //		def interval = 60 * 1000
-		def resultMap = getChartLineFormat(concept.conceptName, dateList, container, DateTypes.MINUTE_PERIOD, 'Tweets por minuto','Cantidad de tweets','Tweets')
+		def resultMap = getChartLineFormat(concept, dateList, container, DateTypes.MINUTE_PERIOD, 'Tweets por minuto','Cantidad de tweets','Tweets')
 		render resultMap as JSON
 	}
 	def conceptsDateJson={
@@ -117,7 +117,7 @@ class ConceptController{
 //		def month =  dateList.get(0).getAt(0)[3..4]
 //		def day =  dateList.get(0).getAt(0)[0..1]
 //		def interval = 24 * 3600 * 1000
-		def resultMap = getChartLineFormat(concept.conceptName, dateList, container, DateTypes.DAY_PERIOD, 'Tweets por Dia','Cantidad de tweets','Tweets')
+		def resultMap = getChartLineFormat(concept, dateList, container, DateTypes.DAY_PERIOD, 'Tweets por Dia','Cantidad de tweets','Tweets')
 		render resultMap as JSON
 	}
 	
@@ -136,7 +136,7 @@ class ConceptController{
 	 * @param title - titulo eje y
 	 * @return
 	 */
-	private getChartLineFormat(conceptName, serviceResultList, container, interval,/*interval, year, month, day, hour,*/ title, titleX, titleY){
+	private getChartLineFormat(concept, serviceResultList, container, interval,/*interval, year, month, day, hour,*/ title, titleX, titleY){
 		def dateValueList = []
 		serviceResultList.each{ i ->
 			dateValueList.add([x:DateUtils.parseDate(interval, i.getAt(0)).getTime(),y:i.getAt(1)])
@@ -144,7 +144,7 @@ class ConceptController{
 		def from = DateUtils.parseDate(interval,serviceResultList.get(0).getAt(0))
 		def to = DateUtils.parseDate(interval,serviceResultList.get(serviceResultList.size()-1).getAt(0))
 		def series = []
-		series << [name:conceptName,data:dateValueList]
+		series << [name:concept.conceptName,data:dateValueList]
 		print "Formato parseado para grafico: " + series
 		series=DateUtils.loadZeros(series,from,to, interval)
 	  
@@ -152,7 +152,7 @@ class ConceptController{
 	   [series:series, 
 //		   year:year as Integer, month:month as Integer, day:day as Integer, hour:hour as Integer,
 		   container: container, /*interval:interval,*/
-		   title:title, titleY:titleY,titleX:titleX]
+		   title:title, titleY:titleY,titleX:titleX,"id":concept.id]
 	}
 	/**
 	 * formato que se necesita la lista [[1381448400000,9],[1381448400000,0]]
@@ -175,10 +175,10 @@ class ConceptController{
 		use ( TimeCategory ) {
 			from = to-1.minutes
 			def tweetByMinute=DateUtils.getDateFormat(DateTypes.MINUTE_PERIOD, to)
-			def dateList = conceptService.categoryStore(["conceptName","tweetByMinute"],
-			[new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),
-				new Filter(attribute:"tweetByMinute",value:tweetByMinute, type:FilterType.EQ)], ["tweetsId" : ProjectionType.COUNT], null);
-
+			//TODO trae siempre cero
+//			def dateList = conceptService.categoryStore(["conceptName","tweetByMinute"],[new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),new Filter(attribute:"tweetByMinute",value:tweetByMinute, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT], null);
+			def dateList =conceptService.categoryStore(["conceptName","tweetByMinute"],[new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),new Filter(attribute:"created",value:from, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT],null);
+			
 			dateList.each{ i ->
 				dateValueList.put(DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2))	
 			}

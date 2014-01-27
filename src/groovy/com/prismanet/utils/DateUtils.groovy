@@ -23,7 +23,13 @@ enum DateTypes {
 
 class DateUtils {
 	
-	
+	static def getDateWithoutSeconds(Date date){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.getTime();
+	}
 	static def getDateFormat(String format, Date date){
 		new SimpleDateFormat(format).format(date)
 	}
@@ -75,18 +81,18 @@ class DateUtils {
 		data.each { serie ->
 			def actualTime = from.time
 			serie.data.each { value ->
-				print "value.x = " + value.x
-				print "actualTime = " + actualTime
+//				print "value.x = " + value.x
+//				print "actualTime = " + actualTime
 				while (actualTime<value.x) {
-					print "ENTROOO"
+//					print "ENTROOO"
 					results.add([x: actualTime, y:0])
 					actualTime=actualTime + DateUtils.getMilisecondsInterval(interval)
-					print "actualTime = " + actualTime
+//					print "actualTime = " + actualTime
 				}
 				results.add(value)
 				actualTime=actualTime + DateUtils.getMilisecondsInterval(interval)
 			}
-			print "resultado: " + results
+//			print "resultado: " + results
 			series << [name:serie.name,data:results]
 		}
 		series

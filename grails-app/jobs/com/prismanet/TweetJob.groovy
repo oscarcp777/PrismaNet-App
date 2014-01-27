@@ -40,19 +40,19 @@ class TweetJob {
 //			dates.put("dateFrom",d1.time)
 //			dates.put("dateTo",d2.time)
 			
-			print "filtros: " + dates
+//			print "filtros: " + dates
 			MongoTweetsImporter importer = new MongoTweetsImporter("mongodb://localhost")
 			def tweets = importer.importTweets(dates)
-			print "-------------------------"
-			print tweets
+//			print "-------------------------"
+//			print tweets
 			def iterator = tweets.iterator()
 			def partialList = []
 			int i = 0
-			print "tweets: " + iterator.size()
+//			print "tweets: " + iterator.size()
 			while (iterator.hasNext()){
 				partialList.add(iterator.next())
 				i++
-				print i
+//				print i
 				if (i % 100 == 0){
 					println "Nuevo Lote" 
 					i = 0

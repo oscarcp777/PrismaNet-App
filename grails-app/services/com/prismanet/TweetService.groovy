@@ -70,7 +70,7 @@ class TweetService extends GenericService{
 //									print "valido para concepto: " +  concept
 						if (!tweet.id){
 							tweet.save(validate:false)
-							println "Tweet guardado con ID :  " + tweet.id
+//							println "Tweet guardado con ID :  " + tweet.id
 						}
 						if (!tweet.id)
 							throw RuntimeException("Tweet no guardado")
@@ -212,7 +212,7 @@ class TweetService extends GenericService{
 			usersName.add(it.tweet.author.accountNameSingle)
 			tweetsTemp.add(it.tweet)
 		}
-		println usersName.toListString()
+//		println usersName.toListString()
 		Twitter twitter = new TwitterFactory().getInstance();
 		ResponseList<twitter4j.User> users = twitter.lookupUsers((String[])usersName.toArray());
 		for (twitter4j.User user : users) {

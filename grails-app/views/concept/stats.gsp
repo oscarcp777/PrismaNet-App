@@ -9,9 +9,6 @@
 				<i class="icon-tag"></i> Resultados Concepto: "${concept.conceptName}"
 			</h1>
 		</div>
-
-
-
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="row">
@@ -77,11 +74,19 @@
 								<h5>
 									<span class="glyphicon glyphicon-stats"> </span> Tweets por Dia
 								</h5>
+								<div class="widget-toolbar input-group ">
+								<input id="datepickerDay"  class="input-sm">
+									 <i class="1 bigger-125  icon-calendar"></i>
+								</div>
 
 								<div class="widget-toolbar">
-									<a href="#" data-action="collapse"> <i
-										class="1 bigger-125 icon-chevron-up"></i>
-									</a>
+													<a href="#" data-action="reload">
+														<i class=" icon-refresh"></i>
+													</a>
+													<a href="#" data-action="collapse">
+														<i class="icon-chevron-up"></i>
+													</a>
+												
 								</div>
 
 
@@ -161,6 +166,12 @@
 	<script type="text/javascript">
 	 
 	  $(function() {
+		  $("#datepickerDay" ).datepicker({
+			  showOtherMonths: true,
+				selectOtherMonths: false
+		  });
+		 
+		 
 		  var id='${concept.id}';
 		  activeItemMenuLevel3('concepts',id,id+'-stats','Conceptos > '+"${concept.conceptName}");
 		   getConceptRealTime(${concept.id}, '#realTimeChar');
