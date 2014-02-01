@@ -158,13 +158,13 @@
 									</a>
 									<ul class="submenu">
 									    <li id="${conceptInstance.id}-tweet">
-									    	<g:link controller='tweet' action="list" id="${conceptInstance.id}" >
+									    	<g:link controller='tweet' action="list" params="[conceptsId:conceptInstance.id]" >
 											<i class="icon-twitter"></i>
 											<span class="menu-text">Tweets</span>
 											</g:link>
 									    </li>
 									    <li id="${conceptInstance.id}-stats">
-									    <g:link controller="concept" action="stats" id="${conceptInstance.id}" >
+									    <g:link controller="concept" action="stats" params="[conceptsId:conceptInstance.id]" >
 											<span class="glyphicon glyphicon-stats"> </span>
 											<span class="menu-text">Graficos</span>
 										</g:link>
