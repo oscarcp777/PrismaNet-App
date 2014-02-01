@@ -55,6 +55,12 @@ function getConceptCharMinute(id, div){
 	var data = {"id":id, "div":div}
 	doRequest('../conceptsMinuteJson',data,paintCharLine, null, 'GET');
 }
+
+function getUserConceptsLineChar(div){
+	var data = {"div":div}
+	doRequest('userConceptsLineChar',data,paintCharLine, null, 'GET');
+}
+
 function printRealTimeChar(data){
     Highcharts.setOptions({
         global: {
@@ -138,7 +144,7 @@ function printRealTimeChar(data){
                 point: {
                     events: {
                         click: function() {
-                        	window.location.href="../../tweet/list/"+data.id+"?date="+this.x;
+                        	window.location.href="../../tweet/list?conceptsId="+data.id+"&"+data.dateProp+"="+this.x;
                         }
                     }
                 },
@@ -276,7 +282,7 @@ function paintCharLine(data){
 	                point: {
 	                    events: {
 	                        click: function() {
-	                        	window.location.href="../../tweet/list/"+data.id+"?date="+this.x;
+	                        	window.location.href=data.cursorEvent+this.x;
 	                        }
 	                    }
 	                },

@@ -203,7 +203,7 @@
 
 				<div class="col-lg-8" style="text-align: center;">
 					<ul class="pagination pagination-sm">
-						<li><g:paginate total="${tweetInstanceTotal}" id="${concept.id}" /></li>
+						<li><g:paginate total="${tweetInstanceTotal}" id="${concept.id}" params="${params}"  /></li>
 					</ul>
 				</div>
 				

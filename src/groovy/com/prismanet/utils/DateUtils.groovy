@@ -80,19 +80,21 @@ class DateUtils {
 		def results=[]
 		data.each { serie ->
 			def actualTime = from.time
-			serie.data.each { value ->
-//				print "value.x = " + value.x
-//				print "actualTime = " + actualTime
-				while (actualTime<value.x) {
-//					print "ENTROOO"
+			if (serie.data.size() == 0){
+				while (actualTime<to.time) {
 					results.add([x: actualTime, y:0])
 					actualTime=actualTime + DateUtils.getMilisecondsInterval(interval)
-//					print "actualTime = " + actualTime
 				}
-				results.add(value)
-				actualTime=actualTime + DateUtils.getMilisecondsInterval(interval)
+			}else{
+				serie.data.each { value ->
+					while (actualTime<value.x) {
+						results.add([x: actualTime, y:0])
+						actualTime=actualTime + DateUtils.getMilisecondsInterval(interval)
+					}
+					results.add(value)
+					actualTime=actualTime + DateUtils.getMilisecondsInterval(interval)
+				}
 			}
-//			print "resultado: " + results
 			series << [name:serie.name,data:results]
 		}
 		series

@@ -178,6 +178,7 @@ class TweetService extends GenericService{
 	
 	
 	def getTweets(filters, parameters){
+		
 		def conceptId
 		filters.each {
 			if (it.attribute == "conceptsId" && it.type ==  FilterType.EQ)
@@ -188,7 +189,7 @@ class TweetService extends GenericService{
 		if (conceptId)
 			concept = Concept.get(conceptId)
 			
-		def auxList =	list(filters, parameters, [[attribute:"id",value:OrderType.DESC]])
+		def auxList =	list(Tweet, new TweetAttributeContext(), filters, parameters, [[attribute:"id",value:OrderType.DESC]])
 		for (tweet in auxList.results){
 			def opValue
 			if (conceptId){
@@ -214,7 +215,10 @@ class TweetService extends GenericService{
 		}
 //		println usersName.toListString()
 		Twitter twitter = new TwitterFactory().getInstance();
-		ResponseList<twitter4j.User> users = twitter.lookupUsers((String[])usersName.toArray());
+		ResponseList<twitter4j.User> users = null
+		if (usersName.size()>0)
+			users = twitter.lookupUsers((String[])usersName.toArray());
+		if (users != null)	
 		for (twitter4j.User user : users) {
 			Tweet tweet=tweetsTemp.find {it.author.accountNameSingle == user.screenName}
 			if (tweet && tweet.author){

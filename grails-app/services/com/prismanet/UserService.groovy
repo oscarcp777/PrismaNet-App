@@ -14,7 +14,7 @@ class UserService extends GenericService {
     def categoryStore(User entity, def groups, def filters, def orders) {
 		filters.add(new Filter(attribute:"id",value: entity.id, type:FilterType.EQ))
 		def projection = ["tweetsId" : ProjectionType.COUNT]
-		return groupBy(groups, filters, projection, orders)
+		return groupBy(User, new UserAttributeContext(), groups, filters, projection, orders)
 	}
 
 }
