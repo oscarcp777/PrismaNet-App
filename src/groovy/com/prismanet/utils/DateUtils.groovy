@@ -76,27 +76,23 @@ class DateUtils {
 	}
 	
 	static def loadZeros(data,from,to,interval){
-		def series = []
 		def results=[]
-		data.each { serie ->
-			def actualTime = from.time
-			if (serie.data.size() == 0){
-				while (actualTime<to.time) {
+		def actualTime = from.time
+		if (data.size() == 0){
+			while (actualTime<to.time) {
+				results.add([x: actualTime, y:0])
+				actualTime=actualTime + DateUtils.getMilisecondsInterval(interval)
+			}
+		}else{
+			data.each { value ->
+				while (actualTime<value.x) {
 					results.add([x: actualTime, y:0])
 					actualTime=actualTime + DateUtils.getMilisecondsInterval(interval)
 				}
-			}else{
-				serie.data.each { value ->
-					while (actualTime<value.x) {
-						results.add([x: actualTime, y:0])
-						actualTime=actualTime + DateUtils.getMilisecondsInterval(interval)
-					}
-					results.add(value)
-					actualTime=actualTime + DateUtils.getMilisecondsInterval(interval)
-				}
+				results.add(value)
+				actualTime=actualTime + DateUtils.getMilisecondsInterval(interval)
 			}
-			series << [name:serie.name,data:results]
 		}
-		series
+		results
 	}
 }

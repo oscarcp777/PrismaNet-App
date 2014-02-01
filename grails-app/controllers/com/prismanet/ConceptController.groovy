@@ -56,10 +56,10 @@ class ConceptController extends GenericController{
 		def cal = new GregorianCalendar()
 		def day = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, cal.time) ;
 		Concept concept = Concept.get(params.id)
-		def dateList = conceptService.categoryStore(["tweetByHour"], [new Filter(attribute:"id",value:concept.id, type:FilterType.EQ),
+		def dateList = conceptService.categoryStore(["conceptName","tweetByHour"], [new Filter(attribute:"id",value:concept.id, type:FilterType.EQ),
 			new Filter(attribute:"tweetCreated",value:day, type:FilterType.EQ)], ["tweetsId" : ProjectionType.COUNT], [[attribute:"created",value:OrderType.ASC]]);
 		
-		def resultMap = getChartLineFormat(dateList, container, DateTypes.HOUR_PERIOD, 
+		def resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD, 
 											'Tweets por hora','Cantidad de tweets','Tweets',
 											"../../tweet/list?conceptsId="+concept.id+"&tweetHour=")
 		render resultMap as JSON
@@ -71,7 +71,7 @@ class ConceptController extends GenericController{
 		Concept concept = Concept.get(params.id)
 		def cal = new GregorianCalendar()
 		def hourFilter=DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, cal.time)
-		def dateList = conceptService.categoryStore(["tweetByMinute"], [new Filter(attribute:"id", value : concept.id, type:FilterType.EQ)
+		def dateList = conceptService.categoryStore(["conceptName","tweetByMinute"], [new Filter(attribute:"id", value : concept.id, type:FilterType.EQ)
 			,new Filter(attribute:"tweetByHour",value:hourFilter, type:FilterType.EQ)], 
 			["tweetsId" : ProjectionType.COUNT], [[attribute:"created",value:OrderType.ASC]]);
 		log.debug "Formato del servicio: " + dateList
@@ -83,7 +83,7 @@ class ConceptController extends GenericController{
 //		month = DateUtils.getDateFormat(DateTypes.MONTH, cal.time)
 //		year = DateUtils.getDateFormat(DateTypes.YEAR, cal.time) ;
 //		def interval = 60 * 1000
-		def resultMap = getChartLineFormat(dateList, container, DateTypes.MINUTE_PERIOD, 
+		def resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD, 
 											'Tweets por minuto','Cantidad de tweets','Tweets',
 											"../../tweet/list?conceptsId="+concept.id+"&tweetMinute=")
 		render resultMap as JSON
@@ -94,11 +94,11 @@ class ConceptController extends GenericController{
 		Concept concept = Concept.get(params.id)
 		def cal = new GregorianCalendar()
 		def period = DateUtils.getDateFormat(DateTypes.MONTH_PERIOD, cal.time) ;
-		def dateList = conceptService.categoryStore(["tweetCreated"], [new Filter(attribute:"id",value : concept.id, type:FilterType.EQ),
+		def dateList = conceptService.categoryStore(["conceptName","tweetCreated"], [new Filter(attribute:"id",value : concept.id, type:FilterType.EQ),
 			new Filter(attribute:"tweetPeriod",value:period, type:FilterType.EQ)], ["tweetsId" : ProjectionType.COUNT], [[attribute:"created",value:OrderType.ASC]]);
 		log.debug "Formato del servicio: " + dateList
 		
-		def resultMap = getChartLineFormat(dateList, container, DateTypes.DAY_PERIOD, 
+		def resultMap = getChartLineFormat(dateList, 2, container, DateTypes.DAY_PERIOD, 
 											'Tweets por Dia','Cantidad de tweets','Tweets',
 											"../../tweet/list?conceptsId="+concept.id+"&tweetCreated=")
 		render resultMap as JSON

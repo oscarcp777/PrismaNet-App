@@ -16,6 +16,8 @@ class UserAttributeContext extends AttributeContext {
 		addPropertyRelation("tweetYear", "year", null, "concepts.tweets");
 		addPropertyRelation("tweetMonth", "month", null, "concepts.tweets");
 		addPropertyRelation("tweetHour", "hour", null, "concepts.tweets");
+		addPropertyRelation("tweetByHour", "dateByHour", null, "concepts.tweets");
+		addPropertyRelation("tweetByMinute", "dateByMinute", null, "concepts.tweets");
 		addPropertyRelation("tweetMinute", "minute", null, "concepts.tweets");
 		addPropertyRelation("tweetTime", "time", null, "concepts.tweets");
 		addPropertyRelation("tweetDay", "day", null, "concepts.tweets");

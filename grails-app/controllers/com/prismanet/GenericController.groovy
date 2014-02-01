@@ -39,6 +39,7 @@ class GenericController {
 	/**
 	 * Recibe lo necesario para armar un grafico de lineas
 	 * @param serviceResultList - Lista con formato [{cat1,cat2..,value1},{cat1,cat2..,value2}]
+	 * @param numCategories - Numero de categorias del origen de los datos (cat1..catN) se envia N
 	 * @param container - div donde se ubicara el grafico
 	 * @param interval - date type que indica separacion entre datos
 	 * @param title - titulo grafico
@@ -47,20 +48,38 @@ class GenericController {
 	 * @param actionOnClick - url con filtros incluidos de la accion destino al clikear un punto del grafico
 	 * @return mapa con la data necesaria para formar un grafico de lineas
 	 */
-	private getChartLineFormat(serviceResultList, container, interval, title, titleX, titleY, actionOnClick){
-		def dateValueList = []
+	private getChartLineFormat(serviceResultList, numCategories, container, interval, title, titleX, titleY, actionOnClick){
+		def mapByCategory = [:]
+		def series = []
+		def level = numCategories
 		serviceResultList.each{ i ->
-			dateValueList.add([x:DateUtils.parseDate(interval, i.getAt(0)).getTime(),y:i.getAt(1)])
+			
+			if (level == 1){
+				if (!mapByCategory["Serie"])
+					mapByCategory["Serie"] = []
+				mapByCategory["Serie"].add([x:DateUtils.parseDate(interval, i.getAt(level-1)).getTime(),y:i.getAt(level)]) 
+			}	
+			if (level == 2){
+				if (!mapByCategory[i.getAt(level-2)])
+					mapByCategory[i.getAt(level-2)] = []
+				mapByCategory[i.getAt(level-2)].add([x:DateUtils.parseDate(interval, i.getAt(level-1)).getTime(),y:i.getAt(level)])
+			}
+//			dateValueList.add([x:DateUtils.parseDate(interval, i.getAt(0)).getTime(),y:i.getAt(1)])
 		}
 		def from,to
-		if (serviceResultList.size() > 0){
-			from = DateUtils.parseDate(interval,serviceResultList.get(0).getAt(0))
-			to = DateUtils.parseDate(interval,serviceResultList.get(serviceResultList.size()-1).getAt(0))
+		mapByCategory.each {
+			def dateValueList = []
+			print "it.value: " + it.value
+			if (it.value.size()>0){
+				def cal = new GregorianCalendar()
+				cal.setTimeInMillis(it.value.get(0).x)
+				from = cal.getTime()
+				cal.setTimeInMillis(it.value.get(it.value.size()-1).x)
+				to = cal.getTime()
+				dateValueList = DateUtils.loadZeros(it.value,from,to, interval)
+			}
+			series << [name:it.key,data:dateValueList]
 		}
-		def series = []
-		series << [name:"none",data:dateValueList]
-		if (serviceResultList.size() > 0)
-			series=DateUtils.loadZeros(series,from,to, interval)
 		log.debug "Formato parseado para grafico: " + series
 		
 	   [series:series,

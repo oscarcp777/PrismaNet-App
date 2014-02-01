@@ -57,9 +57,10 @@ class TweetJob {
 					println "Nuevo Lote" 
 					i = 0
 					tweetService.saveTweets(partialList)
-					partialList = []
+					partialList.clear();
 				}
 			}
+			print "Lista: " +partialList.size()
 			tweetService.saveTweets(partialList)
 		}
 		

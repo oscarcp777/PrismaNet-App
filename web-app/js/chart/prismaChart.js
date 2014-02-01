@@ -58,7 +58,7 @@ function getConceptCharMinute(id, div){
 
 function getUserConceptsLineChar(div){
 	var data = {"div":div}
-	doRequest('userConceptsLineChar',data,paintCharLine, null, 'GET');
+	doRequest('getComparativeConceptChar',data,paintCharLine, null, 'GET');
 }
 
 function printRealTimeChar(data){
@@ -260,7 +260,7 @@ function paintCharLine(data){
                     return "Click para ver los <b> "+this.y+'</b> tweets de las '+ Highcharts.dateFormat('%d/%m/%Y--%H:%M', this.x) ;
 	            },
 	            crosshairs: true,
-		        shared: true
+		        shared: false
 	        },
 	        legend: {
 	            enabled: true
@@ -269,14 +269,14 @@ function paintCharLine(data){
 	            enabled: true
 	        },
 	        plotOptions: {
-	        	spline: {
-	                lineWidth: 4,
-	                states: {
-	                    hover: {
-	                        lineWidth: 6
-	                    }
-	                }
-	            },
+//	        	spline: {
+//	                lineWidth: 4,
+//	                states: {
+//	                    hover: {
+//	                        lineWidth: 6
+//	                    }
+//	                }
+//	            },
 	            series: {
 	                cursor: 'pointer',
 	                point: {
@@ -285,13 +285,14 @@ function paintCharLine(data){
 	                        	window.location.href=data.cursorEvent+this.x;
 	                        }
 	                    }
-	                },
-	                marker: {
-			    		fillColor: 'white',
-			    		lineWidth: 3,
-			    		lineColor: Highcharts.getOptions().colors[0]
-			    	},
-			    	zIndex: 2
+	                }
+//	            ,
+//	                marker: {
+//			    		fillColor: 'white',
+//			    		lineWidth: 3,
+//			    		lineColor: Highcharts.getOptions().colors[0]
+//			    	},
+//			    	zIndex: 2
 	            }
 	        },
 	        series: data.series

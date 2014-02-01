@@ -31,7 +31,7 @@ class TweetService extends GenericService{
 	def saveTweets(def tweets){
 		def index = 0
 		def error = false
-
+		def List<Concept> concepts = Concept.list()
 		for (BasicDBObject tweetObj : tweets){
 
 			JSONObject obj = new JSONObject(tweetObj)
@@ -44,7 +44,8 @@ class TweetService extends GenericService{
 				Author author = Author.findByAccountName("@"+status.getUser().getScreenName())
 				if (!author){
 					author = new Author(accountName:"@"+status.getUser().getScreenName(), followers:status.getUser().getFollowersCount(), sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()).save(validate:false)
-				}else{
+				}
+				else{
 					author.followers = status.getUser().getFollowersCount()
 					author.profileImage = status.getUser().getProfileImageURL()
 				}
@@ -64,7 +65,8 @@ class TweetService extends GenericService{
 										retweetCount:retCount, 
 										favoriteCount:favCount)
 				
-				def List<Concept> concepts = Concept.list()
+				
+				
 				concepts.each(){ concept->
 					if (concept.testAddTweet(tweet)){
 //									print "valido para concepto: " +  concept
@@ -85,9 +87,9 @@ class TweetService extends GenericService{
 
 			} catch (Exception e) {
 				error = true
-				print "Tweet Fallido: " + status.getId() +"-"+status.getText()
-				print e.getCause()
-				print e.getStackTrace()
+				println "Tweet Fallido: " + status.getId() +"-"+status.getText()
+				println e.getCause()
+				println e.getStackTrace()
 				
 				
 			}

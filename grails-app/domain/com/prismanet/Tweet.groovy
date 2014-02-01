@@ -12,8 +12,8 @@ class Tweet extends Mention{
 	static belongsTo = Concept
 	static transients = ['contentHtml']
     static constraints = {
-		content(maxLength:140)
-		tweetId unique:true  
+//		content(maxLength:140)
+//		tweetId unique:true  
     }
 	
 	public Tweet(){
