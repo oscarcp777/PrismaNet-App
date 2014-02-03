@@ -38,14 +38,13 @@
 							</div>
 						</div>
 					</div>
-					
-					<div class="row">
+
 					<div class="col-lg-12 widget-container-span ui-sortable">
 						<div class="widget-box">
 							<div class="widget-header header-color-blue">
 								<h5>
 									<span class="glyphicon glyphicon-stats"></span> Tweets por
-									Concepto
+									Minuto
 								</h5>
 
 								<div class="widget-toolbar">
@@ -64,6 +63,58 @@
 							</div>
 						</div>
 					</div>
+					
+					<div class="col-lg-12 widget-container-span ui-sortable">
+						<div class="widget-box">
+							<div class="widget-header header-color-blue">
+								<h5>
+									<span class="glyphicon glyphicon-stats"></span> Tweets por
+									Hora
+								</h5>
+
+								<div class="widget-toolbar">
+									<a href="javascript:void(0);" id="refreshCharPie"> <span
+										data-action="reload"> <i class="icon-refresh"></i></span>
+									</a> <a href="javascript:void(0);" data-action="collapse"> <i
+										class="icon-chevron-up"></i></a> <a href="javascript:void(0);"
+										data-action="close"> <i class="icon-remove"></i></a>
+								</div>
+							</div>
+
+							<div class="widget-body">
+								<div class="widget-main padding-4">
+									<div id="container2" style="width: 100%; height: 400px;"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					<div class="col-lg-12 widget-container-span ui-sortable">
+						<div class="widget-box">
+							<div class="widget-header header-color-blue">
+								<h5>
+									<span class="glyphicon glyphicon-stats"></span> Tweets por
+									Dia
+								</h5>
+
+								<div class="widget-toolbar">
+									<a href="javascript:void(0);" id="refreshCharPie"> <span
+										data-action="reload"> <i class="icon-refresh"></i></span>
+									</a> <a href="javascript:void(0);" data-action="collapse"> <i
+										class="icon-chevron-up"></i></a> <a href="javascript:void(0);"
+										data-action="close"> <i class="icon-remove"></i></a>
+								</div>
+							</div>
+
+							<div class="widget-body">
+								<div class="widget-main padding-4">
+									<div id="container3" style="width: 100%; height: 400px;"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 
 
 					<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
@@ -122,20 +173,23 @@
 							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
-		</div>
-		<hr>
+			<hr>
 
-		<div class="row"></div>
+			<div class="row"></div>
+		</div>
 	</div>
-	<script type="text/javascript">
+		<script type="text/javascript">
 		$(document).ready(function() {
 			inicializeColorChar();
 			activeItemMenuLevel2('chart', 'general', 'Estadisticas > General');
 			paintCharGender();
 			getTweetCharPie();
-			getUserConceptsLineChar('#container1');
+			getUserConceptsLineChartByMinute('#container1');
+			getUserConceptsLineChartByHour('#container2');
+			getUserConceptsLineChartByDate('#container3');
 			$('#refreshCharPie').click(function() {
 				getTweetCharPie();
 			});

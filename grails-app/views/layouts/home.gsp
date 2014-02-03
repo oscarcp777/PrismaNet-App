@@ -164,7 +164,7 @@
 											</g:link>
 									    </li>
 									    <li id="${conceptInstance.id}-stats">
-									    <g:link controller="concept" action="stats" params="[conceptsId:conceptInstance.id]" >
+									    <g:link controller="concept" action="stats" id="${conceptInstance.id}" >
 											<span class="glyphicon glyphicon-stats"> </span>
 											<span class="menu-text">Graficos</span>
 										</g:link>

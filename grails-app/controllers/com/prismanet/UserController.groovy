@@ -41,19 +41,49 @@ class UserController extends GenericController{
 	}
 	
 	
-	def getComparativeConceptChar(){
-		log.debug "comparativeConceptChar params: " + params
+	def getComparativeConceptChartByMinute(){
+		log.debug "comparativeConceptChartByMinute params: " + params
 		def container = params.div
 		def cal = new GregorianCalendar()
 		def hourFilter=DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, cal.time)
-		def dateList = userService.categoryStore(session.user, ["conceptsName","tweetByMinute"], [new Filter(attribute:"tweetByHour",value:hourFilter, type:FilterType.EQ)
-			], 
+		def dateList = userService.categoryStore(session.user, ["conceptsName","tweetByMinute"], [new Filter(attribute:"tweetByHour",value:hourFilter, type:FilterType.EQ)], 
 			[[attribute:"conceptsId",value:OrderType.ASC],[attribute:"created",value:OrderType.ASC]]);
 		log.debug "Formato del servicio: " + dateList
 		
 		def resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD, 
 											'Tweets por minuto','Cantidad de tweets','Tweets',
 											"../../tweet/list?tweetMinute=")
+		render resultMap as JSON
+	}
+	
+	
+	def getComparativeConceptChartByHour(){
+		log.debug "comparativeConceptChartByHour params: " + params
+		def container = params.div
+		def cal = new GregorianCalendar()
+		def day = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, cal.time) 
+		def dateList = userService.categoryStore(session.user, ["conceptsName","tweetByHour"], [new Filter(attribute:"tweetCreated",value:day, type:FilterType.EQ)],
+			 [[attribute:"conceptsId",value:OrderType.ASC],[attribute:"created",value:OrderType.ASC]]);
+		log.debug "Formato del servicio: " + dateList
+		
+		def resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD,
+											'Tweets por hora','Cantidad de tweets','Tweets',
+											"../../tweet/list?tweetHour=")
+		render resultMap as JSON
+	}
+	
+	def getComparativeConceptChartByDate(){
+		log.debug "comparativeConceptChartByHour params: " + params
+		def container = params.div
+		def cal = new GregorianCalendar()
+		def period = DateUtils.getDateFormat(DateTypes.MONTH_PERIOD, cal.time) ;
+		def dateList = userService.categoryStore(session.user, ["conceptsName","tweetCreated"], [new Filter(attribute:"tweetPeriod",value:period, type:FilterType.EQ)],
+			 [[attribute:"conceptsId",value:OrderType.ASC],[attribute:"created",value:OrderType.ASC]]);
+		log.debug "Formato del servicio: " + dateList
+		
+		def resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD,
+											'Tweets por Dia','Cantidad de tweets','Tweets',
+											"../../tweet/list?tweetCreated=")
 		render resultMap as JSON
 	}
 	

@@ -56,9 +56,19 @@ function getConceptCharMinute(id, div){
 	doRequest('../conceptsMinuteJson',data,paintCharLine, null, 'GET');
 }
 
+function getUserConceptsLineChart(div){
+	var data = {"div":div}
+	doRequest('getComparativeConceptChartByMinute',data,paintCharLine, null, 'GET');
+}
+
 function getUserConceptsLineChar(div){
 	var data = {"div":div}
-	doRequest('getComparativeConceptChar',data,paintCharLine, null, 'GET');
+	doRequest('getComparativeConceptChartByHour',data,paintCharLine, null, 'GET');
+}
+
+function getUserConceptsLineChar(div){
+	var data = {"div":div}
+	doRequest('getComparativeConceptChartByDate',data,paintCharLine, null, 'GET');
 }
 
 function printRealTimeChar(data){
