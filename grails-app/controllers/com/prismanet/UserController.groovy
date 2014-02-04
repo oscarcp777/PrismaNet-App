@@ -81,7 +81,7 @@ class UserController extends GenericController{
 			 [[attribute:"conceptsId",value:OrderType.ASC],[attribute:"created",value:OrderType.ASC]]);
 		log.debug "Formato del servicio: " + dateList
 		
-		def resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD,
+		def resultMap = getChartLineFormat(dateList, 2, container, DateTypes.DAY_PERIOD,
 											'Tweets por Dia','Cantidad de tweets','Tweets',
 											"../../tweet/list?tweetCreated=")
 		render resultMap as JSON

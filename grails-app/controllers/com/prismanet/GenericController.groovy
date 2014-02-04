@@ -69,7 +69,6 @@ class GenericController {
 		def from,to
 		mapByCategory.each {
 			def dateValueList = []
-			print "it.value: " + it.value
 			if (it.value.size()>0){
 				def cal = new GregorianCalendar()
 				cal.setTimeInMillis(it.value.get(0).x)
