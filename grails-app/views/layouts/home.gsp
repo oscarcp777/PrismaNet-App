@@ -9,7 +9,7 @@
 	href="${resource(dir: 'images', file: 'favicon.gif')}" type="image/gif">
 <link rel="icon" href="${resource(dir: 'images', file: 'favicon.gif')}" type="image/gif">
 
-<r:require modules="core,ace,chartPie,highcharts" />
+<r:require modules="core,ace,chartPie,highcharts,datepicker" />
 
 <g:layoutHead />
 <r:layoutResources />
@@ -39,6 +39,11 @@
 				</div>
 				<div class="navbar-header pull-right" role="navigation">
 					<ul class="nav ace-nav">
+						<li > <a class="dropdown-toggle" href="javascript:void(0);">  
+							    <span id="datetime">
+							    </span>
+							    </a>
+						</li>
 						<li><a data-toggle="dropdown" href="#"
 							class="dropdown-toggle"> <img class="nav-user-photo"
 								src="${resource(dir: 'img', file: 'oscar.png')}"

@@ -200,6 +200,7 @@ function paintCharPie(dataJson) {
 						plotOptions : {
 							pie : {
 								allowPointSelect : true,
+								showInLegend: true,
 								cursor : 'pointer',
 								dataLabels : {
 									enabled : true,

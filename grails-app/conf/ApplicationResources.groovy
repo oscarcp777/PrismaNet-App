@@ -26,8 +26,15 @@ modules = {
 	}
 	highcharts {
 		dependsOn 'core'
-		resource url:'js/chart/highstock.js'
+		resource url:'js/chart/highcharts.js'
 		resource url:'js/chart/prismaChart.js'
+	}
+	datepicker{
+		dependsOn 'core'
+		resource url:'css/daterangepicker-bs3.css'
+		resource url:'js/datepicker/moment.js'
+		resource url:'js/datepicker/daterangepicker.js'
+		resource url:'js/datepicker/prismaDatepicker.js'
 	}
 	indexcss {
 		dependsOn 'core'

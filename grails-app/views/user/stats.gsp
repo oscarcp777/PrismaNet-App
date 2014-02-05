@@ -43,77 +43,82 @@
 						<div class="widget-box">
 							<div class="widget-header header-color-blue">
 								<h5>
-									<span class="glyphicon glyphicon-stats"></span> Tweets por
-									Minuto
+									<span class="glyphicon glyphicon-stats"> </span> Tweets entre fechas
 								</h5>
-
+								<div class="widget-toolbar input-group ">
+								<div id="pickertUser" class="btn btn-primary date-picker">
+				                        <i class="icon-calendar"></i>
+				                        <span class="date-range"></span> 
+				                        <i class="icon-chevron-down"></i>
+                   					 </div>
+								</div>
 								<div class="widget-toolbar">
-									<a href="javascript:void(0);" id="refreshCharPie"> <span
-										data-action="reload"> <i class="icon-refresh"></i></span>
-									</a> <a href="javascript:void(0);" data-action="collapse"> <i
-										class="icon-chevron-up"></i></a> <a href="javascript:void(0);"
-										data-action="close"> <i class="icon-remove"></i></a>
+									<a href="#" data-action="collapse"> <i
+										class="1 bigger-125 icon-chevron-up"></i>
+									</a>
+									 
 								</div>
 							</div>
 
+
 							<div class="widget-body">
 								<div class="widget-main padding-4">
-									<div id="container1" style="width: 100%; height: 400px;"></div>
+									<div id="lineaCharUser" style="width: 100%; height: 400px;"></div>
 								</div>
 							</div>
 						</div>
 					</div>
 					
-					<div class="col-lg-12 widget-container-span ui-sortable">
-						<div class="widget-box">
-							<div class="widget-header header-color-blue">
-								<h5>
-									<span class="glyphicon glyphicon-stats"></span> Tweets por
-									Hora
-								</h5>
+<!-- 					<div class="col-lg-12 widget-container-span ui-sortable"> -->
+<!-- 						<div class="widget-box"> -->
+<!-- 							<div class="widget-header header-color-blue"> -->
+<!-- 								<h5> -->
+<!-- 									<span class="glyphicon glyphicon-stats"></span> Tweets por -->
+<!-- 									Hora -->
+<!-- 								</h5> -->
 
-								<div class="widget-toolbar">
-									<a href="javascript:void(0);" id="refreshCharPie"> <span
-										data-action="reload"> <i class="icon-refresh"></i></span>
-									</a> <a href="javascript:void(0);" data-action="collapse"> <i
-										class="icon-chevron-up"></i></a> <a href="javascript:void(0);"
-										data-action="close"> <i class="icon-remove"></i></a>
-								</div>
-							</div>
+<!-- 								<div class="widget-toolbar"> -->
+<!-- 									<a href="javascript:void(0);" id="refreshCharPie"> <span -->
+<!-- 										data-action="reload"> <i class="icon-refresh"></i></span> -->
+<!-- 									</a> <a href="javascript:void(0);" data-action="collapse"> <i -->
+<!-- 										class="icon-chevron-up"></i></a> <a href="javascript:void(0);" -->
+<!-- 										data-action="close"> <i class="icon-remove"></i></a> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 
-							<div class="widget-body">
-								<div class="widget-main padding-4">
-									<div id="container2" style="width: 100%; height: 400px;"></div>
-								</div>
-							</div>
-						</div>
-					</div>
+<!-- 							<div class="widget-body"> -->
+<!-- 								<div class="widget-main padding-4"> -->
+<!-- 									<div id="container2" style="width: 100%; height: 400px;"></div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 					
 					
-					<div class="col-lg-12 widget-container-span ui-sortable">
-						<div class="widget-box">
-							<div class="widget-header header-color-blue">
-								<h5>
-									<span class="glyphicon glyphicon-stats"></span> Tweets por
-									Dia
-								</h5>
+<!-- 					<div class="col-lg-12 widget-container-span ui-sortable"> -->
+<!-- 						<div class="widget-box"> -->
+<!-- 							<div class="widget-header header-color-blue"> -->
+<!-- 								<h5> -->
+<!-- 									<span class="glyphicon glyphicon-stats"></span> Tweets por -->
+<!-- 									Dia -->
+<!-- 								</h5> -->
 
-								<div class="widget-toolbar">
-									<a href="javascript:void(0);" id="refreshCharPie"> <span
-										data-action="reload"> <i class="icon-refresh"></i></span>
-									</a> <a href="javascript:void(0);" data-action="collapse"> <i
-										class="icon-chevron-up"></i></a> <a href="javascript:void(0);"
-										data-action="close"> <i class="icon-remove"></i></a>
-								</div>
-							</div>
+<!-- 								<div class="widget-toolbar"> -->
+<!-- 									<a href="javascript:void(0);" id="refreshCharPie"> <span -->
+<!-- 										data-action="reload"> <i class="icon-refresh"></i></span> -->
+<!-- 									</a> <a href="javascript:void(0);" data-action="collapse"> <i -->
+<!-- 										class="icon-chevron-up"></i></a> <a href="javascript:void(0);" -->
+<!-- 										data-action="close"> <i class="icon-remove"></i></a> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 
-							<div class="widget-body">
-								<div class="widget-main padding-4">
-									<div id="container3" style="width: 100%; height: 400px;"></div>
-								</div>
-							</div>
-						</div>
-					</div>
+<!-- 							<div class="widget-body"> -->
+<!-- 								<div class="widget-main padding-4"> -->
+<!-- 									<div id="container3" style="width: 100%; height: 400px;"></div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 					
 
 
@@ -182,14 +187,19 @@
 		</div>
 	</div>
 		<script type="text/javascript">
+		function loadCharTest1(start, end,rangeSelect) {
+	        $('#pickertUser span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
+	        //TODO aca se recarga el la nueva fecha
+	    }
 		$(document).ready(function() {
 			inicializeColorChar();
 			activeItemMenuLevel2('chart', 'general', 'Estadisticas > General');
 			paintCharGender();
 			getTweetCharPie();
-			getUserConceptsLineChartByMinute('#container1');
-			getUserConceptsLineChartByHour('#container2');
-			getUserConceptsLineChartByDate('#container3');
+			loadDatepicker('pickertUser',loadCharTest1);
+			getUserConceptsLineChartByMinute('#lineaCharUser');
+// 			getUserConceptsLineChartByHour('#container2');
+// 			getUserConceptsLineChartByDate('#container3');
 			$('#refreshCharPie').click(function() {
 				getTweetCharPie();
 			});
