@@ -8,32 +8,36 @@ import com.prismanet.utils.DateTypes
 import com.prismanet.utils.DateUtils
 
 
-abstract class GenericCoreService extends GenericService {
+class GenericCoreService extends GenericService {
 
 	
-	
-	def getFilterList(DayFilterType type){
+	/**
+	 * Dado un DateFilterType que define un intervalo de tiempo se devuelve el filtro correspondiente para el mismo
+	 * @param type intervalo de tiempo
+	 * @return filtro obtenido
+	 */
+	def getFilterList(DateFilterType type){
 		switch (type) {
-			case DayFilterType.TODAY:
+			case DateFilterType.TODAY:
 				def cal = new GregorianCalendar()
 				def day = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, cal.time) ;
-				return [new Filter(attribute:getProyectionForServiceType(ServiceType.BY_DATE), value:day, type:FilterType.EQ)]
-			case DayFilterType.YESTERDAY:
+				return [new Filter(attribute:getProyectionForDateServiceType(DateServiceType.BY_DATE), value:day, type:FilterType.EQ)]
+			case DateFilterType.YESTERDAY:
 				use ( TimeCategory ) {
 					def cal = new GregorianCalendar()
 					def date = cal.getTime() - 1.day
 					def day = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, date) ;
-					return [new Filter(attribute:getProyectionForServiceType(ServiceType.BY_DATE), value:day, type:FilterType.EQ)]
+					return [new Filter(attribute:getProyectionForDateServiceType(DateServiceType.BY_DATE), value:day, type:FilterType.EQ)]
 				}
-			case DayFilterType.LAST_7_DAYS:
+			case DateFilterType.LAST_7_DAYS:
 				use ( TimeCategory ) {
 					def cal = new GregorianCalendar()
 					def dateFrom = cal.getTime() - 7.day
 					def dateTo = cal.getTime() - 1.day
 					def valueFrom = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateFrom) ;
 					def valueTo = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateTo) ;
-					return [new Filter(attribute:getProyectionForServiceType(ServiceType.BY_DATE), value:valueFrom, type:FilterType.GE),
-						new Filter(attribute:getProyectionForServiceType(ServiceType.BY_DATE), value:valueTo, type:FilterType.LE)]
+					return [new Filter(attribute:getProyectionForDateServiceType(DateServiceType.BY_DATE), value:valueFrom, type:FilterType.GE),
+						new Filter(attribute:getProyectionForDateServiceType(DateServiceType.BY_DATE), value:valueTo, type:FilterType.LE)]
 				}
 				break
 			
@@ -42,26 +46,17 @@ abstract class GenericCoreService extends GenericService {
 		}
 	}
 	
-	
-	def abstract String getProyectionForServiceType(ServiceType type)
+	/**
+	 * Las subclases deberán implementar el mismo debiendo devolver el nombre de la propiedad en el contexto 
+	 * que corresponda con el tipo de servicio pedido (ej: DateServiceType.BY_MINUTE -> "tweetByMinute")
+	 * solo aplica para controladores que ejecuten querys en funcion del tiempo
+	 * @param type
+	 * @return
+	 */
+	protected String getProyectionForDateServiceType(DateServiceType type){
+		return null
+	}
 }
 
 
-/**
- * Enumeracion que contiene los distintos tipos de filtros por fecha.
- */
-protected enum DayFilterType{
-	TODAY,
-	YESTERDAY,
-	LAST_7_DAYS;
-}
 
-
-/**
- * Enumeracion que contiene los distintos tipos de proyecciones existentes
- */
-protected enum ServiceType{
-	BY_MINUTE,
-	BY_HOUR,
-	BY_DATE;
-}
