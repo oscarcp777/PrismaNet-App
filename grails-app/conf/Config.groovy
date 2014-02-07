@@ -11,6 +11,11 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
+def barra = File.separator
+//Environment variable that contains a path
+def logFile =  "${userHome}${barra}logs${barra}${appName}"
+
+
 grails.project.groupId = 'com.prismanet' // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
@@ -89,11 +94,15 @@ environments {
 
 // log4j configuration
 log4j = {
-    // Example of changing the log pattern for the default console appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+   appenders {
+		console name: 'stdout', layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n')
+
+		rollingFile name:'appLog', file: "${logFile}${barra}app.log", append: true,
+			layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n'), threshold: org.apache.log4j.Level.INFO
+			
+		rollingFile name:'errorsLog', file: "${logFile}${barra}errors.log", append: true,
+			layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n'), threshold: org.apache.log4j.Level.ERROR
+	}
 	debug 'grails.app.jobs'
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
@@ -106,6 +115,16 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+		   
+	info "grails.app" //,"com.prismanet"
+		   additivity: false
+			  
+	root {
+		   info 'appLog', 'stdout'
+		   error 'errorsLog'
+		   additivity = false
+	   }
+		   	   
 }
 
 // Added by the Spring Security Core plugin:
