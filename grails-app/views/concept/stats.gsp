@@ -149,10 +149,7 @@
 		  var id='${concept.id}';
 		  activeItemMenuLevel3('concepts',id,id+'-stats','Conceptos > '+"${concept.conceptName}");
 		   getConceptRealTime(${concept.id}, '#realTimeChar');
-		   <%-- 	  getConceptCharDay(${concept.id}, '#container2');--%>
-		  		  getConceptCharHour(${concept.id},'#lineaCharConcept');
-<%-- 		  		  getConceptCharDate(${concept.id}, '#container1'); --%>
-<%-- 				  getConceptCharMinute(${concept.id}, '#container4');  --%>
+		   getGroupedTweets(${concept.id},'#lineaCharConcept');
 		});
 	</script>
 </body>

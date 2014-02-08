@@ -36,25 +36,13 @@ function getConceptRealTime(id, div){
 	var data = {"id":id, "div":div}
 	doRequest('../conceptsRealTime',data,printRealTimeChar, null, 'GET');
 }
-function getConceptCharDay(id, div){
+
+
+function getGroupedTweets(id, div){
 	var data = {"id":id, "div":div}
-	doRequest('../conceptsDayJson',data,paintCharLine, null, 'GET');
+	doRequest('../getGroupedTweets',data,paintCharLine, null, 'GET');
 }
 
-function getConceptCharDate(id, div){
-	var data = {"id":id, "div":div}
-	doRequest('../conceptsDateJson',data,paintCharLine, null, 'GET');
-}
-
-function getConceptCharHour(id, div){
-	var data = {"id":id, "div":div}
-	doRequest('../conceptsHourJson',data,paintCharLine, null, 'GET');
-}
-
-function getConceptCharMinute(id, div){
-	var data = {"id":id, "div":div}
-	doRequest('../conceptsMinuteJson',data,paintCharLine, null, 'GET');
-}
 
 function getUserConceptsLineChartByMinute(div){
 	var data = {"div":div}

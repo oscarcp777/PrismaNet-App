@@ -50,62 +50,48 @@ class ConceptController extends GenericController{
 		[concept : concept, dateList : dateList, hourList:hourList, minuteList:minuteList, lineGraphList: dateValueList]
 	}
 	
-	def conceptsHourJson(){
-		log.debug "conceptsHourJson params: " + params
-		def container = params.div
-		def cal = new GregorianCalendar()
-		def day = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, cal.time) ;
-		Concept concept = Concept.get(params.id)
-		def dateList = conceptService.categoryStore(["conceptName","tweetByHour"], [new Filter(attribute:"id",value:concept.id, type:FilterType.EQ),
-			new Filter(attribute:"tweetCreated",value:day, type:FilterType.EQ)], ["tweetsId" : ProjectionType.COUNT], [[attribute:"created",value:OrderType.ASC]]);
-		
-		def resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD, 
-											'Tweets por hora','Cantidad de tweets','Tweets',
-											"../../tweet/list?conceptsId="+concept.id+"&tweetHour=")
-		render resultMap as JSON
-	}
-	
-	def conceptsMinuteJson(){
-		log.debug "conceptsMinuteJson params: " + params
+	def getGroupedTweets(){
+		log.info "conceptsHourJson params: " + params
 		def container = params.div
 		Concept concept = Concept.get(params.id)
-		def cal = new GregorianCalendar()
-		def hourFilter=DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, cal.time)
-		def dateList = conceptService.categoryStore(["conceptName","tweetByMinute"], [new Filter(attribute:"id", value : concept.id, type:FilterType.EQ)
-			,new Filter(attribute:"tweetByHour",value:hourFilter, type:FilterType.EQ)], 
-			["tweetsId" : ProjectionType.COUNT], [[attribute:"created",value:OrderType.ASC]]);
-		log.debug "Formato del servicio: " + dateList
+		def filters = []
+		filters.add(new Filter(attribute:"id",value:concept.id, type:FilterType.EQ))
 		
-//	Comentado por si volvemos a tipo de grafico con fecha de inicio		
-//		def hour,day,month,year
-//		hour = DateUtils.getDateFormat(DateTypes.HOUR, cal.time)
-//		day = DateUtils.getDateFormat(DateTypes.DAY, cal.time)
-//		month = DateUtils.getDateFormat(DateTypes.MONTH, cal.time)
-//		year = DateUtils.getDateFormat(DateTypes.YEAR, cal.time) ;
-//		def interval = 60 * 1000
-		def resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD, 
-											'Tweets por minuto','Cantidad de tweets','Tweets',
-											"../../tweet/list?conceptsId="+concept.id+"&tweetMinute=")
-		render resultMap as JSON
-	}
-	def conceptsDateJson={
-		log.debug "conceptDateJson params: " + params 
-		def container = params.div
-		Concept concept = Concept.get(params.id)
-		def cal = new GregorianCalendar()
-		def period = DateUtils.getDateFormat(DateTypes.MONTH_PERIOD, cal.time) ;
-		def dateList = conceptService.categoryStore(["conceptName","tweetCreated"], [new Filter(attribute:"id",value : concept.id, type:FilterType.EQ),
-			new Filter(attribute:"tweetPeriod",value:period, type:FilterType.EQ)], ["tweetsId" : ProjectionType.COUNT], [[attribute:"created",value:OrderType.ASC]]);
-		log.debug "Formato del servicio: " + dateList
+		//TODO reemplazar enum por el que viene por parametro
+		def range = DateFilterType.LAST_HOUR
 		
-		def resultMap = getChartLineFormat(dateList, 2, container, DateTypes.DAY_PERIOD, 
-											'Tweets por Dia','Cantidad de tweets','Tweets',
-											"../../tweet/list?conceptsId="+concept.id+"&tweetCreated=")
-		render resultMap as JSON
-	}
-	
-	
+		DateServiceType type = conceptService.getChartType(range) 
+		
+		
+		// Obtengo tweets por hora
+		def dateList = conceptService.getTweetsBy(filters, range, type)
 
+		def redirectOnClick = "../../tweet/list?conceptsId="+concept.id
+		def resultMap = [:]
+		//TODO localizar todos los textos
+		// Parseo resultado para generar el grafico
+		switch (type) {
+			case DateServiceType.BY_MINUTE:
+				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
+												'Tweets por minuto','Cantidad de tweets','Tweets',
+												redirectOnClick+"&tweetMinute=")
+			break
+			case DateServiceType.BY_HOUR:
+				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD,
+											   'Tweets por hora','Cantidad de tweets','Tweets',
+											   redirectOnClick+"&tweetHour=")
+			break
+			case DateServiceType.BY_DATE:
+				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.DAY_PERIOD,
+												'Tweets por Dia','Cantidad de tweets','Tweets',
+												redirectOnClick+"&tweetCreated=")
+			break
+		}
+		print resultMap
+		render resultMap as JSON
+	}
+	
+	
 	/**
 	 * formato que se necesita la lista [[1381448400000,9],[1381448400000,0]]
 	 */

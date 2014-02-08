@@ -17,7 +17,7 @@ class ConceptException extends RuntimeException {
 	Concept concept
 }
 
-class ConceptService extends GenericService {
+class ConceptService extends GenericCoreService {
 		
 	ConceptService(){
 		super(Concept, new ConceptAttributeContext())
@@ -44,6 +44,28 @@ class ConceptService extends GenericService {
 			}
 		}
 		DateUtils.loadZerosForMinute(dateValueList,from,to)
+	}
+	
+	@Override
+	protected String getGroupForDateServiceType(DateServiceType type){
+		switch (type) {
+			case DateServiceType.BY_MINUTE:
+				return "tweetByMinute"
+			case DateServiceType.BY_HOUR:
+				return "tweetByHour"
+			case DateServiceType.BY_DATE:
+				return "tweetCreated"
+		}
+		return null
+	}
+	
+	def getTweetsBy(filters, DateFilterType filterRange, DateServiceType serviceType){
+		def groups = ["conceptName",getGroupForDateServiceType(serviceType)]
+		filters.addAll(getFilterList(filterRange))
+		def result = groupBy(Concept, new ConceptAttributeContext(),
+						groups, filters, ["tweetsId" : ProjectionType.COUNT], 
+						[[attribute:"created",value:OrderType.ASC]]);
+		result
 	}
 	
 }

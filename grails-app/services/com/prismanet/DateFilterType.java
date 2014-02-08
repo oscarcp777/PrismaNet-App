@@ -6,5 +6,6 @@ package com.prismanet;
 public enum DateFilterType {
 	TODAY,
 	YESTERDAY,
+	LAST_HOUR,
 	LAST_7_DAYS;
 }
