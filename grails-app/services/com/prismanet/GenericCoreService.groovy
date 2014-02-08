@@ -25,7 +25,7 @@ class GenericCoreService extends GenericService {
 			case DateFilterType.TODAY:
 				def cal = new GregorianCalendar()
 				def day = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, cal.time) ;
-				return [new Filter(attribute:getProyectionForDateServiceType(DateServiceType.BY_DATE), value:day, type:FilterType.EQ)]
+				return [new Filter(attribute:getGroupForDateServiceType(DateServiceType.BY_DATE), value:day, type:FilterType.EQ)]
 				break
 			case DateFilterType.YESTERDAY:
 				use ( TimeCategory ) {
@@ -33,7 +33,7 @@ class GenericCoreService extends GenericService {
 					def cal = new GregorianCalendar()
 					def date = cal.getTime() - 1.day
 					def day = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, date) ;
-					return [new Filter(attribute:getProyectionForDateServiceType(DateServiceType.BY_DATE), value:day, type:FilterType.EQ)]
+					return [new Filter(attribute:getGroupForDateServiceType(DateServiceType.BY_DATE), value:day, type:FilterType.EQ)]
 				}
 				break
 			case DateFilterType.LAST_7_DAYS:
@@ -44,7 +44,7 @@ class GenericCoreService extends GenericService {
 					def valueFrom = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateFrom) ;
 					def valueTo = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateTo) ;
 					return [new Filter(attribute:getProyectionForDateServiceType(DateServiceType.BY_DATE), value:valueFrom, type:FilterType.GE),
-						new Filter(attribute:getProyectionForDateServiceType(DateServiceType.BY_DATE), value:valueTo, type:FilterType.LE)]
+						new Filter(attribute:getGroupForDateServiceType(DateServiceType.BY_DATE), value:valueTo, type:FilterType.LE)]
 				}
 				break
 			case DateFilterType.LAST_HOUR:
@@ -52,7 +52,7 @@ class GenericCoreService extends GenericService {
 					def cal = new GregorianCalendar()
 					def date = cal.getTime()
 					def value = DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, date) ;
-					return [new Filter(attribute:getProyectionForDateServiceType(DateServiceType.BY_HOUR), value:value, type:FilterType.EQ)]
+					return [new Filter(attribute:getGroupForDateServiceType(DateServiceType.BY_HOUR), value:value, type:FilterType.EQ)]
 				}
 				break
 			default:
