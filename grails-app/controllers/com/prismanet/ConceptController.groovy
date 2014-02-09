@@ -58,7 +58,7 @@ class ConceptController extends GenericController{
 		filters.add(new Filter(attribute:"id",value:concept.id, type:FilterType.EQ))
 		
 		//TODO reemplazar enum por el que viene por parametro
-		def range = DateFilterType.LAST_HOUR
+		def range = DateFilterType.LAST_7_DAYS
 		
 		DateServiceType type = conceptService.getChartType(range) 
 		
@@ -87,7 +87,6 @@ class ConceptController extends GenericController{
 												redirectOnClick+"&tweetCreated=")
 			break
 		}
-		print resultMap
 		render resultMap as JSON
 	}
 	

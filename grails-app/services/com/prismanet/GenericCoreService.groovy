@@ -43,7 +43,7 @@ class GenericCoreService extends GenericService {
 					def dateTo = cal.getTime()
 					def valueFrom = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateFrom) ;
 					def valueTo = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateTo) ;
-					return [new Filter(attribute:getProyectionForDateServiceType(DateServiceType.BY_DATE), value:valueFrom, type:FilterType.GE),
+					return [new Filter(attribute:getGroupForDateServiceType(DateServiceType.BY_DATE), value:valueFrom, type:FilterType.GE),
 						new Filter(attribute:getGroupForDateServiceType(DateServiceType.BY_DATE), value:valueTo, type:FilterType.LE)]
 				}
 				break
