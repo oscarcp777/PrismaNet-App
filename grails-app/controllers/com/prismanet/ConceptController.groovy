@@ -30,35 +30,15 @@ class ConceptController extends GenericController{
 	}
 	
 	
-	def customStats(proyection){
-		
-		Concept concept = Concept.findByConceptName(params.id)
-		def filters = [new Filter(attribute:"id",value: concept.id, type:FilterType.EQ)]
-		// Tweets por fecha
-		def groupList = ["tweetCreated"]
-		def dateList = conceptService.categoryStore(groupList, filters, proyection);
-		// Tweets por hora del dia X (va a ser el actual ahora pongo uno con datos)
-		SimpleDateFormat dF = new SimpleDateFormat("dd/MM/yyyy")
-		filters.add(new Filter(attribute:"tweetPeriod",value: "201309", type:FilterType.GE))
-		
-		groupList = ["tweetHour"]
-		def hourList = conceptService.categoryStore(groupList, filters, proyection);
-		groupList = ["tweetMinute"]
-		def minuteList = conceptService.categoryStore(groupList, filters, proyection);
-		def dateValueList = []
-		minuteList.each{ i -> dateValueList << i.getAt(1)	}
-		[concept : concept, dateList : dateList, hourList:hourList, minuteList:minuteList, lineGraphList: dateValueList]
-	}
-	
 	def getGroupedTweets(){
-		log.info "conceptsHourJson params: " + params
+		log.info "getGroupedTweets params: " + params
 		def container = params.div
 		Concept concept = Concept.get(params.id)
 		def filters = []
 		filters.add(new Filter(attribute:"id",value:concept.id, type:FilterType.EQ))
 		
 		//TODO reemplazar enum por el que viene por parametro
-		def range = DateFilterType.LAST_7_DAYS
+		def range = DateFilterType.CURRENT_MONTH
 		
 		DateServiceType type = conceptService.getChartType(range) 
 		

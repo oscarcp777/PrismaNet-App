@@ -55,6 +55,8 @@ class ConceptService extends GenericCoreService {
 				return "tweetByHour"
 			case DateServiceType.BY_DATE:
 				return "tweetCreated"
+			case DateServiceType.BY_MONTH:
+				return "tweetPeriod"
 		}
 		return null
 	}
@@ -64,6 +66,15 @@ class ConceptService extends GenericCoreService {
 		filters.addAll(getFilterList(filterRange))
 		def result = groupBy(Concept, new ConceptAttributeContext(),
 						groups, filters, ["tweetsId" : ProjectionType.COUNT], 
+						[[attribute:"created",value:OrderType.ASC]]);
+		result
+	}
+	
+	def getWeightBy(filters, DateFilterType filterRange, DateServiceType serviceType){
+		def groups = ["conceptName",getGroupForDateServiceType(serviceType)]
+		filters.addAll(getFilterList(filterRange))
+		def result = groupBy(Concept, new ConceptAttributeContext(),
+						groups, filters, ["authorFollowers" : ProjectionType.SUM],
 						[[attribute:"created",value:OrderType.ASC]]);
 		result
 	}

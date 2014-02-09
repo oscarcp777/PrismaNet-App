@@ -6,5 +6,6 @@ package com.prismanet;
 public enum DateServiceType {
 	BY_MINUTE,
 	BY_HOUR,
-	BY_DATE;
+	BY_DATE,
+	BY_MONTH;
 }

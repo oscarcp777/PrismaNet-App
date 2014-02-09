@@ -7,5 +7,8 @@ public enum DateFilterType {
 	TODAY,
 	YESTERDAY,
 	LAST_HOUR,
-	LAST_7_DAYS;
+	LAST_7_DAYS,
+	LAST_30_DAYS,
+	CURRENT_MONTH,
+	PREVIOUS_MONTH;
 }
