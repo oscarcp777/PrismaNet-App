@@ -41,22 +41,11 @@ function getConceptRealTime(id, div){
 function getGroupedTweets(data){
 	doRequest('../getGroupedTweets',data,paintCharLine, null, 'GET');
 }
-
-
-function getUserConceptsLineChartByMinute(div){
-	var data = {"div":div}
-	doRequest('getComparativeConceptChartByMinute',data,paintCharLine, null, 'GET');
+function getUserGroupedTweets(data){
+	doRequest('getGroupedTweets',data,paintCharLine, null, 'GET');
 }
 
-function getUserConceptsLineChartByHour(div){
-	var data = {"div":div}
-	doRequest('getComparativeConceptChartByHour',data,paintCharLine, null, 'GET');
-}
 
-function getUserConceptsLineChartByDate(div){
-	var data = {"div":div}
-	doRequest('getComparativeConceptChartByDate',data,paintCharLine, null, 'GET');
-}
 
 function printRealTimeChar(data){
     Highcharts.setOptions({

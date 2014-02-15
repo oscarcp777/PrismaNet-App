@@ -63,64 +63,12 @@
 
 							<div class="widget-body">
 								<div class="widget-main padding-4">
-									<div id="lineaCharUser" style="width: 100%; height: 400px;"></div>
+									<div id=lineaChartUser style="width: 100%; height: 400px;"></div>
 								</div>
 							</div>
 						</div>
 					</div>
 					
-<!-- 					<div class="col-lg-12 widget-container-span ui-sortable"> -->
-<!-- 						<div class="widget-box"> -->
-<!-- 							<div class="widget-header header-color-blue"> -->
-<!-- 								<h5> -->
-<!-- 									<span class="glyphicon glyphicon-stats"></span> Tweets por -->
-<!-- 									Hora -->
-<!-- 								</h5> -->
-
-<!-- 								<div class="widget-toolbar"> -->
-<!-- 									<a href="javascript:void(0);" id="refreshCharPie"> <span -->
-<!-- 										data-action="reload"> <i class="icon-refresh"></i></span> -->
-<!-- 									</a> <a href="javascript:void(0);" data-action="collapse"> <i -->
-<!-- 										class="icon-chevron-up"></i></a> <a href="javascript:void(0);" -->
-<!-- 										data-action="close"> <i class="icon-remove"></i></a> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-
-<!-- 							<div class="widget-body"> -->
-<!-- 								<div class="widget-main padding-4"> -->
-<!-- 									<div id="container2" style="width: 100%; height: 400px;"></div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-					
-					
-<!-- 					<div class="col-lg-12 widget-container-span ui-sortable"> -->
-<!-- 						<div class="widget-box"> -->
-<!-- 							<div class="widget-header header-color-blue"> -->
-<!-- 								<h5> -->
-<!-- 									<span class="glyphicon glyphicon-stats"></span> Tweets por -->
-<!-- 									Dia -->
-<!-- 								</h5> -->
-
-<!-- 								<div class="widget-toolbar"> -->
-<!-- 									<a href="javascript:void(0);" id="refreshCharPie"> <span -->
-<!-- 										data-action="reload"> <i class="icon-refresh"></i></span> -->
-<!-- 									</a> <a href="javascript:void(0);" data-action="collapse"> <i -->
-<!-- 										class="icon-chevron-up"></i></a> <a href="javascript:void(0);" -->
-<!-- 										data-action="close"> <i class="icon-remove"></i></a> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-
-<!-- 							<div class="widget-body"> -->
-<!-- 								<div class="widget-main padding-4"> -->
-<!-- 									<div id="container3" style="width: 100%; height: 400px;"></div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-					
-
 
 					<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
 						<div class="widget-box">
@@ -189,7 +137,8 @@
 		<script type="text/javascript">
 		function loadCharTest1(start, end,rangeSelect) {
 	        $('#pickertUser span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
-	        //TODO aca se recarga el la nueva fecha
+	        var data = {"id":${user.id}, "div":'#lineaChartUser',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
+	        getUserGroupedTweets(data);
 	    }
 		$(document).ready(function() {
 			inicializeColorChar();
@@ -197,9 +146,8 @@
 			paintCharGender();
 			getTweetCharPie();
 			loadDatepicker('pickertUser',loadCharTest1);
-			getUserConceptsLineChartByMinute('#lineaCharUser');
-// 			getUserConceptsLineChartByHour('#container2');
-// 			getUserConceptsLineChartByDate('#container3');
+			var data = {"id":${user.id}, "div":'#lineaChartUser',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+			getUserGroupedTweets(data);
 			$('#refreshCharPie').click(function() {
 				getTweetCharPie();
 			});
