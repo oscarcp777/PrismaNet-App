@@ -138,10 +138,19 @@
 	</div>
 
 	<script type="text/javascript">
-	function loadCharTest(start, end,rangeSelect) {
-        $('#pickertConcept span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
-        //TODO aca se recarga el la nueva fecha
-    }
+
+<%--		$('#pickertConcept').on('apply', function(ev, picker) {--%>
+<%--			$('#pickertConcept span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));--%>
+<%--  		     var data = {"id":${concept.id}, "div":'#lineaCharConcept',"dateFrom":start._d,"dateTo":end._d};--%>
+<%--	    	 doRequest('../getGroupedTweets',data,paintCharLine, null, 'GET');--%>
+<%--		});--%>
+	
+		function loadCharTest(start, end, rangeSelect) {
+		     $('#pickertConcept span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
+   		     var data = {"id":${concept.id}, "div":'#lineaCharConcept',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
+	    	 doRequest('../getGroupedTweets',data,paintCharLine, null, 'GET');
+		}
+    
 	  $(function() {
 		 
 		  loadDatepicker('pickertConcept',loadCharTest);

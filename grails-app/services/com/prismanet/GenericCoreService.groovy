@@ -16,71 +16,59 @@ class GenericCoreService extends GenericService {
 	}
 	
 	/**
-	 * Dado un DateFilterType que define un intervalo de tiempo se devuelve el filtro correspondiente para el mismo
+	 * Dadas una fecha desde y una fecha hasta que definen un intervalo de tiempo 
+	 * se devuelve el filtro correspondiente para el mismo
 	 * @param type intervalo de tiempo
 	 * @return filtro obtenido
 	 */
-	def getFilterList(DateFilterType type){
+	def getFilterList(dateFrom, dateTo){
+		
+		if (!dateFrom)
+			return []
+		if (!dateTo){
+			def cal = new GregorianCalendar()
+			dateTo = cal.getTime()
+		}
+		
+		DateServiceType type = getChartType(dateFrom, dateTo)
+		Calendar calendarFrom = Calendar.getInstance();
+		calendarFrom.setTime(dateFrom);
+		calendarFrom.set(Calendar.SECOND, 0);
+		Calendar calendarTo = Calendar.getInstance();
+		calendarTo.setTime(dateTo);
+		calendarTo.set(Calendar.SECOND, 0);
 		switch (type) {
-			case DateFilterType.TODAY:
-				def cal = new GregorianCalendar()
-				def day = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, cal.time) 
-				return [new Filter(attribute:getGroupForDateServiceType(DateServiceType.BY_DATE), value:day, type:FilterType.EQ)]
+			case DateServiceType.BY_MINUTE:
+//				def valueFrom = DateUtils.getDateFormat(DateTypes.MINUTE_PERIOD, dateFrom)
+//				def valueTo = DateUtils.getDateFormat(DateTypes.MINUTE_PERIOD, dateTo)
+				return [new Filter(attribute:"created", value:calendarFrom.getTime(), type:FilterType.GE),
+					new Filter(attribute:"created", value:calendarTo.getTime(), type:FilterType.LE)]
 				break
-			case DateFilterType.YESTERDAY:
-				use ( TimeCategory ) {
-					
-					def cal = new GregorianCalendar()
-					def date = cal.getTime() - 1.day
-					def day = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, date) 
-					return [new Filter(attribute:getGroupForDateServiceType(DateServiceType.BY_DATE), value:day, type:FilterType.EQ)]
-				}
+			case DateServiceType.BY_HOUR:
+				calendarFrom.set(Calendar.MINUTE, 0);
+				calendarTo.set(Calendar.MINUTE, 0);
+//				def valueFrom = DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, dateFrom)
+//				def valueTo = DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, dateTo)
+				return [new Filter(attribute:"created", value:calendarFrom.getTime(), type:FilterType.GE),
+					new Filter(attribute:"created", value:calendarTo.getTime(), type:FilterType.LE)]
 				break
-			case DateFilterType.LAST_7_DAYS:
-				use ( TimeCategory ) {
-					def cal = new GregorianCalendar()
-					def dateFrom = cal.getTime() - 7.day
-					def dateTo = cal.getTime()
-					def valueFrom = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateFrom) 
-					def valueTo = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateTo) 
-					return [new Filter(attribute:getGroupForDateServiceType(DateServiceType.BY_DATE), value:valueFrom, type:FilterType.GE),
-						new Filter(attribute:getGroupForDateServiceType(DateServiceType.BY_DATE), value:valueTo, type:FilterType.LE)]
-				}
+			case DateServiceType.BY_DATE:
+				calendarFrom.set(Calendar.MINUTE, 0);
+				calendarTo.set(Calendar.MINUTE, 0);
+				calendarFrom.set(Calendar.HOUR, 0);
+				calendarTo.set(Calendar.HOUR, 0);
+				print "From:" + calendarFrom.getTime()
+				print "To:" + calendarTo.getTime()
+//				def valueFrom = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateFrom)
+//				def valueTo = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateTo)
+				return [new Filter(attribute:"created", value:calendarFrom.getTime(), type:FilterType.GE),
+					new Filter(attribute:"created", value:calendarTo.getTime(), type:FilterType.LE)]
 				break
-			case DateFilterType.LAST_30_DAYS:
-				use ( TimeCategory ) {
-					def cal = new GregorianCalendar()
-					def dateFrom = cal.getTime() - 30.day
-					def dateTo = cal.getTime()
-					def valueFrom = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateFrom) 
-					def valueTo = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateTo) 
-					return [new Filter(attribute:getGroupForDateServiceType(DateServiceType.BY_DATE), value:valueFrom, type:FilterType.GE),
-						new Filter(attribute:getGroupForDateServiceType(DateServiceType.BY_DATE), value:valueTo, type:FilterType.LE)]
-				}
-				break
-			case DateFilterType.LAST_HOUR:
-				use ( TimeCategory ) {
-					def cal = new GregorianCalendar()
-					def date = cal.getTime()
-					def value = DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, date) 
-					return [new Filter(attribute:getGroupForDateServiceType(DateServiceType.BY_HOUR), value:value, type:FilterType.EQ)]
-				}
-				break
-			case DateFilterType.CURRENT_MONTH:
-				use ( TimeCategory ) {
-					def cal = new GregorianCalendar()
-					def date = cal.getTime()
-					def value = DateUtils.getDateFormat(DateTypes.MONTH_PERIOD, date) 
-					return [new Filter(attribute:getGroupForDateServiceType(DateServiceType.BY_MONTH), value:value, type:FilterType.EQ)]
-				}
-				break
-			case DateFilterType.PREVIOUS_MONTH:
-				use ( TimeCategory ) {
-					def cal = new GregorianCalendar()
-					def date = cal.getTime() - 1.month
-					def value = DateUtils.getDateFormat(DateTypes.MONTH_PERIOD, date)
-					return [new Filter(attribute:getGroupForDateServiceType(DateServiceType.BY_MONTH), value:value, type:FilterType.EQ)]
-				}
+			case DateServiceType.BY_MONTH:
+				def valueFrom = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateFrom)
+				def valueTo = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateTo)
+				return [new Filter(attribute:"created", value:valueFrom, type:FilterType.GE),
+					new Filter(attribute:"created", value:valueTo, type:FilterType.LE)]
 				break
 			default:
 				return []	
@@ -100,24 +88,29 @@ class GenericCoreService extends GenericService {
 	
 	/**
 	 * Dado un rango determina el tipo de grafico
-	 * @param range
-	 * @return
+	 * @param dateFrom - fecha desde del rango
+	 * @param dateTo - fecha hasta del rango
+	 * @return tipo de grafico 
 	 */
-	def DateServiceType getChartType(DateFilterType range){
-		switch (range) {
-			case DateFilterType.TODAY:
-			case DateFilterType.YESTERDAY:
-				return DateServiceType.BY_HOUR
-			case DateFilterType.LAST_7_DAYS:
-			case DateFilterType.LAST_30_DAYS:
-			case DateFilterType.CURRENT_MONTH:
-			case DateFilterType.PREVIOUS_MONTH:
-				return DateServiceType.BY_DATE
-			case DateFilterType.LAST_HOUR:
+	def DateServiceType getChartType(Date dateFrom, Date dateTo){
+		if (!dateFrom)
+			return DateServiceType.BY_MONTH
+		if (!dateTo){
+			def cal = new GregorianCalendar()
+			dateTo = cal.getTime()
+		}	
+		
+		use (TimeCategory){
+			def duration = dateTo - dateFrom
+			println "days: ${duration.days}, Hours: ${duration.hours}"
+			if (duration.hours < 3 && duration.days < 1)
 				return DateServiceType.BY_MINUTE
-			
+			if (duration.hours < 24 && duration.days < 2)
+				return DateServiceType.BY_HOUR
+			if (duration.days < 61)
+				return DateServiceType.BY_DATE
+			return DateServiceType.BY_MONTH
 		}
-		return DateServiceType.BY_DATE
 	}
 }
 

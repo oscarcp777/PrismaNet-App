@@ -1,5 +1,4 @@
 
-
 function loadDatepicker(container,callBack){
 	$('#'+container).daterangepicker({
         startDate: moment().subtract('days', 29),
@@ -10,12 +9,12 @@ function loadDatepicker(container,callBack){
         timePickerIncrement: 1,
         timePicker12Hour: false,
         ranges: {
-            'Hoy': [moment(), moment(),'today'],
-            'Ayer': [moment().subtract('days', 1), moment().subtract('days', 1),'yesterdar'],
-            'Ultimos 7 dias': [moment().subtract('days', 6), moment(),'7days'],
-            'Ultimos 30 dias': [moment().subtract('days', 29), moment(),'30days'],
-            'Presente mes': [moment().startOf('month'), moment().endOf('month'),'presentMonth'],
-            'Mes Pasado': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month'),'lastMonth']
+            'Hoy': [moment().startOf('day'), moment().endOf('day'),'Hoy'],
+            'Ayer': [moment().subtract('days', 1).startOf('day'), moment().subtract('days', 1).endOf('day'),'Ayer'],
+            'Ultimos 7 dias': [moment().subtract('days', 6), moment(),'Ultimos 7 dias'],
+            'Ultimos 30 dias': [moment().subtract('days', 29), moment(),'Ultimos 30 dias'],
+            'Presente Mes': [moment().startOf('month'), moment().endOf('month'),'Presente Mes'],
+            'Mes Pasado': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month'),'Mes Pasado']
         },
         opens: 'left',
         buttonClasses: ['btn btn-default'],
@@ -34,7 +33,7 @@ function loadDatepicker(container,callBack){
             weekLabel: 'S'
         }
     },
-    callBack
+    loadCharTest
 );
 //Set the initial state of the picker label
 	$('#'+container+' span').html(moment().subtract('days', 29).format('LLL') + ' - ' + moment().format('LLLL'));

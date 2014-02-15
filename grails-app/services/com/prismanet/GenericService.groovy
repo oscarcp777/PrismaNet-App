@@ -80,6 +80,7 @@ class GenericService {
 	}
 	
 	def groupBy(domainClass, context, groups, filters, projection, orders){
+		print "FILTROS: " + filters
 		def criteria = domainClass.createCriteria()
 		
 		def resultList = criteria {

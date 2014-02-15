@@ -61,18 +61,18 @@ class ConceptService extends GenericCoreService {
 		return null
 	}
 	
-	def getTweetsBy(filters, DateFilterType filterRange, DateServiceType serviceType){
-		def groups = ["conceptName",getGroupForDateServiceType(serviceType)]
-		filters.addAll(getFilterList(filterRange))
+	def getTweetsBy(filters, dateFrom, dateTo){
+		def groups = ["conceptName",getGroupForDateServiceType(getChartType(dateFrom, dateTo))]
+		filters.addAll(getFilterList(dateFrom, dateTo))
 		def result = groupBy(Concept, new ConceptAttributeContext(),
 						groups, filters, ["tweetsId" : ProjectionType.COUNT], 
 						[[attribute:"created",value:OrderType.ASC]]);
 		result
 	}
 	
-	def getWeightBy(filters, DateFilterType filterRange, DateServiceType serviceType){
-		def groups = ["conceptName",getGroupForDateServiceType(serviceType)]
-		filters.addAll(getFilterList(filterRange))
+	def getWeightBy(filters, dateFrom, dateTo){
+		def groups = ["conceptName",getGroupForDateServiceType(getChartType(dateFrom, dateTo))]
+		filters.addAll(getFilterList(dateFrom, dateTo))
 		def result = groupBy(Concept, new ConceptAttributeContext(),
 						groups, filters, ["authorFollowers" : ProjectionType.SUM],
 						[[attribute:"created",value:OrderType.ASC]]);

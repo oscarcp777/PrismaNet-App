@@ -19,4 +19,10 @@ class Filter {
 	 */
 	def attribute
 
+	@Override
+	public String toString() {
+		return attribute + ": " + value + "(" + type + ")"
+	}	
+	
+
 }

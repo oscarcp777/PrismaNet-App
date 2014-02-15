@@ -37,19 +37,20 @@ class ConceptController extends GenericController{
 		def filters = []
 		filters.add(new Filter(attribute:"id",value:concept.id, type:FilterType.EQ))
 		
-		//TODO reemplazar enum por el que viene por parametro
-		def range = DateFilterType.CURRENT_MONTH
-		
-		DateServiceType type = conceptService.getChartType(range) 
+		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
+		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
+			
+		DateServiceType type = conceptService.getChartType(dateFrom, dateTo) 
 		
 		
 		// Obtengo tweets por hora
-		def dateList = conceptService.getTweetsBy(filters, range, type)
+		def dateList = conceptService.getTweetsBy(filters, dateFrom, dateTo)
 
 		def redirectOnClick = "../../tweet/list?conceptsId="+concept.id
 		def resultMap = [:]
 		//TODO localizar todos los textos
 		// Parseo resultado para generar el grafico
+		
 		switch (type) {
 			case DateServiceType.BY_MINUTE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
