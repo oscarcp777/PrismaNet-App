@@ -38,8 +38,7 @@ function getConceptRealTime(id, div){
 }
 
 
-function getGroupedTweets(id, div){
-	var data = {"id":id, "div":div}
+function getGroupedTweets(data){
 	doRequest('../getGroupedTweets',data,paintCharLine, null, 'GET');
 }
 

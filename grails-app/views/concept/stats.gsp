@@ -145,20 +145,21 @@
 <%--	    	 doRequest('../getGroupedTweets',data,paintCharLine, null, 'GET');--%>
 <%--		});--%>
 	
-		function loadCharTest(start, end, rangeSelect) {
+		function loadCharLineConcepts(start, end, rangeSelect) {
 		     $('#pickertConcept span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
    		     var data = {"id":${concept.id}, "div":'#lineaCharConcept',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
-	    	 doRequest('../getGroupedTweets',data,paintCharLine, null, 'GET');
+   		 	 getGroupedTweets(data);
 		}
     
 	  $(function() {
 		 
-		  loadDatepicker('pickertConcept',loadCharTest);
+		  loadDatepicker('pickertConcept',loadCharLineConcepts);
 		  
 		  var id='${concept.id}';
-		  activeItemMenuLevel3('concepts',id,id+'-stats','Conceptos > '+"${concept.conceptName}");
+		   activeItemMenuLevel3('concepts',id,id+'-stats','Conceptos > '+"${concept.conceptName}");
 		   getConceptRealTime(${concept.id}, '#realTimeChar');
-		   getGroupedTweets(${concept.id},'#lineaCharConcept');
+		   var data = {"id":${concept.id}, "div":'#lineaCharConcept',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+		   getGroupedTweets(data);
 		});
 	</script>
 </body>

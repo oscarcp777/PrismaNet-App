@@ -33,7 +33,7 @@ function loadDatepicker(container,callBack){
             weekLabel: 'S'
         }
     },
-    loadCharTest
+    callBack
 );
 //Set the initial state of the picker label
 	$('#'+container+' span').html(moment().subtract('days', 29).format('LLL') + ' - ' + moment().format('LLLL'));
