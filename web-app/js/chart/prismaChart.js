@@ -250,8 +250,8 @@ function paintCharLine(data){
 	        yAxis: {
 	            title: {
 	                text: data.titleY
-	            },
-	            min:0
+	            }
+//	        , min:0
 	        },
 	        tooltip: {
 	            formatter: function() {
