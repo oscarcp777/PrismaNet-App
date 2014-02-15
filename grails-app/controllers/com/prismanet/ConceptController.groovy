@@ -54,17 +54,60 @@ class ConceptController extends GenericController{
 		switch (type) {
 			case DateServiceType.BY_MINUTE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
-												'Tweets por minuto','Cantidad de tweets','Tweets',
+												'Tweets por minuto','Fecha','Tweets',
 												redirectOnClick+"&tweetMinute=")
 			break
 			case DateServiceType.BY_HOUR:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD,
-											   'Tweets por hora','Cantidad de tweets','Tweets',
+											   'Tweets por hora','Fecha','Tweets',
 											   redirectOnClick+"&tweetHour=")
 			break
 			case DateServiceType.BY_DATE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.DAY_PERIOD,
-												'Tweets por Dia','Cantidad de tweets','Tweets',
+												'Tweets por Dia','Fecha','Tweets',
+												redirectOnClick+"&tweetCreated=")
+			break
+		}
+		render resultMap as JSON
+	}
+	
+	
+	
+	def getGroupedWeight(){
+		log.info "getGroupedWeight params: " + params
+		def container = params.div
+		Concept concept = Concept.get(params.id)
+		def filters = []
+		filters.add(new Filter(attribute:"id",value:concept.id, type:FilterType.EQ))
+		
+		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
+		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
+			
+		DateServiceType type = conceptService.getChartType(dateFrom, dateTo)
+		
+		
+		// Obtengo tweets por hora
+		def dateList = conceptService.getWeightBy(filters, dateFrom, dateTo)
+
+		def redirectOnClick = "../../tweet/list?conceptsId="+concept.id
+		def resultMap = [:]
+		//TODO localizar todos los textos
+		// Parseo resultado para generar el grafico
+		
+		switch (type) {
+			case DateServiceType.BY_MINUTE:
+				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
+												'Alcance por minuto','Fecha','Alcance',
+												redirectOnClick+"&tweetMinute=")
+			break
+			case DateServiceType.BY_HOUR:
+				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD,
+											   'Alcance por hora','Fecha','Alcance',
+											   redirectOnClick+"&tweetHour=")
+			break
+			case DateServiceType.BY_DATE:
+				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.DAY_PERIOD,
+												'Alcance por Dia','Fecha','Alcance',
 												redirectOnClick+"&tweetCreated=")
 			break
 		}

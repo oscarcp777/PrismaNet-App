@@ -41,6 +41,9 @@ function getConceptRealTime(id, div){
 function getGroupedTweets(data){
 	doRequest('../getGroupedTweets',data,paintCharLine, null, 'GET');
 }
+function getGroupedWeight(data){
+	doRequest('../getGroupedWeight',data,paintCharLine, null, 'GET');
+}
 function getUserGroupedTweets(data){
 	doRequest('getGroupedTweets',data,paintCharLine, null, 'GET');
 }
@@ -244,7 +247,7 @@ function paintCharLine(data){
 	        },
 	        tooltip: {
 	            formatter: function() {
-                    return "Click para ver los <b> "+this.y+'</b> tweets de las '+ Highcharts.dateFormat('%d/%m/%Y--%H:%M', this.x) ;
+                    return Highcharts.dateFormat('%d/%m/%Y--%H:%M', this.x) + "<br><b>"+ this.series.name + ": </b>" + this.y;
 	            },
 	            crosshairs: true,
 		        shared: false
