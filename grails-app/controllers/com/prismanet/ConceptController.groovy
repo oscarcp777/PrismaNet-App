@@ -43,7 +43,7 @@ class ConceptController extends GenericController{
 		DateServiceType type = conceptService.getChartType(dateFrom, dateTo) 
 		
 		
-		// Obtengo tweets por hora
+		// Obtengo tweets 
 		def dateList = conceptService.getTweetsBy(filters, dateFrom, dateTo)
 
 		def redirectOnClick = "../../tweet/list?conceptsId="+concept.id
@@ -86,7 +86,7 @@ class ConceptController extends GenericController{
 		DateServiceType type = conceptService.getChartType(dateFrom, dateTo)
 		
 		
-		// Obtengo tweets por hora
+		// Obtengo alcance
 		def dateList = conceptService.getWeightBy(filters, dateFrom, dateTo)
 
 		def redirectOnClick = "../../tweet/list?conceptsId="+concept.id
@@ -112,6 +112,28 @@ class ConceptController extends GenericController{
 			break
 		}
 		render resultMap as JSON
+	}
+	
+	
+	
+	def getRelevantAuthors(){
+		log.info "getRelevantAuthors params: " + params
+		def container = params.div
+		Concept concept = Concept.get(params.id)
+		def filters = []
+		filters.add(new Filter(attribute:"conceptId",value:concept.id, type:FilterType.EQ))
+		
+		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
+		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
+				
+		
+		// Obtengo autores
+		def authorsList = conceptService.getRelevantAuthors(filters, dateFrom, dateTo, 10)
+		def results = []
+		for ( i in 0..9 ){
+				results.add(authorsList[i])
+		}
+		render results
 	}
 	
 	

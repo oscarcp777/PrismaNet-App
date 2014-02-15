@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional
 import com.prismanet.GenericService.FilterType
 import com.prismanet.GenericService.OrderType
 import com.prismanet.GenericService.ProjectionType
+import com.prismanet.context.AuthorAttributeContext
 import com.prismanet.context.ConceptAttributeContext
 import com.prismanet.context.Filter
 import com.prismanet.utils.DateTypes
@@ -76,6 +77,16 @@ class ConceptService extends GenericCoreService {
 		def result = groupBy(Concept, new ConceptAttributeContext(),
 						groups, filters, ["authorFollowers" : ProjectionType.SUM],
 						[[attribute:"created",value:OrderType.ASC]]);
+		result
+	}
+	
+	
+	def getRelevantAuthors(filters, dateFrom, dateTo, maxAuthors){
+		def groups = ["accountName","followers"]
+		filters.addAll(getFilterList(dateFrom, dateTo))
+		def result = groupBy(Author, new AuthorAttributeContext(),
+						groups, filters, [:],
+						[[attribute:"followers",value:OrderType.DESC]]);
 		result
 	}
 	

@@ -44,6 +44,9 @@ function getGroupedTweets(data){
 function getGroupedWeight(data){
 	doRequest('../getGroupedWeight',data,paintCharLine, null, 'GET');
 }
+function getRelevantAuthors(data){
+	doRequest('../getRelevantAuthors',data,loadAuthors, null, 'GET');
+}
 function getUserGroupedTweets(data){
 	doRequest('getGroupedTweets',data,paintCharLine, null, 'GET');
 }
@@ -330,3 +333,20 @@ function paintCharGender() {
 										});
 					})
 }
+
+
+
+function loadAuthors(response){
+	console.log(response);
+//	jQuery.each(response, function() {
+//		console.log(this);
+//	});
+	var array = response;
+	for (var selector in array) {
+//	for (var i = 0; i < response.length; i++) {
+//		 var item = response[i];
+		console.log(selector);
+//		var row = "<p><b>Autor:</b>"+ selector.name + " <b>Seguidores:</b>" + selector.followers +"</p>";
+//		$('#relevantAuthors').append(row);
+	}
+}	

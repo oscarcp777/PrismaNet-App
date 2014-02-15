@@ -109,6 +109,41 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
+						<div class="widget-box">
+							<div class="widget-header header-color-blue">
+								<h5>
+									<span class="glyphicon glyphicon-stats"> </span> Autores con mas seguidores
+								</h5>
+								<div class="widget-toolbar input-group ">
+									<div id="authorPickert" class="btn btn-primary date-picker">
+										<i class="icon-calendar"></i> <span class="date-range"></span>
+										<i class="icon-chevron-down"></i>
+									</div>
+								</div>
+								<div class="widget-toolbar">
+									<a href="#" data-action="collapse"> <i
+										class="1 bigger-125 icon-chevron-up"></i>
+									</a>
+
+								</div>
+
+
+							</div>
+
+							<div class="widget-body">
+								<div class="widget-body-inner" style="display: block;">
+									<div class="widget-main">
+										<div id="relevantAuthors">
+											
+    									</div>
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 
 
@@ -130,11 +165,18 @@
   		     var data = {"id":${concept.id}, "div":'#weightChart',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
   		   	 getGroupedWeight(data);
 		}
+
+		function loadAuthorPickert(start, end, rangeSelect) {
+		     $('#weightPickert span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
+ 		     var data = {"id":${concept.id}, "div":'#relevantAuthors',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
+ 		     getRelevantAuthors(data);
+		}
     
 	  $(function() {
 		 
 		  loadDatepicker('tweetPickert',loadChartLineForTweetPickert);
 		  loadDatepicker('weightPickert',loadChartLineForWeightPickert);
+		  loadDatepicker('authorPickert',loadAuthorPickert);
 		  
 		  var id='${concept.id}';
 		   activeItemMenuLevel3('concepts',id,id+'-stats','Conceptos > '+"${concept.conceptName}");
@@ -144,6 +186,9 @@
 		   getGroupedTweets(dataTweets);
 		   var dataWeight = {"id":${concept.id}, "div":'#weightChart',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 		   getGroupedWeight(dataWeight);
+
+		   var data = {"id":${concept.id}, "div":'#relevantAuthors',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+		    getRelevantAuthors(data);
 		});
 	</script>
 </body>
