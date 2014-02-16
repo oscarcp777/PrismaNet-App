@@ -15,7 +15,7 @@
 		<div class="page-header">
 			<h1>
 				<i class="icon-twitter"></i>
-				<g:message code="tweets.title" /> del Concepto: "${concept.conceptName}"
+				<g:message code="tweets.title" />
 			</h1>
 		</div>
 		<div class="row well">
@@ -32,7 +32,7 @@
 								<div class="profile-info-name">Nombre concepto</div>
 
 								<div class="profile-info-value">
-									<span >CFK</span>
+									<span >${concept.conceptName}</span>
 								</div>
 							</div>
 
@@ -41,15 +41,15 @@
 								<div class="profile-info-name">Inicio Seguimiento</div>
 
 								<div class="profile-info-value">
-									<span >20/06/2010 00:00</span>
+									<span ><g:formatDate format="dd/MM/yyyy HH:mm" date="${concept.dateCreated}"/></span>
 								</div>
 							</div>
 
 							<div class="profile-info-row">
-								<div class="profile-info-name">Fin seguimiento</div>
+								<div class="profile-info-name">Fin Seguimiento</div>
 
 								<div class="profile-info-value">
-									<span >20/06/2010 12:00</span>
+									<span >31/12/2014 12:00</span>
 								</div>
 							</div>
 
@@ -62,7 +62,7 @@
 									class="icon-facebook-sign icon-2x blue"></i> 
 								</span>
 								<h4 >Post</h4>
-								<h4 class="bigger">1,255</h4>
+								<h4 class="bigger">0</h4>
 							</div>
 
 							<div class="grid3">
@@ -70,7 +70,7 @@
 									class="icon-twitter-sign icon-2x purple"></i> 
 								</span>
 								<h4 >Tweets</h4>
-								<h4 class="bigger">941</h4>
+								<h4 class="bigger">${tweetInstanceTotal}</h4>
 							</div>
 
 							<div class="grid3">
@@ -78,7 +78,7 @@
 									class="icon-comment icon-2x red"></i>
 								</span>
 								<h4 >Menciones</h4>
-								<h4 class="bigger ">1,050</h4>
+								<h4 class="bigger ">${tweetInstanceTotal}</h4>
 							</div>
 						</div>
 					</div>
