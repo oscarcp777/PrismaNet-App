@@ -207,6 +207,25 @@ class TweetService extends GenericService{
 		
 	}
 	
+	def getSamplingTweets(filters, parameters){
+		def tweets = getTweets(filters, [:])
+		print "size: "+ tweets.resultList.size()
+		def resultList = []
+		def samplingSize = getSamplingSize(tweets.totalCount)
+		print "tamaño muestra: " + samplingSize
+		Random rand = new Random()
+		def randomIntegerList = []
+		(1..samplingSize).each {
+			resultList.add(tweets.resultList.get(rand.nextInt(tweets.totalCount)))
+		}
+		[resultList:resultList,totalCount:samplingSize]
+	}
+	
+	private def getSamplingSize(poblationNumber){
+		def numerator = poblationNumber*1.96**2*0.05*0.95
+		numerator.divide(0.03**2*(poblationNumber-1)+1.96**2*0.05*0.95, 0, BigDecimal.ROUND_HALF_UP)
+	}
+	
 	def loadAvatarUsers(tweets){
 		
 		def usersName=[]
