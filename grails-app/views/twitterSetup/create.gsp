@@ -7,12 +7,17 @@
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#create-twitterSetup" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<div class="page-content">
+	<div class="page-header">
+							<h1>
+								<g:message code="default.create.label" args="[entityName]" />
+								
+							</h1>
+						</div>
 		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-			</ul>
+			<g:link  class="btn btn-info btn-sm" action="list" ><g:message code="default.list.label" args="[entityName]" />
+			<i class="icon-arrow-right icon-on-right bigger-110"></i>
+			</g:link>
 		</div>
 		<div id="create-twitterSetup" class="content scaffold-create" role="main">
 			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
@@ -26,14 +31,19 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form action="save" >
-				<fieldset class="form">
+			<g:form class="form-horizontal" action="save" >
+				<div class="form">
 					<g:render template="form"/>
-				</fieldset>
-				<fieldset class="buttons">
+				</div>
+				<div class="buttons">
+				<div class="clearfix form-actions">
+						<div class="col-md-9">
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-				</fieldset>
+				</div>
+				</div>
+				</div>
 			</g:form>
+		</div>
 		</div>
 	</body>
 </html>

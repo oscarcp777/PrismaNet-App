@@ -2,8 +2,8 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: facebookSetupInstance, field: 'keywords', 'error')} ">
-	<label for="keywords">
+<div class="form-group fieldcontain ${hasErrors(bean: facebookSetupInstance, field: 'keywords', 'error')} ">
+	<label class="col-sm-3 control-label no-padding-right" for="keywords">
 		<g:message code="facebookSetup.keywords.label" default="Keywords" />
 		
 	</label>
