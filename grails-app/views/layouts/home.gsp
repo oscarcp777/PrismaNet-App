@@ -194,6 +194,17 @@
 							<li id="Otros"><a href="#"> <i class="icon-rss-sign"></i> <span
 									class="menu-text">Otros</span>
 							</a></li>
+							
+							<sec:access expression="hasRole('ROLE_ADMIN')">
+							    <li id="admin">
+								<g:link controller='home' action='controlPanel'>
+								<i class="icon-cogs"></i> <span class="menu-text"><g:message code="home.menu.admin"/></span>
+								</g:link>
+								</li>
+							</sec:access>
+							
+								
+							
 						</ul>
 						<!-- /.nav-list -->
 

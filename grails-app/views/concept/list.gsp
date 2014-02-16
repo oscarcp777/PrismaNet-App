@@ -8,10 +8,18 @@
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#list-concept" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+	<div class="page-content">
+	<div class="page-header">
+							<h1>
+								<g:message code="default.list.label" args="[entityName]" />
+								<small>
+									<i class="icon-double-angle-right"></i>
+									<g:message code="default.list.label.and" />
+								</small>
+							</h1>
+						</div>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
@@ -25,6 +33,8 @@
 					<tr>
 					
 						<g:sortableColumn property="conceptName" title="${message(code: 'concept.conceptName.label', default: 'Concept Name')}" />
+					
+						<th><g:message code="concept.user.label" default="User" /></th>
 					
 						<th><g:message code="concept.twitterSetup.label" default="Twitter Setup" /></th>
 					
@@ -42,6 +52,8 @@
 					
 						<td><g:link action="show" id="${conceptInstance.id}">${fieldValue(bean: conceptInstance, field: "conceptName")}</g:link></td>
 					
+						<td>${fieldValue(bean: conceptInstance, field: "user")}</td>
+					
 						<td>${fieldValue(bean: conceptInstance, field: "twitterSetup")}</td>
 					
 						<td>${fieldValue(bean: conceptInstance, field: "facebookSetup")}</td>
@@ -54,9 +66,15 @@
 				</g:each>
 				</tbody>
 			</table>
-			<div class="pagination">
-				<g:paginate total="${conceptInstanceTotal}" />
+			
+			<div class="col-lg-8" style="text-align: center;">
+					<ul class="pagination pagination-sm">
+						<li><g:paginate total="${conceptInstanceTotal}" /></li>
+					</ul>
 			</div>
+			
+			
+		</div>
 		</div>
 	</body>
 </html>

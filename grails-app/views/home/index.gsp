@@ -1,7 +1,6 @@
 <html>
 <head>
 <meta name='layout' content='home' />
-<title>Welcome to Grails</title>
 
 </head>
 <body>
@@ -24,8 +23,8 @@
 
 				<div class="widget-body">
 					<div class="widget-main padding-4">
-						<div class="slimScrollDiv" id="scroll">
-							<div class="slim-scroll" data-height="125" >
+						<div class="slimScrollDiv" >
+							<div class="slim-scroll" data-height="525" >
 								<div class="content">
 									<div id="page-body" role="main">
 
@@ -34,12 +33,15 @@
 											<ul class="list-unstyled">
 												<g:each var="c"
 													in="${grailsApplication.controllerClasses.sort { it.fullName } }">
+													<g:if test="${c.fullName.contains("prismanet")}">
 													<li class="controller">
 													<i class="icon-double-angle-right"></i>
 													<g:link
 															controller="${c.logicalPropertyName}">
-															${c.fullName}
-														</g:link></li>
+															${c.logicalPropertyName}
+														</g:link>
+													</li>
+													</g:if>
 												</g:each>
 											</ul>
 										</div>

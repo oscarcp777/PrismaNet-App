@@ -32,6 +32,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${conceptInstance?.user}">
+				<li class="fieldcontain">
+					<span id="user-label" class="property-label"><g:message code="concept.user.label" default="User" /></span>
+					
+						<span class="property-value" aria-labelledby="user-label"><g:link controller="user" action="show" id="${conceptInstance?.user?.id}">${conceptInstance?.user?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${conceptInstance?.tweets}">
 				<li class="fieldcontain">
 					<span id="tweets-label" class="property-label"><g:message code="concept.tweets.label" default="Tweets" /></span>

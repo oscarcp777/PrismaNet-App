@@ -10,6 +10,14 @@
 	<g:textField name="conceptName" value="${conceptInstance?.conceptName}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: conceptInstance, field: 'user', 'error')} ">
+	<label for="user">
+		<g:message code="concept.user.label" default="User" />
+		
+	</label>
+	<g:select id="user" name="user.id" from="${com.prismanet.User.list()}" optionKey="id" value="${conceptInstance?.user?.id}" class="many-to-one" noSelection="['null': '']"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: conceptInstance, field: 'tweets', 'error')} ">
 	<label for="tweets">
 		<g:message code="concept.tweets.label" default="Tweets" />

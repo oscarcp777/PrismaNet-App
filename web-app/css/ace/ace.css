@@ -12829,3 +12829,12 @@ th[aria-selected=true] .ui-jqgrid-sortable {
 .logo .logoDot:hover {
 	visibility: visible;
 }
+
+.panelButton-md{
+	width: 200px !important;
+	margin: 20px !important;
+}
+.panelButton-lg{
+	width: 300px !important;
+	margin: 20px !important;
+}

@@ -11,5 +11,7 @@ class HomeController {
 	}
 	
 	@Secured(['ROLE_ADMIN'])
-	def onlyAdmin(){render 'admin'}
+	def controlPanel(){
+		
+	}
 }
