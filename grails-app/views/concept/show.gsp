@@ -58,43 +58,16 @@
 					</div>
 				<div class="profile-info-value">
 					
-						<span class="property-value" aria-labelledby="user-label"><g:link controller="user" action="show" id="${conceptInstance?.user?.id}">${conceptInstance?.user?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="user-label">
+						<g:link class="btn btn-xs btn-info" controller="user" action="show" id="${conceptInstance?.user?.id}">${conceptInstance?.user?.encodeAsHTML()}
+						<i class="icon-arrow-right icon-on-right"></i>
+						</g:link></span>
 					
 					</div>
 					</div>
 				</g:if>
 			
-				<g:if test="${conceptInstance?.tweets}">
-				<div class="profile-info-row">
-					<div class="profile-info-name"><span id="tweets-label" class="property-label">
-					<g:message code="concept.tweets.label" default="Tweets" />
-				    </span>
-					</div>
-				<div class="profile-info-value">
-					
-						<g:each in="${conceptInstance.tweets}" var="t">
-						<span class="property-value" aria-labelledby="tweets-label"><g:link controller="tweet" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-					</div>
-					</div>
-				</g:if>
-			
-				<g:if test="${conceptInstance?.posts}">
-				<div class="profile-info-row">
-					<div class="profile-info-name"><span id="posts-label" class="property-label">
-					<g:message code="concept.posts.label" default="Posts" />
-				    </span>
-					</div>
-				<div class="profile-info-value">
-					
-						<g:each in="${conceptInstance.posts}" var="p">
-						<span class="property-value" aria-labelledby="posts-label"><g:link controller="post" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-					</div>
-					</div>
-				</g:if>
+				
 			
 				<g:if test="${conceptInstance?.twitterSetup}">
 				<div class="profile-info-row">
@@ -104,7 +77,11 @@
 					</div>
 				<div class="profile-info-value">
 					
-						<span class="property-value" aria-labelledby="twitterSetup-label"><g:link controller="twitterSetup" action="show" id="${conceptInstance?.twitterSetup?.id}">${conceptInstance?.twitterSetup?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="twitterSetup-label">
+						
+						<g:link class="btn btn-xs btn-info" controller="twitterSetup" action="show" id="${conceptInstance?.twitterSetup?.id}">${conceptInstance?.twitterSetup?.encodeAsHTML()}
+						<i class="icon-arrow-right icon-on-right"></i>
+						</g:link></span>
 					
 					</div>
 					</div>
@@ -118,7 +95,10 @@
 					</div>
 				<div class="profile-info-value">
 					
-						<span class="property-value" aria-labelledby="facebookSetup-label"><g:link controller="facebookSetup" action="show" id="${conceptInstance?.facebookSetup?.id}">${conceptInstance?.facebookSetup?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="facebookSetup-label">
+						<g:link class="btn btn-xs btn-info" controller="facebookSetup" action="show" id="${conceptInstance?.facebookSetup?.id}">${conceptInstance?.facebookSetup?.encodeAsHTML()}
+						<i class="icon-arrow-right icon-on-right"></i>
+						</g:link></span>
 					
 					</div>
 					</div>
