@@ -37,8 +37,8 @@
 				</div>
 				<div class="buttons">
 				<div class="clearfix form-actions">
-						<div class="col-md-9">
-					<g:submitButton name="create" class="save" value="\${message(code: 'default.button.create.label', default: 'Create')}" />
+					<div class="col-md-offset-3 col-md-9">
+					<g:submitButton name="create" class="btn btn-info" value="\${message(code: 'default.button.create.label', default: 'Create')}" />
 				</div>
 				</div>
 				</div>
