@@ -37,6 +37,10 @@ class TweetServiceTests {
 //		mockDomain(Opinion, [opinion])
 //	
 //	}
+	
+	void testGetSamplingSize(){
+		assertEquals 197,tweetService.getSamplingSize(7000)
+	}
 
     void testGetOpinion() {
 //		User.metaClass.encodePassword = { -> }

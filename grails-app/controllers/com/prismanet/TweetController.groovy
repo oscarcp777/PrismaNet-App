@@ -34,45 +34,52 @@ class TweetController extends GenericController{
 	def list(Integer max) {
 		
 		log.debug "tweetController->list params: " + params
-		print params
+		def filters = loadTweetFilters()
 		
-		def filters=[]
+		params.max = Math.min(max ?: 6, 100)
 //		filters = loadFilters(params, new TweetAttributeContext())
+//		def parameters = cleanParams(params)
+		
+		def tweets = tweetService.getTweets(filters,params)
+		Concept concept = Concept.get(params.conceptsId.toLong())
+		if(!grailsApplication.config.grails.twitter.offline)
+			tweetService.loadAvatarUsers(tweets.resultList)
+		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"]]
+	}
+	
+	def randomList(){
+		def filters = loadTweetFilters()
+	}
+	
+	
+	
+	private def loadTweetFilters(){
+		def filters=[]
+
 		if (params["conceptsId"])
 			filters.add(new Filter(attribute:"conceptsId",value: params.conceptsId.toLong(), type:FilterType.EQ))
-		
+
 		if (params["tweetMinute"]){
 			def cal = new GregorianCalendar()
 			cal.setTimeInMillis(params["tweetMinute"] as Long)
 			def minuteFilter=DateUtils.getDateFormat(DateTypes.MINUTE_PERIOD, cal.time)
 			filters.add(new Filter(attribute:"tweetMinute",value: minuteFilter, type:FilterType.EQ))
 		}
-		
+
 		if (params["tweetCreated"]){
 			def cal = new GregorianCalendar()
 			cal.setTimeInMillis(params["tweetCreated"] as Long)
 			def day = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, cal.time)
 			filters.add(new Filter(attribute:"tweetCreated",value: day, type:FilterType.EQ))
 		}
-		
+
 		if (params["tweetHour"]){
 			def cal = new GregorianCalendar()
 			cal.setTimeInMillis(params["tweetHour"] as Long)
 			def hourFilter=DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, cal.time)
 			filters.add(new Filter(attribute:"tweetHour",value: hourFilter, type:FilterType.EQ))
 		}
-		
-		params.max = Math.min(max ?: 6, 100)
-//		def parameters = cleanParams(params)
-		
-//		Filter filter = new Filter(attribute:"conceptsId",value: params.id.toLong(), type:FilterType.EQ)
-//		filters.add(filter)
-		def tweets = tweetService.getTweets(filters,params)
-		Concept concept = Concept.get(params.conceptsId.toLong())
-		print tweets.totalCount
-		if(!grailsApplication.config.grails.twitter.offline)
-			tweetService.loadAvatarUsers(tweets.resultList)
-		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"]]
+		filters
 	}
 	
 	def saveOpinion(){
