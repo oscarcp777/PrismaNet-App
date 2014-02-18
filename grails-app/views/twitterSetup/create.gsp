@@ -42,7 +42,15 @@
 			</g:hasErrors>
 			<g:form class="form-horizontal" action="save">
 				<div class="form">
+				<div class="tabbable">
+	<ul class="nav nav-tabs padding-16">
+		<li class="active"><a data-toggle="tab" href="#edit-basic"> <i
+				class="green icon-edit bigger-125"></i> <g:message
+					code="form.new.twitter" />
+		</a></li>
+	</ul>
 					<g:render template="form" />
+					</div>
 				</div>
 				<div class="buttons">
 					<div class="clearfix form-actions">

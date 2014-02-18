@@ -25,9 +25,16 @@
 		<hr>
 		<div id="create-concept" class="content scaffold-create" role="main">
 			<g:if test="${flash.message}">
+			<div class="alert alert-info">
+					<button type="button" class="close" data-dismiss="alert">
+						<i class="icon-remove"></i>
+					</button>
 				<div class="message" role="status">
 					${flash.message}
 				</div>
+				<br>
+				</div>
+				
 			</g:if>
 			<g:hasErrors bean="${conceptInstance}">
 				<ul class="errors" role="alert">
@@ -40,7 +47,16 @@
 			</g:hasErrors>
 			<g:form class="form-horizontal" action="save">
 				<div class="form">
-					<g:render template="form" />
+
+					<div class="tabbable">
+						<ul class="nav nav-tabs padding-16">
+							<li class="active"><a data-toggle="tab" href="#edit-basic">
+									<i class="green icon-edit bigger-125"></i> <g:message
+										code="form.new.concept" />
+							</a></li>
+						</ul>
+						<g:render template="form" />
+					</div>
 				</div>
 
 

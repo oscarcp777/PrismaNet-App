@@ -1,12 +1,7 @@
 <%@ page import="com.prismanet.Concept"%>
 
 
-	<div class="tabbable">
-		<ul class="nav nav-tabs padding-16">
-			<li class="active"><a data-toggle="tab" href="#edit-basic">
-					<i class="green icon-edit bigger-125"></i> <g:message code="form.new.concept"/>
-			</a></li>
-		</ul>
+
 
 		<div class="tab-content profile-edit-tab-content">
 			<div id="edit-basic" class="tab-pane active">
@@ -88,4 +83,4 @@
 
 </div>
 				</div>
-				</div>
+				

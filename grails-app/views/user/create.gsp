@@ -19,8 +19,8 @@
 			<i class="icon-arrow-right icon-on-right bigger-110"></i>
 			</g:link>
 		</div>
+		<hr>
 		<div id="create-user" class="content scaffold-create" role="main">
-			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -33,7 +33,15 @@
 			</g:hasErrors>
 			<g:form class="form-horizontal" action="save" >
 				<div class="form">
+				<div class="tabbable">
+						<ul class="nav nav-tabs padding-16">
+							<li class="active"><a data-toggle="tab" href="#edit-basic">
+									<i class="green icon-edit bigger-125"></i> <g:message
+										code="form.new.user" />
+							</a></li>
+						</ul>
 					<g:render template="form"/>
+					</div>
 				</div>
 				<div class="buttons">
 				<div class="clearfix form-actions">

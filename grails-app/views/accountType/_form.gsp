@@ -1,11 +1,6 @@
 <%@ page import="com.prismanet.AccountType"%>
 
-<div class="tabbable">
-	<ul class="nav nav-tabs padding-16">
-		<li class="active"><a data-toggle="tab" href="#edit-basic"> <i
-				class="green icon-edit bigger-125"></i> <g:message code="form.new.count"/>
-		</a></li>
-	</ul>
+
 
 	<div class="tab-content profile-edit-tab-content">
 		<div id="edit-basic" class="tab-pane active">
@@ -28,4 +23,3 @@
 
 		</div>
 	</div>
-</div>

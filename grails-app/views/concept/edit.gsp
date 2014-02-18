@@ -38,12 +38,20 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form method="post" >
+			<g:form method="post" class="form-horizontal">
 				<g:hiddenField name="id" value="${conceptInstance?.id}" />
 				<g:hiddenField name="version" value="${conceptInstance?.version}" />
-				<fieldset class="form">
+				<div class="form">
+				<div class="tabbable">
+						<ul class="nav nav-tabs padding-16">
+							<li class="active"><a data-toggle="tab" href="#edit-basic">
+									<i class="green icon-edit bigger-125"></i> <g:message
+										code="form.edit.concept" />
+							</a></li>
+						</ul>
 					<g:render template="form"/>
-				</fieldset>
+					</div>
+				</div>
 				<div class="clearfix form-actions">
 					<div class="col-md-offset-3 col-md-9">
 					<g:actionSubmit class="btn btn-info" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />

@@ -31,7 +31,16 @@
 		<div id="show-concept"
 			class="content scaffold-show" role="main">
 			<g:if test="${flash.message}">
-				<div class="message" role="status">${flash.message}</div>
+				<div class="alert alert-block alert-success">
+					<button type="button" class="close" data-dismiss="alert">
+						<i class="icon-remove"></i>
+					</button>
+					<div class="message" role="status">
+						${flash.message}
+					</div>
+					<br>
+				</div>
+
 			</g:if>
 			<div
 				class="profile-user-info profile-user-info-striped property-list concept">
