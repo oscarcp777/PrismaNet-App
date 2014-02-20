@@ -33,7 +33,7 @@
 
 							<div class="widget-body">
 								<div class="widget-main padding-4">
-									<div id="container" style="width: 100%; height: 400px;"></div>
+									<div id="container" style="width: 100%; min-width: 300px;"></div>
 								</div>
 							</div>
 						</div>
@@ -63,7 +63,7 @@
 
 							<div class="widget-body">
 								<div class="widget-main padding-4">
-									<div id=lineaChartUser style="width: 100%; height: 400px;"></div>
+									<div id=lineaChartUser style="width: 100%; min-width:300px;"></div>
 								</div>
 							</div>
 						</div>

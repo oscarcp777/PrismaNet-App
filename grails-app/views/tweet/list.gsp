@@ -19,7 +19,7 @@
 			</h1>
 		</div>
 		<div class="row well">
-			<div class="col-lg-4">
+			<div class="col-xs-4">
 				<div class="widget-body box-user-twitter" style="background: white;">
 					<div class="widget-header header-color-green4">
 						<h4 class="lighter">
@@ -85,7 +85,7 @@
 				</div>
 			</div>
 
-			<div class="col-lg-8">
+			<div class="col-xs-8">
 
 
 				<ul class="tweets tweet-group list-unstyled">

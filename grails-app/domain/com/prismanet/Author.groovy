@@ -40,4 +40,7 @@ class Author {
 	public String toString() {
 		return accountName;
 	}
+	public getRatio(){
+		following!=null&& following>1? followers/following:followers
+	}
 }

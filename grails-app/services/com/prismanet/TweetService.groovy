@@ -225,7 +225,31 @@ class TweetService extends GenericService{
 		def numerator = poblationNumber*1.96**2*0.05*0.95
 		numerator.divide(0.03**2*(poblationNumber-1)+1.96**2*0.05*0.95, 0, BigDecimal.ROUND_HALF_UP)
 	}
-	
+	def loadDataAuthors(authors){
+		
+		def usersName=[]
+		authors.each {it ->
+			usersName.add(it.accountNameSingle)
+		}
+		Twitter twitter = new TwitterFactory().getInstance();
+		ResponseList<twitter4j.User> users = null
+		if (usersName.size()>0)
+			users = twitter.lookupUsers((String[])usersName.toArray());
+		if (users != null)
+		for (twitter4j.User user : users) {
+			Author author=authors.find {it.accountNameSingle == user.screenName}
+			if (author){
+				author.profileImage=user.profileImageURL
+				author.followers=user.followersCount
+				author.following=user.friendsCount
+				author.tweetsCount=user.statusesCount
+				author.name=user.name
+			}
+			if (author)
+				author.save(flush:true)
+			
+		}
+	}
 	def loadAvatarUsers(tweets){
 		
 		def usersName=[]

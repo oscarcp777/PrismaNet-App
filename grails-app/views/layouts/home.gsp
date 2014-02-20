@@ -154,7 +154,7 @@
 									<b class="arrow icon-angle-down"></b>
 							</a>
 								<ul class="submenu">
-								<g:each in="${scService.currentUser.concepts.sort{it.conceptName}}" status="i" var="conceptInstance">
+								<g:each in="${scService?.currentUser?.concepts?.sort{it.conceptName}}" status="i" var="conceptInstance">
 									<li id="${conceptInstance.id}">
 									<a href="#" class="dropdown-toggle">
 									<i class="icon-double-angle-right"></i>

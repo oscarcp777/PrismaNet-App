@@ -8256,7 +8256,7 @@ li.item-default {
 }
 .profile-users .user img {
     padding:2px;
-    border-radius:100%;
+    border-radius:20px;
     border:1px solid #AAA;
     max-width:none;
     width:64px;

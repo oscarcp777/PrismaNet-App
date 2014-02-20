@@ -1,6 +1,8 @@
 <html>
 <head>
 <meta name="layout" content="home" />
+<link rel="stylesheet"
+	href="${resource(dir: 'css', file: 'twitter.css')}" type="text/css">
 </head>
 <body>
 	<div class="page-content">
@@ -113,14 +115,8 @@
 						<div class="widget-box">
 							<div class="widget-header header-color-blue">
 								<h5>
-									<span class="glyphicon glyphicon-stats"> </span> Autores con mas seguidores
+									<i class="icon-group "></i> Autores con mas seguidores
 								</h5>
-								<div class="widget-toolbar input-group ">
-									<div id="authorPickert" class="btn btn-primary date-picker">
-										<i class="icon-calendar"></i> <span class="date-range"></span>
-										<i class="icon-chevron-down"></i>
-									</div>
-								</div>
 								<div class="widget-toolbar">
 									<a href="#" data-action="collapse"> <i
 										class="1 bigger-125 icon-chevron-up"></i>
@@ -134,8 +130,11 @@
 							<div class="widget-body">
 								<div class="widget-body-inner" style="display: block;">
 									<div class="widget-main">
-										<div id="relevantAuthors">
-											
+										<div id="relevantAuthors" style="min-width: 310px">
+											<div class="profile-users clearfix">
+												
+														<g:render template="author" />
+											</div>
     									</div>
 									</div>
 
@@ -187,8 +186,6 @@
 		   var dataWeight = {"id":${concept.id}, "div":'#weightChart',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 		   getGroupedWeight(dataWeight);
 
-		   var data = {"id":${concept.id}, "div":'#relevantAuthors',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
-		    getRelevantAuthors(data);
 		});
 	</script>
 </body>

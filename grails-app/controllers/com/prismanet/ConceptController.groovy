@@ -16,7 +16,7 @@ class ConceptController extends GenericController{
 
 	def scaffold = true
 	def conceptService
-	
+	def tweetService
 	
 	
 	def weightStats = {
@@ -26,7 +26,10 @@ class ConceptController extends GenericController{
 
 	def stats = {
 		Concept concept = Concept.get(params.id)
-		[concept : concept]
+		def authors=Author.list(max:10,sort:"followers",order:"desc");
+		if(!grailsApplication.config.grails.twitter.offline)
+		tweetService.loadDataAuthors(authors)
+		[concept : concept,authors:authors]
 	}
 	
 	
@@ -128,12 +131,12 @@ class ConceptController extends GenericController{
 				
 		
 		// Obtengo autores
-		def authorsList = conceptService.getRelevantAuthors(filters, dateFrom, dateTo, 10)
+//		def authorsList = conceptService.getRelevantAuthors(filters, dateFrom, dateTo, 10)
 		def results = []
 		for ( i in 0..9 ){
-				results.add(authorsList[i])
+				results.add(["cfk","1200000"])
 		}
-		render results
+		render results as JSON
 	}
 	
 	
