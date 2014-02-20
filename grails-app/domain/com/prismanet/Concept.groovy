@@ -71,12 +71,10 @@ class Concept {
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		Concept newConcept = new Concept()
-		newConcept.conceptName = conceptName
-		newConcept.twitterSetup = twitterSetup
-		newConcept.facebookSetup = facebookSetup
-		newConcept.user = user
-		return newConcept;
+		Concept newConcept = new Concept(this)
+		newConcept.twitterSetup = twitterSetup.clone()
+		newConcept.facebookSetup = facebookSetup.clone()
+		return newConcept
 	}
 	
 	

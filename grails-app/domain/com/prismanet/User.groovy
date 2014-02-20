@@ -20,4 +20,9 @@ class User extends SecUser{
 		firstName(blank:false)
 		lastName(blank:false)
 	}
+	
+	@Override
+	public String toString() {
+		return username;
+	}
 }

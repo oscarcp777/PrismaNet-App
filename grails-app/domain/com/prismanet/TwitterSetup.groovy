@@ -30,5 +30,11 @@ class TwitterSetup {
 	public String toString() {
 		return includedAccounts;
 	}
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		TwitterSetup setup = new TwitterSetup(this)
+		return setup
+	}
 
 }
