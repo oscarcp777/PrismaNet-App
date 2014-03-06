@@ -11,6 +11,10 @@ import com.prismanet.utils.DateUtils
 
 class GenericCoreService extends GenericService {
 
+	GenericCoreService(){
+		super()
+	}
+	
 	GenericCoreService(def domainClass,AttributeContext context){
 		super(domainClass, context)
 	}

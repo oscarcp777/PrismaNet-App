@@ -8,7 +8,10 @@ import grails.orm.HibernateCriteriaBuilder
 class GenericService {
 	
 	AttributeContext context
-	def domainClass 
+	def domainClass
+	
+	GenericService(){
+	}
 	
 	GenericService(def domainClass,AttributeContext context){
 		this.domainClass = domainClass

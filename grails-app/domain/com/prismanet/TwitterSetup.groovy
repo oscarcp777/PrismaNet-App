@@ -10,6 +10,8 @@ class TwitterSetup {
 	String excludedAccounts
 	// Palabras clave
 	String keywords
+	
+	Date lastUpdated
 
 	static constraints = {
 		// Ver constraint twitterAccount en TwitterAccountConstraint (usa plugin)
@@ -24,6 +26,7 @@ class TwitterSetup {
 					}
 				}
 		})
+		lastUpdated(nullable:true)
 	}
 
 	@Override
