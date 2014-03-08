@@ -80,7 +80,7 @@ grails.hibernate.cache.queries = false
 grails.gorm.default.constraints = {
 	'*'(nullable: true)
 }
-grails.jobs.disable = false
+grails.jobs.disable = true
 grails.twitter.offline = false
 environments {
     development {
@@ -103,6 +103,11 @@ log4j = {
 		rollingFile name:'errorsLog', file: "${logFile}${barra}errors.log", append: true,
 			layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n'), threshold: org.apache.log4j.Level.ERROR
 	}
+   
+   //Para ver valores de filtros
+//   trace 'org.hibernate.type'
+//   debug 'org.hibernate.SQL'
+   
 	debug 'grails.app.jobs'
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP

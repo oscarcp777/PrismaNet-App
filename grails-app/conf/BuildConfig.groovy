@@ -11,6 +11,8 @@ grails.project.source.level = 1.6
 //   run: [maxMemory:1024, minMemory:64, debug:false, maxPerm:256]
 //]
 
+grails.plugin.location."prisma-net-core" = "../PrismaNet-core"
+
 grails.project.dependency.resolution = {
 	// inherit Grails' default dependencies
 	inherits("global") {
@@ -59,7 +61,6 @@ grails.project.dependency.resolution = {
 		compile ':cache:1.0.1'
 		compile ":create-domain-uml:0.5"
 		compile ":constraints:0.8.0"
-		compile ":quartz:1.0-RC9"
 		compile ":mongodb:1.3.0"
 		compile ':gson:1.1.4'
 		runtime ":zipped-resources:1.0"
