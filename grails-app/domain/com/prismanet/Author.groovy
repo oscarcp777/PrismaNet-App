@@ -17,7 +17,7 @@ class Author {
 	static hasMany = [tweets:Tweet, posts:Post]
 	
     static constraints = {
-		profileImage(url:true)
+		profileImage(nullable:true, url:true)
 		accountName(unique:true, validator:{value ->
 			// Validacion cadena de cuentas de twitter
 			if (!value.matches("^@[0-9A-Za-z_]+")) {
@@ -25,11 +25,12 @@ class Author {
 			}
 
 		})
-		followers(min: 0)
-		following(min: 0)
-		tweetsCount(min: 0)
-		sex()
-		userSince()  
+		name(nullable:true)
+		followers(nullable:true, min: 0)
+		following(nullable:true, min: 0)
+		tweetsCount(nullable:true, min: 0)
+		sex(nullable:true)
+		userSince(nullable:true)  
 		tweets(nullable:true)
 		posts(nullable:true)
     }
