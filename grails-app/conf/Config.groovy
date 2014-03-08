@@ -91,3 +91,6 @@ log4j = {
 }
 
 jobs.disable = false
+
+
+grails.serverURL = "http://localhost:8090/PrismaNet-jobs"
