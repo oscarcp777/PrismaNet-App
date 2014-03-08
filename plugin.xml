@@ -1,0 +1,41 @@
+<plugin name='prisma-net-core' version='0.1' grailsVersion='2.2 &gt; *'>
+  <author>Your name</author>
+  <title>Prisma Net Core Plugin</title>
+  <description>Brief summary/description of the plugin.
+</description>
+  <documentation>http://grails.org/plugin/prisma-net-core</documentation>
+  <type>PrismaNetCoreGrailsPlugin</type>
+  <resources>
+    <resource>com.prismanet.AccountType</resource>
+    <resource>com.prismanet.Author</resource>
+    <resource>com.prismanet.Concept</resource>
+    <resource>com.prismanet.FacebookSetup</resource>
+    <resource>com.prismanet.HistoricalTwitterAccount</resource>
+    <resource>com.prismanet.Keyword</resource>
+    <resource>com.prismanet.Mention</resource>
+    <resource>com.prismanet.Post</resource>
+    <resource>com.prismanet.Tweet</resource>
+    <resource>com.prismanet.TwitterAccount</resource>
+    <resource>com.prismanet.TwitterSetup</resource>
+    <resource>com.prismanet.User</resource>
+    <resource>com.prismanet.model.security.SecRole</resource>
+    <resource>com.prismanet.model.security.SecUser</resource>
+    <resource>com.prismanet.model.security.SecUserSecRole</resource>
+  </resources>
+  <repositories>
+    <repository name='grailsCentral' url='http://grails.org/plugins' />
+    <repository name='mavenCentral' url='http://repo1.maven.org/maven2/' />
+    <repository name='http://twitter4j.org/maven2' url='http://twitter4j.org/maven2/' />
+  </repositories>
+  <dependencies>
+    <compile>
+      <dependency group='org.twitter4j' name='twitter4j-stream' version='3.0.4-SNAPSHOT' />
+      <dependency group='org.twitter4j' name='twitter4j-media-support' version='3.0.4-SNAPSHOT' />
+      <dependency group='org.twitter4j' name='twitter4j-async' version='3.0.4-SNAPSHOT' />
+      <dependency group='org.twitter4j' name='twitter4j-core' version='3.0.4-SNAPSHOT' />
+    </compile>
+  </dependencies>
+  <plugins />
+  <runtimePluginRequirements />
+  <behavior />
+</plugin>

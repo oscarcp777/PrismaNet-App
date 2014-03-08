@@ -1,0 +1,10 @@
+target/
+web-app/WEB-INF/tld/
+target-eclipse/
+.settings/
+*.log
+.DS_Store
+.classpath
+.project
+/.metadata
+/Servers
