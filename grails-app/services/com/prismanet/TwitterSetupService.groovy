@@ -16,5 +16,24 @@ class TwitterSetupService extends GenericCoreService {
 		result.results[0].lastUpdated
 	}
 	
+	def getConfiguration(){
+		def configs = TwitterSetup.findAll()
+		def stringConfig = ""
+		configs.each{ TwitterSetup setup ->
+			if (setup.includedAccounts)
+				stringConfig += setup.includedAccounts + ","
+			if (setup.keywords)
+				stringConfig += setup.keywords + ","
+			if (setup.neutralHashtags)
+				stringConfig += setup.neutralHashtags + ","
+			if (setup.positiveHashtags)
+				stringConfig += setup.positiveHashtags + ","
+			if (setup.negativeHashtags)
+				stringConfig += setup.negativeHashtags 
+		}
+		print "la configuracion es: " + stringConfig
+		stringConfig
+	}
+	
 		
 }
