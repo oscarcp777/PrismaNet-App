@@ -40,5 +40,8 @@ grails.project.dependency.resolution = {
               ":rest-client-builder:1.0.3") {
             export = false
         }
+		compile ":spring-security-core:1.2.7.3"
+		compile ":spring-security-ui:0.2"
+		compile ":constraints:0.8.0"
     }
 }

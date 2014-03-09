@@ -12,31 +12,27 @@ import com.prismanet.sentiment.OpinionValue
 
 class TweetIntegrationTests {
 
-   
+	@Before
+	void setUp() {
+		def setup = new TwitterSetup(includedAccounts:"@CFKArgentina,@twitter2", keywords:"politica,filmus").save()
+		def author = new Author(accountName:"@oscar", followers:10, userSince:new Date(), sex: Sex.M).save()
+		def account = new AccountType(type:'free').save()
+		def user = new User(username: 'oscar', password: 'fiuba', firstName:'oscar', lastName:'Caceres',account:account).save()
+		def tweet = new Tweet(content:"@CFKArgentina", author:author, created:new Date(), tweetId:1l, retweet:false).save()
+		
+	}
 	
 	@Test
 	void testGetTweetsWithConcept(){
-		def d1 = new GregorianCalendar(2013, Calendar.OCTOBER, 14,1,35)
-		def twitterConfig = new TwitterSetup(includedAccounts:"@CFKArgentina,@twitter2",
-		keywords:"politica,filmus").save()
-		def author1 = new Author(accountName:"@oscar", followers:10, userSince:new Date(), sex: Sex.M).save()
-		def tweet1 = new Tweet(content:"@CFKArgentina", author:author1, created:d1.time).save()
 		
-		def user = new User(firstName: "sant",lastName:"donik").save()
+		def concept = new Concept(conceptName: 'Filmus',twitterSetup:TwitterSetup.first(), user: User.first()).save()
+		concept.addToTweets(Tweet.first())
 		
-		
-		def concept = new Concept(conceptName: 'Filmus',twitterSetup:twitterConfig, user: user).save()
-		concept.addToTweets(tweet1)
-		
-		
-		
-		def opinion = new Opinion(concept:concept, tweet:tweet1, value:OpinionValue.POSITIVE).save()
+		def opinion = new Opinion(concept:concept, tweet:Tweet.first(), value:OpinionValue.POSITIVE).save()
 		
 		
 		def tweetService = new TweetService()
-		def filters = []
-		Filter filter = new Filter(attribute:"conceptsId",value: concept.id, type:FilterType.EQ)
-		filters.add(filter)
+		def filters = [new Filter(attribute:"conceptsId",value: concept.id, type:FilterType.EQ)]
 		def tweetList = tweetService.getTweets(filters, [:])
 		assert tweetList.resultList.size() == 1
 		assert tweetList.resultList.get(0).value == OpinionValue.POSITIVE
@@ -45,11 +41,6 @@ class TweetIntegrationTests {
 	
 	@Test
 	void testGetTweetsWithoutConcept(){
-		def d1 = new GregorianCalendar(2013, Calendar.OCTOBER, 14,1,35)
-		def twitterConfig = new TwitterSetup(includedAccounts:"@CFKArgentina,@twitter2",
-		keywords:"politica,filmus").save()
-		def author1 = new Author(accountName:"@oscar", followers:10, userSince:new Date(), sex: Sex.M).save()
-		def tweet1 = new Tweet(content:"@CFKArgentina", author:author1, created:d1.time).save()
 		
 		def tweetService = new TweetService()
 		def tweetList = tweetService.getTweets([],[:])

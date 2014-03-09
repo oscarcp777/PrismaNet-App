@@ -4,10 +4,10 @@ import static org.junit.Assert.*
 import org.junit.*
 
 class UserIntegrationTests {
-
+	
+	
     @Before
     void setUp() {
-        // Setup logic here
     }
 
     @After
@@ -20,6 +20,9 @@ class UserIntegrationTests {
     void testFirstSaveEver() {
 		def account = new AccountType(type:'free').save()
         def user = new User(username: 'oscar', password: 'fiuba', firstName:'oscar', lastName:'Caceres', account:account)
+		def springSecurityService = new Object()
+		springSecurityService.metaClass.encodePassword = {String password -> "ENCODED_PASSWORD"}
+		user.springSecurityService = springSecurityService
         assertNotNull user.save()
         assertNotNull user.id
 
@@ -54,20 +57,18 @@ class UserIntegrationTests {
     }
 
 	
-// TODO FALLA POR SPRING SECURITY
-//    @Test
-//    void testEvilSave() {
-//		def account = new AccountType(type:'free').save()
-//        def user = new User(password: 'pass', account:account)
-//        assertFalse user.validate()
-//        assertTrue user.hasErrors()
-//        def errors = user.errors
-//        assertEquals "nullable", errors.getFieldError("username").code
-//        
-//        // Campo valido no esta en el objeto errors
-//        assertNull errors.getFieldError("username")
-//        
-//    }
+    @Test
+    void testEvilSave() {
+		def account = new AccountType(type:'free').save()
+        def user = new User(password: 'pass', account:account)
+        assertFalse user.validate()
+        assertTrue user.hasErrors()
+        def errors = user.errors
+        assertEquals "nullable", errors.getFieldError("username").code
+        
+        // Campo valido no esta en el objeto errors
+        assertNull errors.getFieldError("pass")
+    }
 
 
 }

@@ -13,21 +13,14 @@ class ConceptIntegrationTests {
 
     @Before
     void setUp() {
-		def d1 = new GregorianCalendar(2013, Calendar.OCTOBER, 14,1,35)
-        def twitterConfig = new TwitterSetup(includedAccounts:"@CFKArgentina,@twitter2",
-		keywords:"politica,filmus").save()
-		def author1 = new Author(accountName:"@oscar", followers:10, userSince:new Date(), sex: Sex.M).save()
-		def tweet1 = new Tweet(content:"@CFKArgentina", author:author1, created:d1.time).save()
-		
-		def user = new User(firstName: "sant",lastName:"donik").save()
-		
-		
-		def concept = new Concept(conceptName: 'Filmus',twitterSetup:twitterConfig)
-		concept.addToTweets(tweet1)
-		concept.save()
-		
-		
-		def opinion = new Opinion(user:user,concept:concept, tweet:tweet1, value:OpinionValue.POSITIVE).save()
+		def setup = new TwitterSetup(includedAccounts:"@CFKArgentina,@twitter2", keywords:"politica,filmus").save()
+		def author = new Author(accountName:"@oscar", followers:10, userSince:new Date(), sex: Sex.M).save()
+		def account = new AccountType(type:'free').save()
+		def user = new User(username: 'oscar', password: 'fiuba', firstName:'oscar', lastName:'Caceres',account:account).save()
+		def tweet = new Tweet(content:"@CFKArgentina", author:author, created:new Date(), tweetId:1l, retweet:false).save()
+		def concept = new Concept(conceptName: 'Filmus',twitterSetup:setup, user: user).save()
+		concept.addToTweets(tweet)
+		def opinion = new Opinion(concept:concept, tweet:tweet, value:OpinionValue.POSITIVE).save()
     }
 
     @After
@@ -37,7 +30,7 @@ class ConceptIntegrationTests {
 
      @Test
     void testFirstSaveEver() {
-		def concept = new Concept(conceptName: 'Filmus')
+		def concept = new Concept(conceptName: 'Filmus', user:User.first())
 		assertNotNull concept.save()
         assertNotNull concept.id
 
@@ -47,12 +40,11 @@ class ConceptIntegrationTests {
 
     @Test
     void testSaveAndUpdate() {
-        def concept = new Concept(conceptName: 'Filmus')
+        def concept = new Concept(conceptName: 'Filmus', user:User.first())
 		assertNotNull concept.save()
 
         def foundConcept = Concept.get(concept.id)
-		def keyword = new Keyword(word:'Cristina')
-        foundConcept.conceptName = "Daniel Filmus"
+		foundConcept.conceptName = "Daniel Filmus"
         foundConcept.save()
 
         def editedConcept = Concept.get(concept.id)
@@ -61,7 +53,7 @@ class ConceptIntegrationTests {
 
     @Test
     void testSaveThenDelete() {
-        def concept = new Concept(conceptName: 'Filmus')
+        def concept = new Concept(conceptName: 'Filmus', user:User.first())
 		assertNotNull concept.save()
         
         def foundConcept = Concept.get(concept.id)
@@ -84,7 +76,7 @@ class ConceptIntegrationTests {
 		def twitterConfig = new TwitterSetup(includedAccounts:"@twitter1,@twitter2",
 		keywords:"politica,filmus")
 		
-		def concept = new Concept(conceptName:"Filmus",twitterSetup:twitterConfig).save()
+		def concept = new Concept(conceptName:"Filmus",twitterSetup:twitterConfig, user:User.first()).save()
 		def tweet1 = new Tweet(content:"El @twitter1 no existe")
 		def tweet2 = new Tweet(content:"El @twitter2 no existe")
 		concept.addToTweets(tweet1)
@@ -99,10 +91,10 @@ class ConceptIntegrationTests {
 	void testCategorizationByAuthorSexService(){
 		def quantityProjection = ["tweetsId" : ProjectionType.COUNT]
 		def conceptService = new ConceptService()
-		def concept = new Concept(conceptName: 'Filmus')
+		def concept = new Concept(conceptName: 'Filmus', user:User.first())
 		assertNotNull concept.save()
 		def groupList = ["sex"]
-		def categoryList = conceptService.categoryStore(groupList, null, quantityProjection);
+		def categoryList = conceptService.categoryStore(groupList, null, quantityProjection, null);
 		int j = 1
 		for (i in categoryList) {
 			 println j + "- Sexo: " + i[0] + ", Valor: " + i[1]
@@ -118,7 +110,7 @@ class ConceptIntegrationTests {
 		def conceptService = new ConceptService()
 		def groupList = ["tweetCreated"]
 		def list = Concept.list()
-		def categoryList = conceptService.categoryStore(groupList, null, quantityProjection);
+		def categoryList = conceptService.categoryStore(groupList, null, quantityProjection, null);
 		int j = 1
 		for (i in categoryList) {
 			 println j + "- Fecha: " + i[0] + ", Valor: " + i[1]

@@ -10,6 +10,12 @@ class TwitterSetup {
 	String excludedAccounts
 	// Palabras clave
 	String keywords
+	// Hashtags neutrales
+	String neutralHashtags
+	// Hashtags positivos
+	String positiveHashtags
+	// Hashtags negativos
+	String negativeHashtags
 	
 	Date lastUpdated
 
@@ -17,15 +23,10 @@ class TwitterSetup {
 		// Ver constraint twitterAccount en TwitterAccountConstraint (usa plugin)
 		includedAccounts(nullable:true, twitterAccount:true)
 		excludedAccounts(nullable:true, twitterAccount:true)
-		keywords(nullable:true, validator:{value ->
-			// Validacion cadena de palabras clave
-			if (value != null)
-				for (String twitterAccount in value.split(',')) {
-					if (!twitterAccount.matches("^[0-9A-Za-z]+")) {
-						return false
-					}
-				}
-		})
+		keywords(nullable:true, wordSetup:true)
+		neutralHashtags(nullable:true, wordSetup:true)
+		positiveHashtags(nullable:true, wordSetup:true)
+		negativeHashtags(nullable:true, wordSetup:true)
 		lastUpdated(nullable:true)
 	}
 

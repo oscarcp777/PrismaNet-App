@@ -23,15 +23,11 @@ class TwitterSetupIntegrationTests {
 		
 		def twitterConfig2 = new TwitterSetup(includedAccounts:"@dsfa")
 		assertNotNull twitterConfig2.save()
-//		twitterConfig.addToKeywords(new Keyword(word:'filmus'))
-//		twitterConfig.addToKeywords(new Keyword(word:'politica'))
-		
-        assertNotNull twitterConfig1.id
+
+		assertNotNull twitterConfig1.id
 
         def foundConfig = TwitterSetup.get(twitterConfig1.id)
 		assertEquals(twitterConfig1.id,foundConfig.id)
-//        def keywords = foundConfig.keywords*.word
-//		assertEquals([ 'filmus', 'politica'] , keywords.sort())
 
     }
 
@@ -39,19 +35,13 @@ class TwitterSetupIntegrationTests {
     void testSaveAndUpdate() {
         def twitterConfig = new TwitterSetup(includedAccounts:"@Filmus")
 		assertNotNull twitterConfig.save()
-//		twitterConfig.addToKeywords(new Keyword(word:'filmus'))
-//		twitterConfig.addToKeywords(new Keyword(word:'politica'))
-		
 
         def foundConfig = TwitterSetup.get(twitterConfig.id)
 		assertNotNull foundConfig.save()
-//		def keyword = new Keyword(word:'Cristina')
-//        foundConfig.addToKeywords(keyword)
         foundConfig.includedAccounts += ",@Pichetto"
 		
 
         def editedConfig = TwitterSetup.get(twitterConfig.id)
-//        assertTrue editedConfig.keywords.contains(keyword)
 		assertTrue editedConfig.includedAccounts.contains(",@Pichetto")
     }
 
@@ -59,8 +49,6 @@ class TwitterSetupIntegrationTests {
     void testSaveThenDelete() {
         def twitterConfig = new TwitterSetup(includedAccounts:"@Filmus")
 		assertNotNull twitterConfig.save()
-//		twitterConfig.addToKeywords(new Keyword(word:'filmus'))
-//		twitterConfig.addToKeywords(new Keyword(word:'politica'))
 		
         def foundConfig = TwitterSetup.get(twitterConfig.id)
         foundConfig.delete()
@@ -94,7 +82,7 @@ class TwitterSetupIntegrationTests {
 		assertFalse twitterConfig.validate()
 		assertTrue twitterConfig.hasErrors()
 		errors = twitterConfig.errors
-		assertEquals "validator.invalid", errors.getFieldError("keywords").code
+		assertEquals "wordSetup.invalid", errors.getFieldError("keywords").code
 		// Campo valido no esta en el objeto errors
 		assertNull errors.getFieldError("excludedAccounts")
 		
