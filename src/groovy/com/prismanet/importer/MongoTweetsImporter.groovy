@@ -40,5 +40,13 @@ class MongoTweetsImporter {
 		
 		cursor
 	}
+	
+	def setConfiguration(config){
+		DB db = client.getDB("prismanet")
+		DBCollection setup = db.getCollection("config")
+		BasicDBObject obj = new BasicDBObject()
+		obj.append("config", config)
+		setup.update(new BasicDBObject(), obj)
+	}
 
 }

@@ -28,6 +28,7 @@ class TweetJob {
 		 return
 		 
 		println "TweetJob ejecutado: " + new Date()
+		MongoTweetsImporter importer = new MongoTweetsImporter("mongodb://localhost")
 		
 		use(TimeCategory){
 			Date aux = twitterSetupService.getLastUpdated()
@@ -40,17 +41,14 @@ class TweetJob {
 				
 				if (!grailsApplication.config.twitter.process){
 					grailsApplication.config.twitter.process = Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
-					println "Proceso api-twitter iniciado por modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
+					println "Proceso api-twitter iniciado, ultima modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
 				}else{
 					grailsApplication.config.twitter.process.destroy()
+					importer.setConfiguration(twitterSetupService.getConfiguration())
 					grailsApplication.config.twitter.process = Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
 					println "Proceso api-twitter reiniciado por modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
 				}
 			}
-		}
-		
-		
-		use ( TimeCategory ) {
 			
 			def d1 = new GregorianCalendar(2013, Calendar.OCTOBER, 27,11,00)
 //			def d2 = new GregorianCalendar(2013, Calendar.OCTOBER, 14,1,36)
@@ -62,7 +60,7 @@ class TweetJob {
 //			dates.put("dateTo",d2.time)
 			
 //			print "filtros: " + dates
-			MongoTweetsImporter importer = new MongoTweetsImporter("mongodb://localhost")
+			
 			def tweets = importer.importTweets(dates)
 //			print "-------------------------"
 //			print tweets
