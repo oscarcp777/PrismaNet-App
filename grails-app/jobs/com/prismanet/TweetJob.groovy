@@ -24,12 +24,10 @@ class TweetJob {
 	}
 
 	def execute() {
-		if(grailsApplication.config.jobs.disable)
+		if(grailsApplication.config.jobs.twitter.disable)
 		 return
 		 
 		println "TweetJob ejecutado: " + new Date()
-		
-//		Process p = Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar");
 		
 		use(TimeCategory){
 			Date aux = twitterSetupService.getLastUpdated()
@@ -42,12 +40,10 @@ class TweetJob {
 				
 				if (!grailsApplication.config.twitter.process){
 					grailsApplication.config.twitter.process = Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
-					log.info "Proceso api-twitter iniciado por modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
 					println "Proceso api-twitter iniciado por modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
 				}else{
 					grailsApplication.config.twitter.process.destroy()
 					grailsApplication.config.twitter.process = Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
-					log.info "Proceso api-twitter reiniciado por modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
 					println "Proceso api-twitter reiniciado por modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
 				}
 			}

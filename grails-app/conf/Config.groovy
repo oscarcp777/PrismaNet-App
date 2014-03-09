@@ -90,7 +90,4 @@ log4j = {
            'net.sf.ehcache.hibernate'
 }
 
-jobs.disable = false
-
-
-grails.serverURL = "http://localhost:8090/PrismaNet-jobs"
+jobs.twitter.disable = false
