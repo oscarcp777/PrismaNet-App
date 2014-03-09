@@ -60,7 +60,6 @@ grails.project.dependency.resolution = {
 		runtime ":database-migration:1.3.2"
 		compile ':cache:1.0.1'
 		compile ":create-domain-uml:0.5"
-		compile ":constraints:0.8.0"
 		compile ":mongodb:1.3.0"
 		compile ':gson:1.1.4'
 		runtime ":zipped-resources:1.0"
