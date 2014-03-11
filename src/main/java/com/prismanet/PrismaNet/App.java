@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import twitter4j.FilterQuery;
@@ -63,8 +64,8 @@ public class App implements StatusListener
 
 		TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
 		twitterStream.addListener(this);
-		ArrayList<Long> follow = new ArrayList<Long>();
-		ArrayList<String> track = new ArrayList<String>();
+		List<Long> follow = new ArrayList<Long>();
+		List<String> track = new ArrayList<String>();
 		//		for (String arg : args) {
 		if (isNumericalArgument(args)) {
 			for (String id : args.split(",")) {
