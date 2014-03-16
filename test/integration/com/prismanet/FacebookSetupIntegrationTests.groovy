@@ -17,43 +17,34 @@ class FacebookSetupIntegrationTests {
 
    @Test
     void testFirstSaveEver() {
-		def facebookConfig = new FacebookSetup()
+		def facebookConfig = new FacebookSetup(keywords:'filmus,politica')
 		assertNotNull facebookConfig.save()
-		facebookConfig.addToKeywords(new Keyword(word:'filmus'))
-		facebookConfig.addToKeywords(new Keyword(word:'politica'))
-		
-        assertNotNull facebookConfig.id
+		assertNotNull facebookConfig.id
 
         def foundConfig = FacebookSetup.get(facebookConfig.id)
-        def keywords = foundConfig.keywords*.word
-		assertEquals([ 'filmus', 'politica'] , keywords.sort())
+        assertEquals("filmus,politica" , foundConfig.keywords)
 
     }
 
     @Test
     void testSaveAndUpdate() {
-        def facebookConfig = new FacebookSetup()
+        def facebookConfig = new FacebookSetup(keywords:'filmus,politica')
 		assertNotNull facebookConfig.save()
-		facebookConfig.addToKeywords(new Keyword(word:'filmus'))
-		facebookConfig.addToKeywords(new Keyword(word:'politica'))
 		
-
         def foundConfig = FacebookSetup.get(facebookConfig.id)
 		assertNotNull foundConfig.save()
-		def keyword = new Keyword(word:'Cristina')
-        foundConfig.addToKeywords(keyword)
+		def keyword = 'dfilmus,politica'
+        foundConfig.keywords = keyword
         
 
         def editedConfig = FacebookSetup.get(facebookConfig.id)
-        assertTrue editedConfig.keywords.contains(keyword)
+        assertEquals('dfilmus,politica' , editedConfig.keywords)
     }
 
     @Test
     void testSaveThenDelete() {
         def facebookConfig = new FacebookSetup()
 		assertNotNull facebookConfig.save()
-		facebookConfig.addToKeywords(new Keyword(word:'filmus'))
-		facebookConfig.addToKeywords(new Keyword(word:'politica'))
 		
         def foundConfig = FacebookSetup.get(facebookConfig.id)
         foundConfig.delete()

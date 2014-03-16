@@ -24,9 +24,9 @@ class TwitterSetup {
 		includedAccounts(nullable:true, twitterAccount:true)
 		excludedAccounts(nullable:true, twitterAccount:true)
 		keywords(nullable:true, wordSetup:true)
-		neutralHashtags(nullable:true, wordSetup:true)
-		positiveHashtags(nullable:true, wordSetup:true)
-		negativeHashtags(nullable:true, wordSetup:true)
+		neutralHashtags(nullable:true, twitterHashtag:true)
+		positiveHashtags(nullable:true, twitterHashtag:true)
+		negativeHashtags(nullable:true, twitterHashtag:true)
 		lastUpdated(nullable:true)
 	}
 

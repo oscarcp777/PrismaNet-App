@@ -1,12 +1,17 @@
 package com.prismanet
 
+import java.util.Date;
+
 class FacebookSetup {
 
 	static belongsTo = Concept
-	static hasMany = [keywords: Keyword]
-
+	String keywords
+	
+	Date lastUpdated
+	
 	static constraints = {
-		keywords(nullable:true)
+		keywords(nullable:true, wordSetup:true)
+		lastUpdated(nullable:true)
 	}
 	
 	@Override
