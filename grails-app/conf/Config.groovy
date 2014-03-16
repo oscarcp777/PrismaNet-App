@@ -91,3 +91,4 @@ log4j = {
 }
 
 jobs.twitter.disable = false
+jobs.facebook.disable = true
