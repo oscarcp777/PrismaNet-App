@@ -9,6 +9,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 import twitter4j.FilterQuery;
 import twitter4j.StallWarning;
 import twitter4j.Status;
@@ -32,13 +35,16 @@ import com.mongodb.util.JSON;
  */
 public class App implements StatusListener
 {
+	static final Logger logger = Logger.getLogger(App.class.getName());
 	private static DB db;
 
 	final static String TWITTER="EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+	
 	static SimpleDateFormat sf;
 
 
 	public static void main( String[] args ) throws UnknownHostException   {
+		PropertyConfigurator.configure("log4j.properties");
 		MongoClient client =  new MongoClient(new MongoClientURI("mongodb://localhost"));
 		db = client.getDB("prismanet");
 		sf = new SimpleDateFormat(TWITTER, Locale.ENGLISH);
@@ -54,12 +60,12 @@ public class App implements StatusListener
 			throw new RuntimeException("No hay una configuracion definida");
 
 		String args = (String)config.findOne().get("config");
-		System.out.println("Args: " + args);
+		logger.info("Args: " + args);
 
 		
 //		DBCursor cursor = db.getCollection("tweets").find(new BasicDBObject("created_at", new BasicDBObject("$lt", new Date())));
 //		for (DBObject tweet : cursor){
-//			System.out.println("@" + ((DBObject)tweet.get("user")).get("screen_name") + " - " + tweet.get("Text"));
+//			logger.info("@" + ((DBObject)tweet.get("user")).get("screen_name") + " - " + tweet.get("Text"));
 //		}
 
 		TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
@@ -128,27 +134,27 @@ public class App implements StatusListener
 	}
 
 	public void onStatus(Status status) {
-		System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
+		logger.info("@" + status.getUser().getScreenName() + " - " + status.getText());
 		this.saveTweet(status);
 	}
 
 	public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
-		System.out.println("Got a status deletion notice id:" + statusDeletionNotice.getStatusId());
+		logger.info("Got a status deletion notice id:" + statusDeletionNotice.getStatusId());
 	}
 
 	public void onTrackLimitationNotice(int numberOfLimitedStatuses) {
-		System.out.println("Got track limitation notice:" + numberOfLimitedStatuses);
+		logger.info("Got track limitation notice:" + numberOfLimitedStatuses);
 	}
 
 	public void onScrubGeo(long userId, long upToStatusId) {
-		System.out.println("Got scrub_geo event userId:" + userId + " upToStatusId:" + upToStatusId);
+		logger.info("Got scrub_geo event userId:" + userId + " upToStatusId:" + upToStatusId);
 	}
 
 	public void onStallWarning(StallWarning warning) {
-		System.out.println("Got stall warning:" + warning);
+		logger.info("Got stall warning:" + warning);
 	}
 
 	public void onException(Exception ex) {
-		ex.printStackTrace();
+		logger.error("error", ex);
 	}
 }
