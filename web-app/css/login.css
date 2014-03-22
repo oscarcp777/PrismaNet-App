@@ -118,7 +118,7 @@
 }
 
 .logo .logoFirst {
-	color: #dd5a43!important;
+	color: #1abc9c!important;//#dd5a43
 }
 
 .logo .logoI {
@@ -136,3 +136,18 @@
 .logo .logoDot:hover {
 	visibility: visible;
 }
+
+.btn-flaty {
+  color: #ffffff;
+  background-color: #95a5a6;
+  border-color: #95a5a6;
+}
+.btn-flaty:hover,
+.btn-flaty:focus,
+.btn-flaty:active,
+.btn-flaty.active {
+  color: #ffffff;
+  background-color: #7f9293;
+  border-color: #74898a;
+}
+

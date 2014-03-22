@@ -49,5 +49,6 @@ modules = {
 	}
 	login {
 		resource url:'css/login.css'
+		resource url:'js/jquery.backstretch.min.js',disposition: 'head'
 	}
 }

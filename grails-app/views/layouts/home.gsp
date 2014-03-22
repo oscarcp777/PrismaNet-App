@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><g:layoutTitle default="Prisma-Net" /></title>
-<link rel="shortcut icon"
-	href="${resource(dir: 'images', file: 'favicon.gif')}" type="image/gif">
-<link rel="icon" href="${resource(dir: 'images', file: 'favicon.gif')}" type="image/gif">
+<link rel="shortcut icon" href="${resource(dir: 'img', file: 'favicon.png')}" type="image/png">
+<link rel="icon" href="${resource(dir: 'img', file: 'favicon.png')}" type="image/png">
 
 <r:require modules="core,ace,chartPie,highcharts,datepicker" />
 
@@ -29,9 +28,9 @@
 					<div class="logo">
 
 						<a class="logoHolder" title="return to home page" href="#"> <span
-							class="logoFirst"> <i class="fa fa-cloud"
-								style="font-weight: bold; font-size: 0.9em;"></i> Prisma
-						</span>-Net
+							class="logoFirst"> <i class="fa fa-filter"
+								style="font-weight: bold; font-size: 0.9em;"></i> 
+								<g:message code="general.title.prism"/></span><g:message code="general.title.net"/>
 						</a>
 					</div>
 					<!-- /.brand -->

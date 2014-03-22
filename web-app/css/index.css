@@ -984,13 +984,13 @@ a:hover {
 	text-shadow: 0 0.032em 0 #b0b0b0, 0px 0.15em 0.11em rgba(0, 0, 0, 0.15),
 		0px 0.25em 0.021em rgba(0, 0, 0, 0.1), 0px 0.32em 0.32em
 		rgba(0, 0, 0, 0.1);
-	color: #1abc9c;
+	color:#f9f9f9;
 	width: 500px;
 	text-decoration: none;
 }
 
 .hd_navbar .brand .logoFirst {
-	color: #000000;
+	color:#16a085;
 }
 
 .hd_navbar .brand .logoI {
@@ -1211,12 +1211,13 @@ a:hover {
 	background-color: #fff;
 	text-align: center;
 	border-radius: 100px;
-	margin: 0 0 0 0;
+	margin: 0;
 	font-size: 2rem;
 	-webkit-transition: 100ms all linear;
 	text-indent: 0;
 	cursor: pointer;
 	border: none;
+	padding-top:8px;
 }
 .carousel-indicators  li:hover {
 	background: #2c3e50;

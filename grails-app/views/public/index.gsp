@@ -45,9 +45,9 @@
 									<div class="brand">
 										<a class="logoHolder" title="return to home page" href="#">
 											<span class="logoFirst">
-											<i class="fa fa-cloud" style="font-weight:bold;font-size:0.8em;"></i>
-											<g:message code="general.title.prism"/> </span>
-											<g:message code="general.title.net"/>
+											<i class="fa fa-filter" style="font-weight:bold;font-size:0.8em;"></i>
+											
+											<g:message code="general.title.prism"/></span><g:message code="general.title.net"/>
 											
 										</a>
 									</div>

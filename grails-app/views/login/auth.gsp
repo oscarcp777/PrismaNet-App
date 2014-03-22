@@ -7,13 +7,14 @@
 
 <body>
 
-   <div class="fondo-login">
+   <div >
    
 	<div id='login' >
 	
 				<div class="logo">
 					<a class="logoHolder" title="return to home page" href="#"> <span class="logoFirst"> 
-					<i class="fa fa-cloud" style="font-weight: bold; font-size: 0.9em;"></i> Prisma</span>-Net
+					<i class="fa fa-filter" style="font-weight: bold; font-size: 0.9em;"></i> 
+					<g:message code="general.title.prism"/></span><g:message code="general.title.net"/>
 					</a>
 				</div>
 		<div class='container'>
@@ -37,7 +38,7 @@
 					${flash.message}
 				</div>
 			   </g:if>
-					<button class="btn btn-lg btn-danger btn-block"  type='submit' id="submit"
+					<button class="btn btn-lg btn-flaty btn-block"  type='submit' id="submit"
 						value='${message(code: "springSecurity.login.button")}' >${message(code: "springSecurity.login.button")}
 					</button>
 				
@@ -46,5 +47,8 @@
 		</div>
 	</div>
 	</div>
+	   <script>
+        $.backstretch("../img/login-bg.jpg", {speed: 500});
+    </script>
 </body>
 </html>
