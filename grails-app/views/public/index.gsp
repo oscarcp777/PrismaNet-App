@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
 <meta name="layout" content="main" />
-<title>Home page</title>
 <r:require modules="indexcss" />
 </head>
 <body >
@@ -10,19 +9,17 @@
 	<div id="wrapper">
 		<div id="sidebar">
 			<a class="btn-navbar" data-toggle="collapse"
-				data-target=".navbar-collapse"> <span class="icon-bar"></span> <span
-				class="icon-bar"></span> <span class="icon-bar"></span>
+				data-target=".navbar-collapse"> <span class="fa fa-bars"></span>
 			</a>
-			<!-- <div id="logo"> <a href="/"><img src="img/logo.svg" alt="logo" /></a> </div> -->
 			<nav id="nav" class="navigation" role="navigation">
 				<ul class="unstyled">
-					<li class="active" data-section="1"><i class="icon-home"></i>
-						<span>Home</span></li>
-					<li data-section="2" class=""><i class="icon-time"></i> <span>Real time</span></li>
-					<li data-section="3" class=""><i class="icon-laptop"></i> <span>Ideal para</span></li>
-					<li data-section="4" class=""><i class="icon-pencil"></i> <span>Features</span></li>
-					<li data-section="5" class="last"><i class="icon-envelope"></i>
-						<span>Hablemos</span></li>
+					<li class="active" data-section="1"><i class="fa fa-home"></i>
+						<span><g:message code="public.index.home"/> </span></li>
+					<li data-section="2" class=""><i class="fa fa-clock-o"></i> <span><g:message code="public.index.real.time"/></span></li>
+					<li data-section="3" class=""><i class="fa fa-laptop"></i> <span><g:message code="public.index.ideal.for"/></span></li>
+					<li data-section="4" class=""><i class="fa fa-pencil"></i> <span><g:message code="public.index.features"/></span></li>
+					<li data-section="5" class="last"><i class="fa fa-envelope"></i>
+						<span><g:message code="public.index.tellme"/></span></li>
 				</ul>
 			</nav>
 			<!-- /nav -->
@@ -41,15 +38,16 @@
 								<div class="navbar-header">
 									<button type="button" class="navbar-toggle"
 										data-toggle="collapse" data-target=".navbar-collapse">
-										<span class="icon-bar"></span> <span class="icon-bar"></span>
-										<span class="icon-bar"></span>
+										<span class="fa fa-bar"></span> <span class="fa fa-bar"></span>
+										<span class="fa fa-bar"></span>
 									</button>
 
 									<div class="brand">
 										<a class="logoHolder" title="return to home page" href="#">
 											<span class="logoFirst">
-											<i class="icon-rombo" style="font-weight:bold;font-size:0.9em;"></i>
-											Prisma</span>-Net
+											<i class="fa fa-cloud" style="font-weight:bold;font-size:0.8em;"></i>
+											<g:message code="general.title.prism"/> </span>
+											<g:message code="general.title.net"/>
 											
 										</a>
 									</div>
@@ -60,7 +58,7 @@
 									<ul class="nav navbar-nav navbar-right">
 
 										<li>
-										 <g:link class="btn btn-success" controller='login' action='auth'>Login</g:link>
+										 <g:link class="btn btn-login"  controller='login' action='auth'><g:message code="public.index.login"/></g:link>
 										</li>
 
 									</ul>
@@ -70,17 +68,18 @@
 					</header>
 					<article class="hd_main" role="main">
 						<div id="main" class="container">
-							<section class="col-md-10 col-md-offset-1 hd_hero">
-
+							<section class="col-md-10  hd_hero">
+                             <div class="col-md-offset-1">
 								<h1>
-									<span>Repercuciones de las redes sociales </span> <br>en
-									tiempo real
+									<span><g:message code="public.index.home.title1"/> </span> <br>
+									<g:message code="public.index.home.title1"/> 
 								</h1>
 								<h2>Prisma-net te ofrece la mejor colecci&oacute;n de
 									estad&iacute;sticas sobre la demograf&iacute;a, el
 									comportamiento y los intereses de tu audiencia online,
 									otorg&aacute;ndote todo lo que necesitas para mantener el
 									dominio sobre tu presencia social.</h2>
+									</div>
 								<div class="featurette container">
 									<img src="img/home-mac.jpg" alt="">
 									<div class="video">
@@ -467,20 +466,19 @@
 						<div class="col-sm-4 col-md-4" id="article-id">
 							<ul class="article-tags">
 								<li data-blog="blog" class=""><i
-									class="icon-circle-arrow-right"></i>Blog</li>
+									class="fa fa-arrow-circle-right"></i>Blog</li>
 								<li data-blog="dribbble" class=""><i
-									class="icon-circle-arrow-right"></i>Monitoreo</li>
+									class="fa fa-arrow-circle-right"></i>Monitoreo</li>
 								<li data-blog="instagram" class=""><i
-									class="icon-circle-arrow-right"></i>Features Destacados</li>
+									class="fa fa-arrow-circle-right"></i>Features Destacados</li>
 								<li data-blog="github" class="current"><i
-									class="icon-circle-arrow-right"></i>Reportes</li>
+									class="fa fa-arrow-circle-right"></i>Reportes</li>
 
 							</ul>
 						</div>
 						<!-- /span4 -->
 
-						<div class="slide col-sm-8 col-md-8" data-blog="blog"
-							style="display: none;">
+						<div class="slide col-sm-8 col-md-8" data-blog="blog" style="display: none;">
 							<div class="row">
 								<div class="expand col-sm-6 col-md-6">
 									<h4>Políticos de Argentina en las redes sociales</h4>
@@ -490,7 +488,7 @@
 									que …</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external" target="_blank">Leer más <i
-											class="icon-double-angle-right"></i></a>
+											class="fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
@@ -502,15 +500,16 @@
 									 transmisión sino también por el</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer más <i
-											class="icon-double-angle-right"></i></a>
+											class="fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
 
 							</div>
+							</div>
 							<!-- /row-fluid -->
-						</div>
-						<!-- /span8 -->
+						
+						
 
 						<div class="slide col-sm-8 col-md-8" data-blog="dribbble"
 							style="display: none;">
@@ -522,18 +521,18 @@
 									</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer mas <i
-											class="icon-double-angle-right"></i></a>
+											class="fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
 								<div class="col-sm-6 col-md-6 visible-lg">
 									<h4>Releva tu reputación en medios sociales</h4>
 									<p style="text-align: center">
-										<img class="img-responsive"   src="img/features_ff_2.jpg" alt="">
+										<img class="img-responsive"  src="img/features_ff_2.jpg" alt="">
 									</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer mas  <i
-											class="icon-double-angle-right"></i></a>
+											class="fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
@@ -551,7 +550,7 @@
 										<img class="img-responsive" src="img/features_ff_hl_4.jpg" alt="">
 									</p>
 									<div class="pull-right read-more">
-										Leer más <i class="icon-double-angle-right"></i>
+										Leer más <i class="fa fa-angle-double-right"></i>
 									</div>
 								</div>
 								<!-- /span6 -->
@@ -563,7 +562,7 @@
 									</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer más <i
-											class="icon-double-angle-right"></i></a>
+											class="fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
@@ -582,7 +581,7 @@
 									</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer más <i
-											class="icon-double-angle-right"></i></a>
+											class="fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
@@ -593,7 +592,7 @@
 									</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer más <i
-											class="icon-double-angle-right"></i></a>
+											class="fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
@@ -732,7 +731,7 @@
 
 								<input type="hidden" name="save" value="contact">
 								<button type="submit" class="btn-inverse pull-right">
-									Envíar <span>Mensaje</span> <i class="icon-circle-arrow-right"></i>
+									Envíar <span>Mensaje</span> <i class="fa fa-arrow-circle-right"></i>
 								</button>
 							</form>
 							<!-- /form -->

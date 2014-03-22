@@ -19,7 +19,7 @@
 		<div class="nav" role="navigation">
 			<g:link class="btn btn-info btn-sm" action="list">
 				<g:message code="default.list.label" args="[entityName]" />
-				<i class="icon-arrow-right icon-on-right bigger-110"></i>
+				<i class="fa fa-arrow-right icon-on-right bigger-110"></i>
 			</g:link>
 		</div>
 		<hr>
@@ -27,7 +27,7 @@
 			<g:if test="${flash.message}">
 			<div class="alert alert-info">
 					<button type="button" class="close" data-dismiss="alert">
-						<i class="icon-remove"></i>
+						<i class="fa fa-remove"></i>
 					</button>
 				<div class="message" role="status">
 					${flash.message}
@@ -63,7 +63,7 @@
 				<div class="clearfix form-actions">
 					<div class="col-md-offset-3 col-md-9">
 						<button class="btn btn-info" type="submit" name="create">
-							<i class="icon-ok bigger-110"></i>
+							<i class="fa fa-ok bigger-110"></i>
 							<g:message code="default.button.create.label" default="Create" />
 
 						</button>

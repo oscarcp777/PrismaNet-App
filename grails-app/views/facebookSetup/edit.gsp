@@ -17,11 +17,11 @@
 		<div class="nav" role="navigation">
 			<g:link class="btn btn-info btn-sm" action="list">
 				<g:message code="default.list.label" args="[entityName]" />
-				<i class="icon-arrow-right icon-on-right bigger-110"></i>
+				<i class="fa fa-arrow-right icon-on-right bigger-110"></i>
 			</g:link>
 			<g:link class="btn btn-info btn-sm" action="create">
 				<g:message code="default.new.label" args="[entityName]" />
-				<i class="icon-arrow-right icon-on-right bigger-110"></i>
+				<i class="fa fa-arrow-right icon-on-right bigger-110"></i>
 			</g:link>
 			
 			

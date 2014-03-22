@@ -13,8 +13,7 @@
 	
 				<div class="logo">
 					<a class="logoHolder" title="return to home page" href="#"> <span class="logoFirst"> 
-					<i class="icon-rombo" style="font-weight: bold; font-size: 0.9em;"></i> Prisma
-					</span>-Net
+					<i class="fa fa-cloud" style="font-weight: bold; font-size: 0.9em;"></i> Prisma</span>-Net
 					</a>
 				</div>
 		<div class='container'>

@@ -20,11 +20,11 @@
 		<div class="nav" role="navigation">
 			<g:link class="btn btn-info btn-sm" action="list">
 				<g:message code="default.list.label" args="[entityName]" />
-				<i class="icon-arrow-right icon-on-right bigger-110"></i>
+				<i class="fa fa-arrow-right icon-on-right bigger-110"></i>
 			</g:link>
 			<g:link class="btn btn-info btn-sm" action="create">
 				<g:message code="default.new.label" args="[entityName]" />
-				<i class="icon-arrow-right icon-on-right bigger-110"></i>
+				<i class="fa fa-arrow-right icon-on-right bigger-110"></i>
 			</g:link>
 		</div>
 		<hr>
@@ -33,7 +33,7 @@
 			<g:if test="${flash.message}">
 				<div class="alert alert-block alert-success">
 					<button type="button" class="close" data-dismiss="alert">
-						<i class="icon-remove"></i>
+						<i class="fa fa-remove"></i>
 					</button>
 					<div class="message" role="status">
 						${flash.message}
@@ -69,7 +69,7 @@
 					
 						<span class="property-value" aria-labelledby="user-label">
 						<g:link class="btn btn-xs btn-info" controller="user" action="show" id="${conceptInstance?.user?.id}">${conceptInstance?.user?.encodeAsHTML()}
-						<i class="icon-arrow-right icon-on-right"></i>
+						<i class="fa fa-arrow-right icon-on-right"></i>
 						</g:link></span>
 					
 					</div>
@@ -89,7 +89,7 @@
 						<span class="property-value" aria-labelledby="twitterSetup-label">
 						
 						<g:link class="btn btn-xs btn-info" controller="twitterSetup" action="show" id="${conceptInstance?.twitterSetup?.id}">${conceptInstance?.twitterSetup?.encodeAsHTML()}
-						<i class="icon-arrow-right icon-on-right"></i>
+						<i class="fa fa-arrow-right icon-on-right"></i>
 						</g:link></span>
 					
 					</div>
@@ -106,7 +106,7 @@
 					
 						<span class="property-value" aria-labelledby="facebookSetup-label">
 						<g:link class="btn btn-xs btn-info" controller="facebookSetup" action="show" id="${conceptInstance?.facebookSetup?.id}">${conceptInstance?.facebookSetup?.encodeAsHTML()}
-						<i class="icon-arrow-right icon-on-right"></i>
+						<i class="fa fa-arrow-right icon-on-right"></i>
 						</g:link></span>
 					
 					</div>
@@ -147,7 +147,7 @@
 					<div class="col-md-offset-3 col-md-9">
 					    <g:hiddenField name="id" value="${conceptInstance?.id}" />
 						<g:link class="btn btn-info" action="edit" id="${conceptInstance?.id}">
-						<i class="icon-ok bigger-110"></i>
+						<i class="fa fa-ok bigger-110"></i>
 						<g:message code="default.button.edit.label" default="Edit" />
 					</g:link>
 						&nbsp; &nbsp;

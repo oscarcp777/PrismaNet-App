@@ -8,7 +8,7 @@
 	<div class="page-content">
 		<div class="page-header">
 			<h1>
-				<i class="icon-tag"></i> Resultados Concepto: "${concept.conceptName}"
+				<i class="fa fa-tag"></i> Resultados Concepto: "${concept.conceptName}"
 			</h1>
 		</div>
 		<div class="row">
@@ -52,8 +52,8 @@
 								</h5>
 								<div class="widget-toolbar input-group ">
 									<div id="tweetPickert" class="btn btn-primary date-picker">
-										<i class="icon-calendar"></i> <span class="date-range"></span>
-										<i class="icon-chevron-down"></i>
+										<i class="fa fa-calendar"></i> <span class="date-range"></span>
+										<i class="fa fa-chevron-down"></i>
 									</div>
 								</div>
 								<div class="widget-toolbar">
@@ -86,8 +86,8 @@
 								</h5>
 								<div class="widget-toolbar input-group ">
 									<div id="weightPickert" class="btn btn-primary date-picker">
-										<i class="icon-calendar"></i> <span class="date-range"></span>
-										<i class="icon-chevron-down"></i>
+										<i class="fa fa-calendar"></i> <span class="date-range"></span>
+										<i class="fa fa-chevron-down"></i>
 									</div>
 								</div>
 								<div class="widget-toolbar">
@@ -115,7 +115,7 @@
 						<div class="widget-box">
 							<div class="widget-header header-color-blue">
 								<h5>
-									<i class="icon-group "></i> Autores con mas seguidores
+									<i class="fa fa-group "></i> Autores con mas seguidores
 								</h5>
 								<div class="widget-toolbar">
 									<a href="#" data-action="collapse"> <i

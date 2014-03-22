@@ -13,10 +13,10 @@
 
 					<div class="widget-toolbar">
 
-						<a href="#" data-action="reload"> <i class="icon-refresh"></i>
+						<a href="#" data-action="reload"> <i class="fa fa-refresh"></i>
 						</a> <a href="#" data-action="collapse"> <i
-							class="icon-chevron-up"></i>
-						</a> <a href="#" data-action="close"> <i class="icon-remove"></i>
+							class="fa fa-chevron-up"></i>
+						</a> <a href="#" data-action="close"> <i class="fa fa-remove"></i>
 						</a>
 					</div>
 				</div>
@@ -35,7 +35,7 @@
 													in="${grailsApplication.controllerClasses.sort { it.fullName } }">
 													<g:if test="${c.fullName.contains("prismanet")}">
 													<li class="controller">
-													<i class="icon-double-angle-right"></i>
+													<i class="fa fa-angle-double-right"></i>
 													<g:link
 															controller="${c.logicalPropertyName}">
 															${c.logicalPropertyName}

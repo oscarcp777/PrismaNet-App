@@ -114,6 +114,7 @@ a:hover {
     margin: 20px 5px 10px;
     opacity: .4;
     padding: 7px 10px;
+    color: white;
 }
 
 .btn-navbar .icon-bar {
@@ -134,10 +135,10 @@ a:hover {
 }
 
 .expanded #sidebar {
-	width: 150px;
+	width: 195px;
 }
 .expanded #header {
-	margin-left: 150px;
+	margin-left: 195px;
 }
 .expanded #nav li {
 	width: 90%;
@@ -258,7 +259,16 @@ a:hover {
     color: #151515;
     margin-top: 75px;
 }
-
+.btn-login {
+  color: #ffffff !important;
+  background-color: #18bc9c;
+  border-color: #18bc9c;
+}
+.btn-login:hover {
+   color: #000 !important;
+  background-color: #13987e;
+  border-color: #11866f;
+}
 .btn-inverse {
 	background: none #16a085;
     color: #F1F1F1;

@@ -29,7 +29,7 @@
 					<div class="logo">
 
 						<a class="logoHolder" title="return to home page" href="#"> <span
-							class="logoFirst"> <i class="icon-rombo"
+							class="logoFirst"> <i class="fa fa-cloud"
 								style="font-weight: bold; font-size: 0.9em;"></i> Prisma
 						</span>-Net
 						</a>
@@ -49,15 +49,15 @@
 								src="${resource(dir: 'img', file: 'oscar.png')}"
 								alt="Oscar&#39;s Photo"> <span class="user-info"> <small>Bienvenido,</small>
 									<sec:username />
-							</span> <i class="icon-caret-down"></i>
+							</span> <i class="fa fa-caret-down"></i>
 						</a>
 
 							<ul
 								class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li><a href="#"> <i class="icon-cog"></i> Settings
+								<li><a href="#"> <i class="fa fa-cog"></i> Settings
 								</a></li>
 
-								<li><a href="#"> <i class="icon-user"></i> Profile
+								<li><a href="#"> <i class="fa fa-user"></i> Profile
 								</a></li>
 
 								<li class="divider"></li>
@@ -65,7 +65,7 @@
 								<li><sec:ifLoggedIn>
 
 										<g:link controller='logout'>
-											<i class="icon-off"></i>Log Out</g:link>
+											<i class="fa fa-off"></i>Log Out</g:link>
 									</sec:ifLoggedIn></li>
 							</ul></li>
 					</ul>
@@ -96,19 +96,19 @@
 						<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 							<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
 								<button class="btn btn-success">
-									<i class="icon-signal"></i>
+									<i class="fa fa-signal"></i>
 								</button>
 
 								<button class="btn btn-info">
-									<i class="icon-pencil"></i>
+									<i class="fa fa-pencil"></i>
 								</button>
 
 								<button class="btn btn-warning">
-									<i class="icon-group"></i>
+									<i class="fa fa-group"></i>
 								</button>
 
 								<button class="btn btn-danger">
-									<i class="icon-cogs"></i>
+									<i class="fa fa-cogs"></i>
 								</button>
 							</div>
 
@@ -124,25 +124,25 @@
 						<ul class="nav nav-list" id="menuIzquierdo">
 							<li class="active" id="Dashboard">
 							<g:link	controller="home" action="index"> 
-								<i class="icon-dashboard"></i> 
+								<i class="fa fa-dashboard"></i> 
 								<span class="menu-text" >Dashboard</span>
 							   </g:link>
 							</li>
 							<li id="chart">
 							   <a href="#" class="dropdown-toggle"> <i
-									class="icon-bar-chart"></i> <span class="menu-text">Estadisticas</span>
+									class="fa fa-bar-chart-o"></i> <span class="menu-text">Estadisticas</span>
 
-									<b class="arrow icon-angle-down"></b>
+									<b class="arrow fa fa-angle-down"></b>
 							</a>
 
 								<ul class="submenu">
 									<li id="general"><g:link controller='user' action="stats" >
-									<i class="icon-double-angle-right"></i>
+									<i class="fa fa-angle-double-right"></i>
 											General
 									</g:link> 
 									</li>
 
-									<li id="mensual"><g:link controller='user' action="monthStats" ><i class="icon-double-angle-right"></i>
+									<li id="mensual"><g:link controller='user' action="monthStats" ><i class="fa fa-angle-double-right"></i>
 											Mensual
 									</g:link> 
 									</li>
@@ -150,21 +150,21 @@
 							</li>
 							<li id="concepts">
 							<a href="#" class="dropdown-toggle"> 
-							  <i class="icon-tags"></i> <span class="menu-text">Conceptos</span>
-									<b class="arrow icon-angle-down"></b>
+							  <i class="fa fa-tags"></i> <span class="menu-text">Conceptos</span>
+									<b class="arrow fa fa-angle-down"></b>
 							</a>
 								<ul class="submenu">
 								<g:each in="${scService?.currentUser?.concepts?.sort{it.conceptName}}" status="i" var="conceptInstance">
 									<li id="${conceptInstance.id}">
 									<a href="#" class="dropdown-toggle">
-									<i class="icon-double-angle-right"></i>
+									<i class="fa fa-angle-double-right"></i>
 									${fieldValue(bean: conceptInstance, field: "conceptName")}
-									<b class="arrow icon-angle-down"></b>
+									<b class="arrow  fa fa fa-angle-down"></b>
 									</a>
 									<ul class="submenu">
 									    <li id="${conceptInstance.id}-tweet">
 									    	<g:link controller='tweet' action="list" params="[conceptsId:conceptInstance.id]" >
-											<i class="icon-twitter"></i>
+											<i class="fa fa-twitter"></i>
 											<span class="menu-text">Tweets</span>
 											</g:link>
 									    </li>
@@ -179,26 +179,26 @@
 									</g:each>
 								</ul>
 							</li>							
-							<li id="facebook"><a href="#"> <i class="icon-facebook"></i> <span
+							<li id="facebook"><a href="#"> <i class="fa fa-facebook"></i> <span
 									class="menu-text">Facebook</span>
 							</a></li>
-							<li id="Flickr"><a href="#"> <i class="icon-flickr"></i> <span
+							<li id="Flickr"><a href="#"> <i class="fa fa-flickr"></i> <span
 									class="menu-text">Flickr</span>
 							</a></li>
-							<li id="Bloqs"><a href="#"> <i class="icon-book"></i> <span
+							<li id="Bloqs"><a href="#"> <i class="fa fa-book"></i> <span
 									class="menu-text">Bloqs</span>
 							</a></li>
-							<li id="Diarios"><a href="#"> <i class="icon-cloud"></i> <span
+							<li id="Diarios"><a href="#"> <i class="fa fa-cloud"></i> <span
 									class="menu-text">Diarios</span>
 							</a></li>
-							<li id="Otros"><a href="#"> <i class="icon-rss-sign"></i> <span
+							<li id="Otros"><a href="#"> <i class="fa fa-rss-square"></i> <span
 									class="menu-text">Otros</span>
 							</a></li>
 							
 							<sec:access expression="hasRole('ROLE_ADMIN')">
 							    <li id="admin">
 								<g:link controller='home' action='controlPanel'>
-								<i class="icon-cogs"></i> <span class="menu-text"><g:message code="home.menu.admin"/></span>
+								<i class="fa fa-cogs"></i> <span class="menu-text"><g:message code="home.menu.admin"/></span>
 								</g:link>
 								</li>
 							</sec:access>
@@ -209,9 +209,9 @@
 						<!-- /.nav-list -->
 
 						<div class="sidebar-collapse" id="sidebar-collapse">
-							<i class="icon-double-angle-left"
-								data-icon1="icon-double-angle-left"
-								data-icon2="icon-double-angle-right"></i>
+							<i class="fa fa-angle-double-left"
+								data-icon1="fa fa-dangle-double-left"
+								data-icon2="fa fa-angle-double-left"></i>
 						</div>
 
 						<script type="text/javascript">
@@ -231,7 +231,7 @@
 							</script>
 
 							<ul class="breadcrumb">
-								<li><i class="icon-home home-icon"></i> <g:link
+								<li><i class="fa fa-home home-icon"></i> <g:link
 										controller="home" action="index">Home</g:link></li>
 								<li class="active" ><small id="nameItem" style="font-size: 13px;">Dashboard</small></li>
 							</ul>
@@ -262,7 +262,7 @@
 
 			<a href="#" id="btn-scroll-up"
 				class="btn-scroll-up btn btn-sm btn-inverse"> <i
-				class="icon-double-angle-up icon-only bigger-110"></i>
+				class="fa fa-double-angle-up icon-only bigger-110"></i>
 			</a>
 		</div>
 		<!-- /.main-container -->

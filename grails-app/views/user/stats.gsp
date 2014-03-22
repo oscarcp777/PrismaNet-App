@@ -6,7 +6,7 @@
 	<div class="page-content">
 		<div class="page-header">
 			<h1>
-				<i class="icon-user"></i> Resultados Usuario: "${user.username}"
+				<i class="fa fa-user"></i> Resultados Usuario: "${user.username}"
 			</h1>
 		</div>
 
@@ -24,10 +24,10 @@
 
 								<div class="widget-toolbar">
 									<a href="javascript:void(0);" id="refreshCharPie"> <span
-										data-action="reload"> <i class="icon-refresh"></i></span>
+										data-action="reload"> <i class="fa fa-refresh"></i></span>
 									</a> <a href="javascript:void(0);" data-action="collapse"> <i
-										class="icon-chevron-up"></i></a> <a href="javascript:void(0);"
-										data-action="close"> <i class="icon-remove"></i></a>
+										class="fa fa-chevron-up"></i></a> <a href="javascript:void(0);"
+										data-action="close"> <i class="fa fa-remove"></i></a>
 								</div>
 							</div>
 
@@ -47,9 +47,9 @@
 								</h5>
 								<div class="widget-toolbar input-group ">
 								<div id="pickertUser" class="btn btn-primary date-picker">
-				                        <i class="icon-calendar"></i>
+				                        <i class="fa fa-calendar"></i>
 				                        <span class="date-range"></span> 
-				                        <i class="icon-chevron-down"></i>
+				                        <i class="fa fa-chevron-down"></i>
                    					 </div>
 								</div>
 								<div class="widget-toolbar">
@@ -79,10 +79,10 @@
 
 
 								<div class="widget-toolbar">
-									<a href="#" data-action="reload"> <i class="icon-refresh"></i>
+									<a href="#" data-action="reload"> <i class="fa fa-refresh"></i>
 									</a> <a href="#" data-action="collapse"> <i
 										class="1 bigger-125 icon-chevron-up"></i>
-									</a> <a href="#" data-action="close"> <i class="icon-remove"></i>
+									</a> <a href="#" data-action="close"> <i class="fa fa-remove"></i>
 									</a>
 								</div>
 
@@ -97,7 +97,7 @@
 											<div class="col-md-6" style="padding-left: 10%;">
 												<div class="easy-pie-chart percentage easyPieChart"
 													data-percent="62" data-color="#2a91d8">
-													<i class="icon-male" style="font-size: 9em; color: #2a91d8"></i>
+													<i class="fa fa-male" style="font-size: 9em; color: #2a91d8"></i>
 													<h2
 														style="margin-top: -72px; margin-left: 10px;; position: relative;">62%</h2>
 												</div>
@@ -106,7 +106,7 @@
 											<div class="col-md-6">
 												<div class="easy-pie-chart percentage easyPieChart"
 													data-percent="38" data-color="#c6699f">
-													<i class="icon-female"
+													<i class="fa fa-female"
 														style="font-size: 9em; color: #c6699f"></i>
 													<h2
 														style="margin-top: -72px; margin-left: 10px;; position: relative;">38%</h2>

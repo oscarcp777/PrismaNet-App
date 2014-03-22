@@ -14,7 +14,7 @@
 	<div class="page-content">
 		<div class="page-header">
 			<h1>
-				<i class="icon-twitter"></i>
+				<i class="fa fa-twitter"></i>
 				<g:message code="tweets.title" />
 			</h1>
 		</div>
@@ -23,7 +23,7 @@
 				<div class="widget-body box-user-twitter" style="background: white;">
 					<div class="widget-header header-color-green4">
 						<h4 class="lighter">
-							<i class="icon-cloud"></i> Concepto
+							<i class="fa fa-cloud"></i> Concepto
 						</h4>
 					</div>
 					<div class="widget-main">
@@ -59,7 +59,7 @@
 						<div class="clearfix center grey">
 							<div class="grid3 ">
 								<span class="grey"> <i
-									class="icon-facebook-sign icon-2x blue"></i> 
+									class="fa fa-facebook-square fa-2x blue"></i> 
 								</span>
 								<h4 >Post</h4>
 								<h4 class="bigger">0</h4>
@@ -67,7 +67,7 @@
 
 							<div class="grid3">
 								<span class="grey"> <i
-									class="icon-twitter-sign icon-2x purple"></i> 
+									class="fa fa-twitter-square fa-2x purple"></i> 
 								</span>
 								<h4 >Tweets</h4>
 								<h4 class="bigger">${tweetInstanceTotal}</h4>
@@ -75,7 +75,7 @@
 
 							<div class="grid3">
 								<span class="grey"> <i
-									class="icon-comment icon-2x red"></i>
+									class="fa fa-comment fa-2x red"></i>
 								</span>
 								<h4 >Menciones</h4>
 								<h4 class="bigger ">${tweetInstanceTotal}</h4>
@@ -104,7 +104,7 @@
 										<div class="inline position-relative">
 											<a href=" javascript:void(0);" class="btn btn-link dropdown-toggle"
 												data-toggle="dropdown"> <i
-												class="icon-plus-sign bigger-120 blue"></i> M&aacute;s Datos
+												class="fa fa-plus-circle bigger-120 blue"></i> M&aacute;s Datos
 											</a>
 
 											
@@ -163,21 +163,21 @@
 												onclick="changeState('${tweetInstance.tweet.id}Pos','${createLink(controller:'tweet', action:'saveOpinion')}','${tweetInstance.tweet.id}','${concept.id}', 'POS');"  
 												data-original-title="" 
 												title="Positivo"> 
-												<i class="icon-check-sign" title="Positivo" ></i>
+												<i class="fa fa-check-square" title="Positivo" ></i>
 											</a>
 											<a href=" javascript:void(0);"  id="${tweetInstance.tweet.id}Neg" 
 												class="icon last tooltips" 
 												onclick="changeState('${tweetInstance.tweet.id}Neg', '${createLink(controller:'tweet', action:'saveOpinion')}','${tweetInstance.tweet.id}','${concept.id}','NEG');" 
 												data-original-title="" 
 												title="Negativo"> 
-												<i class="icon-minus-sign-alt" ></i>
+												<i class="fa fa-minus-square" ></i>
 											</a>
 			     							<a href="javascript:void(0);" id="${tweetInstance.tweet.id}Que" 
 			     								class="icon last tooltips" 
 			     								onclick="changeState('${tweetInstance.tweet.id}Que', '${createLink(controller:'tweet', action:'saveOpinion')}','${tweetInstance.tweet.id}','${concept.id}','NEU');" 
 			     								data-original-title="" 
 			     								title="Indefinido"> 
-												<i class="icon-question-sign"></i>
+												<i class="fa fa-question-circle"></i>
 											</a>
 										</div>
 									</div>
@@ -185,9 +185,9 @@
 										<div class="reply-icons pull-right">
 
 											<a href="" class="icon hide_tweet" data-original-title="">
-												${tweetInstance.tweet.retweetCount} <i class="icon-retweet fs1" title="retweet"></i>
+												${tweetInstance.tweet.retweetCount} <i class="fa fa-retweet fs1" title="retweet"></i>
 											</a> <a href="" class="icon last" data-original-title=""> 
-												${tweetInstance.tweet.favoriteCount}<i class="icon-star fs1" title="favorito"></i>
+												${tweetInstance.tweet.favoriteCount}<i class="fa fa-star fs1" title="favorito"></i>
 											</a>
 										</div>
 									</div>
