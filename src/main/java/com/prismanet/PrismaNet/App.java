@@ -1,5 +1,6 @@
 package com.prismanet.PrismaNet;
 
+import java.io.IOException;
 import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,6 +9,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -44,7 +46,7 @@ public class App implements StatusListener
 
 
 	public static void main( String[] args ) throws UnknownHostException   {
-		PropertyConfigurator.configure("log4j.properties");
+		
 		MongoClient client =  new MongoClient(new MongoClientURI("mongodb://localhost"));
 		db = client.getDB("prismanet");
 		sf = new SimpleDateFormat(TWITTER, Locale.ENGLISH);
@@ -53,8 +55,27 @@ public class App implements StatusListener
 		App app = new App();
 		app.startJob();
 	}
-
+	public void startJob2(){
+		Properties props = new Properties();
+		try {
+			props.load( App.class.getClassLoader().getResourceAsStream("log4j.properties"));
+		} catch (IOException e) {
+			logger.info("Error habriendo log4j.properties");
+			logger.error("Error habriendo log4j.properties",e);
+		}
+		PropertyConfigurator.configure(props);
+		logger.info("Incio de servicio");
+	}
 	public void startJob(){
+		Properties props = new Properties();
+		try {
+			props.load( App.class.getClassLoader().getResourceAsStream("log4j.properties"));
+		} catch (IOException e) {
+			logger.info("Error habriendo log4j.properties");
+			logger.error("Error habriendo log4j.properties",e);
+		}
+		PropertyConfigurator.configure(props);
+		logger.info("Incio de servicio");
 		DBCollection config = db.getCollection("config");
 		if (config.getCount() == 0)
 			throw new RuntimeException("No hay una configuracion definida");
