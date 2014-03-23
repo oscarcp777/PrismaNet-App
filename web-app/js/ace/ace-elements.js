@@ -346,8 +346,8 @@ jQuery(function() {
 (function(a, b) {
     a.fn.ace_spinner = function(c) {
         this.each(function() {
-            var f = c.icon_up || "fa fa-chevron-up";
-            var j = c.icon_down || "fa fa-chevron-down";
+            var f = c.icon_up || "fa-chevron-up";
+            var j = c.icon_down || "fa-chevron-down";
             var h = c.on_sides || false;
             var e = c.btn_up_class || "";
             var g = c.btn_down_class || "";
@@ -592,7 +592,7 @@ jQuery(function() {
                     var q = "className" in p ? p.className : "";
                     switch (p.name) {
                         case "font":
-                            r += ' <a class="btn btn-sm ' + q + ' dropdown-toggle" data-toggle="dropdown" title="' + p.title + '"><i class="' + p.icon + '"></i><i class="fa fa -angle-down icon-on-right"></i></a> ';
+                            r += ' <a class="btn btn-sm ' + q + ' dropdown-toggle" data-toggle="dropdown" title="' + p.title + '"><i class="' + p.icon + '"></i><i class="fa fa -angle-down"></i></a> ';
                             r += ' <ul class="dropdown-menu dropdown-light">';
                             for (var j in p.values) {
                                 if (p.values.hasOwnProperty(j)) {
@@ -602,7 +602,7 @@ jQuery(function() {
                             r += " </ul>";
                             break;
                         case "fontSize":
-                            r += ' <a class="btn btn-sm ' + q + ' dropdown-toggle" data-toggle="dropdown" title="' + p.title + '"><i class="' + p.icon + '"></i>&nbsp;<i class="fa fa-angle-down icon-on-right"></i></a> ';
+                            r += ' <a class="btn btn-sm ' + q + ' dropdown-toggle" data-toggle="dropdown" title="' + p.title + '"><i class="' + p.icon + '"></i>&nbsp;<i class="fa fa-angle-down"></i></a> ';
                             r += ' <ul class="dropdown-menu dropdown-light"> ';
                             for (var t in p.values) {
                                 if (p.values.hasOwnProperty(t)) {

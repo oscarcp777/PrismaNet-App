@@ -3,6 +3,7 @@
 <meta name="layout" content="home" />
 <link rel="stylesheet"
 	href="${resource(dir: 'css', file: 'twitter.css')}" type="text/css">
+	
 </head>
 <body>
 	<div class="page-content">
@@ -24,7 +25,7 @@
 
 								<div class="widget-toolbar">
 									<a href="#" data-action="collapse"> <i
-										class="1 bigger-125 icon-chevron-up"></i>
+										class="1 bigger-125 fa fa-chevron-up"></i>
 									</a>
 								</div>
 
@@ -58,7 +59,7 @@
 								</div>
 								<div class="widget-toolbar">
 									<a href="#" data-action="collapse"> <i
-										class="1 bigger-125 icon-chevron-up"></i>
+										class="1 bigger-125 fa fa-chevron-up"></i>
 									</a>
 
 								</div>
@@ -92,7 +93,7 @@
 								</div>
 								<div class="widget-toolbar">
 									<a href="#" data-action="collapse"> <i
-										class="1 bigger-125 icon-chevron-up"></i>
+										class="1 bigger-125 fa fa-chevron-up"></i>
 									</a>
 
 								</div>
@@ -119,7 +120,7 @@
 								</h5>
 								<div class="widget-toolbar">
 									<a href="#" data-action="collapse"> <i
-										class="1 bigger-125 icon-chevron-up"></i>
+										class="1 bigger-125 fa fa-chevron-up"></i>
 									</a>
 
 								</div>

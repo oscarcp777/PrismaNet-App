@@ -19,7 +19,7 @@
 		<div class="nav" role="navigation">
 			<g:link class="btn btn-info btn-sm" action="list">
 				<g:message code="default.list.label" args="[entityName]" />
-				<i class="fa fa-arrow-right icon-on-right bigger-110"></i>
+				<i class="fa fa-arrow-right  bigger-110"></i>
 			</g:link>
 		</div>
 		<hr>
@@ -45,7 +45,7 @@
 				<div class="tabbable">
 	<ul class="nav nav-tabs padding-16">
 		<li class="active"><a data-toggle="tab" href="#edit-basic"> <i
-				class="green icon-edit bigger-125"></i> <g:message
+				class="green fa fa-edit bigger-125"></i> <g:message
 					code="form.new.twitter" />
 		</a></li>
 	</ul>

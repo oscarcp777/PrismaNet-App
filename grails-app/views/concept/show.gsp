@@ -20,11 +20,11 @@
 		<div class="nav" role="navigation">
 			<g:link class="btn btn-info btn-sm" action="list">
 				<g:message code="default.list.label" args="[entityName]" />
-				<i class="fa fa-arrow-right icon-on-right bigger-110"></i>
+				<i class="fa fa-arrow-right  bigger-110"></i>
 			</g:link>
 			<g:link class="btn btn-info btn-sm" action="create">
 				<g:message code="default.new.label" args="[entityName]" />
-				<i class="fa fa-arrow-right icon-on-right bigger-110"></i>
+				<i class="fa fa-arrow-right  bigger-110"></i>
 			</g:link>
 		</div>
 		<hr>
@@ -69,7 +69,7 @@
 					
 						<span class="property-value" aria-labelledby="user-label">
 						<g:link class="btn btn-xs btn-info" controller="user" action="show" id="${conceptInstance?.user?.id}">${conceptInstance?.user?.encodeAsHTML()}
-						<i class="fa fa-arrow-right icon-on-right"></i>
+						<i class="fa fa-arrow-right "></i>
 						</g:link></span>
 					
 					</div>
@@ -89,7 +89,7 @@
 						<span class="property-value" aria-labelledby="twitterSetup-label">
 						
 						<g:link class="btn btn-xs btn-info" controller="twitterSetup" action="show" id="${conceptInstance?.twitterSetup?.id}">${conceptInstance?.twitterSetup?.encodeAsHTML()}
-						<i class="fa fa-arrow-right icon-on-right"></i>
+						<i class="fa fa-arrow-right "></i>
 						</g:link></span>
 					
 					</div>
@@ -106,7 +106,7 @@
 					
 						<span class="property-value" aria-labelledby="facebookSetup-label">
 						<g:link class="btn btn-xs btn-info" controller="facebookSetup" action="show" id="${conceptInstance?.facebookSetup?.id}">${conceptInstance?.facebookSetup?.encodeAsHTML()}
-						<i class="fa fa-arrow-right icon-on-right"></i>
+						<i class="fa fa-arrow-right "></i>
 						</g:link></span>
 					
 					</div>

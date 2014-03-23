@@ -54,7 +54,7 @@
 								</div>
 								<div class="widget-toolbar">
 									<a href="#" data-action="collapse"> <i
-										class="1 bigger-125 icon-chevron-up"></i>
+										class="1 bigger-125  fa fa-chevron-up"></i>
 									</a>
 									 
 								</div>
@@ -81,7 +81,7 @@
 								<div class="widget-toolbar">
 									<a href="#" data-action="reload"> <i class="fa fa-refresh"></i>
 									</a> <a href="#" data-action="collapse"> <i
-										class="1 bigger-125 icon-chevron-up"></i>
+										class="1 bigger-125 fa fa-chevron-up"></i>
 									</a> <a href="#" data-action="close"> <i class="fa fa-remove"></i>
 									</a>
 								</div>

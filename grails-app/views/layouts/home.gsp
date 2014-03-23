@@ -122,42 +122,17 @@
 
 						<ul class="nav nav-list" id="menuIzquierdo">
 							<li class="active" id="Dashboard">
-							<g:link	controller="home" action="index"> 
+							<g:link	controller="user" action="stats"> 
 								<i class="fa fa-dashboard"></i> 
 								<span class="menu-text" >Dashboard</span>
 							   </g:link>
 							</li>
-							<li id="chart">
-							   <a href="#" class="dropdown-toggle"> <i
-									class="fa fa-bar-chart-o"></i> <span class="menu-text">Estadisticas</span>
-
-									<b class="arrow fa fa-angle-down"></b>
-							</a>
-
-								<ul class="submenu">
-									<li id="general"><g:link controller='user' action="stats" >
-									<i class="fa fa-angle-double-right"></i>
-											General
-									</g:link> 
-									</li>
-
-									<li id="mensual"><g:link controller='user' action="monthStats" ><i class="fa fa-angle-double-right"></i>
-											Mensual
-									</g:link> 
-									</li>
-								</ul>
-							</li>
-							<li id="concepts">
-							<a href="#" class="dropdown-toggle"> 
-							  <i class="fa fa-tags"></i> <span class="menu-text">Conceptos</span>
-									<b class="arrow fa fa-angle-down"></b>
-							</a>
-								<ul class="submenu">
 								<g:each in="${scService?.currentUser?.concepts?.sort{it.conceptName}}" status="i" var="conceptInstance">
 									<li id="${conceptInstance.id}">
 									<a href="#" class="dropdown-toggle">
-									<i class="fa fa-angle-double-right"></i>
-									${fieldValue(bean: conceptInstance, field: "conceptName")}
+									<i class="fa fa-globe"></i>
+									<span class="menu-text" >${fieldValue(bean: conceptInstance, field: "conceptName")}</span>
+									
 									<b class="arrow  fa fa fa-angle-down"></b>
 									</a>
 									<ul class="submenu">
@@ -176,24 +151,6 @@
 									</ul>
 									</li>
 									</g:each>
-								</ul>
-							</li>							
-							<li id="facebook"><a href="#"> <i class="fa fa-facebook"></i> <span
-									class="menu-text">Facebook</span>
-							</a></li>
-							<li id="Flickr"><a href="#"> <i class="fa fa-flickr"></i> <span
-									class="menu-text">Flickr</span>
-							</a></li>
-							<li id="Bloqs"><a href="#"> <i class="fa fa-book"></i> <span
-									class="menu-text">Bloqs</span>
-							</a></li>
-							<li id="Diarios"><a href="#"> <i class="fa fa-cloud"></i> <span
-									class="menu-text">Diarios</span>
-							</a></li>
-							<li id="Otros"><a href="#"> <i class="fa fa-rss-square"></i> <span
-									class="menu-text">Otros</span>
-							</a></li>
-							
 							<sec:access expression="hasRole('ROLE_ADMIN')">
 							    <li id="admin">
 								<g:link controller='home' action='controlPanel'>
@@ -201,15 +158,12 @@
 								</g:link>
 								</li>
 							</sec:access>
-							
-								
-							
 						</ul>
 						<!-- /.nav-list -->
 
 						<div class="sidebar-collapse" id="sidebar-collapse">
 							<i class="fa fa-angle-double-left"
-								data-icon1="fa fa-dangle-double-left"
+								data-icon1="fa fa-angle-double-left"
 								data-icon2="fa fa-angle-double-left"></i>
 						</div>
 
@@ -261,7 +215,7 @@
 
 			<a href="#" id="btn-scroll-up"
 				class="btn-scroll-up btn btn-sm btn-inverse"> <i
-				class="fa fa-double-angle-up icon-only bigger-110"></i>
+				class="fa fa-double-angle-up bigger-110"></i>
 			</a>
 		</div>
 		<!-- /.main-container -->

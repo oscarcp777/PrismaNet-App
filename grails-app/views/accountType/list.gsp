@@ -21,7 +21,7 @@
 		<div class="nav" role="navigation">
 			<g:link class="btn btn-sm btn-info" action="create">
 				<g:message code="default.new.label" args="[entityName]" />
-				<i class="fa fa-arrow-right icon-on-right bigger-110"></i>
+				<i class="fa fa-arrow-right bigger-110"></i>
 			</g:link>
 		</div>
 		<hr>

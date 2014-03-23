@@ -28,6 +28,7 @@ modules = {
 		dependsOn 'core'
 		resource url:'js/chart/highcharts.js'
 		resource url:'js/chart/prismaChart.js'
+		resource url:'js/chart/exportingHC.js'
 	}
 	datepicker{
 		dependsOn 'core'

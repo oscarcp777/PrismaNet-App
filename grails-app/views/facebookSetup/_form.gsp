@@ -3,7 +3,7 @@
 <div class="tabbable">
 	<ul class="nav nav-tabs padding-16">
 		<li class="active"><a data-toggle="tab" href="#edit-basic"> <i
-				class="green icon-edit bigger-125"></i> <g:message code="form.new.facebook"/>
+				class="green fa fa-edit bigger-125"></i> <g:message code="form.new.facebook"/>
 		</a></li>
 	</ul>
 

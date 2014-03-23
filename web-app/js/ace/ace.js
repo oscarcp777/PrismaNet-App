@@ -173,10 +173,10 @@ ace.widget_boxes = function(a) {
                 return
             }
             var g = b.find(".widget-body");
-            var m = n.find("[class*=fa fa-]").eq(0);
-            var h = m.attr("class").match(/fa fa\-(.*)\-(up|down)/);
-            var d = "fa fa-" + h[1] + "-down";
-            var i = "fa fa-" + h[1] + "-up";
+            var m = n.find("[class*=fa-]").eq(0);
+            var h = m.attr("class").match(/fa\-(.*)\-(up|down)/);
+            var d = "fa-" + h[1] + "-down";
+            var i = "fa-" + h[1] + "-up";
             var l = g.find(".widget-body-inner");
             if (l.length == 0) {
                 g = g.wrapInner('<div class="widget-body-inner"></div>').find(":first-child").eq(0)
@@ -229,7 +229,7 @@ ace.widget_boxes = function(a) {
                         q = true;
                         b.addClass("position-relative")
                     }
-                    b.append('<div class="widget-box-overlay"><i class="fa fa-spinner icon-spin icon-2x white"></i></div>');
+                    b.append('<div class="widget-box-overlay"><i class="fa fa-spinner icon-2x white"></i></div>');
                     b.one("reloaded.ace.widget", function() {
                         b.find(".widget-box-overlay").remove();
                         if (q) {
