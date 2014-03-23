@@ -120,10 +120,10 @@ ace.general_things = function(a) {
             a(".ace-nav > li.grey").removeClass("dark")
         } if (d == "skin-2") {
             a(".ace-nav > li").addClass("no-border margin-1");
-            a(".ace-nav > li:not(:last-child)").addClass("light-pink").find('> a > [class*="icon-"]').addClass("pink").end().eq(0).find(".badge").addClass("badge-warning")
+            a(".ace-nav > li:not(:last-child)").addClass("light-pink").find('> a > [class*="fa fa-"]').addClass("pink").end().eq(0).find(".badge").addClass("badge-warning")
         } else {
             a(".ace-nav > li").removeClass("no-border margin-1");
-            a(".ace-nav > li:not(:last-child)").removeClass("light-pink").find('> a > [class*="icon-"]').removeClass("pink").end().eq(0).find(".badge").removeClass("badge-warning")
+            a(".ace-nav > li:not(:last-child)").removeClass("light-pink").find('> a > [class*="fa fa-"]').removeClass("pink").end().eq(0).find(".badge").removeClass("badge-warning")
         } if (d == "skin-3") {
             a(".ace-nav > li.grey").addClass("red").find(".badge").addClass("badge-yellow")
         } else {
@@ -134,7 +134,7 @@ ace.general_things = function(a) {
 ace.widget_boxes = function(a) {
     a(document).on("hide.bs.collapse show.bs.collapse", function(c) {
         var b = c.target.getAttribute("id");
-        a('[href*="#' + b + '"]').find('[class*="icon-"]').each(function() {
+        a('[href*="#' + b + '"]').find('[class*="fa fa-"]').each(function() {
             var e = a(this);
             var d;
             var f = null;
@@ -143,8 +143,8 @@ ace.widget_boxes = function(a) {
                 g = e.attr("data-icon-hide")
             } else {
                 if (d = e.attr("class").match(/icon\-(.*)\-(up|down)/)) {
-                    f = "icon-" + d[1] + "-down";
-                    g = "icon-" + d[1] + "-up"
+                    f = "fa fa-" + d[1] + "-down";
+                    g = "fa fa-" + d[1] + "-up"
                 }
             } if (f) {
                 if (c.type == "show") {
@@ -173,10 +173,10 @@ ace.widget_boxes = function(a) {
                 return
             }
             var g = b.find(".widget-body");
-            var m = n.find("[class*=icon-]").eq(0);
-            var h = m.attr("class").match(/icon\-(.*)\-(up|down)/);
-            var d = "icon-" + h[1] + "-down";
-            var i = "icon-" + h[1] + "-up";
+            var m = n.find("[class*=fa fa-]").eq(0);
+            var h = m.attr("class").match(/fa fa\-(.*)\-(up|down)/);
+            var d = "fa fa-" + h[1] + "-down";
+            var i = "fa fa-" + h[1] + "-up";
             var l = g.find(".widget-body-inner");
             if (l.length == 0) {
                 g = g.wrapInner('<div class="widget-body-inner"></div>').find(":first-child").eq(0)
@@ -229,7 +229,7 @@ ace.widget_boxes = function(a) {
                         q = true;
                         b.addClass("position-relative")
                     }
-                    b.append('<div class="widget-box-overlay"><i class="icon-spinner icon-spin icon-2x white"></i></div>');
+                    b.append('<div class="widget-box-overlay"><i class="fa fa-spinner icon-spin icon-2x white"></i></div>');
                     b.one("reloaded.ace.widget", function() {
                         b.find(".widget-box-overlay").remove();
                         if (q) {

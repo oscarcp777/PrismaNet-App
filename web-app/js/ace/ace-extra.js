@@ -112,7 +112,7 @@ ace.settings = {
     sidebar_collapsed: function(c) {
         c = c || false;
         var e = document.getElementById("sidebar");
-        var d = document.getElementById("sidebar-collapse").querySelector('[class*="icon-"]');
+        var d = document.getElementById("sidebar-collapse").querySelector('[class*="fa fa-"]');
         var b = d.getAttribute("data-icon1");
         var a = d.getAttribute("data-icon2");
         if (c) {

@@ -85,25 +85,25 @@ jQuery(function() {
                 q = l.lastIndexOf("/") + 1
             }
             l = l.substr(q);
-            var m = "icon-file";
+            var m = "fa fa-file";
             if ((/\.(jpe?g|png|gif|svg|bmp|tiff?)$/i).test(l)) {
-                m = "icon-picture"
+                m = "fa fa-picture"
             } else {
                 if ((/\.(mpe?g|flv|mov|avi|swf|mp4|mkv|webm|wmv|3gp)$/i).test(l)) {
-                    m = "icon-film"
+                    m = "fa fa-film"
                 } else {
                     if ((/\.(mp3|ogg|wav|wma|amr|aac)$/i).test(l)) {
-                        m = "icon-music"
+                        m = "fa fa-music"
                     }
                 }
             } if (!this.well_style) {
                 this.$label.find(".file-name").attr({
                     "data-title": l
-                }).find('[class*="icon-"]').attr("class", m)
+                }).find('[class*="fa fa-"]').attr("class", m)
             } else {
                 this.$label.append('<span class="file-name" data-title="' + l + '"><i class="' + m + '"></i></span>');
                 var r = e.trim(n[p].type);
-                var o = b && this.settings.thumbnail && ((r.length > 0 && r.match("image")) || (r.length == 0 && m == "icon-picture"));
+                var o = b && this.settings.thumbnail && ((r.length > 0 && r.match("image")) || (r.length == 0 && m == "fa fa-picture"));
                 if (o) {
                     var s = this;
                     e.when(i.call(this, n[p])).fail(function(t) {
@@ -123,9 +123,9 @@ jQuery(function() {
         }).find(".file-name:first").attr({
             "data-title": this.settings.no_file,
             "class": "file-name"
-        }).find('[class*="icon-"]').attr("class", this.settings.no_icon).prev("img").remove();
+        }).find('[class*="fa fa-"]').attr("class", this.settings.no_icon).prev("img").remove();
         if (!this.settings.no_icon) {
-            this.$label.find('[class*="icon-"]').remove()
+            this.$label.find('[class*="fa fa-"]').remove()
         }
         this.$label.find(".file-name").not(":first").remove();
         if (this.$element.data("ace_input_files")) {
@@ -332,10 +332,10 @@ jQuery(function() {
     e.fn.ace_file_input.defaults = {
         style: false,
         no_file: "No File ...",
-        no_icon: "icon-upload-alt",
+        no_icon: "fa fa-upload-alt",
         btn_choose: "Choose",
         btn_change: "Change",
-        icon_remove: "icon-remove",
+        icon_remove: "fa fa-remove",
         droppable: false,
         thumbnail: false,
         before_change: null,
@@ -346,8 +346,8 @@ jQuery(function() {
 (function(a, b) {
     a.fn.ace_spinner = function(c) {
         this.each(function() {
-            var f = c.icon_up || "icon-chevron-up";
-            var j = c.icon_down || "icon-chevron-down";
+            var f = c.icon_up || "fa fa-chevron-up";
+            var j = c.icon_down || "fa fa-chevron-down";
             var h = c.on_sides || false;
             var e = c.btn_up_class || "";
             var g = c.btn_down_class || "";
@@ -441,10 +441,10 @@ jQuery(function() {
 (function(a, b) {
     a.fn.ace_tree = function(d) {
         var c = {
-            "open-icon": "icon-folder-open",
-            "close-icon": "icon-folder-close",
+            "open-icon": "fa fa-folder-open",
+            "close-icon": "fa fa-folder-close",
             selectable: true,
-            "selected-icon": "icon-ok",
+            "selected-icon": "fa fa-ok",
             "unselected-icon": "tree-dot"
         };
         c = a.extend({}, c, d);
@@ -467,7 +467,7 @@ jQuery(function() {
         var g = {
             font: {
                 values: ["Arial", "Courier", "Comic Sans MS", "Helvetica", "Open Sans", "Tahoma", "Verdana"],
-                icon: "icon-font",
+                icon: "fa fa-font",
                 title: "Font"
             },
             fontSize: {
@@ -476,72 +476,72 @@ jQuery(function() {
                     3: "Normal",
                     1: "Small"
                 },
-                icon: "icon-text-height",
+                icon: "fa fa-text-height",
                 title: "Font Size"
             },
             bold: {
-                icon: "icon-bold",
+                icon: "fa fa-bold",
                 title: "Bold (Ctrl/Cmd+B)"
             },
             italic: {
-                icon: "icon-italic",
+                icon: "fa fa-italic",
                 title: "Italic (Ctrl/Cmd+I)"
             },
             strikethrough: {
-                icon: "icon-strikethrough",
+                icon: "fa fa-strikethrough",
                 title: "Strikethrough"
             },
             underline: {
-                icon: "icon-underline",
+                icon: "fa fa-underline",
                 title: "Underline"
             },
             insertunorderedlist: {
-                icon: "icon-list-ul",
+                icon: "fa fa-list-ul",
                 title: "Bullet list"
             },
             insertorderedlist: {
-                icon: "icon-list-ol",
+                icon: "fa fa-list-ol",
                 title: "Number list"
             },
             outdent: {
-                icon: "icon-indent-left",
+                icon: "fa fa-indent-left",
                 title: "Reduce indent (Shift+Tab)"
             },
             indent: {
-                icon: "icon-indent-right",
+                icon: "fa fa-indent-right",
                 title: "Indent (Tab)"
             },
             justifyleft: {
-                icon: "icon-align-left",
+                icon: "fa fa-align-left",
                 title: "Align Left (Ctrl/Cmd+L)"
             },
             justifycenter: {
-                icon: "icon-align-center",
+                icon: "fa fa-align-center",
                 title: "Center (Ctrl/Cmd+E)"
             },
             justifyright: {
-                icon: "icon-align-right",
+                icon: "fa fa-align-right",
                 title: "Align Right (Ctrl/Cmd+R)"
             },
             justifyfull: {
-                icon: "icon-align-justify",
+                icon: "fa fa-align-justify",
                 title: "Justify (Ctrl/Cmd+J)"
             },
             createLink: {
-                icon: "icon-link",
+                icon: "fa fa-link",
                 title: "Hyperlink",
                 button_text: "Add",
                 placeholder: "URL",
                 button_class: "btn-primary"
             },
             unlink: {
-                icon: "icon-unlink",
+                icon: "fa fa-unlink",
                 title: "Remove Hyperlink"
             },
             insertImage: {
-                icon: "icon-picture",
+                icon: "fa fa-picture",
                 title: "Insert picture",
-                button_text: '<i class="icon-file"></i> Choose Image &hellip;',
+                button_text: '<i class="fa fa-file"></i> Choose Image &hellip;',
                 placeholder: "Image URL",
                 button_insert: "Insert",
                 button_class: "btn-success",
@@ -557,15 +557,15 @@ jQuery(function() {
                 title: "Change Background Color"
             },
             undo: {
-                icon: "icon-undo",
+                icon: "fa fa-undo",
                 title: "Undo (Ctrl/Cmd+Z)"
             },
             redo: {
-                icon: "icon-repeat",
+                icon: "fa fa-repeat",
                 title: "Redo (Ctrl/Cmd+Y)"
             },
             viewSource: {
-                icon: "icon-code",
+                icon: "fa fa-code",
                 title: "View Source"
             }
         };
@@ -592,7 +592,7 @@ jQuery(function() {
                     var q = "className" in p ? p.className : "";
                     switch (p.name) {
                         case "font":
-                            r += ' <a class="btn btn-sm ' + q + ' dropdown-toggle" data-toggle="dropdown" title="' + p.title + '"><i class="' + p.icon + '"></i><i class="icon-angle-down icon-on-right"></i></a> ';
+                            r += ' <a class="btn btn-sm ' + q + ' dropdown-toggle" data-toggle="dropdown" title="' + p.title + '"><i class="' + p.icon + '"></i><i class="fa fa -angle-down icon-on-right"></i></a> ';
                             r += ' <ul class="dropdown-menu dropdown-light">';
                             for (var j in p.values) {
                                 if (p.values.hasOwnProperty(j)) {
@@ -602,7 +602,7 @@ jQuery(function() {
                             r += " </ul>";
                             break;
                         case "fontSize":
-                            r += ' <a class="btn btn-sm ' + q + ' dropdown-toggle" data-toggle="dropdown" title="' + p.title + '"><i class="' + p.icon + '"></i>&nbsp;<i class="icon-angle-down icon-on-right"></i></a> ';
+                            r += ' <a class="btn btn-sm ' + q + ' dropdown-toggle" data-toggle="dropdown" title="' + p.title + '"><i class="' + p.icon + '"></i>&nbsp;<i class="fa fa-angle-down icon-on-right"></i></a> ';
                             r += ' <ul class="dropdown-menu dropdown-light"> ';
                             for (var t in p.values) {
                                 if (p.values.hasOwnProperty(t)) {

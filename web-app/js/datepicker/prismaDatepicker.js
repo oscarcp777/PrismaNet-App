@@ -46,7 +46,7 @@ var datetime = null,
 
 var update = function() {
     date = moment(new Date())
-    datetime.html(' <i class="icon-time bigger-120"></i>  '+date.format('LLLL:ss'));
+    datetime.html(' <i class="fa fa-clock-o bigger-120"></i>  '+date.format('LLLL:ss'));
 };
 
 $(document).ready(function() {
