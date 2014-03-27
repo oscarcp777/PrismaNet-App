@@ -12,7 +12,7 @@ body {
 	background: #ecf0f1;
     color: #2d2d2d;
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 15px; font-size: 1.5rem;
+    font-size: 14px;
     font-weight: 300;
     line-height: 22px;
     /* margin-top: 60px; */
@@ -57,7 +57,7 @@ a:hover {
     position: fixed;
     left: 0;
     top: 0;
-    width: 50px;
+    width:40px;
     z-index: 2;
 }
 
@@ -102,7 +102,7 @@ a:hover {
 	height: 0;
 	opacity: 0;
 	overflow: hidden;
-	padding-left: 10px;
+	padding-left: 1px;
 	width: 0;
 	font-family: arial;
 }
@@ -135,10 +135,10 @@ a:hover {
 }
 
 .expanded #sidebar {
-	width: 195px;
+	width: 145px;
 }
 .expanded #header {
-	margin-left: 195px;
+	margin-left: 145px;
 }
 .expanded #nav li {
 	width: 90%;
@@ -174,7 +174,7 @@ a:hover {
 
 #container {
 	backface-visibility: hidden;
-    left: 50px;
+    left: 40px;
     position: relative;
     transform: translate3d(0px, 0px, 0px);
     transition: transform 500ms ease 0s;
@@ -184,9 +184,9 @@ a:hover {
 .section {
 	background-attachment: scroll;
 	background-position: center top;
-	margin-left: -50px;
+	margin-left: -40px;
 	position: relative;
-	padding: 150px 0 100px;
+	padding: 120px 0 50px;
 }
 
 .section h2 {
@@ -280,7 +280,7 @@ a:hover {
     cursor: pointer;
     display: inline-block;
     font-family: "Montserrat",sans-serif;
-    font-size: 14px; font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 300;
     line-height: 20px;
     padding: 8px 14px;
@@ -413,7 +413,7 @@ a:hover {
 
 /* Section 4 */
 #section4 {
-	margin-bottom: 120px;
+	margin-bottom:5px;
 }
 #section4  h2 {
 	margin-left: -4px;
@@ -482,8 +482,7 @@ a:hover {
 #section5 {
 	background:#1abc9c;
 	color: #F1F1F1;
-/* 	padding-bottom: 0px; */
-	padding-bottom: 100px;
+	padding-bottom: 10px;
 }
 
 #section5 h4.intro {
@@ -559,7 +558,7 @@ a:hover {
 	
 	
 	#section1 {
-		padding: 85px 0;
+		padding: 70px 0;
 	}
 	
 	#section1 .intro h1 {
@@ -587,7 +586,7 @@ a:hover {
 @media screen and (max-width: 1199px) {
 
 	.section{
-		margin-left: -50px;
+		margin-left: -40px;
 		padding: 135px 0;
 	}
 	
@@ -947,7 +946,7 @@ a:hover {
 
 .hd_navbar {
 	background-color:#ffffff;
-	margin-left:50px;
+	margin-left:40px;
 /* 	border-top: 8px solid #16a085; */
 	border-bottom: 1px solid #cccccc;
 	opacity: 0.0096;
@@ -965,7 +964,7 @@ a:hover {
 	margin-top:15px;
 	position: relative;
 	color: #000000;
-	font-size: 50px;
+	font-size: 40px;
 	display: block;
 }
 
@@ -1015,7 +1014,7 @@ a:hover {
 }
 
 .hd_navbar .nav li a {
-	border-top: 3px solid #ffffff;
+/* 	border-top: 3px solid #ffffff; */
 }
 
 .hd_navbar .nav li a:hover {
@@ -1110,7 +1109,6 @@ a:hover {
 }
 
 .hd_hero h2 {
-	margin-bottom: 30px;
 	font-weight: 400;
 	font-size: 18px;
 	line-height: 24px;
@@ -1143,25 +1141,22 @@ a:hover {
 }
 
 .landing .featurette {
-	padding-bottom: 90px;
+/* 	margin-left:-60px; */
 	text-align: center
 }
 
 .landing .featurette .video i {
-	font-family: entypo;
-	font-style: normal;
-	display: inline-block;
-	padding: 0 17px;
+	padding:5px 17px;
 	color: #fff;
-	background: #e45816;
+	background: #16a085;
 	border-radius: 3px;
 	margin-right: 10px;
-	font-size: 44px;
+	font-size: 24px;
 	line-height: 30px
 }
 
 .landing .featurette .video span {
-	font-size: 30px;
+	font-size: 20px;
 	margin-left: 12px
 }
 .landing .featurette .lead {
@@ -1184,20 +1179,20 @@ a:hover {
 	margin: 0
 }
 .landing .featurette img {
-	margin: 40px 0;
-	max-width: 100%;
+	width:90%;
 }
 
 .carousel-indicators {
   position: absolute;
-  bottom: -50px;
   left: 0;
   z-index: 15;
   width:15%;
   padding-left: 0;
   margin-left:15%;
+  bottom:-30px;
   text-align: center;
   list-style: none;
+  color: #f1c40f
 }
 
 .carousel-indicators li {

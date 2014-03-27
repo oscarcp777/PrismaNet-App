@@ -33,7 +33,7 @@
 				<div class="hd_wrapInner">
 					<header class="hd_navbar navbar navbar-default navbar-fixed-top"
 						id="header">
-						<div class="navbar" style="padding: 0;">
+						<div class="navbar" style="margin-bottom:7px;">
 							<div class="container">
 								<div class="navbar-header">
 									<button type="button" class="navbar-toggle"
@@ -46,7 +46,6 @@
 										<a class="logoHolder" title="return to home page" href="#">
 											<span class="logoFirst">
 											<i class="fa fa-filter" style="font-weight:bold;font-size:0.8em;"></i>
-											
 											<g:message code="general.title.prism"/></span><g:message code="general.title.net"/>
 											
 										</a>
@@ -68,11 +67,11 @@
 					</header>
 					<article class="hd_main" role="main">
 						<div id="main" class="container">
-							<section class="col-md-10  hd_hero">
+							<section  class="col-md-10  hd_hero">
                              <div class="col-md-offset-1">
 								<h1>
 									<span><g:message code="public.index.home.title1"/> </span> <br>
-									<g:message code="public.index.home.title1"/> 
+									<g:message code="public.index.home.title2"/> 
 								</h1>
 								<h2>Prisma-net te ofrece la mejor colecci&oacute;n de
 									estad&iacute;sticas sobre la demograf&iacute;a, el
@@ -80,11 +79,11 @@
 									otorg&aacute;ndote todo lo que necesitas para mantener el
 									dominio sobre tu presencia social.</h2>
 									</div>
-								<div class="featurette container">
-									<img src="img/home-mac.jpg" alt="">
+								<div class="featurette container" style="margin-left:-60px;">
+									<img src="img/analytics_howitworks.png" alt="como trabaja">
 									<div class="video">
-										<a href="https://www.youtube.com/embed/s8z3UVn3Xhc?vq=hd720"
-											class="open-trailer"><i>▸</i><span>Ver Demo</span></a>
+										<a href="https://www.youtube.com/embed/s8z3UVn3Xhc?vq=hd720" target="_blank"
+											class="open-trailer"><i class="fa fa-play"></i><span>Ver Demo</span></a>
 									</div>
 								</div>
 							</section>
@@ -189,8 +188,7 @@
 
 									<div class="skill">
 										<div style="display: inline; width: 245px; height: 122.5px;">
-											<canvas width="245" height="122.5px"></canvas>
-											<input data-readonly="true" data-fgcolor="#f1c40f"
+											<input data-readonly="true" data-fgcolor="#c4aa45"
 												data-inputcolor="#333" data-width="245" data-height="122.5"
 												class="knob-4" rel="43" value="0" readonly="readonly"
 												data-anglearc="180" data-angleoffset="-90" data-max="100"
@@ -268,7 +266,6 @@
 
 									<div class="skill">
 										<div style="display: inline; width: 245px; height: 122.5px;">
-											<canvas width="245" height="122.5px"></canvas>
 											<input data-readonly="true" data-fgcolor="#f68e51"
 												data-inputcolor="#333" data-width="245" data-height="122.5"
 												class="knob-65" rel="65" value="0" readonly="readonly"
@@ -342,7 +339,6 @@
 
 									<div class="skill">
 										<div style="display: inline; width: 245px; height: 122.5px;">
-											<canvas width="245" height="122.5px"></canvas>
 											<input data-readonly="true" data-fgcolor="#2c3e50"
 												data-inputcolor="#333" data-width="245" data-height="122.5"
 												class="knob-85" rel="4000" step="10" value="0" readonly="readonly"
