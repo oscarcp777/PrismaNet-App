@@ -31,14 +31,14 @@
 /* Customize container */
 @media (min-width: 768px) {
   .container {
-    max-width:450px;
+    max-width:400px;
   }
   .container .jumbotron{
 	margin: 0 auto;
 }
 }
 .form-signin {
-  max-width: 330px;
+  max-width:300px;
   padding: 15px;
   margin: 0 auto;
 }
@@ -48,8 +48,9 @@
   margin-bottom: 10px;
 }
 .form-signin-heading{
-	font-size: 30px;
-	margin-bottom: 15px;
+	font-size: 20px;
+	margin-bottom:10px;
+	font-weight: bold;
 }
 .form-signin .checkbox {
   padding-top: 15px;
@@ -61,7 +62,7 @@
 }
 .form-signin .form-control {
   position: relative;
-  font-size: 16px;
+  font-size: 14px;
   height: auto;
   padding: 10px;
   -webkit-box-sizing: border-box;
@@ -93,7 +94,7 @@
 	margin-left: 0;
 	position: relative;
 	color: #000000;
-	font-size: 50px;
+	font-size:40px;
 	display: block;
 	left: -2px;
 }
