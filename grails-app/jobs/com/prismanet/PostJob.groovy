@@ -2,6 +2,8 @@ package com.prismanet
 
 import groovy.time.TimeCategory
 
+import org.apache.log4j.LogManager
+
 import com.prismanet.importer.MongoPostsImporter
 
 class PostJob {
@@ -76,7 +78,7 @@ class PostJob {
 			} catch (Exception e) {
 				log.error "Importación Fallida: " + e.getMessage()
 				log.error e.getCause()
-				log.error e.getStackTrace()
+				log.error LogManager.getLogger("StackTrace")
 			}
 		}
 		
