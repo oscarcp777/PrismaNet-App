@@ -11,7 +11,7 @@ class MongoPostsImporter {
 	
 	MongoClient client
 	
-	public MongoTweetsImporter(def uri){
+	public MongoPostsImporter(def uri){
 		client = new MongoClient(new MongoClientURI(uri))
 	}
 	
@@ -24,6 +24,7 @@ class MongoPostsImporter {
 	def importPosts(dates){
 		DB db = client.getDB("prismanet")
 		DBCollection posts = db.getCollection("posts")
+		
 		
 		def filters = []
 		if (dates.dateFrom && dates.dateTo){

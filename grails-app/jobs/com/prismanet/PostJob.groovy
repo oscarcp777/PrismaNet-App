@@ -6,7 +6,7 @@ import com.prismanet.importer.MongoPostsImporter
 
 class PostJob {
 	def grailsApplication
-	def facebookService
+	def postService
 	def facebookSetupService
 	def group = "postsJobs"
 	
@@ -32,6 +32,7 @@ class PostJob {
 			}
 			
 			Process p = Runtime.getRuntime().exec("java -jar prismanet-facebook-api.jar")
+			p.waitFor()
 			println "Proceso api-facebook ejecutado, ultima modificacion a las : " + grailsApplication.config.facebook.setup.lastUpdated
 			
 			def d1 = new GregorianCalendar(2013, Calendar.OCTOBER, 27,11,00)
@@ -45,28 +46,38 @@ class PostJob {
 			
 //			print "filtros: " + dates
 			
-			def posts = importer.importPosts(dates)
+			def posts = importer.importPosts([])
 //			print "-------------------------"
 //			print posts
 			def iterator = posts.iterator()
 			def partialList = []
 			int i = 0
-//			print "posts: " + iterator.size()
+			print "posts: " + iterator.size()
 			while (iterator.hasNext()){
 				partialList.add(iterator.next())
 				i++
 //				print i
 				if (i % 100 == 0){
-					println "Nuevo Lote" 
-					i = 0
-					//TODO
-//					postsService.saveTweets(partialList)
+					try {
+						println "Nuevo Lote"
+						i = 0
+						postService.savePosts(partialList)
+					} catch (Exception e) {
+						log.error "Importación Fallida: " + e.getMessage()
+						log.error e.getCause()
+						log.error e.getStackTrace()
+					}
 					partialList.clear();
 				}
 			}
-			print "Lista: " +partialList.size()
-			//TODO
-//			postsService.saveTweets(partialList)
+			try {
+				print "Lista: " +partialList.size()
+				postService.savePosts(partialList)
+			} catch (Exception e) {
+				log.error "Importación Fallida: " + e.getMessage()
+				log.error e.getCause()
+				log.error e.getStackTrace()
+			}
 		}
 		
 	}
