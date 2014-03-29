@@ -29,8 +29,9 @@ function inicializeColorChar(){
 	});
 }
 
-function getTweetCharPie(){
-	doRequest('conceptTweetsJson',null,paintCharPie, null, 'GET');
+function getTweetCharPie(div){
+	var data = {"div":div}
+	doRequest('conceptTweetsJson',data,paintCharPie, null, 'GET');
 }
 function getConceptRealTime(id, div){
 	var data = {"id":id, "div":div}
@@ -161,11 +162,7 @@ function printRealTimeChar(data){
 
 
 function paintCharPie(dataJson) {
-	// Radialize the colors
-	
-
-	// Build the chart
-	$('#container')
+	$(dataJson.container)
 			.highcharts(
 					{
 						chart : {
@@ -174,7 +171,7 @@ function paintCharPie(dataJson) {
 					            plotBorderWidth: 2
 						},
 						title : {
-							text : 'Porcentajes de tweets por Concepto'
+							text : dataJson.title
 						},
 						tooltip : {
 							pointFormat : '{series.name}: <b>{point.y}</b>'
@@ -199,8 +196,8 @@ function paintCharPie(dataJson) {
 						},
 						series : [ {
 							type : 'pie',
-							name : 'Tweets',
-							data : dataJson
+							name : dataJson.name,
+							data : dataJson.data
 						} ]
 					});
 
@@ -304,35 +301,6 @@ function paintCharLine(data){
 }
 
 
-
-function paintCharGender() {
-	$('.easy-pie-chart.percentage')
-			.each(
-					function() {
-						var $box = $(this).closest('.infobox');
-						var barColor = $(this).data('color')
-								|| (!$box.hasClass('infobox-dark') ? $box
-										.css('color')
-										: 'rgba(255,255,255,0.95)');
-						var trackColor = barColor == 'rgba(255,255,255,0.95)' ? 'rgba(255,255,255,0.25)'
-								: '#E2E2E2';
-						var size = parseInt($(this).data('size')) || 300;
-						$(this)
-								.easyPieChart(
-										{
-											barColor : barColor,
-											trackColor : trackColor,
-											scaleColor : false,
-											lineCap : 'butt',
-											lineWidth : parseInt(size / 10),
-											animate : /msie\s*(8|7|6)/
-													.test(navigator.userAgent
-															.toLowerCase()) ? false
-													: 1000,
-											size : size
-										});
-					})
-}
 
 
 

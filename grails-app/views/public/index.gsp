@@ -72,6 +72,8 @@
 								<h1>
 									<span><g:message code="public.index.home.title1"/> </span> <br>
 									<g:message code="public.index.home.title2"/> 
+
+
 								</h1>
 								<h2>Prisma-net te ofrece la mejor colecci&oacute;n de
 									estad&iacute;sticas sobre la demograf&iacute;a, el

@@ -2,8 +2,6 @@ package com.prismanet.sentiment
 
 
 
-import org.junit.*
-import grails.test.mixin.*
 import com.prismanet.*
 
 @TestFor(OpinionController)

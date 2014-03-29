@@ -6,20 +6,20 @@
 	<div class="page-content">
 		<div class="page-header">
 			<h1>
-				<i class="fa fa-user"></i> Resultados Usuario: "${user.username}"
+				<i class="fa fa-user"></i> <g:message code="user.stats.title"/>"${user.username}"
 			</h1>
 		</div>
 
 
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="row">
+		<div class="row" >
+			<div class="col-lg-12" id="printArea">
+				<div class="row" >
 					<div class="col-lg-12 widget-container-span ui-sortable">
 						<div class="widget-box">
 							<div class="widget-header header-color-blue">
 								<h5>
-									<span class="glyphicon glyphicon-stats"></span> Tweets por
-									Concepto
+									<span class="glyphicon glyphicon-stats"></span> 
+									<g:message code="user.stats.tweets.concepts"/>
 								</h5>
 
 								<div class="widget-toolbar">
@@ -33,17 +33,17 @@
 
 							<div class="widget-body">
 								<div class="widget-main padding-4">
-									<div id="container" style="width: 100%; min-width: 300px;"></div>
+									<div id="tweetCharPie" style="width: 100%; min-width: 300px;"></div>
 								</div>
 							</div>
 						</div>
 					</div>
-
 					<div class="col-lg-12 widget-container-span ui-sortable">
 						<div class="widget-box">
 							<div class="widget-header header-color-blue">
 								<h5>
-									<span class="glyphicon glyphicon-stats"> </span> Tweets entre fechas
+									<span class="glyphicon glyphicon-stats"> </span> 
+									<g:message code="user.stats.tweets.date"/>
 								</h5>
 								<div class="widget-toolbar input-group ">
 								<div id="pickertUser" class="btn btn-primary date-picker">
@@ -70,68 +70,12 @@
 					</div>
 					
 
-					<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
-						<div class="widget-box">
-							<div class="widget-header header-color-dark">
-								<h5>
-									<span class="glyphicon glyphicon-stats"></span> Tweets por Sexo
-								</h5>
-
-
-								<div class="widget-toolbar">
-									<a href="#" data-action="reload"> <i class="fa fa-refresh"></i>
-									</a> <a href="#" data-action="collapse"> <i
-										class="1 bigger-125 fa fa-chevron-up"></i>
-									</a> <a href="#" data-action="close"> <i class="fa fa-remove"></i>
-									</a>
-								</div>
-
-							</div>
-
-							<div class="widget-body">
-								<div class="widget-body-inner" style="display: block;">
-									<div class="widget-main">
-
-
-										<div class="row">
-											<div class="col-md-6" style="padding-left: 10%;">
-												<div class="easy-pie-chart percentage easyPieChart"
-													data-percent="62" data-color="#2a91d8">
-													<i class="fa fa-male" style="font-size: 9em; color: #2a91d8"></i>
-													<h2
-														style="margin-top: -72px; margin-left: 10px;; position: relative;">62%</h2>
-												</div>
-
-											</div>
-											<div class="col-md-6">
-												<div class="easy-pie-chart percentage easyPieChart"
-													data-percent="38" data-color="#c6699f">
-													<i class="fa fa-female"
-														style="font-size: 9em; color: #c6699f"></i>
-													<h2
-														style="margin-top: -72px; margin-left: 10px;; position: relative;">38%</h2>
-												</div>
-
-											</div>
-
-										</div>
-
-
-
-
-									</div>
-
-
-								</div>
-							</div>
-						</div>
-					</div>
+					
 
 				</div>
 			</div>
 			<hr>
 
-			<div class="row"></div>
 		</div>
 	</div>
 		<script type="text/javascript">
@@ -143,15 +87,15 @@
 		$(document).ready(function() {
 			inicializeColorChar();
 			activeItemMenuLevel2('chart', 'general', 'Estadisticas > General');
-			paintCharGender();
-			getTweetCharPie();
+			getTweetCharPie('#tweetCharPie');
 			loadDatepicker('pickertUser',loadCharTest1);
 			var data = {"id":${user.id}, "div":'#lineaChartUser',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 			getUserGroupedTweets(data);
 			$('#refreshCharPie').click(function() {
-				getTweetCharPie();
+				getTweetCharPie('#tweetCharPie');
 			});
 		});
 	</script>
+	
 </body>
 </html>

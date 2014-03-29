@@ -26,7 +26,7 @@
 		<link>
 			<name>.link_to_grails_plugins</name>
 			<type>2</type>
-			<locationURI>GRAILS_ROOT/2.2.4/projects/PrismaNet/plugins</locationURI>
+			<location>/Users/oscar/workspace/Prisma-net/PrismaNet/target/work/plugins</location>
 		</link>
 	</linkedResources>
 </projectDescription>

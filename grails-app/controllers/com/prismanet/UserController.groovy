@@ -36,8 +36,10 @@ class UserController extends GenericController{
 		[user: session.user, statsList : statsList]
 	}
 	def conceptTweetsJson ={
+		def container=params.div
 		def dateList = userService.categoryStore(session.user, ["conceptsName"], [],null).sort{a,b -> a[1] <=> b[1] }
-		render dateList as JSON
+		def resultMap = [container:container,data:dateList,title:'Porcentajes de tweets por Concepto',name : 'Tweets']
+		render resultMap as JSON
 	}
 	
 	

@@ -151,7 +151,7 @@
 								</div>
 
 								<p class="body no-margin content">
-									${tweetInstance.tweet.contentHtml}
+									${raw(tweetInstance.tweet.contentHtml)}
 								</p>
 								<div class="hr hr8 hr-double"></div>
 								<div class="clearfix ">
