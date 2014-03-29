@@ -1,7 +1,6 @@
 package com.prismanet
 
 import grails.test.GrailsUnitTestCase
-import grails.test.mixin.*
 import grails.test.mixin.support.*
 
 class ConceptTests extends GrailsUnitTestCase{

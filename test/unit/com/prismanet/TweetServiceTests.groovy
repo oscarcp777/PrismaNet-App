@@ -2,8 +2,6 @@ package com.prismanet
 
 
 
-import grails.test.mixin.*
-import org.junit.*
 
 import com.prismanet.sentiment.Opinion
 import com.prismanet.sentiment.OpinionValue;

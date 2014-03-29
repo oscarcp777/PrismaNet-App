@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import grails.test.*
-import grails.test.mixin.*
 import groovy.time.TimeCategory
 
 
