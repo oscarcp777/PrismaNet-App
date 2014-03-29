@@ -14,7 +14,7 @@ class ConceptIntegrationTests {
     @Before
     void setUp() {
 		def setup = new TwitterSetup(includedAccounts:"@CFKArgentina,@twitter2", keywords:"politica,filmus").save()
-		def author = new Author(accountName:"@oscar", followers:10, userSince:new Date(), sex: Sex.M).save()
+		def author = new TwitterAuthor(name:"@oscar", accountName:"@oscar", followers:10, userSince:new Date(), sex: Sex.M).save()
 		def account = new AccountType(type:'free').save()
 		def user = new User(username: 'oscar', password: 'fiuba', firstName:'oscar', lastName:'Caceres',account:account).save()
 		def tweet = new Tweet(content:"@CFKArgentina", author:author, created:new Date(), tweetId:1l, retweet:false).save()

@@ -13,12 +13,9 @@ class TweetTests extends GrailsUnitTestCase{
 		
 		def testTweet = new Tweet(created:new Date())
 		assertFalse testTweet.validate()
-		assertEquals testTweet.errors.getErrorCount(),4
+		assertEquals testTweet.errors.getErrorCount(),2
 		assertEquals "nullable", testTweet.errors["content"]
 		assertEquals "nullable", testTweet.errors["author"]
-		assertEquals "nullable", testTweet.errors["retweet"]
-		assertEquals "nullable", testTweet.errors["tweetId"]
-
 	}
 
 	void testParseDate() {
@@ -41,10 +38,6 @@ class TweetTests extends GrailsUnitTestCase{
 	}
 	
 	
-	void testMentionType() {
-		Tweet tweet = new Tweet()
-		assertEquals tweet.mentionType,MentionType.TWITTER
-	}
 	void testContentHtml(){
 		
 		Tweet tweet = new Tweet()

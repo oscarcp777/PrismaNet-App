@@ -49,6 +49,12 @@ class Concept {
 		tweets.add(tweet);
 	}
 	
+	public doAddToPost(Post post){
+		if (!posts)
+			posts = new ArrayList<Post>()
+		posts.add(post);
+	}
+	
 	public boolean testAddTweet(Tweet tweet){
 		def add = false
 		for (String twitterAccount in this.twitterSetup?.includedAccounts?.split(',')) {
@@ -64,6 +70,17 @@ class Concept {
 		return add
 	}
 	
+	public boolean testAddPost(Post post){
+		def add = false
+		
+		for (String keyword in this.facebookSetup?.accounts?.split(',')) {
+			if (post.postId.contains(keyword)){
+				add = true
+			}
+		}
+		return add
+	}
+	
 	@Override
 	public String toString() {
 		return conceptName;
@@ -71,9 +88,13 @@ class Concept {
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		Concept newConcept = new Concept(this)
-		newConcept.twitterSetup = twitterSetup.clone()
-		newConcept.facebookSetup = facebookSetup.clone()
+		Concept newConcept = new Concept()
+		newConcept.conceptName = conceptName
+		newConcept.twitterSetup = twitterSetup
+		newConcept.facebookSetup = facebookSetup
+		newConcept.user = user
+		newConcept.twitterSetup = twitterSetup?.clone()
+		newConcept.facebookSetup = facebookSetup?.clone()
 		return newConcept
 	}
 	

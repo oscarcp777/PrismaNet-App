@@ -18,12 +18,8 @@ import com.prismanet.context.TweetAttributeContext
 import com.prismanet.sentiment.Opinion
 import com.prismanet.sentiment.OpinionValue
 
-class TweetService extends GenericService{
+class TweetService extends MentionService{
 
-	def sessionFactory
-	def propertyInstanceMap = org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
-	//boolean transactional = false
-	
 	TweetService(){
 		super(Tweet, new TweetAttributeContext())
 	}
@@ -41,9 +37,9 @@ class TweetService extends GenericService{
 				index++
 				
 				def start = System.currentTimeMillis()
-				Author author = Author.findByAccountName("@"+status.getUser().getScreenName())
+				Author author = TwitterAuthor.findByAccountName("@"+status.getUser().getScreenName())
 				if (!author){
-					author = new Author(accountName:"@"+status.getUser().getScreenName(), followers:status.getUser().getFollowersCount(), sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()).save(validate:false)
+					author = new TwitterAuthor(name: status.getUser().getName(), twitterAuthorId: status.getUser().getId(), accountName:"@"+status.getUser().getScreenName(), followers:status.getUser().getFollowersCount(), sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()).save(validate:false)
 				}
 				else{
 					author.followers = status.getUser().getFollowersCount()
@@ -99,28 +95,6 @@ class TweetService extends GenericService{
 	}
 	
 	
-	def cleanUpGorm() {
-		try {
-			sessionFactory.currentSession.flush()
-			sessionFactory.currentSession.clear()
-			propertyInstanceMap.get().clear()
-		} catch (Exception e) {
-			print e.getCause()
-		}
-		
-		
-	}
-
-	
-	def OpinionValue getOpinion(User user, Concept concept){
-		def opinion = Opinion.findByUserandConcept(user,concept)
-		if (!opinion)
-			return OpinionValue.NEUTRAL
-		
-		opinion.value
-	}
-	
-	
 	def streamConection(StatusListener listener){
 		String args;
 		Concept.withTransaction{
@@ -159,26 +133,6 @@ class TweetService extends GenericService{
 		twitterStream.filter(new FilterQuery(0, followArray, trackArray));
 	}
 	
-	
-	
-	
-	
-	
-	private boolean isNumericalArgument(String argument) {
-		def String arguments = argument.split(",");
-		boolean isNumericalArgument = true;
-		for (String arg : arguments) {
-			try {
-				Integer.parseInt(arg);
-			} catch (NumberFormatException nfe) {
-				isNumericalArgument = false;
-				break;
-			}
-		}
-		return isNumericalArgument;
-	}
-	
-	
 	def getTweets(filters, parameters){
 		
 		def conceptId
@@ -191,7 +145,7 @@ class TweetService extends GenericService{
 		if (conceptId)
 			concept = Concept.get(conceptId)
 			
-		def auxList =	list(Tweet, new TweetAttributeContext(), filters, parameters, [[attribute:"id",value:OrderType.DESC]])
+		def auxList =	list(Tweet.class, new TweetAttributeContext(), filters, parameters, [[attribute:"id",value:OrderType.DESC]])
 		for (tweet in auxList.results){
 			def opValue
 			if (conceptId){
@@ -237,7 +191,7 @@ class TweetService extends GenericService{
 			users = twitter.lookupUsers((String[])usersName.toArray());
 		if (users != null)
 		for (twitter4j.User user : users) {
-			Author author=authors.find {it.accountNameSingle == user.screenName}
+			TwitterAuthor author=authors.find {it.accountNameSingle == user.screenName}
 			if (author){
 				author.profileImage=user.profileImageURL
 				author.followers=user.followersCount

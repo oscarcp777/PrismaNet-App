@@ -1,11 +1,18 @@
 package com.prismanet
 
-class Post {
+class Post extends Mention{
 	
-	String content
+	String postId
 	
-	static belongsTo = [author:Author]
-
-    static constraints = {
+	static belongsTo = Concept
+	static hasMany = [concepts:Concept]
+	
+	static constraints = {
+		postId(nullable:true)
     }
+	
+	@Override
+	public String toString() {time
+		return author?.accountName + "-" + content;
+	}
 }

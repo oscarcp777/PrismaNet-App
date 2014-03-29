@@ -12,8 +12,9 @@ grails.project.dependency.resolution = {
     legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
     repositories {
         grailsCentral()
+		mavenLocal()
         mavenCentral()
-        // uncomment the below to enable remote dependency resolution
+		// uncomment the below to enable remote dependency resolution
         // from public Maven repositories
         //mavenLocal()
         //mavenRepo "http://snapshots.repository.codehaus.org"
@@ -30,6 +31,7 @@ grails.project.dependency.resolution = {
 		compile 'org.twitter4j:twitter4j-async:3.0.4-SNAPSHOT'
 		compile 'org.twitter4j:twitter4j-stream:3.0.4-SNAPSHOT'
 		compile 'org.twitter4j:twitter4j-media-support:3.0.4-SNAPSHOT'
+		compile 'org.facebook4j:facebook4j-core:2.0.5-Prisma'
     }
 
     plugins {

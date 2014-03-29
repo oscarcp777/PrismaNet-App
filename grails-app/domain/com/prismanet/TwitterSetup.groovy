@@ -32,12 +32,18 @@ class TwitterSetup {
 
 	@Override
 	public String toString() {
-		return includedAccounts;
+		return includedAccounts
 	}
 	
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		TwitterSetup setup = new TwitterSetup(this)
+		TwitterSetup setup = new TwitterSetup()
+		setup.includedAccounts =includedAccounts
+		setup.excludedAccounts = excludedAccounts
+		setup.keywords = keywords
+		setup.neutralHashtags = neutralHashtags
+		setup.positiveHashtags = positiveHashtags
+		setup.negativeHashtags = negativeHashtags
 		return setup
 	}
 

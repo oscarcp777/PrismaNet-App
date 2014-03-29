@@ -1,7 +1,7 @@
 package com.prismanet.context
 
 
-class AuthorAttributeContext extends AttributeContext {
+class TwitterAuthorAttributeContext extends AttributeContext {
 
 	@Override
 	protected void initializeRelations() {

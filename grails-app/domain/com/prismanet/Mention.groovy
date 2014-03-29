@@ -5,11 +5,9 @@ import java.text.SimpleDateFormat
 import com.prismanet.utils.DateTypes;
 import com.prismanet.utils.DateUtils;
 
-enum MentionType {TWITTER,FACEBOOK}
-
 abstract class Mention {
 	
-	MentionType mentionType
+	String content
 	
 	Date created
 	String date
@@ -23,8 +21,11 @@ abstract class Mention {
 	Integer year
 	Integer hour
 	String minute
+	
+	Author author
 
     static constraints = {
+		content(maxSize: 5000)
     }
 	
 	
@@ -42,5 +43,12 @@ abstract class Mention {
 
 		created = inputDate
 	}
+	
+	
+	@Override
+	public String toString() {
+		return author?.accountName + "-" + content;
+	}
+
 	
 }

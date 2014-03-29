@@ -2,29 +2,21 @@ package com.prismanet
 
 
 class Tweet extends Mention{
-	String content
+	
 	Boolean retweet
 	Long retweetCount = 0
 	Long favoriteCount = 0
 	Long tweetId
-	static hasMany = [concepts:Concept]
-	Author author
+	
 	static belongsTo = Concept
+	static hasMany = [concepts:Concept]
+	
 	static transients = ['contentHtml']
     static constraints = {
-//		content(maxLength:140)
-//		tweetId unique:true  
-    }
-	
-	public Tweet(){
-		mentionType = MentionType.TWITTER
+		retweet(nullable:true)
+		tweetId(nullable:true)
 	}
 	
-	
-	@Override
-	public String toString() {time
-		return author?.accountName + "-" + content;
-	}
 	
 	
 	def getContentHtml(){
