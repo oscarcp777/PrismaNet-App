@@ -26,7 +26,7 @@ class ConceptController extends GenericController{
 
 	def stats = {
 		Concept concept = Concept.get(params.id)
-		def authors=Author.list(max:10,sort:"followers",order:"desc");
+		def authors=TwitterAuthor.list(max:10,sort:"followers",order:"desc");
 		if(!grailsApplication.config.grails.twitter.offline)
 		tweetService.loadDataAuthors(authors)
 		[concept : concept,authors:authors]

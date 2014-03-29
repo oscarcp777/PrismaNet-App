@@ -44,10 +44,8 @@
 					</div>
 				<div class="profile-info-value">
 					
-						<g:each in="${facebookSetupInstance.keywords}" var="k">
-						<span class="property-value" aria-labelledby="keywords-label"><g:link controller="keyword" action="show" id="${k.id}">${k?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
+						<span class="property-value" aria-labelledby="keywords-label"><g:fieldValue bean="${facebookSetupInstance}" field="keywords"/></span>
+						
 					</div>
 					</div>
 				</g:if>

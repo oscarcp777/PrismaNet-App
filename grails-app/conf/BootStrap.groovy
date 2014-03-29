@@ -1,16 +1,14 @@
 import grails.util.Environment
+import groovy.time.TimeCategory
 
 import com.prismanet.AccountType
-import com.prismanet.Author
 import com.prismanet.Concept
-import com.prismanet.Sex
-import com.prismanet.Tweet
+import com.prismanet.FacebookSetup
+import com.prismanet.FacebookSetupService;
 import com.prismanet.TwitterSetup
 import com.prismanet.User
 import com.prismanet.model.security.SecRole
-import com.prismanet.model.security.SecUserSecRole;
-
-import groovy.time.TimeCategory
+import com.prismanet.model.security.SecUserSecRole
 
 class BootStrap {
 
@@ -67,7 +65,7 @@ class BootStrap {
 				def user = User.findByUsername("admin");
 
 				// Twitter's Setup ,@Stolbizer,@danielscioli,@HermesBinner,@mauriciomacri,@elisacarrio,@DelaSotaOk,@juliocobos"}
-				def twitterConfigIns = new TwitterSetup(includedAccounts:"@minsaurralde",keywords:"politica,filmus").save()
+				def twitterConfigIns = new TwitterSetup(includedAccounts:"@minsaurralde").save()
 				def twitterConfigMass = new TwitterSetup(includedAccounts:"@SergioMassa").save()
 				def twitterConfigColo = new TwitterSetup(includedAccounts:"@denarvaez").save()
 				def twitterConfigPresi = new TwitterSetup(includedAccounts:"@CFKArgentina").save()
@@ -81,6 +79,14 @@ class BootStrap {
 				def twitterConfigCobos= new TwitterSetup(includedAccounts:"@juliocobos").save()
 				def twitterConfigCapi= new TwitterSetup(includedAccounts:"@jmcapitanich").save()
 				
+				// Facebook's Setup 
+				def facebookConfigPresi = new FacebookSetup(keywords:"CFKArgentina")
+				def facebookConfigMacri = new FacebookSetup(keywords:"mauriciomacri")
+				def facebookConfigIns = new FacebookSetup(keywords:"insaurraldem")
+				FacebookSetupService facebookSetupService = new FacebookSetupService()
+				facebookSetupService.save(facebookConfigPresi)
+				facebookSetupService.save(facebookConfigMacri)
+				facebookSetupService.save(facebookConfigIns)
 
 				// Autores
 //				def author1 = new Author(accountName:"@oscarcp777", followers:10, userSince:new Date(), sex: Sex.M).save()
@@ -90,15 +96,15 @@ class BootStrap {
 
 
 				// Conceptos
-				def conceptIns = new Concept(conceptName: 'Insaurralde',twitterSetup:twitterConfigIns, user:user).save()
+				def conceptIns = new Concept(conceptName: 'Insaurralde',twitterSetup:twitterConfigIns, facebookSetup:facebookConfigIns, user:user).save()
 				def conceptMass = new Concept(conceptName: 'Massa',twitterSetup:twitterConfigMass, user:user).save()
 				def conceptColo = new Concept(conceptName: 'De Narvaez',twitterSetup:twitterConfigColo, user:user).save()
-				def conceptPresi = new Concept(conceptName: 'CFK',twitterSetup:twitterConfigPresi, user:user).save()
+				def conceptPresi = new Concept(conceptName: 'CFK',twitterSetup:twitterConfigPresi, facebookSetup:facebookConfigPresi, user:user).save()
 				
 				def conceptStolb= new Concept(conceptName: 'Stolbizer',twitterSetup:twitterConfigsStolb, user:user).save()
 				def conceptScioli = new Concept(conceptName: 'Scioli',twitterSetup:twitterConfigScioli, user:user).save()
 				def conceptBinner= new Concept(conceptName: 'Binner',twitterSetup:twitterConfigBinner, user:user).save()
-				def conceptMacri = new Concept(conceptName: 'Macri',twitterSetup:twitterConfigMacri, user:user).save()
+				def conceptMacri = new Concept(conceptName: 'Macri',twitterSetup:twitterConfigMacri, facebookSetup:facebookConfigMacri, user:user).save()
 				def conceptCarrio = new Concept(conceptName: 'Carrio',twitterSetup:twitterConfigCarrio, user:user).save()
 				def conceptSota = new Concept(conceptName: 'De la Sota',twitterSetup:twitterConfigSota, user:user).save()
 				def conceptCobos = new Concept(conceptName: 'Cobos',twitterSetup:twitterConfigCobos, user:user).save()
