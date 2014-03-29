@@ -3,6 +3,7 @@ package com.prismanet
 class Post extends Mention{
 	
 	String postId
+	String commentId
 	
 	static belongsTo = Concept
 	static hasMany = [concepts:Concept]

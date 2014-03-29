@@ -13,7 +13,7 @@ class TwitterSetupService extends GenericCoreService {
 		def result = list(TwitterSetup, new TwitterSetupAttributeContext(),
 						filters, parameters, 
 						[[attribute:"lastUpdated",value:OrderType.DESC]]);
-		result.results[0].lastUpdated
+		result?.results[0]?.lastUpdated ?: new Date()
 	}
 	
 	def getConfiguration(){
