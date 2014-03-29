@@ -2,7 +2,6 @@ package com.prismanet
 
 import grails.test.mixin.support.*
 
-import org.junit.*
 
 class TweetJobTests {
 	
