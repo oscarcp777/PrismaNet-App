@@ -20,6 +20,7 @@ hibernate {
 //  cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory' // Hibernate 3
 //    cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory' // Hibernate 4
 //    singleSession = true // configure OSIV singleSession mode
+	jdbc.batch_size=50
 }
 
 // environment specific settings

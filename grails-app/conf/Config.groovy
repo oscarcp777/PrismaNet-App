@@ -142,3 +142,10 @@ log4j = {
 	   }
 		   	   
 }
+
+grails.gorm.failOnError=true
+grails.gorm.autoFlush=false
+
+grails.gorm.default.mapping = {
+	  dynamicUpdate true
+}
