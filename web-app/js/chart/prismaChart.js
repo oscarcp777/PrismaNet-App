@@ -33,9 +33,9 @@ function getTweetCharPie(div){
 	var data = {"div":div}
 	doRequest('conceptTweetsJson',data,paintCharPie, null, 'GET');
 }
-function getConceptRealTime(id, div){
+function getConceptRealTime(id, div,level){
 	var data = {"id":id, "div":div}
-	doRequest('../conceptsRealTime',data,printRealTimeChar, null, 'GET');
+	doRequest(level+'conceptsRealTime',data,printRealTimeChar, null, 'GET');
 }
 
 
@@ -54,111 +54,7 @@ function getUserGroupedTweets(data){
 
 
 
-function printRealTimeChar(data){
-    Highcharts.setOptions({
-        global: {
-            useUTC: false
-        }
-    });
 
-    var chart;
-    $(data.container).highcharts({
-        chart: {
-            type: 'spline',
-            animation: Highcharts.svg, // don't animate in old IE
-            plotShadow: true,
-            plotBorderWidth: 2,
-            events: {
-                load: function() {
-
-                    // set up the updating of the chart each second
-                    var series = this.series[0];
-                    setInterval(function() {
-                    	var dataNew = {"id":data.id}
-                    	doRequest('../conceptsRealTimeForOneMinute',
-                    			  dataNew,
-                    			 function(data) {
-                	        		for ( var int = 0; int < data.length; int++) {
-                	        			var element = data[int];
-                	        			series.addPoint(element, true, true);
-                	        			}
-                    			}
-                    			, null, 
-                    			'GET');
-                       
-                    }, 60000);
-                }
-            }
-        },
-        title: {
-            text:data.title
-        },
-        subtitle: {
-            text: data.subTitle
-        },
-        xAxis: {
-        	gridLineWidth: 1,
-        	title: {
-                text:data.titleX
-            },
-            type: 'datetime'
-        },
-        yAxis: {
-            title: {
-                text: data.titleY
-            },
-            min:0
-        },
-        tooltip: {
-            formatter: function() {
-                    return "Click para ver los <b> "+this.y+'</b> tweets de las '+ Highcharts.dateFormat('%H:%M', this.x) ;
-            },
-            crosshairs: true,
-	        shared: true
-        },
-        legend: {
-            enabled: true
-        },
-        exporting: {
-            enabled: true
-        },
-        
-        plotOptions: {
-        	spline: {
-                lineWidth: 4,
-                states: {
-                    hover: {
-                        lineWidth: 6
-                    }
-                }
-            },
-            series: {
-                cursor: 'pointer',
-                point: {
-                    events: {
-                        click: function() {
-                        	window.location.href="../../tweet/list?conceptsId="+data.id+"&"+data.dateProp+"="+this.x;
-                        }
-                    }
-                },
-                marker: {
-		    		fillColor: 'white',
-		    		lineWidth: 3,
-		    		lineColor: Highcharts.getOptions().colors[0]
-		    	},
-		    	zIndex: 2
-            }
-        },
-        
-       
-        series: [{
-            name: data.title,
-            data:data.data
-	    	
-        }
-        ]
-    });
-}
 
 
 function paintCharPie(dataJson) {
@@ -202,7 +98,100 @@ function paintCharPie(dataJson) {
 					});
 
 }
+function printRealTimeChar(data){
+    Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
+    });
 
+    var chart;
+    $(data.container).highcharts({
+        chart: {
+            type: 'spline',
+            animation: Highcharts.svg, // don't animate in old IE
+            plotShadow: true,
+            plotBorderWidth: 2,
+            events: {
+                load: function() {
+
+                    // set up the updating of the chart each second
+                    var series = this.series;
+                    setInterval(function() {
+                    	var dataNew = {"id":data.id};
+                    	var element;
+                    	doRequest(data.ajaxMethodReload,
+                    			  dataNew,
+                    			 function(data) {
+                	        			for ( var int = 0; int < series.length; int++) {
+                	        				for ( var i = 0; int < data.length; i++) {
+                	        					if(series[int].name == data[i].name){
+                                    			 element = data[int].data;
+                                    			 series[int].addPoint(element[0], true, true);
+                                    			 break;
+                                    		 }
+                                	       }
+                	        				
+                	        			}
+                    			}
+                    			, null, 
+                    			'GET');
+                       
+                    },60000);
+                }
+            }
+        },
+        title: {
+            text:data.title
+        },
+        subtitle: {
+            text: data.subTitle
+        },
+        xAxis: {
+        	gridLineWidth: 1,
+        	title: {
+                text:data.titleX
+            },
+            type: 'datetime',
+            labels: {
+                overflow: 'justify'
+           }
+        },
+        yAxis: {
+            title: {
+                text: data.titleY
+            }
+        },
+        tooltip: {
+            formatter: function() {
+                    return "Click para ver los <b> "+this.y+'</b> tweets de las '+ Highcharts.dateFormat('%H:%M', this.x) ;
+            },
+            crosshairs: true,
+	        shared: true
+        },
+        legend: {
+            enabled: true
+        },
+        exporting: {
+            enabled: true
+        },
+        
+        plotOptions: {
+            series: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function() {
+                        	window.location.href=data.cursorEvent+data.id+"&"+data.dateProp+"="+this.x+'&conceptName='+this.series.name;;
+                        }
+                    }
+                }
+            }
+        },
+        series: data.series
+        
+    });
+}
 
 function paintCharLine(data){
 	Highcharts.setOptions({
@@ -225,8 +214,6 @@ function paintCharLine(data){
 	        },
 	        xAxis: {
 	        	gridLineWidth: 1,
-//	            lineColor: '#1ABC9C',
-//	            tickColor: '#1ABC9C',
 	        	title: {
 	                text:data.titleX
 	            },
@@ -234,16 +221,11 @@ function paintCharLine(data){
                 labels: {
                     overflow: 'justify'
                 }
-//	            tickPixelInterval:3600,
-//	            plotLines: [{
-//	                value:0,
-//	            }]
 	        },
 	        yAxis: {
 	            title: {
 	                text: data.titleY
 	            }
-//	        , min:0
 	        },
 	        tooltip: {
 	            formatter: function() {
@@ -259,44 +241,18 @@ function paintCharLine(data){
 	            enabled: true
 	        },
 	        plotOptions: {
-//	        	spline: {
-//	                lineWidth: 4,
-//	                states: {
-//	                    hover: {
-//	                        lineWidth: 6
-//	                    }
-//	                }
-//	            },
 	            series: {
 	                cursor: 'pointer',
 	                point: {
 	                    events: {
 	                        click: function() {
-	                        	window.location.href=data.cursorEvent+this.x;
+	                        	window.location.href=data.cursorEvent+this.x+'&conceptName='+this.series.name;
 	                        }
 	                    }
 	                }
-//	            ,
-//	                marker: {
-//			    		fillColor: 'white',
-//			    		lineWidth: 3,
-//			    		lineColor: Highcharts.getOptions().colors[0]
-//			    	},
-//			    	zIndex: 2
 	            }
 	        },
 	        series: data.series
-//	        series: [{
-//	            name: data.title,
-//	            data:data.data,
-//		    	marker: {
-//		    		fillColor: 'white',
-//		    		lineWidth: 3,
-//		    		lineColor: Highcharts.getOptions().colors[0]
-//		    	},
-//		    	zIndex: 2
-//	        }
-//	        ]
 	    });
 }
 

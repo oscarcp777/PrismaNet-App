@@ -12,8 +12,37 @@
 
 
 		<div class="row" >
-			<div class="col-lg-12" id="printArea">
+			<div class="col-lg-12" >
 				<div class="row" >
+				<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
+						<div class="widget-box">
+							<div class="widget-header header-color-blue">
+								<h5>
+									<span class="glyphicon glyphicon-stats"> </span> 
+									<g:message code="user.stats.tweets.real.time"/>
+								</h5>
+
+								<div class="widget-toolbar">
+									<a href="#" data-action="collapse"> <i
+										class="1 bigger-125 fa fa-chevron-up"></i>
+									</a>
+								</div>
+
+
+							</div>
+
+							<div class="widget-body">
+								<div class="widget-body-inner" style="display: block;">
+									<div class="widget-main">
+										<div id="realTimeCharUser" style="height: 400px; min-width: 310px"></div>
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				
 					<div class="col-lg-12 widget-container-span ui-sortable">
 						<div class="widget-box">
 							<div class="widget-header header-color-blue">
@@ -91,6 +120,7 @@
 			loadDatepicker('pickertUser',loadCharTest1);
 			var data = {"id":${user.id}, "div":'#lineaChartUser',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 			getUserGroupedTweets(data);
+			getConceptRealTime(${user.id}, '#realTimeCharUser','');
 			$('#refreshCharPie').click(function() {
 				getTweetCharPie('#tweetCharPie');
 			});

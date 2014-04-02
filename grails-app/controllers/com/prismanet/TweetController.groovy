@@ -1,6 +1,7 @@
 package com.prismanet
 
 import grails.plugins.springsecurity.Secured
+import grails.plugins.springsecurity.SpringSecurityService;
 
 import com.prismanet.GenericService.FilterType
 import com.prismanet.context.Filter
@@ -11,10 +12,12 @@ import com.prismanet.utils.DateUtils
 @Secured(['ROLE_USER'])
 class TweetController extends GenericController{
 	static scaffold = true
-
+	SpringSecurityService springSecurityService;
 	def quartzScheduler
 	def tweetService
-	
+	def beforeInterceptor = {
+		session.user=springSecurityService.currentUser
+	}
 	def showJobState = {
 		def status = ""
 		switch(params.operation) {
@@ -30,18 +33,28 @@ class TweetController extends GenericController{
 		return [ status: status ]
 	}
 	
-	
+	Concept getConcept(params){
+		Concept concept
+		if(params["conceptsId"])
+		return Concept.get(params.conceptsId)
+		
+		session.user.concepts.each {it -> 
+		   if(params.conceptName!=null && it.conceptName==params.conceptName){
+			concept=it 
+			params.conceptsId=it.id
+			return true
+			}
+		}
+		concept
+	}
 	def list(Integer max) {
 		
 		log.debug "tweetController->list params: " + params
+		Concept concept =getConcept(params)
 		def filters = loadTweetFilters()
-		
 		params.max = Math.min(max ?: 6, 100)
-//		filters = loadFilters(params, new TweetAttributeContext())
-//		def parameters = cleanParams(params)
-		
 		def tweets = tweetService.getTweets(filters,params)
-		Concept concept = Concept.get(params.conceptsId.toLong())
+		
 		if(!grailsApplication.config.grails.twitter.offline)
 			tweetService.loadAvatarUsers(tweets.resultList)
 		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"]]

@@ -2,9 +2,9 @@ package com.prismanet
 import grails.converters.*
 import grails.plugins.springsecurity.Secured
 import grails.plugins.springsecurity.SpringSecurityService
+import groovy.time.TimeCategory
 
 import com.prismanet.GenericService.FilterType
-import com.prismanet.GenericService.OrderType
 import com.prismanet.GenericService.ProjectionType
 import com.prismanet.context.Filter
 import com.prismanet.utils.DateTypes
@@ -41,8 +41,75 @@ class UserController extends GenericController{
 		def resultMap = [container:container,data:dateList,title:'Porcentajes de tweets por Concepto',name : 'Tweets']
 		render resultMap as JSON
 	}
-	
-	
+	void loadZerosForMinute(series,from,to){
+		def dateValueList = [:]
+		def valueList = []
+		series.each {
+			dateValueList = [:]
+			valueList = []
+			it["data"].each {
+				dateValueList.put(it["x"], it["y"])
+			}
+			
+			it["data"]=DateUtils.loadZerosForMinute(dateValueList,from,to)
+		}
+	}
+	void addConceptsEmpty(List series,User user,from,to){
+		def conceptsListExits=[]
+		def conceptsListNoExits=[]
+		series.each {
+			conceptsListExits.add(it["name"])
+		}
+		user.concepts.each {
+			 if(!conceptsListExits.contains(it.conceptName)){
+				 conceptsListNoExits.add(it.conceptName)
+			 }
+		}
+		conceptsListNoExits.each {
+			series.add(
+				[name:it,data:DateUtils.loadZerosForMinute([:],from,to)]
+				)
+		}
+	}
+	def getConceptsRealTime( userId,from,to){
+		def filters = []
+		filters.add(new Filter(attribute:"id",value: userId, type:FilterType.EQ))
+		userService.getTweetsBy(filters,from,to);
+	}
+	def conceptsRealTime={
+		def container = params.div
+		def resultMap = [:]
+		Date from,to
+//		to=DateUtils.getDateWithoutSeconds(new GregorianCalendar(2014, Calendar.FEBRUARY, 11,21,40).time)
+		to=DateUtils.getDateWithoutSeconds(new Date())
+			use ( TimeCategory ) {
+	    		from = to-20.minutes
+     		}
+		def dateList=getConceptsRealTime(session.user.id,from,to)
+		resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
+			'Tweets por minuto','Minutos','Cantidad de tweets', "../tweet/list?id=")
+		loadZerosForMinute(resultMap["series"],from,to)
+		addConceptsEmpty(resultMap["series"],springSecurityService.currentUser,from,to)
+		
+		def json =[id:session.user.id,"subTitle":"Actualizacion en tiempo Real de la cantidad de Tweets"
+			      ,dateProp:"tweetMinute",ajaxMethodReload:'conceptsRealTimeForOneMinute']
+		resultMap.putAll(json)
+		render resultMap as JSON
+	}
+	def conceptsRealTimeForOneMinute={
+		Date from,to
+		def resultMap = [:]
+//		to=DateUtils.getDateWithoutSeconds(new GregorianCalendar(2014, Calendar.FEBRUARY, 11,21,40).time)
+				to=DateUtils.getDateWithoutSeconds(new Date())
+		use ( TimeCategory ) {
+				from = to-1.minutes
+		}
+		def dateList=getConceptsRealTime(session.user.id,from,to)
+		resultMap = getChartLineFormat(dateList, 2,'', DateTypes.MINUTE_PERIOD,'','','','')
+		loadZerosForMinute(resultMap["series"],from,to)
+		addConceptsEmpty(resultMap["series"],session.user,from,to)
+		render resultMap["series"] as JSON
+	}
 	def getGroupedTweets(){
 		
 		log.info "getGroupedTweets params: " + params
@@ -58,8 +125,7 @@ class UserController extends GenericController{
 		
 		// Obtengo tweets por hora
 		def dateList = userService.getTweetsBy(filters, dateFrom, dateTo)
-
-		def redirectOnClick = "../../tweet/list?"
+		def redirectOnClick = "../tweet/list?"
 		def resultMap = [:]
 		//TODO localizar todos los textos
 		// Parseo resultado para generar el grafico
@@ -67,17 +133,17 @@ class UserController extends GenericController{
 		switch (type) {
 			case DateServiceType.BY_MINUTE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
-												'Tweets por minuto','Cantidad de tweets','Tweets',
+												'Tweets por minuto','Minutos','Cantidad de tweets',
 												redirectOnClick+"tweetMinute=")
 			break
 			case DateServiceType.BY_HOUR:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD,
-											   'Tweets por hora','Cantidad de tweets','Tweets',
+											   'Tweets por hora','Horas','Cantidad de tweets',
 											   redirectOnClick+"tweetHour=")
 			break
 			case DateServiceType.BY_DATE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.DAY_PERIOD,
-												'Tweets por Dia','Cantidad de tweets','Tweets',
+												'Tweets por Dia','Dias','Cantidad de tweets',
 												redirectOnClick+"tweetCreated=")
 			break
 		}

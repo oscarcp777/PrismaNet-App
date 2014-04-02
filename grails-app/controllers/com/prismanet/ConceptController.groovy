@@ -140,37 +140,22 @@ class ConceptController extends GenericController{
 	}
 	
 	
-	/**
-	 * formato que se necesita la lista [[1381448400000,9],[1381448400000,0]]
-	 */
+	
 	def conceptsRealTime={
-		
 		Concept concept = Concept.get(params.id)
 		def container = params.div
-		def listRealTime=conceptService.getConceptsRealTime(concept)
-		def json =["data":listRealTime,"container":container,"id":params.id, "title":'Tweets por minuto',"subTitle":"Actualización en tiempo Real de la cantidad de Tweets" ,"titleY":'Cantidad de tweets',"titleX":'Minutos']
-		json<< [dateProp:"tweetMinute"]
+		def listRealTime=conceptService.getConceptsRealTime(concept.id,20)
+		def series=[[name:concept.conceptName,data:listRealTime]]
+		def json =[series:series,"container":container,id:params.id,title:"Tweets por minuto",
+			subTitle:"Actualizacion en tiempo Real de la cantidad de Tweets" ,
+			titleY:'Cantidad de tweets',titleX:'Minutos',dateProp:"tweetMinute",
+			cursorEvent:"../../tweet/list?conceptsId=",ajaxMethodReload:'../conceptsRealTimeForOneMinute']
+		
 		render json as JSON
 	}
 	def conceptsRealTimeForOneMinute={
 		Concept concept = Concept.get(params.id)
-		def dateValueList = [:]
-		Date from,to
-		Calendar calendar = new GregorianCalendar()
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
-		to=calendar.getTime();
-		use ( TimeCategory ) {
-			from = to-1.minutes
-			def tweetByMinute=DateUtils.getDateFormat(DateTypes.MINUTE_PERIOD, to)
-			//TODO trae siempre cero
-//			def dateList = conceptService.categoryStore(["conceptName","tweetByMinute"],[new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),new Filter(attribute:"tweetByMinute",value:tweetByMinute, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT], null);
-			def dateList =conceptService.categoryStore(["conceptName","tweetByMinute"],[new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),new Filter(attribute:"created",value:from, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT],null);
-			
-			dateList.each{ i ->
-				dateValueList.put(DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2))	
-			}
-		}
-		render DateUtils.loadZerosForMinute(dateValueList,from,to) as JSON
+		def listRealTime=conceptService.getConceptsRealTime(concept.id,1)
+		render  listRealTime as JSON
 	}
 }

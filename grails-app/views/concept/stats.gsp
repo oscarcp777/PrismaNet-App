@@ -180,7 +180,7 @@
 		  
 		  var id='${concept.id}';
 		   activeItemMenuLevel3('concepts',id,id+'-stats','Conceptos > '+"${concept.conceptName}");
-		   getConceptRealTime(${concept.id}, '#realTimeChar');
+		   getConceptRealTime(${concept.id}, '#realTimeChar','../');
 		   
 		   var dataTweets = {"id":${concept.id}, "div":'#tweetsChart',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 		   getGroupedTweets(dataTweets);

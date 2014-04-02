@@ -9433,7 +9433,7 @@ ul.attachment-list>li {
 .chosen-container-active.chosen-with-drop .chosen-single {
     border-color:#4492c9
 }
-@media only screen and (-webkit-min-device-pixel-ratio:2), only screen and (min-resolution:144dpi) {
+@media only screen and (-webkit-min-device-pixel-ratio:2), only screen and (min-resolution:144dppx) {
     .chosen-rtl .chosen-search input[type="text"], .chosen-container-single .chosen-single abbr, .chosen-container-single .chosen-single div b, .chosen-container-single .chosen-search input[type="text"], .chosen-container-multi .chosen-choices li.search-choice .search-choice-close, .chosen-container .chosen-results-scroll-down span, .chosen-container .chosen-results-scroll-up span {
         background-image:none!important;
         background-repeat:no-repeat!important;
@@ -9585,7 +9585,7 @@ ul.attachment-list>li {
     position:relative;
     z-index:1
 }
-@media only screen and (-webkit-min-device-pixel-ratio:1.5), only screen and (min-resolution:144dpi) {
+@media only screen and (-webkit-min-device-pixel-ratio:1.5), only screen and (min-resolution:144dppx) {
     .select2-search input, .select2-search-choice-close, .select2-container .select2-choice abbr, .select2-container .select2-choice div b {
         background-image:none!important;
         background-size:auto!important
@@ -9622,7 +9622,7 @@ ul.attachment-list>li {
 .form-group.has-success .select2-choice, .form-group.has-success .select2-choices {
     border-color:#92bf65!important
 }
-@media only screen and (-webkit-min-device-pixel-ratio:1.5), only screen and (min-resolution:144dpi) {
+@media only screen and (-webkit-min-device-pixel-ratio:1.5), only screen and (min-resolution:144dppx) {
     .select2-search input, .select2-search-choice-close, .select2-container .select2-choice abbr, .select2-container .select2-choice .select2-arrow b {
         background-image:none!important;
         background-repeat:no-repeat!important;
