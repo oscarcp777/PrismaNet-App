@@ -47,6 +47,7 @@ environments {
 		dataSource {
 			dbCreate = "update"
 			url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+			logSql = true
 		}
 		grails {
 			mongo {

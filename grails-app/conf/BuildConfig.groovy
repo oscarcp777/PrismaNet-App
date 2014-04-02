@@ -46,6 +46,9 @@ grails.project.dependency.resolution = {
   		compile 'org.grails:grails-datastore-core:3.0.4.RELEASE'
   		test 'org.grails:grails-datastore-simple:3.0.4.RELEASE'
   		compile 'org.facebook4j:facebook4j-core:2.0.5-Prisma'
+		  
+		compile 'org.mongodb:mongo-java-driver:2.10.1'
+	  
     }
 
     plugins {
@@ -58,7 +61,7 @@ grails.project.dependency.resolution = {
 		compile ':cache:1.1.1'
 		runtime ":database-migration:1.3.8"
 		runtime ":resources:1.2.7"
-		compile ":mongodb:2.0.1"
+//		compile ":mongodb:2.0.1"
 		compile ":constraints:0.8.0"
 		compile ":spring-security-core:1.2.7.3"
     }

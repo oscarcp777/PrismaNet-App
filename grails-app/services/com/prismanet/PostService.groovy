@@ -38,7 +38,7 @@ class PostService extends MentionService{
 				
 				Author author = FacebookAuthor.findByName(comment.getFrom().getName().trim())
 				if (!author){
-					author = new FacebookAuthor(name:comment.getFrom().getName().trim(), facebookAuthorId: comment.getFrom().getId().trim()/*, sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()*/).save()
+					author = new FacebookAuthor(name:comment.getFrom().getName().trim(), facebookAuthorId: comment.getFrom().getId().trim()/*, sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()*/).save(validate:false)
 					if (!author.id){
 						throw ApplicationException.create(author)
 					}
@@ -64,7 +64,7 @@ class PostService extends MentionService{
 						log.info "valido para concepto: " +  concept
 
 						if (!post.id){
-							post.save()
+							post.save(validate:false)
 							if (!post.id){
 								throw ApplicationException.create(post)
 							}

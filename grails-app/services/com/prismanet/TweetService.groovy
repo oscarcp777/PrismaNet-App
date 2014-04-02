@@ -1,5 +1,7 @@
 package com.prismanet
 
+import org.springframework.transaction.annotation.Transactional
+
 import twitter4j.FilterQuery
 import twitter4j.ResponseList
 import twitter4j.Status
@@ -15,6 +17,7 @@ import com.mongodb.BasicDBObject
 import com.prismanet.GenericService.FilterType
 import com.prismanet.GenericService.OrderType
 import com.prismanet.context.TweetAttributeContext
+import com.prismanet.exception.ApplicationException
 import com.prismanet.sentiment.Opinion
 import com.prismanet.sentiment.OpinionValue
 
@@ -24,74 +27,53 @@ class TweetService extends MentionService{
 		super(Tweet, new TweetAttributeContext())
 	}
 	
+	@Transactional
 	def saveTweets(def tweets){
-		def index = 0
-		def error = false
 		def List<Concept> concepts = Concept.list()
 		for (BasicDBObject tweetObj : tweets){
-
 			JSONObject obj = new JSONObject(tweetObj)
 			Status status = new StatusJSONImpl(obj)
-			try {
-				
-				index++
-				
-				def start = System.currentTimeMillis()
-				Author author = TwitterAuthor.findByAccountName("@"+status.getUser().getScreenName())
-				if (!author){
-					author = new TwitterAuthor(name: status.getUser().getName(), twitterAuthorId: status.getUser().getId(), accountName:"@"+status.getUser().getScreenName(), followers:status.getUser().getFollowersCount(), sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()).save(validate:false)
-				}
-				else{
-					author.followers = status.getUser().getFollowersCount()
-					author.profileImage = status.getUser().getProfileImageURL()
-				}
-				
-//				print "Tiempo autor: " + (start - System.currentTimeMillis())/1000 + " segundos"
-//				start = System.currentTimeMillis()
-				def retCount = 0
-				def favCount = 0
-				if (status.getRetweetedStatus()){
-					retCount = status.getRetweetedStatus().getRetweetCount()
-					favCount = status.getRetweetedStatus().getFavoriteCount()
-				}	
-				Tweet tweet = new Tweet(content:status.getText(),
-										author:author, 
-										created:status.getCreatedAt(), 
-										tweetId:status.getId(), 
-										retweetCount:retCount, 
-										favoriteCount:favCount)
-				
-				
-				
-				concepts.each(){ concept->
-					if (concept.testAddTweet(tweet)){
-//									print "valido para concepto: " +  concept
-						if (!tweet.id){
-							tweet.save(validate:false)
-//							println "Tweet guardado con ID :  " + tweet.id
-						}
-						if (!tweet.id)
-							throw RuntimeException("Tweet no guardado")
-//						print "Tiempo tweet: " + (start - System.currentTimeMillis())/1000 + " segundos"
-//						start = System.currentTimeMillis()
-						concept.doAddToTweets(tweet)
-//						print "Tiempo concept: " + (start - System.currentTimeMillis())/1000 + " segundos"
-						
-					}
-				}
-//				if (index % 20 == 0) cleanUpGorm()
+			//def start = System.currentTimeMillis()
+			Author author = TwitterAuthor.findByAccountName("@"+status.getUser().getScreenName())
+			if (!author){
+				author = new TwitterAuthor(name: status.getUser().getName(), twitterAuthorId: status.getUser().getId(), accountName:"@"+status.getUser().getScreenName(), followers:status.getUser().getFollowersCount(), sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()).save(validate:false)
+			}
+			else{
+				author.followers = status.getUser().getFollowersCount()
+				author.profileImage = status.getUser().getProfileImageURL()
+			}
+			//				print "Tiempo autor: " + (start - System.currentTimeMillis())/1000 + " segundos"
+			//				start = System.currentTimeMillis()
+			def retCount = 0
+			def favCount = 0
+			if (status.getRetweetedStatus()){
+				retCount = status.getRetweetedStatus().getRetweetCount()
+				favCount = status.getRetweetedStatus().getFavoriteCount()
+			}
+			Tweet tweet = new Tweet(content:status.getText(),
+			author:author,
+			created:status.getCreatedAt(),
+			tweetId:status.getId(),
+			retweetCount:retCount,
+			favoriteCount:favCount)
 
-			} catch (Exception e) {
-				error = true
-				println "Tweet Fallido: " + status.getId() +"-"+status.getText()
-				println e.getCause()
-				println e.getStackTrace()
-				
-				
+			concepts.each(){ concept->
+				if (concept.testAddTweet(tweet)){
+					log.info "valido para concepto: " +  concept
+					if (!tweet.id){
+						tweet.save(validate:false)
+						log.info "Tweet guardado con ID :  " + tweet.id
+					}
+					if (!tweet.id)
+						throw ApplicationException.create(tweet)
+					//print "Tiempo tweet: " + (start - System.currentTimeMillis())/1000 + " segundos"
+					//start = System.currentTimeMillis()
+					concept.doAddToTweets(tweet)
+					//print "Tiempo concept: " + (start - System.currentTimeMillis())/1000 + " segundos"
+				}
 			}
 		}
-		if (!error)
-			cleanUpGorm()
+		cleanUpGorm()
 	}
 	
 	

@@ -23,8 +23,9 @@ class MentionService extends GenericService{
 			sessionFactory.currentSession.flush()
 			sessionFactory.currentSession.clear()
 			propertyInstanceMap.get().clear()
+			log.info "Gorm clean"
 		} catch (Exception e) {
-			print e.getCause()
+			log.error e.getCause()
 		}
 	}
 
