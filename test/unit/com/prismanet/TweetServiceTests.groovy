@@ -3,8 +3,7 @@ package com.prismanet
 
 
 
-import com.prismanet.sentiment.Opinion
-import com.prismanet.sentiment.OpinionValue;
+import grails.test.mixin.*
 
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
