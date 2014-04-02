@@ -4,6 +4,7 @@ import groovy.time.TimeCategory
 
 import org.apache.log4j.LogManager
 
+import com.mongodb.DBCursor
 import com.prismanet.importer.MongoPostsImporter
 
 class PostJob {
@@ -48,7 +49,7 @@ class PostJob {
 			
 //			print "filtros: " + dates
 			
-			def posts = importer.importPosts([])
+			DBCursor posts = importer.importPosts([])
 //			print "-------------------------"
 //			print posts
 			def iterator = posts.iterator()
@@ -59,27 +60,32 @@ class PostJob {
 				partialList.add(iterator.next())
 				i++
 //				print i
-				if (i % 100 == 0){
+				if (i % 25 == 0){
 					try {
-						println "Nuevo Lote"
+						log.info "Nuevo Lote Posts"
 						i = 0
 						postService.savePosts(partialList)
+						partialList.clear();
 					} catch (Exception e) {
 						log.error "Importación Fallida: " + e.getMessage()
 						log.error e.getCause()
 						log.error e.getStackTrace()
+						partialList.clear();
 					}
-					partialList.clear();
 				}
 			}
 			try {
-				print "Lista: " +partialList.size()
+				log.info "List posts: " +partialList.size()
 				postService.savePosts(partialList)
 			} catch (Exception e) {
 				log.error "Importación Fallida: " + e.getMessage()
 				log.error e.getCause()
-				log.error LogManager.getLogger("StackTrace")
+				log.error e.getStackTrace()
+			} finally {
+				log.info "Cursor Post cerrado"
+				posts.close()
 			}
+			
 		}
 		
 	}

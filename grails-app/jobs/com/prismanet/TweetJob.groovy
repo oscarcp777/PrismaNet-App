@@ -1,16 +1,8 @@
 package com.prismanet
 
 import groovy.time.TimeCategory
-import twitter4j.Status
-import twitter4j.internal.json.StatusJSONImpl
-import twitter4j.internal.org.json.JSONObject
 
-import com.mongodb.BasicDBObject
-import com.mongodb.DB
-import com.mongodb.DBCollection
 import com.mongodb.DBCursor
-import com.mongodb.MongoClient
-import com.mongodb.MongoClientURI
 import com.prismanet.importer.MongoTweetsImporter
 
 class TweetJob {
@@ -27,7 +19,7 @@ class TweetJob {
 		if(grailsApplication.config.jobs.twitter.disable)
 		 return
 		 
-		println "TweetJob ejecutado: " + new Date()
+		log.info "TweetJob ejecutado: " + new Date()
 		MongoTweetsImporter importer = new MongoTweetsImporter("mongodb://localhost")
 		
 		use(TimeCategory){
@@ -41,12 +33,12 @@ class TweetJob {
 				
 				if (!grailsApplication.config.twitter.process){
 					grailsApplication.config.twitter.process = Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
-					println "Proceso api-twitter iniciado, ultima modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
+					log.info "Proceso api-twitter iniciado, ultima modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
 				}else{
 					grailsApplication.config.twitter.process.destroy()
 					importer.setConfiguration(twitterSetupService.getConfiguration())
 					grailsApplication.config.twitter.process = Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
-					println "Proceso api-twitter reiniciado por modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
+					log.info "Proceso api-twitter reiniciado por modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
 				}
 			}
 			
@@ -61,7 +53,7 @@ class TweetJob {
 			
 //			print "filtros: " + dates
 			
-			def tweets = importer.importTweets(dates)
+			DBCursor tweets = importer.importTweets(dates)
 //			print "-------------------------"
 //			print tweets
 			def iterator = tweets.iterator()
@@ -72,15 +64,31 @@ class TweetJob {
 				partialList.add(iterator.next())
 				i++
 //				print i
-				if (i % 100 == 0){
-					println "Nuevo Lote" 
-					i = 0
-					tweetService.saveTweets(partialList)
+				try {
+					if (i % 25 == 0){
+						log.info "Nuevo Lote Tweets"
+						i = 0
+						tweetService.saveTweets(partialList)
+						partialList.clear();
+					}
+				} catch (Exception e) {
+					log.error "Importación Fallida: " + e.getMessage()
+					log.error e.getCause()
+					log.error e.getStackTrace()
 					partialList.clear();
 				}
 			}
-			print "Lista: " +partialList.size()
-			tweetService.saveTweets(partialList)
+			try {
+				log.info "Lista Tweets: " +partialList.size()
+				tweetService.saveTweets(partialList)
+			} catch (Exception e) {
+				log.error "Importación Fallida: " + e.getMessage()
+				log.error e.getCause()
+				log.error e.getStackTrace()
+			} finally {
+				log.info "Cursor Tweets cerrado"
+				tweets.close()
+			}
 		}
 		
 	}
