@@ -37,6 +37,10 @@ class TweetService extends MentionService{
 			Author author = TwitterAuthor.findByAccountName("@"+status.getUser().getScreenName())
 			if (!author){
 				author = new TwitterAuthor(name: status.getUser().getName(), twitterAuthorId: status.getUser().getId(), accountName:"@"+status.getUser().getScreenName(), followers:status.getUser().getFollowersCount(), sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()).save(validate:false)
+				if (!author.id){
+					author.discard()
+					throw ApplicationException.create(author)
+				}
 			}
 			else{
 				author.followers = status.getUser().getFollowersCount()
@@ -64,8 +68,10 @@ class TweetService extends MentionService{
 						tweet.save(validate:false)
 						log.info "Tweet guardado con ID :  " + tweet.id
 					}
-					if (!tweet.id)
+					if (!tweet.id){
+						tweet.discard()
 						throw ApplicationException.create(tweet)
+					}
 					//print "Tiempo tweet: " + (start - System.currentTimeMillis())/1000 + " segundos"
 					//start = System.currentTimeMillis()
 					concept.doAddToTweets(tweet)

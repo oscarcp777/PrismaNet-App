@@ -40,6 +40,7 @@ class PostService extends MentionService{
 				if (!author){
 					author = new FacebookAuthor(name:comment.getFrom().getName().trim(), facebookAuthorId: comment.getFrom().getId().trim()/*, sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()*/).save(validate:false)
 					if (!author.id){
+						author.discard()
 						throw ApplicationException.create(author)
 					}
 				}
@@ -66,6 +67,7 @@ class PostService extends MentionService{
 						if (!post.id){
 							post.save(validate:false)
 							if (!post.id){
+								post.discard()
 								throw ApplicationException.create(post)
 							}
 							log.info "Post guardado con ID :  " + post.id
