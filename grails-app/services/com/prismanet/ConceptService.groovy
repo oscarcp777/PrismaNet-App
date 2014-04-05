@@ -28,18 +28,13 @@ class ConceptService extends GenericCoreService {
 		return groupBy(Concept, new ConceptAttributeContext(), groups, filters, projection, orders)
 	}
 	 @Transactional(readOnly = true)
-	def getConceptsRealTime(Concept concept){
-		Date from
-		Date to=new Date()
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(to);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
-		to=calendar.getTime();
+	def getConceptsRealTime( conceptId,timeMin){
+		Date from,to
+		to=DateUtils.getDateWithoutSeconds(new Date())
 		def dateValueList = [:]
 		use ( TimeCategory ) {
-			from = to-20.minutes
-			def dateList = categoryStore(["conceptName","tweetByMinute"], [new Filter(attribute:"id", value : concept.id, type:FilterType.EQ),new Filter(attribute:"created",value:from, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT],null);
+			from = to-timeMin.minutes
+			def dateList = categoryStore(["conceptName","tweetByMinute"], [new Filter(attribute:"id", value : conceptId, type:FilterType.EQ),new Filter(attribute:"created",value:from, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT],null);
 			dateList.each{ i ->
 				dateValueList.put(DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2))
 			}

@@ -16,6 +16,7 @@ class Author {
 	static hasMany = [tweets:Tweet, posts:Post]
 	
     static constraints = {
+		name(nullable:true)
 		sex(nullable:true)
 		profileImage(nullable:true, url:true)
 		accountName(nullable:true)
