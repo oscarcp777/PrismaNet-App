@@ -68,6 +68,6 @@ grails.project.dependency.resolution = {
         runtime ":resources:1.2.7"
 		compile ':cache:1.1.1'
 		compile ":quartz:1.0.1"
-        
+		
     }
 }
