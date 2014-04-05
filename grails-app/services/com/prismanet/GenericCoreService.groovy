@@ -61,18 +61,20 @@ class GenericCoreService extends GenericService {
 				calendarTo.set(Calendar.MINUTE, 0);
 				calendarFrom.set(Calendar.HOUR, 0);
 				calendarTo.set(Calendar.HOUR, 0);
-				print "From:" + calendarFrom.getTime()
-				print "To:" + calendarTo.getTime()
 //				def valueFrom = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateFrom)
 //				def valueTo = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateTo)
 				return [new Filter(attribute:"created", value:calendarFrom.getTime(), type:FilterType.GE),
 					new Filter(attribute:"created", value:calendarTo.getTime(), type:FilterType.LE)]
 				break
 			case DateServiceType.BY_MONTH:
-				def valueFrom = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateFrom)
-				def valueTo = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateTo)
-				return [new Filter(attribute:"created", value:valueFrom, type:FilterType.GE),
-					new Filter(attribute:"created", value:valueTo, type:FilterType.LE)]
+				calendarFrom.set(Calendar.MINUTE, 0);
+				calendarTo.set(Calendar.MINUTE, 0);
+				calendarFrom.set(Calendar.HOUR, 0);
+				calendarTo.set(Calendar.HOUR, 0);
+//				def valueFrom = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateFrom)
+//				def valueTo = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateTo)
+				return [new Filter(attribute:"created", value:calendarFrom.getTime(), type:FilterType.GE),
+					new Filter(attribute:"created", value:calendarTo.getTime(), type:FilterType.LE)]
 				break
 			default:
 				return []	
