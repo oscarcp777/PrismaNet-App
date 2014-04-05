@@ -2,6 +2,7 @@ package com.prismanet
 
 import com.prismanet.GenericService.FilterType
 import com.prismanet.context.Filter
+import com.prismanet.utils.DateTypes
 import com.prismanet.utils.DateUtils
 
 class GenericController {
@@ -52,36 +53,54 @@ class GenericController {
 		def mapByCategory = [:]
 		def series = []
 		def level = numCategories
+		def serieX = null
+//		print "serviceResultList: " + serviceResultList
 		serviceResultList.each{ i ->
-			
-			if (level == 1){
-				if (!mapByCategory["Serie"])
-					mapByCategory["Serie"] = []
-				mapByCategory["Serie"].add([x:DateUtils.parseDate(interval, i.getAt(level-1)).getTime(),y:i.getAt(level)]) 
-			}	
-			if (level == 2){
+			if (interval != DateTypes.MONTH_PERIOD){
+				if (level == 1){
+					if (!mapByCategory["Serie"])
+						mapByCategory["Serie"] = []
+					mapByCategory["Serie"].add([x:DateUtils.parseDate(interval, i.getAt(level-1)).getTime(),y:i.getAt(level)])
+				}
+				if (level == 2){
+					if (!mapByCategory[i.getAt(level-2)])
+						mapByCategory[i.getAt(level-2)] = []
+					mapByCategory[i.getAt(level-2)].add([x:DateUtils.parseDate(interval, i.getAt(level-1)).getTime(),y:i.getAt(level)])
+				}
+			}else{
+				if (!serieX)
+					serieX = []
 				if (!mapByCategory[i.getAt(level-2)])
 					mapByCategory[i.getAt(level-2)] = []
-				mapByCategory[i.getAt(level-2)].add([x:DateUtils.parseDate(interval, i.getAt(level-1)).getTime(),y:i.getAt(level)])
+				serieX.add(i.getAt(level-1))	
+				mapByCategory[i.getAt(level-2)].add(i.getAt(level))
 			}
-//			dateValueList.add([x:DateUtils.parseDate(interval, i.getAt(0)).getTime(),y:i.getAt(1)])
+			//			dateValueList.add([x:DateUtils.parseDate(interval, i.getAt(0)).getTime(),y:i.getAt(1)])
 		}
+		
+//		print "mapByCategory: " + mapByCategory
 		def from,to
 		mapByCategory.each {
 			def dateValueList = []
-			if (it.value.size()>0){
-				def cal = new GregorianCalendar()
-				cal.setTimeInMillis(it.value.get(0).x)
-				from = cal.getTime()
-				cal.setTimeInMillis(it.value.get(it.value.size()-1).x)
-				to = cal.getTime()
-				dateValueList = DateUtils.loadZeros(it.value,from,to, interval)
+			if (interval != DateTypes.MONTH_PERIOD){
+				if (it.value.size()>0){
+					def cal = new GregorianCalendar()
+					cal.setTimeInMillis(it.value.get(0).x)
+					from = cal.getTime()
+					cal.setTimeInMillis(it.value.get(it.value.size()-1).x)
+					to = cal.getTime()
+					dateValueList = DateUtils.loadZeros(it.value,from,to, interval)
+				}
+				series << [name:it.key,data:dateValueList]
+			}else{
+				//TODO rellenar meses con 0
+				series << [name:it.key,data:it.value]
 			}
-			series << [name:it.key,data:dateValueList]
-		}
-		log.debug "Formato parseado para grafico: " + series
+		}		
+//		print "SerieX: " + serieX
+//		print "Formato parseado para grafico: " + series
 		
-	   [series:series,
+	   [series:series, serieX:serieX, 
 //		   year:year as Integer, month:month as Integer, day:day as Integer, hour:hour as Integer,
 		   container: container, /*interval:interval,*/
 		   title:title, titleY:titleY,titleX:titleX, cursorEvent:actionOnClick]

@@ -199,6 +199,7 @@ function paintCharLine(data){
             useUTC: false
         }
     });
+	if (data.serieX != null){
 	 $(data.container).highcharts({
 	        chart: {
 	            type: 'spline',
@@ -213,6 +214,7 @@ function paintCharLine(data){
 	            text: data.subTitle
 	        },
 	        xAxis: {
+	       		categories: data.serieX,
 	        	gridLineWidth: 1,
 	        	title: {
 	                text:data.titleX
@@ -228,10 +230,7 @@ function paintCharLine(data){
 	            }
 	        },
 	        tooltip: {
-	            formatter: function() {
-                    return Highcharts.dateFormat('%d/%m/%Y--%H:%M', this.x) + "<br><b>"+ this.series.name + ": </b>" + this.y;
-	            },
-	            crosshairs: true,
+	        	crosshairs: true,
 		        shared: false
 	        },
 	        legend: {
@@ -254,6 +253,64 @@ function paintCharLine(data){
 	        },
 	        series: data.series
 	    });
+	}else{
+		 $(data.container).highcharts({
+		        chart: {
+		            type: 'spline',
+		            animation: Highcharts.svg, // don't animate in old IE
+		            plotShadow: true,
+		            plotBorderWidth: 2
+		        },
+		        title: {
+		            text:data.title
+		        },
+		        subtitle: {
+		            text: data.subTitle
+		        },
+		        xAxis: {
+		        	gridLineWidth: 1,
+		        	title: {
+		                text:data.titleX
+		            },
+		            type: 'datetime',
+	                labels: {
+	                    overflow: 'justify'
+	                }
+		        },
+		        yAxis: {
+		            title: {
+		                text: data.titleY
+		            }
+		        },
+		        tooltip: {
+		            formatter: function() {
+	                    return Highcharts.dateFormat('%d/%m/%Y--%H:%M', this.x) + "<br><b>"+ this.series.name + ": </b>" + this.y;
+		            },
+		            crosshairs: true,
+			        shared: false
+		        },
+		        legend: {
+		            enabled: true
+		        },
+		        exporting: {
+		            enabled: true
+		        },
+		        plotOptions: {
+		            series: {
+		                cursor: 'pointer',
+		                point: {
+		                    events: {
+		                        click: function() {
+		                        	window.location.href=data.cursorEvent+this.x+'&conceptName='+this.series.name;
+		                        }
+		                    }
+		                }
+		            }
+		        },
+		        series: data.series
+		    });
+
+	}
 }
 
 

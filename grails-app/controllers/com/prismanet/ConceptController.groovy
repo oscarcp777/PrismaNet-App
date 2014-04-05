@@ -42,7 +42,7 @@ class ConceptController extends GenericController{
 		
 		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
 		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
-			
+		
 		DateServiceType type = conceptService.getChartType(dateFrom, dateTo) 
 		
 		
@@ -70,7 +70,14 @@ class ConceptController extends GenericController{
 												'Tweets por Dia','Fecha','Tweets',
 												redirectOnClick+"&tweetCreated=")
 			break
+			case DateServiceType.BY_MONTH:
+			resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MONTH_PERIOD,
+											'Tweets por Mes','Fecha','Tweets',
+											redirectOnClick+"&tweetCreated=")
+			break
 		}
+//		def aux = resultMap as JSON
+//		print "resultMap: " + aux
 		render resultMap as JSON
 	}
 	
