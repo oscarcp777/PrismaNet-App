@@ -9,16 +9,16 @@ grails {
 dataSource {
     pooled = true
     jmxExport = true
-    driverClassName = "org.h2.Driver"
-    username = "sa"
-    password = ""
+  	driverClassName = "com.mysql.jdbc.Driver"
+	username = "root"
+	password = "fiuba"
 	logSql = false
 }
 hibernate {
     cache.use_second_level_cache = false
     cache.use_query_cache = false
 //  cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory' // Hibernate 3
-//    cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory' // Hibernate 4
+    cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory' // Hibernate 4
 //    singleSession = true // configure OSIV singleSession mode
 	jdbc.batch_size=50
 }
@@ -78,9 +78,14 @@ environments {
 	}
 	production {
         dataSource {
-            dbCreate = "update"
-            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
-            properties {
+    		pooled = true
+			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
+            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+            url = "jdbc:mysql://localhost:3306/prismanet?autoReconnect=true"
+			driverClassName = "com.mysql.jdbc.Driver"
+			username = "root"
+			password = "fiuba"
+	        properties {
                // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
                jmxEnabled = true
                initialSize = 5
@@ -97,7 +102,7 @@ environments {
                testOnBorrow = true
                testWhileIdle = true
                testOnReturn = false
-               jdbcInterceptors = "ConnectionState"
+               jdbcInterceptors = "ConnectionState;StatementCache(max=200)"
                defaultTransactionIsolation = java.sql.Connection.TRANSACTION_READ_COMMITTED
             }
         }
