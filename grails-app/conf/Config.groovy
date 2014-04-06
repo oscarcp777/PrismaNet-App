@@ -93,6 +93,7 @@ grails.hibernate.pass.readonly = false
 grails.hibernate.osiv.readonly = false
 jobs.twitter.disable = false
 jobs.facebook.disable = false
+jobs.exec.jar.tomcat = false
 environments {
     development {
         grails.logging.jul.usebridge = true

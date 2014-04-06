@@ -10,7 +10,7 @@ class TweetJob {
 	def tweetService
 	def twitterSetupService
 	def group = "tweetsJobs"
-	
+	def pathCommand=""
 	static triggers = {
 		simple repeatInterval: 60000, repeatCount:-1 , startDelay: 60000
 	}
@@ -18,7 +18,12 @@ class TweetJob {
 	def execute() {
 		if(grailsApplication.config.jobs.twitter.disable)
 		 return
-		 
+		 if(grailsApplication.config.jobs.exec.jar.tomcat){
+			 def catalina_base = System.getProperty('catalina.base')
+			 pathCommand=catalina_base+"/webapps/PrismaNet-jobs/WEB-INF/lib/"
+			 log.info "path para correr jar" +pathCommand
+		 }
+		
 		log.info "TweetJob ejecutado: " + new Date()
 		MongoTweetsImporter importer = new MongoTweetsImporter("mongodb://localhost")
 		
@@ -32,12 +37,12 @@ class TweetJob {
 				grailsApplication.config.twitter.setup.lastUpdated = aux
 				
 				if (!grailsApplication.config.twitter.process){
-					grailsApplication.config.twitter.process = Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
+					grailsApplication.config.twitter.process = Runtime.getRuntime().exec("java -jar "+pathCommand+"prismanet-twitter-api.jar")
 					log.info "Proceso api-twitter iniciado, ultima modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
 				}else{
 					grailsApplication.config.twitter.process.destroy()
 					importer.setConfiguration(twitterSetupService.getConfiguration())
-					grailsApplication.config.twitter.process = Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
+					grailsApplication.config.twitter.process = Runtime.getRuntime().exec("java -jar "+pathCommand+"prismanet-twitter-api.jar")
 					log.info "Proceso api-twitter reiniciado por modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
 				}
 			}

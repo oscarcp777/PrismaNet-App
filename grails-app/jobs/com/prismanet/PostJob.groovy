@@ -12,7 +12,7 @@ class PostJob {
 	def postService
 	def facebookSetupService
 	def group = "postsJobs"
-	
+	def pathCommand=""
 	static triggers = {
 		simple repeatInterval: 300000, repeatCount:-1 , startDelay: 60000
 	}
@@ -20,7 +20,11 @@ class PostJob {
 	def execute() {
 		if(grailsApplication.config.jobs.facebook.disable)
 		 return
-		 
+		 if(grailsApplication.config.jobs.exec.jar.tomcat){
+			 def catalina_base = System.getProperty('catalina.base')
+			 pathCommand=catalina_base+"/webapps/PrismaNet-jobs/WEB-INF/lib/"
+			 log.info "path para correr jar" +pathCommand
+		 }
 		println "PostJob ejecutado: " + new Date()
 		MongoPostsImporter importer = new MongoPostsImporter("mongodb://localhost")
 		
@@ -34,7 +38,7 @@ class PostJob {
 				importer.setConfiguration(facebookSetupService.getConfiguration())
 			}
 			
-			Process p = Runtime.getRuntime().exec("java -jar prismanet-facebook-api.jar")
+			Process p = Runtime.getRuntime().exec("java -jar "+pathCommand+"prismanet-facebook-api.jar")
 			p.waitFor()
 			println "Proceso api-facebook ejecutado, ultima modificacion a las : " + grailsApplication.config.facebook.setup.lastUpdated
 			
