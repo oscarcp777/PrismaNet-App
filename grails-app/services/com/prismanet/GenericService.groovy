@@ -83,10 +83,13 @@ class GenericService {
 	}
 	
 	def groupBy(domainClass, context, groups, filters, projection, orders){
-		print "FILTROS: " + filters
-		def criteria = domainClass.createCriteria()
+		groupBy(domainClass, context, groups, filters, projection, orders, [:])
+	}
+	
+	def groupBy(domainClass, context, groups, filters, projection, orders, parameters){
 		
-		def resultList = criteria {
+		def criteria = domainClass.createCriteria()
+		def resultList = criteria.list(parameters) {
 			context.clearDefinedAlias()
 			and{
 				filters.each {

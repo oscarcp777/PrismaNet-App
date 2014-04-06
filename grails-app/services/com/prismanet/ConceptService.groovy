@@ -77,11 +77,13 @@ class ConceptService extends GenericCoreService {
 	
 	
 	def getRelevantAuthors(filters, dateFrom, dateTo, maxAuthors){
-		def groups = ["accountName","followers"]
+		// No lo hago con un select porque duplica los autores (un autor tiene puede
+		// tener muchas menciones de un concepto)
+		def groups = ["id", "accountName","followers"]
 		filters.addAll(getFilterList(dateFrom, dateTo))
 		def result = groupBy(TwitterAuthor, new TwitterAuthorAttributeContext(),
 						groups, filters, [:],
-						[[attribute:"followers",value:OrderType.DESC]]);
+						[[attribute:"followers",value:OrderType.DESC]], [max:maxAuthors]);
 		result
 	}
 	
