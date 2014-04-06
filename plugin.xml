@@ -1,4 +1,4 @@
-<plugin name='prisma-net-core' version='0.1' grailsVersion='2.3 &gt; *'>
+<plugin name='prisma-net-core' version='0.1' grailsVersion='2.3.7 &gt; *'>
   <author>Your name</author>
   <title>Prisma Net Core Plugin</title>
   <description>Brief summary/description of the plugin.
