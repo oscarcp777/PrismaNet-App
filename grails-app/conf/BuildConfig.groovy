@@ -71,6 +71,7 @@ plugins {
         runtime ":jquery:1.11.0.2"
 		compile ":jquery-ui:1.8.24"
         runtime ":resources:1.2.7"
+		runtime ":famfamfam:1.0.1"
 		compile ':cache:1.1.1'
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0.1"

@@ -1,7 +1,5 @@
 modules = {
-	    application {
-	        resource url:'js/jquery.slimscroll.js'
-	    }
+	   
 	core {
 		resource url:'css/bootstrap.css', disposition: 'head'
 		resource url:'js/jquery.js', disposition: 'head'
