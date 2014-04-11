@@ -37,12 +37,23 @@ class TweetJob {
 				grailsApplication.config.twitter.setup.lastUpdated = aux
 				
 				if (!grailsApplication.config.twitter.process){
-					grailsApplication.config.twitter.process = Runtime.getRuntime().exec("java -jar "+pathCommand+"prismanet-twitter-api.jar")
+					Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
 					log.info "Proceso api-twitter iniciado, ultima modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
 				}else{
-					grailsApplication.config.twitter.process.destroy()
+					try {
+						ProcessBuilder b = new ProcessBuilder("/bin/sh", "-c", "ps ax | grep prismanet-twitter-api")
+						Process p = b.start()
+						List<String> result = IOUtils.readLines(p.getInputStream());
+						println "resultado: " + result.get(0)[0..4]
+						
+						ProcessBuilder kill = new ProcessBuilder("/bin/sh", "-c", "kill -9 " + result.get(0)[0..4])
+						kill.start()
+						log.info "Kill proceso: " + result.get(0)[0..4]
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					importer.setConfiguration(twitterSetupService.getConfiguration())
-					grailsApplication.config.twitter.process = Runtime.getRuntime().exec("java -jar "+pathCommand+"prismanet-twitter-api.jar")
+					Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
 					log.info "Proceso api-twitter reiniciado por modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
 				}
 			}
