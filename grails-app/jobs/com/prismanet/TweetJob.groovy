@@ -2,6 +2,8 @@ package com.prismanet
 
 import groovy.time.TimeCategory
 
+import org.apache.commons.io.IOUtils
+
 import com.mongodb.DBCursor
 import com.prismanet.importer.MongoTweetsImporter
 
@@ -28,34 +30,45 @@ class TweetJob {
 		MongoTweetsImporter importer = new MongoTweetsImporter("mongodb://localhost")
 		
 		use(TimeCategory){
-			Date aux = twitterSetupService.getLastUpdated()
-
-			if (!grailsApplication.config.twitter.setup.lastUpdated || 
-					aux.after(grailsApplication.config.twitter.setup.lastUpdated)){
-				// Se reinicia el servicio de streaming
-				
-				grailsApplication.config.twitter.setup.lastUpdated = aux
-				
-				if (!grailsApplication.config.twitter.process){
-					Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
-					log.info "Proceso api-twitter iniciado, ultima modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
-				}else{
-					try {
-						ProcessBuilder b = new ProcessBuilder("/bin/sh", "-c", "ps ax | grep prismanet-twitter-api")
-						Process p = b.start()
-						List<String> result = IOUtils.readLines(p.getInputStream());
-						println "resultado: " + result.get(0)[0..4]
-						
-						ProcessBuilder kill = new ProcessBuilder("/bin/sh", "-c", "kill -9 " + result.get(0)[0..4])
-						kill.start()
-						log.info "Kill proceso: " + result.get(0)[0..4]
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					importer.setConfiguration(twitterSetupService.getConfiguration())
-					Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
-					log.info "Proceso api-twitter reiniciado por modificacion a las : " + grailsApplication.config.twitter.setup.lastUpdated
+			// Determino la fecha de ultima actualizacion de una configuracion de twitter
+			Date lastUpdate = twitterSetupService.getLastUpdated()
+			
+			List<String> result
+			try {
+				// Determino si el proceso esta corriendo
+				ProcessBuilder b = new ProcessBuilder("/bin/sh", "-c", "ps ax | grep prismanet-twitter-api")
+				Process p = b.start()
+				result = IOUtils.readLines(p.getInputStream());
+				result.each {
+					print it
 				}
+				println "resultado: " + result.get(0)[0..4] + " size: " +result.size()
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			if (result.size()<3){
+				//No esta corriendo por lo tanto lo ejecuto
+				Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
+				log.info "Proceso api-twitter iniciado, ultima modificacion a las : " + lastUpdate
+			}
+			
+			// Si la ultima actualizacion de una configuracion fue en el último minuto reinicio el proceso
+			if (lastUpdate.after(new Date()-1.minute)){
+				// Detencion del proceso actual
+				try {
+					ProcessBuilder kill = new ProcessBuilder("/bin/sh", "-c", "kill -9 " + result.get(0)[0..4])
+					kill.start()
+					log.info "Kill proceso: " + result.get(0)[0..4]
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				// Actualizo config. de mongo
+				importer.setConfiguration(twitterSetupService.getConfiguration())
+				// Re-ejecuto proceso
+//				Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
+//				log.info "Proceso api-twitter reiniciado por modificacion a las : " + lastUpdate
 			}
 			
 			def d1 = new GregorianCalendar(2013, Calendar.OCTOBER, 27,11,00)
