@@ -18,14 +18,17 @@ class ConceptController extends GenericController{
 	def conceptService
 	def tweetService
 	
-	
+	def dashboard = {
+		Concept concept = getConcept(params.id)
+		[concept :concept,tweetsTotal:1000]
+	}
 	def weightStats = {
 		def weightProjection = ["authorFollowers" : ProjectionType.SUM]
 		customStats(weightProjection)
 	}
 
 	def stats = {
-		Concept concept = Concept.get(params.id)
+		Concept concept = getConcept(params.id)
 		def authors=TwitterAuthor.list(max:10,sort:"followers",order:"desc");
 		if(!grailsApplication.config.grails.twitter.offline)
 		tweetService.loadDataAuthors(authors)
@@ -36,7 +39,7 @@ class ConceptController extends GenericController{
 	def getGroupedTweets(){
 		log.info "getGroupedTweets params: " + params
 		def container = params.div
-		Concept concept = Concept.get(params.id)
+		Concept concept = getConcept(params.id)
 		def filters = []
 		filters.add(new Filter(attribute:"id",value:concept.id, type:FilterType.EQ))
 		
@@ -86,7 +89,7 @@ class ConceptController extends GenericController{
 	def getGroupedWeight(){
 		log.info "getGroupedWeight params: " + params
 		def container = params.div
-		Concept concept = Concept.get(params.id)
+		Concept concept = getConcept(params.id)
 		def filters = []
 		filters.add(new Filter(attribute:"id",value:concept.id, type:FilterType.EQ))
 		
@@ -134,7 +137,7 @@ class ConceptController extends GenericController{
 	def getRelevantAuthors(){
 		log.info "getRelevantAuthors params: " + params
 		def container = params.div
-		Concept concept = Concept.get(params.id)
+		Concept concept = getConcept(params.id)
 		def filters = []
 		filters.add(new Filter(attribute:"conceptId",value:concept.id, type:FilterType.EQ))
 		
@@ -149,7 +152,7 @@ class ConceptController extends GenericController{
 	
 	
 	def conceptsRealTime={
-		Concept concept = Concept.get(params.id)
+		Concept concept = getConcept(params.id)
 		def container = params.div
 		def listRealTime=conceptService.getConceptsRealTime(concept.id,20)
 		def series=[[name:concept.conceptName,data:listRealTime]]
@@ -161,7 +164,7 @@ class ConceptController extends GenericController{
 		render json as JSON
 	}
 	def conceptsRealTimeForOneMinute={
-		Concept concept = Concept.get(params.id)
+		Concept concept = getConcept(params.id)
 		def listRealTime=conceptService.getConceptsRealTime(concept.id,1)
 		render  listRealTime as JSON
 	}

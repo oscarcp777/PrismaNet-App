@@ -4,6 +4,11 @@ var doRequest = function(url,data,callback, errorHandler, method) {
 	              type: method,
 	              data: data,
 	              cache: false,
+	              beforeSend: function( xhr ) {
+	            	  var message='<div class="widget-box-overlay"><div  class="wait white">Aguarde unos instantes por favor...'+
+          						   '<br><i class="fa fa-spinner fa-spin fa-4x"></i></div></div>';
+	            	   $(data.div).append(message);
+	            	  },
 	              success: callback,
 	              error: errorHandler
 	            });

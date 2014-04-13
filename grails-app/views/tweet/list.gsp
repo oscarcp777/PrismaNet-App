@@ -12,80 +12,13 @@
 </head>
 <body>
 	<div class="page-content">
-		<div class="page-header">
-			<h1>
-				<i class="fa fa-twitter"></i>
-				<g:message code="tweets.title" />
-			</h1>
-		</div>
-		<div class="row well">
-			<div class="col-xs-4">
-				<div class="widget-body box-user-twitter" style="background: white;">
-					<div class="widget-header header-color-green4">
-						<h4 class="lighter">
-							<i class="fa fa-cloud"></i> Concepto
-						</h4>
-					</div>
-					<div class="widget-main">
-						<div class="profile-user-info profile-user-info-striped">
-							<div class="profile-info-row">
-								<div class="profile-info-name">Nombre concepto</div>
+		
+		<g:render contextPath="../concept" template="tabTwitter"  model="['concept':concept,'tabMain':'','tabTweets':'active','tabChar':'','tabSentimental':'']"></g:render>
+		
+		<div class="row well center-block ">
+			
 
-								<div class="profile-info-value">
-									<span >${concept.conceptName}</span>
-								</div>
-							</div>
-
-
-							<div class="profile-info-row">
-								<div class="profile-info-name">Inicio Seguimiento</div>
-
-								<div class="profile-info-value">
-									<span ><g:formatDate format="dd/MM/yyyy HH:mm" date="${concept.dateCreated}"/></span>
-								</div>
-							</div>
-
-							<div class="profile-info-row">
-								<div class="profile-info-name">Fin Seguimiento</div>
-
-								<div class="profile-info-value">
-									<span >31/12/2014 12:00</span>
-								</div>
-							</div>
-
-						</div>
-						
-						<div class="hr hr8 hr-double"></div>
-						<div class="clearfix center grey">
-							<div class="grid3 ">
-								<span class="grey"> <i
-									class="fa fa-facebook-square fa-2x blue"></i> 
-								</span>
-								<h4 >Post</h4>
-								<h4 class="bigger">0</h4>
-							</div>
-
-							<div class="grid3">
-								<span class="grey"> <i
-									class="fa fa-twitter-square fa-2x purple"></i> 
-								</span>
-								<h4 >Tweets</h4>
-								<h4 class="bigger">${tweetInstanceTotal}</h4>
-							</div>
-
-							<div class="grid3">
-								<span class="grey"> <i
-									class="fa fa-comment fa-2x red"></i>
-								</span>
-								<h4 >Menciones</h4>
-								<h4 class="bigger ">${tweetInstanceTotal}</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-xs-8">
+			<div class="col-xs-8 ">
 
 
 				<ul class="tweets tweet-group list-unstyled">
@@ -211,7 +144,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	  activeItemMenuLevel3('concepts','${concept.id}','${concept.id}-tweet','Tweets > '+"${concept.conceptName}");
+	activeItemMenuLevel2('${concept.id}','${concept.id}-tweet');
 	  jQuery(function($) {
 		  $(".tooltips").tooltip();
 		  });

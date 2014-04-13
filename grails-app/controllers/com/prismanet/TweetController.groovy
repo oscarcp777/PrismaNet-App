@@ -15,9 +15,7 @@ class TweetController extends GenericController{
 	SpringSecurityService springSecurityService;
 	def quartzScheduler
 	def tweetService
-	def beforeInterceptor = {
-		session.user=springSecurityService.currentUser
-	}
+	
 	def showJobState = {
 		def status = ""
 		switch(params.operation) {
@@ -33,12 +31,12 @@ class TweetController extends GenericController{
 		return [ status: status ]
 	}
 	
-	Concept getConcept(params){
+	Concept chooseConcept(params){
 		Concept concept
-		if(params["conceptsId"])
-		return Concept.get(params.conceptsId)
+		if(params.conceptsId)
+		return getConcept(params.conceptsId)
 		
-		session.user.concepts.each {it -> 
+		session.concepts.each {it -> 
 		   if(params.conceptName!=null && it.conceptName==params.conceptName){
 			concept=it 
 			params.conceptsId=it.id
@@ -50,7 +48,7 @@ class TweetController extends GenericController{
 	def list(Integer max) {
 		
 		log.debug "tweetController->list params: " + params
-		Concept concept =getConcept(params)
+		Concept concept =chooseConcept(params)
 		def filters = loadTweetFilters()
 		params.max = Math.min(max ?: 6, 100)
 		def tweets = tweetService.getTweets(filters,params)

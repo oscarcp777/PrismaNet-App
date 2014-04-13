@@ -1,4 +1,16 @@
-/* @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,700.css); */
+/* included only when we don't want to use fonts from google server */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(/fonts/DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(/fonts/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
 html {
     min-height:100%;
     position:relative
@@ -9,7 +21,8 @@ body {
     min-height:100%;
     font-size:14px;
     color:#393939;
-    line-height:1.5
+    line-height:1.5;
+    font-family:'Open Sans';
 }
 body.navbar-fixed {
     padding-top:45px
@@ -222,7 +235,7 @@ blockquote, blockquote.pull-right {
     border-color:#e5eaf1
 }
 .modal-content {
-    border-radius:0;
+    border-radius:4px;
     -webkit-box-shadow:none;
     box-shadow:none
 }
@@ -246,7 +259,7 @@ blockquote, blockquote.pull-right {
 }
 .alert {
     font-size:14px;
-    border-radius:0
+    border-radius:4px;
 }
 .alert .close {
     font-size:16px
@@ -256,7 +269,7 @@ blockquote, blockquote.pull-right {
 }
 .pagination>li>a, .pager>li>a, .pagination>li>span, .pager>li>span {
     border-width:1px;
-    border-radius:0!important
+    border-radius:4px !important
 }
 .pagination>li>a, .pager>li>a {
     color:#2283c5;
@@ -368,10 +381,10 @@ blockquote, blockquote.pull-right {
     color:#c6699f!important
 }
 .pink2 {
-    color:#d6487e!important
+    color:#d6487e !important
 }
 .brown {
-    color:#a52a2a!important
+    color:#a52a2a !important
 }
 .grey {
     color:#777!important
@@ -989,7 +1002,7 @@ blockquote, blockquote.pull-right {
     border:0;
     -webkit-box-shadow:none;
     box-shadow:none;
-    border-radius:0;
+    border-radius:0px;
     margin:0;
     padding-left:0;
     padding-right:0;
@@ -1415,7 +1428,7 @@ blockquote, blockquote.pull-right {
     padding:0;
     font-size:13px;
     color:#333;
-    border-radius:0
+    border-radius:4px
 }
 .breadcrumb>li, .breadcrumb>li.active {
     color:#555
@@ -1548,7 +1561,7 @@ blockquote, blockquote.pull-right {
 }
 .nav-search.minimized:hover .nav-search-icon, .nav-search.minimized .nav-search-input:focus ~ .nav-search-icon, .nav-search.minimized .nav-search-input:hover ~ .nav-search-icon, .nav-search.minimized .nav-search-input:active ~ .nav-search-icon {
     border:0;
-    border-radius:0;
+    border-radius:4px;
     padding:0 3px!important
 }
 .nav-search-icon {
@@ -5385,7 +5398,7 @@ input[type=checkbox].ace.ace-switch.ace-switch-7:checked+.lbl::after {
     padding:8px 12px
 }
 .nav-tabs>li>a, .nav-tabs>li>a:focus {
-    border-radius:0!important;
+/*     border-radius:0!important; */
     background-color:#f9f9f9;
     color:#999;
     margin-right:-1px;
@@ -5414,7 +5427,8 @@ input[type=checkbox].ace.ace-switch.ace-switch-7:checked+.lbl::after {
     z-index:12;
     line-height:16px;
     margin-top:-1px;
-    box-shadow:0 -2px 3px 0 rgba(0, 0, 0, 0.15)
+    box-shadow:0 -2px 3px 0 rgba(0, 0, 0, 0.15);
+    border-radius:4px 4px 0 0;
 }
 .tabs-below>.nav-tabs {
     top:auto;
@@ -6533,23 +6547,14 @@ th .lbl:only-child, td .lbl:only-child {
     background-color:rgba(0, 0, 0, 0.3);
     z-index:21
 }
-.widget-box-overlay>[class*="fa-"] {
-    position:absolute;
-    top:15%;
-    left:0;
-    right:0;
+.widget-box-overlay .wait {
+    margin-top:10%;
     text-align:center
 }
-.widget-box.collapsed .widget-box-overlay>[class*="fa-"] {
-    top:5%
+.widget-box.collapsed .widget-box-overlay.wait {
+    margin-top:5%;
 }
-.widget-box-overlay>.icon-spin {
-    -moz-animation-duration:1.2s;
-    -webkit-animation-duration:1.2s;
-    -o-animation-duration:1.2s;
-    -ms-animation-duration:1.2s;
-    animation-duration:1.2s
-}
+
 .widget-main>form {
     margin-bottom:0
 }

@@ -14,7 +14,6 @@
 <r:layoutResources />
 </head>
 <body>
-<g:set var="scService" bean="springSecurityService"/>
 	<div class="navbar-fixed breadcrumbs-fixed skin-1">
 		<div class="navbar navbar-default navbar-fixed-top" id="navbar">
 			<script type="text/javascript">
@@ -46,17 +45,17 @@
 						<li><a data-toggle="dropdown" href="#"
 							class="dropdown-toggle"> <img class="nav-user-photo"
 								src="${resource(dir: 'img', file: 'oscar.png')}"
-								alt="Oscar&#39;s Photo"> <span class="user-info"> <small>Bienvenido,</small>
+								alt="Oscar&#39;s Photo"> <span class="user-info"> <small><g:message code="home.user.wellcome"/> </small>
 									<sec:username />
 							</span> <i class="fa fa-caret-down"></i>
 						</a>
 
 							<ul
 								class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li><a href="#"> <i class="fa fa-cog"></i> Settings
+								<li><a href="#"> <i class="fa fa-cog"></i> <g:message code="home.user.settings"/>
 								</a></li>
 
-								<li><a href="#"> <i class="fa fa-user"></i> Profile
+								<li><a href="#"> <i class="fa fa-user"></i> <g:message code="home.user.profile"/>
 								</a></li>
 
 								<li class="divider"></li>
@@ -64,7 +63,7 @@
 								<li><sec:ifLoggedIn>
 
 										<g:link controller='logout'>
-											<i class="fa fa-off"></i>Log Out</g:link>
+											<i class="fa fa-off"></i><g:message code="home.user.logout"/> </g:link>
 									</sec:ifLoggedIn></li>
 							</ul></li>
 					</ul>
@@ -119,33 +118,37 @@
 							</div>
 						</div>
 						<!-- #sidebar-shortcuts -->
-
+                         <div class="nav-container">
 						<ul class="nav nav-list" id="menuIzquierdo">
-							<li class="active" id="Dashboard">
+							<li class="active" id="home">
 							<g:link	controller="user" action="stats"> 
-								<i class="fa fa-dashboard"></i> 
-								<span class="menu-text" >Dashboard</span>
+								<i class="fa fa-home"></i> 
+								<span class="menu-text" ><g:message code="home.menu.begin"/> </span>
 							   </g:link>
 							</li>
-								<g:each in="${scService?.currentUser?.concepts?.sort{it.conceptName}}" status="i" var="conceptInstance">
+								<g:each in="${session.concepts}" status="i" var="conceptInstance">
 									<li id="${conceptInstance.id}">
 									<a href="#" class="dropdown-toggle">
-									<i class="fa fa-globe"></i>
+									<i class="fa fa-cloud-download"></i>
 									<span class="menu-text" >${fieldValue(bean: conceptInstance, field: "conceptName")}</span>
 									
 									<b class="arrow  fa fa fa-angle-down"></b>
 									</a>
 									<ul class="submenu">
-									    <li id="${conceptInstance.id}-tweet">
-									    	<g:link controller='tweet' action="list" params="[conceptsId:conceptInstance.id]" >
-											<i class="fa fa-twitter"></i>
-											<span class="menu-text">Tweets</span>
+									
+									<li id="${conceptInstance.id}-dash">
+									    	<g:link controller='concept' action="dashboard" id="${conceptInstance.id}"  >
+											<span class="menu-text"><g:message code="home.menu.concept.dashboard"/></span>
 											</g:link>
 									    </li>
-									    <li id="${conceptInstance.id}-stats">
-									    <g:link controller="concept" action="stats" id="${conceptInstance.id}" >
-											<span class="glyphicon glyphicon-stats"> </span>
-											<span class="menu-text">Graficos</span>
+									    <li id="${conceptInstance.id}-tweet">
+									    	<g:link controller='tweet' action="list" params="[conceptsId:conceptInstance.id]" >
+											<span class="menu-text"><g:message code="home.menu.concept.twitter"/></span>
+											</g:link>
+									    </li>
+									    <li id="${conceptInstance.id}-face">
+									    <g:link controller="facebook" action="list" id="${conceptInstance.id}" >
+											<span class="menu-text"><g:message code="home.menu.concept.facebook"/></span>
 										</g:link>
 									    </li>
 									</ul>
@@ -159,6 +162,7 @@
 								</li>
 							</sec:access>
 						</ul>
+						</div>
 						<!-- /.nav-list -->
 
 						<div class="sidebar-collapse" id="sidebar-collapse">
@@ -221,27 +225,6 @@
 		<!-- /.main-container -->
 	</div>
 	<!-- basic scripts -->
-
-
-
-
-
-	<script type="text/javascript">
-		$(function() {
-			$('#scroll').slimScroll({
-				height : '200px',
-				railVisible : true,
-				alwaysVisible : true
-			});
-		});
-	</script>
-
-
-	<script type="text/javascript">
-		if ("ontouchend" in document)
-			document.write("<script src='js/jquery.mobile.custom.min.js'>"
-					+ "<"+"/script>");
-	</script>
 
 </body>
 </html>

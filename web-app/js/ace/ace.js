@@ -229,7 +229,9 @@ ace.widget_boxes = function(a) {
                         q = true;
                         b.addClass("position-relative")
                     }
-                    b.append('<div class="widget-box-overlay"><i class="fa fa-spinner icon-2x white"></i></div>');
+                    var message='<div class="widget-box-overlay"><div  class="wait white">Aguarde unos instantes por favor...'+
+                    			'<br><i class="fa fa-spinner fa-spin fa-4x"></i></div></div>';
+                    b.append(message);
                     b.one("reloaded.ace.widget", function() {
                         b.find(".widget-box-overlay").remove();
                         if (q) {

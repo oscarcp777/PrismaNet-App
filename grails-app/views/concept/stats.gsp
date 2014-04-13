@@ -6,12 +6,11 @@
 	
 </head>
 <body>
+		
+		<g:render template="tabTwitter"  model="['concept':concept,'tabMain':'','tabTweets':'','tabChar':'active','tabSentimental':'']"></g:render>
+		
 	<div class="page-content">
-		<div class="page-header">
-			<h1>
-				<i class="fa fa-tag"></i> Resultados Concepto: "${concept.conceptName}"
-			</h1>
-		</div>
+		
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="row">
@@ -179,7 +178,7 @@
 		  loadDatepicker('authorPickert',loadAuthorPickert);
 		  
 		  var id='${concept.id}';
-		   activeItemMenuLevel3('concepts',id,id+'-stats','Conceptos > '+"${concept.conceptName}");
+		  	activeItemMenuLevel2('${concept.id}','${concept.id}-tweet');
 		   getConceptRealTime(${concept.id}, '#realTimeChar','../');
 		   
 		   var dataTweets = {"id":${concept.id}, "div":'#tweetsChart',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};

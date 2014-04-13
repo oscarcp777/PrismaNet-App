@@ -14,10 +14,7 @@ class UserController extends GenericController{
 	
 	def scaffold = true
 	def userService
-	SpringSecurityService springSecurityService;
-	def beforeInterceptor = {
-		session.user=springSecurityService.currentUser
-	}
+	
 	def stats = {
 		def groupList = ["tweetCreated","conceptsName"]
 		def dateList = userService.categoryStore(session.user, groupList, [],null);

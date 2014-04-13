@@ -1,14 +1,30 @@
 package com.prismanet
 
+import grails.plugins.springsecurity.SpringSecurityService;
 import com.prismanet.GenericService.FilterType
 import com.prismanet.context.Filter
 import com.prismanet.utils.DateTypes
 import com.prismanet.utils.DateUtils
-
 class GenericController {
 	
 	static listMethods = ["max", "offset", "order", "sort", "ignoreCase", "fetch", "readOnly", "fetchSize", "flushMode", "timeout"]
-	
+			SpringSecurityService springSecurityService;
+	def beforeInterceptor = {
+		if(!session.user){
+			session.user=springSecurityService.currentUser
+			session.concepts=springSecurityService.currentUser.concepts
+		}
+	}
+	def getConcept(id){
+		def concept
+		session.concepts.each{
+			if(id.toLong()==it.id){
+			concept=it
+			return true
+			}
+		}
+		concept
+	}
 	def loadFilters(parameters, context) {
 		def filters = []
 		

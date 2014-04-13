@@ -115,7 +115,7 @@
 	    }
 		$(document).ready(function() {
 			inicializeColorChar();
-			activeItemMenuLevel2('chart', 'general', 'Estadisticas > General');
+			activeItemMenuLevel1('home');
 			getTweetCharPie('#tweetCharPie');
 			loadDatepicker('pickertUser',loadCharTest1);
 			var data = {"id":${user.id}, "div":'#lineaChartUser',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
