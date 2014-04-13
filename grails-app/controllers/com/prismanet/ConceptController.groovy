@@ -72,7 +72,7 @@ class ConceptController extends GenericController{
 			break
 			case DateServiceType.BY_MONTH:
 			resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MONTH_PERIOD,
-											'Tweets por Mes','Fecha','Tweets',
+											'Tweets por Mes','Mes','Tweets',
 											redirectOnClick+"&tweetCreated=")
 			break
 		}
@@ -120,6 +120,11 @@ class ConceptController extends GenericController{
 												'Alcance por Dia','Fecha','Alcance',
 												redirectOnClick+"&tweetCreated=")
 			break
+			case DateServiceType.BY_MONTH:
+			resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MONTH_PERIOD,
+											'Alcance por Mes','Mes','Alcance',
+											redirectOnClick+"&tweetCreated=")
+			break
 		}
 		render resultMap as JSON
 	}
@@ -135,15 +140,10 @@ class ConceptController extends GenericController{
 		
 		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
 		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
-				
 		
 		// Obtengo autores
-//		def authorsList = conceptService.getRelevantAuthors(filters, dateFrom, dateTo, 10)
-		def results = []
-		for ( i in 0..9 ){
-				results.add(["cfk","1200000"])
-		}
-		render results as JSON
+		def authorsList = conceptService.getRelevantAuthors(filters, dateFrom, dateTo, 10)
+		render authorsList as JSON
 	}
 	
 	

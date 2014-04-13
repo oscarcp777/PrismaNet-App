@@ -146,6 +146,11 @@ class UserController extends GenericController{
 												'Tweets por Dia','Dias','Cantidad de tweets',
 												redirectOnClick+"tweetCreated=")
 			break
+			case DateServiceType.BY_MONTH:
+			resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MONTH_PERIOD,
+											'Tweets por Mes','Mes','Cantidad de tweets',
+											redirectOnClick+"tweetCreated=")
+		break
 		}
 		render resultMap as JSON
 	}

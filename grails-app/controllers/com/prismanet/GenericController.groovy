@@ -56,54 +56,126 @@ class GenericController {
 		def serieX = null
 //		print "serviceResultList: " + serviceResultList
 		serviceResultList.each{ i ->
-			if (interval != DateTypes.MONTH_PERIOD){
+
+			def xValue
+			if (!interval  || interval == DateTypes.MONTH_PERIOD)
+				xValue = i.getAt(level-1)
+			else
+				xValue = DateUtils.parseDate(interval, i.getAt(level-1)).getTime()
 				if (level == 1){
 					if (!mapByCategory["Serie"])
 						mapByCategory["Serie"] = []
-					mapByCategory["Serie"].add([x:DateUtils.parseDate(interval, i.getAt(level-1)).getTime(),y:i.getAt(level)])
+					mapByCategory["Serie"].add([x:xValue,y:i.getAt(level)])
 				}
 				if (level == 2){
 					if (!mapByCategory[i.getAt(level-2)])
 						mapByCategory[i.getAt(level-2)] = []
-					mapByCategory[i.getAt(level-2)].add([x:DateUtils.parseDate(interval, i.getAt(level-1)).getTime(),y:i.getAt(level)])
+					mapByCategory[i.getAt(level-2)].add([x:xValue,y:i.getAt(level)])
 				}
-			}else{
-				if (!serieX)
-					serieX = []
-				if (!mapByCategory[i.getAt(level-2)])
-					mapByCategory[i.getAt(level-2)] = []
-				serieX.add(i.getAt(level-1))	
-				mapByCategory[i.getAt(level-2)].add(i.getAt(level))
-			}
-			//			dateValueList.add([x:DateUtils.parseDate(interval, i.getAt(0)).getTime(),y:i.getAt(1)])
 		}
-		
-//		print "mapByCategory: " + mapByCategory
-		def from,to
+		def minFrom,from,to,maxTo
+		if (interval){
+			minFrom = getMinDate(mapByCategory, interval)
+			maxTo = getMaxDate(mapByCategory, interval)
+		}
 		mapByCategory.each {
 			def dateValueList = []
-			if (interval != DateTypes.MONTH_PERIOD){
+			if (interval){
 				if (it.value.size()>0){
-					def cal = new GregorianCalendar()
-					cal.setTimeInMillis(it.value.get(0).x)
-					from = cal.getTime()
-					cal.setTimeInMillis(it.value.get(it.value.size()-1).x)
-					to = cal.getTime()
-					dateValueList = DateUtils.loadZeros(it.value,from,to, interval)
+					if (interval == DateTypes.MONTH_PERIOD){
+						from = it.value.get(0).x
+						to = it.value.get(it.value.size()-1).x
+					}else{
+						def cal = new GregorianCalendar()
+						cal.setTimeInMillis(minFrom)
+						from = cal.getTime()
+						cal.setTimeInMillis(maxTo)
+						to = cal.getTime()
+					}
+					dateValueList = loadZeros(it.value,from,to, interval)
 				}
+			}else
+				dateValueList = it.value
+			
+			if (!interval || interval == DateTypes.MONTH_PERIOD){
+				series << [name:it.key,data:dateValueList.collect{it.y}]
+				serieX = dateValueList.collect{it.x}
+			}else
 				series << [name:it.key,data:dateValueList]
-			}else{
-				//TODO rellenar meses con 0
-				series << [name:it.key,data:it.value]
-			}
-		}		
-//		print "SerieX: " + serieX
-//		print "Formato parseado para grafico: " + series
+		}
 		
 	   [series:series, serieX:serieX, 
-//		   year:year as Integer, month:month as Integer, day:day as Integer, hour:hour as Integer,
-		   container: container, /*interval:interval,*/
+		   container: container, 
 		   title:title, titleY:titleY,titleX:titleX, cursorEvent:actionOnClick]
 	}
-
+	
+	private def getMinDate(mapByCategory, interval){
+		def min
+		mapByCategory.each {
+			def aux = it.value.get(0).x
+			if (!min)
+				min = aux
+			else{
+				if (min>aux)
+					min = aux
+			}
+		}
+		min
+	}
+	
+	private def getMaxDate(mapByCategory, interval){
+		def max
+		mapByCategory.each {
+			def aux = it.value.get(it.value.size()-1).x
+			if (!max)
+				max = aux
+			else{
+				if (max<aux)
+					max = aux
+			}
+		}
+		max
+	}
+	
+	private def loadZeros(data,from,to,interval){
+		def results=[]
+		def actualTime
+		def finalTime
+		if (interval == DateTypes.MONTH_PERIOD){
+			actualTime = from
+			finalTime = to
+		}else{
+			actualTime = from.time
+			finalTime = to.time
+		}
+		if (data.size() == 0){
+			while (actualTime < finalTime) {
+				results.add([x: actualTime, y:0])
+				actualTime = getNextInterval(actualTime, interval)
+			}
+		}else{
+			data.each { value ->
+				while (actualTime < value.x) {
+					results.add([x: actualTime, y:0])
+					actualTime = getNextInterval(actualTime, interval)
+				}
+				results.add(value)
+				actualTime = getNextInterval(actualTime, interval)
+			}
+			while (actualTime <= finalTime) {
+				results.add([x: actualTime, y:0])
+				actualTime = getNextInterval(actualTime, interval)
+			}
+		}
+		results
+	}
+	
+	private def getNextInterval(time, interval){
+		if (interval == DateTypes.MONTH_PERIOD)
+			time =  DateUtils.getNextPeriod(time)
+		else
+			time = time + DateUtils.getMilisecondsInterval(interval)
+		time	
+	}
+	
 }
