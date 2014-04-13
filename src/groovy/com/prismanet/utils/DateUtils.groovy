@@ -75,24 +75,19 @@ class DateUtils {
 		}
 	}
 	
-	static def loadZeros(data,from,to,interval){
-		def results=[]
-		def actualTime = from.time
-		if (data.size() == 0){
-			while (actualTime<to.time) {
-				results.add([x: actualTime, y:0])
-				actualTime=actualTime + DateUtils.getMilisecondsInterval(interval)
-			}
-		}else{
-			data.each { value ->
-				while (actualTime<value.x) {
-					results.add([x: actualTime, y:0])
-					actualTime=actualTime + DateUtils.getMilisecondsInterval(interval)
-				}
-				results.add(value)
-				actualTime=actualTime + DateUtils.getMilisecondsInterval(interval)
-			}
-		}
-		results
+	static def getNextPeriod(period){
+		def year = period[0..3] as Integer
+		def month = period[4..5] as Integer
+		if (month + 1 == 13){
+			year++
+			month = 1
+		}else
+			month++
+		def sMonth = month.toString()
+		if (month<10)
+			sMonth = '0' + month.toString()
+		return year.toString()+ sMonth
 	}
+
+	
 }
