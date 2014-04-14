@@ -43,31 +43,44 @@ class ConceptService extends GenericCoreService {
 	}
 	
 	@Override
-	protected String getGroupForDateServiceType(DateServiceType type){
+	protected String getGroupForDateServiceType(DateServiceType type, MentionType mentionType){
+		def value = getPrefixForMentionType(mentionType)
 		switch (type) {
 			case DateServiceType.BY_MINUTE:
-				return "tweetByMinute"
+				return value + "ByMinute"
 			case DateServiceType.BY_HOUR:
-				return "tweetByHour"
+				return value + "ByHour"
 			case DateServiceType.BY_DATE:
-				return "tweetCreated"
+				return value + "Created"
 			case DateServiceType.BY_MONTH:
-				return "tweetPeriod"
+				return value + "Period"
 		}
 		return null
 	}
 	
 	def getTweetsBy(filters, dateFrom, dateTo){
-		def groups = ["conceptName",getGroupForDateServiceType(getChartType(dateFrom, dateTo))]
+		def result = getMentionBy(filters, dateFrom, dateTo, MentionType.TWITTER)
+		result
+	}
+	
+	def getPostsBy(filters, dateFrom, dateTo){
+		def result = getMentionBy(filters, dateFrom, dateTo, MentionType.FACEBOOK)
+		result
+	}
+	
+	def getMentionBy(filters, dateFrom, dateTo, MentionType mentionType){
+		def groups = ["conceptName",getGroupForDateServiceType(getChartType(dateFrom, dateTo), mentionType)]
 		filters.addAll(getFilterList(dateFrom, dateTo))
+		def countValue = getPrefixForMentionType(mentionType) +"sId"
+		def orderValue = getPrefixForMentionType(mentionType) +"TimeCreated"
 		def result = groupBy(Concept, new ConceptAttributeContext(),
-						groups, filters, ["tweetsId" : ProjectionType.COUNT], 
-						[[attribute:"created",value:OrderType.ASC]]);
+						groups, filters, [(countValue) : ProjectionType.COUNT],
+						[[attribute:orderValue,value:OrderType.ASC]]);
 		result
 	}
 	
 	def getWeightBy(filters, dateFrom, dateTo){
-		def groups = ["conceptName",getGroupForDateServiceType(getChartType(dateFrom, dateTo))]
+		def groups = ["conceptName",getGroupForDateServiceType(getChartType(dateFrom, dateTo), MentionType.TWITTER)]
 		filters.addAll(getFilterList(dateFrom, dateTo))
 		def result = groupBy(Concept, new ConceptAttributeContext(),
 						groups, filters, ["authorFollowers" : ProjectionType.SUM],
@@ -85,6 +98,15 @@ class ConceptService extends GenericCoreService {
 						groups, filters, [:],
 						[[attribute:"followers",value:OrderType.DESC]], [max:maxAuthors]);
 		result
+	}
+	
+	private getPrefixForMentionType(MentionType type){
+		def value
+		if (type == MentionType.FACEBOOK)
+			value = 'post'
+		else
+			value = 'tweet'
+		value
 	}
 	
 }

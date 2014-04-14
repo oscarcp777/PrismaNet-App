@@ -7,6 +7,7 @@ class ConceptAttributeContext extends AttributeContext {
 	protected void initializeRelations() {
 		addPropertyRelation("id", "id", null, null);
 		addPropertyRelation("conceptName", "conceptName", null, null);
+		
 		addPropertyRelation("sex", "sex", null, "tweets.author");
 		addPropertyRelation("authorFollowers", "followers", null, "tweets.author");
 		addPropertyRelation("tweetCreated", "date", null, "tweets");
@@ -21,6 +22,22 @@ class ConceptAttributeContext extends AttributeContext {
 		addPropertyRelation("tweetDay", "day", null, "tweets");
 		addPropertyRelation("tweetsId", "id", null, "tweets");
 		addPropertyRelation("created", "created", null, "tweets");
+		addPropertyRelation("tweetTimeCreated", "created", null, "tweets");
+		
+		
+		addPropertyRelation("postAuthorFollowers", "followers", null, "posts.author");
+		addPropertyRelation("postCreated", "date", null, "posts");
+		addPropertyRelation("postPeriod", "period", null, "posts");
+		addPropertyRelation("postYear", "year", null, "posts");
+		addPropertyRelation("postMonth", "month", null, "posts");
+		addPropertyRelation("postHour", "hour", null, "posts");
+		addPropertyRelation("postMinute", "minute", null, "posts");
+		addPropertyRelation("postByHour", "dateByHour", null, "posts");
+		addPropertyRelation("postByMinute", "dateByMinute", null, "posts");
+		addPropertyRelation("postTime", "time", null, "posts");
+		addPropertyRelation("postDay", "day", null, "posts");
+		addPropertyRelation("postsId", "id", null, "posts");
+		addPropertyRelation("postTimeCreated", "created", null, "posts");
 	}
 
 	
