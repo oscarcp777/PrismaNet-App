@@ -1,13 +1,10 @@
 package com.prismanet
 import grails.converters.*
 import grails.plugins.springsecurity.Secured
-import groovy.time.TimeCategory
-
-import java.text.SimpleDateFormat
 
 import com.prismanet.GenericService.FilterType
-import com.prismanet.GenericService.OrderType
 import com.prismanet.GenericService.ProjectionType
+import com.prismanet.context.ConceptAttributeContext
 import com.prismanet.context.Filter
 import com.prismanet.utils.DateTypes
 import com.prismanet.utils.DateUtils
@@ -20,18 +17,24 @@ class ConceptController extends GenericController{
 	
 	def dashboard = {
 		Concept concept = getConcept(params.id)
-		[concept :concept,tweetsTotal:1000]
-	}
-	def weightStats = {
-		def weightProjection = ["authorFollowers" : ProjectionType.SUM]
-		customStats(weightProjection)
+		def filters = [new Filter(attribute:"id",value:concept.id, type:FilterType.EQ)]
+		def groups = ["conceptName"]
+		def tweetCount = conceptService.groupBy(Concept, new ConceptAttributeContext(),
+				groups, filters, ['tweetsId' : ProjectionType.COUNT],null)
+		def tweetTotal = tweetCount.size()>0 ? tweetCount.get(0).getAt(1) : 0
+		
+		def postCount = conceptService.groupBy(Concept, new ConceptAttributeContext(),
+				groups, filters, ['postsId' : ProjectionType.COUNT],null)
+		def postTotal = postCount.size()>0 ? postCount.get(0).getAt(1) : 0
+
+		[concept :concept,tweetsTotal:tweetTotal, postsTotal:postTotal, total:postTotal+tweetTotal]
 	}
 
 	def stats = {
 		Concept concept = getConcept(params.id)
 		def authors=TwitterAuthor.list(max:10,sort:"followers",order:"desc");
 		if(!grailsApplication.config.grails.twitter.offline)
-		tweetService.loadDataAuthors(authors)
+			tweetService.loadDataAuthors(authors)
 		[concept : concept,authors:authors]
 	}
 	
@@ -51,7 +54,7 @@ class ConceptController extends GenericController{
 		
 		// Obtengo tweets 
 		def dateList = conceptService.getTweetsBy(filters, dateFrom, dateTo)
-
+		print "dateList: " + dateList 
 		def redirectOnClick = "../../tweet/list?conceptsId="+concept.id
 		def resultMap = [:]
 		//TODO localizar todos los textos

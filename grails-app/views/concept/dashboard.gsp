@@ -9,7 +9,7 @@
 		<div class="page-header">
 			<h1>
 				<i class="fa fa-cloud-download"></i>
-				<g:message code="dashboard.concetp.title"/>${concept.conceptName}
+				<g:message code="dashboard.concetp.title"/> ${concept.conceptName}
 			</h1>
 		</div>
 		
@@ -62,7 +62,7 @@
 									class="fa fa-facebook-square fa-2x blue"></i> 
 								</span>
 								<h4 ><g:message code="dashborad.concept.post"/> </h4>
-								<h4 class="bigger">0</h4>
+								<h4 class="bigger">${postsTotal}</h4>
 							</div>
 
 							<div class="grid3">
@@ -78,7 +78,7 @@
 									class="fa fa-comment fa-2x red"></i>
 								</span>
 								<h4 ><g:message code="dashborad.concept.mentions"/> </h4>
-								<h4 class="bigger ">${tweetsTotal}</h4>
+								<h4 class="bigger ">${total}</h4>
 							</div>
 						</div>
 					</div>
