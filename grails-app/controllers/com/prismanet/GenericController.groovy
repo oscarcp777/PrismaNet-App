@@ -70,7 +70,7 @@ class GenericController {
 		def series = []
 		def level = numCategories
 		def serieX = null
-//		print "serviceResultList: " + serviceResultList
+		log.debug "serviceResultList: " + serviceResultList
 		serviceResultList.each{ i ->
 
 			def xValue
@@ -89,36 +89,39 @@ class GenericController {
 					mapByCategory[i.getAt(level-2)].add([x:xValue,y:i.getAt(level)])
 				}
 		}
-		def minFrom,from,to,maxTo
+		log.debug "mapByCategory: " + mapByCategory
+		
+		def minFrom, maxTo
 		if (interval){
 			minFrom = getMinDate(mapByCategory, interval)
 			maxTo = getMaxDate(mapByCategory, interval)
+			if (interval != DateTypes.MONTH_PERIOD){
+				def cal = new GregorianCalendar()
+				cal.setTimeInMillis(minFrom)
+				minFrom = cal.getTime()
+				cal.setTimeInMillis(maxTo)
+				maxTo = cal.getTime()
+			}	
 		}
 		mapByCategory.each {
 			def dateValueList = []
 			if (interval){
 				if (it.value.size()>0){
-					if (interval == DateTypes.MONTH_PERIOD){
-						from = it.value.get(0).x
-						to = it.value.get(it.value.size()-1).x
-					}else{
-						def cal = new GregorianCalendar()
-						cal.setTimeInMillis(minFrom)
-						from = cal.getTime()
-						cal.setTimeInMillis(maxTo)
-						to = cal.getTime()
-					}
-					dateValueList = loadZeros(it.value,from,to, interval)
+					log.debug "entro para: " + it.key
+					dateValueList = loadZeros(it.value, minFrom, maxTo, interval)
 				}
 			}else
 				dateValueList = it.value
 			
+			log.debug "dateValueList: " + dateValueList 
 			if (!interval || interval == DateTypes.MONTH_PERIOD){
 				series << [name:it.key,data:dateValueList.collect{it.y}]
 				serieX = dateValueList.collect{it.x}
 			}else
 				series << [name:it.key,data:dateValueList]
 		}
+		log.debug "series: " + series
+		log.debug "serieX: " + serieX
 		
 	   [series:series, serieX:serieX, 
 		   container: container, 
