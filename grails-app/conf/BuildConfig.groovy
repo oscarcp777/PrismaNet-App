@@ -47,7 +47,7 @@ grails.project.dependency.resolution = {
   		test 'org.grails:grails-datastore-simple:3.0.4.RELEASE'
   		compile 'org.facebook4j:facebook4j-core:2.0.5-Prisma'
 		  
-		compile 'org.mongodb:mongo-java-driver:2.10.1'
+		compile 'org.mongodb:mongo-java-driver:2.12.0-rc3'
 	  
     }
 
