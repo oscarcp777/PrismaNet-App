@@ -2,20 +2,19 @@
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
 
-// grails.config.locations = [ "classpath:${appName}-config.properties",
-//                             "classpath:${appName}-config.groovy",
-//                             "file:${userHome}/.grails/${appName}-config.properties",
-//                             "file:${userHome}/.grails/${appName}-config.groovy"]
+ grails.config.locations = [ "classpath:${appName}-config.properties",
+                             "classpath:${appName}-config.groovy",
+                             "file:${userHome}/.grails/${appName}-config.properties",
+                             "file:${userHome}/.grails/${appName}-config.groovy"]
 
-// if (System.properties["${appName}.config.location"]) {
-//    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
-// }
+ if (System.properties["${appName}.config.location"]) {
+    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
+ }
 def barra = File.separator
 //Environment variable that contains a path
 def logFile =  "${userHome}${barra}logs${barra}${appName}"
-def catalinaBase = System.properties.getProperty('catalina.base')
-if (!catalinaBase) catalinaBase = '.'   // just in case
-def logDirectory = "${catalinaBase}/logs"
+def catalinaBase ="..${barra}"
+def logDirectory = "${catalinaBase}${barra}logs${barra}${appName}"
 grails.project.groupId = 'com.prismanet' // change this to alter the default package name and Maven publishing destination
 
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
@@ -95,10 +94,11 @@ grails.hibernate.pass.readonly = false
 grails.hibernate.osiv.readonly = false
 jobs.twitter.disable = false
 jobs.facebook.disable = false
-jobs.exec.jar.tomcat = false
+
 environments {
     development {
         grails.logging.jul.usebridge = true
+		jobs.exec.jar.tomcat =false
 		// log4j configuration
 		log4j = {
 		   appenders {
@@ -141,16 +141,17 @@ environments {
     }
     production {
         grails.logging.jul.usebridge = false
+		jobs.exec.jar.tomcat =true
         // TODO: grails.serverURL = "http://www.changeme.com"
 		// log4j configuration
 		log4j = {
 		   appenders {
 				console name: 'stdout', layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n')
 		
-				rollingFile name:'appLog', file:"${logDirectory}/${appName}.log".toString(), append: true,
+				rollingFile name:'appLog', file:"${logDirectory}.log", append: true,
 					layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n'), threshold: org.apache.log4j.Level.INFO
 					
-				rollingFile name:'errorsLog', file:"${logDirectory}/${appName}_error.log".toString(), append: true,
+				rollingFile name:'errorsLog', file:"${logDirectory}_error.log", append: true,
 					layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n'), threshold: org.apache.log4j.Level.ERROR
 			}
 		   
