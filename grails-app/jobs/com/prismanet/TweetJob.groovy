@@ -50,7 +50,7 @@ class TweetJob {
 			
 			if (result.size()<3){
 				//No esta corriendo por lo tanto lo ejecuto
-				Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
+				Runtime.getRuntime().exec("java -jar "+pathCommand+"prismanet-twitter-api.jar")
 				log.info "Proceso api-twitter iniciado, ultima modificacion a las : " + lastUpdate
 			}
 			
