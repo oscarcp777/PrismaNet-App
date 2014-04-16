@@ -1,8 +1,7 @@
 <html>
 <head>
 <meta name="layout" content="home" />
-<link rel="stylesheet"
-	href="${resource(dir: 'css', file: 'twitter.css')}" type="text/css">
+<link rel="stylesheet" href="${resource(dir: 'css', file: 'twitter.css')}" type="text/css">
 	
 </head>
 <body>
@@ -18,8 +17,8 @@
 						<div class="widget-box">
 							<div class="widget-header header-color-blue">
 								<h5>
-									<span class="glyphicon glyphicon-stats"> </span> Tweets
-									RealTime
+									<span class="glyphicon glyphicon-stats"> </span>
+									<g:message code="Tweets en tiempo real"/>
 								</h5>
 
 								<div class="widget-toolbar">
@@ -47,8 +46,8 @@
 						<div class="widget-box">
 							<div class="widget-header header-color-blue">
 								<h5>
-									<span class="glyphicon glyphicon-stats"> </span> Tweets entre
-									fechas
+									<span class="glyphicon glyphicon-stats"> </span> 
+									<g:message code="user.stats.tweets.date"/>
 								</h5>
 								<div class="widget-toolbar input-group ">
 									<div id="tweetPickert" class="btn btn-primary date-picker">
@@ -81,8 +80,8 @@
 						<div class="widget-box">
 							<div class="widget-header header-color-blue">
 								<h5>
-									<span class="glyphicon glyphicon-stats"> </span> Alcance entre
-									fechas
+									<span class="glyphicon glyphicon-stats"> </span>
+									<g:message code="concept.stats.scope.date"/>
 								</h5>
 								<div class="widget-toolbar input-group ">
 									<div id="weightPickert" class="btn btn-primary date-picker">
@@ -115,7 +114,8 @@
 						<div class="widget-box">
 							<div class="widget-header header-color-blue">
 								<h5>
-									<i class="fa fa-group "></i> Autores con mas seguidores
+									<i class="fa fa-group "></i>
+									<g:message code="concept.author.more.followers"/>
 								</h5>
 								<div class="widget-toolbar">
 									<a href="#" data-action="collapse"> <i

@@ -74,10 +74,10 @@ plugins {
 		runtime ":famfamfam:1.0.1"
 		compile ':cache:1.1.1'
         // Uncomment these (or add new ones) to enable additional resources capabilities
-        //runtime ":zipped-resources:1.0.1"
-        //runtime ":cached-resources:1.1"
-        //runtime ":yui-minify-resources:0.1.5"
-		//runtime ":cache-headers:1.1.5"
+        runtime ":zipped-resources:1.0.1"
+        runtime ":cached-resources:1.1"
+        runtime ":yui-minify-resources:0.1.5"
+		runtime ":cache-headers:1.1.5"
 		compile ":mail:1.0.1"
 		compile ":spring-security-core:1.2.7.3"
 		compile ":spring-security-ui:0.2"

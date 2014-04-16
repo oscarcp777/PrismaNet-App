@@ -13,6 +13,9 @@
 def barra = File.separator
 //Environment variable that contains a path
 def logFile =  "${userHome}${barra}logs${barra}${appName}"
+def catalinaBase = System.properties.getProperty('catalina.base')
+if (!catalinaBase) catalinaBase = '.'   // just in case
+def logDirectory = "${catalinaBase}/logs"
 
 grails.project.groupId = 'com.prismanet' // change this to alter the default package name and Maven publishing destination
 
@@ -96,52 +99,92 @@ grails.twitter.offline = false
 environments {
     development {
         grails.logging.jul.usebridge = true
+		// log4j configuration
+		log4j = {
+		   appenders {
+				console name: 'stdout', layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n')
+		
+				rollingFile name:'appLog', file: "${logFile}${barra}app.log", append: true,
+					layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n'), threshold: org.apache.log4j.Level.INFO
+					
+				rollingFile name:'errorsLog', file: "${logFile}${barra}errors.log", append: true,
+					layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n'), threshold: org.apache.log4j.Level.ERROR
+			}
+		   
+		   //Para ver valores de filtros
+		//   trace 'org.hibernate.type'
+		//   debug 'org.hibernate.SQL'
+		   
+			debug 'grails.app.jobs'
+			error  'org.codehaus.groovy.grails.web.servlet',        // controllers
+				   'org.codehaus.groovy.grails.web.pages',          // GSP
+				   'org.codehaus.groovy.grails.web.sitemesh',       // layouts
+				   'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+				   'org.codehaus.groovy.grails.web.mapping',        // URL mapping
+				   'org.codehaus.groovy.grails.commons',            // core / classloading
+				   'org.codehaus.groovy.grails.plugins',            // plugins
+				   'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
+				   'org.springframework',
+				   'org.hibernate',
+				   'net.sf.ehcache.hibernate'
+				   
+			info "grails.app" //,"com.prismanet"
+				   additivity: false
+					  
+			root {
+				   info 'appLog', 'stdout'
+				   error 'errorsLog'
+				   additivity = false
+			   }
+						  
+		}
     }
     production {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
+		// log4j configuration
+		log4j = {
+		   appenders {
+				console name: 'stdout', layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n')
+		
+				rollingFile name:'appLog', file:"${logDirectory}/${appName}.log".toString(), append: true,
+					layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n'), threshold: org.apache.log4j.Level.INFO
+					
+				rollingFile name:'errorsLog', file:"${logDirectory}/${appName}_error.log".toString(), append: true,
+					layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n'), threshold: org.apache.log4j.Level.ERROR
+			}
+		   
+		   //Para ver valores de filtros
+		//   trace 'org.hibernate.type'
+		//   debug 'org.hibernate.SQL'
+		   
+			debug 'grails.app.jobs'
+			error  'org.codehaus.groovy.grails.web.servlet',        // controllers
+				   'org.codehaus.groovy.grails.web.pages',          // GSP
+				   'org.codehaus.groovy.grails.web.sitemesh',       // layouts
+				   'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+				   'org.codehaus.groovy.grails.web.mapping',        // URL mapping
+				   'org.codehaus.groovy.grails.commons',            // core / classloading
+				   'org.codehaus.groovy.grails.plugins',            // plugins
+				   'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
+				   'org.springframework',
+				   'org.hibernate',
+				   'net.sf.ehcache.hibernate'
+				   
+			info "grails.app" //,"com.prismanet"
+				   additivity: false
+					  
+			root {
+				   info 'appLog', 'stdout'
+				   error 'errorsLog'
+				   additivity = false
+			   }
+						  
+		}
     }
 }
 
-// log4j configuration
-log4j = {
-   appenders {
-		console name: 'stdout', layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n')
 
-		rollingFile name:'appLog', file: "${logFile}${barra}app.log", append: true,
-			layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n'), threshold: org.apache.log4j.Level.INFO
-			
-		rollingFile name:'errorsLog', file: "${logFile}${barra}errors.log", append: true,
-			layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n'), threshold: org.apache.log4j.Level.ERROR
-	}
-   
-   //Para ver valores de filtros
-//   trace 'org.hibernate.type'
-//   debug 'org.hibernate.SQL'
-   
-	debug 'grails.app.jobs'
-    error  'org.codehaus.groovy.grails.web.servlet',        // controllers
-           'org.codehaus.groovy.grails.web.pages',          // GSP
-           'org.codehaus.groovy.grails.web.sitemesh',       // layouts
-           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-           'org.codehaus.groovy.grails.web.mapping',        // URL mapping
-           'org.codehaus.groovy.grails.commons',            // core / classloading
-           'org.codehaus.groovy.grails.plugins',            // plugins
-           'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
-           'org.springframework',
-           'org.hibernate',
-           'net.sf.ehcache.hibernate'
-		   
-	info "grails.app" //,"com.prismanet"
-		   additivity: false
-			  
-	root {
-		   info 'appLog', 'stdout'
-		   error 'errorsLog'
-		   additivity = false
-	   }
-		   	   
-}
 
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.prismanet.model.security.SecUser'
