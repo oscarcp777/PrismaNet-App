@@ -13,9 +13,8 @@
 def barra = File.separator
 //Environment variable that contains a path
 def logFile =  "${userHome}${barra}logs${barra}${appName}"
-def catalinaBase = System.properties.getProperty('catalina.base')
-if (!catalinaBase) catalinaBase = '.'   // just in case
-def logDirectory = "${catalinaBase}/logs"
+def catalinaBase ="..${barra}"
+def logDirectory = "${catalinaBase}${barra}logs${barra}${appName}"
 
 grails.project.groupId = 'com.prismanet' // change this to alter the default package name and Maven publishing destination
 
@@ -147,10 +146,10 @@ environments {
 		   appenders {
 				console name: 'stdout', layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n')
 		
-				rollingFile name:'appLog', file:"${logDirectory}/${appName}.log".toString(), append: true,
+				rollingFile name:'appLog', file:"${logDirectory}.log".toString(), append: true,
 					layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n'), threshold: org.apache.log4j.Level.INFO
 					
-				rollingFile name:'errorsLog', file:"${logDirectory}/${appName}_error.log".toString(), append: true,
+				rollingFile name:'errorsLog', file:"${logDirectory}_error.log".toString(), append: true,
 					layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n'), threshold: org.apache.log4j.Level.ERROR
 			}
 		   
