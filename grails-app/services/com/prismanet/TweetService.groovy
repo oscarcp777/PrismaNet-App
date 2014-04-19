@@ -122,31 +122,7 @@ class TweetService extends MentionService{
 	}
 	
 	def getTweets(filters, parameters){
-		
-		def conceptId
-		filters.each {
-			if (it.attribute == "conceptsId" && it.type ==  FilterType.EQ)
-				conceptId = it.value
-		}
-		def resultList = []
-		Concept concept
-		if (conceptId)
-			concept = Concept.get(conceptId)
-			
-		def auxList =	list(Tweet.class, new TweetAttributeContext(), filters, parameters, [[attribute:"id",value:OrderType.DESC]])
-		for (tweet in auxList.results){
-			def opValue
-			if (conceptId){
-				opValue = OpinionValue.NEUTRAL
-				Opinion op = Opinion.findByTweetAndConcept(tweet,concept)
-				if (op)
-					opValue = op.value
-			}
-			resultList << [tweet:tweet, value:opValue]
-		}
-		
-		[resultList:resultList,totalCount:auxList.totalCount]
-		
+		getMentions(filters, parameters, new TweetAttributeContext(), Tweet)
 	}
 	
 	def getSamplingTweets(filters, parameters){
@@ -219,5 +195,19 @@ class TweetService extends MentionService{
 				tweet.save(flush:true)
 			
 		}
+	}
+	
+	public String getDateGroupProperty(DateServiceType type){
+		switch (type) {
+			case DateServiceType.BY_MINUTE:
+				return "tweetByMinute"
+			case DateServiceType.BY_HOUR:
+				return "tweetByHour"
+			case DateServiceType.BY_DATE:
+				return "tweetCreated"
+			case DateServiceType.BY_MONTH:
+				return "tweetPeriod"
+		}
+		return null
 	}
 }

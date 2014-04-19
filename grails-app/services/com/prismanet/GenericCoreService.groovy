@@ -26,6 +26,11 @@ class GenericCoreService extends GenericService {
 	 * @return filtro obtenido
 	 */
 	def getFilterList(dateFrom, dateTo){
+		getFilterList(dateFrom, dateTo, "created")
+	}
+	
+	
+	def getFilterList(dateFrom, dateTo, attributeName){
 		
 		if (!dateFrom)
 			return []
@@ -42,43 +47,20 @@ class GenericCoreService extends GenericService {
 		calendarTo.setTime(dateTo);
 		calendarTo.set(Calendar.SECOND, 0);
 		switch (type) {
-			case DateServiceType.BY_MINUTE:
-//				def valueFrom = DateUtils.getDateFormat(DateTypes.MINUTE_PERIOD, dateFrom)
-//				def valueTo = DateUtils.getDateFormat(DateTypes.MINUTE_PERIOD, dateTo)
-				return [new Filter(attribute:"created", value:calendarFrom.getTime(), type:FilterType.GE),
-					new Filter(attribute:"created", value:calendarTo.getTime(), type:FilterType.LE)]
-				break
 			case DateServiceType.BY_HOUR:
 				calendarFrom.set(Calendar.MINUTE, 0);
 				calendarTo.set(Calendar.MINUTE, 0);
-//				def valueFrom = DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, dateFrom)
-//				def valueTo = DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, dateTo)
-				return [new Filter(attribute:"created", value:calendarFrom.getTime(), type:FilterType.GE),
-					new Filter(attribute:"created", value:calendarTo.getTime(), type:FilterType.LE)]
 				break
 			case DateServiceType.BY_DATE:
-				calendarFrom.set(Calendar.MINUTE, 0);
-				calendarTo.set(Calendar.MINUTE, 0);
-				calendarFrom.set(Calendar.HOUR, 0);
-				calendarTo.set(Calendar.HOUR, 0);
-//				def valueFrom = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateFrom)
-//				def valueTo = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateTo)
-				return [new Filter(attribute:"created", value:calendarFrom.getTime(), type:FilterType.GE),
-					new Filter(attribute:"created", value:calendarTo.getTime(), type:FilterType.LE)]
-				break
 			case DateServiceType.BY_MONTH:
 				calendarFrom.set(Calendar.MINUTE, 0);
 				calendarTo.set(Calendar.MINUTE, 0);
 				calendarFrom.set(Calendar.HOUR, 0);
 				calendarTo.set(Calendar.HOUR, 0);
-//				def valueFrom = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateFrom)
-//				def valueTo = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, dateTo)
-				return [new Filter(attribute:"created", value:calendarFrom.getTime(), type:FilterType.GE),
-					new Filter(attribute:"created", value:calendarTo.getTime(), type:FilterType.LE)]
 				break
-			default:
-				return []	
 		}
+		return [new Filter(attribute:attributeName, value:calendarFrom.getTime(), type:FilterType.GE),
+			new Filter(attribute:attributeName, value:calendarTo.getTime(), type:FilterType.LE)]
 	}
 	
 	/**
@@ -88,8 +70,18 @@ class GenericCoreService extends GenericService {
 	 * @param type
 	 * @return
 	 */
-	protected String getGroupForDateServiceType(DateServiceType type){
+	protected String getDateGroupProperty(DateServiceType type){
 		return null
+	}
+	
+	/**
+	 * Dadas dos fechas retorna un string con el nombre de la propiedad de tiempo a agrupar
+	 * @param dateFrom - fecha desde
+	 * @param dateTo - fecha hasta
+	 * @return
+	 */
+	public String getDateGroupProperty(Date dateFrom, Date dateTo){
+		getDateGroupProperty(getChartType(dateFrom, dateTo))
 	}
 	
 	/**
@@ -108,7 +100,6 @@ class GenericCoreService extends GenericService {
 		
 		use (TimeCategory){
 			def duration = dateTo - dateFrom
-			println "days: ${duration.days}, Hours: ${duration.hours}"
 			if (duration.hours < 3 && duration.days < 1)
 				return DateServiceType.BY_MINUTE
 			if (duration.hours < 24 && duration.days < 2)

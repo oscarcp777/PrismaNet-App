@@ -1,10 +1,13 @@
 package com.prismanet
 
-import com.prismanet.context.AttributeContext;
+import com.prismanet.GenericService.FilterType
+import com.prismanet.GenericService.OrderType
+import com.prismanet.context.AttributeContext
+import com.prismanet.context.TweetAttributeContext
 import com.prismanet.sentiment.Opinion
 import com.prismanet.sentiment.OpinionValue
 
-class MentionService extends GenericService{
+class MentionService extends GenericCoreService{
 
 	def sessionFactory
 	def propertyInstanceMap = org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
@@ -53,5 +56,32 @@ class MentionService extends GenericService{
 		return isNumericalArgument;
 	}
 	
+	def getMentions(filters, parameters, context, mentionType){
+		
+		def conceptId
+		filters.each {
+			if (it.attribute == "conceptsId" && it.type ==  FilterType.EQ)
+				conceptId = it.value
+		}
+		def resultList = []
+		Concept concept
+		if (conceptId)
+			concept = Concept.get(conceptId)
+			
+		def auxList =	list(mentionType, context, filters, parameters, [[attribute:"id",value:OrderType.DESC]])
+		for (mention in auxList.results){
+			def opValue
+			if (conceptId){
+				opValue = OpinionValue.NEUTRAL
+				Opinion op = Opinion.findByMentionAndConcept(mention,concept)
+				if (op)
+					opValue = op.value
+			}
+			resultList << [tweet:mention, value:opValue]
+		}
+		
+		[resultList:resultList,totalCount:auxList.totalCount]
+		
+	}
 	
 }

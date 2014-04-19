@@ -19,7 +19,7 @@ class UserService extends GenericCoreService {
 	}
 	
 	@Override
-	protected String getGroupForDateServiceType(DateServiceType type){
+	protected String getDateGroupProperty(DateServiceType type){
 		switch (type) {
 			case DateServiceType.BY_MINUTE:
 				return "tweetByMinute"
@@ -35,7 +35,7 @@ class UserService extends GenericCoreService {
 	
 	
 	def getTweetsBy(filters, dateFrom, dateTo){
-		def groups = ["conceptsName",getGroupForDateServiceType(getChartType(dateFrom, dateTo))]
+		def groups = ["conceptsName",getDateGroupProperty(dateFrom, dateTo)]
 		filters.addAll(getFilterList(dateFrom, dateTo))
 		def result = groupBy(User, new UserAttributeContext(),
 						groups, filters, ["tweetsId" : ProjectionType.COUNT],

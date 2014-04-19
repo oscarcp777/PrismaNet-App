@@ -90,5 +90,23 @@ class PostService extends MentionService{
 						[[attribute:"created",value:OrderType.DESC]]);
 		result?.results[0]?.created
 	}
+	
+	def getPosts(filters, parameters){
+		getMentions(filters, parameters, new PostAttributeContext(), Post)
+	}
+	
+	public String getDateGroupProperty(DateServiceType type){
+		switch (type) {
+			case DateServiceType.BY_MINUTE:
+				return "postByMinute"
+			case DateServiceType.BY_HOUR:
+				return "postByHour"
+			case DateServiceType.BY_DATE:
+				return "postCreated"
+			case DateServiceType.BY_MONTH:
+				return "postPeriod"
+		}
+		return null
+	}
 
 }

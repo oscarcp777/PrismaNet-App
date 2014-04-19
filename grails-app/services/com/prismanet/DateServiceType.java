@@ -1,7 +1,7 @@
 package com.prismanet;
 
 /**
- * Enumeracion que contiene los distintos tipos de proyecciones existentes
+ * Enumeracion que contiene los distintos tipos de graficos por tiempo existentes
  */
 public enum DateServiceType {
 	BY_MINUTE,
