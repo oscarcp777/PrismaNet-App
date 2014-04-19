@@ -1,6 +1,7 @@
 package com.prismanet
 
 import grails.plugins.springsecurity.SpringSecurityService;
+
 import com.prismanet.GenericService.FilterType
 import com.prismanet.context.Filter
 import com.prismanet.utils.DateTypes
@@ -92,7 +93,7 @@ class GenericController {
 		log.debug "mapByCategory: " + mapByCategory
 		
 		def minFrom, maxTo
-		if (interval){
+		if (interval && serviceResultList.size()>0){
 			minFrom = getMinDate(mapByCategory, interval)
 			maxTo = getMaxDate(mapByCategory, interval)
 			if (interval != DateTypes.MONTH_PERIOD){
@@ -105,20 +106,20 @@ class GenericController {
 		}
 		mapByCategory.each {
 			def dateValueList = []
-			if (interval){
-				if (it.value.size()>0){
+			if (it.value.size()>0){
+				if (interval){
 					log.debug "entro para: " + it.key
 					dateValueList = loadZeros(it.value, minFrom, maxTo, interval)
-				}
-			}else
-				dateValueList = it.value
-			
-			log.debug "dateValueList: " + dateValueList 
-			if (!interval || interval == DateTypes.MONTH_PERIOD){
-				series << [name:it.key,data:dateValueList.collect{it.y}]
-				serieX = dateValueList.collect{it.x}
-			}else
-				series << [name:it.key,data:dateValueList]
+				}else
+					dateValueList = it.value
+
+				log.debug "dateValueList: " + dateValueList
+				if (!interval || interval == DateTypes.MONTH_PERIOD){
+					series << [name:it.key,data:dateValueList.collect{it.y}]
+					serieX = dateValueList.collect{it.x}
+				}else
+					series << [name:it.key,data:dateValueList]
+			}
 		}
 		log.debug "series: " + series
 		log.debug "serieX: " + serieX
@@ -195,6 +196,22 @@ class GenericController {
 		else
 			time = time + DateUtils.getMilisecondsInterval(interval)
 		time	
+	}
+	
+	
+	Concept chooseConcept(params){
+		Concept concept
+		if(params.conceptsId)
+		return getConcept(params.conceptsId)
+		
+		session.concepts.each {it ->
+		   if(params.conceptName!=null && it.conceptName==params.conceptName){
+			concept=it
+			params.conceptsId=it.id
+			return true
+			}
+		}
+		concept
 	}
 	
 }
