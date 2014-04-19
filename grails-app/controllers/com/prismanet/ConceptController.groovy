@@ -30,12 +30,17 @@ class ConceptController extends GenericController{
 		[concept :concept,tweetsTotal:tweetTotal, postsTotal:postTotal, total:postTotal+tweetTotal]
 	}
 
-	def stats = {
+	def tweetStats = {
 		Concept concept = getConcept(params.id)
 		def authors=TwitterAuthor.list(max:10,sort:"followers",order:"desc");
 		if(!grailsApplication.config.grails.twitter.offline)
 			tweetService.loadDataAuthors(authors)
 		[concept : concept,authors:authors]
+	}
+	
+	def postStats = {
+		Concept concept = getConcept(params.id)
+		[concept : concept]
 	}
 	
 	
@@ -54,7 +59,6 @@ class ConceptController extends GenericController{
 		
 		// Obtengo tweets 
 		def dateList = conceptService.getTweetsBy(filters, dateFrom, dateTo)
-		print "dateList: " + dateList 
 		def redirectOnClick = "../../tweet/list?conceptsId="+concept.id
 		def resultMap = [:]
 		//TODO localizar todos los textos
@@ -84,6 +88,52 @@ class ConceptController extends GenericController{
 		}
 //		def aux = resultMap as JSON
 //		print "resultMap: " + aux
+		render resultMap as JSON
+	}
+	
+	
+	def getGroupedPosts(){
+		log.info "getGroupedPosts params: " + params
+		def container = params.div
+		Concept concept = getConcept(params.id)
+		def filters = []
+		filters.add(new Filter(attribute:"id",value:concept.id, type:FilterType.EQ))
+		
+		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
+		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
+		
+		DateServiceType type = conceptService.getChartType(dateFrom, dateTo)
+		
+		
+		// Obtengo posts
+		def dateList = conceptService.getPostsBy(filters, dateFrom, dateTo)
+		def redirectOnClick = "../../tweet/list?conceptsId="+concept.id
+		def resultMap = [:]
+		//TODO localizar todos los textos
+		// Parseo resultado para generar el grafico
+		
+		switch (type) {
+			case DateServiceType.BY_MINUTE:
+				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
+												'Posts por minuto','Fecha','Posts',
+												redirectOnClick+"&postMinute=")
+			break
+			case DateServiceType.BY_HOUR:
+				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD,
+											   'Posts por hora','Fecha','Posts',
+											   redirectOnClick+"&postHour=")
+			break
+			case DateServiceType.BY_DATE:
+				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.DAY_PERIOD,
+												'Posts por Dia','Fecha','Posts',
+												redirectOnClick+"&postCreated=")
+			break
+			case DateServiceType.BY_MONTH:
+			resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MONTH_PERIOD,
+											'Posts por Mes','Mes','Posts',
+											redirectOnClick+"&postCreated=")
+			break
+		}
 		render resultMap as JSON
 	}
 	

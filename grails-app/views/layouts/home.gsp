@@ -147,7 +147,7 @@
 											</g:link>
 									    </li>
 									    <li id="${conceptInstance.id}-face">
-									    <g:link controller="facebook" action="list" id="${conceptInstance.id}" >
+									    <g:link controller="post" action="list" params="[conceptsId:conceptInstance.id]" >
 											<span class="menu-text"><g:message code="home.menu.concept.facebook"/></span>
 										</g:link>
 									    </li>

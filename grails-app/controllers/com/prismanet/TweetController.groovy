@@ -31,20 +31,6 @@ class TweetController extends GenericController{
 		return [ status: status ]
 	}
 	
-	Concept chooseConcept(params){
-		Concept concept
-		if(params.conceptsId)
-		return getConcept(params.conceptsId)
-		
-		session.concepts.each {it -> 
-		   if(params.conceptName!=null && it.conceptName==params.conceptName){
-			concept=it 
-			params.conceptsId=it.id
-			return true
-			}
-		}
-		concept
-	}
 	def list(Integer max) {
 		
 		log.debug "tweetController->list params: " + params
@@ -108,9 +94,9 @@ class TweetController extends GenericController{
 		}
 		def concept = Concept.get(conceptId)
 		def tweet = Tweet.get(tweetId)
-		Opinion opinion = Opinion.findByConceptAndTweet(concept, tweet)
+		Opinion opinion = Opinion.findByConceptAndMention(concept, tweet)
 		if (!opinion){
-			opinion = new Opinion(concept:concept,tweet:tweet,value:getValue(params.value))
+			opinion = new Opinion(concept:concept,mention:tweet,value:getValue(params.value))
 		}else{
 			opinion.value = getValue(params.value) ?: OpinionValue.NEUTRAL
 		}

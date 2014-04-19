@@ -19,7 +19,7 @@
 		</li>
 
 		<li class="${tabChar}">
-		  <g:link  controller="concept" action="stats" id="${concept.id}" >
+		  <g:link  controller="concept" action="tweetStats" id="${concept.id}" >
 				<i class="green fa fa-bar-chart-o bigger-120"></i> 
 				<g:message code="dashborad.tab.chart"/>
 		</g:link>

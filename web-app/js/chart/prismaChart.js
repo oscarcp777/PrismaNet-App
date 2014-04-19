@@ -58,7 +58,9 @@ function getUserGroupedTweets(data){
 }
 
 
-
+function getGroupedPosts(data){
+	doRequest('../getGroupedPosts',data,paintCharLine, null, 'GET');
+}
 
 
 
