@@ -49,6 +49,8 @@ abstract class Mention {
 	public String toString() {
 		return author?.accountName + "-" + content;
 	}
+	
+	public abstract MentionType getMentionType()
 
 	
 }

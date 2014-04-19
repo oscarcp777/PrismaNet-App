@@ -16,4 +16,8 @@ class Post extends Mention{
 	public String toString() {time
 		return author?.accountName + "-" + content;
 	}
+	
+	public MentionType getMentionType(){
+		return MentionType.FACEBOOK
+	}
 }

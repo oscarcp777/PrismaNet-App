@@ -44,4 +44,9 @@ class Tweet extends Mention{
 	}
 	
 	
+	public MentionType getMentionType(){
+		return MentionType.TWITTER
+	}
+	
+	
 }
