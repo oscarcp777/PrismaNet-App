@@ -1,8 +1,7 @@
 package com.prismanet.sentiment
 
-import com.prismanet.User
-import com.prismanet.Tweet
 import com.prismanet.Concept
+import com.prismanet.Mention
 
 enum OpinionValue {
 	POSITIVE,
@@ -12,12 +11,12 @@ enum OpinionValue {
 
 class Opinion {
 	
-	Tweet tweet
+	Mention mention
 	Concept concept
 	OpinionValue value
 
      static constraints = {
-		tweet(nullable:false)
+		mention(nullable:false)
 		concept(nullable:false)
 		value(nullable:false)
     }

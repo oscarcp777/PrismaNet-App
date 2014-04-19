@@ -14,7 +14,7 @@ class OpinionTests {
     void testConstraints() {
 		
 		def existingOpinion = new Opinion(
-			tweet: new Tweet(),
+			mention: new Tweet(),
 			concept: new Concept(),
 			value: OpinionValue.POSITIVE,
 		)
