@@ -39,10 +39,6 @@ class TweetJob {
 				ProcessBuilder b = new ProcessBuilder("/bin/sh", "-c", "ps ax | grep prismanet-twitter-api")
 				Process p = b.start()
 				result = IOUtils.readLines(p.getInputStream());
-				result.each {
-					print it
-				}
-				println "resultado: " + result.get(0)[0..4] + " size: " +result.size()
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -67,8 +63,8 @@ class TweetJob {
 				// Actualizo config. de mongo
 				importer.setConfiguration(twitterSetupService.getConfiguration())
 				// Re-ejecuto proceso
-//				Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
-//				log.info "Proceso api-twitter reiniciado por modificacion a las : " + lastUpdate
+				Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
+				log.info "Proceso api-twitter reiniciado por modificacion a las : " + lastUpdate
 			}
 			
 			def d1 = new GregorianCalendar(2013, Calendar.OCTOBER, 27,11,00)
