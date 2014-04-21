@@ -21,7 +21,7 @@ grails.project.fork = [
     console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
 ]
 grails.plugin.location."prisma-net-core" = "../PrismaNet-core"
-grails.server.port.http = 8081
+grails.server.port.http = 8082
 
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
