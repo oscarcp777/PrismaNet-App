@@ -27,14 +27,24 @@ class ConceptService extends GenericCoreService {
     def categoryStore(def groups, def filters, def projection, def orders) {
 		return groupBy(Concept, new ConceptAttributeContext(), groups, filters, projection, orders)
 	}
-	 @Transactional(readOnly = true)
-	def getConceptsRealTime( conceptId,timeMin){
+	
+	
+	def getTweetsRealTime(conceptId,timeMin){
+		getConceptsRealTime(conceptId, timeMin, "tweetByMinute", "tweetsId", "tweetTimeCreated")
+	}
+	
+	def getPostsRealTime(conceptId,timeMin){
+		getConceptsRealTime(conceptId, timeMin, "postByMinute", "postsId", "postTimeCreated")
+	}
+	
+	@Transactional(readOnly = true)
+	def getConceptsRealTime(conceptId, timeMin, groupDateProperty, projectionProperty, filterDateProperty){
 		Date from,to
 		to=DateUtils.getDateWithoutSeconds(new Date())
 		def dateValueList = [:]
 		use ( TimeCategory ) {
 			from = to-timeMin.minutes
-			def dateList = categoryStore(["conceptName","tweetByMinute"], [new Filter(attribute:"id", value : conceptId, type:FilterType.EQ),new Filter(attribute:"created",value:from, type:FilterType.GE)], ["tweetsId" : ProjectionType.COUNT],null);
+			def dateList = categoryStore(["conceptName", groupDateProperty], [new Filter(attribute:"id", value : conceptId, type:FilterType.EQ),new Filter(attribute:filterDateProperty,value:from, type:FilterType.GE)], [(projectionProperty) : ProjectionType.COUNT],null);
 			dateList.each{ i ->
 				dateValueList.put(DateUtils.parseDate(DateTypes.MINUTE_PERIOD, i.getAt(1)).time,i.getAt(2))
 			}
@@ -52,7 +62,6 @@ class ConceptService extends GenericCoreService {
 	def getPostsBy(filters, dateFrom, dateTo){
 		PostService postService = new PostService()
 		def dateGroupProperty = postService.getDateGroupProperty(dateFrom, dateTo)
-		print "dateGroupProperty: " + dateGroupProperty
 		def result = getMentionBy(filters, dateFrom, dateTo, dateGroupProperty, "postsId", "postTimeCreated")
 		result
 	}
