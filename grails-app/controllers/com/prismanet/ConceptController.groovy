@@ -207,7 +207,7 @@ class ConceptController extends GenericController{
 	def conceptsRealTime={
 		Concept concept = getConcept(params.id)
 		def container = params.div
-		def listRealTime=conceptService.getConceptsRealTime(concept.id,20)
+		def listRealTime=conceptService.getTweetsRealTime(concept.id,20)
 		def series=[[name:concept.conceptName,data:listRealTime]]
 		def json =[series:series,"container":container,id:params.id,title:"Tweets por minuto",
 			subTitle:"Actualizacion en tiempo Real de la cantidad de Tweets" ,
@@ -218,7 +218,26 @@ class ConceptController extends GenericController{
 	}
 	def conceptsRealTimeForOneMinute={
 		Concept concept = getConcept(params.id)
-		def listRealTime=conceptService.getConceptsRealTime(concept.id,1)
+		def listRealTime=conceptService.getTweetsRealTime(concept.id,1)
+		render  listRealTime as JSON
+	}
+	
+	def postRealTime={
+		Concept concept = getConcept(params.id)
+		
+		def container = params.div
+		def listRealTime=conceptService.getPostsRealTime(concept.id,20)
+		def series=[[name:concept.conceptName,data:listRealTime]]
+		def json =[series:series,"container":container,id:params.id,title:"Posts por minuto",
+			subTitle:"Actualizacion en tiempo Real de la cantidad de Posts" ,
+			titleY:'Cantidad de posts',titleX:'Minutos',dateProp:"postMinute",
+			cursorEvent:"../../post/list?conceptsId=",ajaxMethodReload:'../postRealTimeForOneMinute']
+		
+		render json as JSON
+	}
+	def postRealTimeForOneMinute={
+		Concept concept = getConcept(params.id)
+		def listRealTime=conceptService.getPostsRealTime(concept.id,1)
 		render  listRealTime as JSON
 	}
 }

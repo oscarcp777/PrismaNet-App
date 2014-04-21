@@ -43,6 +43,11 @@ function getConceptRealTime(id, div,level){
 	doRequest(level+'conceptsRealTime',data,printRealTimeChar, null, 'GET');
 }
 
+function getPostRealTime(id, div,level){
+	var data = {"id":id, "div":div}
+	doRequest(level+'postRealTime',data,printRealTimeChar, null, 'GET');
+}
+
 
 function getGroupedTweets(data){
 	doRequest('../getGroupedTweets',data,paintCharLine, null, 'GET');

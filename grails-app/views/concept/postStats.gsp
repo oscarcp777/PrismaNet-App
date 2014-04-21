@@ -31,7 +31,7 @@
 							<div class="widget-body">
 								<div class="widget-body-inner" style="display: block;">
 									<div class="widget-main">
-										<div id="realTimeChar" style="height: 400px; min-width: 310px"></div>
+										<div id="postRealTimeChar" style="height: 400px; min-width: 310px"></div>
 									</div>
 
 
@@ -95,7 +95,7 @@
 		  
 		  var id='${concept.id}';
 		  	activeItemMenuLevel2('${concept.id}','${concept.id}-post');
-		   getConceptRealTime(${concept.id}, '#realTimeChar','../');
+		   getPostRealTime(${concept.id}, '#postRealTimeChar','../');
 		   
 		   var dataPosts = {"id":${concept.id}, "div":'#postsChart',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 		   getGroupedPosts(dataPosts);
