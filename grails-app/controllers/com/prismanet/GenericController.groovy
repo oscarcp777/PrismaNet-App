@@ -71,7 +71,7 @@ class GenericController {
 		def series = []
 		def level = numCategories
 		def serieX = null
-		print "serviceResultList: " + serviceResultList
+		log.debug "serviceResultList: " + serviceResultList
 		serviceResultList.each{ i ->
 
 			def xValue
@@ -90,7 +90,7 @@ class GenericController {
 					mapByCategory[i.getAt(level-2)].add([x:xValue,y:i.getAt(level)])
 				}
 		}
-		print "mapByCategory: " + mapByCategory
+		log.debug "mapByCategory: " + mapByCategory
 		
 		def minFrom, maxTo
 		if (interval && serviceResultList.size()>0){

@@ -60,21 +60,21 @@ class TweetController extends GenericController{
 			def cal = new GregorianCalendar()
 			cal.setTimeInMillis(params["tweetMinute"] as Long)
 			def minuteFilter=DateUtils.getDateFormat(DateTypes.MINUTE_PERIOD, cal.time)
-			filters.add(new Filter(attribute:"tweetMinute",value: minuteFilter, type:FilterType.EQ))
+			filters.add(new Filter(attribute:"dateMinute",value: minuteFilter, type:FilterType.EQ))
 		}
 
 		if (params["tweetCreated"]){
 			def cal = new GregorianCalendar()
 			cal.setTimeInMillis(params["tweetCreated"] as Long)
 			def day = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, cal.time)
-			filters.add(new Filter(attribute:"tweetCreated",value: day, type:FilterType.EQ))
+			filters.add(new Filter(attribute:"dateCreated",value: day, type:FilterType.EQ))
 		}
 
 		if (params["tweetHour"]){
 			def cal = new GregorianCalendar()
 			cal.setTimeInMillis(params["tweetHour"] as Long)
 			def hourFilter=DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, cal.time)
-			filters.add(new Filter(attribute:"tweetHour",value: hourFilter, type:FilterType.EQ))
+			filters.add(new Filter(attribute:"dateHour",value: hourFilter, type:FilterType.EQ))
 		}
 		filters
 	}

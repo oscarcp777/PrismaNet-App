@@ -15,18 +15,35 @@ class ConceptController extends GenericController{
 	def conceptService
 	def tweetService
 	
+	def getTwitterFilter(){
+		new Filter(attribute:"sourceType",value:Tweet.class, type:FilterType.EQ)
+	}
+	
+	def getFacebookFilter(){
+		new Filter(attribute:"sourceType",value:Post.class, type:FilterType.EQ)
+	}
+	
 	def dashboard = {
 		Concept concept = getConcept(params.id)
-		def filters = [new Filter(attribute:"id",value:concept.id, type:FilterType.EQ)]
-		def groups = ["conceptName"]
-		def tweetCount = conceptService.groupBy(Concept, new ConceptAttributeContext(),
-				groups, filters, ['tweetsId' : ProjectionType.COUNT],null)
-		def tweetTotal = tweetCount.size()>0 ? tweetCount.get(0).getAt(1) : 0
 		
+		def conceptFilter = new Filter(attribute:"id",value:concept.id, type:FilterType.EQ)
+		
+		def filters = [conceptFilter, getTwitterFilter()]
+		def groups = ["conceptName"]
+		def projection = ['mentionId' : ProjectionType.COUNT]
+		
+		// Contabilizar menciones de twitter
+		def tweetCount = conceptService.groupBy(Concept, new ConceptAttributeContext(),
+				groups, filters, projection, null)
+		def tweetTotal = tweetCount.size()>0 ? tweetCount.get(0).getAt(1) : 0
+
+		// Contabilizar menciones de facebook
+		filters = [conceptFilter, getFacebookFilter()]
 		def postCount = conceptService.groupBy(Concept, new ConceptAttributeContext(),
-				groups, filters, ['postsId' : ProjectionType.COUNT],null)
+				groups, filters, projection, null)
 		def postTotal = postCount.size()>0 ? postCount.get(0).getAt(1) : 0
 
+		
 		[concept :concept,tweetsTotal:tweetTotal, postsTotal:postTotal, total:postTotal+tweetTotal]
 	}
 
@@ -50,6 +67,7 @@ class ConceptController extends GenericController{
 		Concept concept = getConcept(params.id)
 		def filters = []
 		filters.add(new Filter(attribute:"id",value:concept.id, type:FilterType.EQ))
+		filters.add(getTwitterFilter())
 		
 		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
 		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
@@ -58,7 +76,7 @@ class ConceptController extends GenericController{
 		
 		
 		// Obtengo tweets 
-		def dateList = conceptService.getTweetsBy(filters, dateFrom, dateTo)
+		def dateList = conceptService.getMentionsBy(filters, dateFrom, dateTo)
 		def redirectOnClick = "../../tweet/list?conceptsId="+concept.id
 		def resultMap = [:]
 		//TODO localizar todos los textos
@@ -98,6 +116,7 @@ class ConceptController extends GenericController{
 		Concept concept = getConcept(params.id)
 		def filters = []
 		filters.add(new Filter(attribute:"id",value:concept.id, type:FilterType.EQ))
+		filters.add(getFacebookFilter())
 		
 		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
 		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
@@ -106,7 +125,7 @@ class ConceptController extends GenericController{
 		
 		
 		// Obtengo posts
-		def dateList = conceptService.getPostsBy(filters, dateFrom, dateTo)
+		def dateList = conceptService.getMentionsBy(filters, dateFrom, dateTo)
 		def redirectOnClick = "../../tweet/list?conceptsId="+concept.id
 		def resultMap = [:]
 		//TODO localizar todos los textos
@@ -145,6 +164,7 @@ class ConceptController extends GenericController{
 		Concept concept = getConcept(params.id)
 		def filters = []
 		filters.add(new Filter(attribute:"id",value:concept.id, type:FilterType.EQ))
+		filters.add(getTwitterFilter())
 		
 		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
 		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
@@ -205,11 +225,15 @@ class ConceptController extends GenericController{
 	
 	
 	def conceptsRealTime={
-		Concept concept = getConcept(params.id)
+		def conceptId = params.id as Long
+		def conceptFilter = new Filter(attribute:"id",value:conceptId, type:FilterType.EQ)
+		def filters = [conceptFilter, getTwitterFilter()]
+		def listRealTime=conceptService.getMentionsRealTime(filters,20)
+		
+		Concept concept = getConcept(conceptId)
 		def container = params.div
-		def listRealTime=conceptService.getTweetsRealTime(concept.id,20)
 		def series=[[name:concept.conceptName,data:listRealTime]]
-		def json =[series:series,"container":container,id:params.id,title:"Tweets por minuto",
+		def json =[series:series,"container":container,id:conceptId,title:"Tweets por minuto",
 			subTitle:"Actualizacion en tiempo Real de la cantidad de Tweets" ,
 			titleY:'Cantidad de tweets',titleX:'Minutos',dateProp:"tweetMinute",
 			cursorEvent:"../../tweet/list?conceptsId=",ajaxMethodReload:'../conceptsRealTimeForOneMinute']
@@ -217,16 +241,21 @@ class ConceptController extends GenericController{
 		render json as JSON
 	}
 	def conceptsRealTimeForOneMinute={
-		Concept concept = getConcept(params.id)
-		def listRealTime=conceptService.getTweetsRealTime(concept.id,1)
+		def conceptId = params.id as Long
+		def conceptFilter = new Filter(attribute:"id",value:conceptId, type:FilterType.EQ)
+		def filters = [conceptFilter, getTwitterFilter()]
+		def listRealTime=conceptService.getMentionsRealTime(filters,1)
 		render  listRealTime as JSON
 	}
 	
 	def postRealTime={
-		Concept concept = getConcept(params.id)
+		def conceptId = params.id as Long
+		def conceptFilter = new Filter(attribute:"id",value:conceptId, type:FilterType.EQ)
+		def filters = [conceptFilter, getFacebookFilter()]
+		def listRealTime=conceptService.getMentionsRealTime(filters,20)
 		
+		Concept concept = getConcept(params.id)
 		def container = params.div
-		def listRealTime=conceptService.getPostsRealTime(concept.id,20)
 		def series=[[name:concept.conceptName,data:listRealTime]]
 		def json =[series:series,"container":container,id:params.id,title:"Posts por minuto",
 			subTitle:"Actualizacion en tiempo Real de la cantidad de Posts" ,
@@ -235,9 +264,12 @@ class ConceptController extends GenericController{
 		
 		render json as JSON
 	}
+	
 	def postRealTimeForOneMinute={
-		Concept concept = getConcept(params.id)
-		def listRealTime=conceptService.getPostsRealTime(concept.id,1)
+		def conceptId = params.id as Long
+		def conceptFilter = new Filter(attribute:"id",value:conceptId, type:FilterType.EQ)
+		def filters = [conceptFilter, getFacebookFilter()]
+		def listRealTime=conceptService.getMentionsRealTime(filters,1)
 		render  listRealTime as JSON
 	}
 }

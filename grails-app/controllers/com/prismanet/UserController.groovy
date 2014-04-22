@@ -15,8 +15,18 @@ class UserController extends GenericController{
 	def scaffold = true
 	def userService
 	
+	
+	def getTwitterFilter(){
+		new Filter(attribute:"sourceType",value:Tweet.class, type:FilterType.EQ)
+	}
+	
+	def getFacebookFilter(){
+		new Filter(attribute:"sourceType",value:Post.class, type:FilterType.EQ)
+	}
+	
+	
 	def stats = {
-		def groupList = ["tweetCreated","conceptsName"]
+		def groupList = ["dateCreated","conceptsName"]
 		def dateList = userService.categoryStore(session.user, groupList, [],null);
 		[user: session.user,  dateList : dateList]
 	}
@@ -27,14 +37,14 @@ class UserController extends GenericController{
 		def groupList = ["conceptsName"]
 		def criteria = User.createCriteria();
 		def filters = [new Filter(attribute:"id",value: session.user.id, type:FilterType.EQ)]
-		def projection = ["tweetsId" : ProjectionType.COUNT, "authorId" : ProjectionType.COUNT]
+		def projection = ["mentionId" : ProjectionType.COUNT, "authorId" : ProjectionType.COUNT]
 		def statsList = userService.groupBy(groupList, filters, projection,null)
 		
 		[user: session.user, statsList : statsList]
 	}
 	def conceptTweetsJson ={
 		def container=params.div
-		def dateList = userService.categoryStore(session.user, ["conceptsName"], [],null).sort{a,b -> a[1] <=> b[1] }
+		def dateList = userService.categoryStore(session.user, ["conceptsName"], [getTwitterFilter()], null).sort{a,b -> a[1] <=> b[1] }
 		def resultMap = [container:container,data:dateList,title:'Porcentajes de tweets por Concepto',name : 'Tweets']
 		render resultMap as JSON
 	}
@@ -71,7 +81,8 @@ class UserController extends GenericController{
 	def getConceptsRealTime( userId,from,to){
 		def filters = []
 		filters.add(new Filter(attribute:"id",value: userId, type:FilterType.EQ))
-		userService.getTweetsBy(filters,from,to);
+		filters.add(getTwitterFilter())
+		userService.getMentionsBy(filters,from,to);
 	}
 	def conceptsRealTime={
 		def container = params.div
@@ -114,6 +125,7 @@ class UserController extends GenericController{
 		
 		def filters = []
 		filters.add(new Filter(attribute:"id",value: session.user.id, type:FilterType.EQ))
+		filters.add(getTwitterFilter())
 		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
 		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
 			
@@ -121,7 +133,7 @@ class UserController extends GenericController{
 		
 		
 		// Obtengo tweets por hora
-		def dateList = userService.getTweetsBy(filters, dateFrom, dateTo)
+		def dateList = userService.getMentionsBy(filters, dateFrom, dateTo)
 		def redirectOnClick = "../tweet/list?"
 		def resultMap = [:]
 		//TODO localizar todos los textos
