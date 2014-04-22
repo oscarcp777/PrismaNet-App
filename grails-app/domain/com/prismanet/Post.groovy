@@ -5,8 +5,7 @@ class Post extends Mention{
 	String postId
 	String commentId
 	
-	static belongsTo = Concept
-	static hasMany = [concepts:Concept]
+	
 	
 	static constraints = {
 		postId(nullable:true)

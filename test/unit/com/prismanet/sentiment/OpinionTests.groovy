@@ -1,8 +1,9 @@
 package com.prismanet.sentiment
 
-import com.prismanet.User
-import com.prismanet.Tweet
+import grails.test.mixin.*
+
 import com.prismanet.Concept
+import com.prismanet.Tweet
 
 
 /**

@@ -8,9 +8,6 @@ class Tweet extends Mention{
 	Long favoriteCount = 0
 	Long tweetId
 	
-	static belongsTo = Concept
-	static hasMany = [concepts:Concept]
-	
 	static transients = ['contentHtml']
     static constraints = {
 		retweet(nullable:true)

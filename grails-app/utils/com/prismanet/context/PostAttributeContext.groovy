@@ -8,17 +8,18 @@ class PostAttributeContext extends AttributeContext {
 		addPropertyRelation("id", "id", null, null);
 		addPropertyRelation("sex", "sex", null, "author");
 		addPropertyRelation("authorFollowers", "followers", null, "author");
-		addPropertyRelation("tweetCreated", "date", null, null);
-		addPropertyRelation("tweetPeriod", "period", null, null);
-		addPropertyRelation("tweetYear", "year", null, null);
-		addPropertyRelation("tweetMonth", "month", null, null);
-		addPropertyRelation("tweetHour", "dateByHour", null, null);
-		addPropertyRelation("tweetMinute", "dateByMinute", null, null);
-		addPropertyRelation("tweetTime", "time", null, null);
-		addPropertyRelation("tweetDay", "day", null, null);
-		addPropertyRelation("tweetsId", "id", null, null);
+		addPropertyRelation("dateCreated", "date", null, null);
+		addPropertyRelation("datePeriod", "period", null, null);
+		addPropertyRelation("dateYear", "year", null, null);
+		addPropertyRelation("dateMonth", "month", null, null);
+		addPropertyRelation("dateHour", "dateByHour", null, null);
+		addPropertyRelation("dateMinute", "dateByMinute", null, null);
+		addPropertyRelation("dateTime", "time", null, null);
+		addPropertyRelation("dateDay", "day", null, null);
+		addPropertyRelation("mentionId", "id", null, null);
 		addPropertyRelation("created", "created", null, null);
 		addPropertyRelation("conceptsId", "id", null, "concepts");
+		addPropertyRelation("sourceType", "class", null, null);
 	}
 
 	

@@ -14,7 +14,7 @@ class UserService extends GenericCoreService {
 	
     def categoryStore(User entity, def groups, def filters, def orders) {
 		filters.add(new Filter(attribute:"id",value: entity.id, type:FilterType.EQ))
-		def projection = ["tweetsId" : ProjectionType.COUNT]
+		def projection = ["mentionId" : ProjectionType.COUNT]
 		return groupBy(User, new UserAttributeContext(), groups, filters, projection, orders)
 	}
 	
@@ -22,23 +22,23 @@ class UserService extends GenericCoreService {
 	protected String getDateGroupProperty(DateServiceType type){
 		switch (type) {
 			case DateServiceType.BY_MINUTE:
-				return "tweetByMinute"
+				return "dateByMinute"
 			case DateServiceType.BY_HOUR:
-				return "tweetByHour"
+				return "dateByHour"
 			case DateServiceType.BY_DATE:
-				return "tweetCreated"
+				return "dateCreated"
 			case DateServiceType.BY_MONTH:
-				return "tweetPeriod"
+				return "datePeriod"
 		}
 		return null
 	}
 	
 	
-	def getTweetsBy(filters, dateFrom, dateTo){
+	def getMentionsBy(filters, dateFrom, dateTo){
 		def groups = ["conceptsName",getDateGroupProperty(dateFrom, dateTo)]
 		filters.addAll(getFilterList(dateFrom, dateTo))
 		def result = groupBy(User, new UserAttributeContext(),
-						groups, filters, ["tweetsId" : ProjectionType.COUNT],
+						groups, filters, ["mentionId" : ProjectionType.COUNT],
 						[[attribute:"created",value:OrderType.ASC]]);
 		result
 	}

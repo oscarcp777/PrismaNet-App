@@ -3,14 +3,15 @@ package com.prismanet
 import org.springframework.transaction.annotation.Transactional
 
 import com.mongodb.BasicDBObject
+import com.prismanet.GenericService.FilterType
 import com.prismanet.GenericService.OrderType
+import com.prismanet.context.Filter
 import com.prismanet.context.PostAttributeContext
 import com.prismanet.exception.ApplicationException
 
 import facebook4j.Comment
 import facebook4j.internal.json.PostJSONImpl
 import facebook4j.internal.org.json.JSONObject
-import groovy.time.TimeCategory;
 
 
 class PostService extends MentionService{
@@ -72,7 +73,7 @@ class PostService extends MentionService{
 							}
 							log.info "Post guardado con ID :  " + post.id
 						}
-						concept.doAddToPost(post)
+						concept.doAddToMentions(post)
 					}
 				}
 			}
@@ -92,6 +93,7 @@ class PostService extends MentionService{
 	}
 	
 	def getPosts(filters, parameters){
+		filters.add(new Filter(attribute:"sourceType",value:Post.class, type:FilterType.EQ))
 		getMentions(filters, parameters, new PostAttributeContext(), Post)
 	}
 	

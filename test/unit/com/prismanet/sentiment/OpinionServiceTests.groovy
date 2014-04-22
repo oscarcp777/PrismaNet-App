@@ -1,5 +1,7 @@
 package com.prismanet.sentiment
 
+import grails.test.mixin.*
+
 
 
 

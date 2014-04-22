@@ -23,6 +23,9 @@ abstract class Mention {
 	String minute
 	
 	Author author
+	
+	static belongsTo = Concept
+	static hasMany = [concepts:Concept]
 
     static constraints = {
 		content(maxSize: 5000)

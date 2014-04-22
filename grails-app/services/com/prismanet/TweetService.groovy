@@ -15,11 +15,9 @@ import twitter4j.internal.org.json.JSONObject
 
 import com.mongodb.BasicDBObject
 import com.prismanet.GenericService.FilterType
-import com.prismanet.GenericService.OrderType
+import com.prismanet.context.Filter
 import com.prismanet.context.TweetAttributeContext
 import com.prismanet.exception.ApplicationException
-import com.prismanet.sentiment.Opinion
-import com.prismanet.sentiment.OpinionValue
 
 class TweetService extends MentionService{
 
@@ -74,7 +72,7 @@ class TweetService extends MentionService{
 					}
 					//print "Tiempo tweet: " + (start - System.currentTimeMillis())/1000 + " segundos"
 					//start = System.currentTimeMillis()
-					concept.doAddToTweets(tweet)
+					concept.doAddToMentions(tweet)
 					//print "Tiempo concept: " + (start - System.currentTimeMillis())/1000 + " segundos"
 				}
 			}
@@ -122,6 +120,7 @@ class TweetService extends MentionService{
 	}
 	
 	def getTweets(filters, parameters){
+		filters.add(new Filter(attribute:"sourceType",value:Tweet.class, type:FilterType.EQ))
 		getMentions(filters, parameters, new TweetAttributeContext(), Tweet)
 	}
 	

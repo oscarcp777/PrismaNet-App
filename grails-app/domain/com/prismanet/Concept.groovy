@@ -12,48 +12,48 @@ class Concept {
 	Date lastUpdated
 	TwitterSetup twitterSetup
 	FacebookSetup facebookSetup
-	static hasMany = [tweets:Tweet, posts:Post]
+	static hasMany = [mentions:Mention]
 	User user
 
     static constraints = {
 		conceptName(nullable:false)
 		user()
-		tweets()
-		posts()
+//		tweets()
+//		posts()
+		mentions()
 		twitterSetup(nullable:true)
 		facebookSetup(nullable:true)
     }
 	
 	
-	public void addToTweets(Tweet tweet){
+	public void addTweet(Tweet tweet){
 		def add = testAddTweet(tweet)
 		if (add == false){
-//			this.errors.reject(
-//					'concept.tweets.invalid',
-//					['tweets', 'class Concept'] as Object[],
-//					'[Property [{0}] of class [{1}] is invalid]')
-
-			// The following helps with field highlighting in your view
 			this.errors.rejectValue(
 					'tweets',
 					'concept.tweets.invalid')
 		}else{
-			doAddToTweets(tweet)
+			doAddToMentions(tweet)
 		}
-			
 	}
 	
-	public doAddToTweets(Tweet tweet){
-		if (!tweets)
-			tweets = new ArrayList<Tweet>()
-		tweets.add(tweet);
+	public void addPost(Post post){
+		def add = testAddPost(post)
+		if (add == false){
+			this.errors.rejectValue(
+					'posts',
+					'concept.posts.invalid')
+		}else{
+			doAddToMentions(post)
+		}
 	}
 	
-	public doAddToPost(Post post){
-		if (!posts)
-			posts = new ArrayList<Post>()
-		posts.add(post);
+	public doAddToMentions(Mention mention){
+		if (!mentions)
+			mentions = new ArrayList<Mention>()
+		mentions.add(mention)
 	}
+	
 	
 	public boolean testAddTweet(Tweet tweet){
 		def add = false

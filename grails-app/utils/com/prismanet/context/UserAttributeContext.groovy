@@ -8,20 +8,21 @@ class UserAttributeContext extends AttributeContext {
 		addPropertyRelation("id", "id", null, null);
 		addPropertyRelation("conceptsId", "id", null, "concepts");
 		addPropertyRelation("conceptsName", "conceptName", null, "concepts");
-		addPropertyRelation("authorId", "id", null, "concepts.tweets.author");
-		addPropertyRelation("sex", "sex", null, "concepts.tweets.author");
-		addPropertyRelation("tweetCreated", "date", null, "concepts.tweets");
-		addPropertyRelation("tweetsId", "id", null, "concepts.tweets");
-		addPropertyRelation("tweetPeriod", "period", null, "concepts.tweets");
-		addPropertyRelation("tweetYear", "year", null, "concepts.tweets");
-		addPropertyRelation("tweetMonth", "month", null, "concepts.tweets");
-		addPropertyRelation("tweetHour", "hour", null, "concepts.tweets");
-		addPropertyRelation("tweetByHour", "dateByHour", null, "concepts.tweets");
-		addPropertyRelation("tweetByMinute", "dateByMinute", null, "concepts.tweets");
-		addPropertyRelation("tweetMinute", "minute", null, "concepts.tweets");
-		addPropertyRelation("tweetTime", "time", null, "concepts.tweets");
-		addPropertyRelation("tweetDay", "day", null, "concepts.tweets");
-		addPropertyRelation("created", "created", null, "concepts.tweets");
+		addPropertyRelation("authorId", "id", null, "concepts.mentions.author");
+		addPropertyRelation("sex", "sex", null, "concepts.mentions.author");
+		addPropertyRelation("dateCreated", "date", null, "concepts.mentions");
+		addPropertyRelation("mentionId", "id", null, "concepts.mentions");
+		addPropertyRelation("datePeriod", "period", null, "concepts.mentions");
+		addPropertyRelation("dateYear", "year", null, "concepts.mentions");
+		addPropertyRelation("dateMonth", "month", null, "concepts.mentions");
+		addPropertyRelation("dateHour", "hour", null, "concepts.mentions");
+		addPropertyRelation("dateByHour", "dateByHour", null, "concepts.mentions");
+		addPropertyRelation("dateByMinute", "dateByMinute", null, "concepts.mentions");
+		addPropertyRelation("dateMinute", "minute", null, "concepts.mentions");
+		addPropertyRelation("dateTime", "time", null, "concepts.mentions");
+		addPropertyRelation("dateDay", "day", null, "concepts.mentions");
+		addPropertyRelation("created", "created", null, "concepts.mentions");
+		addPropertyRelation("sourceType", "class", null, "concepts.mentions");
 	}
 
 	
