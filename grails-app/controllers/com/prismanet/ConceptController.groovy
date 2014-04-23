@@ -6,6 +6,9 @@ import com.prismanet.GenericService.FilterType
 import com.prismanet.GenericService.ProjectionType
 import com.prismanet.context.ConceptAttributeContext
 import com.prismanet.context.Filter
+import com.prismanet.context.OpinionAttributeContext
+import com.prismanet.sentiment.Opinion
+import com.prismanet.sentiment.OpinionValue
 import com.prismanet.utils.DateTypes
 import com.prismanet.utils.DateUtils
 @Secured(['ROLE_USER'])
@@ -13,6 +16,7 @@ class ConceptController extends GenericController{
 
 	def scaffold = true
 	def conceptService
+	def opinionService
 	def tweetService
 	
 	def getTwitterFilter(){
@@ -271,5 +275,76 @@ class ConceptController extends GenericController{
 		def filters = [conceptFilter, getFacebookFilter()]
 		def listRealTime=conceptService.getMentionsRealTime(filters,1)
 		render  listRealTime as JSON
+	}
+	
+	def sentimental = {
+		Concept concept = getConcept(params.id)
+		[concept : concept]
+	}
+	
+	def sentimentalAnalitycs(){
+		log.info "sentimentalAnalitycs params: " + params
+		def container = params.div
+		Concept concept = getConcept(params.id)
+		def filters = []
+		filters.add(new Filter(attribute:"conceptId",value:concept.id, type:FilterType.EQ))
+		filters.add(getTwitterFilter())
+		
+		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
+		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
+		
+		DateServiceType type = conceptService.getChartType(dateFrom, dateTo)
+		
+		
+		// Obtengo opiniones por valor
+		def dateList = opinionService.getOpinionsBy(filters, dateFrom, dateTo)
+		def redirectOnClick = "../../tweet/list?conceptsId="+concept.id
+		def resultMap = [:]
+		//TODO localizar todos los textos
+		// Parseo resultado para generar el grafico
+		
+		switch (type) {
+			case DateServiceType.BY_MINUTE:
+				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
+												'Opiniones por minuto','Fecha','Opiniones',
+												redirectOnClick+"&tweetMinute=")
+			break
+			case DateServiceType.BY_HOUR:
+				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD,
+											   'Opiniones por hora','Fecha','Opiniones',
+											   redirectOnClick+"&tweetHour=")
+			break
+			case DateServiceType.BY_DATE:
+				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.DAY_PERIOD,
+												'Opiniones por Dia','Fecha','Opiniones',
+												redirectOnClick+"&tweetCreated=")
+			break
+			case DateServiceType.BY_MONTH:
+			resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MONTH_PERIOD,
+											'Opiniones por Mes','Mes','Opiniones',
+											redirectOnClick+"&tweetCreated=")
+			break
+		}
+		resultMap.series.each{
+			it.name = it.name.localize()
+		}
+		render resultMap as JSON
+	}
+	
+	def sentimentChartPie ={
+		print "params: " + params
+		def container=params.div
+		def filters = []
+		def conceptId = params.id as Long
+		filters.add(new Filter(attribute:"conceptId",value:conceptId as Long, type:FilterType.EQ))
+		filters.add(new Filter(attribute:"value",value:OpinionValue.NEUTRAL, type:FilterType.NE))
+		filters.add(getTwitterFilter())
+		def projection = ["mentionId" : ProjectionType.COUNT]
+		def dateList = opinionService.groupBy(Opinion, new OpinionAttributeContext(), ["value"], filters, projection, null).sort{a,b -> a[1] <=> b[1] }
+		dateList.each{
+			it[0] = it[0].localize()
+		}
+		def resultMap = [container:container,data:dateList,title:'Porcentajes de Opiniones',name : 'Opinion']
+		render resultMap as JSON
 	}
 }

@@ -121,7 +121,7 @@ class GenericController {
 					series << [name:it.key,data:dateValueList]
 			}
 		}
-		log.debug "series: " + series
+		print "series: " + series
 		log.debug "serieX: " + serieX
 		
 	   [series:series, serieX:serieX, 

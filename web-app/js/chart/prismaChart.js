@@ -38,6 +38,13 @@ function getTweetCharPie(div){
 	var data = {"div":div}
 	doRequest('conceptTweetsJson',data,paintCharPie, null, 'GET');
 }
+
+function getSentimentChartPie(id, div){
+	var data = {"id":id, "div":div}
+	doRequest('../sentimentChartPie',data,paintCharPie, null, 'GET');
+}
+
+
 function getConceptRealTime(id, div,level){
 	var data = {"id":id, "div":div}
 	doRequest(level+'conceptsRealTime',data,printRealTimeChar, null, 'GET');
@@ -67,6 +74,9 @@ function getGroupedPosts(data){
 	doRequest('../getGroupedPosts',data,paintCharLine, null, 'GET');
 }
 
+function getSentimentalAnalitycs(data){
+	doRequest('../sentimentalAnalitycs',data,paintCharLine, null, 'GET');
+}
 
 
 function paintCharPie(dataJson) {

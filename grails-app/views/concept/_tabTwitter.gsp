@@ -19,16 +19,17 @@
 		</li>
 
 		<li class="${tabChar}">
-		  <g:link  controller="concept" action="tweetStats" id="${concept.id}" >
+		  	<g:link  controller="concept" action="tweetStats" id="${concept.id}" >
 				<i class="green fa fa-bar-chart-o bigger-120"></i> 
 				<g:message code="dashborad.tab.chart"/>
-		</g:link>
-		
-		
+			</g:link>
 		</li>
-		<li class="${tabSentimental}"><a  href="#"> 
-		<i class="red fa fa-heart bigger-120"></i> <g:message code="dashborad.tab.sentimental"/>
-		</a>
+		
+		<li class="${tabSentimental}">
+			<g:link  controller="concept" action="sentimental" id="${concept.id}" >
+				<i class="red fa fa-heart bigger-120"></i> 
+				<g:message code="dashborad.tab.sentimental"/>
+			</g:link>
 		</li>
 		
 	</ul>
