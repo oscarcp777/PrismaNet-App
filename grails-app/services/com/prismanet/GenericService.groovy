@@ -37,6 +37,9 @@ class GenericService {
 							case FilterType.EQ:
 								eq(property, value)
 								break
+							case FilterType.NE:
+								ne(property, value)
+								break
 							case FilterType.GT:
 								gt(property, value)
 								break
@@ -99,6 +102,9 @@ class GenericService {
 						switch (it.type) {
 							case FilterType.EQ:
 								eq(property, value)
+								break
+							case FilterType.NE:
+								ne(property, value)
 								break
 							case FilterType.GT:
 								gt(property, value)
@@ -193,6 +199,7 @@ class GenericService {
 	 */
 	protected enum FilterType{
 		EQ,			// Igual a
+		NE,			// No Igual a
 		GT, 		// Mayor que
 		GE, 		// Mayor o Igual que
 		LT,			// Menor que
