@@ -71,6 +71,32 @@
 						<div class="widget-box">
 							<div class="widget-header header-color-blue">
 								<h5>
+									<span class="glyphicon glyphicon-stats"></span> 
+									<g:message code="user.stats.tweets.followers"/>
+								</h5>
+
+								<div class="widget-toolbar">
+									<a href="javascript:void(0);" id="refreshCharFollowers"> <span
+										data-action="reload"> <i class="fa fa-refresh"></i></span>
+									</a> <a href="javascript:void(0);" data-action="collapse"> <i
+										class="fa fa-chevron-up"></i></a> <a href="javascript:void(0);"
+										data-action="close"> <i class="fa fa-remove"></i></a>
+								</div>
+							</div>
+
+							<div class="widget-body">
+								<div class="widget-main padding-4">
+									<div id="totalFollowers" style="width: 100%; min-width: 300px;"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					<div class="col-lg-12 widget-container-span ui-sortable">
+						<div class="widget-box">
+							<div class="widget-header header-color-blue">
+								<h5>
 									<span class="glyphicon glyphicon-stats"> </span> 
 									<g:message code="user.stats.tweets.date"/>
 								</h5>
@@ -117,6 +143,8 @@
 			inicializeColorChar();
 			activeItemMenuLevel1('home');
 			getTweetCharPie('#tweetCharPie');
+			getTotalFollowers('#totalFollowers');
+			
 			loadDatepicker('pickertUser',loadCharTest1);
 			var data = {"id":${user.id}, "div":'#lineaChartUser',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 			getUserGroupedTweets(data);

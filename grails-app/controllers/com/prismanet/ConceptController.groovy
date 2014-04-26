@@ -53,10 +53,7 @@ class ConceptController extends GenericController{
 
 	def tweetStats = {
 		Concept concept = getConcept(params.id)
-		def authors=TwitterAuthor.list(max:10,sort:"followers",order:"desc");
-		if(!grailsApplication.config.grails.twitter.offline)
-			tweetService.loadDataAuthors(authors)
-		[concept : concept,authors:authors]
+		[concept : concept]
 	}
 	
 	def postStats = {
@@ -223,7 +220,9 @@ class ConceptController extends GenericController{
 		
 		// Obtengo autores
 		def authorsList = conceptService.getRelevantAuthors(filters, dateFrom, dateTo, 10)
-		render authorsList as JSON
+		if(!grailsApplication.config.grails.twitter.offline)
+			tweetService.loadDataAuthors(authorsList)
+		render(template: "author", model: [authors:authorsList])
 	}
 	
 	
@@ -246,10 +245,12 @@ class ConceptController extends GenericController{
 	}
 	def conceptsRealTimeForOneMinute={
 		def conceptId = params.id as Long
+		Concept concept = getConcept(conceptId)
 		def conceptFilter = new Filter(attribute:"id",value:conceptId, type:FilterType.EQ)
 		def filters = [conceptFilter, getTwitterFilter()]
 		def listRealTime=conceptService.getMentionsRealTime(filters,1)
-		render  listRealTime as JSON
+		def series=[[name:concept.conceptName,data:listRealTime]]
+		render  series as JSON
 	}
 	
 	def postRealTime={

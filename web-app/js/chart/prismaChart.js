@@ -39,6 +39,10 @@ function getTweetCharPie(div){
 	doRequest('conceptTweetsJson',data,paintCharPie, null, 'GET');
 }
 
+function getTotalFollowers(div){
+	var data = {"div":div}
+	doRequest('totalFollowers',data,paintCharPie, null, 'GET');
+}
 function getSentimentChartPie(id, div){
 	var data = {"id":id, "div":div}
 	doRequest('../sentimentChartPie',data,paintCharPie, null, 'GET');
@@ -339,17 +343,6 @@ function paintCharLine(data){
 
 
 
-function loadAuthors(response){
-	console.log(response);
-//	jQuery.each(response, function() {
-//		console.log(this);
-//	});
-	var array = response;
-	for (var selector in array) {
-//	for (var i = 0; i < response.length; i++) {
-//		 var item = response[i];
-		console.log(selector);
-//		var row = "<p><b>Autor:</b>"+ selector.name + " <b>Seguidores:</b>" + selector.followers +"</p>";
-//		$('#relevantAuthors').append(row);
-	}
+function loadAuthors(data){
+	$("#relevantAuthors").html(data);
 }	

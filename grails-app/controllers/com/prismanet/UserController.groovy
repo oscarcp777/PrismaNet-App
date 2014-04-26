@@ -3,6 +3,9 @@ import grails.converters.*
 import grails.plugins.springsecurity.Secured
 import grails.plugins.springsecurity.SpringSecurityService
 import groovy.time.TimeCategory
+import twitter4j.ResponseList
+import twitter4j.Twitter
+import twitter4j.TwitterFactory
 
 import com.prismanet.GenericService.FilterType
 import com.prismanet.GenericService.ProjectionType
@@ -46,6 +49,23 @@ class UserController extends GenericController{
 		def container=params.div
 		def dateList = userService.categoryStore(session.user, ["conceptsName"], [getTwitterFilter()], null).sort{a,b -> a[1] <=> b[1] }
 		def resultMap = [container:container,data:dateList,title:'Porcentajes de tweets por Concepto',name : 'Tweets']
+		render resultMap as JSON
+	}
+	def totalFollowers ={
+		def container=params.div
+		def dateList =[]
+		session.concepts=springSecurityService.currentUser.concepts
+		def usersName=[]
+		session.concepts.each {
+			usersName.add(it.twitterSetup.includedAccounts.replace("@",""))
+		}
+		Twitter twitter = new TwitterFactory().getInstance();
+		ResponseList<twitter4j.User> users = null
+		users = twitter.lookupUsers((String[])usersName.toArray());
+		for (twitter4j.User user : users) {
+			dateList.add([user.screenName,user.followersCount])
+		}
+		def resultMap = [container:container,data:dateList,title: message(code: "user.stats.tweets.followers.sub"),name : 'Seguidores']
 		render resultMap as JSON
 	}
 	void loadZerosForMinute(series,from,to){
