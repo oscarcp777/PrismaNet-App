@@ -10,6 +10,7 @@ import twitter4j.TwitterFactory
 import com.prismanet.GenericService.FilterType
 import com.prismanet.GenericService.ProjectionType
 import com.prismanet.context.Filter
+import com.prismanet.context.UserAttributeContext
 import com.prismanet.utils.DateTypes
 import com.prismanet.utils.DateUtils
 @Secured(['ROLE_USER'])
@@ -40,8 +41,10 @@ class UserController extends GenericController{
 		def groupList = ["conceptsName"]
 		def criteria = User.createCriteria();
 		def filters = [new Filter(attribute:"id",value: session.user.id, type:FilterType.EQ)]
-		def projection = ["mentionId" : ProjectionType.COUNT, "authorId" : ProjectionType.COUNT]
-		def statsList = userService.groupBy(groupList, filters, projection,null)
+		def projection = [:]
+		projection["mentionId"] = ProjectionType.COUNT
+		projection["authorId"] = ProjectionType.COUNT_DISTINCT
+		def statsList = userService.groupBy(User, new UserAttributeContext(), groupList, filters, projection,null)
 		
 		[user: session.user, statsList : statsList]
 	}
