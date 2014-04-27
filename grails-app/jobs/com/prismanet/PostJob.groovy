@@ -91,7 +91,7 @@ class PostJob {
 			}
 			
 		}
-		
+		importer.close()
 	}
 	
 	

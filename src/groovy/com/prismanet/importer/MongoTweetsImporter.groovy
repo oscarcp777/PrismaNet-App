@@ -15,7 +15,9 @@ class MongoTweetsImporter {
 		client = new MongoClient(new MongoClientURI(uri))
 	}
 	
-	
+	def close(){
+		client.close();
+	}
 	/**
 	 * @param dates - map con valores posibles dateFrom y dateTo, ambos opcionales, indican fecha desde y hasta
 	 * 		para realizar la consulta
@@ -36,7 +38,7 @@ class MongoTweetsImporter {
 			 filters.add(created_at:['$lte': dates.dateTo])
 		}
 		DBCursor cursor = tweets.find(filters as BasicDBObject)
-		cursor.addOption(com.mongodb.Bytes.QUERYOPTION_NOTIMEOUT)
+//		cursor.addOption(com.mongodb.Bytes.QUERYOPTION_NOTIMEOUT)
 		
 		cursor
 	}

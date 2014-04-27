@@ -15,7 +15,9 @@ class MongoPostsImporter {
 		client = new MongoClient(new MongoClientURI(uri))
 	}
 	
-	
+	def close(){
+		client.close();
+	}
 	/**
 	 * @param dates - map con valores posibles dateFrom y dateTo, ambos opcionales, indican fecha desde y hasta
 	 * 		para realizar la consulta
@@ -37,7 +39,7 @@ class MongoPostsImporter {
 			 filters.add(created_time:['$lte': dates.dateTo])
 		}
 		DBCursor cursor = posts.find(filters as BasicDBObject)
-		cursor.addOption(com.mongodb.Bytes.QUERYOPTION_NOTIMEOUT)
+//		cursor.addOption(com.mongodb.Bytes.QUERYOPTION_NOTIMEOUT)
 		
 		cursor
 	}

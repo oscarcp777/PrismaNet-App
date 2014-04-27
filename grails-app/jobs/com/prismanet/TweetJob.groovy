@@ -115,7 +115,7 @@ class TweetJob {
 				tweets.close()
 			}
 		}
-		
+		importer.close()
 	}
 	
 	
