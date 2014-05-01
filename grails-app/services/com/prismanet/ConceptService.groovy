@@ -72,9 +72,14 @@ class ConceptService extends GenericCoreService {
 		// tener muchas menciones de un concepto)
 		def groups = ["id", "accountName","followers"]
 		filters.addAll(getFilterList(dateFrom, dateTo))
-		groupBy(TwitterAuthor, new TwitterAuthorAttributeContext(),
-						groups, filters, [:],
-						[[attribute:"followers",value:OrderType.DESC]], [max:maxAuthors]);
+		def authorsList =groupBy(TwitterAuthor, new TwitterAuthorAttributeContext(),
+				groups, filters, [:],
+				[[attribute:"followers",value:OrderType.DESC]], [max:maxAuthors]);
+		def listids=[]
+		authorsList.each {
+			listids.add(it[0].toLong())
+		}
+		TwitterAuthor.findAllByIdInList(listids,[sort: "followers", order: "desc"])
 	}
 	
 	public String getDateGroupProperty(DateServiceType type){
