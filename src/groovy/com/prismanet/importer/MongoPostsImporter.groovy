@@ -49,7 +49,8 @@ class MongoPostsImporter {
 		DBCollection setup = db.getCollection("configFacebook")
 		BasicDBObject obj = new BasicDBObject()
 		obj.append("config", config)
-		setup.update(new BasicDBObject(), obj)
+		setup.update(new BasicDBObject(), obj, true, false)
+		
 	}
 
 }

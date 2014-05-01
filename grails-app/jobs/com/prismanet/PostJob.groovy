@@ -30,9 +30,9 @@ class PostJob {
 		
 		use(TimeCategory){
 			Date aux = facebookSetupService.getLastUpdated()
-
 			// Si el momento de ultima actualizacion no esta seteado se setea
 			if (!grailsApplication.config.facebook.setup.lastUpdated ||
+				grailsApplication.config.facebook.setup.lastUpdated.empty ||
 				aux.after(grailsApplication.config.facebook.setup.lastUpdated)){
 				grailsApplication.config.facebook.setup.lastUpdated = aux
 				importer.setConfiguration(facebookSetupService.getConfiguration())
