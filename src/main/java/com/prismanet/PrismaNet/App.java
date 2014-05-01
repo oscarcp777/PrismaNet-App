@@ -19,6 +19,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.util.JSON;
 
+import facebook4j.Comment;
 import facebook4j.Facebook;
 import facebook4j.FacebookException;
 import facebook4j.FacebookFactory;
@@ -34,6 +35,7 @@ import facebook4j.json.DataObjectFactory;
 public class App
 {
 	static final Logger logger = Logger.getLogger(App.class.getName());
+	private static MongoClient client;
 	private static DB db;
 	final static String FACEBOOK="yyyy-MM-dd'T'HH:mm:ssZZZZ";
 	static SimpleDateFormat sf;
@@ -41,7 +43,7 @@ public class App
 	public static void main( String[] args ) throws FacebookException, UnknownHostException   {
 		PropertyConfigurator.configure("log4j.properties");
 		
-		MongoClient client =  new MongoClient(new MongoClientURI("mongodb://localhost"));
+		client =  new MongoClient(new MongoClientURI("mongodb://localhost"));
 		db = client.getDB("prismanet");
 		sf = new SimpleDateFormat(FACEBOOK, Locale.ENGLISH);
 		sf.setLenient(false);
@@ -73,11 +75,18 @@ public class App
 			ResponseList<Post> response = facebook.getPosts(currentUser.getId());
 			for (Iterator<Post> iterator = response.iterator(); iterator.hasNext();) {
 				Post post = (Post) iterator.next();
+				for (Comment comment : post.getComments()){
+					comment.getFrom().getId();
+					comment.getMessage();
+					comment.getCreatedTime();
+					comment.getId();
+				}
 				logger.info("Post: " +post.getName());
 				logger.info("Fecha Creacion: " + post.getCreatedTime());
 				this.savePost(post);
 			}
 		}
+		client.close();
 	}
 	
 	
