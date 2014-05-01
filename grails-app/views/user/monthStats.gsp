@@ -7,7 +7,7 @@
 	<h2>Resultados Usuario: "${user.username}"</h2>
 	<h1>Tweets por Fecha</h1>
 	<g:each var="item" in="${statsList}">
-		<li>Concepto: ${item[0]} -  Tweets: ${item[1]} -  Autores: ${item[2]}</li>
+		<li>Concepto: ${item[0]} -  Tweets: ${item[1]} -  Autores: ${item[2]} - Menciones por Autor: ${item[1]/item[2]}</li>
 	</g:each>
 	<g:link action='monthStats' id="${user.id}">Nueva Busqueda</g:link>
 	<script type="text/javascript">
