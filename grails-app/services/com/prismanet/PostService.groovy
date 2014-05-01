@@ -33,8 +33,8 @@ class PostService extends MentionService{
 			index++
 			
 			for (Comment comment : status.getComments()){
-				
-				if (!lastUpdated && lastUpdated.after(comment.createdTime))
+				print "fecha ultimo post: " + lastUpdated 
+				if (!lastUpdated || lastUpdated.after(comment.createdTime))
 					continue
 				
 				Author author = FacebookAuthor.findByName(comment.getFrom().getName().trim())

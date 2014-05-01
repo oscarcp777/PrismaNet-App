@@ -20,15 +20,15 @@ class TwitterSetupService extends GenericCoreService {
 		def configs = TwitterSetup.findAll()
 		def stringConfig = ""
 		configs.each{ TwitterSetup setup ->
-			if (setup.includedAccounts)
+			if (setup.includedAccounts && !stringConfig.contains(setup.includedAccounts))
 				stringConfig += setup.includedAccounts + ","
-			if (setup.keywords)
+			if (setup.keywords && !stringConfig.contains(setup.keywords))
 				stringConfig += setup.keywords + ","
-			if (setup.neutralHashtags)
+			if (setup.neutralHashtags && !stringConfig.contains(setup.neutralHashtags))
 				stringConfig += setup.neutralHashtags + ","
-			if (setup.positiveHashtags)
+			if (setup.positiveHashtags && !stringConfig.contains(setup.positiveHashtags))
 				stringConfig += setup.positiveHashtags + ","
-			if (setup.negativeHashtags)
+			if (setup.negativeHashtags && !stringConfig.contains(setup.negativeHashtags ))
 				stringConfig += setup.negativeHashtags 
 		}
 		stringConfig = stringConfig[0..-2]

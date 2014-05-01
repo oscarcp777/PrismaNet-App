@@ -25,11 +25,11 @@ class FacebookSetupService extends GenericCoreService {
 		def configs = FacebookSetup.findAll()
 		def stringConfig = ""
 		configs.each{ FacebookSetup setup ->
-			if (setup.keywords)
+			if (setup.keywords && !stringConfig.contains(setup.keywords))
 				stringConfig += setup.keywords + ","
 		}
 		stringConfig = stringConfig[0..-2]
-		print "la configuracion es: " + stringConfig
+		print "la configuracion de facebook es: " + stringConfig
 		stringConfig
 	}
 	
