@@ -126,7 +126,7 @@
 								<span class="menu-text" ><g:message code="home.menu.begin"/> </span>
 							   </g:link>
 							</li>
-								<g:each in="${session.concepts}" status="i" var="conceptInstance">
+								<g:each in="${session.concepts.sort{it.conceptName}}" status="i" var="conceptInstance">
 									<li id="${conceptInstance.id}">
 									<a href="#" class="dropdown-toggle">
 									<i class="fa fa-cloud-download"></i>
