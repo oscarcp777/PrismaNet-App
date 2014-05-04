@@ -5,5 +5,6 @@ package com.prismanet;
  */
 public enum MentionType {
 	TWITTER,
-	FACEBOOK;
+	FACEBOOK,
+	ALL;
 }
