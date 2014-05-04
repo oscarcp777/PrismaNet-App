@@ -49,7 +49,7 @@
 								<div class="profile-info-name"> <g:message code="dashborad.concept.end"/> </div>
 
 								<div class="profile-info-value">
-									<span ><g:formatDate format="dd/MM/yyyy HH:mm" date="${concept.lastUpdated}"/></span>
+									<span ><g:formatDate format="dd/MM/yyyy HH:mm" date="${concept.dateCreated}"/></span>
 								</div>
 							</div>
 

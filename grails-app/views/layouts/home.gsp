@@ -42,12 +42,14 @@
 							    </span>
 							    </a>
 						</li>
-						<li><a data-toggle="dropdown" href="#"
-							class="dropdown-toggle"> <img class="nav-user-photo"
-								src="${resource(dir: 'img', file: 'oscar.png')}"
-								alt="Oscar&#39;s Photo"> <span class="user-info"> <small><g:message code="home.user.wellcome"/> </small>
+						<li>
+						<a data-toggle="dropdown" href="#" 
+							class="dropdown-toggle"> 
+								<span class="user-info"> 
+								<small><g:message code="home.user.wellcome"/> </small>
 									<sec:username />
-							</span> <i class="fa fa-caret-down"></i>
+							</span> 
+							<i class="fa fa-caret-down"></i>
 						</a>
 
 							<ul
@@ -93,19 +95,19 @@
 
 						<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 							<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-								<button class="btn btn-success">
-									<i class="fa fa-signal"></i>
+								<button class="btn btn-info" onclick="alert('aqui va los datos de twitter');">
+									<i class="ace-icon fa fa-twitter align-top bigger-125"></i>
 								</button>
 
-								<button class="btn btn-info">
-									<i class="fa fa-pencil"></i>
-								</button>
-
-								<button class="btn btn-warning">
-									<i class="fa fa-group"></i>
+								<button class="btn btn-primary">
+									<i class="ace-icon fa fa-facebook align-top bigger-125"></i>
 								</button>
 
 								<button class="btn btn-danger">
+									<i class="ace-icon fa fa-comments align-top bigger-125"></i>
+								</button>
+
+								<button class="btn btn-success">
 									<i class="fa fa-cogs"></i>
 								</button>
 							</div>

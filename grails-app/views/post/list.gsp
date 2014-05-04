@@ -25,7 +25,8 @@
 					<g:if test="${flash.message}">
 						<div class="message" role="status">${flash.message}</div>
 					</g:if>
-					<g:each in="${postInstanceList}" status="i" var="postInstance">
+					<g:each in="${postInstanceList}" status="i" var="post">
+					<p>${post.tweet.content}</p>
 					</g:each>
 
 				</ul>

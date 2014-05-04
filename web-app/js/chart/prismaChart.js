@@ -34,8 +34,8 @@ function inicializeColorChar(){
 	});
 }
 
-function getTweetCharPie(div){
-	var data = {"div":div}
+function getTweetCharPie(div,channel){
+	var data = {"div":div,"channel":channel}
 	doRequest('conceptTweetsJson',data,paintCharPie, null, 'GET');
 }
 

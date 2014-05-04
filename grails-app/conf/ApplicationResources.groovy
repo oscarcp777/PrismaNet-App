@@ -12,7 +12,6 @@ modules = {
 		resource url:'js/ace/ace.js'
 		resource url:'js/ace/ace-extra.js'
 		resource url:'js/ace/ace-elements.js'
-		resource url:'js/jquery.slimscroll.js'
 		resource url:'js/home.js',disposition: 'head'
 		resource url:'js/ace/bootstrap-datepicker.min.js'
 		

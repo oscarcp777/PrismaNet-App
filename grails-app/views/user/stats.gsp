@@ -1,3 +1,4 @@
+
 <html>
 <head>
 <meta name="layout" content="home" />
@@ -11,6 +12,8 @@
 		</div>
 
 
+
+        
 		<div class="row" >
 			<div class="col-lg-12" >
 				<div class="row" >
@@ -21,14 +24,12 @@
 									<span class="glyphicon glyphicon-stats"> </span> 
 									<g:message code="user.stats.tweets.real.time"/>
 								</h5>
-
 								<div class="widget-toolbar">
 									<a href="#" data-action="collapse"> <i
 										class="1 bigger-125 fa fa-chevron-up"></i>
 									</a>
 								</div>
-
-
+								<g:render template="chooseChannel" model="['callback':'loadTweetCharPie']"></g:render>
 							</div>
 
 							<div class="widget-body">
@@ -134,7 +135,11 @@
 		</div>
 	</div>
 		<script type="text/javascript">
-		function loadCharTest1(start, end,rangeSelect) {
+		function loadTweetCharPie(channel){
+			getTweetCharPie('#tweetCharPie',channel);
+			return false;
+		}
+		function lineaChartUser(start, end,rangeSelect) {
 	        $('#pickertUser span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
 	        var data = {"id":${user.id}, "div":'#lineaChartUser',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
 	        getUserGroupedTweets(data);
@@ -145,7 +150,7 @@
 			getTweetCharPie('#tweetCharPie');
 			getTotalFollowers('#totalFollowers');
 			
-			loadDatepicker('pickertUser',loadCharTest1);
+			loadDatepicker('pickertUser',lineaChartUser);
 			var data = {"id":${user.id}, "div":'#lineaChartUser',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 			getUserGroupedTweets(data);
 			getConceptRealTime(${user.id}, '#realTimeCharUser','');

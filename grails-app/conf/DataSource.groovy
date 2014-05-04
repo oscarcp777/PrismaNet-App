@@ -30,6 +30,7 @@ environments {
 			pooled = true
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 			dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+//			url = "jdbc:mysql://192.168.0.2:3306/prismanet?autoReconnect=true"
 			url = "jdbc:mysql://localhost:3306/prismanet?autoReconnect=true"
 			driverClassName = "com.mysql.jdbc.Driver"
 			username = "root"

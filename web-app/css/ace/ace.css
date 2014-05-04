@@ -12843,3 +12843,30 @@ th[aria-selected=true] .ui-jqgrid-sortable {
 	width: 300px !important;
 	margin: 20px !important;
 }
+.btn-group.btn-overlap>.btn {
+    margin-right:-1px
+}
+.btn-group.btn-corner>.btn:first-child {
+    border-bottom-left-radius:8px !important;
+    border-top-left-radius:8px !important
+}
+.btn-group.btn-corner>.btn:last-child {
+    border-bottom-right-radius:8px !important;
+    border-top-right-radius:8px !important
+}
+.btn-group.btn-corner>.btn.btn-sm:first-child {
+    border-bottom-left-radius:6px !important;
+    border-top-left-radius:6px !important
+}
+.btn-group.btn-corner>.btn.btn-sm:last-child {
+    border-bottom-right-radius:6px !important;
+    border-top-right-radius:6px !important
+}
+.btn-group.btn-corner>.btn.btn-xs:first-child {
+    border-bottom-left-radius:4px !important;
+    border-top-left-radius:4px !important
+}
+.btn-group.btn-corner>.btn.btn-xs:last-child {
+    border-bottom-right-radius:4px !important;
+    border-top-right-radius:4px !important
+}
