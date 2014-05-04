@@ -52,7 +52,7 @@ class PostJob {
 			
 //			print "filtros: " + dates
 			
-			DBCursor posts = importer.importPosts(dates)
+			DBCursor posts = importer.importPosts([])
 			def iterator = posts.iterator()
 			def partialList = []
 			int i = 0
