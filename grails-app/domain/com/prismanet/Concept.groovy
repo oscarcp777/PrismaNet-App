@@ -9,7 +9,7 @@ class Concept {
 	
 	String conceptName
 	Date dateCreated
-	Date lastUpdated
+//	Date lastUpdated
 	TwitterSetup twitterSetup
 	FacebookSetup facebookSetup
 	static hasMany = [mentions:Mention]

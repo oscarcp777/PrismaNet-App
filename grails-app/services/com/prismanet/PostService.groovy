@@ -33,9 +33,10 @@ class PostService extends MentionService{
 			index++
 			
 			for (Comment comment : status.getComments()){
-				print "fecha ultimo post: " + lastUpdated 
-				if (!lastUpdated || lastUpdated.after(comment.createdTime))
-					continue
+				if (lastUpdated){ 
+					if (lastUpdated.after(comment.createdTime))
+						continue
+				}
 				
 				Author author = FacebookAuthor.findByName(comment.getFrom().getName().trim())
 				if (!author){
@@ -80,6 +81,21 @@ class PostService extends MentionService{
 
 		}
 		cleanUpGorm()
+	}
+	
+	def getNewComments(def post){
+		Date lastUpdated = getLastUpdated()
+		JSONObject obj = new JSONObject(post)
+		facebook4j.Post status = new PostJSONImpl(obj)
+		def i = 0
+		for (Comment comment : status.getComments()){
+			if (lastUpdated){
+				if (lastUpdated.after(comment.createdTime))
+					continue
+			}
+			i++
+		}
+		i
 	}
 	
 	

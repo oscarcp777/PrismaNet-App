@@ -25,6 +25,7 @@ class FacebookSetup {
 	protected Object clone() throws CloneNotSupportedException {
 		FacebookSetup setup = new FacebookSetup()
 		setup.keywords = keywords
+		setup.accounts = accounts
 		return setup
 	}
 }
