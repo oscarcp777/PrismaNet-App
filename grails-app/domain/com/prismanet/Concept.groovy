@@ -9,7 +9,7 @@ class Concept {
 	
 	String conceptName
 	Date dateCreated
-//	Date lastUpdated
+	Date lastUpdated
 	TwitterSetup twitterSetup
 	FacebookSetup facebookSetup
 	static hasMany = [mentions:Mention]
@@ -18,8 +18,6 @@ class Concept {
     static constraints = {
 		conceptName(nullable:false)
 		user()
-//		tweets()
-//		posts()
 		mentions()
 		twitterSetup(nullable:true)
 		facebookSetup(nullable:true)
