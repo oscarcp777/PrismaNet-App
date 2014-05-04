@@ -32,7 +32,6 @@ class PostJob {
 			Date aux = facebookSetupService.getLastUpdated()
 			// Si el momento de ultima actualizacion no esta seteado se setea
 			if (!grailsApplication.config.facebook.setup.lastUpdated ||
-				grailsApplication.config.facebook.setup.lastUpdated.empty ||
 				aux.after(grailsApplication.config.facebook.setup.lastUpdated)){
 				grailsApplication.config.facebook.setup.lastUpdated = aux
 				importer.setConfiguration(facebookSetupService.getConfiguration())
@@ -54,17 +53,19 @@ class PostJob {
 //			print "filtros: " + dates
 			
 			DBCursor posts = importer.importPosts([])
-//			print "-------------------------"
-//			print posts
 			def iterator = posts.iterator()
 			def partialList = []
 			int i = 0
-			print "posts: " + iterator.size()
+			log.info "posts: " + iterator.size()
 			while (iterator.hasNext()){
-				partialList.add(iterator.next())
-				i++
-//				print i
-				if (i % 25 == 0){
+				def post = iterator.next()
+				def newComments = postService.getNewComments(post)
+//				log.info "newComments" + newComments
+				if (newComments > 0){
+					partialList.add(post)
+				}
+				i += newComments
+				if (i >24){
 					try {
 						log.info "Nuevo Lote Posts"
 						i = 0
