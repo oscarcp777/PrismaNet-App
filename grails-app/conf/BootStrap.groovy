@@ -83,10 +83,15 @@ class BootStrap {
 				def facebookConfigPresi = new FacebookSetup(keywords:"CFKArgentina")
 				def facebookConfigMacri = new FacebookSetup(keywords:"mauriciomacri")
 				def facebookConfigIns = new FacebookSetup(keywords:"insaurraldem")
+				def facebookConfigMassa = new FacebookSetup(keywords:"SergioMassaOk")
+				def facebookConfigScioli = new FacebookSetup(keywords:"danielsciolioficial")
 				FacebookSetupService facebookSetupService = new FacebookSetupService()
 				facebookSetupService.save(facebookConfigPresi)
 				facebookSetupService.save(facebookConfigMacri)
+				facebookSetupService.save(facebookConfigScioli)
 				facebookSetupService.save(facebookConfigIns)
+				facebookSetupService.save(facebookConfigMassa)
+				
 
 				// Autores
 //				def author1 = new Author(accountName:"@oscarcp777", followers:10, userSince:new Date(), sex: Sex.M).save()
@@ -97,12 +102,12 @@ class BootStrap {
 
 				// Conceptos
 				def conceptIns = new Concept(conceptName: 'Insaurralde',twitterSetup:twitterConfigIns, facebookSetup:facebookConfigIns, user:user).save()
-				def conceptMass = new Concept(conceptName: 'Massa',twitterSetup:twitterConfigMass, user:user).save()
+				def conceptMass = new Concept(conceptName: 'Massa',twitterSetup:twitterConfigMass, facebookSetup:facebookConfigMassa, user:user).save()
 				def conceptColo = new Concept(conceptName: 'De Narvaez',twitterSetup:twitterConfigColo, user:user).save()
 				def conceptPresi = new Concept(conceptName: 'CFK',twitterSetup:twitterConfigPresi, facebookSetup:facebookConfigPresi, user:user).save()
 				
 				def conceptStolb= new Concept(conceptName: 'Stolbizer',twitterSetup:twitterConfigsStolb, user:user).save()
-				def conceptScioli = new Concept(conceptName: 'Scioli',twitterSetup:twitterConfigScioli, user:user).save()
+				def conceptScioli = new Concept(conceptName: 'Scioli',twitterSetup:twitterConfigScioli, facebookSetup:facebookConfigScioli, user:user).save()
 				def conceptBinner= new Concept(conceptName: 'Binner',twitterSetup:twitterConfigBinner, user:user).save()
 				def conceptMacri = new Concept(conceptName: 'Macri',twitterSetup:twitterConfigMacri, facebookSetup:facebookConfigMacri, user:user).save()
 				def conceptCarrio = new Concept(conceptName: 'Carrio',twitterSetup:twitterConfigCarrio, user:user).save()
