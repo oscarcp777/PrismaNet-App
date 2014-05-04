@@ -1,4 +1,6 @@
 package com.prismanet
+import java.security.Policy.Parameters;
+
 import grails.converters.*
 import grails.plugins.springsecurity.Secured
 import grails.plugins.springsecurity.SpringSecurityService
@@ -20,12 +22,39 @@ class UserController extends GenericController{
 	def userService
 	
 	
-	def getTwitterFilter(){
+	private Filter getTwitterFilter(){
 		new Filter(attribute:"sourceType",value:Tweet.class, type:FilterType.EQ)
 	}
 	
-	def getFacebookFilter(){
+	private Filter getFacebookFilter(){
 		new Filter(attribute:"sourceType",value:Post.class, type:FilterType.EQ)
+	}
+	
+	private Filter getFilterByMentionType(MentionType type){
+		if (type)
+			switch (type){
+				case MentionType.TWITTER:
+					return getTwitterFilter()
+				case MentionType.FACEBOOK:
+					return getFacebookFilter()
+			}
+	}
+	
+	private List loadFilters(Map parameters){
+		def filters = []
+		def filter = getFilterByMentionType(parameters.sourceType)
+		if (filter)
+			filters.add(filter)	
+		if (parameters.userId){
+			filters.add(new Filter(attribute:"id",value: parameters.userId, type:FilterType.EQ))
+		}
+		filters
+	}
+	
+	private Map getPropertiesByMentionType(){
+		def strings = [(MentionType.FACEBOOK) :[name:'Posts', controller:'post'], 
+						(MentionType.TWITTER): [name:'Tweets', controller: 'tweet'],
+						(MentionType.ALL): [name:'Menciones']]
 	}
 	
 	
@@ -37,7 +66,6 @@ class UserController extends GenericController{
 	
 	
 	def monthStats = {
-		//TODO agregar mensaje de error o 404 si no encuentra el user
 		def groupList = ["conceptsName"]
 		def criteria = User.createCriteria();
 		def filters = [new Filter(attribute:"id",value: session.user.id, type:FilterType.EQ)]
@@ -49,11 +77,16 @@ class UserController extends GenericController{
 		[user: session.user, statsList : statsList]
 	}
 	def conceptTweetsJson ={
+		def sourceType = params.channel as MentionType
+		def strings = getPropertiesByMentionType()
 		def container=params.div
-		def dateList = userService.categoryStore(session.user, ["conceptsName"], [getTwitterFilter()], null).sort{a,b -> a[1] <=> b[1] }
-		def resultMap = [container:container,data:dateList,title:'Porcentajes de tweets por Concepto',name : 'Tweets']
+		def filters = loadFilters([sourceType: sourceType])
+		
+		def dateList = userService.categoryStore(session.user, ["conceptsName"], filters, null).sort{a,b -> a[1] <=> b[1] }
+		def resultMap = [container:container,data:dateList, divTitle: strings[sourceType].name  + ' por Concepto', title:'Porcentajes de ' + strings[sourceType].name + ' por Concepto', name : strings[sourceType].name]
 		render resultMap as JSON
 	}
+	
 	def totalFollowers ={
 		def container=params.div
 		def dateList =[]
@@ -71,6 +104,7 @@ class UserController extends GenericController{
 		def resultMap = [container:container,data:dateList,title: message(code: "user.stats.tweets.followers.sub"),name : 'Seguidores']
 		render resultMap as JSON
 	}
+	
 	void loadZerosForMinute(series,from,to){
 		def dateValueList = [:]
 		def valueList = []
@@ -84,6 +118,7 @@ class UserController extends GenericController{
 			it["data"]=DateUtils.loadZerosForMinute(dateValueList,from,to)
 		}
 	}
+	
 	void addConceptsEmpty(List series,User user,from,to){
 		def conceptsListExits=[]
 		def conceptsListNoExits=[]
@@ -101,63 +136,63 @@ class UserController extends GenericController{
 				)
 		}
 	}
-	def getConceptsRealTime( userId,from,to){
-		def filters = []
-		filters.add(new Filter(attribute:"id",value: userId, type:FilterType.EQ))
-		filters.add(getTwitterFilter())
-		userService.getMentionsBy(filters,from,to);
-	}
+	
 	def conceptsRealTime={
+		def sourceType = params.channel as MentionType
+		def filters = loadFilters([sourceType:sourceType,userId:session.user.id])
 		def container = params.div
-		def resultMap = [:]
+		def strings = getPropertiesByMentionType()
+
 		Date from,to
-//		to=DateUtils.getDateWithoutSeconds(new GregorianCalendar(2014, Calendar.FEBRUARY, 11,21,40).time)
 		to=DateUtils.getDateWithoutSeconds(new Date())
 			use ( TimeCategory ) {
 	    		from = to-20.minutes
      		}
-		def dateList=getConceptsRealTime(session.user.id,from,to)
-		resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
-			'Tweets por minuto','Minutos','Cantidad de tweets', "../tweet/list?id=")
+		
+		def dateList = userService.getMentionsBy(filters,from,to);
+		def resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
+			strings[sourceType].name + ' por minuto','Minutos','Cantidad de ' + strings[sourceType].name, strings[sourceType].controller ? "../"+strings[sourceType].controller+"/list?id=" : "#")
 		loadZerosForMinute(resultMap["series"],from,to)
 		addConceptsEmpty(resultMap["series"],springSecurityService.currentUser,from,to)
 		
-		def json =[id:session.user.id,"subTitle":"Actualizacion en tiempo Real de la cantidad de Tweets"
-			      ,dateProp:"tweetMinute",ajaxMethodReload:'conceptsRealTimeForOneMinute']
+		def json =[id:session.user.id,"subTitle":"Actualizacion en tiempo Real de la cantidad de " +strings[sourceType].name
+			      ,dateProp:"dateMinute",ajaxMethodReload:'conceptsRealTimeForOneMinute',channel:sourceType]
 		resultMap.putAll(json)
 		render resultMap as JSON
 	}
+	
 	def conceptsRealTimeForOneMinute={
 		Date from,to
-		def resultMap = [:]
-//		to=DateUtils.getDateWithoutSeconds(new GregorianCalendar(2014, Calendar.FEBRUARY, 11,21,40).time)
-				to=DateUtils.getDateWithoutSeconds(new Date())
+		def sourceType = params.channel as MentionType
+		def filters = loadFilters([sourceType:sourceType,userId:session.user.id])
+		
+		to=DateUtils.getDateWithoutSeconds(new Date())
 		use ( TimeCategory ) {
 				from = to-1.minutes
 		}
-		def dateList=getConceptsRealTime(session.user.id,from,to)
-		resultMap = getChartLineFormat(dateList, 2,'', DateTypes.MINUTE_PERIOD,'','','','')
+		
+		def dateList= userService.getMentionsBy(filters, from, to)
+		def resultMap = getChartLineFormat(dateList, 2,'', DateTypes.MINUTE_PERIOD,'','','','')
 		loadZerosForMinute(resultMap["series"],from,to)
 		addConceptsEmpty(resultMap["series"],session.user,from,to)
 		render resultMap["series"] as JSON
 	}
+	
 	def getGroupedTweets(){
-		
 		log.info "getGroupedTweets params: " + params
 		def container = params.div
+		def sourceType = params.channel as MentionType
+		def properties = getPropertiesByMentionType()
 		
-		def filters = []
-		filters.add(new Filter(attribute:"id",value: session.user.id, type:FilterType.EQ))
-		filters.add(getTwitterFilter())
+		def filters = loadFilters([sourceType:sourceType, userId:session.user.id])
 		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
 		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
-			
 		DateServiceType type = userService.getChartType(dateFrom, dateTo)
 		
 		
 		// Obtengo tweets por hora
 		def dateList = userService.getMentionsBy(filters, dateFrom, dateTo)
-		def redirectOnClick = "../tweet/list?"
+		def redirectOnClick = properties[sourceType]?.controller ? "../"+properties[sourceType].controller+"/list?" : "#"
 		def resultMap = [:]
 		//TODO localizar todos los textos
 		// Parseo resultado para generar el grafico
@@ -165,74 +200,28 @@ class UserController extends GenericController{
 		switch (type) {
 			case DateServiceType.BY_MINUTE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
-												'Tweets por minuto','Minutos','Cantidad de tweets',
-												redirectOnClick+"tweetMinute=")
+												properties[sourceType].name +' por minuto','Minutos','Cantidad de '+properties[sourceType].name,
+												redirectOnClick+"dateMinute=")
 			break
 			case DateServiceType.BY_HOUR:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD,
-											   'Tweets por hora','Horas','Cantidad de tweets',
-											   redirectOnClick+"tweetHour=")
+											   properties[sourceType].name +' por hora','Horas','Cantidad de '+properties[sourceType].name,
+											   redirectOnClick+"dateHour=")
 			break
 			case DateServiceType.BY_DATE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.DAY_PERIOD,
-												'Tweets por Dia','Dias','Cantidad de tweets',
-												redirectOnClick+"tweetCreated=")
+												properties[sourceType].name +' por Dia','Dias','Cantidad de '+properties[sourceType].name,
+												redirectOnClick+"dateCreated=")
 			break
 			case DateServiceType.BY_MONTH:
 			resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MONTH_PERIOD,
-											'Tweets por Mes','Mes','Cantidad de tweets',
-											redirectOnClick+"tweetCreated=")
+											properties[sourceType].name +' por Mes','Mes','Cantidad de ' +properties[sourceType].name,
+											redirectOnClick+"dateCreated=")
 		break
 		}
 		render resultMap as JSON
 	}
 	
 	
-	
-//	def getComparativeConceptChartByMinute(){
-//		log.debug "comparativeConceptChartByMinute params: " + params
-//		def container = params.div
-//		def cal = new GregorianCalendar()
-//		def hourFilter=DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, cal.time)
-//		def dateList = userService.categoryStore(session.user, ["conceptsName","tweetByMinute"], [new Filter(attribute:"tweetByHour",value:hourFilter, type:FilterType.EQ)], 
-//			[[attribute:"conceptsId",value:OrderType.ASC],[attribute:"created",value:OrderType.ASC]]);
-//		log.debug "Formato del servicio: " + dateList
-//		
-//		def resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD, 
-//											'Tweets por minuto','Cantidad de tweets','Tweets',
-//											"../../tweet/list?tweetMinute=")
-//		render resultMap as JSON
-//	}
-//	
-//	
-//	def getComparativeConceptChartByHour(){
-//		log.debug "comparativeConceptChartByHour params: " + params
-//		def container = params.div
-//		def cal = new GregorianCalendar()
-//		def day = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, cal.time) 
-//		def dateList = userService.categoryStore(session.user, ["conceptsName","tweetByHour"], [new Filter(attribute:"tweetCreated",value:day, type:FilterType.EQ)],
-//			 [[attribute:"conceptsId",value:OrderType.ASC],[attribute:"created",value:OrderType.ASC]]);
-//		log.debug "Formato del servicio: " + dateList
-//		
-//		def resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD,
-//											'Tweets por hora','Cantidad de tweets','Tweets',
-//											"../../tweet/list?tweetHour=")
-//		render resultMap as JSON
-//	}
-//	
-//	def getComparativeConceptChartByDate(){
-//		log.debug "comparativeConceptChartByHour params: " + params
-//		def container = params.div
-//		def cal = new GregorianCalendar()
-//		def period = DateUtils.getDateFormat(DateTypes.MONTH_PERIOD, cal.time) ;
-//		def dateList = userService.categoryStore(session.user, ["conceptsName","tweetCreated"], [new Filter(attribute:"tweetPeriod",value:period, type:FilterType.EQ)],
-//			 [[attribute:"conceptsId",value:OrderType.ASC],[attribute:"created",value:OrderType.ASC]]);
-//		log.debug "Formato del servicio: " + dateList
-//		
-//		def resultMap = getChartLineFormat(dateList, 2, container, DateTypes.DAY_PERIOD,
-//											'Tweets por Dia','Cantidad de tweets','Tweets',
-//											"../../tweet/list?tweetCreated=")
-//		render resultMap as JSON
-//	}
 	
 }

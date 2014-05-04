@@ -87,22 +87,22 @@ class ConceptController extends GenericController{
 			case DateServiceType.BY_MINUTE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
 												'Tweets por minuto','Fecha','Tweets',
-												redirectOnClick+"&tweetMinute=")
+												redirectOnClick+"&dateMinute=")
 			break
 			case DateServiceType.BY_HOUR:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD,
 											   'Tweets por hora','Fecha','Tweets',
-											   redirectOnClick+"&tweetHour=")
+											   redirectOnClick+"&dateHour=")
 			break
 			case DateServiceType.BY_DATE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.DAY_PERIOD,
 												'Tweets por Dia','Fecha','Tweets',
-												redirectOnClick+"&tweetCreated=")
+												redirectOnClick+"&dateCreated=")
 			break
 			case DateServiceType.BY_MONTH:
 			resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MONTH_PERIOD,
 											'Tweets por Mes','Mes','Tweets',
-											redirectOnClick+"&tweetCreated=")
+											redirectOnClick+"&dateCreated=")
 			break
 		}
 //		def aux = resultMap as JSON
@@ -185,22 +185,22 @@ class ConceptController extends GenericController{
 			case DateServiceType.BY_MINUTE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
 												'Alcance por minuto','Fecha','Alcance',
-												redirectOnClick+"&tweetMinute=")
+												redirectOnClick+"&dateMinute=")
 			break
 			case DateServiceType.BY_HOUR:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD,
 											   'Alcance por hora','Fecha','Alcance',
-											   redirectOnClick+"&tweetHour=")
+											   redirectOnClick+"&dateHour=")
 			break
 			case DateServiceType.BY_DATE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.DAY_PERIOD,
 												'Alcance por Dia','Fecha','Alcance',
-												redirectOnClick+"&tweetCreated=")
+												redirectOnClick+"&dateCreated=")
 			break
 			case DateServiceType.BY_MONTH:
 			resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MONTH_PERIOD,
 											'Alcance por Mes','Mes','Alcance',
-											redirectOnClick+"&tweetCreated=")
+											redirectOnClick+"&dateCreated=")
 			break
 		}
 		render resultMap as JSON
@@ -238,7 +238,7 @@ class ConceptController extends GenericController{
 		def series=[[name:concept.conceptName,data:listRealTime]]
 		def json =[series:series,"container":container,id:conceptId,title:"Tweets por minuto",
 			subTitle:"Actualizacion en tiempo Real de la cantidad de Tweets" ,
-			titleY:'Cantidad de tweets',titleX:'Minutos',dateProp:"tweetMinute",
+			titleY:'Cantidad de tweets',titleX:'Minutos',dateProp:"dateMinute",
 			cursorEvent:"../../tweet/list?conceptsId=",ajaxMethodReload:'../conceptsRealTimeForOneMinute']
 		
 		render json as JSON
@@ -308,22 +308,22 @@ class ConceptController extends GenericController{
 			case DateServiceType.BY_MINUTE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
 												'Opiniones por minuto','Fecha','Opiniones',
-												redirectOnClick+"&tweetMinute=")
+												redirectOnClick+"&dateMinute=")
 			break
 			case DateServiceType.BY_HOUR:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD,
 											   'Opiniones por hora','Fecha','Opiniones',
-											   redirectOnClick+"&tweetHour=")
+											   redirectOnClick+"&dateHour=")
 			break
 			case DateServiceType.BY_DATE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.DAY_PERIOD,
 												'Opiniones por Dia','Fecha','Opiniones',
-												redirectOnClick+"&tweetCreated=")
+												redirectOnClick+"&dateCreated=")
 			break
 			case DateServiceType.BY_MONTH:
 			resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MONTH_PERIOD,
 											'Opiniones por Mes','Mes','Opiniones',
-											redirectOnClick+"&tweetCreated=")
+											redirectOnClick+"&dateCreated=")
 			break
 		}
 		resultMap.series.each{
