@@ -1,4 +1,4 @@
-
+<%@page import="com.prismanet.MentionType"%>
 <html>
 <head>
 <meta name="layout" content="home" />
@@ -29,7 +29,7 @@
 										class="1 bigger-125 fa fa-chevron-up"></i>
 									</a>
 								</div>
-								<g:render template="chooseChannel" model="['callback':'loadTweetCharPie']"></g:render>
+								<g:render template="chooseChannel" model="['callback':'loadRealTime']"></g:render>
 							</div>
 
 							<div class="widget-body">
@@ -53,12 +53,11 @@
 								</h5>
 
 								<div class="widget-toolbar">
-									<a href="javascript:void(0);" id="refreshCharPie"> <span
-										data-action="reload"> <i class="fa fa-refresh"></i></span>
-									</a> <a href="javascript:void(0);" data-action="collapse"> <i
+										<a href="javascript:void(0);" data-action="collapse"> <i
 										class="fa fa-chevron-up"></i></a> <a href="javascript:void(0);"
 										data-action="close"> <i class="fa fa-remove"></i></a>
 								</div>
+								<g:render template="chooseChannel" model="['callback':'loadTweetCharPie']"></g:render>
 							</div>
 
 							<div class="widget-body">
@@ -77,12 +76,11 @@
 								</h5>
 
 								<div class="widget-toolbar">
-									<a href="javascript:void(0);" id="refreshCharFollowers"> <span
-										data-action="reload"> <i class="fa fa-refresh"></i></span>
-									</a> <a href="javascript:void(0);" data-action="collapse"> <i
+								 <a href="javascript:void(0);" data-action="collapse"> <i
 										class="fa fa-chevron-up"></i></a> <a href="javascript:void(0);"
 										data-action="close"> <i class="fa fa-remove"></i></a>
 								</div>
+								<g:render template="chooseChannel" model="['callback':'loadTotalFollowers']"></g:render>
 							</div>
 
 							<div class="widget-body">
@@ -112,8 +110,8 @@
 									<a href="#" data-action="collapse"> <i
 										class="1 bigger-125  fa fa-chevron-up"></i>
 									</a>
-									 
 								</div>
+								<g:render template="chooseChannel" model="['callback':'loadUserGroupedData']"></g:render>
 							</div>
 
 
@@ -135,28 +133,17 @@
 		</div>
 	</div>
 		<script type="text/javascript">
-		function loadTweetCharPie(channel){
-			getTweetCharPie('#tweetCharPie',channel);
-			return false;
-		}
-		function lineaChartUser(start, end,rangeSelect) {
-	        $('#pickertUser span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
-	        var data = {"id":${user.id}, "div":'#lineaChartUser',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
-	        getUserGroupedTweets(data);
-	    }
 		$(document).ready(function() {
 			inicializeColorChar();
 			activeItemMenuLevel1('home');
-			getTweetCharPie('#tweetCharPie');
-			getTotalFollowers('#totalFollowers');
-			
-			loadDatepicker('pickertUser',lineaChartUser);
-			var data = {"id":${user.id}, "div":'#lineaChartUser',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
-			getUserGroupedTweets(data);
-			getConceptRealTime(${user.id}, '#realTimeCharUser','');
-			$('#refreshCharPie').click(function() {
-				getTweetCharPie('#tweetCharPie');
-			});
+			//real time
+			loadRealTime('${MentionType.ALL}');
+			//data por concepto
+			loadTweetCharPie('${MentionType.ALL}');
+			//Followers y likes por concepto
+			loadTotalFollowers('${MentionType.ALL}');
+			//data entre fechas
+			loadUserGroupedData('${MentionType.ALL}');
 		});
 	</script>
 	

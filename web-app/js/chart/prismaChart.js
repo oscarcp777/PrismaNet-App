@@ -34,28 +34,25 @@ function inicializeColorChar(){
 	});
 }
 
-function getTweetCharPie(div,channel){
-	var data = {"div":div,"channel":channel}
+function getTweetCharPie(data){
 	doRequest('conceptTweetsJson',data,paintCharPie, null, 'GET');
 }
 
-function getTotalFollowers(div){
-	var data = {"div":div}
+function getTotalFollowers(data){
 	doRequest('totalFollowers',data,paintCharPie, null, 'GET');
 }
-function getSentimentChartPie(id, div){
-	var data = {"id":id, "div":div}
+function getSentimentChartPie(div){
+	var data = {"div":div}
 	doRequest('../sentimentChartPie',data,paintCharPie, null, 'GET');
 }
 
 
-function getConceptRealTime(id, div,level){
-	var data = {"id":id, "div":div}
+function getConceptRealTime(data,level){
 	doRequest(level+'conceptsRealTime',data,printRealTimeChar, null, 'GET');
 }
 
-function getPostRealTime(id, div,level){
-	var data = {"id":id, "div":div}
+function getPostRealTime(div,level){
+	var data = {"div":div}
 	doRequest(level+'postRealTime',data,printRealTimeChar, null, 'GET');
 }
 
@@ -81,8 +78,28 @@ function getGroupedPosts(data){
 function getSentimentalAnalitycs(data){
 	doRequest('../sentimentalAnalitycs',data,paintCharLine, null, 'GET');
 }
-
-
+function loadTweetCharPie(channel){
+	var data = {"div":'#tweetCharPie',"channel":channel}
+	getTweetCharPie(data);
+}
+function loadRealTime(channel){
+	var data = {"div":'#realTimeCharUser','channel':channel}
+	getConceptRealTime(data,'');
+}
+function loadTotalFollowers(channel){
+	var data = {"div":'#totalFollowers',"channel":channel}
+	getTotalFollowers(data);
+}
+function lineaChartUser(start, end,rangeSelect) {
+    $('#pickertUser span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
+    var data = { "div":'#lineaChartUser',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
+    getUserGroupedTweets(data);
+}
+function loadUserGroupedData(channel){
+	loadDatepicker('pickertUser',lineaChartUser);
+	var data = {'channel':channel, "div":'#lineaChartUser',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+	getUserGroupedTweets(data);
+}
 function paintCharPie(dataJson) {
 	$(dataJson.container)
 			.highcharts(

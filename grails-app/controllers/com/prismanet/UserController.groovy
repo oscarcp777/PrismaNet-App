@@ -1,6 +1,7 @@
 package com.prismanet
 import java.security.Policy.Parameters;
-
+import facebook4j.Facebook
+import facebook4j.FacebookFactory
 import grails.converters.*
 import grails.plugins.springsecurity.Secured
 import grails.plugins.springsecurity.SpringSecurityService
@@ -88,7 +89,38 @@ class UserController extends GenericController{
 	}
 	
 	def totalFollowers ={
-		def container=params.div
+		def resultMap=[:]
+		def channel=params.channel as MentionType
+		if(channel == MentionType.TWITTER){
+		 resultMap=getTotalFollowers(params.div)
+		}else if(channel == MentionType.FACEBOOK){
+		 resultMap=getTotalikes(params.div)
+		} else{
+		resultMap=[container:params.div,data:[],title: message(code: "user.stats.all.message"),name : '']
+		}
+		render resultMap as JSON
+	}
+	def getTotalikes(container){
+		def dateList =[]
+		session.concepts=springSecurityService.currentUser.concepts
+		def usersName=[]
+		session.concepts.each {
+			if(it.facebookSetup !=null ){
+//			usersName.add(it.facebookSetup.accounts.replace(",",""))
+				println it.facebookSetup.accounts
+			}
+		}
+		Facebook facebook =new FacebookFactory().getInstance();
+		ResponseList<facebook4j.Post> pages = null
+		pages = facebook.getFeed('55432788477');
+//		lookupUsers((String[])usersName.toArray());
+		for (facebook4j.Post page : pages) {
+			dateList.add([page.name,page.likes])
+		}
+		def resultMap=[container:container,data:dateList,title: message(code: "user.stats.facebook.likes.sub"),name : message(code: "user.stats.title.likes")]
+		resultMap
+	}
+	def getTotalFollowers(container){
 		def dateList =[]
 		session.concepts=springSecurityService.currentUser.concepts
 		def usersName=[]
@@ -101,8 +133,8 @@ class UserController extends GenericController{
 		for (twitter4j.User user : users) {
 			dateList.add([user.screenName,user.followersCount])
 		}
-		def resultMap = [container:container,data:dateList,title: message(code: "user.stats.tweets.followers.sub"),name : 'Seguidores']
-		render resultMap as JSON
+		def resultMap=[container:container,data:dateList,title: message(code: "user.stats.tweets.followers.sub"),name : message(code: "user.stats.title.followers")]
+		resultMap
 	}
 	
 	void loadZerosForMinute(series,from,to){
