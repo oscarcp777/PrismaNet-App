@@ -17,3 +17,12 @@
 .blue-active {
     background-color:#1b6aaa!important
 }
+.btn.btn-app {
+	width:120px;
+	}
+.btn.btn-app>[class*=icon] {
+	line-height:25px;
+}
+.profile-info-name , .profile-info-value , .profile-info-row{
+	min-height: 35px !important;
+}

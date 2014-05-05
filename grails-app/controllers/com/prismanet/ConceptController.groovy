@@ -28,7 +28,7 @@ class ConceptController extends GenericController{
 	}
 	
 	def dashboard = {
-		Concept concept = getConcept(params.id)
+		Concept concept = Concept.get(params.id)
 		
 		def conceptFilter = new Filter(attribute:"id",value:concept.id, type:FilterType.EQ)
 		
@@ -48,7 +48,7 @@ class ConceptController extends GenericController{
 		def postTotal = postCount.size()>0 ? postCount.get(0).getAt(1) : 0
 
 		
-		[concept :concept,tweetsTotal:tweetTotal, postsTotal:postTotal, total:postTotal+tweetTotal]
+		[concept :concept,twSetup:concept.twitterSetup,fcSetup:concept.facebookSetup,tweetsTotal:tweetTotal, postsTotal:postTotal, total:postTotal+tweetTotal]
 	}
 
 	def tweetStats = {
