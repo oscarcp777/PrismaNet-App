@@ -1,0 +1,19 @@
+.btn-primary.active {
+    background-color:#1b6aaa!important;
+    border-color:#ffcb05;
+}
+.btn-info.active {
+    background-color:#4f99c6!important;
+    border-color:#ffcb05;
+
+}
+.btn-danger.active {
+    background-color:#b74635!important;
+    border-color:#ffcb05;
+}
+.btn.active:after{
+	border-bottom:white;
+}
+.blue-active {
+    background-color:#1b6aaa!important
+}
