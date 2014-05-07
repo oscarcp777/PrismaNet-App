@@ -85,16 +85,14 @@
 		}
 
 		 $(function() {
-			 
+			 var id='${concept.id}';
 			  loadDatepicker('sentimentalPickert',loadChartLineForSentimentalPickert);
-			  
-			  var id='${concept.id}';
-			  activeItemMenuLevel2('${concept.id}','${concept.id}-sentiment');
+			  activeItemMenuLevel2(id,id+'-sentiment');
 			   
-			  var dataSentiment = {"id":${concept.id}, "div":'#sentimentalChart',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+			  var dataSentiment = {"id":id, "div":'#sentimentalChart',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 			  getSentimentalAnalitycs(dataSentiment);
 
-			  getSentimentChartPie('${concept.id}', '#sentimentChartPie');
+			  getSentimentChartPie(id, '#sentimentChartPie');
 			
 			});
 	</script>

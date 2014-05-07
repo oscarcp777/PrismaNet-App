@@ -41,8 +41,8 @@ function getTweetCharPie(data){
 function getTotalFollowers(data){
 	doRequest('totalFollowers',data,paintCharPie, null, 'GET');
 }
-function getSentimentChartPie(div){
-	var data = {"div":div}
+function getSentimentChartPie(id,div){
+	var data = {"div":div,"id":id}
 	doRequest('../sentimentChartPie',data,paintCharPie, null, 'GET');
 }
 
@@ -51,8 +51,8 @@ function getConceptRealTime(data,level){
 	doRequest(level+'conceptsRealTime',data,printRealTimeChar, null, 'GET');
 }
 
-function getPostRealTime(div,level){
-	var data = {"div":div}
+function getPostRealTime(id,div,level){
+	var data = {"div":div,"id":id}
 	doRequest(level+'postRealTime',data,printRealTimeChar, null, 'GET');
 }
 
@@ -85,6 +85,10 @@ function loadTweetCharPie(channel){
 function loadRealTime(channel){
 	var data = {"div":'#realTimeCharUser','channel':channel}
 	getConceptRealTime(data,'');
+}
+function loadRealTimeConcept(id){
+	var data = {"div":'#realTimeChar',"id":id}
+	getConceptRealTime(data,'../');
 }
 function loadTotalFollowers(channel){
 	var data = {"div":'#totalFollowers',"channel":channel}

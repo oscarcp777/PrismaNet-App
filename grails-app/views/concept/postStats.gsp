@@ -90,13 +90,10 @@
 
 		    
 	  $(function() {
-		 
-		  loadDatepicker('postPickert',loadChartLineForPostPickert);
-		  
 		  var id='${concept.id}';
-		  	activeItemMenuLevel2('${concept.id}','${concept.id}-post');
+		  loadDatepicker('postPickert',loadChartLineForPostPickert);
+		  activeItemMenuLevel2(id,id+'-post');
 		   getPostRealTime(${concept.id}, '#postRealTimeChar','../');
-		   
 		   var dataPosts = {"id":${concept.id}, "div":'#postsChart',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 		   getGroupedPosts(dataPosts);
 
