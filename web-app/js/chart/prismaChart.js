@@ -1,3 +1,10 @@
+Highcharts.setOptions({
+	lang: {
+		months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+		weekdays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Sabado', 'Domingo'],
+		shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',  'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+	}
+});
 var doRequest = function(url,data,callback, errorHandler, method) {
 	      $.ajax({
 	              url: url,
@@ -14,25 +21,18 @@ var doRequest = function(url,data,callback, errorHandler, method) {
 	            });
 };
 
-function inicializeColorChar(){
-	Highcharts.getOptions().colors = Highcharts.map(Highcharts
-			.getOptions().colors, function(color) {
-		return {
-			radialGradient : {
-				cx : 0.5,
-				cy : 0.3,
-				r : 0.7
-			},
-			stops : [
-					[ 0, color ],
-					[
-							1,
-							Highcharts.Color(color).brighten(-0.3).get(
-									'rgb') ] // darken
-			]
-		};
-	});
-}
+//function inicializeColorChar(){
+//	Highcharts.getOptions().colors = Highcharts.map(Highcharts
+//			.getOptions().colors, function(color) {
+//		return {
+//			radialGradient : {cx : 0.5,cy : 0.3,r : 0.7},
+//			stops : [
+//					[ 0, color ],
+//					[1,Highcharts.Color(color).brighten(-0.3).get('rgb') ] // darken
+//			]
+//		};
+//	});
+//}
 
 function getTweetCharPie(data){
 	doRequest('conceptTweetsJson',data,paintCharPie, null, 'GET');
@@ -108,35 +108,36 @@ function paintCharPie(dataJson) {
 	$(dataJson.container)
 			.highcharts(
 					{
-						chart : {
-							 animation: Highcharts.svg, // don't animate in old IE
-					            plotShadow: true,
-					            plotBorderWidth: 2
-						},
+						chart: {
+				            type: 'pie',
+				            options3d: {
+								enabled: true,
+				                alpha: 45,
+				                beta: 0
+				            }
+				        },
 						title : {
 							text : dataJson.title
 						},
-						tooltip : {
-							pointFormat : '{series.name}: <b>{point.y}</b>'
-						},
-						plotOptions : {
-							pie : {
-								allowPointSelect : true,
-								showInLegend: true,
-								cursor : 'pointer',
-								dataLabels : {
-									enabled : true,
-									color : '#000000',
-									connectorColor : '#000000',
-									formatter : function() {
-										return '<b>' + this.point.name
-												+ '</b>: '
-												+ this.percentage.toFixed(2);
-												+ ' %';
-									}
-								}
-							}
-						},
+						tooltip: {
+			        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+			            },
+			            plotOptions: {
+			                pie: {
+			                    allowPointSelect: true,
+			                    cursor: 'pointer',
+			                    depth: 35,
+			                    dataLabels: {
+			                        enabled: true,
+			                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+			                        style: {
+			                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+			                        },
+			                        connectorColor: 'silver'
+			                    },
+			                    showInLegend: true
+			                }
+			            },
 						series : [ {
 							type : 'pie',
 							name : dataJson.name,
@@ -156,7 +157,6 @@ function printRealTimeChar(data){
     $(data.container).highcharts({
         chart: {
             type: 'spline',
-            animation: Highcharts.svg, // don't animate in old IE
             plotShadow: true,
             plotBorderWidth: 2,
             events: {
@@ -210,11 +210,8 @@ function printRealTimeChar(data){
             }
         },
         tooltip: {
-            formatter: function() {
-                    return "Click para ver los <b> "+this.y+'</b> tweets de las '+ Highcharts.dateFormat('%H:%M', this.x) ;
-            },
-            crosshairs: true,
-	        shared: true
+            crosshairs: true
+//	        shared: true
         },
         legend: {
             enabled: true

@@ -144,8 +144,8 @@
 											</g:link>
 									    </li>
 									    <li id="${conceptInstance.id}-tweet">
-									    	<g:link controller='tweet' action="list" params="[conceptsId:conceptInstance.id]" >
-											<span class="menu-text"><g:message code="home.menu.concept.twitter"/></span>
+									   	   <g:link  controller="concept" action="tweetStats" id="${conceptInstance.id}"  >
+									    	<span class="menu-text"><g:message code="home.menu.concept.twitter"/></span>
 											</g:link>
 									    </li>
 									    <li id="${conceptInstance.id}-face">

@@ -62,7 +62,7 @@
 
 							<div class="widget-body">
 								<div class="widget-main padding-4">
-									<div id="tweetCharPie" style="width: 100%; min-width: 300px;"></div>
+									<div id="tweetCharPie" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 								</div>
 							</div>
 						</div>
@@ -134,7 +134,7 @@
 	</div>
 		<script type="text/javascript">
 		$(document).ready(function() {
-			inicializeColorChar();
+// 			inicializeColorChar();
 			activeItemMenuLevel1('home');
 			//real time
 			loadRealTime('${MentionType.ALL}');
