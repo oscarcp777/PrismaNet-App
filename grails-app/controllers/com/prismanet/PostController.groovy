@@ -17,7 +17,7 @@ class PostController extends GenericController{
 		params.max = Math.min(max ?: 6, 100)
 		def posts = postService.getPosts(filters,params)
 		
-		[postInstanceList: posts.resultList, postInstanceTotal: posts.totalCount, concept: concept]
+		[postList: posts.resultList, postTotal: posts.totalCount, concept: concept]
 	}
 	
    private def loadPostFilters(){

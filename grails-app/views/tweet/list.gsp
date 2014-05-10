@@ -9,7 +9,7 @@
 	<div class="page-content">
 		<g:render contextPath="../concept" template="tabTwitter"  model="['concept':concept,'tabMain':'','tabTweets':'active','tabChar':'','tabSentimental':'']"></g:render>
 		<div class="row well center-block ">
-       <g:render template="listTweets" model="['concept':concept,'tweetInstanceList':tweetInstanceList,'tweetInstanceTotal':tweetInstanceTotal]"></g:render>			
+       <g:render template="listTweets" model="['concept':concept,'tweetList':tweetInstanceList,'tweetTotal':tweetInstanceTotal]"></g:render>			
 		</div>
 	</div>
 	<script type="text/javascript">
