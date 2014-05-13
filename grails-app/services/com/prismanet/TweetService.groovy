@@ -1,6 +1,9 @@
 package com.prismanet
 
+import groovy.sql.Sql
+
 import org.springframework.transaction.annotation.Transactional
+import org.springframework.util.StopWatch
 
 import twitter4j.FilterQuery
 import twitter4j.ResponseList
@@ -31,7 +34,8 @@ class TweetService extends MentionService{
 		for (BasicDBObject tweetObj : tweets){
 			JSONObject obj = new JSONObject(tweetObj)
 			Status status = new StatusJSONImpl(obj)
-			//def start = System.currentTimeMillis()
+			StopWatch timer = new StopWatch()
+			timer.start()
 			Author author = TwitterAuthor.findByAccountName("@"+status.getUser().getScreenName())
 			if (!author){
 				author = new TwitterAuthor(name: status.getUser().getName(), twitterAuthorId: status.getUser().getId(), accountName:"@"+status.getUser().getScreenName(), followers:status.getUser().getFollowersCount(), sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()).save(validate:false)
@@ -44,8 +48,10 @@ class TweetService extends MentionService{
 				author.followers = status.getUser().getFollowersCount()
 				author.profileImage = status.getUser().getProfileImageURL()
 			}
-			//				print "Tiempo autor: " + (start - System.currentTimeMillis())/1000 + " segundos"
-			//				start = System.currentTimeMillis()
+			timer.stop()
+			log.info "tiempo autor: " + timer.getTotalTimeMillis()
+			timer = new StopWatch()
+			timer.start()
 			def retCount = 0
 			def favCount = 0
 			if (status.getRetweetedStatus()){
@@ -65,17 +71,27 @@ class TweetService extends MentionService{
 					if (!tweet.id){
 						tweet.save(validate:false)
 						log.info "Tweet guardado con ID :  " + tweet.id
+						timer.stop()
+						log.info "tiempo tweet: " + timer.getTotalTimeMillis()
 					}
 					if (!tweet.id){
 						tweet.discard()
 						throw ApplicationException.create(tweet)
 					}
-					//print "Tiempo tweet: " + (start - System.currentTimeMillis())/1000 + " segundos"
-					//start = System.currentTimeMillis()
-					concept.doAddToMentions(tweet)
-					//print "Tiempo concept: " + (start - System.currentTimeMillis())/1000 + " segundos"
+					if (timer.isRunning()){
+						log.info "no estopeo"
+						timer.stop()
+					}
+					timer = new StopWatch()
+					timer.start()
+					def sql = new Sql(sessionFactory.currentSession.connection())
+					sql.execute("insert into concept_mentions values(?,?)", [concept.id, tweet.id])
+//					concept.doAddToMentions(tweet)
+					timer.stop()
+					log.info  "tiempo concept: " + timer.getTotalTimeMillis()
 				}
 			}
+			
 		}
 		cleanUpGorm()
 	}

@@ -9,7 +9,7 @@ class Concept {
 	
 	String conceptName
 	Date dateCreated
-	Date lastUpdated
+//	Date lastUpdated
 	TwitterSetup twitterSetup
 	FacebookSetup facebookSetup
 	static hasMany = [mentions:Mention]
@@ -23,6 +23,9 @@ class Concept {
 		facebookSetup(nullable:true)
     }
 	
+	static mapping = {
+		version false
+	}
 	
 	public void addTweet(Tweet tweet){
 		def add = testAddTweet(tweet)

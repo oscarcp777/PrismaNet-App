@@ -1,6 +1,7 @@
 package com.prismanet
 
 import org.springframework.transaction.annotation.Transactional
+import org.springframework.util.StopWatch
 
 import com.mongodb.BasicDBObject
 import com.prismanet.GenericService.FilterType
@@ -12,6 +13,7 @@ import com.prismanet.exception.ApplicationException
 import facebook4j.Comment
 import facebook4j.internal.json.PostJSONImpl
 import facebook4j.internal.org.json.JSONObject
+import groovy.sql.Sql
 
 
 class PostService extends MentionService{
@@ -25,7 +27,7 @@ class PostService extends MentionService{
 		def index = 0
 		def List<Concept> concepts = Concept.list()
 		Date lastUpdated = getLastUpdated()
-
+		StopWatch timer = new StopWatch()
 		for (BasicDBObject postObj : posts){
 
 			JSONObject obj = new JSONObject(postObj)
@@ -37,7 +39,8 @@ class PostService extends MentionService{
 					if (lastUpdated.after(comment.createdTime))
 						continue
 				}
-				
+				timer = new StopWatch()
+				timer.start()
 				Author author = FacebookAuthor.findByName(comment.getFrom().getName().trim())
 				if (!author){
 					author = new FacebookAuthor(name:comment.getFrom().getName().trim(), facebookAuthorId: comment.getFrom().getId().trim()/*, sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()*/).save(validate:false)
@@ -46,7 +49,10 @@ class PostService extends MentionService{
 						throw ApplicationException.create(author)
 					}
 				}
-
+				timer.stop()
+				log.info "tiempo autor: " + timer.getTotalTimeMillis()
+				timer = new StopWatch()
+				timer.start()
 				def message = ""
 				if (comment.getMessage())
 					message = comment.getMessage().trim()
@@ -73,8 +79,19 @@ class PostService extends MentionService{
 								throw ApplicationException.create(post)
 							}
 							log.info "Post guardado con ID :  " + post.id
+							timer.stop()
+							log.info "tiempo post: " + timer.getTotalTimeMillis()
 						}
-						concept.doAddToMentions(post)
+						if (timer.isRunning()){
+							log.info "no estopeo"
+							timer.stop()
+						}
+						timer = new StopWatch()
+						timer.start()
+						def sql = new Sql(sessionFactory.currentSession.connection())
+						sql.execute("insert into concept_mentions values(?,?)", [concept.id, post.id])
+						timer.stop()
+						log.info  "tiempo concept: " + timer.getTotalTimeMillis()
 					}
 				}
 			}
