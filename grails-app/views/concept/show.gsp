@@ -127,20 +127,6 @@
 					</div>
 				</g:if>
 			
-				<g:if test="${conceptInstance?.lastUpdated}">
-				<div class="profile-info-row">
-					<div class="profile-info-name"><span id="lastUpdated-label" class="property-label">
-					<g:message code="concept.lastUpdated.label" default="Last Updated" />
-				    </span>
-					</div>
-				<div class="profile-info-value">
-					
-						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${conceptInstance?.lastUpdated}" /></span>
-					
-					</div>
-					</div>
-				</g:if>
-			
 			</div>
 			<g:form>
 				<div class="clearfix form-actions">

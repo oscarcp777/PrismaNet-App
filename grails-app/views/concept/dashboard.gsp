@@ -39,7 +39,7 @@
 
 							<div class="profile-info-value">
 								<span><g:formatDate format="dd/MM/yyyy HH:mm"
-										date="${concept.lastUpdated}" /></span>
+										date="${concept.dateCreated}" /></span>
 							</div>
 						</div>
 					</div>

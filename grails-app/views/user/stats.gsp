@@ -134,16 +134,16 @@
 	</div>
 		<script type="text/javascript">
 		$(document).ready(function() {
-// 			inicializeColorChar();
+			inicializeColorChar();
 			activeItemMenuLevel1('home');
 			//real time
-			loadRealTime('${MentionType.ALL}');
+			loadRealTime('${MentionType.TWITTER}');
 			//data por concepto
-			loadTweetCharPie('${MentionType.ALL}');
+			loadTweetCharPie('${MentionType.TWITTER}');
 			//Followers y likes por concepto
-			loadTotalFollowers('${MentionType.ALL}');
+			loadTotalFollowers('${MentionType.TWITTER}');
 			//data entre fechas
-			loadUserGroupedData('${MentionType.ALL}');
+			loadUserGroupedData('${MentionType.TWITTER}');
 		});
 	</script>
 	

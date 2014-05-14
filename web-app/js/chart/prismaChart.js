@@ -21,18 +21,18 @@ var doRequest = function(url,data,callback, errorHandler, method) {
 	            });
 };
 
-//function inicializeColorChar(){
-//	Highcharts.getOptions().colors = Highcharts.map(Highcharts
-//			.getOptions().colors, function(color) {
-//		return {
-//			radialGradient : {cx : 0.5,cy : 0.3,r : 0.7},
-//			stops : [
-//					[ 0, color ],
-//					[1,Highcharts.Color(color).brighten(-0.3).get('rgb') ] // darken
-//			]
-//		};
-//	});
-//}
+function inicializeColorChar(){
+	Highcharts.getOptions().colors = Highcharts.map(Highcharts
+			.getOptions().colors, function(color) {
+		return {
+			radialGradient : {cx : 0.5,cy : 0.3,r : 0.7},
+			stops : [
+					[ 0, color ],
+					[1,Highcharts.Color(color).brighten(-0.3).get('rgb') ] // darken
+			]
+		};
+	});
+}
 
 function getTweetCharPie(data){
 	doRequest('conceptTweetsJson',data,paintCharPie, null, 'GET');
@@ -107,15 +107,12 @@ function loadUserGroupedData(channel){
 function paintCharPie(dataJson) {
 	$(dataJson.container)
 			.highcharts(
-					{
+					   {
 						chart: {
-				            type: 'pie',
-				            options3d: {
-								enabled: true,
-				                alpha: 45,
-				                beta: 0
-				            }
-				        },
+			                plotBackgroundColor: null,
+			                plotBorderWidth: null,
+			                plotShadow: true
+			            },
 						title : {
 							text : dataJson.title
 						},
@@ -126,14 +123,12 @@ function paintCharPie(dataJson) {
 			                pie: {
 			                    allowPointSelect: true,
 			                    cursor: 'pointer',
-			                    depth: 35,
 			                    dataLabels: {
 			                        enabled: true,
 			                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
 			                        style: {
 			                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-			                        },
-			                        connectorColor: 'silver'
+			                        }
 			                    },
 			                    showInLegend: true
 			                }

@@ -43,7 +43,6 @@
 					
 						<g:sortableColumn property="dateCreated" title="${message(code: 'concept.dateCreated.label', default: 'Date Created')}" />
 					
-						<g:sortableColumn property="lastUpdated" title="${message(code: 'concept.lastUpdated.label', default: 'Last Updated')}" />
 					
 					</tr>
 				</thead>
@@ -61,7 +60,6 @@
 					
 						<td><g:formatDate date="${conceptInstance.dateCreated}" /></td>
 					
-						<td><g:formatDate date="${conceptInstance.lastUpdated}" /></td>
 					
 					</tr>
 				</g:each>

@@ -38,6 +38,9 @@
 						<g:sortableColumn property="excludedAccounts" title="${message(code: 'twitterSetup.excludedAccounts.label', default: 'Excluded Accounts')}" />
 					
 						<g:sortableColumn property="keywords" title="${message(code: 'twitterSetup.keywords.label', default: 'Keywords')}" />
+						<g:sortableColumn property="neutralHashtags" title="${message(code: 'twitterSetup.neutralHashtags.label', default: 'neutralHashtags')}" />
+						<g:sortableColumn property="positiveHashtags" title="${message(code: 'twitterSetup.positiveHashtags.label', default: 'positiveHashtags')}" />
+						<g:sortableColumn property="negativeHashtags" title="${message(code: 'twitterSetup.negativeHashtags.label', default: 'negativeHashtags')}" />
 					
 					</tr>
 				</thead>
@@ -45,11 +48,13 @@
 				<g:each in="${twitterSetupInstanceList}" status="i" var="twitterSetupInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${twitterSetupInstance.id}">${fieldValue(bean: twitterSetupInstance, field: "includedAccounts")}</g:link></td>
-					
+						<td><g:link action="show" id="${twitterSetupInstance.id}">
+						${fieldValue(bean: twitterSetupInstance, field: "includedAccounts")}</g:link></td>
 						<td>${fieldValue(bean: twitterSetupInstance, field: "excludedAccounts")}</td>
-					
 						<td>${fieldValue(bean: twitterSetupInstance, field: "keywords")}</td>
+						<td>${fieldValue(bean: twitterSetupInstance, field: "neutralHashtags")}</td>
+						<td>${fieldValue(bean: twitterSetupInstance, field: "positiveHashtags")}</td>
+						<td>${fieldValue(bean: twitterSetupInstance, field: "negativeHashtags")}</td>
 					
 					</tr>
 				</g:each>

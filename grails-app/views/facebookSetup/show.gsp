@@ -48,6 +48,17 @@
 						
 					</div>
 					</div>
+				<div class="profile-info-row">
+					<div class="profile-info-name"><span id="accounts-label" class="property-label">
+					<g:message code="facebookSetup.accounts.label" default="Accounts" />
+				    </span>
+					</div>
+				<div class="profile-info-value">
+					
+						<span class="property-value" aria-labelledby="accounts-label"><g:fieldValue bean="${facebookSetupInstance}" field="accounts"/></span>
+						
+					</div>
+					</div>
 				</g:if>
 			
 			</div>

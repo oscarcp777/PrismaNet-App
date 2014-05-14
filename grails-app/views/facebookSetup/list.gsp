@@ -32,13 +32,19 @@
 			<table class="table table-condensed table-bordered table-hover table-striped dataTable">
 				<thead>
 					<tr>
+								<g:sortableColumn property="accounts" title="${message(code: 'facebookSetup.accounts.label', default: 'Accounts')}" />
 					
+						<g:sortableColumn property="keywords" title="${message(code: 'facebookSetup.keywords.label', default: 'Keywords')}" />
+			
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${facebookSetupInstanceList}" status="i" var="facebookSetupInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+						<td><g:link action="show" id="${facebookSetupInstance.id}">
+						${fieldValue(bean: facebookSetupInstance, field: "accounts")}</g:link></td>
 					
+						<td>${fieldValue(bean: facebookSetupInstance, field: "keywords")}</td>
 					</tr>
 				</g:each>
 				</tbody>

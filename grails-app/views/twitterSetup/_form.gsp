@@ -57,7 +57,50 @@
 						</span>
 					</div>
 			</div>
+			<div class="form-group fieldcontain ${hasErrors(bean: twitterSetupInstance, field: 'neutralHashtags', 'error')} ">
+				<label class="col-sm-3 control-label no-padding-right"
+					for="neutralHashtags"> <g:message
+						code="twitterSetup.neutralHashtags.label" default="neutralHashtags" />
 
+				</label>
+			
+					<div class="col-sm-9">
+						<span class="input-icon input-icon-right"> 
+						<g:textField name="neutralHashtags"
+					value="${twitterSetupInstance?.neutralHashtags}" />
+						</span>
+					</div>
+			</div>
+			<div
+				class="form-group fieldcontain ${hasErrors(bean: twitterSetupInstance, field: 'positiveHashtags', 'error')} ">
+				<label class="col-sm-3 control-label no-padding-right"
+					for="positiveHashtags"> <g:message
+						code="twitterSetup.positiveHashtags.label" default="positiveHashtags" />
+
+				</label>
+			
+					<div class="col-sm-9">
+						<span class="input-icon input-icon-right"> 
+						<g:textField name="positiveHashtags"
+					value="${twitterSetupInstance?.positiveHashtags}" />
+						</span>
+					</div>
+			</div>
+				<div
+				class="form-group fieldcontain ${hasErrors(bean: twitterSetupInstance, field: 'negativeHashtags', 'error')} ">
+				<label class="col-sm-3 control-label no-padding-right"
+					for="negativeHashtags"> <g:message
+						code="twitterSetup.negativeHashtags.label" default="negativeHashtags" />
+
+				</label>
+			
+					<div class="col-sm-9">
+						<span class="input-icon input-icon-right"> 
+						<g:textField name="negativeHashtags"
+					value="${twitterSetupInstance?.negativeHashtags}" />
+						</span>
+					</div>
+			</div>
 
 			<div class="space-4"></div>
 

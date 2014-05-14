@@ -77,7 +77,45 @@
 					</div>
 					</div>
 				</g:if>
-			
+				<g:if test="${twitterSetupInstance?.neutralHashtags}">
+				<div class="profile-info-row">
+					<div class="profile-info-name"><span id="neutralHashtags-label" class="property-label">
+					<g:message code="twitterSetup.neutralHashtags.label" default="neutralHashtags" />
+				    </span>
+					</div>
+				<div class="profile-info-value">
+					
+						<span class="property-value" aria-labelledby="neutralHashtags-label"><g:fieldValue bean="${twitterSetupInstance}" field="neutralHashtags"/></span>
+					
+					</div>
+					</div>
+				</g:if>
+				<g:if test="${twitterSetupInstance?.positiveHashtags}">
+				<div class="profile-info-row">
+					<div class="profile-info-name"><span id="positiveHashtags-label" class="property-label">
+					<g:message code="twitterSetup.positiveHashtags.label" default="positiveHashtags" />
+				    </span>
+					</div>
+				<div class="profile-info-value">
+					
+						<span class="property-value" aria-labelledby="positiveHashtags-label"><g:fieldValue bean="${twitterSetupInstance}" field="positiveHashtags"/></span>
+					
+					</div>
+					</div>
+				</g:if>
+				<g:if test="${twitterSetupInstance?.negativeHashtags}">
+				<div class="profile-info-row">
+					<div class="profile-info-name"><span id="negativeHashtags-label" class="property-label">
+					<g:message code="twitterSetup.negativeHashtags.label" default="negativeHashtags" />
+				    </span>
+					</div>
+				<div class="profile-info-value">
+					
+						<span class="property-value" aria-labelledby="negativeHashtags-label"><g:fieldValue bean="${twitterSetupInstance}" field="negativeHashtags"/></span>
+					
+					</div>
+					</div>
+				</g:if>
 			</div>
 			<g:form>
 				<div class="clearfix form-actions">

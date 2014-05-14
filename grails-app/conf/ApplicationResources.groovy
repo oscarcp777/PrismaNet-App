@@ -27,7 +27,6 @@ modules = {
 		resource url:'js/chart/highcharts.js'
 		resource url:'js/chart/prismaChart.js'
 		resource url:'js/chart/exporting.js'
-		resource url:'js/chart/highcharts-3d.js'
 		
 	}
 	datepicker{

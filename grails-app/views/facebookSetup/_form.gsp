@@ -19,8 +19,22 @@
 				</span>
 			</div>
 		</div>
+		<div class="space-4"></div>
+			<div
+			class="form-group fieldcontain ${hasErrors(bean: facebookSetupInstance, field: 'accounts', 'error')} ">
+			<label class="col-sm-3 control-label no-padding-right" for="accounts">
+				<g:message code="facebookSetup.accounts.label" default="accounts" />
 
-			<div class="space-4"></div>
+			</label>
+
+			<div class="col-sm-9">
+				<span class="input-icon input-icon-right"> <g:textField
+						name="accounts" value="${facebookSetupInstance?.accounts}" />
+				</span>
+			</div>
+		</div>
+			
 
 		</div>
+		<div class="space-4"></div>
 	</div>
