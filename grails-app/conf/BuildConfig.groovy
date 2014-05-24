@@ -48,7 +48,7 @@ grails.project.dependency.resolution = {
   		compile 'org.facebook4j:facebook4j-core:2.0.5-Prisma'
 		  
 		compile 'org.mongodb:mongo-java-driver:2.12.0-rc3'
-	  
+	    compile 'org.apache.solr:solr-solrj:4.6.0'
     }
 
     plugins {

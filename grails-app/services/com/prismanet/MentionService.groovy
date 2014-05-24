@@ -1,11 +1,18 @@
 package com.prismanet
 
+import org.apache.solr.client.solrj.SolrQuery
+import org.apache.solr.client.solrj.SolrServer
+import org.apache.solr.client.solrj.response.QueryResponse
+import org.apache.solr.common.SolrDocumentList
+
 import com.prismanet.GenericService.FilterType
 import com.prismanet.GenericService.OrderType
 import com.prismanet.context.AttributeContext
-import com.prismanet.context.TweetAttributeContext
+import com.prismanet.context.Filter
+import com.prismanet.context.MentionAttributeContext
 import com.prismanet.sentiment.Opinion
 import com.prismanet.sentiment.OpinionValue
+import com.prismanet.utils.SolrUtil
 
 class MentionService extends GenericCoreService{
 
@@ -82,6 +89,39 @@ class MentionService extends GenericCoreService{
 		
 		[resultList:resultList,totalCount:auxList.totalCount]
 		
+	}
+	
+	
+	def getRelevantWords(List<Filter> filters){
+		AttributeContext context = new MentionAttributeContext()
+		SolrServer solr = SolrUtil.getSolrServerInstance()
+		SolrQuery query = new SolrQuery()
+		query.setQuery("*:*")
+		query.setFacet(true)
+		query.setFacetLimit(15)
+		query.addFacetField("mentionContent")
+		query.setRows(1)
+		
+		filters?.each { filter ->
+			if (context.hasPropertyRelationForAttribute(filter.attribute)) {
+				if (filter.attribute == 'conceptsId')
+					query.addFilterQuery("conceptId:" + filter.value)
+				if (filter.attribute == "dateMinute")
+					query.addFilterQuery("dateByMinute:" + filter.value)
+				if (filter.attribute ==  "dateCreated")
+					query.addFilterQuery("date:" + filter.value)
+				if (filter.attribute ==  "dateHour")
+					query.addFilterQuery("dateByHour:" + filter.value)
+				
+			}
+		}
+
+		QueryResponse respSolr = solr.query(query)
+		def result = []
+		respSolr.getFacetFields().get(0).getValues().each{
+			result.add([name:it.getName(),count:it.getCount()])
+		}
+		result
 	}
 	
 }
