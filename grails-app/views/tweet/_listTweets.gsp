@@ -112,6 +112,10 @@
 					</g:each>
 
 				</ul>
+				Palabra---------Cantidad de apariciones
+				<g:each in="${relevantWords}" status="i" var="tweet">
+					<li class="out">${tweet.name}  =  ${tweet.count}</li>
+				</g:each>
 
 				<div class="col-lg-8" style="text-align: center;">
 					<ul class="pagination pagination-sm">

@@ -98,8 +98,8 @@ grails.hibernate.cache.queries = false
 grails.hibernate.pass.readonly = false
 // configure passing read-only to OSIV session by default, requires "singleSession = false" OSIV mode
 grails.hibernate.osiv.readonly = false
-grails.jobs.disable = true
 grails.twitter.offline = false
+solr.server.url = "http://localhost:8983/solr/mention"
 environments {
     development {
         grails.logging.jul.usebridge = true
@@ -196,3 +196,4 @@ grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.prismanet
 grails.plugins.springsecurity.authority.className = 'com.prismanet.model.security.SecRole'
 grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/home'
 grails.plugins.springsecurity.securityConfigType = "Annotation"
+

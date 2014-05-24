@@ -39,9 +39,11 @@ class TweetController extends GenericController{
 		params.max = Math.min(max ?: 6, 100)
 		def tweets = tweetService.getTweets(filters,params)
 		
+		def relevantWords = tweetService.getRelevantWords(filters)
+		
 		if(!grailsApplication.config.grails.twitter.offline)
 			tweetService.loadAvatarUsers(tweets.resultList)
-		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"]]
+		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"], relevantWords:relevantWords]
 	}
 	
 	def randomList(){
