@@ -20,11 +20,11 @@
 		<div class="nav" role="navigation">
 			<g:link class="btn btn-info btn-sm" action="list">
 				<g:message code="default.list.label" args="[entityName]" />
-				<i class="fa fa-arrow-right icon-on-right bigger-110"></i>
+				<i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
 			</g:link>
 			<g:link class="btn btn-info btn-sm" action="create">
 				<g:message code="default.new.label" args="[entityName]" />
-				<i class="fa fa-arrow-right icon-on-right bigger-110"></i>
+				<i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
 			</g:link>
 		</div>
 		<hr>
@@ -72,7 +72,7 @@
 					<div class="col-md-offset-3 col-md-9">
 					    <g:hiddenField name="id" value="\${${propertyName}?.id}" />
 						<g:link class="btn btn-info" action="edit" id="\${${propertyName}?.id}">
-						<i class="fa fa-ok bigger-110"></i>
+						<i class="ace-icon fa fa-ok bigger-110"></i>
 						<g:message code="default.button.edit.label" default="Edit" />
 					</g:link>
 						&nbsp; &nbsp;

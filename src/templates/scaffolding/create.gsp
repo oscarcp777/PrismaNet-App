@@ -16,7 +16,7 @@
 						</div>
 		<div class="nav" role="navigation">
 			<g:link  class="btn btn-info btn-sm" action="list" ><g:message code="default.list.label" args="[entityName]" />
-			<i class="fa fa-arrow-right icon-on-right bigger-110"></i>
+			<i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
 			</g:link>
 		</div>
 		<div id="create-${domainClass.propertyName}" class="content scaffold-create" role="main">

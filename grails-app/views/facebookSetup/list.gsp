@@ -13,7 +13,7 @@
 							<h1>
 								<g:message code="default.list.label" args="[entityName]" />
 								<small>
-									<i class="fa fa-angle-double-right"></i>
+									<i class="ace-icon fa fa-angle-double-right"></i>
 									<g:message code="default.list.label.and" />
 								</small>
 							</h1>
@@ -21,7 +21,7 @@
 		<div class="nav" role="navigation">
 			<g:link class="btn btn-sm btn-info" action="create">
 				<g:message code="default.new.label" args="[entityName]" />
-				<i class="fa fa-arrow-right  bigger-110"></i>
+				<i class="ace-icon fa fa-arrow-right  bigger-110"></i>
 			</g:link>
 		</div>
 		<hr>

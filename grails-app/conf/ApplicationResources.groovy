@@ -7,12 +7,12 @@ modules = {
 		resource url:'css/font-awesome.css'
 	}
 	ace{
-		resource url:'css/ace/ace.css'
-		resource url:'css/ace/ace-skin.css'
+		resource url:'css/ace/ace.min.css'
+		resource url:'css/ace/ace-skins.min.css'
 		resource url:'css/prisma.css'
-		resource url:'js/ace/ace.js'
-		resource url:'js/ace/ace-extra.js'
-		resource url:'js/ace/ace-elements.js'
+		resource url:'js/ace/ace.min.js'
+		resource url:'js/ace/ace-extra.min.js'
+		resource url:'js/ace/ace-elements.min.js'
 		resource url:'js/home.js',disposition: 'head'
 		resource url:'js/ace/bootstrap-datepicker.min.js'
 		

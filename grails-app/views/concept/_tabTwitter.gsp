@@ -1,13 +1,19 @@
-<div class="page-header">
-			<h1>
-				<i class="fa fa-twitter"></i>
+		<div class="page-header">
+			<h1 id="headerMain">
+				<i class="ace-icon glyphicon glyphicon-cloud-download"></i> ${concept.conceptName}
+				
+			<small id="headerSmall">
+			<i class="ace-icon fa fa-angle-double-right"></i>
+				
 				<g:message code="dashboard.concetp.twitter.title" args="[concept.conceptName]"/>
+			</small>
 			</h1>
+			
 		</div>
 	<ul class="nav nav-tabs padding-12 tab-color-blue">
 		<li class="${tabMain}">
 		<a  href="#"> 
-		<i class="fa fa-dashboard grey bigger-120"></i> <g:message code="dashborad.tab.main"/>
+		<i class="ace-icon fa fa-dashboard grey bigger-120"></i> <g:message code="dashborad.tab.main"/>
 		</a>
 		</li>
 
@@ -34,3 +40,5 @@
 		
 	</ul>
 	<br>
+
+		

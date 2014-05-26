@@ -33,7 +33,10 @@ function inicializeColorChar(){
 		};
 	});
 }
-
+function setDataMenu(context,state){
+	var data = {"state":state}
+	doRequest(context+'/home/setDataMenu',data,null, null, 'GET');
+}
 function getTweetCharPie(data){
 	doRequest('conceptTweetsJson',data,paintCharPie, null, 'GET');
 }
@@ -96,13 +99,14 @@ function loadTotalFollowers(channel){
 }
 function lineaChartUser(start, end,rangeSelect) {
     $('#pickertUser span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
-    var data = { "div":'#lineaChartUser',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
+    var data = { 'channel':$('#lineaChartUser').data('channel'),"div":'#lineaChartUser',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
     getUserGroupedTweets(data);
 }
 function loadUserGroupedData(channel){
 	loadDatepicker('pickertUser',lineaChartUser);
 	var data = {'channel':channel, "div":'#lineaChartUser',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 	getUserGroupedTweets(data);
+	$('#lineaChartUser').data('channel',channel);
 }
 function paintCharPie(dataJson) {
 	$(dataJson.container)
@@ -117,7 +121,7 @@ function paintCharPie(dataJson) {
 							text : dataJson.title
 						},
 						tooltip: {
-			        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+			        	    pointFormat: '{series.name}: <b>{point.y}</b>'
 			            },
 			            plotOptions: {
 			                pie: {

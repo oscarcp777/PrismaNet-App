@@ -16,7 +16,7 @@
 										<div class="inline position-relative">
 											<a href=" javascript:void(0);" class="btn btn-link dropdown-toggle"
 												data-toggle="dropdown"> <i
-												class="fa fa-plus-circle bigger-120 blue"></i> <g:message code="tweets.list.more.data"/>
+												class="ace-icon fa fa-plus-circle bigger-120 blue"></i> <g:message code="tweets.list.more.data"/>
 											</a>
 
 											
@@ -75,21 +75,21 @@
 												onclick="changeState('${tweet.tweet.id}Pos','${createLink(controller:'tweet', action:'saveOpinion')}','${tweet.tweet.id}','${concept.id}', 'POS');"  
 												data-original-title="" 
 												title="Positivo"> 
-												<i class="fa fa-check-square" title="Positivo" ></i>
+												<i class="ace-icon fa fa-check-square" title="Positivo" ></i>
 											</a>
 											<a href=" javascript:void(0);"  id="${tweet.tweet.id}Neg" 
 												class="icon last tooltips" 
 												onclick="changeState('${tweet.tweet.id}Neg', '${createLink(controller:'tweet', action:'saveOpinion')}','${tweet.tweet.id}','${concept.id}','NEG');" 
 												data-original-title="" 
 												title="Negativo"> 
-												<i class="fa fa-minus-square" ></i>
+												<i class="ace-icon fa fa-minus-square" ></i>
 											</a>
 			     							<a href="javascript:void(0);" id="${tweet.tweet.id}Que" 
 			     								class="icon last tooltips" 
 			     								onclick="changeState('${tweet.tweet.id}Que', '${createLink(controller:'tweet', action:'saveOpinion')}','${tweet.tweet.id}','${concept.id}','NEU');" 
 			     								data-original-title="" 
 			     								title="Indefinido"> 
-												<i class="fa fa-question-circle"></i>
+												<i class="ace-icon fa fa-question-circle"></i>
 											</a>
 										</div>
 									</div>
@@ -97,9 +97,9 @@
 										<div class="reply-icons pull-right">
 
 											<a href="" class="icon hide_tweet" data-original-title="">
-												${tweet.tweet.retweetCount} <i class="fa fa-retweet fs1" title="retweet"></i>
+												${tweet.tweet.retweetCount} <i class="ace-icon fa fa-retweet fs1" title="retweet"></i>
 											</a> <a href="" class="icon last" data-original-title=""> 
-												${tweet.tweet.favoriteCount}<i class="fa fa-star fs1" title="favorito"></i>
+												${tweet.tweet.favoriteCount}<i class="ace-icon fa fa-star fs1" title="favorito"></i>
 											</a>
 										</div>
 									</div>
@@ -112,10 +112,6 @@
 					</g:each>
 
 				</ul>
-				Palabra---------Cantidad de apariciones
-				<g:each in="${relevantWords}" status="i" var="tweet">
-					<li class="out">${tweet.name}  =  ${tweet.count}</li>
-				</g:each>
 
 				<div class="col-lg-8" style="text-align: center;">
 					<ul class="pagination pagination-sm">

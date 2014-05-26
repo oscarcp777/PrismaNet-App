@@ -4,16 +4,16 @@
 <meta name="layout" content="home">
 </head>
 <body>
-
-
-	<div class="page-header">
-		<h1>
-			<i class="fa fa-cloud-download"></i>
-			<g:message code="dashboard.concetp.title" />
-			${concept.conceptName}
-		</h1>
-	</div>
-
+		<div class="page-header">
+			<h1 id="headerMain">
+				<i class="ace-icon glyphicon glyphicon-cloud-download"></i> ${concept.conceptName}
+			<small id="headerSmall">
+								<i class="ace-icon fa fa-angle-double-right"></i>
+								<g:message code="dashboard.concetp.title" />
+			</small>
+			</h1>
+			
+		</div>
 
 	<div class="page-content">
 		<div class="row">
@@ -156,8 +156,8 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-			activeItemMenuLevel2('${concept.id}','${concept.id}-dash');
-	 
+			activeItemMenuLevel2('${concept.id}','${concept.id}-dash','${concept.conceptName}');
+	        
 	</script>
 </body>
 </html>

@@ -1,152 +1,23 @@
 <html>
 <head>
 <meta name="layout" content="home" />
-<link rel="stylesheet" href="${resource(dir: 'css', file: 'twitter.css')}" type="text/css">
-	
+<link rel="stylesheet"
+	href="${resource(dir: 'css', file: 'twitter.css')}" type="text/css">
 </head>
 <body>
-		
-		<g:render template="tabTwitter"  model="['concept':concept,'tabMain':'','tabTweets':'','tabChar':'active','tabSentimental':'']"></g:render>
-		
+	<g:render template="tabTwitter" model="['concept':concept,'tabMain':'','tabTweets':'','tabChar':'active','tabSentimental':'']"></g:render>
+
 	<div class="page-content">
-		
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
-						<div class="widget-box">
-							<div class="widget-header header-color-blue">
-								<h5>
-									<span class="glyphicon glyphicon-stats"> </span>
-									<g:message code="Tweets en tiempo real"/>
-								</h5>
-
-								<div class="widget-toolbar">
-									<a href="#" data-action="collapse"> <i
-										class="1 bigger-125 fa fa-chevron-up"></i>
-									</a>
-								</div>
-
-
-							</div>
-
-							<div class="widget-body">
-								<div class="widget-body-inner" style="display: block;">
-									<div class="widget-main">
-										<div id="realTimeChar" style="height: 400px; min-width: 310px"></div>
-									</div>
-
-
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
-						<div class="widget-box">
-							<div class="widget-header header-color-blue">
-								<h5>
-									<span class="glyphicon glyphicon-stats"> </span> 
-									<g:message code="user.stats.tweets.date"/>
-								</h5>
-								<div class="widget-toolbar input-group ">
-									<div id="tweetPickert" class="btn btn-primary date-picker">
-										<i class="fa fa-calendar"></i> <span class="date-range"></span>
-										<i class="fa fa-chevron-down"></i>
-									</div>
-								</div>
-								<div class="widget-toolbar">
-									<a href="#" data-action="collapse"> <i
-										class="1 bigger-125 fa fa-chevron-up"></i>
-									</a>
-
-								</div>
-
-
-							</div>
-
-							<div class="widget-body">
-								<div class="widget-body-inner" style="display: block;">
-									<div class="widget-main">
-										<div id="tweetsChart" style="height: 400px; min-width: 310px"></div>
-									</div>
-
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
-						<div class="widget-box">
-							<div class="widget-header header-color-blue">
-								<h5>
-									<span class="glyphicon glyphicon-stats"> </span>
-									<g:message code="concept.stats.scope.date"/>
-								</h5>
-								<div class="widget-toolbar input-group ">
-									<div id="weightPickert" class="btn btn-primary date-picker">
-										<i class="fa fa-calendar"></i> <span class="date-range"></span>
-										<i class="fa fa-chevron-down"></i>
-									</div>
-								</div>
-								<div class="widget-toolbar">
-									<a href="#" data-action="collapse"> <i
-										class="1 bigger-125 fa fa-chevron-up"></i>
-									</a>
-
-								</div>
-
-
-							</div>
-
-							<div class="widget-body">
-								<div class="widget-body-inner" style="display: block;">
-									<div class="widget-main">
-										<div id="weightChart" style="height: 400px; min-width: 310px"></div>
-									</div>
-
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
-						<div class="widget-box">
-							<div class="widget-header header-color-blue">
-								<h5>
-									<i class="fa fa-group "></i>
-									<g:message code="concept.author.more.followers"/>
-								</h5>
-								<div class="widget-toolbar input-group ">
-									<div id="authorPickert" class="btn btn-primary date-picker">
-										<i class="fa fa-calendar"></i> <span class="date-range"></span>
-										<i class="fa fa-chevron-down"></i>
-									</div>
-								</div>
-							</div>
-
-							<div class="widget-body">
-								<div class="widget-body-inner" style="display: block;">
-									<div class="widget-main">
-										<div  style="min-width: 310px">
-											<div class="profile-users clearfix" id="relevantAuthors">
-												
-											</div>
-    									</div>
-									</div>
-
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-
+				<g:render contextPath="../user" template="chart" model="['divPickert':'disable','callback':'disable','titleChar':'user.stats.tweets.real.time','div':'realTimeChar']"></g:render>
+				<g:render contextPath="../user" template="chart" model="['divPickert':'tweetPickert','callback':'disable','titleChar':'user.stats.tweets.date','div':'tweetsChart']"></g:render>
+				<g:render contextPath="../user" template="chart" model="['divPickert':'weightPickert','callback':'disable','titleChar':'concept.stats.scope.date','div':'weightChart']"></g:render>
+				<g:render contextPath="../user" template="chart" model="['divPickert':'authorPickert','callback':'disable','titleChar':'concept.author.more.followers','div':'relevantAuthors']"></g:render>
 			</div>
 		</div>
 	</div>
-	
+
 
 	<script type="text/javascript">
 
@@ -174,7 +45,7 @@
 		  loadDatepicker('weightPickert',loadChartLineForWeightPickert);
 		  loadDatepicker('authorPickert',loadAuthorPickert);
 		  
-		  	activeItemMenuLevel2(id,'${concept.id}-tweet');
+		  	activeItemMenuLevel2(id,'${concept.id}-tweet','${concept.conceptName}');
 		  	loadRealTimeConcept(${concept.id});
 		   
 		   var dataTweets = {"id":id, "div":'#tweetsChart',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};

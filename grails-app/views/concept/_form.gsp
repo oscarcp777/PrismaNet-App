@@ -57,7 +57,7 @@
 								from="${com.prismanet.FacebookSetup.list()}" optionKey="id"
 								value="${conceptInstance?.facebookSetup?.id}"
 								 noSelection="['null': '']" /><i
-							class="fa fa-facebook blue"></i>
+							class="ace-icon fa fa-facebook blue"></i>
 						</span>
 					</div>
 				</div>
@@ -76,7 +76,7 @@
 								from="${com.prismanet.TwitterSetup.list()}" optionKey="id"
 								value="${conceptInstance?.twitterSetup?.id}" 
 								noSelection="['null': '']" /> <i
-							class="fa fa-twitter light-blue"></i>
+							class="ace-icon fa fa-twitter light-blue"></i>
 						</span>
 					</div>
 				</div>

@@ -9,16 +9,16 @@
 	<div id="wrapper">
 		<div id="sidebar">
 			<a class="btn-navbar" data-toggle="collapse"
-				data-target=".navbar-collapse"> <span class="fa fa-bars"></span>
+				data-target=".navbar-collapse"> <span class="ace-icon fa fa-bars"></span>
 			</a>
 			<nav id="nav" class="navigation" role="navigation">
 				<ul class="unstyled">
-					<li class="active" data-section="1"><i class="fa fa-home"></i>
+					<li class="active" data-section="1"><i class="ace-icon fa fa-home"></i>
 						<span><g:message code="public.index.home"/> </span></li>
-					<li data-section="2" class=""><i class="fa fa-clock-o"></i> <span><g:message code="public.index.real.time"/></span></li>
-					<li data-section="3" class=""><i class="fa fa-laptop"></i> <span><g:message code="public.index.ideal.for"/></span></li>
-					<li data-section="4" class=""><i class="fa fa-pencil"></i> <span><g:message code="public.index.features"/></span></li>
-					<li data-section="5" class="last"><i class="fa fa-envelope"></i>
+					<li data-section="2" class=""><i class="ace-icon fa fa-clock-o"></i> <span><g:message code="public.index.real.time"/></span></li>
+					<li data-section="3" class=""><i class="ace-icon fa fa-laptop"></i> <span><g:message code="public.index.ideal.for"/></span></li>
+					<li data-section="4" class=""><i class="ace-icon fa fa-pencil"></i> <span><g:message code="public.index.features"/></span></li>
+					<li data-section="5" class="last"><i class="ace-icon fa fa-envelope"></i>
 						<span><g:message code="public.index.tellme"/></span></li>
 				</ul>
 			</nav>
@@ -38,14 +38,14 @@
 								<div class="navbar-header">
 									<button type="button" class="navbar-toggle"
 										data-toggle="collapse" data-target=".navbar-collapse">
-										<span class="fa fa-bar"></span> <span class="fa fa-bar"></span>
-										<span class="fa fa-bar"></span>
+										<span class="ace-icon fa fa-bar"></span> <span class="ace-icon fa fa-bar"></span>
+										<span class="ace-icon fa fa-bar"></span>
 									</button>
 
 									<div class="brand">
 										<a class="logoHolder" title="return to home page" href="#">
 											<span class="logoFirst">
-											<i class="fa fa-filter" style="font-weight:bold;font-size:0.8em;"></i>
+											<i class="ace-icon fa fa-filter" style="font-weight:bold;font-size:0.8em;"></i>
 											<g:message code="general.title.prism"/></span><g:message code="general.title.net"/>
 											
 										</a>
@@ -85,7 +85,7 @@
 									<img src="img/analytics_howitworks.png" alt="como trabaja">
 									<div class="video">
 										<a href="https://www.youtube.com/embed/s8z3UVn3Xhc?vq=hd720" target="_blank"
-											class="open-trailer"><i class="fa fa-play"></i><span>Ver Demo</span></a>
+											class="open-trailer"><i class="ace-icon fa fa-play"></i><span>Ver Demo</span></a>
 									</div>
 								</div>
 							</section>
@@ -464,13 +464,13 @@
 						<div class="col-sm-4 col-md-4" id="article-id">
 							<ul class="article-tags">
 								<li data-blog="blog" class=""><i
-									class="fa fa-arrow-circle-right"></i>Blog</li>
+									class="ace-icon fa fa-arrow-circle-right"></i>Blog</li>
 								<li data-blog="dribbble" class=""><i
-									class="fa fa-arrow-circle-right"></i>Monitoreo</li>
+									class="ace-icon fa fa-arrow-circle-right"></i>Monitoreo</li>
 								<li data-blog="instagram" class=""><i
-									class="fa fa-arrow-circle-right"></i>Features Destacados</li>
+									class="ace-icon fa fa-arrow-circle-right"></i>Features Destacados</li>
 								<li data-blog="github" class="current"><i
-									class="fa fa-arrow-circle-right"></i>Reportes</li>
+									class="ace-icon fa fa-arrow-circle-right"></i>Reportes</li>
 
 							</ul>
 						</div>
@@ -486,7 +486,7 @@
 									que …</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external" target="_blank">Leer más <i
-											class="fa fa-angle-double-right"></i></a>
+											class="ace-icon fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
@@ -498,7 +498,7 @@
 									 transmisión sino también por el</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer más <i
-											class="fa fa-angle-double-right"></i></a>
+											class="ace-icon fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
@@ -519,7 +519,7 @@
 									</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer mas <i
-											class="fa fa-angle-double-right"></i></a>
+											class="ace-icon fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
@@ -530,7 +530,7 @@
 									</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer mas  <i
-											class="fa fa-angle-double-right"></i></a>
+											class="ace-icon fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
@@ -548,7 +548,7 @@
 										<img class="img-responsive" src="img/features_ff_hl_4.jpg" alt="">
 									</p>
 									<div class="pull-right read-more">
-										Leer más <i class="fa fa-angle-double-right"></i>
+										Leer más <i class="ace-icon fa fa-angle-double-right"></i>
 									</div>
 								</div>
 								<!-- /span6 -->
@@ -560,7 +560,7 @@
 									</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer más <i
-											class="fa fa-angle-double-right"></i></a>
+											class="ace-icon fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
@@ -579,7 +579,7 @@
 									</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer más <i
-											class="fa fa-angle-double-right"></i></a>
+											class="ace-icon fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
@@ -590,7 +590,7 @@
 									</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer más <i
-											class="fa fa-angle-double-right"></i></a>
+											class="ace-icon fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
@@ -729,7 +729,7 @@
 
 								<input type="hidden" name="save" value="contact">
 								<button type="submit" class="btn-inverse pull-right">
-									Envíar <span>Mensaje</span> <i class="fa fa-arrow-circle-right"></i>
+									Envíar <span>Mensaje</span> <i class="ace-icon fa fa-arrow-circle-right"></i>
 								</button>
 							</form>
 							<!-- /form -->

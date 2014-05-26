@@ -4,19 +4,49 @@
 
 </head>
 <body>
-	<div style="margin-top: 80px;" class="container">
 
-		<div class="col-sm-12 widget-container-span ui-sortable">
-			<div class="widget-box">
-				<div class="widget-header widget-hea1der-small header-color-grey">
-					<h6>Controllers</h6>
+<g:javascript src="cloud/d3/d3.js"  />
+<g:javascript src="cloud/d3/d3.layout.cloud.js"  />
+		<div class="page-header">
+			<h1>
+				<i class="ace-icon fa fa-bar-chart-o"></i> <g:message code="dashborad.tab.main"/>
+				<small>
+								<i class="ace-icon fa fa-angle-double-right"></i>
+								<g:message code="user.stats.title"/>
+			</small>
+			</h1>
+			
+		</div>
+	<div class="container">
+	 <div id="example" style="width: 550px; height: 350px;"></div>
+			<div class="widget-box widget-color-dark light-border">
+				<div class="widget-header">
+					<h5 class="widget-title smaller">With Badge</h5>
+
+					<div class="widget-toolbar">
+						<span class="badge badge-danger">Alert</span>
+					</div>
+				</div>
+
+				<div class="widget-body">
+					<div class="widget-main padding-6">
+						<div class="alert alert-info" id="charCloud"></div>
+					</div>
+				</div>
+			</div>
+			<div class="widget-box widget-color-blue light-border">
+				<div class="widget-header header-color-grey">
+					<h5 class="widget-title bigger lighter">
+												<i class="ace-icon fa fa-table"></i>
+												Tables &amp; Colors
+											</h5>
 
 					<div class="widget-toolbar">
 
-						<a href="#" data-action="reload"> <i class="fa fa-refresh"></i>
+						<a href="#" data-action="reload"> <i class="ace-icon fa fa-refresh"></i>
 						</a> <a href="#" data-action="collapse"> <i
-							class="fa fa-chevron-up"></i>
-						</a> <a href="#" data-action="close"> <i class="fa fa-remove"></i>
+							class="ace-icon fa fa-chevron-up"></i>
+						</a> <a href="#" data-action="close"> <i class="ace-icon fa fa-remove"></i>
 						</a>
 					</div>
 				</div>
@@ -35,7 +65,7 @@
 													in="${grailsApplication.controllerClasses.sort { it.fullName } }">
 													<g:if test="${c.fullName.contains("prismanet")}">
 													<li class="controller">
-													<i class="fa fa-angle-double-right"></i>
+													<i class="ace-icon fa fa-angle-double-right"></i>
 													<g:link
 															controller="${c.logicalPropertyName}">
 															${c.logicalPropertyName}
@@ -51,12 +81,59 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-
 
 
 	</div>
+	</div>
+ <script type="text/javascript">
+     
+      var word_array = [
+          {text: "Lorem", weight: 15},
+          {text: "Ipsum", weight: 9, link: "http://jquery.com/"},
+          {text: "Dolor", weight: 66, html: {title: "I can haz any html attribute"}},
+          {text: "Sit", weight: 7},
+          {text: "Amet", weight: 5}
+      ];
+
+      $(function() {
+//         $("#example").jQCloud(word_array);
+     
+     
+      var fill = d3.scale.category20();
+
+      d3.layout.cloud().size([300, 300])
+          .words([
+            "Hello", "world", "normally", "you", "want", "more", "words",
+            "than", "this"].map(function(d) {
+            return {text: d, size: 10 + Math.random() * 90};
+          }))
+          .padding(5)
+          .rotate(function() { return ~~(Math.random() * 2) * 90; })
+          .font("Impact")
+          .fontSize(function(d) { return d.size; })
+          .on("end", draw)
+          .start();
+
+      function draw(words) {
+        d3.select("#charCloud").append("svg")
+            .attr("width",800)
+            .attr("height", 300)
+          .append("g")
+            .attr("transform", "translate(150,150)")
+          .selectAll("text")
+            .data(words)
+          .enter().append("text")
+            .style("font-size", function(d) { return d.size + "px"; })
+            .style("font-family", "Impact")
+            .style("fill", function(d, i) { return fill(i); })
+            .attr("text-anchor", "middle")
+            .attr("transform", function(d) {
+              return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+            })
+            .text(function(d) { return d.text; });
+      }
+      });
+    </script>
 </body>
 </html>
 

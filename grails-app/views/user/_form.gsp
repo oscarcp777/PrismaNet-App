@@ -115,7 +115,7 @@
 						<g:each in="${userInstance?.concepts?}" var="c">
 							<li><g:link controller="concept" action="show" id="${c.id}" class="btn btn-info btn-sm">
 									${c?.encodeAsHTML()}
-									<i class="fa fa-arrow-right  bigger-110"></i>
+									<i class="ace-icon fa fa-arrow-right  bigger-110"></i>
 								</g:link></li>
 						</g:each>
 						<li class="add">
@@ -123,7 +123,7 @@
 						<g:link controller="concept" action="create" class="btn btn-info btn-sm"
 								params="['user.id': userInstance?.id]">
 								${message(code: 'default.add.label', args: [message(code: 'concept.label', default: 'Concept')])}
-							<i class="fa fa-arrow-right  bigger-110"></i>
+							<i class="ace-icon fa fa-arrow-right  bigger-110"></i>
 							</g:link>
 						</li>
 					</ul>

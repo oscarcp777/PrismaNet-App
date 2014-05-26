@@ -1,5 +1,6 @@
 package com.prismanet
 
+import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
 import grails.plugins.springsecurity.SpringSecurityService;
 
@@ -40,10 +41,10 @@ class TweetController extends GenericController{
 		def tweets = tweetService.getTweets(filters,params)
 		
 		def relevantWords = tweetService.getRelevantWords(filters)
-		
+		def relevantWordsJson= relevantWords as JSON
 		if(!grailsApplication.config.grails.twitter.offline)
 			tweetService.loadAvatarUsers(tweets.resultList)
-		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"], relevantWords:relevantWords]
+		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"], relevantWords:relevantWords,relevantWordsJson:relevantWordsJson]
 	}
 	
 	def randomList(){

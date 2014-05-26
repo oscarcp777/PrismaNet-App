@@ -13,68 +13,8 @@
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
-						<div class="widget-box">
-							<div class="widget-header header-color-blue">
-								<h5>
-									<span class="glyphicon glyphicon-stats"> </span> Posts
-									RealTime
-								</h5>
-								<div class="widget-toolbar">
-									<a href="#" data-action="collapse"> <i
-										class="1 bigger-125 fa fa-chevron-up"></i>
-									</a>
-								</div>
-							</div>
-
-							<div class="widget-body">
-								<div class="widget-body-inner" style="display: block;">
-									<div class="widget-main">
-										<div id="postRealTimeChar" style="height: 400px; min-width: 310px"></div>
-									</div>
-
-
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
-						<div class="widget-box">
-							<div class="widget-header header-color-blue">
-								<h5>
-									<span class="glyphicon glyphicon-stats"> </span> Posts entre
-									fechas
-								</h5>
-								<div class="widget-toolbar input-group ">
-									<div id="postPickert" class="btn btn-primary date-picker">
-										<i class="fa fa-calendar"></i> <span class="date-range"></span>
-										<i class="fa fa-chevron-down"></i>
-									</div>
-								</div>
-								<div class="widget-toolbar">
-									<a href="#" data-action="collapse"> <i
-										class="1 bigger-125 fa fa-chevron-up"></i>
-									</a>
-
-								</div>
-
-
-							</div>
-
-							<div class="widget-body">
-								<div class="widget-body-inner" style="display: block;">
-									<div class="widget-main">
-										<div id="postsChart" style="height: 400px; min-width: 310px"></div>
-									</div>
-
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+			 <g:render contextPath="../user" template="chart" model="['divPickert':'disable','callback':'disable','titleChar':'user.stats.posts.real.time','div':'postRealTimeChar']"></g:render>
+			<g:render contextPath="../user" template="chart" model="['divPickert':'postPickert','callback':'disable','titleChar':'user.stats.posts.date','div':'postsChart']"></g:render>
 			</div>
 		</div>	
 	</div>
@@ -92,7 +32,7 @@
 	  $(function() {
 		  var id='${concept.id}';
 		  loadDatepicker('postPickert',loadChartLineForPostPickert);
-		  activeItemMenuLevel2(id,id+'-post');
+		  activeItemMenuLevel2(id,id+'-face','${concept.conceptName}');
 		   getPostRealTime(${concept.id}, '#postRealTimeChar','../');
 		   var dataPosts = {"id":${concept.id}, "div":'#postsChart',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 		   getGroupedPosts(dataPosts);

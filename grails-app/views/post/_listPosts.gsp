@@ -15,7 +15,7 @@
 										<div class="inline position-relative">
 											<a href=" javascript:void(0);" class="btn btn-link dropdown-toggle"
 												data-toggle="dropdown"> <i
-												class="fa fa-plus-circle bigger-120 blue"></i> <g:message code="tweets.list.more.data"/>
+												class="ace-icon fa fa-plus-circle bigger-120 blue"></i> <g:message code="tweets.list.more.data"/>
 											</a>
 
 											
@@ -61,7 +61,7 @@
 									${raw(post.tweet.content)}
 								</p>
 								<p >
-									 <i class="fa fa-hand-o-right blue"> 22 </i>  <i class="date-time"><g:formatDate  date="${post.tweet.created}" format="dd 'de' MMMM 'de' yyyy 'a las(s)' h:mm" /></i>
+									 <i class="ace-icon fa fa-hand-o-right blue"> 22 </i>  <i class="date-time"><g:formatDate  date="${post.tweet.created}" format="dd 'de' MMMM 'de' yyyy 'a las(s)' h:mm" /></i>
 								</p>
 								<div class="hr hr8 hr-dotted hr-face"></div>
 								<div class="clearfix">
@@ -76,21 +76,21 @@
 												onclick="changeState('${post.tweet.id}Pos','${createLink(controller:'tweet', action:'saveOpinion')}','${post.tweet.id}','${concept.id}', 'POS');"  
 												data-original-title="" 
 												title="Positivo"> 
-												<i class="fa fa-check-square" title="Positivo" ></i>
+												<i class="ace-icon fa fa-check-square" title="Positivo" ></i>
 											</a>
 											<a href=" javascript:void(0);"  id="${post.tweet.id}Neg" 
 												class="icon last tooltips" 
 												onclick="changeState('${post.tweet.id}Neg', '${createLink(controller:'tweet', action:'saveOpinion')}','${post.tweet.id}','${concept.id}','NEG');" 
 												data-original-title="" 
 												title="Negativo"> 
-												<i class="fa fa-minus-square" ></i>
+												<i class="ace-icon fa fa-minus-square" ></i>
 											</a>
 			     							<a href="javascript:void(0);" id="${post.tweet.id}Que" 
 			     								class="icon last tooltips" 
 			     								onclick="changeState('${post.tweet.id}Que', '${createLink(controller:'tweet', action:'saveOpinion')}','${post.tweet.id}','${concept.id}','NEU');" 
 			     								data-original-title="" 
 			     								title="Indefinido"> 
-												<i class="fa fa-question-circle"></i>
+												<i class="ace-icon fa fa-question-circle"></i>
 											</a>
 										</div>
 									</div>

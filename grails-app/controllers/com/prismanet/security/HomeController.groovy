@@ -22,4 +22,8 @@ class HomeController extends GenericController{
 	def controlPanel(){
 		
 	}
+	def setDataMenu={
+		session.menu=params.state;
+		render session.menu
+	}
 }

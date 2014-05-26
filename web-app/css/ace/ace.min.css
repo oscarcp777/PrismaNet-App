@@ -42,7 +42,7 @@ body {
     background-color:#fff;
     position:relative;
     margin:0;
-    padding:8px 20px 24px
+    padding:18px 20px 24px
 }
 .page-header {
     margin:0 0 12px;
@@ -1055,7 +1055,7 @@ pre.prettyprint {
     border-left-width:0
 }
 .ace-nav>li>a {
-    background-color:#2e6589;
+/*     background-color:#2e6589; */
     color:#FFF;
     display:block;
     line-height:inherit;

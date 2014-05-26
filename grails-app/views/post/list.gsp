@@ -19,7 +19,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	activeItemMenuLevel2('${concept.id}','${concept.id}-face');
+	activeItemMenuLevel2('${concept.id}','${concept.id}-face','${concept.conceptName}');
 	  jQuery(function($) {
 		  $(".tooltips").tooltip();
 		  });
