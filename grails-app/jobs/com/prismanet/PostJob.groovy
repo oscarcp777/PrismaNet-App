@@ -14,7 +14,7 @@ class PostJob {
 	def group = "postsJobs"
 	def pathCommand=""
 	static triggers = {
-		simple repeatInterval: 300000, repeatCount:-1 , startDelay: 60000
+		simple repeatInterval: 300000, repeatCount:-1 , startDelay: 90000
 	}
 
 	def execute() {
