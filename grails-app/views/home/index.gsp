@@ -87,16 +87,8 @@
 	</div>
  <script type="text/javascript">
      
-      var word_array = [
-          {text: "Lorem", weight: 15},
-          {text: "Ipsum", weight: 9, link: "http://jquery.com/"},
-          {text: "Dolor", weight: 66, html: {title: "I can haz any html attribute"}},
-          {text: "Sit", weight: 7},
-          {text: "Amet", weight: 5}
-      ];
-
+     
       $(function() {
-//         $("#example").jQCloud(word_array);
      
      
       var fill = d3.scale.category20();
