@@ -119,7 +119,7 @@ class MentionService extends GenericCoreService{
 		QueryResponse respSolr = solr.query(query)
 		def result = []
 		respSolr.getFacetFields().get(0).getValues().each{
-			result.add([name:it.getName(),count:it.getCount()])
+			result.add([text:it.getName(),size:it.getCount()])
 		}
 		result
 	}
