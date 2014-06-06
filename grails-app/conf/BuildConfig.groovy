@@ -52,6 +52,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         runtime 'mysql:mysql-connector-java:5.1.27'
+		compile 'org.apache.solr:solr-solrj:4.6.0'
     }
 
     plugins {

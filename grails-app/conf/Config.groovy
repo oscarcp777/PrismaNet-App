@@ -193,3 +193,5 @@ grails.gorm.autoFlush=false
 grails.gorm.default.mapping = {
 	  dynamicUpdate true
 }
+
+solr.server.url = "http://localhost:8983/solr/mention"
