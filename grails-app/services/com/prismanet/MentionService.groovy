@@ -96,9 +96,9 @@ class MentionService extends GenericCoreService{
 		AttributeContext context = new MentionAttributeContext()
 		SolrServer solr = SolrUtil.getSolrServerInstance()
 		SolrQuery query = new SolrQuery()
-		query.setQuery("*:*")
 		query.setFacet(true)
-		query.setFacetLimit(15)
+		query.setQuery("*:*")
+		query.setFacetLimit(16)
 		query.addFacetField("mentionContent")
 		query.setRows(1)
 		
@@ -107,19 +107,20 @@ class MentionService extends GenericCoreService{
 				if (filter.attribute == 'conceptsId')
 					query.addFilterQuery("conceptId:" + filter.value)
 				if (filter.attribute == "dateMinute")
-					query.addFilterQuery("dateByMinute:" + filter.value)
+					query.addFilterQuery("dateByMinute:\"" + filter.value +"\"")
 				if (filter.attribute ==  "dateCreated")
-					query.addFilterQuery("date:" + filter.value)
+					query.addFilterQuery("date:\"" + filter.value+"\"")
 				if (filter.attribute ==  "dateHour")
-					query.addFilterQuery("dateByHour:" + filter.value)
+					query.addFilterQuery("dateByHour:\"" + filter.value+"\"")
 				
 			}
 		}
-
+		print "query: " + query
 		QueryResponse respSolr = solr.query(query)
 		def result = []
-		respSolr.getFacetFields().get(0).getValues().each{
-			result.add([text:it.getName(),size:it.getCount()])
+		respSolr.getFacetFields().get(0).getValues().eachWithIndex{ item, i ->
+			if (i != 0)
+				result.add([text:item.getName(),size:item.getCount()])
 		}
 		result
 	}
