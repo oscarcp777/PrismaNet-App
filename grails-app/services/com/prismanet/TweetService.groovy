@@ -178,8 +178,6 @@ class TweetService extends MentionService{
 				author.tweetsCount=user.statusesCount
 				author.name=user.name
 			}
-			if (author)
-				author.save(flush:true)
 			
 		}
 	}
@@ -206,8 +204,6 @@ class TweetService extends MentionService{
 				tweet.author.tweetsCount=user.statusesCount
 				tweet.author.name=user.name
 			}
-			if (tweet)
-				tweet.save(flush:true)
 			
 		}
 	}
