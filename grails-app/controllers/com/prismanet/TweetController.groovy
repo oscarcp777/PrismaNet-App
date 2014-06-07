@@ -39,19 +39,42 @@ class TweetController extends GenericController{
 		def filters = loadTweetFilters()
 		params.max = Math.min(max ?: 6, 100)
 		def tweets = tweetService.getTweets(filters,params)
-		
 		def relevantWords = tweetService.getRelevantWords(filters)
-		def relevantWordsJson= relevantWords as JSON
 		if(!grailsApplication.config.grails.twitter.offline)
 			tweetService.loadAvatarUsers(tweets.resultList)
-		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"], relevantWords:relevantWords,relevantWordsJson:relevantWordsJson]
+		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"], relevantWords:relevantWords]
 	}
 	
 	def randomList(){
 		def filters = loadTweetFilters()
 	}
 	
-	
+	def wordsCloud() {
+		log.debug "tweetController->wordsCloud params: " + params
+		Concept concept =chooseConcept(params)
+		
+		def filters = loadTweetFilters()
+		def listWords=[]
+		int counter=0
+		def relevantWords = tweetService.getRelevantWords(filters)
+		for (var in relevantWords) {
+			counter+=var.size
+		}
+		int media=(counter/relevantWords.size)/1000;
+        int refinator=1000;
+		if( media > 10 && media < 50){
+			refinator=500;
+		}
+		if(media <= 10){
+			refinator=100;
+		}
+		for (var in relevantWords) {
+			int size=var.size/refinator
+			listWords.add([var.text,size]);
+		}
+		def mapJson=[div:params['div'],json:listWords]
+		render  mapJson as JSON
+	}
 	
 	private def loadTweetFilters(){
 		def filters=[]

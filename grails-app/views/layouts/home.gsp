@@ -14,7 +14,7 @@
 	type="image/png">
 <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Open+Sans:400,300">
-<r:require modules="core,ace,chartPie,highcharts,datepicker" />
+<r:require modules="core,ace,highcharts,datepicker" />
 
 <g:layoutHead />
 <r:layoutResources />

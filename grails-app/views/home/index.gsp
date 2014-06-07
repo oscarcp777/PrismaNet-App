@@ -5,8 +5,7 @@
 </head>
 <body>
 
-<g:javascript src="cloud/d3/d3.js"  />
-<g:javascript src="cloud/d3/d3.layout.cloud.js"  />
+<g:javascript src="cloud/wordcloud2.js"  />
 		<div class="page-header">
 			<h1>
 				<i class="ace-icon fa fa-bar-chart-o"></i> <g:message code="dashborad.tab.main"/>
@@ -18,7 +17,7 @@
 			
 		</div>
 	<div class="container">
-	 <div id="example" style="width: 550px; height: 350px;"></div>
+	 <div id="cloudWords" style=" height: 400px;"></div>
 			<div class="widget-box widget-color-dark light-border">
 				<div class="widget-header">
 					<h5 class="widget-title smaller">With Badge</h5>
@@ -86,44 +85,25 @@
 	</div>
 	</div>
  <script type="text/javascript">
-     
+     var json =[{"text":"cfkargentina","size":144031},{"text":"de","size":57250},{"text":"la","size":53283},{"text":"a","size":42155},{"text":"y","size":38975},{"text":"el","size":38254},{"text":"que","size":37182},{"text":"en","size":35078},{"text":"no","size":26716},{"text":"los","size":21594},{"text":"para","size":17683},{"text":"por","size":16577},{"text":"con","size":16258},{"text":"un","size":15183},{"text":"se","size":14427}]
      
       $(function() {
+			var list=[['foo', 12], ['bar', 26],['foo', 32], ['bar', 46],['foo', 120], ['bar', 60],['foo', 52], ['bar', 60]];
+			var listJson=[];
+			var count=0;
+			for (var i = 1; i < json.length; i++) { 
+			    var h = parseInt(json[i].size/1000,10);
+			    console.log(json[i].size);
+			    console.log(h);
+			    count+=json[i].size;
+			    listJson.push([json[i].text, h]);
+			}
+			console.log('·········')
+			console.log(count/json.length);
+			WordCloud($('#cloudWords')[0], { list: listJson } );
+
      
      
-      var fill = d3.scale.category20();
-
-      d3.layout.cloud().size([300, 300])
-          .words([
-            "Hello", "world", "normally", "you", "want", "more", "words",
-            "than", "this"].map(function(d) {
-            return {text: d, size: 10 + Math.random() * 90};
-          }))
-          .padding(5)
-          .rotate(function() { return ~~(Math.random() * 2) * 90; })
-          .font("Impact")
-          .fontSize(function(d) { return d.size; })
-          .on("end", draw)
-          .start();
-
-      function draw(words) {
-        d3.select("#charCloud").append("svg")
-            .attr("width",800)
-            .attr("height", 300)
-          .append("g")
-            .attr("transform", "translate(150,150)")
-          .selectAll("text")
-            .data(words)
-          .enter().append("text")
-            .style("font-size", function(d) { return d.size + "px"; })
-            .style("font-family", "Impact")
-            .style("fill", function(d, i) { return fill(i); })
-            .attr("text-anchor", "middle")
-            .attr("transform", function(d) {
-              return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-            })
-            .text(function(d) { return d.text; });
-      }
       });
     </script>
 </body>

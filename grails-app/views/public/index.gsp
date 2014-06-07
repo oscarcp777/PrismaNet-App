@@ -635,8 +635,8 @@
 							<!-- /row -->
 							<div class=" alt">
 								<h5>Twitter:</h5>
-								<span><a href="http://www.twitter.com/basicoh_"
-									rel="external">@Basicoh_</a></span>
+								<span><a href="http://www.twitter.com/@Prisma_Net_"
+									rel="external">@Prisma_Net_</a></span>
 							</div>
 							<!-- /row -->
 						</div>
@@ -651,7 +651,7 @@
 							<!-- /row -->
 
 							<form method="POST"
-								action="http://alvarez.is/demo/flat/freelance/index.htm#">
+								action="">
 
 								<div class="row">
 									<div class="col-sm-6 col-md-6">

@@ -6,8 +6,6 @@
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'twitter.css')}" type="text/css">
 </head>
 <body>
-<g:javascript src="cloud/d3/d3.js"  />
-<g:javascript src="cloud/d3/d3.layout.cloud.js"  />
 	<div class="page-content">
 		<g:render contextPath="../concept" template="tabTwitter"  model="['concept':concept,'tabMain':'','tabTweets':'active','tabChar':'','tabSentimental':'']"></g:render>
 		<div class="row well ">
@@ -28,7 +26,7 @@
 
 					<div class="widget-body">
 						<div class="widget-main">
-						<div  id="cloudWords" style="padding:50px;margin:50px;"> 
+						<div  id="cloudWords" style="height: 400px;"> 
 						</div>
 						</div>
 						</div>
@@ -92,43 +90,20 @@
 		
 	</div>
 	<script type="text/javascript">
-	var word_array='${relevantWordsJson}';
-	var jsonObject =word_array.replace(/&quot;/g, '"');
-	var jsonObject2 = JSON.parse(jsonObject);
+	var id='${concept.id}';
 	activeItemMenuLevel2('${concept.id}','${concept.id}-tweet','${concept.conceptName}');
+	
+	function printWordCloud(data){
+		$(data.div).empty();
+		WordCloud($(data.div)[0], { list: data.json } );
+	}
+	function getWordsCloud(id,div){
+		var data = {"div":div,"conceptsId":id}
+		doRequest('wordsCloud',data,printWordCloud, null, 'GET');
+	}
 		jQuery(function($) {
 			$(".tooltips").tooltip();
-			 var fill = d3.scale.category20();
-
-		      d3.layout.cloud().size([400,400])
-		           .words(jsonObject2.map(function(d) {
-           			 return {text: d.text, size:  10 + Math.random() *50};
-          			}))
-		          .padding(1)
-		          .rotate(function() { return ~~(Math.random() * 2) * 90; })
-		          .font("Impact")
-		          .fontSize(function(d) { return d.size; })
-		          .on("end", draw)
-		          .start();
-
-		      function draw(words) {
-		        d3.select("#cloudWords").append("svg")
-		            .attr("width",400)
-		            .attr("height",400)
-		          .append("g")
-		            .attr("transform", "translate(100,100)")
-		          .selectAll("text")
-		            .data(words)
-		          .enter().append("text")
-		            .style("font-size", function(d) { return d.size + "px"; })
-		            .style("font-family", "Impact")
-		            .style("fill", function(d, i) { return fill(i); })
-		            .attr("text-anchor", "middle")
-		            .attr("transform", function(d) {
-		              return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-		            })
-		            .text(function(d) { return d.text; });
-		      }
+			getWordsCloud(id,'#cloudWords');
 		});
 	</script>
 </body>

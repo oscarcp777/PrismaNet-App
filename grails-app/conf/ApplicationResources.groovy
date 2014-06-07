@@ -15,6 +15,7 @@ modules = {
 		resource url:'js/ace/ace-elements.min.js'
 		resource url:'js/home.js',disposition: 'head'
 		resource url:'js/ace/bootstrap-datepicker.min.js'
+		resource url:'js/cloud/wordcloud2.js'
 		
 	}
 	chartPie{
