@@ -12,8 +12,8 @@
 	<div class="page-content">
 		<div class="row">
 			<div class="col-lg-12">
-				<g:render contextPath="../user" template="chart" model="['divPickert':'sentimentalPickert','callback':'disable','titleChar':'user.stats.tweets.date','div':'sentimentalChart']"></g:render>
-				<g:render contextPath="../user" template="chart" model="['divPickert':'disable','callback':'disable','titleChar':'user.stats.tweets.date','div':'sentimentChartPie']"></g:render>
+				<g:render contextPath="../user" template="chart" model="['divPickert':'sentimentalPickert','callback':'disable','titleChar':'dashborad.tab.sentimental.line','div':'sentimentalChart']"></g:render>
+				<g:render contextPath="../user" template="chart" model="['divPickert':'disable','callback':'disable','titleChar':'dashborad.tab.sentimental.pie','div':'sentimentChartPie']"></g:render>
 		   </div>
 		</div>
 	</div>
