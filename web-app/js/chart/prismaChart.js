@@ -12,8 +12,8 @@ var doRequest = function(url,data,callback, errorHandler, method) {
 	              data: data,
 	              cache: false,
 	              beforeSend: function( xhr ) {
-	            	  var message='<div class="widget-box-overlay"><div  class="wait white">Aguarde unos instantes por favor...'+
-          						   '<br><i class="fa fa-spinner fa-spin fa-4x"></i></div></div>';
+	            	  var message='<div class="widget-box-overlay" style="top:43px; min-height:90%;right:15px; left:15px;"><div class="white" style="margin-top:100px;">Aguarde unos instantes por favor...'+
+          						   '<br><i class="loading-icon ace-icon fa fa-spinner fa-spin fa-4x white"></i></div></div>';
 	            	   $(data.div).append(message);
 	            	  },
 	              success: callback,

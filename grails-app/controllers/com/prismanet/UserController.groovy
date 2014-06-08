@@ -60,9 +60,7 @@ class UserController extends GenericController{
 	
 	
 	def stats = {
-		def groupList = ["dateCreated","conceptsName"]
-		def dateList = userService.categoryStore(session.user, groupList, [],null);
-		[user: session.user,  dateList : dateList]
+		[user: session.user]
 	}
 	
 	
