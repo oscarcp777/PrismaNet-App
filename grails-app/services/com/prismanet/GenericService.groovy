@@ -140,22 +140,22 @@ class GenericService {
 
 					switch(it.value){
 						case ProjectionType.SUM:
-							sum(property)
+							sum(property,property)
 							break
 						case ProjectionType.MIN:
-							min(property)
+							min(property,property)
 							break
 						case ProjectionType.MAX:
-							max(property)
+							max(property,property)
 							break
 						case ProjectionType.AVG:
-							avg(property)
+							avg(property,property)
 							break
 						case ProjectionType.COUNT:
-							count(property)
+							count(property,property)
 							break
 						case ProjectionType.COUNT_DISTINCT:
-							countDistinct(property)
+							countDistinct(property,property)
 							break
 
 					}
