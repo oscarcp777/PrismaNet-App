@@ -4,7 +4,9 @@ class FacebookSetupController {
 	
 	def scaffold = true
 	def facebookSetupService
-	
+	def index() {
+		redirect action: 'list', controller: 'facebookSetup'
+	}
 	def save() {
 		FacebookSetup facebookSetup = new FacebookSetup(params)
 		try {

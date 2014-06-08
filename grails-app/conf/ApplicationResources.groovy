@@ -1,9 +1,9 @@
 modules = {
 	   
 	core {
-		resource url:'css/bootstrap.css', disposition: 'head'
+		resource url:'css/bootstrap/bootstrap.css', disposition: 'head'
 		resource url:'js/jquery.js', disposition: 'head'
-		resource url:'js/bootstrap.js' 
+		resource url:'js/bootstrap/bootstrap.js' 
 		resource url:'css/font-awesome.css'
 	}
 	ace{
@@ -22,6 +22,11 @@ modules = {
 		resource url:'js/chart/jquery.easy-pie-chart.js'
 		resource url:'js/jquery-ui-1.10.3.full.min.js',disposition: 'head'
 		
+	}
+     editable{
+		resource url:'css/bootstrap/bootstrap-editable.css'
+		resource url:'js/bootstrap/bootstrap-editable.js'
+		resource url:'js/bootstrap/bootbox.js'
 	}
 	highcharts {
 		dependsOn 'core'

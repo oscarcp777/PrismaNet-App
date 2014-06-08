@@ -14,7 +14,15 @@
 			</h1>
 			
 		</div>
+<div class="alert alert-block alert-warning">
 
+								<i class="ace-icon fa fa-exclamation-triangle fa-2x pull-left fa-border" style="border: solid 0.08em #fcf8e3;color:red;"></i>
+
+								<b>Importante:
+								Aquí ud. podra editar el concepto y agregar o modificar palabras, hashtag, y cuentas a seguir.
+								<br>Estas modificaciones tienen un impacto significativo en la performance de la Applicación, tenga en cuenta esto al realizar las modificaciones 
+							</b>
+							</div>
 	<div class="page-content">
 		<div class="row">
 			<div class="col-lg-12">
@@ -32,16 +40,6 @@
 							</div>
 						</div>
 
-						<div class="profile-info-row">
-							<div class="profile-info-name">
-								<g:message code="dashborad.concept.end" />
-							</div>
-
-							<div class="profile-info-value">
-								<span><g:formatDate format="dd/MM/yyyy HH:mm"
-										date="${concept.dateCreated}" /></span>
-							</div>
-						</div>
 					</div>
 					<h4 class="header blue bolder smaller">
 						<g:message code="dashborad.config.twitter" />
@@ -53,17 +51,7 @@
 							</div>
 
 							<div class="profile-info-value">
-								<span> ${twSetup.includedAccounts}
-								</span>
-							</div>
-						</div>
-						<div class="profile-info-row">
-							<div class="profile-info-name">
-								<g:message code="dashborad.config.twitter.excluded.accounts" />
-							</div>
-
-							<div class="profile-info-value">
-								<span> ${twSetup.excludedAccounts}
+								<span > ${twSetup.includedAccounts}
 								</span>
 							</div>
 						</div>
@@ -73,7 +61,7 @@
 							</div>
 
 							<div class="profile-info-value">
-								<span> ${twSetup.keywords}
+								<span class="editable editable-click" id="keywords" data-value='${twSetup.keywords}'> ${twSetup.keywords}
 								</span>
 							</div>
 						</div>
@@ -83,7 +71,7 @@
 							</div>
 
 							<div class="profile-info-value">
-								<span> ${twSetup.neutralHashtags}
+								<span class="editable editable-click" id="neutralHashtags"> ${twSetup.neutralHashtags}
 								</span>
 							</div>
 						</div>
@@ -93,7 +81,7 @@
 							</div>
 
 							<div class="profile-info-value">
-								<span> ${twSetup.positiveHashtags}
+								<span class="editable editable-click" id="positiveHashtags">  ${twSetup.positiveHashtags}
 								</span>
 							</div>
 						</div>
@@ -103,7 +91,7 @@
 							</div>
 
 							<div class="profile-info-value">
-								<span> ${twSetup.negativeHashtags}
+								<span class="editable editable-click" id="negativeHashtags">  ${twSetup.negativeHashtags}
 								</span>
 							</div>
 						</div>
@@ -120,16 +108,6 @@
 
 							<div class="profile-info-value">
 								<span> ${fcSetup?.keywords}
-								</span>
-							</div>
-						</div>
-						<div class="profile-info-row">
-							<div class="profile-info-name">
-								<g:message code="dashborad.config.facebook.accounts" />
-							</div>
-
-							<div class="profile-info-value">
-								<span> ${fcSetup?.accounts}
 								</span>
 							</div>
 						</div>
@@ -156,8 +134,67 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-			activeItemMenuLevel2('${concept.id}','${concept.id}-dash','${concept.conceptName}');
-	        
+	        var id='${concept.id}';
+	        var idTS='${twSetup.id}'
+			activeItemMenuLevel2(id,id+'-dash','${concept.conceptName}');
+			var titleKeywords='${message(code: "dashborad.config.twitter.keywords")}';
+			var titleNeutral='${message(code: "dashborad.config.twitter.neutral.hashtags")}';
+			var titlePositive='${message(code: "dashborad.config.twitter.positive.hashtags")}';
+			var titleNegative='${message(code: "dashborad.config.twitter.negative.hashtags")}';
+			
+			function validateHash(value){
+			    	var values=$.trim(value).split(',');
+			    	var re = new RegExp('^#[0-9A-Za-z_]+');
+			    	for (var i = 0; i < values.length; i++) {
+			    		var val=values[i];
+			    		 if(val.length > 1 &&  val.length < 4) {
+					            return 'Debe ingresar una palabra de mas de 3 letras';
+					     }else if(val.length > 1 && !val.match(re)){
+					    	 return 'Debe tener un formato de Hashtag (#ejemplo)';
+					     }
+			    	}
+			       
+			}
+			function validateKeywords(value){
+			    $(this).data($(this).attr("id"),$(this).text())
+		    	var values=$.trim(value).split(',');
+		    	for (var i = 0; i < values.length; i++) {
+		    		var val=values[i];
+		    		 if(val.length > 1 && val.length < 4) {
+				            return 'Debe ingresar una palabra de mas de 3 letras';
+				     }
+		    	}
+		       
+		}
+			
+			function editField(id,title,validateCall){
+				$('#'+id).editable({
+					type:'text',
+					emptytext:'Ingrese valor',
+					title: title,
+					success: function(response, newValue) {
+						bootbox.confirm("Esta seguro cambiar a ' "+newValue+" '?", function(result) {
+							if(result){
+								var data = {"id":idTS,'field':id,'newValue':newValue}
+								doRequest('../../twitterSetup/update',data,null, null, 'POST');
+							}else{
+								if($('#'+id).data(id)=='undefined'){
+									 $('#'+id).text('');
+								}else{
+								 $('#'+id).text($('#'+id).data(id));
+								}
+							}
+							}); 
+				    },
+				    validate:validateCall
+			});
+			}
+			$(function() {
+				editField('keywords',titleKeywords,validateKeywords);
+				editField('neutralHashtags',titleNeutral,validateHash);
+				editField('positiveHashtags',titlePositive,validateHash);
+				editField('negativeHashtags',titleNegative,validateHash);
+			});
 	</script>
 </body>
 </html>
