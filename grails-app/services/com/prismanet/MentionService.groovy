@@ -116,13 +116,21 @@ class MentionService extends GenericCoreService{
 			}
 		}
 		log.info "solrQuery: " + query
-		QueryResponse respSolr = solr.query(query)
+		QueryResponse respSolr
 		def result = []
-		respSolr.getFacetFields().get(0).getValues().eachWithIndex{ item, i ->
-			if (i != 0 && item.getCount() != 0)
-				result.add([text:item.getName(),size:item.getCount()])
+		try {
+			respSolr = solr.query(query)
+			result = []
+			respSolr.getFacetFields().get(0).getValues().eachWithIndex{ item, i ->
+				if (i != 0 && item.getCount() != 0)
+					result.add([text:item.getName(),size:item.getCount()])
+			}
+			result
+		} catch (Exception e) {
+			e.printStackTrace()
 		}
-		result
+		
+		
 	}
 	
 }
