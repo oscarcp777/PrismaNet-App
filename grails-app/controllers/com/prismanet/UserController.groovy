@@ -8,6 +8,8 @@ import com.prismanet.GenericService.OrderType
 import com.prismanet.GenericService.ProjectionType
 import com.prismanet.context.Filter
 import com.prismanet.context.UserAttributeContext
+import com.prismanet.model.security.SecRole
+import com.prismanet.model.security.SecUserSecRole
 import com.prismanet.utils.DateTypes
 import com.prismanet.utils.DateUtils
 
@@ -136,7 +138,8 @@ class UserController extends GenericController{
 		}
 		Twitter twitter = new TwitterFactory().getInstance();
 		ResponseList<twitter4j.User> users = null
-		users = twitter.lookupUsers((String[])usersName.toArray());
+		if (usersName.size>0)
+			users = twitter.lookupUsers((String[])usersName.toArray());
 		for (twitter4j.User user : users) {
 			dateList.add([user.screenName,user.followersCount])
 		}
@@ -259,6 +262,24 @@ class UserController extends GenericController{
 		break
 		}
 		render resultMap as JSON
+	}
+	
+	def save(){
+		log.info "user save params: " + params
+		def user = new User (params)
+		if (!user.save(flush: true)) {
+			user.errors.each {
+				print it
+			}
+			render(view: "create", model: [user: user])
+			return
+		}
+		
+		def roleUser = SecRole.findByAuthority('ROLE_USER')
+		SecUserSecRole.create user, roleUser, true
+		
+		flash.message = message(code: 'default.created.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), user.id])
+		redirect(action: "show", id: user.id)
 	}
 	
 	
