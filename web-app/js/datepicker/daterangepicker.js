@@ -546,6 +546,7 @@
         },
 
         clickApply: function (e) {
+        	this.rangeSelect = 'Rango';
             this.updateInputText();
             this.hide();
         },
