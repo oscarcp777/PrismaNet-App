@@ -13,8 +13,9 @@ function loadDatepicker(container,callBack){
             'Ayer': [moment().subtract('days', 1).startOf('day'), moment().subtract('days', 1).endOf('day'),'Ayer'],
             'Ultimos 7 dias': [moment().subtract('days', 6), moment(),'Ultimos 7 dias'],
             'Ultimos 30 dias': [moment().subtract('days', 29), moment(),'Ultimos 30 dias'],
-            'Presente Mes': [moment().startOf('month'), moment().endOf('month'),'Presente Mes'],
-            'Mes Pasado': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month'),'Mes Pasado']
+//            'Presente Mes': [moment().startOf('month'), moment().endOf('month'),'Presente Mes'],
+            'Mes Pasado': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month'),'Mes Pasado'],
+            'Ultimos 90 dias': [moment().subtract('days', 89), moment(),'Ultimos 90 dias']
         },
         opens: 'left',
         buttonClasses: ['btn btn-default'],
