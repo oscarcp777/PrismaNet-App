@@ -73,10 +73,23 @@ function getUserGroupedTweets(data){
 	doRequest('getGroupedTweets',data,paintCharLine, null, 'GET');
 }
 
-function getMonthStats(div){
-	var data = { "div":div};
+function loadMonthStatsData(channel){
+	loadDatepicker('pickertStatsMonth',loadStatsMonthPickert);
+	var data = {"channel":channel, "div":'#monthStats', "dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+	getMonthStats(data);
+	$('#monthStats').data('channel',channel);
+}
+
+function getMonthStats(data){
 	doRequest('monthStats',data,loadMonthStats, null, 'GET');
 }
+
+function loadStatsMonthPickert(start, end, rangeSelect) {
+    $('#pickertStatsMonth span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
+    var data = {"div":'#monthStats',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
+    getMonthStats(data);
+}
+
 
 function printWordCloud(data){
 	$(data.div).empty();

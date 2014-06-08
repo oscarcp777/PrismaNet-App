@@ -21,7 +21,7 @@
 					${item[2]}
 				</td>
 				<td>
-					${item[1]/item[2]}
+					<g:formatNumber number="${item[1]/item[2]}" type="number" maxFractionDigits="2" />
 				</td>
 			</tr>
 		</g:each>

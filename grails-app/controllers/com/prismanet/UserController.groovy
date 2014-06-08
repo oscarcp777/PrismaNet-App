@@ -1,21 +1,22 @@
 package com.prismanet
-import java.security.Policy.Parameters;
+import twitter4j.ResponseList
+import twitter4j.Twitter
+import twitter4j.TwitterFactory
+
+import com.prismanet.GenericService.FilterType
+import com.prismanet.GenericService.OrderType
+import com.prismanet.GenericService.ProjectionType
+import com.prismanet.context.Filter
+import com.prismanet.context.UserAttributeContext
+import com.prismanet.utils.DateTypes
+import com.prismanet.utils.DateUtils
+
 import facebook4j.Facebook
 import facebook4j.FacebookFactory
 import grails.converters.*
 import grails.plugins.springsecurity.Secured
 import grails.plugins.springsecurity.SpringSecurityService
 import groovy.time.TimeCategory
-import twitter4j.ResponseList
-import twitter4j.Twitter
-import twitter4j.TwitterFactory
-
-import com.prismanet.GenericService.FilterType
-import com.prismanet.GenericService.ProjectionType
-import com.prismanet.context.Filter
-import com.prismanet.context.UserAttributeContext
-import com.prismanet.utils.DateTypes
-import com.prismanet.utils.DateUtils
 @Secured(['ROLE_USER'])
 class UserController extends GenericController{
 	
@@ -62,16 +63,24 @@ class UserController extends GenericController{
 	def stats = {
 		[user: session.user]
 	}
-	
-	
+		
 	def monthStats = {
 		def groupList = ["conceptsName"]
-		def criteria = User.createCriteria();
-		def filters = [new Filter(attribute:"id",value: session.user.id, type:FilterType.EQ)]
+		def sourceType = params.channel as MentionType
+		def filters = loadFilters([sourceType:sourceType, userId:session.user.id])
 		def projection = [:]
 		projection["mentionId"] = ProjectionType.COUNT
 		projection["authorId"] = ProjectionType.COUNT_DISTINCT
-		def statsList = userService.groupBy(User, new UserAttributeContext(), groupList, filters, projection,null)
+		
+		// Manejo datepicker
+		Date dateFrom, dateTo
+		if (params.dateFrom)
+			dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
+		if (params.dateFrom)
+			dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
+		filters.addAll(userService.getFilterList(dateFrom, dateTo))
+		
+		def statsList = userService.groupBy(User, new UserAttributeContext(), groupList, filters, projection,[[attribute:"mentionId",value:OrderType.DESC]])
 		
 		render(template: "monthStats", model: [statsList:statsList])
 	}
