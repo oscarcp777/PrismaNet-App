@@ -60,7 +60,12 @@ class TweetController extends GenericController{
 		def relevantWords = tweetService.getRelevantWords(filters)
 		
 		def maxPercent = 40, minPercent = 20
-		def max = relevantWords.get(0).size, min = relevantWords.get(relevantWords.size -1).size
+		def max =1 ,min = 0
+		if (relevantWords){
+			max = relevantWords.get(0).size
+			min = relevantWords.get(relevantWords.size -1).size
+		}
+		
 		def multiplier
 		if (max != min)
 			multiplier = (maxPercent-minPercent)/(max-min)
@@ -71,6 +76,8 @@ class TweetController extends GenericController{
 			int size = minPercent + ((max-(max-(var.size-min)))*multiplier);
 			listWords.add([var.text,size]);
 		}
+		if (listWords.size() == 0)
+			render  "No se encontraron terminos"
 		def mapJson=[div:params['div'],json:listWords]
 		render  mapJson as JSON
 	}
