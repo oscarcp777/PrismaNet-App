@@ -97,13 +97,13 @@
 		$(data.div).empty();
 		WordCloud($(data.div)[0], { list: data.json } );
 	}
-	function getWordsCloud(id,div){
-		var data = {"div":div,"conceptsId":id}
+	function getWordsCloud(id,div, dateCreated){
+		var data = {"div":div,"conceptsId":id, "dateCreated":dateCreated}
 		doRequest('wordsCloud',data,printWordCloud, null, 'GET');
 	}
 		jQuery(function($) {
 			$(".tooltips").tooltip();
-			getWordsCloud(id,'#cloudWords');
+			getWordsCloud(id,'#cloudWords', ${dateCreated});
 		});
 	</script>
 </body>

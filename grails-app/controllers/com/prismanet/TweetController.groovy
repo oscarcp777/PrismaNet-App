@@ -42,7 +42,8 @@ class TweetController extends GenericController{
 		def relevantWords = tweetService.getRelevantWords(filters)
 		if(!grailsApplication.config.grails.twitter.offline)
 			tweetService.loadAvatarUsers(tweets.resultList)
-		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"], relevantWords:relevantWords]
+		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"], 
+			relevantWords:relevantWords, dateCreated:params.dateCreated]
 	}
 	
 	def randomList(){
@@ -57,19 +58,17 @@ class TweetController extends GenericController{
 		def listWords=[]
 		int counter=0
 		def relevantWords = tweetService.getRelevantWords(filters)
+		
+		def maxPercent = 40, minPercent = 10
+		def max = relevantWords.get(0).size, min = relevantWords.get(relevantWords.size -1).size
+		def multiplier
+		if (max != min)
+			multiplier = (maxPercent-minPercent)/(max-min)
+		else	
+			multiplier = (maxPercent-minPercent)
+		
 		for (var in relevantWords) {
-			counter+=var.size
-		}
-		int media=(counter/relevantWords.size)/1000;
-        int refinator=1000;
-		if( media > 10 && media < 50){
-			refinator=500;
-		}
-		if(media <= 10){
-			refinator=100;
-		}
-		for (var in relevantWords) {
-			int size=var.size/refinator
+			int size = minPercent + ((max-(max-(var.size-min)))*multiplier);
 			listWords.add([var.text,size]);
 		}
 		def mapJson=[div:params['div'],json:listWords]
