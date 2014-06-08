@@ -73,7 +73,7 @@ class UserController extends GenericController{
 		projection["authorId"] = ProjectionType.COUNT_DISTINCT
 		def statsList = userService.groupBy(User, new UserAttributeContext(), groupList, filters, projection,null)
 		
-		[user: session.user, statsList : statsList]
+		render(template: "monthStats", model: [statsList:statsList])
 	}
 	def conceptTweetsJson ={
 		def sourceType = params.channel as MentionType

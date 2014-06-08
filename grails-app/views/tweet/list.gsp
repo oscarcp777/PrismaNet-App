@@ -26,7 +26,7 @@
 
 					<div class="widget-body">
 						<div class="widget-main">
-						<div  id="cloudWords" style="height: 400px;"> 
+						<div  id="cloudWords" style="min-height:320px;"> 
 						</div>
 						</div>
 						</div>
@@ -93,17 +93,9 @@
 	var id='${concept.id}';
 	activeItemMenuLevel2('${concept.id}','${concept.id}-tweet','${concept.conceptName}');
 	
-	function printWordCloud(data){
-		$(data.div).empty();
-		WordCloud($(data.div)[0], { list: data.json } );
-	}
-	function getWordsCloud(id,div, dateCreated){
-		var data = {"div":div,"conceptsId":id, "dateCreated":dateCreated}
-		doRequest('wordsCloud',data,printWordCloud, null, 'GET');
-	}
 		jQuery(function($) {
 			$(".tooltips").tooltip();
-			getWordsCloud(id,'#cloudWords', ${dateCreated});
+			getWordsCloud(id,'#cloudWords','${dateCreated}');
 		});
 	</script>
 </body>

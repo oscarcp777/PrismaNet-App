@@ -59,7 +59,7 @@ class TweetController extends GenericController{
 		int counter=0
 		def relevantWords = tweetService.getRelevantWords(filters)
 		
-		def maxPercent = 40, minPercent = 10
+		def maxPercent = 40, minPercent = 20
 		def max = relevantWords.get(0).size, min = relevantWords.get(relevantWords.size -1).size
 		def multiplier
 		if (max != min)

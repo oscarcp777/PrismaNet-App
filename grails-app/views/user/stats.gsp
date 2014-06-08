@@ -21,7 +21,7 @@
 			  <g:render template="chart" model="['divPickert':'disable','callback':'loadTweetCharPie','titleChar':'user.stats.tweets.concepts','div':'tweetCharPie']"></g:render>
 			  <g:render template="chart" model="['divPickert':'disable','callback':'loadTotalFollowers','titleChar':'user.stats.tweets.followers','div':'totalFollowers']"></g:render>
 			  <g:render template="chart" model="['divPickert':'pickertUser','callback':'loadUserGroupedData','titleChar':'user.stats.tweets.date','div':'lineaChartUser']"></g:render>
-				
+			  <g:render template="chart" model="['divPickert':'disable','callback':'disable','titleChar':'user.stats.month.stats','div':'monthStats']"></g:render>
 			</div>
 			<hr>
 
@@ -39,6 +39,8 @@
 			loadTotalFollowers('${MentionType.TWITTER}');
 			//data entre fechas
 			loadUserGroupedData('${MentionType.TWITTER}');
+			//data general de meses
+			getMonthStats('#monthStats');
 		});
 	</script>
 	

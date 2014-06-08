@@ -73,7 +73,19 @@ function getUserGroupedTweets(data){
 	doRequest('getGroupedTweets',data,paintCharLine, null, 'GET');
 }
 
+function getMonthStats(div){
+	var data = { "div":div};
+	doRequest('monthStats',data,loadMonthStats, null, 'GET');
+}
 
+function printWordCloud(data){
+	$(data.div).empty();
+	WordCloud($(data.div)[0], { list: data.json } );
+}
+function getWordsCloud(id,div, dateCreated){
+	var data = {"div":div,"conceptsId":id, "dateCreated":dateCreated}
+	doRequest('wordsCloud',data,printWordCloud, null, 'GET');
+}
 function getGroupedPosts(data){
 	doRequest('../getGroupedPosts',data,paintCharLine, null, 'GET');
 }
@@ -108,6 +120,7 @@ function loadUserGroupedData(channel){
 	getUserGroupedTweets(data);
 	$('#lineaChartUser').data('channel',channel);
 }
+
 function paintCharPie(dataJson) {
 	$(dataJson.container)
 			.highcharts(
@@ -357,7 +370,9 @@ function paintCharLine(data){
 }
 
 
-
+function loadMonthStats(data){
+	$("#monthStats").html(data);
+}
 
 
 function loadAuthors(data){
