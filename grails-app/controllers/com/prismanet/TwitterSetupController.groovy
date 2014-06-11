@@ -6,22 +6,34 @@ class TwitterSetupController {
 	def index() {
 		redirect action: 'list', controller: 'twitterSetup'
 	}
-	def update(){
-		println 'llrgo'
-		TwitterSetup  ts= TwitterSetup.get(params.id);
-		if(params.field=='keywords'){
-			ts.setKeywords(params.newValue)
+	def update(Long id, Long version) {
+        def twitterSetup = TwitterSetup.get(id)
+        if (!twitterSetup) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'controlPanel.twitter.setup', default: 'TwitterSetup'), id])
+            redirect(action: "list")
+            return
+        }
+		if (version != null) {
+			if (twitterSetup.version > version) {
+				twitterSetup.errors.rejectValue("version", "default.optimistic.locking.failure",
+						  [message(code: 'controlPanel.twitter.setup', default: 'TwitterSetup')] as Object[],
+						  "Another user has updated this TwitterSetup while you were editing")
+				render(view: "edit", model: [twitterSetup: twitterSetup])
+				return
+			}
 		}
-		if(params.field=='neutralHashtags'){
-			ts.setNeutralHashtags(params.newValue)
+
+		twitterSetup.properties = params
+				
+		if (!twitterSetup.save(flush: true)) {
+			twitterSetup.errors.each {
+				print it
+			}
+			render(view: "create", model: [twitterSetup: twitterSetup])
+			return
 		}
-		if(params.field=='positiveHashtags'){
-			ts.setPositiveHashtags(params.newValue)
-		}
-		if(params.field=='negativeHashtags'){
-			ts.setNegativeHashtags(params.newValue)
-		}
-		ts.save(flush:true)
-		render 'ok'
+		
+		flash.message = message(code: 'default.updated.message', args: [message(code: 'controlPanel.twitter.setup', default: 'TwitterSetup'), twitterSetup.id])
+		redirect(action: "show", id: twitterSetup.id)
 	}
 }
