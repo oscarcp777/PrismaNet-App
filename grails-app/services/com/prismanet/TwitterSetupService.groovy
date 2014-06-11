@@ -29,7 +29,7 @@ class TwitterSetupService extends GenericCoreService {
 			if (setup.positiveHashtags && !stringConfig.contains(setup.positiveHashtags))
 				stringConfig += setup.positiveHashtags + ","
 			if (setup.negativeHashtags && !stringConfig.contains(setup.negativeHashtags ))
-				stringConfig += setup.negativeHashtags 
+				stringConfig += setup.negativeHashtags + ","
 		}
 		stringConfig = stringConfig[0..-2]
 		print "la configuracion es: " + stringConfig

@@ -35,6 +35,27 @@ class TwitterSetup {
 		return includedAccounts
 	}
 	
+	
+	public boolean isPositiveHashtag(Tweet tweet){
+		def add = false
+		for (String positiveHashtag in this.positiveHashtags?.split(',')) {
+			if (tweet.content.contains(positiveHashtag)){
+				add = true
+			}
+		}
+		return add
+	}
+	
+	public boolean isNegativeHashtag(Tweet tweet){
+		def add = false
+		for (String negativeHashtag in this.negativeHashtags?.split(',')) {
+			if (tweet.content.contains(negativeHashtag)){
+				add = true
+			}
+		}
+		return add
+	}
+	
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		TwitterSetup setup = new TwitterSetup()

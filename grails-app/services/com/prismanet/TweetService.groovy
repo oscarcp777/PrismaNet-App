@@ -21,8 +21,11 @@ import com.prismanet.GenericService.FilterType
 import com.prismanet.context.Filter
 import com.prismanet.context.TweetAttributeContext
 import com.prismanet.exception.ApplicationException
+import com.prismanet.sentiment.OpinionValue
 
 class TweetService extends MentionService{
+	
+	def opinionService
 
 	TweetService(){
 		super(Tweet, new TweetAttributeContext())
@@ -89,6 +92,20 @@ class TweetService extends MentionService{
 //					concept.doAddToMentions(tweet)
 					timer.stop()
 					log.info  "tiempo concept: " + timer.getTotalTimeMillis()
+					if (concept.twitterSetup.isPositiveHashtag(tweet)){
+						timer = new StopWatch()
+						timer.start()
+						opinionService.addOpinion(concept, tweet, OpinionValue.POSITIVE)
+						timer.stop()
+						log.info  "tiempo opinion: " + timer.getTotalTimeMillis()
+					}
+					if (concept.twitterSetup.isNegativeHashtag(tweet)){
+						timer = new StopWatch()
+						timer.start()
+						opinionService.addOpinion(concept, tweet, OpinionValue.NEGATIVE)
+						timer.stop()
+						log.info  "tiempo opinion: " + timer.getTotalTimeMillis()
+					}
 				}
 			}
 			

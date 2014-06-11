@@ -68,6 +68,9 @@ class Concept {
 				add = true
 			}
 		}
+		if(this.twitterSetup?.isPositiveHashtag(tweet) || this.twitterSetup?.isNegativeHashtag(tweet)){
+			add = true
+		}
 		return add
 	}
 	
