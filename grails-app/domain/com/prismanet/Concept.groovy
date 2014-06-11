@@ -68,6 +68,11 @@ class Concept {
 				add = true
 			}
 		}
+		for (String neutralHashtag in this.twitterSetup?.neutralHashtags?.split(',')) {
+			if (tweet.content.contains(neutralHashtag)){
+				add = true
+			}
+		}
 		if(this.twitterSetup?.isPositiveHashtag(tweet) || this.twitterSetup?.isNegativeHashtag(tweet)){
 			add = true
 		}
