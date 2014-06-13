@@ -34,7 +34,7 @@ class TweetController extends GenericController{
 	
 	def list(Integer max) {
 		
-		log.debug "tweetController->list params: " + params
+		log.info "tweetController->list params: " + params
 		Concept concept =chooseConcept(params)
 		def filters = loadTweetFilters()
 		params.max = Math.min(max ?: 6, 100)
@@ -137,6 +137,17 @@ class TweetController extends GenericController{
 			return
 		}
 		render "ok"
+	}
+	
+	def samplingTweets(){
+		log.debug "tweetController->samplingTweets params: " + params
+		Concept concept =chooseConcept(params)
+		def filters = loadTweetFilters()
+		
+		def samplingTweets = tweetService.getSamplingTweets(filters, params)
+//		print "total:" +samplingTweets.totalCount
+		
+		samplingTweets as JSON
 	}
 	
 	private OpinionValue getValue(value){
