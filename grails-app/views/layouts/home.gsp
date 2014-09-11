@@ -14,10 +14,11 @@
 	type="image/png">
 <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Open+Sans:400,300">
-<r:require modules="core,ace,highcharts,datepicker,editable" />
+<r:require modules="core,highcharts,datepicker,editable,ace" />
 
 <g:layoutHead />
 <r:layoutResources />
+
 </head>
 <body class="skin-1">
 

@@ -58,14 +58,3 @@ function activeOpinion(id, value){
 		
 }
 
-function doRequest(url,data,callback, errorHandler, method) {
-    $.ajax({
-            url: url,
-            type: method,
-            data: data,
-            cache: false,
-            success: callback,
-            error: errorHandler
-          });
-};
-

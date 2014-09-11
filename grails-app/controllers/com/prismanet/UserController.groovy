@@ -78,7 +78,7 @@ class UserController extends GenericController{
 		Date dateFrom, dateTo
 		if (params.dateFrom)
 			dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
-		if (params.dateFrom)
+		if (params.dateTo)
 			dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
 		filters.addAll(userService.getFilterList(dateFrom, dateTo))
 		
@@ -91,7 +91,12 @@ class UserController extends GenericController{
 		def strings = getPropertiesByMentionType()
 		def container=params.div
 		def filters = loadFilters([sourceType: sourceType])
-		
+		Date dateFrom, dateTo
+		if (params.dateFrom)
+			dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
+		if (params.dateTo)
+			dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
+		filters.addAll(userService.getFilterList(dateFrom, dateTo))
 		def dateList = userService.categoryStore(session.user, ["conceptsName"], filters, null).sort{a,b -> a[1] <=> b[1] }
 		def resultMap = [container:container,data:dateList, divTitle: strings[sourceType].name  + ' por Concepto', title:'Porcentajes de ' + strings[sourceType].name + ' por Concepto', name : strings[sourceType].name]
 		render resultMap as JSON

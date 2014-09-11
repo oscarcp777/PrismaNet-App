@@ -11,11 +11,11 @@
 			
 		</div>
 	<ul class="nav nav-tabs padding-12 tab-color-blue">
-		<li class="${tabMain}">
-		<a  href="#"> 
-		<i class="ace-icon fa fa-dashboard grey bigger-120"></i> <g:message code="dashborad.tab.main"/>
-		</a>
-		</li>
+<%--		<li class="${tabMain}">--%>
+<%--		<a  href="#"> --%>
+<%--		<i class="ace-icon fa fa-dashboard grey bigger-120"></i> <g:message code="dashborad.tab.main"/>--%>
+<%--		</a>--%>
+<%--		</li>--%>
 
 		<li class="${tabPosts}">
 		<g:link  controller='post' action="list" params="[conceptsId:concept.id]" >

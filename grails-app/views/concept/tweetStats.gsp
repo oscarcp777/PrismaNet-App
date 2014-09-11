@@ -5,7 +5,7 @@
 	href="${resource(dir: 'css', file: 'twitter.css')}" type="text/css">
 </head>
 <body>
-	<g:render template="tabTwitter" model="['concept':concept,'tabMain':'','tabTweets':'','tabChar':'active','tabSentimental':'']"></g:render>
+	<g:render template="tabTwitter" model="['concept':concept,'tabMain':'','tabTweets':'','tabChar':'active','tabSentimental':'','tabSampling':'']"></g:render>
 
 	<div class="page-content">
 		<div class="row">

@@ -184,7 +184,7 @@ a:hover {
 	backface-visibility: hidden;
     left: 40px;
     position: relative;
-    transform: translate3d(0px, 0px, 0px);
+/*     transform: translate3d(0px, 0px, 0px); */
     transition: transform 500ms ease 0s;
     width: 100%;
 }
@@ -919,7 +919,9 @@ a:hover {
 	margin: 0 auto -45px;
 }
 
-
+#section1>.hd_wrapInner {
+	padding-top: 80px;
+}
 ::selection {
 	background: #1abc9c;
 	color: #ffffff;

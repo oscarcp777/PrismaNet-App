@@ -282,7 +282,10 @@ class ConceptController extends GenericController{
 		Concept concept = getConcept(params.id)
 		[concept : concept]
 	}
-	
+	def sampling = {
+		Concept concept = getConcept(params.id)
+		[concept : concept]
+	}
 	def sentimentalAnalitycs(){
 		log.info "sentimentalAnalitycs params: " + params
 		def container = params.div

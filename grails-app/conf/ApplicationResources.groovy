@@ -1,21 +1,22 @@
 modules = {
 	   
 	core {
-		resource url:'css/bootstrap/bootstrap.css', disposition: 'head'
-		resource url:'js/jquery.js', disposition: 'head'
-		resource url:'js/bootstrap/bootstrap.js' 
+		resource url:'css/bootstrap/bootstrap.css'
+		resource url:'js/jquery.js' , disposition: 'head'
+		resource url:'js/bootstrap/bootstrap.js'
 		resource url:'css/font-awesome.css'
 	}
 	ace{
 		resource url:'css/ace/ace.min.css'
-		resource url:'css/ace/ace-skins.min.css'
+		resource url:'css/ace/ace-skins.min.css' 
 		resource url:'css/prisma.css'
-		resource url:'js/ace/ace.min.js'
-		resource url:'js/ace/ace-extra.min.js'
-		resource url:'js/ace/ace-elements.min.js'
-		resource url:'js/home.js',disposition: 'head'
+		resource url:'js/ace/ace-extra.min.js' ,disposition: 'head'
+		resource url:'js/ace/fuelux.wizard.min.js' 
+		resource url:'js/ace/ace-elements.min.js' 
+		resource url:'js/home.js' , disposition: 'head'
 		resource url:'js/ace/bootstrap-datepicker.min.js'
 		resource url:'js/cloud/wordcloud2.js'
+		resource url:'js/ace/ace.min.js' 
 		
 	}
 	chartPie{
@@ -57,4 +58,8 @@ modules = {
 		resource url:'css/login.css'
 		resource url:'js/jquery.backstretch.min.js',disposition: 'head'
 	}
+	paginate{
+		resource url:'js/jquery.quick.pagination.js'
+	}
+	
 }

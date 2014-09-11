@@ -84,7 +84,7 @@
 								<div class="featurette container" style="margin-left:-60px;">
 									<img src="img/analytics_howitworks.png" alt="como trabaja">
 									<div class="video">
-										<a href="https://www.youtube.com/embed/s8z3UVn3Xhc?vq=hd720" target="_blank"
+										<a href="#" 
 											class="open-trailer"><i class="ace-icon fa fa-play"></i><span>Ver Demo</span></a>
 									</div>
 								</div>
@@ -388,7 +388,7 @@
 							</div>
 							<div class="col-md-8">
 								<div>
-									<img src="img/admin.png" style="height: 340px;">
+									<img src="img/public/real_time.png" style="height: 340px;">
 								</div>
 							</div>
 						</div>
@@ -405,7 +405,7 @@
 							</div>
 							<div class="col-md-8">
 								<div>
-									<img src="img/home-work@2x.jpg" style="height: 340px;">
+									<img src="img/public/reputation.png" style="height: 340px;">
 								</div>
 							</div>
 						</div>
@@ -422,7 +422,7 @@
 							</div>
 							<div class="col-md-8">
 								<div>
-									<img src="img/home-merchants-screenshot.jpg"
+									<img src="img/public/cloud_words.png"
 										style="height: 340px;">
 								</div>
 							</div>
@@ -515,7 +515,7 @@
 								<div class="expand col-sm-6 col-md-6">
 									<h4>Está al tanto de todo lo relevante que está pasando</h4>
 									<p style="text-align: center">
-										<img class="img-responsive" src="img/features_ff_1.jpg" alt="">
+										<img class="img-responsive" src="img/public/monitor1.png" alt="">
 									</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer mas <i
@@ -526,7 +526,7 @@
 								<div class="col-sm-6 col-md-6 visible-lg">
 									<h4>Releva tu reputación en medios sociales</h4>
 									<p style="text-align: center">
-										<img class="img-responsive"  src="img/features_ff_2.jpg" alt="">
+										<img class="img-responsive"  src="img/public/monitor2.png" alt="">
 									</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer mas  <i
@@ -556,7 +556,7 @@
 								<div class="col-sm-6 col-md-6 visible-lg">
 									<h4>Top tweets, top hashtags y nube de palabras</h4>
 									<p style="text-align: center">
-										<img class="img-responsive" src="img/features_bz_hl_3.jpg" alt="">
+										<img class="img-responsive" src="img/public/cloud.jpg" style="width:500px; " alt="">
 									</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer más <i
@@ -575,7 +575,7 @@
 								<div class="expand col-sm-6 col-md-6">
 									<h4>Exportación de reportes para períodos de tiempo</h4>
 									<p style="text-align: center">
-										<img class="img-responsive" src="img/features_bz_hl_2.jpg" alt="">
+										<img class="img-responsive" src="img/public/betweentDate.png" alt="">
 									</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer más <i
@@ -586,7 +586,7 @@
 								<div class="col-sm-6 col-md-6 visible-lg">
 									<h4>Features relevantes</h4>
 									<p style="text-align: center">
-										<img class="img-responsive" src="img/features_ff_3.jpg" alt="">
+										<img class="img-responsive" src="img/public/features.png" alt="">
 									</p>
 									<div class="pull-right read-more">
 										<a href="#" rel="external">Leer más <i
@@ -625,12 +625,12 @@
 							<p>Le mostraremos como funciona nuestro sistema</p>
 							<div class=" alt">
 								<h5>Email:</h5>
-								<span>hello@yourdomain.com</span>
+								<span>prima-net@gmail.com</span>
 							</div>
 							<!-- /row -->
 							<div class=" alt">
-								<h5>Phone:</h5>
-								<span>(+34) 123-4567</span>
+								<h5>Telefono:</h5>
+								<span>(+54) 113838-8080</span>
 							</div>
 							<!-- /row -->
 							<div class=" alt">

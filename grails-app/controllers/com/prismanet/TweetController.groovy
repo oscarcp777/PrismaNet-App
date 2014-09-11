@@ -138,7 +138,42 @@ class TweetController extends GenericController{
 		}
 		render "ok"
 	}
-	
+	def samplingStep1(){
+		def container = params.div
+		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
+		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
+		//TODO hardcode para test 
+		params.dateCreated = '1409194800000'
+		log.info "samplingStep1 params: " + params
+		def filters = loadTweetFilters()
+		def samplings = tweetService.getSamplingTweets(filters, params)
+		//TODO guardo en session la muestra ver
+		session.conceptsId=params.conceptsId
+		session.samplingTweets=samplings.resultList
+		render(template: "samplingStep1", model: [dateFrom:params.dateFrom,dateTo:params.dateTo,demos:samplings.totalDemo,sampling:samplings.totalSampling])
+	}
+	def samplingStep2(){
+		Concept concept =getConcept(session.conceptsId)
+		session.samplingTweets.each {it ->
+			it.tweet.refresh()
+		}
+		render(template: "samplingTweets", model: [tweetList:session.samplingTweets,concept:concept])
+	}
+	def samplingStep3(){
+		def tweets=[]
+		def dateList=[]
+		session.samplingTweets.each {it ->
+			tweets.add(it.tweet)
+		}
+		def opinions=tweetService.getOpinionsByTweets(tweets)
+		
+		def container=params.div
+		dateList.add(['Positivo',25]);
+		dateList.add(['Negativo',60]);
+		dateList.add(['Neutral',15]);
+		def resultMap = [container:container,data:dateList,title:'Porcentajes de Opiniones',name : 'Opinion']
+		render resultMap as JSON
+	}
 	def samplingTweets(){
 		log.debug "tweetController->samplingTweets params: " + params
 		Concept concept =chooseConcept(params)

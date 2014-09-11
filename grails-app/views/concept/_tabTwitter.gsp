@@ -11,11 +11,11 @@
 			
 		</div>
 	<ul class="nav nav-tabs padding-12 tab-color-blue">
-		<li class="${tabMain}">
-		<a  href="#"> 
-		<i class="ace-icon fa fa-dashboard grey bigger-120"></i> <g:message code="dashborad.tab.main"/>
-		</a>
-		</li>
+<%-- 		<li class="${tabMain}"> --%>
+<!-- 		<a  href="#">  -->
+<%-- 		<i class="ace-icon fa fa-dashboard grey bigger-120"></i> <g:message code="dashborad.tab.main"/> --%>
+<!-- 		</a> -->
+<!-- 		</li> -->
 
 		<li class="${tabTweets}">
 		<g:link  controller='tweet' action="list" params="[conceptsId:concept.id]" >
@@ -37,7 +37,12 @@
 				<g:message code="dashborad.tab.sentimental"/>
 			</g:link>
 		</li>
-		
+		<li class="${tabSampling}">
+			<g:link  controller="concept" action="sampling" id="${concept.id}" >
+				<i class="blue glyphicon glyphicon-stats bigger-120"></i> 
+				<g:message code="dashborad.tab.sampling"/>
+			</g:link>
+		</li>
 	</ul>
 	<br>
 

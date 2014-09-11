@@ -107,9 +107,17 @@ function getSentimentalAnalitycs(data){
 	doRequest('../sentimentalAnalitycs',data,paintCharLine, null, 'GET');
 }
 function loadTweetCharPie(channel){
-	var data = {"div":'#tweetCharPie',"channel":channel}
+	loadDatepicker('pickertTweetConcept',loadTweetCharPiePickert);
+	var data = {'channel':channel, "div":'#tweetCharPie',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 	getTweetCharPie(data);
+	$('#tweetCharPie').data('channel',channel);
 }
+function loadTweetCharPiePickert(start, end,rangeSelect) {
+    $('#pickertTweetConcept span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
+    var data = { 'channel':$('#tweetCharPie').data('channel'),"div":'#tweetCharPie',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
+    getTweetCharPie(data);
+}
+
 function loadRealTime(channel){
 	var data = {"div":'#realTimeCharUser','channel':channel}
 	getConceptRealTime(data,'');
