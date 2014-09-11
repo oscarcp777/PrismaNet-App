@@ -21,6 +21,7 @@ import com.prismanet.GenericService.FilterType
 import com.prismanet.context.Filter
 import com.prismanet.context.TweetAttributeContext
 import com.prismanet.exception.ApplicationException
+import com.prismanet.sentiment.Opinion;
 import com.prismanet.sentiment.OpinionValue
 
 class TweetService extends MentionService{
@@ -174,7 +175,7 @@ class TweetService extends MentionService{
 //		resultList.eachWithIndex{ obj , i->
 //			println i +"-"+ obj.tweet.id
 //		}
-		[resultList:resultList,totalCount:samplingSize]
+		[resultList:resultList,totalSampling:samplingSize,totalDemo:tweets.totalCount]
 	}
 	
 	private def getSamplingSize(poblationNumber){
@@ -203,6 +204,13 @@ class TweetService extends MentionService{
 			}
 			
 		}
+	}
+	def getOpinionsByTweets(tweets){
+		def c = Opinion.createCriteria()
+		def results = c.list {
+			'in'("mention",tweets)
+		}
+		results
 	}
 	def loadAvatarUsers(tweets){
 		
