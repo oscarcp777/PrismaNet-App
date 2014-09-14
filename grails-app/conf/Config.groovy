@@ -13,7 +13,8 @@
 def barra = File.separator
 //Environment variable that contains a path
 def logFile =  "${userHome}${barra}logs${barra}${appName}"
-def catalinaBase ="..${barra}"
+def catalinaBase = System.properties.getProperty('catalina.base')
+if (!catalinaBase) catalinaBase = '.'
 def logDirectory = "${catalinaBase}${barra}logs${barra}${appName}"
 
 grails.project.groupId = 'com.prismanet' // change this to alter the default package name and Maven publishing destination
@@ -100,6 +101,7 @@ grails.hibernate.pass.readonly = false
 grails.hibernate.osiv.readonly = false
 grails.twitter.offline = false
 solr.server.url = "http://localhost:8983/solr/mention"
+//solr.server.url = "http://192.168.0.2:8983/solr/mention"
 environments {
     development {
         grails.logging.jul.usebridge = true
