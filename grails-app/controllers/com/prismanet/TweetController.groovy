@@ -162,15 +162,25 @@ class TweetController extends GenericController{
 	def samplingStep3(){
 		def tweets=[]
 		def dateList=[]
+		def container=params.div
 		session.samplingTweets.each {it ->
 			tweets.add(it.tweet)
 		}
 		def opinions=tweetService.getOpinionsByTweets(tweets)
+		Integer cantPos=0,cantNeg=0,cantNeu=0
+		opinions.each {it ->
+			if(it.value== OpinionValue.POSITIVE)
+			cantPos++
+			else if(it.value== OpinionValue.NEGATIVE)
+			cantNeg++
+			else if(it.value== OpinionValue.NEUTRAL)
+			cantNeu++
+		}
 		
-		def container=params.div
-		dateList.add(['Positivo',25]);
-		dateList.add(['Negativo',60]);
-		dateList.add(['Neutral',15]);
+		dateList.add(['Positivo',cantPos]);
+		dateList.add(['Negativo',cantNeg]);
+		dateList.add(['Neutral',cantNeu]);
+		session.samplingTweets=null
 		def resultMap = [container:container,data:dateList,title:'Porcentajes de Opiniones',name : 'Opinion']
 		render resultMap as JSON
 	}
