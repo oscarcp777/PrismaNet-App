@@ -36,7 +36,7 @@ class TweetJob {
 			List<String> result
 			try {
 				// Determino si el proceso esta corriendo
-				ProcessBuilder b = new ProcessBuilder("/bin/sh", "-c", "ps ax | grep prismanet-twitter-api")
+				ProcessBuilder b = new ProcessBuilder("/bin/sh", "-c", "ps ax | grep \"java -jar\" | grep \"twitter\"")
 				Process p = b.start()
 				result = IOUtils.readLines(p.getInputStream());
 			} catch (Exception e) {
@@ -44,7 +44,7 @@ class TweetJob {
 			}
 			
 			
-			if (result.size()<3){
+			if (result == null || result.size()<1){
 				//No esta corriendo por lo tanto lo ejecuto
 				Runtime.getRuntime().exec("java -jar "+pathCommand+"prismanet-twitter-api.jar")
 				log.info "Proceso api-twitter iniciado, ultima modificacion a las : " + lastUpdate
