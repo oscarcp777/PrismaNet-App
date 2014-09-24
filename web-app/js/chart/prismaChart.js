@@ -75,7 +75,7 @@ function getUserGroupedTweets(data){
 
 function loadMonthStatsData(channel){
 	loadDatepicker('pickertStatsMonth',loadStatsMonthPickert);
-	var data = {"channel":channel, "div":'#monthStats', "dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+	var data = {"channel":channel, "div":'#monthStats', "dateFrom":moment().subtract('days', 15).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 	getMonthStats(data);
 	$('#monthStats').data('channel',channel);
 }
@@ -108,7 +108,7 @@ function getSentimentalAnalitycs(data){
 }
 function loadTweetCharPie(channel){
 	loadDatepicker('pickertTweetConcept',loadTweetCharPiePickert);
-	var data = {'channel':channel, "div":'#tweetCharPie',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+	var data = {'channel':channel, "div":'#tweetCharPie',"dateFrom":moment().subtract('days', 15).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 	getTweetCharPie(data);
 	$('#tweetCharPie').data('channel',channel);
 }
@@ -137,7 +137,7 @@ function lineaChartUser(start, end,rangeSelect) {
 }
 function loadUserGroupedData(channel){
 	loadDatepicker('pickertUser',lineaChartUser);
-	var data = {'channel':channel, "div":'#lineaChartUser',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+	var data = {'channel':channel, "div":'#lineaChartUser',"dateFrom":moment().subtract('days', 15).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 	getUserGroupedTweets(data);
 	$('#lineaChartUser').data('channel',channel);
 }

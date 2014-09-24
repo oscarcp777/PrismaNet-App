@@ -32,7 +32,6 @@ class GenericController {
 		parameters.each { p ->
 			if (context.hasPropertyRelationForAttribute(p.key)) {
 				if (p.key.contains("id") || p.key.contains("Id")){
-					print "VALOR A CASTEAR:" + p.value
 					long val = p.value as Long
 					filters.add(new Filter(attribute:p.key, value : p.value.toLong(), type:FilterType.EQ))
 				}else	

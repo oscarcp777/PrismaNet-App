@@ -27,7 +27,7 @@ class TwitterSetupController {
 				
 		if (!twitterSetup.save(flush: true)) {
 			twitterSetup.errors.each {
-				print it
+				log.info it
 			}
 			render(view: "create", model: [twitterSetup: twitterSetup])
 			return

@@ -2,10 +2,9 @@
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
 
- grails.config.locations = [ "classpath:${appName}-config.properties",
-                             "classpath:${appName}-config.groovy",
-                             "file:${userHome}/.grails/${appName}-config.properties",
-                             "file:${userHome}/.grails/${appName}-config.groovy"]
+ grails.config.locations = [ "classpath:twitter4j.properties",
+	 						 "classpath:facebook4j.properties",
+                             "classpath:prisma-conf.properties"]
 
  if (System.properties["${appName}.config.location"]) {
     grails.config.locations << "file:" + System.properties["${appName}.config.location"]
@@ -83,11 +82,11 @@ grails.spring.bean.packages = []
 // whether to disable processing of multi part requests
 grails.web.disable.multipart=false
 
-grails.resources.debug=true
-grails.resources.mappers.yuicssminify.disable=true
-grails.resources.mappers.yuijsminify.disable=true
-grails.resources.mappers.cssrewriter.enabled = false
-grails.resources.processing.enabled = false
+grails.resources.debug=false
+grails.resources.mappers.yuicssminify.disable=false
+grails.resources.mappers.yuijsminify.disable=false
+grails.resources.mappers.cssrewriter.enabled = true
+grails.resources.processing.enabled = true
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
 
@@ -100,8 +99,7 @@ grails.hibernate.pass.readonly = false
 // configure passing read-only to OSIV session by default, requires "singleSession = false" OSIV mode
 grails.hibernate.osiv.readonly = false
 grails.twitter.offline = false
-solr.server.url = "http://localhost:8983/solr/mention"
-//solr.server.url = "http://192.168.0.2:8983/solr/mention"
+
 environments {
     development {
         grails.logging.jul.usebridge = true
@@ -179,7 +177,7 @@ environments {
 				   
 			info "grails.app" //,"com.prismanet"
 				   additivity: false
-					  
+			
 			root {
 				   info 'appLog', 'stdout'
 				   error 'errorsLog'

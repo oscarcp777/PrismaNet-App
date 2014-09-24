@@ -90,7 +90,7 @@ class UserController extends GenericController{
 		def sourceType = params.channel as MentionType
 		def strings = getPropertiesByMentionType()
 		def container=params.div
-		def filters = loadFilters([sourceType: sourceType])
+		def filters = loadFilters([sourceType:sourceType,userId:session.user.id])
 		Date dateFrom, dateTo
 		if (params.dateFrom)
 			dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
@@ -121,7 +121,7 @@ class UserController extends GenericController{
 		session.concepts.each {
 			if(it.facebookSetup !=null ){
 //			usersName.add(it.facebookSetup.accounts.replace(",",""))
-				println it.facebookSetup.accounts
+//				log.info it.facebookSetup.accounts
 			}
 		}
 		Facebook facebook =new FacebookFactory().getInstance();
@@ -141,12 +141,14 @@ class UserController extends GenericController{
 		session.concepts.each {
 			usersName.add(it.twitterSetup.includedAccounts.replace("@",""))
 		}
+		if(!grailsApplication.config.grails.twitter.offline){
 		Twitter twitter = new TwitterFactory().getInstance();
 		ResponseList<twitter4j.User> users = null
 		if (usersName.size>0)
 			users = twitter.lookupUsers((String[])usersName.toArray());
 		for (twitter4j.User user : users) {
 			dateList.add([user.screenName,user.followersCount])
+		}
 		}
 		def resultMap=[container:container,data:dateList,title: message(code: "user.stats.tweets.followers.sub"),name : message(code: "user.stats.title.followers")]
 		resultMap
@@ -274,7 +276,7 @@ class UserController extends GenericController{
 		def user = new User (params)
 		if (!user.save(flush: true)) {
 			user.errors.each {
-				print it
+				log.info it
 			}
 			render(view: "create", model: [user: user])
 			return

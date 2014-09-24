@@ -133,7 +133,7 @@ class TweetController extends GenericController{
 			opinion.value = getValue(params.value) ?: OpinionValue.NEUTRAL
 		}
 		if (!opinion.save(flush: true)) {
-			print "NO FUE CREADO: " + opinion.errors
+			log.info "NO FUE CREADO: " + opinion.errors
 			return
 		}
 		render "ok"
@@ -190,7 +190,6 @@ class TweetController extends GenericController{
 		def filters = loadTweetFilters()
 		
 		def samplingTweets = tweetService.getSamplingTweets(filters, params)
-//		print "total:" +samplingTweets.totalCount
 		
 		samplingTweets as JSON
 	}

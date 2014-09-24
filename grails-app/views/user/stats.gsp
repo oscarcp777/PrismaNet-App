@@ -18,8 +18,8 @@
 			<div class="col-lg-12" >
 				
               <g:render template="chart" model="['divPickert':'disable','callback':'loadRealTime','titleChar':'user.stats.tweets.real.time','div':'realTimeCharUser']"></g:render>
+                <g:render template="chart" model="['divPickert':'disable','callback':'loadTotalFollowers','titleChar':'user.stats.tweets.followers','div':'totalFollowers']"></g:render>
 			  <g:render template="chart" model="['divPickert':'pickertTweetConcept','callback':'loadTweetCharPie','titleChar':'user.stats.tweets.concepts','div':'tweetCharPie']"></g:render>
-			  <g:render template="chart" model="['divPickert':'disable','callback':'loadTotalFollowers','titleChar':'user.stats.tweets.followers','div':'totalFollowers']"></g:render>
 			  <g:render template="chart" model="['divPickert':'pickertUser','callback':'loadUserGroupedData','titleChar':'user.stats.tweets.date','div':'lineaChartUser']"></g:render>
 			  <g:render template="chart" model="['divPickert':'pickertStatsMonth','callback':'loadMonthStatsData','titleChar':'user.stats.month.stats','div':'monthStats']"></g:render>
 			</div>

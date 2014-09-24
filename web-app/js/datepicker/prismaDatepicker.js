@@ -1,7 +1,7 @@
 
 function loadDatepicker(container,callBack){
 	$('#'+container).daterangepicker({
-        startDate: moment().subtract('days', 29),
+        startDate: moment().subtract('days', 15),
         endDate: moment(),
         showDropdowns: true,
         showWeekNumbers: true,

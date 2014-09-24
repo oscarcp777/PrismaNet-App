@@ -26,7 +26,7 @@
 
 							<div class="widget-body" >
 								<div class="widget-main">
-								<div id="divSampling">
+								<div id="divSampling" >
 									<div id="fuelux-wizard" data-target="#step-container">
 										<ul class="wizard-steps">
 											<li data-target="#step1" class="active"><span
@@ -51,7 +51,7 @@
 											</div>
 										</div>
 
-										<div class="step-pane" id="step2" style="min-height:950px;">
+										<div class="step-pane" id="step2" style="min-height:1700px;">
 											<div class="center" id="samplingStep2">
 												
 											</div>
@@ -65,7 +65,7 @@
 
 									</div>
 
-									<hr style="margin-left:-1px">
+									<hr >
 									<div class="wizard-actions" id="buttons">
 
 										<button class="btn btn-info btn-next" data-last="Finish">

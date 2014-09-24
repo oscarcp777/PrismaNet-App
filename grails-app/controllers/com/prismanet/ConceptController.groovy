@@ -105,8 +105,6 @@ class ConceptController extends GenericController{
 											redirectOnClick+"&dateCreated=")
 			break
 		}
-//		def aux = resultMap as JSON
-//		print "resultMap: " + aux
 		render resultMap as JSON
 	}
 	
@@ -336,7 +334,7 @@ class ConceptController extends GenericController{
 	}
 	
 	def sentimentChartPie ={
-		print "params: " + params
+		log.info "params: " + params
 		def container=params.div
 		def filters = []
 		def conceptId = params.id as Long
