@@ -30,7 +30,6 @@ class MongoPostsImporter {
 		
 		def filters = []
 		if (dates.dateFrom && dates.dateTo){
-			print "entra aca"
 			filters = ['$and':[[created_time:['$gte': dates.dateFrom]], [created_time:['$lte': dates.dateTo]]]]
 		}else{
 			if (dates.dateFrom)

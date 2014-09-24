@@ -29,7 +29,6 @@ class MongoTweetsImporter {
 		
 		def filters = []
 		if (dates.dateFrom && dates.dateTo){
-			print "entra aca"
 			filters = ['$and':[[created_at:['$gte': dates.dateFrom]], [created_at:['$lte': dates.dateTo]]]]
 		}else{
 			if (dates.dateFrom)

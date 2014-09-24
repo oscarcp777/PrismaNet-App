@@ -40,7 +40,7 @@ class TweetJob {
 				Process p = b.start()
 				result = IOUtils.readLines(p.getInputStream());
 			} catch (Exception e) {
-				e.printStackTrace();
+				log.error "error ProcessBuilder",e
 			}
 			
 			
@@ -58,7 +58,7 @@ class TweetJob {
 					kill.start()
 					log.info "Kill proceso: " + result.get(0)[0..4]
 				} catch (Exception e) {
-					e.printStackTrace();
+					log.error "error ProcessBuilder",e
 				}
 				// Actualizo config. de mongo
 				importer.setConfiguration(twitterSetupService.getConfiguration())
@@ -76,19 +76,14 @@ class TweetJob {
 //			dates.put("dateFrom",d1.time)
 //			dates.put("dateTo",d2.time)
 			
-//			print "filtros: " + dates
 			
 			DBCursor tweets = importer.importTweets(dates)
-//			print "-------------------------"
-//			print tweets
 			def iterator = tweets.iterator()
 			def partialList = []
 			int i = 0
-//			print "tweets: " + iterator.size()
 			while (iterator.hasNext()){
 				partialList.add(iterator.next())
 				i++
-//				print i
 				try {
 					if (i % 25 == 0){
 						log.info "Nuevo Lote Tweets"

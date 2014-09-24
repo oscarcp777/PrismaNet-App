@@ -39,7 +39,7 @@ class PostJob {
 			
 			Process p = Runtime.getRuntime().exec("java -jar "+pathCommand+"prismanet-facebook-api.jar")
 			p.waitFor()
-			println "Proceso api-facebook ejecutado, ultima modificacion a las : " + grailsApplication.config.facebook.setup.lastUpdated
+			log.info "Proceso api-facebook ejecutado, ultima modificacion a las : " + grailsApplication.config.facebook.setup.lastUpdated
 			
 			def d1 = new GregorianCalendar(2013, Calendar.OCTOBER, 27,11,00)
 //			def d2 = new GregorianCalendar(2013, Calendar.OCTOBER, 14,1,36)
@@ -50,7 +50,6 @@ class PostJob {
 //			dates.put("dateFrom",d1.time)
 //			dates.put("dateTo",d2.time)
 			
-//			print "filtros: " + dates
 			
 			DBCursor posts = importer.importPosts([])
 			def iterator = posts.iterator()

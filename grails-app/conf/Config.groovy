@@ -2,10 +2,9 @@
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
 
- grails.config.locations = [ "classpath:${appName}-config.properties",
-                             "classpath:${appName}-config.groovy",
-                             "file:${userHome}/.grails/${appName}-config.properties",
-                             "file:${userHome}/.grails/${appName}-config.groovy"]
+ grails.config.locations = [ "classpath:twitter4j.properties",
+	 						 "classpath:facebook4j.properties",
+                             "classpath:prisma-conf.properties"]
 
  if (System.properties["${appName}.config.location"]) {
     grails.config.locations << "file:" + System.properties["${appName}.config.location"]
@@ -13,7 +12,8 @@
 def barra = File.separator
 //Environment variable that contains a path
 def logFile =  "${userHome}${barra}logs${barra}${appName}"
-def catalinaBase ="..${barra}"
+def catalinaBase = System.properties.getProperty('catalina.base')
+if (!catalinaBase) catalinaBase = '.'
 def logDirectory = "${catalinaBase}${barra}logs${barra}${appName}"
 grails.project.groupId = 'com.prismanet' // change this to alter the default package name and Maven publishing destination
 
@@ -194,4 +194,4 @@ grails.gorm.default.mapping = {
 	  dynamicUpdate true
 }
 
-solr.server.url = "http://localhost:8983/solr/mention"
+
