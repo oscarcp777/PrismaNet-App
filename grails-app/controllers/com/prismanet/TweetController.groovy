@@ -40,7 +40,7 @@ class TweetController extends GenericController{
 		def filters = loadTweetFilters()
 		params.max = Math.min(max ?: 6, 100)
 		def tweets = tweetService.getTweets(filters,params)
-		def relevantWords = tweetService.getRelevantWords(filters)
+		def relevantWords = tweetService.getRelevantWords(loadSolrTweetFilters())
 		if(!grailsApplication.config.grails.twitter.offline)
 			tweetService.loadAvatarUsers(tweets.resultList)
 		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"], 
@@ -85,15 +85,12 @@ class TweetController extends GenericController{
 	
 	private def loadTweetFilters(){
 		def filters=[]
-
 		if (params["conceptsId"])
 			filters.add(new Filter(attribute:"conceptsId",value: params.conceptsId.toLong(), type:FilterType.EQ))
 
 		if (params["dateMinute"]){
 			def cal = new GregorianCalendar()
 			cal.setTimeInMillis(params["dateMinute"] as Long)
-//			def minuteFilter=DateUtils.getDateFormat(DateTypes.MINUTE_PERIOD, cal.time)
-//			filters.add(new Filter(attribute:"dateMinute",value: minuteFilter, type:FilterType.EQ))
 			use (TimeCategory){
 				Date dateFrom = cal.getTime()
 				Date dateTo = dateFrom + 1.minute -1.second
@@ -104,8 +101,6 @@ class TweetController extends GenericController{
 		if (params["dateCreated"]){
 			def cal = new GregorianCalendar()
 			cal.setTimeInMillis(params["dateCreated"] as Long)
-//			def day = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, cal.time)
-//			filters.add(new Filter(attribute:"dateCreated",value: day, type:FilterType.EQ))
 			use (TimeCategory){
 				Date dateFrom = cal.getTime()
 				Date dateTo = dateFrom + 1.day -1.second
@@ -116,13 +111,41 @@ class TweetController extends GenericController{
 		if (params["dateHour"]){
 			def cal = new GregorianCalendar()
 			cal.setTimeInMillis(params["dateHour"] as Long)
-//			def hourFilter=DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, cal.time)
-//			filters.add(new Filter(attribute:"dateHour",value: hourFilter, type:FilterType.EQ))
 			use (TimeCategory){
 				Date dateFrom = cal.getTime()
 				Date dateTo = dateFrom + 1.hour -1.second
 				filters.addAll(tweetService.getFilterList(dateFrom, dateTo, "created", false))
 			}
+		}
+		filters
+	}
+	
+	
+	private def loadSolrTweetFilters(){
+		def filters=[]
+
+		if (params["conceptsId"])
+			filters.add(new Filter(attribute:"conceptsId",value: params.conceptsId.toLong(), type:FilterType.EQ))
+
+		if (params["dateMinute"]){
+			def cal = new GregorianCalendar()
+			cal.setTimeInMillis(params["dateMinute"] as Long)
+			def minuteFilter=DateUtils.getDateFormat(DateTypes.MINUTE_PERIOD, cal.time)
+			filters.add(new Filter(attribute:"dateMinute",value: minuteFilter, type:FilterType.EQ))
+		}
+
+		if (params["dateCreated"]){
+			def cal = new GregorianCalendar()
+			cal.setTimeInMillis(params["dateCreated"] as Long)
+			def day = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, cal.time)
+			filters.add(new Filter(attribute:"dateCreated",value: day, type:FilterType.EQ))
+		}
+
+		if (params["dateHour"]){
+			def cal = new GregorianCalendar()
+			cal.setTimeInMillis(params["dateHour"] as Long)
+			def hourFilter=DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, cal.time)
+			filters.add(new Filter(attribute:"dateHour",value: hourFilter, type:FilterType.EQ))
 		}
 		filters
 	}
