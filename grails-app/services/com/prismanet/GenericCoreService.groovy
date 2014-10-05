@@ -29,8 +29,12 @@ class GenericCoreService extends GenericService {
 		getFilterList(dateFrom, dateTo, "created")
 	}
 	
-	
 	def getFilterList(dateFrom, dateTo, attributeName){
+		getFilterList(dateFrom, dateTo, attributeName, true)
+	}
+	
+	
+	def getFilterList(dateFrom, dateTo, attributeName, cleanDatesByDiff){
 		
 		if (!dateFrom)
 			return []
@@ -42,22 +46,25 @@ class GenericCoreService extends GenericService {
 		DateServiceType type = getChartType(dateFrom, dateTo)
 		Calendar calendarFrom = Calendar.getInstance();
 		calendarFrom.setTime(dateFrom);
-		calendarFrom.set(Calendar.SECOND, 0);
 		Calendar calendarTo = Calendar.getInstance();
 		calendarTo.setTime(dateTo);
-		calendarTo.set(Calendar.SECOND, 0);
-		switch (type) {
-			case DateServiceType.BY_HOUR:
-				calendarFrom.set(Calendar.MINUTE, 0);
-				calendarTo.set(Calendar.MINUTE, 0);
-				break
-			case DateServiceType.BY_DATE:
-			case DateServiceType.BY_MONTH:
-				calendarFrom.set(Calendar.MINUTE, 0);
-				calendarTo.set(Calendar.MINUTE, 0);
-				calendarFrom.set(Calendar.HOUR, 0);
-				calendarTo.set(Calendar.HOUR, 0);
-				break
+		
+		if (cleanDatesByDiff){
+			calendarFrom.set(Calendar.SECOND, 0);
+			calendarTo.set(Calendar.SECOND, 0);
+			switch (type) {
+				case DateServiceType.BY_HOUR:
+					calendarFrom.set(Calendar.MINUTE, 0);
+					calendarTo.set(Calendar.MINUTE, 0);
+					break
+				case DateServiceType.BY_DATE:
+				case DateServiceType.BY_MONTH:
+					calendarFrom.set(Calendar.MINUTE, 0);
+					calendarTo.set(Calendar.MINUTE, 0);
+					calendarFrom.set(Calendar.HOUR, 0);
+					calendarTo.set(Calendar.HOUR, 0);
+					break
+			}
 		}
 		return [new Filter(attribute:attributeName, value:calendarFrom.getTime(), type:FilterType.GE),
 			new Filter(attribute:attributeName, value:calendarTo.getTime(), type:FilterType.LE)]
