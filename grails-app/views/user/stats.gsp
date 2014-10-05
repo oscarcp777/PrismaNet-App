@@ -15,7 +15,18 @@
 			
 		</div>
 		<div class="row" >
-			<div class="col-lg-12" >
+		<div class="col-lg-12">
+			<blockquote>
+				<p class="lighter line-height-125">
+                   <g:message code="dashborad.tab.main.desc"/>
+                </p>
+			</blockquote>
+			<div class="alert alert-warning fade in">
+			<h4><i class="fa fa-warning"></i> Warning!</h4>
+			 <g:message code="dashborad.tab.main.desc"/>
+			 </div>
+		</div>
+		<div class="col-lg-12" >
 				
               <g:render template="chart" model="['divPickert':'disable','callback':'loadRealTime','titleChar':'user.stats.tweets.real.time','div':'realTimeCharUser']"></g:render>
                 <g:render template="chart" model="['divPickert':'disable','callback':'loadTotalFollowers','titleChar':'user.stats.tweets.followers','div':'totalFollowers']"></g:render>

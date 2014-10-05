@@ -75,17 +75,13 @@
 
 
 								</h1>
-								<h2>Prisma-net te ofrece la mejor colecci&oacute;n de
-									estad&iacute;sticas sobre la demograf&iacute;a, el
-									comportamiento y los intereses de tu audiencia online,
-									otorg&aacute;ndote todo lo que necesitas para mantener el
-									dominio sobre tu presencia social.</h2>
+								<h2> <g:message code="public.index.home.sub.title"/> </h2>
 									</div>
 								<div class="featurette container" style="margin-left:-60px;">
 									<img src="img/analytics_howitworks.png" alt="como trabaja">
 									<div class="video">
 										<a href="#" 
-											class="open-trailer"><i class="ace-icon fa fa-play"></i><span>Ver Demo</span></a>
+											class="open-trailer"><i class="ace-icon fa fa-play"></i><span><g:message code="public.index.home.demo"/></span></a>
 									</div>
 								</div>
 							</section>
@@ -103,7 +99,7 @@
 				<div class="container">
 					<div class="row title">
 						<div class="col-sm-6 col-md-6">
-							<h2>Real-Time</h2>
+							<h2><g:message code="public.index.home.real.time"/> </h2>
 						</div>
 						<!-- /span3 -->
 						<div class="col-md-9 hidden-phone">
@@ -115,11 +111,8 @@
 
 					<div class="row desc">
 						<div class="col-sm-8 col-md-8">
-							<p>En junio de 2013, 114.5 millones de personas de América Latina visitó un sitio de red social, 
-							representando TAN SOLO EL 96% de la población online de la región.</p>
-							<p>Las noticias de último minuto que se difunde en las redes sociales tienen mayor alcance en 
-							Twitter que en cualquier otra. 
-							 El 10% del tráfico del diario se genera en los social media.</p>
+							<p><g:message code="public.index.home.real.desc1"/></p>
+							<p><g:message code="public.index.home.real.desc2"/></p>
 						</div>
 						<!-- /span8 -->
 					</div>
@@ -127,7 +120,7 @@
 
 					<div class="row content hidden-tablet">
 						<div class="col-sm-12 col-md-12 expand">
-							<h4>Estadisticas</h4>
+							<h4></h4>
 							<div class="row">
 								<div class="col-sm-4 col-md-4">
 
@@ -201,7 +194,7 @@
 												padding: 0px; -webkit-appearance: none; background-position: initial initial; 
 												background-repeat: initial initial;">
 										</div>
-										<h6>43% de personas usan twitter</h6>
+										<h6><g:message code="public.index.home.stats.msj1"/> </h6>
 									</div>
 									<!-- END CHART N 1 -->
 								</div>
@@ -274,7 +267,7 @@
 												data-anglearc="180" data-angleoffset="-90" data-max="100"
 												style="width: 126px; height: 81px; position: absolute; vertical-align: middle; margin-top: 41px; margin-left: -185px; border: 0px; background-image: none; font-weight: bold; font-style: normal; font-variant: normal; font-size: 49px; line-height: normal; font-family: Arial; text-align: center; color: rgb(51, 51, 51); padding: 0px; -webkit-appearance: none; background-position: initial initial; background-repeat: initial initial;">
 										</div>
-										<h6>65% de las personas usan facebook</h6>
+										<h6><g:message code="public.index.home.stats.msj2"/> </h6>
 									</div>
 									<!-- END CHART N 2 -->
 								</div>
@@ -347,7 +340,7 @@
 												data-anglearc="180" data-angleoffset="-90" data-max="6000"
 												style="width: 126px; height: 81px; position: absolute; vertical-align: middle; margin-top: 41px; margin-left: -185px; border: 0px; background-image: none; font-weight: bold; font-style: normal; font-variant: normal; font-size: 49px; line-height: normal; font-family: Arial; text-align: center; color: rgb(51, 51, 51); padding: 0px; -webkit-appearance: none; background-position: initial initial; background-repeat: initial initial;">
 										</div>
-										<h6>tweets por segundo</h6>
+										<h6><g:message code="public.index.home.stats.msj3"/> </h6>
 									</div>
 									<!-- END CHART N 3 -->
 								</div>
@@ -379,12 +372,9 @@
 					<div class="item active">
 						<div class="container featurette">
 							<div class="col-md-4">
-								<h2>Ideal para</h2>
-								<h3>Monitoreo de redes sociales en tiempo real</h3>
-								<p>Prisma-net te trae un tablero de control único y en
-									tiempo real, con información de Twitter y Facebook curada
-									minuto a minuto sobre los temas y autores a los que deberías
-									estar prestándole atención:</p>
+								<h2><g:message code="public.index.home.carousel1.title1"/></h2>
+								<h3><g:message code="public.index.home.carousel1.title2"/> </h3>
+								<p><g:message code="public.index.home.carousel1.desc"/></p>
 							</div>
 							<div class="col-md-8">
 								<div>
@@ -396,12 +386,10 @@
 					<div class="item">
 						<div class="container featurette">
 							<div class="col-md-4">
-								<h2>Ideal para</h2>
-								<h3>Releva tu reputación en medios sociales</h3>
-								<p>Accede a estadísticas pertinentes sobre tus menciones y
-									audiencia para comprender cómo se encuentra posicionada tu
-									marca en el ámbito de social media, y conecta episodios clave
-									con la reacción online de tu audiencia</p>
+								<h2><g:message code="public.index.home.carousel2.title1"/></h2>
+								<h3><g:message code="public.index.home.carousel2.title2"/> </h3>
+								<p><g:message code="public.index.home.carousel2.desc"/></p>
+
 							</div>
 							<div class="col-md-8">
 								<div>
@@ -413,12 +401,13 @@
 					<div class="item">
 						<div class="container featurette">
 							<div class="col-md-4">
-								<h2>Ideal para</h2>
-								<h3>Top tweets, top hashtags y nube de palabras</h3>
-								<p>Prisma-net te ofrece una herramienta para comparar las
-									menciones de tus competidores a la par de las tuyas,
-									permitiéndote identificar tendencias y contenidos que también
-									son relevantes para tu marca</p>
+								<h2></h2>
+								<h3></h3>
+								<p></p>
+								<h2><g:message code="public.index.home.carousel2.title1"/></h2>
+								<h3><g:message code="public.index.home.carousel2.title2"/> </h3>
+								<p><g:message code="public.index.home.carousel2.desc"/></p>
+									
 							</div>
 							<div class="col-md-8">
 								<div>
@@ -440,7 +429,7 @@
 				<div class="container">
 					<div class="title row">
 						<div class="col-sm-4 col-md-4">
-							<h2>Features</h2>
+							<h2><g:message code="public.index.home.features"/></h2>
 						</div>
 						<!-- /span4 -->
 						<div class="col-sm-8 col-md-8 hidden-sm">
@@ -451,11 +440,7 @@
 					<!-- /row-fluid -->
 					<div class="desc row">
 						<div class="col-sm-8 col-md-8">
-							<p>El monitoreo tradicional es cosa del pasado. Consume estadísticas completas y en tiempo real!
-							Usa Prisma-net para seguir y cuidar tu presencia online, 
-							identificando tendencias en la conversación, detectando y gestionando crisis potenciales,
-							 conociendo el contenido que hace reaccionar
-							 a tu audiencia y descubriendo quiénes son tus influenciadores.</p>
+							<p><g:message code="public.index.home.features.desc"/> </p>
 						</div>
 						<!-- /span8 -->
 					</div>
@@ -464,13 +449,13 @@
 						<div class="col-sm-4 col-md-4" id="article-id">
 							<ul class="article-tags">
 								<li data-blog="blog" class=""><i
-									class="ace-icon fa fa-arrow-circle-right"></i>Blog</li>
+									class="ace-icon fa fa-arrow-circle-right"></i><g:message code="public.index.home.features.blog"/></li>
 								<li data-blog="dribbble" class=""><i
-									class="ace-icon fa fa-arrow-circle-right"></i>Monitoreo</li>
+									class="ace-icon fa fa-arrow-circle-right"></i><g:message code="public.index.home.features.monitor"/></li>
 								<li data-blog="instagram" class=""><i
-									class="ace-icon fa fa-arrow-circle-right"></i>Features Destacados</li>
+									class="ace-icon fa fa-arrow-circle-right"></i><g:message code="public.index.home.features.important"/></li>
 								<li data-blog="github" class="current"><i
-									class="ace-icon fa fa-arrow-circle-right"></i>Reportes</li>
+									class="ace-icon fa fa-arrow-circle-right"></i><g:message code="public.index.home.features.report"/></li>
 
 							</ul>
 						</div>
@@ -479,25 +464,20 @@
 						<div class="slide col-sm-8 col-md-8" data-blog="blog" style="display: none;">
 							<div class="row">
 								<div class="expand col-sm-6 col-md-6">
-									<h4>Políticos de Argentina en las redes sociales</h4>
-									<p>Ayer el diario argentino La Nación publicó un informe sobre la performance de los candidatos a las
-									 PASO en las redes sociales elaborado con estadísticas obtenidas por @Tribatics. A continuación reproducimos parte de la información publicada: 
-									Ranking por volumen de Tweets Daniel Filmus fue el precandidato a Senador por la Ciudad de Buenos Aires 
-									que …</p>
+									<h4><g:message code="public.index.home.features.blog.title"/> </h4>
+									<p><g:message code="public.index.home.features.blog.title"/>
+									</p>
 									<div class="pull-right read-more">
-										<a href="#" rel="external" target="_blank">Leer más <i
+										<a href="#" rel="external" target="_blank"><g:message code="public.index.home.features.blog.more"/> <i
 											class="ace-icon fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
 								<div class="col-sm-6 col-md-6 visible-lg">
-									<h4>Twitter y TV. El rating de los #MartinFierro</h4>
-									<p>La entrega de los Premios #MartinFierro del pasado lunes 5 de Agosto fue la ceremonia con más
-									 audiencia de los últimos 5 años, alcanzando picos de hasta 37.6 puntos de rating (Fuente: IBOPE Media). 
-									 Dicho acontecimiento no sólo fue un verdadero éxito televisivo por la gran audiencia que tuvo la 
-									 transmisión sino también por el</p>
+									<h4><g:message code="public.index.home.features.monitor.title"/> </h4>
+									<p><g:message code="public.index.home.features.monitor.title"/>									 
 									<div class="pull-right read-more">
-										<a href="#" rel="external">Leer más <i
+										<a href="#" rel="external"><g:message code="public.index.home.features.monitor.more"/> <i
 											class="ace-icon fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
@@ -513,23 +493,23 @@
 							style="display: none;">
 							<div class="row">
 								<div class="expand col-sm-6 col-md-6">
-									<h4>Está al tanto de todo lo relevante que está pasando</h4>
+									<h4><g:message code="public.index.home.features.important.title"/></h4>
 									<p style="text-align: center">
 										<img class="img-responsive" src="img/public/monitor1.png" alt="">
 									</p>
 									<div class="pull-right read-more">
-										<a href="#" rel="external">Leer mas <i
+										<a href="#" rel="external"><g:message code="public.index.home.features.monitor.more"/> <i
 											class="ace-icon fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
 								<div class="col-sm-6 col-md-6 visible-lg">
-									<h4>Releva tu reputación en medios sociales</h4>
+									<h4><g:message code="public.index.home.features.reputacion.title"/></h4>
 									<p style="text-align: center">
 										<img class="img-responsive"  src="img/public/monitor2.png" alt="">
 									</p>
 									<div class="pull-right read-more">
-										<a href="#" rel="external">Leer mas  <i
+										<a href="#" rel="external"><g:message code="public.index.home.features.monitor.more"/>  <i
 											class="ace-icon fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
@@ -543,23 +523,23 @@
 							style="display: none;">
 							<div class="row">
 								<div class="expand col-sm-6 col-md-6">
-									<h4>Género, edad, ubicación y audience score</h4>
+									<h4><g:message code="public.index.home.features.monitor.more"/></h4>
 									<p style="text-align: center">
 										<img class="img-responsive" src="img/features_ff_hl_4.jpg" alt="">
 									</p>
 									<div class="pull-right read-more">
-										Leer más <i class="ace-icon fa fa-angle-double-right"></i>
+										<g:message code="public.index.home.features.monitor.more"/> <i class="ace-icon fa fa-angle-double-right"></i>
 									</div>
 								</div>
 								<!-- /span6 -->
 
 								<div class="col-sm-6 col-md-6 visible-lg">
-									<h4>Top tweets, top hashtags y nube de palabras</h4>
+									<h4><g:message code="public.index.home.features.hashtags.title"/> </h4>
 									<p style="text-align: center">
 										<img class="img-responsive" src="img/public/cloud.jpg" style="width:500px; " alt="">
 									</p>
 									<div class="pull-right read-more">
-										<a href="#" rel="external">Leer más <i
+										<a href="#" rel="external"><g:message code="public.index.home.features.monitor.more"/> <i
 											class="ace-icon fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
@@ -573,23 +553,23 @@
 							style="display: block;">
 							<div class="row">
 								<div class="expand col-sm-6 col-md-6">
-									<h4>Exportación de reportes para períodos de tiempo</h4>
+									<h4><g:message code="public.index.home.features.report.time"/> </h4>
 									<p style="text-align: center">
 										<img class="img-responsive" src="img/public/betweentDate.png" alt="">
 									</p>
 									<div class="pull-right read-more">
-										<a href="#" rel="external">Leer más <i
+										<a href="#" rel="external"><g:message code="public.index.home.features.monitor.more"/> <i
 											class="ace-icon fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
 								<!-- /span6 -->
 								<div class="col-sm-6 col-md-6 visible-lg">
-									<h4>Features relevantes</h4>
+									<h4><g:message code="public.index.home.features.relevant"/> </h4>
 									<p style="text-align: center">
 										<img class="img-responsive" src="img/public/features.png" alt="">
 									</p>
 									<div class="pull-right read-more">
-										<a href="#" rel="external">Leer más <i
+										<a href="#" rel="external"><g:message code="public.index.home.features.monitor.more"/> <i
 											class="ace-icon fa fa-angle-double-right"></i></a>
 									</div>
 								</div>
@@ -610,7 +590,7 @@
 				<div class="container">
 					<div class="row title">
 						<div class="col-sm-4 col-md-4">
-							<h2>Contactenos</h2>
+							<h2><g:message code="public.index.home.contact"/></h2>
 						</div>
 						<!-- /span4 -->
 						<div class="col-sm-8 col-md-8 hidden-phone alt">
@@ -621,22 +601,23 @@
 					<!-- /row -->
 					<div class="row content">
 						<div class="col-sm-4 col-md-4">
-							<h4 class="intro">Hablemos</h4>
-							<p>Le mostraremos como funciona nuestro sistema</p>
+							<h4 class="intro"><g:message code="public.index..home.contact.tellme"/></h4>
+							<p><g:message code="public.index..home.contact.msj"/></p>
 							<div class=" alt">
-								<h5>Email:</h5>
-								<span>prima-net@gmail.com</span>
+								<h5><g:message code="public.index..home.contact.email"/></h5>
+								<span><g:message code="public.index..home.contact.email.prisma"/></span>
 							</div>
 							<!-- /row -->
 							<div class=" alt">
-								<h5>Telefono:</h5>
-								<span>(+54) 113838-8080</span>
+								<h5><g:message code="public.index..home.contact.phone"/></h5>
+								<span><g:message code="public.index..home.contact.number"/></span>
 							</div>
 							<!-- /row -->
 							<div class=" alt">
-								<h5>Twitter:</h5>
+								<h5><g:message code="public.index..home.contact.twitter"/></h5>
 								<span><a href="http://www.twitter.com/@Prisma_Net_"
-									rel="external">@Prisma_Net_</a></span>
+									rel="external"><g:message code="public.index..home.contact.prisma_"/>
+									</a></span>
 							</div>
 							<!-- /row -->
 						</div>
@@ -656,7 +637,7 @@
 								<div class="row">
 									<div class="col-sm-6 col-md-6">
 										<div class="control-group">
-											<label for="name" class="control-label">Nombre:</label>
+											<label for="name" class="control-label"><g:message code="public.index..home.contact.name"/></label>
 											<div class="controls">
 												<input class="col-sm-12 col-md-12" type="text"
 													name="contact_name" id="name">
@@ -668,7 +649,7 @@
 									<!-- /span6 -->
 									<div class="col-sm-6 col-md-6">
 										<div class="control-group">
-											<label for="email" class="control-label">Email:</label>
+											<label for="email" class="control-label"><g:message code="public.index..home.contact.email"/></label>
 											<div class="controls">
 												<input class="col-md-12 col-sm-12" type="email"
 													name="contact_email" id="email">
@@ -684,7 +665,7 @@
 								<div class="row">
 									<div class="col-md-6 col-sm-6">
 										<div class="control-group">
-											<label for="phone" class="control-label">Teléfono:</label>
+											<label for="phone" class="control-label"><g:message code="public.index..home.contact.phone"/></label>
 											<div class="controls">
 												<input class="col-md-12 col-sm-12" type="tel"
 													name="contact_phone" id="phone">
@@ -696,7 +677,7 @@
 									<!-- /span6 -->
 									<div class="col-md-6 col-sm-6">
 										<div class="control-group">
-											<label for="website" class="control-label">Tú sitio Web
+											<label for="website" class="control-label"><g:message code="public.index..home.contact.web"/>
 												:</label>
 											<div class="controls">
 												<input class="col-md-12 col-sm-12" type="url"
@@ -714,7 +695,7 @@
 									<div class="col-md-12 col-sm-12">
 										<div class="control-group">
 											<label for="message" class="control-label">
-												Mensaje:</label>
+												<g:message code="public.index..home.contact.message"/></label>
 											<div class="controls">
 												<textarea class="col-md-12 col-sm-12" type="text"
 													name="contact_message" id="message" rows="4"></textarea>
@@ -729,7 +710,7 @@
 
 								<input type="hidden" name="save" value="contact">
 								<button type="submit" class="btn-inverse pull-right">
-									Envíar <span>Mensaje</span> <i class="ace-icon fa fa-arrow-circle-right"></i>
+									 <g:message code="public.index..home.contact.send"/><span><g:message code="public.index..home.contact.message"/></span> <i class="ace-icon fa fa-arrow-circle-right"></i>
 								</button>
 							</form>
 							<!-- /form -->
