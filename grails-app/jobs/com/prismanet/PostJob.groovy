@@ -14,7 +14,7 @@ class PostJob {
 	def group = "postsJobs"
 	def pathCommand=""
 	static triggers = {
-		simple repeatInterval: 300000, repeatCount:-1 , startDelay: 90000
+		simple repeatInterval: 120000, repeatCount:-1 , startDelay: 90000
 	}
 
 	def execute() {
@@ -56,10 +56,12 @@ class PostJob {
 			def partialList = []
 			int i = 0
 			log.info "posts: " + iterator.size()
+			def lastUpdated = postService.getLastUpdated()
+			log.info "fecha ultimo post: " + lastUpdated
 			while (iterator.hasNext()){
 				def post = iterator.next()
-				def newComments = postService.getNewComments(post)
-//				log.info "newComments" + newComments
+				def newComments = postService.getNewComments(post, lastUpdated)
+				log.info "newComments" + newComments
 				if (newComments > 0){
 					partialList.add(post)
 				}
@@ -68,18 +70,19 @@ class PostJob {
 					try {
 						log.info "Nuevo Lote Posts"
 						i = 0
-						postService.savePosts(partialList)
+						postService.savePosts(partialList, lastUpdated)
 						partialList.clear();
 					} catch (Exception e) {
 						log.error "Importación Fallida: " + e.getMessage()
-						log.error "Error: ${e.message}", e
+						log.error e.getCause()
+						log.error e.getStackTrace()
 						partialList.clear();
 					}
 				}
 			}
 			try {
 				log.info "List posts: " +partialList.size()
-				postService.savePosts(partialList)
+				postService.savePosts(partialList, lastUpdated)
 			} catch (Exception e) {
 				log.error "Importación Fallida: " + e.getMessage()
 				log.error e.getCause()
