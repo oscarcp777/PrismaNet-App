@@ -6,6 +6,7 @@ import com.prismanet.GenericService.FilterType
 import com.prismanet.context.Filter
 import com.prismanet.utils.DateTypes
 import com.prismanet.utils.DateUtils
+
 class GenericController {
 	
 	static listMethods = ["max", "offset", "order", "sort", "ignoreCase", "fetch", "readOnly", "fetchSize", "flushMode", "timeout"]
