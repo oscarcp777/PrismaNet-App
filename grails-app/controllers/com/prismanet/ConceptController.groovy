@@ -102,7 +102,7 @@ class ConceptController extends GenericController{
 			case DateServiceType.BY_MONTH:
 			resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MONTH_PERIOD,
 											'Tweets por Mes','Mes','Tweets',
-											redirectOnClick+"&dateCreated=")
+											redirectOnClick+"&datePeriod=")
 			break
 		}
 		render resultMap as JSON

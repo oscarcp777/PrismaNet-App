@@ -117,6 +117,17 @@ class TweetController extends GenericController{
 				filters.addAll(tweetService.getFilterList(dateFrom, dateTo, "created", false))
 			}
 		}
+		
+		if (params["datePeriod"]){
+			def cal = new GregorianCalendar()
+			cal.setTime(DateUtils.parseDate(DateTypes.MONTH_PERIOD, params.datePeriod))
+			use (TimeCategory){
+				Date dateFrom = cal.getTime()
+				Date dateTo = dateFrom + 1.month -1.second
+				filters.addAll(tweetService.getFilterList(dateFrom, dateTo, "created", false))
+			}
+		}
+
 		filters
 	}
 	
@@ -146,6 +157,13 @@ class TweetController extends GenericController{
 			cal.setTimeInMillis(params["dateHour"] as Long)
 			def hourFilter=DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, cal.time)
 			filters.add(new Filter(attribute:"dateHour",value: hourFilter, type:FilterType.EQ))
+		}
+		
+		if (params["datePeriod"]){
+			def cal = new GregorianCalendar()
+			cal.setTime(DateUtils.parseDate(DateTypes.MONTH_PERIOD, params.datePeriod))
+			def periodFilter=DateUtils.getDateFormat(DateTypes.MONTH_PERIOD, cal.time)
+			filters.add(new Filter(attribute:"datePeriod",value: periodFilter, type:FilterType.EQ))
 		}
 		filters
 	}

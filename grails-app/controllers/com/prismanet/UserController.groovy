@@ -265,7 +265,7 @@ class UserController extends GenericController{
 			case DateServiceType.BY_MONTH:
 			resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MONTH_PERIOD,
 											properties[sourceType].name +' por Mes','Mes','Cantidad de ' +properties[sourceType].name,
-											redirectOnClick+"dateCreated=")
+											redirectOnClick+"datePeriod=")
 		break
 		}
 		render resultMap as JSON
