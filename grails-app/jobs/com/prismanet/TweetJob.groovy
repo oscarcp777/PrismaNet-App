@@ -43,8 +43,7 @@ class TweetJob {
 				log.error "error ProcessBuilder",e
 			}
 			
-			
-			if (result == null || result.size()<1){
+			if (result == null || result.size()<2){
 				//No esta corriendo por lo tanto lo ejecuto
 				Runtime.getRuntime().exec("java -jar "+pathCommand+"prismanet-twitter-api.jar")
 				log.info "Proceso api-twitter iniciado, ultima modificacion a las : " + lastUpdate
