@@ -32,7 +32,7 @@ class TwitterSetupService extends GenericCoreService {
 				stringConfig += setup.negativeHashtags + ","
 		}
 		stringConfig = stringConfig[0..-2]
-		print "la configuracion es: " + stringConfig
+		log.info "la configuracion es: " + stringConfig
 		stringConfig
 	}
 	

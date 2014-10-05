@@ -127,7 +127,7 @@ class MentionService extends GenericCoreService{
 			}
 			result
 		} catch (Exception e) {
-			e.printStackTrace()
+			log.error "error solr",e
 		}
 		
 		

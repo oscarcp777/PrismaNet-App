@@ -29,7 +29,7 @@ class FacebookSetupService extends GenericCoreService {
 				stringConfig += setup.keywords + ","
 		}
 		stringConfig = stringConfig[0..-2]
-		print "la configuracion de facebook es: " + stringConfig
+		log.info "la configuracion de facebook es: " + stringConfig
 		stringConfig
 	}
 	

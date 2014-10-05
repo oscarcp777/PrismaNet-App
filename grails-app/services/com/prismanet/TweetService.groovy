@@ -128,7 +128,7 @@ class TweetService extends MentionService{
 				}
 
 			}
-			print "Args: " + args
+			log.info "Args: " + args
 		}
 		TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
 		twitterStream.addListener(listener);
@@ -160,10 +160,8 @@ class TweetService extends MentionService{
 	
 	def getSamplingTweets(filters, parameters){
 		def tweets = getTweets(filters, parameters)
-//		print "size: "+ tweets.resultList.size()
 		def resultList = []
 		def samplingSize = getSamplingSize(tweets.totalCount)
-//		print "tamaño muestra: " + samplingSize
 		Random rand = new Random(tweets.totalCount)
 		def randomIntegerList = []
 		(1..samplingSize).each {
@@ -220,7 +218,6 @@ class TweetService extends MentionService{
 			usersName.add(it.tweet.author.accountNameSingle)
 			tweetsTemp.add(it.tweet)
 		}
-//		println usersName.toListString()
 		Twitter twitter = new TwitterFactory().getInstance();
 		ResponseList<twitter4j.User> users = null
 		if (usersName.size()>0)
