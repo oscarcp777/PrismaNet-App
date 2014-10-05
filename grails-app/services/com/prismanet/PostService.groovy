@@ -23,10 +23,9 @@ class PostService extends MentionService{
 	}
 
 	@Transactional
-	def savePosts(def posts){
+	def savePosts(def posts, def lastUpdated){
 		def index = 0
 		def List<Concept> concepts = Concept.list()
-		Date lastUpdated = getLastUpdated()
 		StopWatch timer = new StopWatch()
 		for (BasicDBObject postObj : posts){
 
@@ -36,7 +35,7 @@ class PostService extends MentionService{
 			
 			for (Comment comment : status.getComments()){
 				if (lastUpdated){ 
-					if (lastUpdated.after(comment.createdTime))
+					if (!lastUpdated.before(comment.createdTime))
 						continue
 				}
 				timer = new StopWatch()
@@ -50,27 +49,25 @@ class PostService extends MentionService{
 					}
 				}
 				timer.stop()
-				log.info "tiempo autor: " + timer.getTotalTimeMillis()
+				log.debug "tiempo autor: " + timer.getTotalTimeMillis()
 				timer = new StopWatch()
 				timer.start()
 				def message = ""
 				if (comment.getMessage())
 					message = comment.getMessage().trim()
 
-				def dateCreated = new Date()
-				if (comment.getCreatedTime())
-					dateCreated = comment.getCreatedTime()
-
+				log.debug "fecha comentario: " + comment.getCreatedTime()
+					
 				Post post = new Post(content:message,
 				author:author,
-				created:dateCreated,
+				created:comment.getCreatedTime(),
 				postId:status.getId(),
 				commentId:comment.getId())
 
 
 				concepts.each{ concept->
 					if (concept.testAddPost(post)){
-						log.info "valido para concepto: " +  concept
+						log.debug "valido para concepto: " +  concept
 
 						if (!post.id){
 							post.save(validate:false)
@@ -80,10 +77,9 @@ class PostService extends MentionService{
 							}
 							log.info "Post guardado con ID :  " + post.id
 							timer.stop()
-							log.info "tiempo post: " + timer.getTotalTimeMillis()
+							log.debug "tiempo post: " + timer.getTotalTimeMillis()
 						}
 						if (timer.isRunning()){
-							log.info "no estopeo"
 							timer.stop()
 						}
 						timer = new StopWatch()
@@ -91,7 +87,7 @@ class PostService extends MentionService{
 						def sql = new Sql(sessionFactory.currentSession.connection())
 						sql.execute("insert into concept_mentions values(?,?)", [concept.id, post.id])
 						timer.stop()
-						log.info  "tiempo concept: " + timer.getTotalTimeMillis()
+						log.debug  "tiempo concept: " + timer.getTotalTimeMillis()
 					}
 				}
 			}
@@ -100,17 +96,24 @@ class PostService extends MentionService{
 		cleanUpGorm()
 	}
 	
-	def getNewComments(def post){
-		Date lastUpdated = getLastUpdated()
+	def getNewComments(def post, def lastUpdated){
 		JSONObject obj = new JSONObject(post)
 		facebook4j.Post status = new PostJSONImpl(obj)
 		def i = 0
+		
 		for (Comment comment : status.getComments()){
 			if (lastUpdated){
-				if (lastUpdated.after(comment.createdTime))
+				if (!lastUpdated.after(comment.createdTime) ){
+					log.debug "post message: " +status.message
+					log.debug "foto: " +status.picture
+					log.debug "comentario agreagado -fecha: " + comment.createdTime + " texto: "+ comment.getMessage()
+					i++
+				}else{
+					log.debug "comentario ignorado -fecha: " + comment.createdTime + " texto: "+ comment.getMessage()
 					continue
+				}
 			}
-			i++
+			
 		}
 		i
 	}
