@@ -1,10 +1,12 @@
+
 <div class="col-lg-12">
 	<div class="widget-box widget-color-blue">
 		<div class="widget-header">
 			<h5 class="widget-title">
-				<span class="glyphicon glyphicon-stats"> </span>
+				<i class="ace-icon  fa-lg fa fa-${icon}"> </i>
 				<g:message code="${titleChar}" />
 			</h5>
+
 			<g:if test="${divPickert != 'disable'}">
 			<div class="widget-toolbar input-group ">
 				<div id="${divPickert}" class="btn btn-primary date-picker">
@@ -21,6 +23,13 @@
 			<g:if test="${callback != 'disable'}"> 
 			<g:render template="chooseChannel"  bean="${callback}"></g:render>
 			</g:if>
+			<div class="widget-toolbar blue-active">
+			   <div class="btn-group  btn-corner">
+				<a href="javascripts:void(0);" id="help-${div}" class="btn btn-grey btn-help" > 
+				<i class="ace-icon fa fa-question-circle fa-2x"></i>
+				</a>
+			   </div>
+			</div>
 		</div>
 
 		<div class="widget-body">
@@ -30,3 +39,18 @@
 			</div>
 	</div>
 </div>
+<script type="text/javascript">
+
+    $(function() {
+        var contentHelp='<g:message code="${contentHelp}" />';
+    	 $('#help-${div}').popover({
+    		 content:contentHelp,
+    		 html:true,
+    		 placement:'top',
+    		 title:'¿Qué es esto?',
+    		 container:'body',
+    		 trigger:'hover'
+    	 });
+    	});
+
+</script>

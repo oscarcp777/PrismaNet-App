@@ -10,18 +10,27 @@
 <body>
 	<g:render template="tabTwitter"  model="['concept':concept,'tabMain':'','tabTweets':'','tabChar':'','tabSentimental':'','tabSampling':'active']"></g:render>
 		<div class="row">
+		<g:render contextPath="../user" template="headerHelp" model="['mainMessage':'dashborad.tab.samplings.desc']"></g:render>
+		   			<div class="col-lg-12">
+						<div class="widget-box widget-color-blue">
+							<div class="widget-header">
+								<h5 class="widget-title">
+								<i class="fa fa-random"></i>
+								<g:message code="sampling.tweets.title"/> </h5>
 
-		   					<div class="col-xs-12">
-						<div class="widget-box">
-							<div class="widget-header widget-header-blue widget-header-flat">
-								<h4 class="widget-title lighter"><g:message code="sampling.tweets.title"/> </h4>
-
-								<div class="widget-toolbar">
+							<div class="widget-toolbar input-group">
 							<div id="pickertSampling" class="btn btn-info date-picker">
 								<i class="ace-icon fa fa-calendar"></i> <span class="date-range"></span>
 								<i class="ace-icon fa fa-chevron-down"></i>
 							</div>
 								</div>
+							<div class="widget-toolbar blue-active">
+							   <div class="btn-group  btn-corner">
+								<a href="javascripts:void(0);" id="help-samplings" class="btn btn-grey btn-help" > 
+								<i class="ace-icon fa fa-question-circle fa-2x"></i>
+								</a>
+							   </div>
+							</div>
 							</div>
 
 							<div class="widget-body" >
@@ -139,6 +148,15 @@
 			 loadDatepicker('pickertSampling',loadPickertSampling);
 			  activeItemMenuLevel2(id,id+'-tweet','${concept.conceptName}');
 			  
+			  var contentHelp='<g:message code="sampling.tweets.help" />';
+		    	 $('#help-samplings').popover({
+		    		 content:contentHelp,
+		    		 html:true,
+		    		 placement:'top',
+		    		 title:'¿Qué es esto?',
+		    		 container:'body',
+		    		 trigger:'hover'
+		    	 });
 			});
 	</script>
 </body>

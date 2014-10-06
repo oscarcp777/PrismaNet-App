@@ -15,30 +15,20 @@
 			
 		</div>
 		<div class="row" >
-		<div class="col-lg-12">
-			<blockquote>
-				<p class="lighter line-height-125">
-                   <g:message code="dashborad.tab.main.desc"/>
-                </p>
-			</blockquote>
-			<div class="alert alert-warning fade in">
-			<h4><i class="fa fa-warning"></i> Warning!</h4>
-			 <g:message code="dashborad.tab.main.desc"/>
-			 </div>
-		</div>
+		<g:render template="headerHelp" model="['mainMessage':'dashborad.tab.main.desc']"></g:render>
 		<div class="col-lg-12" >
 				
-              <g:render template="chart" model="['divPickert':'disable','callback':'loadRealTime','titleChar':'user.stats.tweets.real.time','div':'realTimeCharUser']"></g:render>
-                <g:render template="chart" model="['divPickert':'disable','callback':'loadTotalFollowers','titleChar':'user.stats.tweets.followers','div':'totalFollowers']"></g:render>
-			  <g:render template="chart" model="['divPickert':'pickertTweetConcept','callback':'loadTweetCharPie','titleChar':'user.stats.tweets.concepts','div':'tweetCharPie']"></g:render>
-			  <g:render template="chart" model="['divPickert':'pickertUser','callback':'loadUserGroupedData','titleChar':'user.stats.tweets.date','div':'lineaChartUser']"></g:render>
-			  <g:render template="chart" model="['divPickert':'pickertStatsMonth','callback':'loadMonthStatsData','titleChar':'user.stats.month.stats','div':'monthStats']"></g:render>
+              <g:render template="chart" model="['divPickert':'disable','callback':'loadRealTime','titleChar':'user.stats.tweets.real.time','div':'realTimeCharUser','contentHelp':'user.stats.tweets.real.time.help','icon':'line-chart']"></g:render>
+              <g:render template="chart" model="['divPickert':'disable','callback':'loadTotalFollowers','titleChar':'user.stats.tweets.followers','div':'totalFollowers','contentHelp':'user.stats.tweets.followers.help','icon':'pie-chart']"></g:render>
+			  <g:render template="chart" model="['divPickert':'pickertTweetConcept','callback':'loadTweetCharPie','titleChar':'user.stats.tweets.concepts','div':'tweetCharPie','contentHelp':'user.stats.tweets.concepts.help','icon':'pie-chart']"></g:render>
+			  <g:render template="chart" model="['divPickert':'pickertUser','callback':'loadUserGroupedData','titleChar':'user.stats.tweets.date','div':'lineaChartUser','contentHelp':'user.stats.tweets.date.help','icon':'line-chart']"></g:render>
+			  <g:render template="chart" model="['divPickert':'pickertStatsMonth','callback':'loadMonthStatsData','titleChar':'user.stats.month.stats','div':'monthStats','contentHelp':'user.stats.month.stats.help','icon':'table']"></g:render>
 			</div>
 			<hr>
 
 		</div>
 		<script type="text/javascript">
-		$(document).ready(function() {
+		$(function() {
 			$('#liLevel2').hide();
 			inicializeColorChar();
 			activeItemMenuLevel1('home');

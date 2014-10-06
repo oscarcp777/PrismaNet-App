@@ -82,11 +82,11 @@ grails.spring.bean.packages = []
 // whether to disable processing of multi part requests
 grails.web.disable.multipart=false
 
-grails.resources.debug=false
-grails.resources.mappers.yuicssminify.disable=false
-grails.resources.mappers.yuijsminify.disable=false
-grails.resources.mappers.cssrewriter.enabled = true
-grails.resources.processing.enabled = true
+grails.resources.debug=true
+grails.resources.mappers.yuicssminify.disable=true
+grails.resources.mappers.yuijsminify.disable=true
+grails.resources.mappers.cssrewriter.enabled = false
+grails.resources.processing.enabled = false
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
 
@@ -144,6 +144,11 @@ environments {
 		}
     }
     production {
+		grails.resources.debug=false
+		grails.resources.mappers.yuicssminify.disable=false
+		grails.resources.mappers.yuijsminify.disable=false
+		grails.resources.mappers.cssrewriter.enabled = true
+		grails.resources.processing.enabled = true
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
 		// log4j configuration

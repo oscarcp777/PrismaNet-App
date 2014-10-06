@@ -12,9 +12,10 @@
 	<div class="page-content">
 		
 		<div class="row">
+		<g:render contextPath="../user" template="headerHelp" model="['mainMessage':'dashborad.tab.posts.desc']"></g:render>
 			<div class="col-lg-12">
-			 <g:render contextPath="../user" template="chart" model="['divPickert':'disable','callback':'disable','titleChar':'user.stats.posts.real.time','div':'postRealTimeChar']"></g:render>
-			<g:render contextPath="../user" template="chart" model="['divPickert':'postPickert','callback':'disable','titleChar':'user.stats.posts.date','div':'postsChart']"></g:render>
+			 <g:render contextPath="../user" template="chart" model="['divPickert':'disable','callback':'disable','titleChar':'user.stats.posts.real.time','div':'postRealTimeChar','contentHelp':'user.stats.posts.real.time.help','icon':'line-chart']"></g:render>
+			<g:render contextPath="../user" template="chart" model="['divPickert':'postPickert','callback':'disable','titleChar':'user.stats.posts.date','div':'postsChart','contentHelp':'user.stats.posts.date.help','icon':'line-chart']"></g:render>
 			</div>
 		</div>	
 	</div>
