@@ -2,7 +2,13 @@ Highcharts.setOptions({
 	lang: {
 		months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
 		weekdays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Sabado', 'Domingo'],
-		shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',  'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+		shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',  'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+		downloadJPEG:'Descargar JPEG',
+		downloadPDF:'Descargar PDF',
+		downloadPNG:'Descargar PNG',
+		downloadSVG:'Descargar SVG',
+		printChart:'Imprimir Gr\u00e1fico',
+		contextButtonTitle:'Men\u00fa Imprimir'
 	}
 });
 var doRequest = function(url,data,callback, errorHandler, method) {

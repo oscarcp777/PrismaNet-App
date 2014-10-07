@@ -25,7 +25,7 @@
 			</g:if>
 			<div class="widget-toolbar blue-active">
 			   <div class="btn-group  btn-corner">
-				<a href="javascripts:void(0);" id="help-${div}" class="btn btn-grey btn-help" > 
+				<a href="javascript:void(0);" id="help-${div}" class="btn btn-grey btn-help" > 
 				<i class="ace-icon fa fa-question-circle fa-2x"></i>
 				</a>
 			   </div>
@@ -46,8 +46,7 @@
     	 $('#help-${div}').popover({
     		 content:contentHelp,
     		 html:true,
-    		 placement:'top',
-    		 title:'¿Qué es esto?',
+    		 placement:'bottom',
     		 container:'body',
     		 trigger:'hover'
     	 });
