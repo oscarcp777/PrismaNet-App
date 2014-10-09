@@ -32,10 +32,10 @@
 		
 		
 		</li>
-		<li class="${tabSentimental}"><a  href="#"> 
-		<i class="red fa fa-heart bigger-120"></i> <g:message code="dashborad.tab.sentimental"/>
-		</a>
-		</li>
+<%--		<li class="${tabSentimental}"><a  href="#"> --%>
+<%--		<i class="red fa fa-heart bigger-120"></i> <g:message code="dashborad.tab.sentimental"/>--%>
+<%--		</a>--%>
+<%--		</li>--%>
 		
 	</ul>
 	<br>

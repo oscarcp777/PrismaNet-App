@@ -3,7 +3,7 @@
 	<blockquote>
 		<div class="alert alert-info fade in">
 			<i class="fa fa-info-circle fa-lg fa-border"></i>
-			<g:message code="${mainMessage}" />
+			<g:message code="${mainMessage}" args="[conceptName]"/>
 			<br>
 			<g:message code="dashborad.tab.main.desc.help" />
 			<i class="fa fa-question-circle fa-lg fa-border"></i>

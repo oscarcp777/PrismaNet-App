@@ -5,6 +5,7 @@
 	href="${resource(dir: 'css', file: 'twitter.css')}" type="text/css">
 </head>
 <body>
+	<g:set var="conceptName" value="${concept.conceptName}" />
 	<g:render template="tabTwitter" model="['concept':concept,'tabMain':'','tabTweets':'','tabChar':'active','tabSentimental':'','tabSampling':'']"></g:render>
   
 	<div class="page-content">

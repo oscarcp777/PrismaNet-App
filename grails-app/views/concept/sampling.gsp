@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'twitter.css')}" type="text/css">
 </head>
 <body>
+<g:set var="conceptName" value="${concept.conceptName}" />
 	<g:render template="tabTwitter"  model="['concept':concept,'tabMain':'','tabTweets':'','tabChar':'','tabSentimental':'','tabSampling':'active']"></g:render>
 		<div class="row">
 		<g:render contextPath="../user" template="headerHelp" model="['mainMessage':'dashborad.tab.samplings.desc']"></g:render>

@@ -6,7 +6,7 @@
 	
 </head>
 <body>
-		
+		<g:set var="conceptName" value="${concept.conceptName}" />
 		<g:render template="tabFacebook"  model="['concept':concept,'tabMain':'','tabPosts':'','tabChar':'active','tabSentimental':'']"></g:render>
 		
 	<div class="page-content">

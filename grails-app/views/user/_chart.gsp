@@ -42,7 +42,7 @@
 <script type="text/javascript">
 
     $(function() {
-        var contentHelp='<g:message code="${contentHelp}" />';
+        var contentHelp='<g:message code="${contentHelp}" args="[conceptName]"/>';
     	 $('#help-${div}').popover({
     		 content:contentHelp,
     		 html:true,

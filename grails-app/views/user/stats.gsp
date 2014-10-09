@@ -4,6 +4,7 @@
 <meta name="layout" content="home" />
 </head>
 <body>
+<g:set var="conceptName" value="" />
 		<div class="page-header">
 			<h1>
 				<i class="ace-icon fa fa-bar-chart-o"></i> <g:message code="dashborad.tab.main"/>
