@@ -25,7 +25,7 @@ class PostJob {
 			 pathCommand=catalina_base+"/webapps/PrismaNet-jobs/WEB-INF/lib/"
 			 log.info "path para correr jar" +pathCommand
 		 }
-		println "PostJob ejecutado: " + new Date()
+		log.info "PostJob ejecutado: " + new Date()
 		MongoPostsImporter importer = new MongoPostsImporter("mongodb://localhost")
 		
 		use(TimeCategory){
