@@ -16,7 +16,7 @@ import com.prismanet.utils.SolrUtil
 class SolrJob {
 	def group = "solrJobs"
 	static triggers = {
-		simple repeatInterval: 60000, repeatCount:-1 , startDelay: 60000
+		simple repeatInterval: 60000, repeatCount:-1 , startDelay: 60100
 	}
 
 	def execute() {
