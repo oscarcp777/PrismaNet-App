@@ -7,7 +7,7 @@ import com.mongodb.BasicDBObject
 import com.prismanet.GenericService.FilterType
 import com.prismanet.GenericService.OrderType
 import com.prismanet.context.Filter
-import com.prismanet.context.PostAttributeContext
+import com.prismanet.context.FacebookCommentAttributeContext
 import com.prismanet.exception.ApplicationException
 
 import facebook4j.Comment
@@ -16,10 +16,10 @@ import facebook4j.internal.org.json.JSONObject
 import groovy.sql.Sql
 
 
-class PostService extends MentionService{
+class FacebookCommentService extends MentionService{
 	
-	PostService(){
-		super(Post, new PostAttributeContext())
+	FacebookCommentService(){
+		super(FacebookComment, new FacebookCommentAttributeContext())
 	}
 
 	@Transactional
@@ -58,7 +58,7 @@ class PostService extends MentionService{
 
 				log.debug "fecha comentario: " + comment.getCreatedTime()
 					
-				Post post = new Post(content:message,
+				FacebookComment post = new FacebookComment(content:message,
 				author:author,
 				created:comment.getCreatedTime(),
 				postId:status.getId(),
@@ -75,7 +75,7 @@ class PostService extends MentionService{
 								post.discard()
 								throw ApplicationException.create(post)
 							}
-							log.info "Post guardado con ID :  " + post.id
+							log.info "Comentario Facebook guardado con ID :  " + post.id
 							timer.stop()
 							log.debug "tiempo post: " + timer.getTotalTimeMillis()
 						}
@@ -122,15 +122,15 @@ class PostService extends MentionService{
 	def getLastUpdated(){
 		def filters = []
 		def parameters = [max:1]
-		def result = list(Post, new PostAttributeContext(),
+		def result = list(FacebookComment, new FacebookCommentAttributeContext(),
 						filters, parameters,
 						[[attribute:"created",value:OrderType.DESC]]);
 		result?.results[0]?.created
 	}
 	
 	def getPosts(filters, parameters){
-		filters.add(new Filter(attribute:"sourceType",value:Post.class, type:FilterType.EQ))
-		getMentions(filters, parameters, new PostAttributeContext(), Post)
+		filters.add(new Filter(attribute:"sourceType",value:FacebookComment.class, type:FilterType.EQ))
+		getMentions(filters, parameters, new FacebookCommentAttributeContext(), FacebookComment)
 	}
 	
 	public String getDateGroupProperty(DateServiceType type){

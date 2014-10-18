@@ -13,7 +13,7 @@
     <resource>com.prismanet.FacebookSetup</resource>
     <resource>com.prismanet.HistoricalTwitterAccount</resource>
     <resource>com.prismanet.Mention</resource>
-    <resource>com.prismanet.Post</resource>
+    <resource>com.prismanet.FAcebookComment</resource>
     <resource>com.prismanet.Tweet</resource>
     <resource>com.prismanet.TwitterAccount</resource>
     <resource>com.prismanet.TwitterAuthor</resource>
@@ -28,7 +28,7 @@
     <resource>com.prismanet.GenericCoreService</resource>
     <resource>com.prismanet.GenericService</resource>
     <resource>com.prismanet.MentionService</resource>
-    <resource>com.prismanet.PostService</resource>
+    <resource>com.prismanet.FacebookCommentService</resource>
     <resource>com.prismanet.TweetService</resource>
     <resource>com.prismanet.TwitterSetupService</resource>
     <resource>com.prismanet.UserService</resource>
@@ -42,7 +42,7 @@
     <resource>com.prismanet.context.Filter</resource>
     <resource>com.prismanet.context.MentionAttributeContext</resource>
     <resource>com.prismanet.context.OpinionAttributeContext</resource>
-    <resource>com.prismanet.context.PostAttributeContext</resource>
+    <resource>com.prismanet.context.FacebookCommentAttributeContext</resource>
     <resource>com.prismanet.context.TweetAttributeContext</resource>
     <resource>com.prismanet.context.TwitterAuthorAttributeContext</resource>
     <resource>com.prismanet.context.TwitterSetupAttributeContext</resource>

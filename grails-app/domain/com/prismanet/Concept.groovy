@@ -38,7 +38,7 @@ class Concept {
 		}
 	}
 	
-	public void addPost(Post post){
+	public void addPost(FacebookComment post){
 		def add = testAddPost(post)
 		if (add == false){
 			this.errors.rejectValue(
@@ -79,7 +79,7 @@ class Concept {
 		return add
 	}
 	
-	public boolean testAddPost(Post post){
+	public boolean testAddPost(FacebookComment post){
 		def add = false
 		
 		for (String keyword in this.facebookSetup?.accounts?.split(',')) {

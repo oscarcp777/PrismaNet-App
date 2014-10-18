@@ -1,7 +1,7 @@
 package com.prismanet.context
 
 
-class PostAttributeContext extends MentionAttributeContext {
+class FacebookCommentAttributeContext extends MentionAttributeContext {
 
 	@Override
 	protected void initializeRelations() {

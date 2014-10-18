@@ -1,6 +1,6 @@
 package com.prismanet
 
-class Post extends Mention{
+class FacebookComment extends Mention{
 	
 	String postId
 	String commentId

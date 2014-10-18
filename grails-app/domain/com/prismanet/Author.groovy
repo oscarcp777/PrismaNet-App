@@ -13,7 +13,7 @@ class Author {
 	
 	static transients = ['accountNameSingle']
 	
-	static hasMany = [tweets:Tweet, posts:Post]
+	static hasMany = [tweets:Tweet, posts:FacebookComment]
 	
     static constraints = {
 		name(nullable:true)
