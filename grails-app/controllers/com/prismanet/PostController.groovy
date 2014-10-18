@@ -7,7 +7,7 @@ import com.prismanet.utils.DateUtils
 
 class PostController extends GenericController{
 
-	def postService
+	def facebookCommentService
 	
 	def list(Integer max) {
 		
@@ -15,7 +15,7 @@ class PostController extends GenericController{
 		Concept concept = chooseConcept(params)
 		def filters = loadPostFilters()
 		params.max = Math.min(max ?: 6, 100)
-		def posts = postService.getPosts(filters,params)
+		def posts = facebookCommentService.getPosts(filters,params)
 		
 		[postList: posts.resultList, postTotal: posts.totalCount, concept: concept]
 	}

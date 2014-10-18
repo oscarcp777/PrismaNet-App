@@ -1,11 +1,11 @@
 
-<%@ page import="com.prismanet.Post"%>
+<%@ page import="com.prismanet.FacebookComment"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="layout" content="home">
 <g:set var="entityName"
-	value="${message(code: 'post.label', default: 'Post')}" />
+	value="${message(code: 'post.label', default: 'Comentario')}" />
 <link rel="stylesheet"
 	href="${resource(dir: 'css', file: 'twitter.css')}" type="text/css">
 </head>

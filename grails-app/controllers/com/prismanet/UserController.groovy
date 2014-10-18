@@ -31,7 +31,7 @@ class UserController extends GenericController{
 	}
 	
 	private Filter getFacebookFilter(){
-		new Filter(attribute:"sourceType",value:Post.class, type:FilterType.EQ)
+		new Filter(attribute:"sourceType",value:FacebookComment.class, type:FilterType.EQ)
 	}
 	
 	private Filter getFilterByMentionType(MentionType type){
@@ -56,7 +56,7 @@ class UserController extends GenericController{
 	}
 	
 	private Map getPropertiesByMentionType(){
-		def strings = [(MentionType.FACEBOOK) :[name:'Posts', controller:'post'], 
+		def strings = [(MentionType.FACEBOOK) :[name:'Comentarios', controller:'post'], 
 						(MentionType.TWITTER): [name:'Tweets', controller: 'tweet'],
 						(MentionType.ALL): [name:'Menciones']]
 	}
