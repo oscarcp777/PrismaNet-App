@@ -9,7 +9,7 @@ import com.prismanet.importer.MongoPostsImporter
 
 class PostJob {
 	def grailsApplication
-	def postService
+	def facebookCommentService
 	def facebookSetupService
 	def group = "postsJobs"
 	def pathCommand=""
@@ -56,11 +56,11 @@ class PostJob {
 			def partialList = []
 			int i = 0
 			log.info "posts: " + iterator.size()
-			def lastUpdated = postService.getLastUpdated()
+			def lastUpdated = facebookCommentService.getLastUpdated()
 			log.info "fecha ultimo post: " + lastUpdated
 			while (iterator.hasNext()){
 				def post = iterator.next()
-				def newComments = postService.getNewComments(post, lastUpdated)
+				def newComments = facebookCommentService.getNewComments(post, lastUpdated)
 				log.info "newComments" + newComments
 				if (newComments > 0){
 					partialList.add(post)
@@ -68,9 +68,9 @@ class PostJob {
 				i += newComments
 				if (i >24){
 					try {
-						log.info "Nuevo Lote Posts"
+						log.info "Nuevo Lote Comentarios"
 						i = 0
-						postService.savePosts(partialList, lastUpdated)
+						facebookCommentService.savePosts(partialList, lastUpdated)
 						partialList.clear();
 					} catch (Exception e) {
 						log.error "Importación Fallida: " + e.getMessage()
@@ -82,7 +82,7 @@ class PostJob {
 			}
 			try {
 				log.info "List posts: " +partialList.size()
-				postService.savePosts(partialList, lastUpdated)
+				facebookCommentService.savePosts(partialList, lastUpdated)
 			} catch (Exception e) {
 				log.error "Importación Fallida: " + e.getMessage()
 				log.error e.getCause()
