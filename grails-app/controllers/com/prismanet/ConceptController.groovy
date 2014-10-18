@@ -125,7 +125,7 @@ class ConceptController extends GenericController{
 		
 		// Obtengo posts
 		def dateList = conceptService.getMentionsBy(filters, dateFrom, dateTo)
-		def redirectOnClick = "../../tweet/list?conceptsId="+concept.id
+		def redirectOnClick = "../../post/list?conceptsId="+concept.id
 		def resultMap = [:]
 		//TODO localizar todos los textos
 		// Parseo resultado para generar el grafico
@@ -134,22 +134,22 @@ class ConceptController extends GenericController{
 			case DateServiceType.BY_MINUTE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
 												'Comentarios por minuto','Fecha','Comentarios',
-												redirectOnClick+"&postMinute=")
+												redirectOnClick+"&dateMinute=")
 			break
 			case DateServiceType.BY_HOUR:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD,
 											   'Comentarios por hora','Fecha','Comentarios',
-											   redirectOnClick+"&postHour=")
+											   redirectOnClick+"&dateHour=")
 			break
 			case DateServiceType.BY_DATE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.DAY_PERIOD,
 												'Comentarios por Dia','Fecha','Comentarios',
-												redirectOnClick+"&postCreated=")
+												redirectOnClick+"&dateCreated=")
 			break
 			case DateServiceType.BY_MONTH:
 			resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MONTH_PERIOD,
 											'Comentarios por Mes','Mes','Comentarios',
-											redirectOnClick+"&postCreated=")
+											redirectOnClick+"&dateCreated=")
 			break
 		}
 		render resultMap as JSON

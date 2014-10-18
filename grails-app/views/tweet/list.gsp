@@ -14,7 +14,7 @@
 					<div class="widget-header">
 						<h5 class="widget-title">
 							<i class="ace-icon fa  fa-cloud"></i> 
-							<g:message code="tweets.list.cloud.more.words"/>
+							<g:message code="tweets.list.cloud.more.words"/> <g:message code="dashborad.concept.tweets"/>
 						</h5>
 
 						<div class="widget-toolbar">
@@ -40,7 +40,7 @@
 					<div class="widget-header">
 						<h5 class="widget-title">
 							<i class="ace-icon fa  fa-cloud"></i> 
-							<g:message code="tweets.list.cloud.more.words"/>
+							<g:message code="tweets.list.cloud.more.words"/> <g:message code="dashborad.concept.tweets"/>
 						</h5>
 
 						<div class="widget-toolbar">
