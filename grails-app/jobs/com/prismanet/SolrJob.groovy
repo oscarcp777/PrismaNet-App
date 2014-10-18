@@ -14,12 +14,15 @@ import com.prismanet.context.MentionAttributeContext
 import com.prismanet.utils.SolrUtil
 
 class SolrJob {
+	def grailsApplication
 	def group = "solrJobs"
 	static triggers = {
 		simple repeatInterval: 60000, repeatCount:-1 , startDelay: 60100
 	}
 
 	def execute() {
+		if(grailsApplication.config.jobs.solr.disable)
+		return
 		log.info "SolrJob ejecutado: " + new Date()
 		AttributeContext context = new MentionAttributeContext()
 		SolrServer solr = SolrUtil.getSolrServerInstance()

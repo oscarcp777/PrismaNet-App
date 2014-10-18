@@ -94,6 +94,7 @@ grails.hibernate.pass.readonly = false
 grails.hibernate.osiv.readonly = false
 jobs.twitter.disable = false
 jobs.facebook.disable = false
+jobs.solr.disable = false
 
 environments {
     development {
