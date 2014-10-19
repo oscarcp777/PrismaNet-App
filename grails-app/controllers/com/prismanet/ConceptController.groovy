@@ -24,7 +24,7 @@ class ConceptController extends GenericController{
 	}
 	
 	def getFacebookFilter(){
-		new Filter(attribute:"sourceType",value:Post.class, type:FilterType.EQ)
+		new Filter(attribute:"sourceType",value:FacebookComment.class, type:FilterType.EQ)
 	}
 	
 	def dashboard = {
@@ -102,7 +102,7 @@ class ConceptController extends GenericController{
 			case DateServiceType.BY_MONTH:
 			resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MONTH_PERIOD,
 											'Tweets por Mes','Mes','Tweets',
-											redirectOnClick+"&dateCreated=")
+											redirectOnClick+"&datePeriod=")
 			break
 		}
 		render resultMap as JSON
@@ -133,22 +133,22 @@ class ConceptController extends GenericController{
 		switch (type) {
 			case DateServiceType.BY_MINUTE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
-												'Posts por minuto','Fecha','Posts',
+												'Comentarios por minuto','Fecha','Comentarios',
 												redirectOnClick+"&postMinute=")
 			break
 			case DateServiceType.BY_HOUR:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.HOUR_PERIOD,
-											   'Posts por hora','Fecha','Posts',
+											   'Comentarios por hora','Fecha','Comentarios',
 											   redirectOnClick+"&postHour=")
 			break
 			case DateServiceType.BY_DATE:
 				resultMap = getChartLineFormat(dateList, 2, container, DateTypes.DAY_PERIOD,
-												'Posts por Dia','Fecha','Posts',
+												'Comentarios por Dia','Fecha','Comentarios',
 												redirectOnClick+"&postCreated=")
 			break
 			case DateServiceType.BY_MONTH:
 			resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MONTH_PERIOD,
-											'Posts por Mes','Mes','Posts',
+											'Comentarios por Mes','Mes','Comentarios',
 											redirectOnClick+"&postCreated=")
 			break
 		}
@@ -260,9 +260,9 @@ class ConceptController extends GenericController{
 		Concept concept = getConcept(params.id)
 		def container = params.div
 		def series=[[name:concept.conceptName,data:listRealTime]]
-		def json =[series:series,"container":container,id:params.id,title:"Posts por minuto",
-			subTitle:"Actualizacion en tiempo Real de la cantidad de Posts" ,
-			titleY:'Cantidad de posts',titleX:'Minutos',dateProp:"postMinute",
+		def json =[series:series,"container":container,id:params.id,title:"Comentarios por minuto",
+			subTitle:"Actualizacion en tiempo Real de la cantidad de Comentarios" ,
+			titleY:'Cantidad de Comentarios',titleX:'Minutos',dateProp:"postMinute",
 			cursorEvent:"../../post/list?conceptsId=",ajaxMethodReload:'../postRealTimeForOneMinute']
 		
 		render json as JSON

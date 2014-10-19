@@ -115,7 +115,7 @@ class GenericController {
 
 				log.debug "dateValueList: " + dateValueList
 				if (!interval || interval == DateTypes.MONTH_PERIOD){
-					series << [name:it.key,data:dateValueList.collect{it.y}]
+					series << [name:it.key,data:dateValueList.collect{[y:it.y, url:it.x]}]
 					serieX = dateValueList.collect{it.x}
 				}else
 					series << [name:it.key,data:dateValueList]

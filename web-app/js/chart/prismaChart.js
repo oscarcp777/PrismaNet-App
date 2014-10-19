@@ -328,7 +328,7 @@ function paintCharLine(data){
 	                point: {
 	                    events: {
 	                        click: function() {
-	                        	window.location.href=data.cursorEvent+this.x+'&conceptName='+this.series.name;
+	                        	window.location.href=data.cursorEvent+this.options.url+'&conceptName='+this.series.name;
 	                        }
 	                    }
 	                }
