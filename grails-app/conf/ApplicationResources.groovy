@@ -31,9 +31,9 @@ modules = {
 	}
 	highcharts {
 		dependsOn 'core'
-		resource url:'js/chart/highcharts.js'
-		resource url:'js/chart/exporting.js'
-		resource url:'js/chart/prismaChart.js'
+		resource url:'js/chart/highcharts.js', exclude:'minify'
+		resource url:'js/chart/exporting.js', exclude:'minify'
+		resource url:'js/chart/prismaChart.js', exclude:'minify'
 		
 	}
 	datepicker{

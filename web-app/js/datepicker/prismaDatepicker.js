@@ -1,7 +1,7 @@
 
 function loadDatepicker(container,callBack){
 	$('#'+container).daterangepicker({
-        startDate: moment().subtract('days', 15),
+        startDate: moment().subtract('days', 7),
         endDate: moment(),
         showDropdowns: true,
         showWeekNumbers: true,
@@ -37,7 +37,7 @@ function loadDatepicker(container,callBack){
     callBack
 );
 //Set the initial state of the picker label
-	$('#'+container+' span').html(moment().subtract('days', 29).format('LLL') + ' - ' + moment().format('LLLL'));
+	$('#'+container+' span').html(moment().subtract('days', 7).format('LLL') + ' - ' + moment().format('LLLL'));
 }
 
 

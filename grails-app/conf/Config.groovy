@@ -82,11 +82,11 @@ grails.spring.bean.packages = []
 // whether to disable processing of multi part requests
 grails.web.disable.multipart=false
 
-grails.resources.debug=true
-grails.resources.mappers.yuicssminify.disable=true
-grails.resources.mappers.yuijsminify.disable=true
-grails.resources.mappers.cssrewriter.enabled = false
-grails.resources.processing.enabled = false
+grails.resources.debug=false
+grails.resources.mappers.yuicssminify.disable=false
+grails.resources.mappers.yuijsminify.disable=false
+grails.resources.mappers.cssrewriter.enabled = true
+grails.resources.processing.enabled = true
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
 
@@ -119,7 +119,7 @@ environments {
 		//   trace 'org.hibernate.type'
 		//   debug 'org.hibernate.SQL'
 		   
-			debug 'grails.app.jobs'
+			debug  'grails.app.jobs'
 			error  'org.codehaus.groovy.grails.web.servlet',        // controllers
 				   'org.codehaus.groovy.grails.web.pages',          // GSP
 				   'org.codehaus.groovy.grails.web.sitemesh',       // layouts
@@ -154,7 +154,6 @@ environments {
 		// log4j configuration
 		log4j = {
 		   appenders {
-				console name: 'stdout', layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n')
 		
 				rollingFile name:'appLog', file:"${logDirectory}.log".toString(), append: true,
 					layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n'), threshold: org.apache.log4j.Level.INFO
@@ -167,7 +166,6 @@ environments {
 		//   trace 'org.hibernate.type'
 		//   debug 'org.hibernate.SQL'
 		   
-			debug 'grails.app.jobs'
 			error  'org.codehaus.groovy.grails.web.servlet',        // controllers
 				   'org.codehaus.groovy.grails.web.pages',          // GSP
 				   'org.codehaus.groovy.grails.web.sitemesh',       // layouts
@@ -180,11 +178,11 @@ environments {
 				   'org.hibernate',
 				   'net.sf.ehcache.hibernate'
 				   
-			info "grails.app" //,"com.prismanet"
+			info "grails.app" 
 				   additivity: false
 			
 			root {
-				   info 'appLog', 'stdout'
+				   info 'appLog'
 				   error 'errorsLog'
 				   additivity = false
 			   }
