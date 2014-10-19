@@ -82,11 +82,11 @@ grails.spring.bean.packages = []
 // whether to disable processing of multi part requests
 grails.web.disable.multipart=false
 
-grails.resources.debug=false
-grails.resources.mappers.yuicssminify.disable=false
-grails.resources.mappers.yuijsminify.disable=false
-grails.resources.mappers.cssrewriter.enabled = true
-grails.resources.processing.enabled = true
+grails.resources.debug=true
+grails.resources.mappers.yuicssminify.disable=true
+grails.resources.mappers.yuijsminify.disable=true
+grails.resources.mappers.cssrewriter.enabled = false
+grails.resources.processing.enabled = false
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
 
@@ -119,7 +119,7 @@ environments {
 		//   trace 'org.hibernate.type'
 		//   debug 'org.hibernate.SQL'
 		   
-			debug  'grails.app.jobs'
+			debug 'grails.app.jobs'
 			error  'org.codehaus.groovy.grails.web.servlet',        // controllers
 				   'org.codehaus.groovy.grails.web.pages',          // GSP
 				   'org.codehaus.groovy.grails.web.sitemesh',       // layouts

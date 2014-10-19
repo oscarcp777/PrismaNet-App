@@ -25,13 +25,13 @@
 								<i class="ace-icon fa fa-chevron-down"></i>
 							</div>
 								</div>
-							<div class="widget-toolbar blue-active">
-							   <div class="btn-group  btn-corner">
-								<a href="javascripts:void(0);" id="help-samplings" class="btn btn-grey btn-help" > 
-								<i class="ace-icon fa fa-question-circle fa-2x"></i>
-								</a>
-							   </div>
-							</div>
+<!-- 							<div class="widget-toolbar blue-active"> -->
+<!-- 							   <div class="btn-group  btn-corner"> -->
+<!-- 								<a href="javascripts:void(0);" id="help-samplings" class="btn btn-grey btn-help" >  -->
+<!-- 								<i class="ace-icon fa fa-question-circle fa-2x"></i> -->
+<!-- 								</a> -->
+<!-- 							   </div> -->
+<!-- 							</div> -->
 							</div>
 
 							<div class="widget-body" >
