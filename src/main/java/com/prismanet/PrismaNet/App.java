@@ -24,6 +24,7 @@ import facebook4j.Facebook;
 import facebook4j.FacebookException;
 import facebook4j.FacebookFactory;
 import facebook4j.Post;
+import facebook4j.Reading;
 import facebook4j.ResponseList;
 import facebook4j.User;
 import facebook4j.json.DataObjectFactory;
@@ -67,10 +68,12 @@ public class App
 		ArrayList<User> users = new ArrayList<User>();
 		for (String id : args.split(",")) {
 			User user = facebook.getUser(id);
+			this.saveUser((DBObject) JSON.parse(DataObjectFactory.getRawJSON(user)));
 			if (user != null)
 				users.add(user);
 		}
 		
+		ArrayList<DBObject> posts = new ArrayList<DBObject>();
 		for (User currentUser : users) {
 			ResponseList<Post> response = facebook.getPosts(currentUser.getId());
 			for (Iterator<Post> iterator = response.iterator(); iterator.hasNext();) {
@@ -83,15 +86,26 @@ public class App
 				}
 				logger.info("Post: " +post.getName());
 				logger.info("Fecha Creacion: " + post.getCreatedTime());
-				this.savePost(post);
+				DBObject jsonPost = (DBObject) JSON.parse(DataObjectFactory.getRawJSON(post));
+				posts.add(jsonPost);
 			}
 		}
+		
+		for (DBObject currentPost : posts) {
+			currentPost.put("totalLikes", facebook.getPostLikes((String)currentPost.get("id"), new Reading().summary()).getSummary().getTotalCount());
+			this.savePost(currentPost);
+		}
+
 		client.close();
 	}
 	
+	private void saveUser(DBObject user){
+		logger.info(user);
+		db.getCollection("users").insert(new BasicDBObject("id", user.get("id")).append("username", user.get("username")).append("name", user.get("name")).append("likes", user.get("likes")).append("talking_about_count", user.get("talking_about_count")).append("updated_time", new Date()));
+	}
+
 	
-	private void savePost(Post p){
-		DBObject post = (DBObject) JSON.parse(DataObjectFactory.getRawJSON(p));
+	private void savePost(DBObject post){
 		logger.info(post);
 		Object id = post.get("id");
 //		post.removeField("id");
