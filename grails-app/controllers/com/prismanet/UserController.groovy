@@ -60,6 +60,11 @@ class UserController extends GenericController{
 						(MentionType.TWITTER): [name:'Tweets', controller: 'tweet'],
 						(MentionType.ALL): [name:'Menciones']]
 	}
+	def  nameMentionType(type){
+		def namesMentions = [(MentionType.FACEBOOK) :'FACEBOOK',
+						(MentionType.TWITTER): 'TWITTER',(MentionType.ALL): 'ALL']
+		namesMentions[type]
+	}
 	
 	
 	def stats = {
@@ -203,9 +208,9 @@ class UserController extends GenericController{
 			strings[sourceType].name + ' por minuto','Minutos','Cantidad de ' + strings[sourceType].name, strings[sourceType].controller ? "../"+strings[sourceType].controller+"/list?id=" : "#")
 		loadZerosForMinute(resultMap["series"],from,to)
 		addConceptsEmpty(resultMap["series"],springSecurityService.currentUser,from,to)
-		
+		resultMap["series"]=resultMap["series"].sort{a,b -> a[1] <=> b[1] }
 		def json =[id:session.user.id,"subTitle":"Actualizacion en tiempo Real de la cantidad de " +strings[sourceType].name
-			      ,dateProp:"dateMinute",ajaxMethodReload:'conceptsRealTimeForOneMinute',channel:sourceType]
+			      ,dateProp:"dateMinute",ajaxMethodReload:'conceptsRealTimeForOneMinute',channel:nameMentionType(sourceType)]
 		resultMap.putAll(json)
 		render resultMap as JSON
 	}
@@ -224,6 +229,7 @@ class UserController extends GenericController{
 		def resultMap = getChartLineFormat(dateList, 2,'', DateTypes.MINUTE_PERIOD,'','','','')
 		loadZerosForMinute(resultMap["series"],from,to)
 		addConceptsEmpty(resultMap["series"],session.user,from,to)
+		resultMap["series"]=resultMap["series"].sort{a,b -> a[1] <=> b[1] }
 		render resultMap["series"] as JSON
 	}
 	

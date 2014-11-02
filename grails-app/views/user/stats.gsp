@@ -35,10 +35,10 @@
 			activeItemMenuLevel1('home');
 			//real time
 			loadRealTime('${MentionType.TWITTER}');
-			//data por concepto
-			loadTweetCharPie('${MentionType.TWITTER}');
 			//Followers y likes por concepto
 			loadTotalFollowers('${MentionType.TWITTER}');
+			//data por concepto
+			loadTweetCharPie('${MentionType.TWITTER}');
 			//data entre fechas
 			loadUserGroupedData('${MentionType.TWITTER}');
 			//data general de meses

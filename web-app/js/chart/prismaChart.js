@@ -81,7 +81,7 @@ function getUserGroupedTweets(data){
 
 function loadMonthStatsData(channel){
 	loadDatepicker('pickertStatsMonth',loadStatsMonthPickert);
-	var data = {"channel":channel, "div":'#monthStats', "dateFrom":moment().subtract('days', 15).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+	var data = {"channel":channel, "div":'#monthStats', "dateFrom":moment().subtract('days', 7).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 	getMonthStats(data);
 	$('#monthStats').data('channel',channel);
 }
@@ -113,8 +113,9 @@ function getSentimentalAnalitycs(data){
 	doRequest('../sentimentalAnalitycs',data,paintCharLine, null, 'GET');
 }
 function loadTweetCharPie(channel){
+	changeTitle(channel,'#title-loadTweetCharPie');
 	loadDatepicker('pickertTweetConcept',loadTweetCharPiePickert);
-	var data = {'channel':channel, "div":'#tweetCharPie',"dateFrom":moment().subtract('days', 15).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+	var data = {'channel':channel, "div":'#tweetCharPie',"dateFrom":moment().subtract('days', 7).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 	getTweetCharPie(data);
 	$('#tweetCharPie').data('channel',channel);
 }
@@ -123,9 +124,22 @@ function loadTweetCharPiePickert(start, end,rangeSelect) {
     var data = { 'channel':$('#tweetCharPie').data('channel'),"div":'#tweetCharPie',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
     getTweetCharPie(data);
 }
+function changeTitle(channel,idTitle){
+	if(channel=='TWITTER'){
+		$(idTitle).text($(idTitle).text().replace('Comentarios','Tweets'));
+		$(idTitle).text($(idTitle).text().replace('Menciones','Tweets'));
+	}else if(channel=='FACEBOOK'){
+		$(idTitle).text($(idTitle).text().replace('Tweets','Comentarios'));
+		$(idTitle).text($(idTitle).text().replace('Menciones','Comentarios'));
+	}else if(channel=='ALL'){
+		$(idTitle).text($(idTitle).text().replace('Tweets','Menciones'));
+		$(idTitle).text($(idTitle).text().replace('Comentarios','Menciones'));
+	}
 
+}
 function loadRealTime(channel){
-	var data = {"div":'#realTimeCharUser','channel':channel}
+	var data = {"div":'#realTimeCharUser','channel':channel};
+	changeTitle(channel,'#title-loadRealTime');
 	getConceptRealTime(data,'');
 }
 function loadRealTimeConcept(id){
@@ -142,8 +156,9 @@ function lineaChartUser(start, end,rangeSelect) {
     getUserGroupedTweets(data);
 }
 function loadUserGroupedData(channel){
+	changeTitle(channel,'#title-loadUserGroupedData');
 	loadDatepicker('pickertUser',lineaChartUser);
-	var data = {'channel':channel, "div":'#lineaChartUser',"dateFrom":moment().subtract('days', 15).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+	var data = {'channel':channel, "div":'#lineaChartUser',"dateFrom":moment().subtract('days', 7).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 	getUserGroupedTweets(data);
 	$('#lineaChartUser').data('channel',channel);
 }
@@ -204,16 +219,16 @@ function printRealTimeChar(data){
                     // set up the updating of the chart each second
                     var series = this.series;
                     setInterval(function() {
-                    	var dataNew = {"id":data.id};
+                    	var dataNew = {"channel":data.channel};
                     	var element;
                     	doRequest(data.ajaxMethodReload,
                     			  dataNew,
                     			 function(data) {
-                	        			for ( var int = 0; int < series.length; int++) {
+                	        			for ( var j = 0; int < series.length; j++) {
                 	        				for ( var i = 0; int < data.length; i++) {
-                	        					if(series[int].name == data[i].name){
-                                    			 element = data[int].data;
-                                    			 series[int].addPoint(element[0], true, true);
+                	        					if(series[j].name == data[i].name){
+                                    			 element = data[i].data;
+                                    			 series[j].addPoint(element[0], true, true);
                                     			 break;
                                     		 }
                                 	       }
