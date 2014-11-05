@@ -37,14 +37,21 @@ class TweetController extends GenericController{
 		
 		log.info "tweetController->list params: " + params
 		Concept concept =chooseConcept(params)
+		def relevantWords=[]
+
 		def filters = loadTweetFilters()
 		params.max = Math.min(max ?: 6, 100)
 		def tweets = tweetService.getTweets(filters,params)
-		def relevantWords = tweetService.getRelevantWords(loadSolrTweetFilters())
+		
 		if(!grailsApplication.config.grails.twitter.offline)
 			tweetService.loadAvatarUsers(tweets.resultList)
+		
+		if(params.offset==null){
+		session.relevantWords=tweetService.getRelevantWords(loadSolrTweetFilters())
+		}
+		
 		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"], 
-			relevantWords:relevantWords, dateCreated:params.dateCreated]
+			relevantWords:session.relevantWords, dateCreated:params.dateCreated]
 	}
 	
 	def randomList(){
@@ -52,13 +59,10 @@ class TweetController extends GenericController{
 	}
 	
 	def wordsCloud() {
-		log.debug "tweetController->wordsCloud params: " + params
-		Concept concept =chooseConcept(params)
-		
-		def filters = loadTweetFilters()
+		log.info "tweetController->wordsCloud params: " + params
 		def listWords=[]
 		int counter=0
-		def relevantWords = tweetService.getRelevantWords(filters)
+		def relevantWords = session.relevantWords
 		
 		def maxPercent = 40, minPercent = 20
 		def max =1 ,min = 0

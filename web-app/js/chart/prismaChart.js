@@ -101,8 +101,8 @@ function printWordCloud(data){
 	$(data.div).empty();
 	WordCloud($(data.div)[0], { list: data.json } );
 }
-function getWordsCloud(id,div, dateCreated){
-	var data = {"div":div,"conceptsId":id, "dateCreated":dateCreated}
+function getWordsCloud(div){
+	var data = {"div":div}
 	doRequest('wordsCloud',data,printWordCloud, null, 'GET');
 }
 function getGroupedPosts(data){
@@ -219,12 +219,12 @@ function printRealTimeChar(data){
                     // set up the updating of the chart each second
                     var series = this.series;
                     setInterval(function() {
-                    	var dataNew = {"channel":data.channel};
+                    	var dataNew = {"channel":data.channel,"id":data.id};
                     	var element;
                     	doRequest(data.ajaxMethodReload,
                     			  dataNew,
                     			 function(data) {
-                	        			for ( var j = 0; int < series.length; j++) {
+                	        			for ( var j = 0; j < series.length; j++) {
                 	        				for ( var i = 0; int < data.length; i++) {
                 	        					if(series[j].name == data[i].name){
                                     			 element = data[i].data;
