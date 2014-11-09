@@ -13,8 +13,9 @@ class PostJob {
 	def facebookSetupService
 	def group = "postsJobs"
 	def pathCommand=""
+	def minutesBetweenJobs = 2
 	static triggers = {
-		simple repeatInterval: 120000, repeatCount:-1 , startDelay: 90000
+		simple repeatInterval: 1000*60*2 , repeatCount:-1 , startDelay: 90000
 	}
 
 	def execute() {
@@ -43,7 +44,7 @@ class PostJob {
 			
 			def d1 = new GregorianCalendar(2013, Calendar.OCTOBER, 27,11,00)
 //			def d2 = new GregorianCalendar(2013, Calendar.OCTOBER, 14,1,36)
-			Date filteredDate = new Date()-5.minute
+			Date filteredDate = new Date()-minutesBetweenJobs.minute
 			
 			def dates = [:]
 			dates.put("dateFrom",filteredDate)
@@ -55,7 +56,7 @@ class PostJob {
 			def iterator = posts.iterator()
 			def partialList = []
 			int i = 0
-			log.info "posts: " + iterator.size()
+			log.info "posts: " + posts.size()
 			def lastUpdated = facebookCommentService.getLastUpdated()
 			log.info "fecha ultimo post: " + lastUpdated
 			while (iterator.hasNext()){
@@ -75,7 +76,7 @@ class PostJob {
 					} catch (Exception e) {
 						log.error "Importación Fallida: " + e.getMessage()
 						log.error e.getCause()
-						log.error e.getStackTrace()
+						log.error e.printStackTrace()
 						partialList.clear();
 					}
 				}
@@ -86,7 +87,7 @@ class PostJob {
 			} catch (Exception e) {
 				log.error "Importación Fallida: " + e.getMessage()
 				log.error e.getCause()
-				log.error e.getStackTrace()
+				log.error e.printStackTrace()
 			} finally {
 				log.info "Cursor Post cerrado"
 				posts.close()
