@@ -24,6 +24,7 @@
 			  <g:render template="chart" model="['divPickert':'pickertTweetConcept','callback':'loadTweetCharPie','titleChar':'user.stats.tweets.concepts','div':'tweetCharPie','contentHelp':'user.stats.tweets.concepts.help','icon':'pie-chart']"></g:render>
 			  <g:render template="chart" model="['divPickert':'pickertUser','callback':'loadUserGroupedData','titleChar':'user.stats.tweets.date','div':'lineaChartUser','contentHelp':'user.stats.tweets.date.help','icon':'line-chart']"></g:render>
 			  <g:render template="chart" model="['divPickert':'pickertStatsMonth','callback':'loadMonthStatsData','titleChar':'user.stats.month.stats','div':'monthStats','contentHelp':'user.stats.month.stats.help','icon':'table']"></g:render>
+			  <g:render template="chart" model="['divPickert':'pickertStatsPost','callback':'loadPostStatsData','titleChar':'user.stats.post.stats','div':'postStats','contentHelp':'user.stats.post.stats.help','icon':'table']"></g:render>
 			</div>
 			<hr>
 
@@ -43,6 +44,8 @@
 			loadUserGroupedData('${MentionType.TWITTER}');
 			//data general de meses
 			loadMonthStatsData('${MentionType.TWITTER}');
+			//likes y comentarios de posts mas importantes
+			loadPostStatsData();
 		});
 
 		

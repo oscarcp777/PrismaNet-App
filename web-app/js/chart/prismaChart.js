@@ -86,14 +86,31 @@ function loadMonthStatsData(channel){
 	$('#monthStats').data('channel',channel);
 }
 
+function loadPostStatsData(){
+	loadDatepicker('pickertStatsPost',loadStatsPostPickert);
+	var data = {"div":'#postStats', "dateFrom":moment().subtract('days', 15).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+	getPostStats(data);
+}
+
+
 function getMonthStats(data){
 	doRequest('monthStats',data,loadMonthStats, null, 'GET');
+}
+
+function getPostStats(data){
+	doRequest('postsStats',data,loadPostStats, null, 'GET');
 }
 
 function loadStatsMonthPickert(start, end, rangeSelect) {
     $('#pickertStatsMonth span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
     var data = {"div":'#monthStats',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
     getMonthStats(data);
+}
+
+function loadStatsPostPickert(start, end, rangeSelect) {
+    $('#pickertStatsPost span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
+    var data = {"div":'#postStats',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
+    getPostStats(data);
 }
 
 
@@ -414,6 +431,10 @@ function paintCharLine(data){
 
 function loadMonthStats(data){
 	$("#monthStats").html(data);
+}
+
+function loadPostStats(data){
+	$("#postStats").html(data);
 }
 
 

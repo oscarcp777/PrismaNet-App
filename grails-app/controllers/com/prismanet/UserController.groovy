@@ -91,6 +91,31 @@ class UserController extends GenericController{
 		
 		render(template: "monthStats", model: [statsList:statsList])
 	}
+	
+	def postsStats = {
+		PostService postService = new PostService()
+		def filters = []
+		if (session.user.id){
+			filters.add(new Filter(attribute:"userId",value: session.user.id, type:FilterType.EQ))
+		}
+		Date dateFrom, dateTo
+		if (params.dateFrom)
+			dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
+		if (params.dateTo)
+			dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
+		filters.addAll(userService.getFilterList(dateFrom, dateTo))
+		def result = postService.getPosts(filters, [max:10])
+		def statsList = result.results.collect{
+			def link = it.link
+			if (it.link && it.link[-1]=='/'){
+				link = it.link[0..-2]
+			}
+			[created:it.created,icon:it.icon,name:it.name,link:link,totalLikes:it.totalLikes, totalComments:it.totalComments, conceptName:it.concepts[0]?.conceptName]
+		}
+
+		render(template: "postStats", model: [statsList:statsList])
+	}
+	
 	def conceptTweetsJson ={
 		def sourceType = params.channel as MentionType
 		def strings = getPropertiesByMentionType()

@@ -55,7 +55,7 @@ grails.project.dependency.resolution = {
 		compile 'org.twitter4j:twitter4j-async:3.0.4-SNAPSHOT'
 		compile 'org.twitter4j:twitter4j-stream:3.0.4-SNAPSHOT'
 		compile 'org.twitter4j:twitter4j-media-support:3.0.4-SNAPSHOT'
-		compile 'org.facebook4j:facebook4j-core:2.0.5-Prisma'
+		compile 'org.facebook4j:facebook4j-core:2.2.1-Prisma-SNAPSHOT'
 	}
 plugins {
         // plugins for the build system only
