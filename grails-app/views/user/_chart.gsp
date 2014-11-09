@@ -4,7 +4,7 @@
 		<div class="widget-header">
 			<h5 class="widget-title">
 				<i class="ace-icon  fa-lg fa fa-${icon}"> </i>
-				<g:message code="${titleChar}" />
+				<label id="title-${callback}"> <g:message code="${titleChar}" /></label>
 			</h5>
 
 			<g:if test="${divPickert != 'disable'}">

@@ -48,7 +48,7 @@
 	</div>
 	</div>
 	   <script>
-        $.backstretch("../img/login-bg.jpg", {speed: 500});
+        $.backstretch("../img/login-bg.jpg", {speed:200});
     </script>
 </body>
 </html>

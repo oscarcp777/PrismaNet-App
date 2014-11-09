@@ -78,7 +78,7 @@
 								<h2> <g:message code="public.index.home.sub.title"/> </h2>
 									</div>
 								<div class="featurette container" style="margin-left:-60px;">
-									<img src="img/analytics_howitworks.png" alt="como trabaja">
+									<img src="img/prisma_howitworks.png" alt="como trabaja">
 									<div class="video">
 										<a href="#" 
 											class="open-trailer"><i class="ace-icon fa fa-play"></i><span><g:message code="public.index.home.demo"/></span></a>

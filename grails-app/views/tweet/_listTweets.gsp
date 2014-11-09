@@ -6,7 +6,7 @@
 
 				<div class="col-lg-8" style="text-align: center;">
 					<ul class="pagination pagination-sm">
-						<li><g:paginate total="${tweetTotal}" id="${concept.id}" params="${params}"  /></li>
+						<li><g:paginate total="${tweetTotal}" params="${params}"  /></li>
 					</ul>
 				</div>
 				

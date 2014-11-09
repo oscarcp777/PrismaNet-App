@@ -44,8 +44,13 @@ class TweetController extends MentionController{
 		def relevantWords = tweetService.getRelevantWords(loadSolrFilters())
 		if(!grailsApplication.config.grails.twitter.offline)
 			tweetService.loadAvatarUsers(tweets.resultList)
+		
+		if(params.offset==null){
+		session.relevantWords=tweetService.getRelevantWords(loadSolrTweetFilters())
+		}
+		
 		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"], 
-			relevantWords:relevantWords, dateCreated:params.dateCreated]
+			relevantWords:session.relevantWords, dateCreated:params.dateCreated]
 	}
 	
 	def randomList(){
