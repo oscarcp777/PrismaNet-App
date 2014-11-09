@@ -1,16 +1,19 @@
 package com.prismanet
 
+import java.sql.Timestamp
+
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.StopWatch
 
 import com.mongodb.BasicDBObject
 import com.prismanet.GenericService.FilterType
 import com.prismanet.GenericService.OrderType
-import com.prismanet.context.Filter
 import com.prismanet.context.FacebookCommentAttributeContext
+import com.prismanet.context.Filter
 import com.prismanet.exception.ApplicationException
 
 import facebook4j.Comment
+import facebook4j.Post
 import facebook4j.internal.json.PostJSONImpl
 import facebook4j.internal.org.json.JSONObject
 import groovy.sql.Sql
@@ -24,14 +27,11 @@ class FacebookCommentService extends MentionService{
 
 	@Transactional
 	def savePosts(def posts, def lastUpdated){
-		def index = 0
 		def List<Concept> concepts = Concept.list()
 		StopWatch timer = new StopWatch()
 		for (BasicDBObject postObj : posts){
-
 			JSONObject obj = new JSONObject(postObj)
 			facebook4j.Post status = new PostJSONImpl(obj)
-			index++
 			
 			for (Comment comment : status.getComments()){
 				if (lastUpdated){ 
@@ -57,25 +57,24 @@ class FacebookCommentService extends MentionService{
 					message = comment.getMessage().trim()
 
 				log.debug "fecha comentario: " + comment.getCreatedTime()
-					
-				FacebookComment post = new FacebookComment(content:message,
+				
+				
+				FacebookComment facebookComment = new FacebookComment(content:message,
 				author:author,
 				created:comment.getCreatedTime(),
 				postId:status.getId(),
 				commentId:comment.getId())
 
-
 				concepts.each{ concept->
-					if (concept.testAddPost(post)){
+					if (concept.testAddPost(facebookComment)){
 						log.debug "valido para concepto: " +  concept
-
-						if (!post.id){
-							post.save(validate:false)
-							if (!post.id){
-								post.discard()
-								throw ApplicationException.create(post)
+						if (!facebookComment.id){
+							facebookComment.save(validate:false)
+							if (!facebookComment.id){
+								facebookComment.discard()
+								throw ApplicationException.create(facebookComment)
 							}
-							log.info "Comentario Facebook guardado con ID :  " + post.id
+							log.info "Comentario Facebook guardado con ID :  " + facebookComment.id
 							timer.stop()
 							log.debug "tiempo post: " + timer.getTotalTimeMillis()
 						}
@@ -85,7 +84,7 @@ class FacebookCommentService extends MentionService{
 						timer = new StopWatch()
 						timer.start()
 						def sql = new Sql(sessionFactory.currentSession.connection())
-						sql.execute("insert into concept_mentions values(?,?)", [concept.id, post.id])
+						sql.execute("insert into concept_mentions values(?,?)", [concept.id, facebookComment.id])
 						timer.stop()
 						log.debug  "tiempo concept: " + timer.getTotalTimeMillis()
 					}
@@ -106,12 +105,14 @@ class FacebookCommentService extends MentionService{
 				if (!lastUpdated.after(comment.createdTime) ){
 					log.debug "post message: " +status.message
 					log.debug "foto: " +status.picture
-					log.debug "comentario agreagado -fecha: " + comment.createdTime + " texto: "+ comment.getMessage()
+					log.debug "comentario agregado -fecha: " + comment.createdTime + " texto: "+ comment.getMessage()
 					i++
 				}else{
 					log.debug "comentario ignorado -fecha: " + comment.createdTime + " texto: "+ comment.getMessage()
 					continue
 				}
+			}else{
+				i++
 			}
 			
 		}

@@ -12,13 +12,14 @@ class Concept {
 //	Date lastUpdated
 	TwitterSetup twitterSetup
 	FacebookSetup facebookSetup
-	static hasMany = [mentions:Mention]
+	static hasMany = [mentions:Mention, posts:Post]
 	User user
 
     static constraints = {
 		conceptName(nullable:false)
 		user()
 		mentions()
+		posts()
 		twitterSetup(nullable:true)
 		facebookSetup(nullable:true)
     }
@@ -80,6 +81,17 @@ class Concept {
 	}
 	
 	public boolean testAddPost(FacebookComment post){
+		def add = false
+		
+		for (String keyword in this.facebookSetup?.accounts?.split(',')) {
+			if (post.postId.contains(keyword)){
+				add = true
+			}
+		}
+		return add
+	}
+	
+	public boolean testAddPost(Post post){
 		def add = false
 		
 		for (String keyword in this.facebookSetup?.accounts?.split(',')) {

@@ -1,6 +1,7 @@
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
+grails.project.work.dir = "target/work"
 
 grails.project.fork = [
     // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
@@ -45,7 +46,7 @@ grails.project.dependency.resolution = {
 		compile 'org.grails:grails-datastore-gorm:3.0.4.RELEASE'
   		compile 'org.grails:grails-datastore-core:3.0.4.RELEASE'
   		test 'org.grails:grails-datastore-simple:3.0.4.RELEASE'
-  		compile 'org.facebook4j:facebook4j-core:2.0.5-Prisma'
+  		compile 'org.facebook4j:facebook4j-core:2.2.1-Prisma-SNAPSHOT'
 		  
 		compile 'org.mongodb:mongo-java-driver:2.12.0-rc3'
 	    compile 'org.apache.solr:solr-solrj:4.6.0'

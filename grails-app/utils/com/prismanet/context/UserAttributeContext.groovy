@@ -23,6 +23,10 @@ class UserAttributeContext extends AttributeContext {
 		addPropertyRelation("dateDay", "day", null, "concepts.mentions");
 		addPropertyRelation("created", "created", null, "concepts.mentions");
 		addPropertyRelation("sourceType", "class", null, "concepts.mentions");
+		
+		addPropertyRelation("postCreated", "created", null, "concepts.posts");
+		addPropertyRelation("totalLikes", "totalLikes", null, "concepts.posts");
+
 	}
 
 	

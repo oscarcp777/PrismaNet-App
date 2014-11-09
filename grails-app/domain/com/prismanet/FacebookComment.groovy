@@ -5,14 +5,11 @@ class FacebookComment extends Mention{
 	String postId
 	String commentId
 	
-	
-	
 	static constraints = {
-		postId(nullable:true)
-    }
+	}
 	
 	@Override
-	public String toString() {time
+	public String toString() {
 		return author?.accountName + "-" + content;
 	}
 	

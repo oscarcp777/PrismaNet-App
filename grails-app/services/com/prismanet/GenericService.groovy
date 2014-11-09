@@ -1,12 +1,17 @@
 package com.prismanet
 
-import com.prismanet.context.AttributeContext
+import grails.gorm.CriteriaBuilder
 import grails.orm.HibernateCriteriaBuilder
+
+import com.prismanet.context.AttributeContext
 
 
 
 class GenericService {
 	
+	def sessionFactory
+	def propertyInstanceMap = org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
+
 	AttributeContext context
 	def domainClass
 	
@@ -18,6 +23,16 @@ class GenericService {
 		this.context = context
 	}
 	
+	def cleanUpGorm() {
+		try {
+			sessionFactory.currentSession.flush()
+			sessionFactory.currentSession.clear()
+			propertyInstanceMap.get().clear()
+			log.info "Gorm clean"
+		} catch (Exception e) {
+			log.error e.getCause()
+		}
+	}
 	
 	
 	def list(filters, parameters, orders){

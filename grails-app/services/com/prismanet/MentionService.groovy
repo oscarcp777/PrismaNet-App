@@ -16,10 +16,6 @@ import com.prismanet.utils.SolrUtil
 
 class MentionService extends GenericCoreService{
 
-	def sessionFactory
-	def propertyInstanceMap = org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
-	//boolean transactional = false
-	
 	MentionService(){
 		super()
 	}
@@ -27,18 +23,6 @@ class MentionService extends GenericCoreService{
 	MentionService(def domainClass,AttributeContext context){
 		super(domainClass, context)
 	}
-	
-	def cleanUpGorm() {
-		try {
-			sessionFactory.currentSession.flush()
-			sessionFactory.currentSession.clear()
-			propertyInstanceMap.get().clear()
-			log.info "Gorm clean"
-		} catch (Exception e) {
-			log.error e.getCause()
-		}
-	}
-
 	
 	def OpinionValue getOpinion(User user, Concept concept){
 		def opinion = Opinion.findByUserandConcept(user,concept)
