@@ -8,6 +8,7 @@ import com.prismanet.GenericService.OrderType
 import com.prismanet.GenericService.ProjectionType
 import com.prismanet.context.Filter
 import com.prismanet.context.UserAttributeContext
+import com.prismanet.importer.MongoPostsImporter;
 import com.prismanet.model.security.SecRole
 import com.prismanet.model.security.SecUserSecRole
 import com.prismanet.utils.DateTypes
@@ -135,6 +136,7 @@ class UserController extends GenericController{
 	def totalFollowers ={
 		def resultMap=[:]
 		def channel=params.channel as MentionType
+		
 		if(channel == MentionType.TWITTER){
 		 resultMap=getTotalFollowers(params.div)
 		}else if(channel == MentionType.FACEBOOK){
@@ -150,16 +152,13 @@ class UserController extends GenericController{
 		def usersName=[]
 		session.concepts.each {
 			if(it.facebookSetup !=null ){
-//			usersName.add(it.facebookSetup.accounts.replace(",",""))
-//				log.info it.facebookSetup.accounts
+				usersName.add(it.facebookSetup.accounts.replace(",",""))
 			}
 		}
-		Facebook facebook =new FacebookFactory().getInstance();
-		ResponseList<facebook4j.Post> pages = null
-		pages = facebook.getFeed('55432788477');
-//		lookupUsers((String[])usersName.toArray());
-		for (facebook4j.Post page : pages) {
-			dateList.add([page.name,page.likes])
+		MongoPostsImporter importer = new MongoPostsImporter()
+		dateList = importer.getUsersByLikes(usersName)
+		dateList = dateList.collect{
+			[it._id,it.likes]
 		}
 		def resultMap=[container:container,data:dateList,title: message(code: "user.stats.facebook.likes.sub"),name : message(code: "user.stats.title.likes")]
 		resultMap
