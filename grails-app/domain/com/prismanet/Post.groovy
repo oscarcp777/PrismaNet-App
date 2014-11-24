@@ -20,6 +20,7 @@ class Post{
 	
 	String postId
 	String icon
+	String picture
 	String link
 	String name
 	Integer totalLikes
@@ -31,6 +32,7 @@ class Post{
 	
 	static constraints = {
 		icon(nullable:true)
+		picture(nullable:true,maxSize: 5000)
 		link(nullable:true)
 		name(nullable:true)
 		totalLikes(nullable:true)

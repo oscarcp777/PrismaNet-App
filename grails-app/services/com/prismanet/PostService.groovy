@@ -62,7 +62,7 @@ class PostService extends GenericCoreService{
 			
 			com.prismanet.Post post = com.prismanet.Post.findByPostId(status.getId())
 			if (!post){
-				post = new com.prismanet.Post(postId:status.getId(),icon:status.getIcon(), created:status.getCreatedTime(),
+				post = new com.prismanet.Post(postId:status.getId(),picture:status.getPicture(), created:status.getCreatedTime(),
 						link:status.getLink(),name:status.getName(), totalLikes:postObj.get("totalLikes"),
 						totalComments:postObj.get("totalComments"))
 			}else{
