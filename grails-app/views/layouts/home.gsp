@@ -168,8 +168,8 @@
 													<g:message code="home.menu.concept.twitter" />
 												</g:link> <b class="arrow"></b></li>
 											<li id="${conceptInstance.id}-face"><g:link
-													controller="post" action="list"
-													params="[conceptsId:conceptInstance.id]">
+													controller="concept" action="postStats"
+													id="${conceptInstance.id}">
 													<i class="menu-icon fa fa-caret-right"></i>
 													<g:message code="home.menu.concept.facebook" />
 												</g:link> <b class="arrow"></b></li>

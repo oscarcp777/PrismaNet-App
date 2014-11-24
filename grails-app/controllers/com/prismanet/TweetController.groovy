@@ -41,12 +41,12 @@ class TweetController extends MentionController{
 		def filters = loadMentionFilters()
 		params.max = Math.min(max ?: 6, 100)
 		def tweets = tweetService.getTweets(filters,params)
-		def relevantWords = tweetService.getRelevantWords(loadSolrFilters())
+//		def relevantWords = tweetService.getRelevantWords(loadSolrFilters())
 		if(!grailsApplication.config.grails.twitter.offline)
 			tweetService.loadAvatarUsers(tweets.resultList)
 		
 		if(params.offset==null){
-		session.relevantWords=tweetService.getRelevantWords(loadSolrTweetFilters())
+		session.relevantWords=tweetService.getRelevantWords(loadSolrFilters())
 		}
 		
 		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"], 

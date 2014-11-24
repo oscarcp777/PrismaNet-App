@@ -213,4 +213,9 @@ class GenericController {
 		concept
 	}
 	
+	String createLing(postId){
+		def values = postId.split('_')
+		'https://www.facebook.com/'+values[0]+'/posts/'+values[1]
+	}
+	
 }

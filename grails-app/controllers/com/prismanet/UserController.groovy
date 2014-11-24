@@ -93,6 +93,7 @@ class UserController extends GenericController{
 		render(template: "monthStats", model: [statsList:statsList])
 	}
 	
+	
 	def postsStats = {
 		PostService postService = new PostService()
 		def filters = []
@@ -107,13 +108,9 @@ class UserController extends GenericController{
 		filters.addAll(userService.getFilterList(dateFrom, dateTo))
 		def result = postService.getPosts(filters, [max:10])
 		def statsList = result.results.collect{
-			def link = it.link
-			if (it.link && it.link[-1]=='/'){
-				link = it.link[0..-2]
-			}
-			[created:it.created,icon:it.icon,name:it.name,link:link,totalLikes:it.totalLikes, totalComments:it.totalComments, conceptName:it.concepts[0]?.conceptName]
+			
+			[created:it.created,name:it.name,postId:it.postId,picture:it.icon,link:createLing(it.postId),totalLikes:it.totalLikes, totalComments:it.totalComments, faceName:it.concepts[0]?.facebookSetup?.keywords]
 		}
-
 		render(template: "postStats", model: [statsList:statsList])
 	}
 	

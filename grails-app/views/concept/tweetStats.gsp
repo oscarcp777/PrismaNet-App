@@ -50,11 +50,11 @@
 		  	activeItemMenuLevel2(id,'${concept.id}-tweet','${concept.conceptName}');
 		  	loadRealTimeConcept(${concept.id});
 		   
-		   var dataTweets = {"id":id, "div":'#tweetsChart',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+		   var dataTweets = {"id":id, "div":'#tweetsChart',"dateFrom":moment().subtract('days', 7).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 		   getGroupedTweets(dataTweets);
-		   var dataWeight = {"id":id, "div":'#weightChart',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+		   var dataWeight = {"id":id, "div":'#weightChart',"dateFrom":moment().subtract('days', 7).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 		   getGroupedWeight(dataWeight);
-		   var dataAuthors = {"id":id, "div":'#relevantAuthors',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+		   var dataAuthors = {"id":id, "div":'#relevantAuthors',"dateFrom":moment().subtract('days', 7).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 		   getRelevantAuthors(dataAuthors);
 
 		});

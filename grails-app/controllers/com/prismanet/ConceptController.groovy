@@ -107,7 +107,26 @@ class ConceptController extends GenericController{
 		}
 		render resultMap as JSON
 	}
-	
+	def getPostMoreLikes={
+		PostService postService = new PostService()
+		def filters = []
+		if (session.user.id){
+			filters.add(new Filter(attribute:"userId",value: session.user.id, type:FilterType.EQ))
+		}
+		Date dateFrom, dateTo
+		if (params.dateFrom)
+			dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
+		if (params.dateTo)
+			dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
+		filters.addAll(postService.getFilterList(dateFrom, dateTo))
+		filters.add(new Filter(attribute:"conceptsId",value: params.id.toLong(), type:FilterType.EQ))
+		def result = postService.getPosts(filters, [max:10])
+		def statsList = result.results.collect{
+			
+			[created:it.created,name:it.name,postId:it.postId,picture:it.icon,link:createLing(it.postId),totalLikes:it.totalLikes, totalComments:it.totalComments, faceName:it.concepts[0]?.facebookSetup?.keywords]
+		}
+		render(template: "/user/postStats", model: [statsList:statsList])
+	}
 	
 	def getGroupedPosts(){
 		log.info "getGroupedPosts params: " + params

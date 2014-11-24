@@ -88,7 +88,7 @@ function loadMonthStatsData(channel){
 
 function loadPostStatsData(){
 	loadDatepicker('pickertStatsPost',loadStatsPostPickert);
-	var data = {"div":'#postStats', "dateFrom":moment().subtract('days', 15).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+	var data = {"div":'#postStats', "dateFrom":moment().subtract('days', 7).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
 	getPostStats(data);
 }
 
@@ -124,6 +124,9 @@ function getWordsCloud(div){
 }
 function getGroupedPosts(data){
 	doRequest('../getGroupedPosts',data,paintCharLine, null, 'GET');
+}
+function getPostMoreLikes(data){
+	doRequest('../getPostMoreLikes',data,loadPostMoreLikes, null, 'GET');
 }
 
 function getSentimentalAnalitycs(data){
@@ -242,7 +245,7 @@ function printRealTimeChar(data){
                     			  dataNew,
                     			 function(data) {
                 	        			for ( var j = 0; j < series.length; j++) {
-                	        				for ( var i = 0; int < data.length; i++) {
+                	        				for ( var i = 0; i < data.length; i++) {
                 	        					if(series[j].name == data[i].name){
                                     			 element = data[i].data;
                                     			 series[j].addPoint(element[0], true, true);
@@ -436,7 +439,9 @@ function loadMonthStats(data){
 function loadPostStats(data){
 	$("#postStats").html(data);
 }
-
+function loadPostMoreLikes(data){
+	$("#postMoreLikes").html(data);
+}
 
 function loadAuthors(data){
 	$("#relevantAuthors").html(data);
