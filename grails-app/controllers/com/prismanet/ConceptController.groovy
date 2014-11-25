@@ -123,7 +123,7 @@ class ConceptController extends GenericController{
 		def result = postService.getPosts(filters, [max:10])
 		def statsList = result.results.collect{
 			
-			[created:it.created,name:it.name,postId:it.postId,picture:it.icon,link:createLing(it.postId),totalLikes:it.totalLikes, totalComments:it.totalComments, faceName:it.concepts[0]?.facebookSetup?.keywords]
+			[created:it.created,name:it.name,postId:it.postId,picture:it.picture,link:createLing(it.postId),totalLikes:it.totalLikes, totalComments:it.totalComments, faceName:it.concepts[0]?.facebookSetup?.keywords]
 		}
 		render(template: "/user/postStats", model: [statsList:statsList])
 	}
