@@ -1,18 +1,5 @@
 
-/* estilos del logo*/
-@font-face {
-	font-family: 'Arista';
-	font-style: normal;
-	font-weight: 700;
-	src: url(../fonts/Arista.ttf) format('truetype');
-}
-.logo {
-	position: relative;
-	color: #000000;
-	font-size: 30px;
-	display: block;
-    margin-left: 50px;
-}
+
 /*ovewrite styles ace*/
 body{
 	font-size:14px;
@@ -52,6 +39,20 @@ body{
 	text-decoration: none;
 }
 /*#####################*/
+/* estilos del logo*/
+@font-face {
+	font-family: 'Arista';
+	font-style: normal;
+	font-weight: 700;
+	src: url(../fonts/Arista.ttf) format('truetype');
+}
+.logo {
+	position: relative;
+	color: #000000;
+	font-size: 30px;
+	display: block;
+    margin-left: 50px;
+}
 .logo:hover {
 	background-position: bottom;
 }
