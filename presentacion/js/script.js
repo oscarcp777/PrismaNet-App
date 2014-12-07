@@ -37,7 +37,24 @@ $(function() {
 	window.addEventListener('impress:stepenter', function() {
 	  $('#what_content.future p.text-center').removeClass('animated tada');
 	});
+	$('#success_map.active div.map_bg div.spain').delay(1750).queue(function(next){
+	  	$(this).addClass("spainMove");
+	  	next();
+	  });
+	window.addEventListener('impress:stepenter', function() {
+		$('#what_content.active #timer').counter({});
+		$('#what_content.active #person').counter({});
+		$('#what_content.active #otros').counter({});
 
+	   $('#what_content.active #facebook').counterUp({
+			delay: 10,
+			time: 600000
+		});
+		$('#what_content.active #twitter').counterUp({
+			delay: 10,
+			time: 600000
+		});
+	});
 
 	//how we do
 
@@ -260,7 +277,10 @@ $(function() {
 	//animate finish
 
 	window.addEventListener('impress:stepenter', function() {
-	  $('#slogan-finish.present div.drop_box span#drop_down').addClass('animated hinge');
+		$('#slogan-finish.present div.drop_box span#drop_down').delay(3000).queue(function(next){
+	  	$(this).addClass('animated hinge');
+	  	next();
+	  });
 	});
 	window.addEventListener('impress:stepenter', function() {
 	  $('#slogan-finish.past div.drop_box span#drop_down').removeClass('animated hinge');

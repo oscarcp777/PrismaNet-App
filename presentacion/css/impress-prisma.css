@@ -655,7 +655,7 @@ transition: opacity 1s, transform 0.5s 1s;
     font-size: 100px;
 }
 .font-x2 {
-    font-size: 130px
+    font-size: 100px
 }
 .tittle {
     font-size: 60px;
@@ -1071,3 +1071,9 @@ transition: opacity 1s, transform 0.5s 1s;
     color: white;
 
 }
+.margin-center{
+  margin-left:25%;
+}
+
+
+
