@@ -38,6 +38,7 @@ class FacebookCommentService extends MentionService{
 					if (!lastUpdated.after(comment.createdTime) ){
 						log.info("Comentario valido: " + comment.getId())
 					}else{
+						log.info "comentario ignorado -fecha: " + comment.createdTime + " texto: "+ comment.getMessage()
 						continue
 					}
 				}
