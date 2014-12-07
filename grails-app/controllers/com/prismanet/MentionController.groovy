@@ -102,10 +102,9 @@ class MentionController extends GenericController{
 		log.debug "tweetController->wordsCloud params: " + params
 		Concept concept =chooseConcept(params)
 		
-		def filters = loadMentionFilters()
 		def listWords=[]
 		int counter=0
-		def relevantWords = getService().getRelevantWords(filters)
+		def relevantWords = session.relevantWords
 		
 		def maxPercent = 40, minPercent = 20
 		def max =1 ,min = 0
