@@ -35,8 +35,11 @@ class FacebookCommentService extends MentionService{
 			
 			for (Comment comment : status.getComments()){
 				if (lastUpdated){ 
-					if (!lastUpdated.before(comment.createdTime))
+					if (!lastUpdated.after(comment.createdTime) ){
+						log.info("Comentario valido: " + comment.getId())
+					}else{
 						continue
+					}
 				}
 				timer = new StopWatch()
 				timer.start()
