@@ -1074,6 +1074,17 @@ transition: opacity 1s, transform 0.5s 1s;
 .margin-center{
   margin-left:25%;
 }
+.massa{
+ height: 700px;
+ width: 850px;
+}
+.massa img{
+    margin-left: auto;
+height: 700px;
+ width: 600px;
+}
+
+
 
 
 
