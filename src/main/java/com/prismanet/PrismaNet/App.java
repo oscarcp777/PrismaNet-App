@@ -23,9 +23,11 @@ import facebook4j.Comment;
 import facebook4j.Facebook;
 import facebook4j.FacebookException;
 import facebook4j.FacebookFactory;
+import facebook4j.Like;
 import facebook4j.Post;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
+import facebook4j.Summary;
 import facebook4j.User;
 import facebook4j.json.DataObjectFactory;
 
@@ -38,7 +40,7 @@ public class App
 	static final Logger logger = Logger.getLogger(App.class.getName());
 	private static MongoClient client;
 	private static DB db;
-	final static String FACEBOOK="yyyy-MM-dd'T'HH:mm:ssZZZZ";
+	final static String FACEBOOK="yyyy-MM-dd'T'HH:mm:ss+SSSS";
 	static SimpleDateFormat sf;
 	
 	public static void main( String[] args ) throws FacebookException, UnknownHostException   {
@@ -84,16 +86,26 @@ public class App
 					comment.getCreatedTime();
 					comment.getId();
 				}
-				logger.info("Post: " +post.getName());
+				logger.info("Post Id:" +post.getId());
+				logger.info("Post Link:" +post.getLink());
 				logger.info("Fecha Creacion: " + post.getCreatedTime());
 				DBObject jsonPost = (DBObject) JSON.parse(DataObjectFactory.getRawJSON(post));
 				posts.add(jsonPost);
 			}
 		}
-		
+		int i = 0;
 		for (DBObject currentPost : posts) {
-			currentPost.put("totalLikes", facebook.getPostLikes((String)currentPost.get("id"), new Reading().summary()).getSummary().getTotalCount());
+			ResponseList<Like> likes = facebook.getPostLikes((String)currentPost.get("id"), new Reading().summary());
+			Summary summaryLikes = likes != null ? likes.getSummary() : null;
+			Integer totalLikes = summaryLikes != null ? summaryLikes.getTotalCount() : 0;
+			currentPost.put("totalLikes", totalLikes != null ? totalLikes : 0);
+			
+			ResponseList<Comment> comments = facebook.getPostComments((String)currentPost.get("id"), new Reading().summary());
+			Summary summaryComments = comments != null ? comments.getSummary() : null;
+			Integer totalComments = summaryComments != null ? summaryComments.getTotalCount() : 0;
+			currentPost.put("totalComments", totalComments != null ? totalComments : 0);
 			this.savePost(currentPost);
+			i++;
 		}
 
 		client.close();
@@ -106,7 +118,7 @@ public class App
 
 	
 	private void savePost(DBObject post){
-		logger.info(post);
+		logger.info((String)post.get("type")+":"+post);
 		Object id = post.get("id");
 //		post.removeField("id");
 		post.put("_id",id);
