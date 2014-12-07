@@ -175,7 +175,9 @@
 					success: function(response, newValue) {
 						bootbox.confirm("Esta seguro cambiar a ' "+newValue+" '?", function(result) {
 							if(result){
-								var data = {"id":idTS,'field':id,'newValue':newValue}
+								var data = {};
+								data["id"]=idTS;
+								data[id]=newValue;
 								doRequest('../../twitterSetup/update',data,null, null, 'POST');
 							}else{
 								if($('#'+id).data(id)=='undefined'){
