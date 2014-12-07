@@ -2,7 +2,7 @@
 	<thead>
 		<tr>
 			<th>Concepto</th>
-			<th>Tweets</th>
+			<th>Menciones</th>
 			<th>Autores</th>
 			<th> Menciones por Autor</th>
 		</tr>
