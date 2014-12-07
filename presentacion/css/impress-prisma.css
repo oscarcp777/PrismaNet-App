@@ -677,9 +677,13 @@ transition: opacity 1s, transform 0.5s 1s;
 #services_tags{
     transition:1s !important;
 }
+.howitworks img{
+ background-color: #fff;
+}
 .standGem {
     -webkit-transform: rotateY(0deg) rotateZ(0deg) translateY(-10000px);
-    transition:1s !important;    
+    transition:1s !important;
+    width: 1000px;
 }
 
 .tech-size {
@@ -743,12 +747,12 @@ transition: opacity 1s, transform 0.5s 1s;
 .clients-logos {
     width: 150px;
     padding: 30px 0;
-    background-color: #f85d5d;
-    border: 1px solid #e45555;
-    color: white;
+    background-color: #a1d9ce;
+    border: 1px solid #fff;
+    color: #323639;
     float: left;
     text-align: center;
-    -webkit-transition:1s !important;
+    -webkit-transition:5s !important;
     -webkit-transform: scale(0.1);
     -moz-transform:    scale(0.1);
     -ms-transform:     scale(0.1);
@@ -756,7 +760,7 @@ transition: opacity 1s, transform 0.5s 1s;
     transform:         scale(0.1);       
 }
 #success_map .map_bg .clients-logos img {
-    width: 60%;
+    width: 100%;
     margin:0;
     padding: 0;
 }
@@ -764,20 +768,23 @@ transition: opacity 1s, transform 0.5s 1s;
     display: block;
     position: relative;
     top: -15px;
-    color: white;
+    color: #323639;
     text-align: center;
-    font-size: 17px;
+    font-size: 20px;
+    font-family: Antipasto;
     margin: 0;
     padding: 0;
 }
 .map_bg {
-    background: url(../img/map.svg) no-repeat center center;
+    background: url(../img/prisma_howitworks.png) no-repeat center center;
+     background-size: 1024px;
     width: 1024px;
     height: 700px;
     margin-left: -512px;
     left: 50%;
     position: relative;
 }
+
 .california {
     -webkit-transform: translateY(140px) translateX(10px) scale(0.1);
     -moz-transform: translateY(140px) translateX(10px) scale(0.1);
@@ -790,7 +797,7 @@ transition: opacity 1s, transform 0.5s 1s;
     -moz-transform: translateY(200px) translateX(150px) scale(1);
     -ms-transform: translateY(200px) translateX(150px) scale(1);
     -o-transform: translateY(200px) translateX(150px) scale(1);
-    transform: translateY(200px) translateX(150px) scale(1);
+    transform: translateY(50px) translateX(150px) scale(1);
 }
 .atlanta {
     -webkit-transform: translateY(220px) translateX(-30px) scale(0.1);
@@ -804,7 +811,7 @@ transition: opacity 1s, transform 0.5s 1s;
     -moz-transform: translateY(270px) translateX(110px) scale(1);
     -ms-transform: translateY(270px) translateX(110px) scale(1);
     -o-transform: translateY(270px) translateX(110px) scale(1);
-    transform: translateY(270px) translateX(110px) scale(1);
+    transform: translateY(350px) translateX(130px) scale(1);
 }
 .baires {
     -webkit-transform: translateY(505px) translateX(-85px) scale(0.1);
@@ -818,7 +825,7 @@ transition: opacity 1s, transform 0.5s 1s;
     -moz-transform: translateY(330px) translateX(70px) scale(1);
     -ms-transform: translateY(330px) translateX(70px) scale(1);
     -o-transform: translateY(330px) translateX(70px) scale(1);
-    transform: translateY(330px) translateX(70px) scale(1);
+    transform: translateY(100px) translateX(160px) scale(1);
 }
 .tcm {
     -webkit-transform: translateY(470px) translateX(-260px) scale(0.1);
@@ -832,7 +839,7 @@ transition: opacity 1s, transform 0.5s 1s;
     -moz-transform: translateY(270px) translateX(30px) scale(1);
     -ms-transform: translateY(270px) translateX(30px) scale(1);
     -o-transform: translateY(270px) translateX(30px) scale(1);
-    transform: translateY(270px) translateX(30px) scale(1);
+    transform: translateY(380px) translateX(180px) scale(1);
 }
 .baires2 {
     -webkit-transform: translateY(520px) translateX(-405px) scale(0.1);
@@ -846,7 +853,7 @@ transition: opacity 1s, transform 0.5s 1s;
     -moz-transform: translateY(200px) translateX(-10px) scale(1);
     -ms-transform: translateY(200px) translateX(-10px) scale(1);
     -o-transform: translateY(200px) translateX(-10px) scale(1);
-    transform: translateY(200px) translateX(-10px) scale(1);
+    transform: translateY(100px) translateX(80px) scale(1);
 }
 .spain {
     -webkit-transform: translateY(180px) translateX(-403px) scale(0.1);
@@ -860,7 +867,7 @@ transition: opacity 1s, transform 0.5s 1s;
     -moz-transform: translateY(270px) translateX(-40px) scale(1);
     -ms-transform: translateY(270px) translateX(-40px) scale(1);
     -o-transform: translateY(270px) translateX(-40px) scale(1);
-    transform: translateY (270px) translateX(-40px) scale(1);
+     transform: translateY(220px) translateX(220px) scale(1);
 }
 .margin-fix {
     margin-left: 125px;

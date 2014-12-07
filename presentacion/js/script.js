@@ -44,7 +44,10 @@ $(function() {
 	window.addEventListener('impress:stepenter', function() {
 		$('#what_content.active #timer').counter({});
 		$('#what_content.active #person').counter({});
-		$('#what_content.active #otros').counter({});
+		$('#what_content.active #otros').counterUp({
+			delay: 10,
+			time: 600000
+		});
 
 	   $('#what_content.active #facebook').counterUp({
 			delay: 10,

@@ -111,7 +111,7 @@
 
 				</div>
 
-				<div class="col-md-6">
+<!-- 				<div class="col-md-6"> 
 					<a href="#" class="btn btn-danger btn-app"> <i
 						class="ace-icon fa fa-comments"></i> ${total} <br>
 					<g:message code="dashborad.concept.mentions" />
@@ -123,7 +123,7 @@
 					<g:message code="dashborad.concept.post" />
 					</a>
 				</div>
-			</div>
+			</div>-->
 			<div class="col-lg-12 ">
 				<div class="hr hr32 hr-dotted"></div>
 			</div>

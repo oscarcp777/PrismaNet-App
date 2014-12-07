@@ -37,15 +37,13 @@ class ConceptController extends GenericController{
 		def projection = ['mentionId' : ProjectionType.COUNT]
 		
 		// Contabilizar menciones de twitter
-		def tweetCount = conceptService.groupBy(Concept, new ConceptAttributeContext(),
-				groups, filters, projection, null)
-		def tweetTotal = tweetCount.size()>0 ? tweetCount.get(0).getAt(1) : 0
+//		def tweetCount = conceptService.groupBy(Concept, new ConceptAttributeContext(),groups, filters, projection, null)
+		def tweetTotal = 0;//tweetCount.size()>0 ? tweetCount.get(0).getAt(1) : 0
 
 		// Contabilizar menciones de facebook
-		filters = [conceptFilter, getFacebookFilter()]
-		def postCount = conceptService.groupBy(Concept, new ConceptAttributeContext(),
-				groups, filters, projection, null)
-		def postTotal = postCount.size()>0 ? postCount.get(0).getAt(1) : 0
+//		filters = [conceptFilter, getFacebookFilter()]
+//		def postCount = conceptService.groupBy(Concept, new ConceptAttributeContext(),groups, filters, projection, null)
+		def postTotal = 0;//postCount.size()>0 ? postCount.get(0).getAt(1) : 0
 
 		
 		[concept :concept,twSetup:concept.twitterSetup,fcSetup:concept.facebookSetup,tweetsTotal:tweetTotal, postsTotal:postTotal, total:postTotal+tweetTotal]
