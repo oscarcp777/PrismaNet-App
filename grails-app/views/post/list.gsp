@@ -95,21 +95,12 @@
 		</div>
 		
 	</div>
-	<script type="text/javascript">
-	var id='${concept.id}';
-	activeItemMenuLevel2('${concept.id}','${concept.id}-tweet','${concept.conceptName}');
-	
-		jQuery(function($) {
-			$(".tooltips").tooltip();
-			getWordsCloud(id,'#cloudWords','${dateCreated}');
-		});
-	</script>
 	</div>
 	<script type="text/javascript">
 	activeItemMenuLevel2('${concept.id}','${concept.id}-face','${concept.conceptName}');
 	  jQuery(function($) {
 		  $(".tooltips").tooltip();
-		  getWordsCloud(id,'#cloudWords','${dateCreated}');
+		  getWordsCloud('#cloudWords');
 		  });
 	</script>
 </body>

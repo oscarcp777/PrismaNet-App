@@ -88,10 +88,9 @@ class TweetController extends MentionController{
 		def container = params.div
 		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
 		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
-		//TODO hardcode para test 
-		params.dateCreated = '1409194800000'
 		log.info "samplingStep1 params: " + params
 		def filters = loadMentionFilters()
+		filters.addAll(getService().getFilterList(dateFrom, dateTo, "created", false))
 		def samplings = tweetService.getSamplingTweets(filters, params)
 		//TODO guardo en session la muestra ver
 		session.conceptsId=params.conceptsId

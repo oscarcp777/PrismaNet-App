@@ -17,11 +17,7 @@
 <div class="alert alert-block alert-warning">
 
 								<i class="ace-icon fa fa-exclamation-triangle fa-2x pull-left fa-border" style="border: solid 0.08em #fcf8e3;color:red;"></i>
-
-								<b>Importante:
-								Aquí ud. podra editar el concepto y agregar o modificar palabras, hashtag, y cuentas a seguir.
-								<br>Estas modificaciones tienen un impacto significativo en la performance de la Applicación, tenga en cuenta esto al realizar las modificaciones 
-							</b>
+								<g:message code='concept.general.edition'/> 
 							</div>
 	<div class="page-content">
 		<div class="row">
@@ -103,7 +99,7 @@
 					<div class="profile-user-info profile-user-info-striped">
 						<div class="profile-info-row">
 							<div class="profile-info-name">
-								<g:message code="dashborad.config.twitter.keywords" />
+								<g:message code="dashborad.config.facebook.accounts" />
 							</div>
 
 							<div class="profile-info-value">
@@ -175,7 +171,9 @@
 					success: function(response, newValue) {
 						bootbox.confirm("Esta seguro cambiar a ' "+newValue+" '?", function(result) {
 							if(result){
-								var data = {"id":idTS,'field':id,'newValue':newValue}
+								var data = {};
+								data["id"]=idTS;
+								data[id]=newValue;
 								doRequest('../../twitterSetup/update',data,null, null, 'POST');
 							}else{
 								if($('#'+id).data(id)=='undefined'){
