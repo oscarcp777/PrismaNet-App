@@ -42,7 +42,7 @@ $(function() {
 	  	next();
 	  });
 	window.addEventListener('impress:stepenter', function() {
-		$('#what_content.active #timer').counter({});
+		/*$('#what_content.active #timer').counter({});
 		$('#what_content.active #person').counter({});
 		$('#what_content.active #otros').counterUp({
 			delay: 10,
@@ -56,7 +56,7 @@ $(function() {
 		$('#what_content.active #twitter').counterUp({
 			delay: 10,
 			time: 600000
-		});
+		});*/
 	});
 
 	//how we do
@@ -142,6 +142,17 @@ $(function() {
 	});
 	window.addEventListener('impress:stepenter', function() {
 	  $('#frontend.animar.future ul li').removeClass('animated bounceIn');
+	});
+
+
+window.addEventListener('impress:stepenter', function() {
+	  $('#gracias.animar.active ul li').addClass('animated bounceIn');
+	});
+	window.addEventListener('impress:stepenter', function() {
+	  $('#gracias.animar.past ul li').removeClass('animated bounceIn');
+	});
+	window.addEventListener('impress:stepenter', function() {
+	  $('#gracias.animar.future ul li').removeClass('animated bounceIn');
 	});
 
 	//backend

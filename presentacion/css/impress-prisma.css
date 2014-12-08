@@ -1,16 +1,4 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
@@ -18,16 +6,13 @@ time, mark, audio, video {
     font: inherit;
     vertical-align: baseline;
 }
-
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
     display: block;
 }
 body {
     line-height: 1;
     color: #323639;
-
 }
 ol, ul {
     list-style: none;
@@ -35,17 +20,14 @@ ol, ul {
 blockquote, q {
     quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
+blockquote:before, blockquote:after, q:before, q:after {
+    content:'';
     content: none;
 }
-
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-
 /*
     Now here is when interesting things start to appear.
 
@@ -53,44 +35,41 @@ table {
     And yes, there is a lot of repetition there because of -prefixes but we don't
     want to leave anybody behind.
 */
-body {
-    font-family: 'PT Sans', sans-serif;
+ body {
+    font-family:'PT Sans', sans-serif;
     min-height: 740px;
-
     background: rgb(255, 255, 238);
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(rgb(255, 250, 242)), to(239(1213 1172 190)));
     background: -webkit-radial-gradient(rgb(255, 250, 242), rgb(239, 213, 172));
-    background:    -moz-radial-gradient(rgb(255, 250, 242), rgb(239, 213, 172));
-    background:     -ms-radial-gradient(rgb(255, 250, 242), rgb(239, 213, 172));
-    background:      -o-radial-gradient(rgb(255, 250, 242), rgb(239, 213, 172));
-    background:         radial-gradient(rgb(255, 250, 242), rgb(239, 213, 172));
+    background: -moz-radial-gradient(rgb(255, 250, 242), rgb(239, 213, 172));
+    background: -ms-radial-gradient(rgb(255, 250, 242), rgb(239, 213, 172));
+    background: -o-radial-gradient(rgb(255, 250, 242), rgb(239, 213, 172));
+    background: radial-gradient(rgb(255, 250, 242), rgb(239, 213, 172));
 }
-
 /*
     Now let's bring some text styles back ...
 */
-b, strong { font-weight: bold }
-i, em { font-style: italic }
-
+ b, strong {
+    font-weight: bold
+}
+i, em {
+    font-style: italic
+}
 /*
     ... and give links a nice look.
 */
-a {
+ a {
     text-decoration: none;
     padding: 0 0.1em;
     border-radius: 0.2em;
-
     -webkit-transition: 0.5s;
-    -moz-transition:    0.5s;
-    -ms-transition:     0.5s;
-    -o-transition:      0.5s;
-    transition:         0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
 }
-
-a:hover,
-a:focus {
+a:hover, a:focus {
 }
-
 /*
     Because the main point behind the impress.js demo is to demo impress.js
     we display a fallback message for users with browsers that don't support
@@ -102,69 +81,58 @@ a:focus {
 
     And then we hide the message, when support is detected in the browser.
 */
-
-.fallback-message {
+ .fallback-message {
     font-family: sans-serif;
     line-height: 1.3;
-
     width: 780px;
     padding: 10px 10px 0;
     margin: 20px auto;
-
     border: 1px solid #E4C652;
     border-radius: 10px;
     background: #EEDC94;
 }
-
 .fallback-message p {
     margin-bottom: 10px;
 }
-
 .impress-supported .fallback-message {
     display: none;
 }
-
 /*
     Now let's style the presentation steps.
 
     We start with basics to make sure it displays correctly in everywhere ...
 */
-
-.step {
+ .step {
     position: relative;
     width: 900px;
     padding: 40px;
     margin: 20px auto;
-
     -webkit-box-sizing: border-box;
-    -moz-box-sizing:    border-box;
-    -ms-box-sizing:     border-box;
-    -o-box-sizing:      border-box;
-    box-sizing:         border-box;
-
-    font-family: 'PT Serif', georgia, serif;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family:'PT Serif', georgia, serif;
     font-size: 48px;
     line-height: 1.5;
 }
-
 /*
     ... and we enhance the styles for impress.js.
 
     Basically we remove the margin and make inactive steps a little bit transparent.
 */
-.impress-enabled .step {
+ .impress-enabled .step {
     margin: 0;
     opacity: 0.1;
-
     -webkit-transition: opacity 1s;
-    -moz-transition:    opacity 1s;
-    -ms-transition:     opacity 1s;
-    -o-transition:      opacity 1s;
-    transition:         opacity 1s;
+    -moz-transition: opacity 1s;
+    -ms-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    transition: opacity 1s;
 }
-
-.impress-enabled .step.active { opacity: 1 }
-
+.impress-enabled .step.active {
+    opacity: 1
+}
 /*
     These 'slide' step styles were heavily inspired by HTML5 Slides:
     http://html5slides.googlecode.com/svn/trunk/styles.css
@@ -173,39 +141,31 @@ a:focus {
 
     They cover everything what you see on first three steps of the demo.
 */
-.slide {
+ .slide {
     display: block;
-
     width: 900px;
     height: 700px;
     padding: 40px 60px;
-
     background-color: white;
     border: 1px solid rgba(0, 0, 0, .3);
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
-
     color: rgb(102, 102, 102);
     text-shadow: 0 2px 2px rgba(0, 0, 0, .1);
-
-    font-family: 'Open Sans', Arial, sans-serif;
+    font-family:'Open Sans', Arial, sans-serif;
     font-size: 30px;
     line-height: 36px;
     letter-spacing: -1px;
 }
-
 .slide q {
     display: block;
     font-size: 50px;
     line-height: 72px;
-
     margin-top: 100px;
 }
-
 .slide q strong {
     white-space: nowrap;
 }
-
 /*
     And now we start to style each step separately.
 
@@ -216,146 +176,127 @@ a:focus {
     First is the title step with a big <h1> (no room for padding) and some
     3D positioning along Z axis.
 */
-
-#title {
+ #title {
     padding: 0;
 }
-
 #title .try {
     font-size: 64px;
     position: absolute;
     top: -0.5em;
     left: 1.5em;
-
     -webkit-transform: translateZ(20px);
-    -moz-transform:    translateZ(20px);
-    -ms-transform:     translateZ(20px);
-    -o-transform:      translateZ(20px);
-    transform:         translateZ(20px);
+    -moz-transform: translateZ(20px);
+    -ms-transform: translateZ(20px);
+    -o-transform: translateZ(20px);
+    transform: translateZ(20px);
 }
-
 #title h1 {
     font-size: 190px;
-
     -webkit-transform: translateZ(50px);
-    -moz-transform:    translateZ(50px);
-    -ms-transform:     translateZ(50px);
-    -o-transform:      translateZ(50px);
-    transform:         translateZ(50px);
+    -moz-transform: translateZ(50px);
+    -ms-transform: translateZ(50px);
+    -o-transform: translateZ(50px);
+    transform: translateZ(50px);
 }
-
 #title .footnote {
     font-size: 32px;
 }
-
 /*
     Second step is nothing special, just a text with a link, so it doesn't need
     any special styling.
 
     Let's move to 'big thoughts' with centered text and custom font sizes.
 */
-#big {
+ #big {
     width: 600px;
     text-align: center;
     font-size: 60px;
     line-height: 1;
 }
-
 #big b {
     display: block;
     font-size: 250px;
     line-height: 250px;
 }
-
 #big .thoughts {
     font-size: 90px;
     line-height: 150px;
 }
-
 /*
     'Tiny ideas' just need some tiny styling.
 */
-#tiny {
+ #tiny {
     width: 500px;
     text-align: center;
 }
-
 /*
     This step has some animated text ...
 */
-#ing { width: 500px }
-
+ #ing {
+    width: 500px
+}
 /*
     ... so we define display to `inline-block` to enable transforms and
     transition duration to 0.5s ...
 */
-#ing b {
+ #ing b {
     display: inline-block;
     -webkit-transition: 0.5s;
-    -moz-transition:    0.5s;
-    -ms-transition:     0.5s;
-    -o-transition:      0.5s;
-    transition:         0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
 }
-
 /*
     ... and we want 'positioning` word to move up a bit when the step gets
     `present` class ...
 */
-#ing.present .positioning {
+ #ing.present .positioning {
     -webkit-transform: translateY(-10px);
-    -moz-transform:    translateY(-10px);
-    -ms-transform:     translateY(-10px);
-    -o-transform:      translateY(-10px);
-    transform:         translateY(-10px);
+    -moz-transform: translateY(-10px);
+    -ms-transform: translateY(-10px);
+    -o-transform: translateY(-10px);
+    transform: translateY(-10px);
 }
-
 /*
     ... 'rotating' to rotate a quarter of a second later ...
 */
-#ing.present .rotating {
+ #ing.present .rotating {
     -webkit-transform: rotate(-10deg);
-    -moz-transform:    rotate(-10deg);
-    -ms-transform:     rotate(-10deg);
-    -o-transform:      rotate(-10deg);
-    transform:         rotate(-10deg);
-
+    -moz-transform: rotate(-10deg);
+    -ms-transform: rotate(-10deg);
+    -o-transform: rotate(-10deg);
+    transform: rotate(-10deg);
     -webkit-transition-delay: 0.25s;
-    -moz-transition-delay:    0.25s;
-    -ms-transition-delay:     0.25s;
-    -o-transition-delay:      0.25s;
-    transition-delay:         0.25s;
+    -moz-transition-delay: 0.25s;
+    -ms-transition-delay: 0.25s;
+    -o-transition-delay: 0.25s;
+    transition-delay: 0.25s;
 }
-
 /*
     ... and 'scaling' to scale down after another quarter of a second.
 */
-#ing.present .scaling {
+ #ing.present .scaling {
     -webkit-transform: scale(0.7);
-    -moz-transform:    scale(0.7);
-    -ms-transform:     scale(0.7);
-    -o-transform:      scale(0.7);
-    transform:         scale(0.7);
-
+    -moz-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    -o-transform: scale(0.7);
+    transform: scale(0.7);
     -webkit-transition-delay: 0.5s;
-    -moz-transition-delay:    0.5s;
-    -ms-transition-delay:     0.5s;
-    -o-transition-delay:      0.5s;
-    transition-delay:         0.5s;
+    -moz-transition-delay: 0.5s;
+    -ms-transition-delay: 0.5s;
+    -o-transition-delay: 0.5s;
+    transition-delay: 0.5s;
 }
-
 /*
     The 'imagination' step is again some boring font-sizing.
 */
-
-#imagination {
+ #imagination {
     width: 600px;
 }
-
 #imagination .imagination {
     font-size: 78px;
 }
-
 /*
     There is nothing really special about 'use the source, Luke' step, too,
     except maybe of the Yoda background.
@@ -366,20 +307,17 @@ a:focus {
 
     Just make sure you don't blindly copy this approach.
 */
-#source {
+ #source {
     width: 700px;
     padding-bottom: 300px;
-
     /* Yoda Icon :: Pixel Art from Star Wars http://www.pixeljoint.com/pixelart/1423.htm */
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARgAAAEYCAMAAACwUBm+AAAAAXNSR0IArs4c6QAAAKtQTFRFsAAAvbWSLUUrLEQqY1s8UYJMqJ1vNTEgOiIdIzYhjIFVLhsXZ6lgSEIsP2U8JhcCVzMsSXZEgXdOO145XJdWOl03LzAYMk4vSXNExr+hwcuxRTs1Qmk+RW9Am49eFRANQz4pUoNMQWc+OSMDTz0wLBsCNVMxa2NBOyUDUoNNSnlEWo9VRGxAVzYFl6tXCggHbLNmMUIcHhwTXkk5f3VNRT8wUT8xAAAACQocRBWFFwAAAAF0Uk5TAEDm2GYAAAPCSURBVHja7d3JctNAFIZRMwRCCGEmzPM8z/D+T8bu/ptbXXJFdij5fMt2Wuo+2UgqxVmtttq5WVotLzBgwIABAwYMGDCn0qVqbo69psPqVpWx+1XG5iaavF8wYMCAAQMGDBgwi4DJ6Y6qkxB1HNlcN3a92gbR5P2CAQMGDBgwYMCAWSxMlrU+UY5yu2l9okfV4bAxUVbf7TJnAwMGDBgwYMCAAbMLMHeqbGR82Zy+VR1Ht81nVca6R+UdTLaU24Ruzd3qM/e4yjnAgAEDBgwYMGDA7AJMd1l/3NRdVGcj3eX/2WEhCmDGxnM7yqygu8XIPjJj8iN/MGDAgAEDBgwYMAuDGb8q0RGlLCHLv1t9qDKWn3vdNHVuEI6HPaxO9Jo3GDBgwIABAwYMmIXBdC9ShGgMk+XnkXUeuGcsP/e1+lhNnZsL/G5Vs3OAAQMGDBgwYMCAWSxMR3SzOmraG5atdy9wZKzb+vg16qyqe2FltbnAgAEDBgwYMGDALAxmTJSuN3WA76rnVca6GTnemGN1WoEBAwYMGDBgwIBZGMxUomy4+xO899V4LAg5Xnc2MGDAgAEDBgwYMGA218Wq+2K1LDqvY9xZu8zN8fICdM6btYABAwYMGDBgwIABMzfH0+pGU5afze2tXebmeAfVz+p8BQYMGDBgwIABAwbMPBzZ+oWmfJrln1273FhkbHzee9WWbw7AgAEDBgwYMGDALAKm43hcdctKgblcPamOhuXnXlY5Xs6bsW4FGyQCAwYMGDBgwIABswiYMceZKgvMo+h8mrHLTdn676rj+FEFoTtHd8MwOxEYMGDAgAEDBgyYRcBM5UhXqiymW3R3c9ARhWO/OmjqfjVZy+xEYMCAAQMGDBgwYBYG073OnCV0RFNhMhaOa9WfKmOB6XjHMN1tQmaAAQMGDBgwYMCA2VWY7vXjz1U4croAzgPztwIDBgwYMGDAgAEDZhswh035NBw59Dww3RgYMGDAgAEDBgwYMJuD6f4tXT7NUqfCdBvZLkxXdgQGDBgwYMCAAQNmt2DGj8WzwAfV/w7T/aq7mxwwYMCAAQMGDBgwuwqTOo7uTwTngflSzQ3TdaJvAwEDBgwYMGDAgAED5gSvgbyo5oHZ4Pc+gwEDBgwYMGDAgAEzhOm+5G0qTGaAAQMGDBgwYMCAAXNaMOcnls3tNwWm+zRzp54NDBgwYMCAAQMGDJh5YNL36k1TLuGvVq+qnKMbS5n7tulT9asCAwYMGDBgwIABA2ZumKuztLnjgQEDBgwYMGDAgNl5mH/4/ltKA6vBNAAAAABJRU5ErkJggg==);
     background-position: bottom right;
     background-repeat: no-repeat;
 }
-
 #source q {
     font-size: 60px;
 }
-
 /*
     And the "it's in 3D" step again brings some 3D typography - just for fun.
 
@@ -388,156 +326,143 @@ a:focus {
     It is not needed by webkit browsers, but it is in Firefox. It's hard to say
     which behaviour is correct as 3D transforms spec is not very clear about it.
 */
-#its-in-3d p {
+ #its-in-3d p {
     -webkit-transform-style: preserve-3d;
-    -moz-transform-style:    preserve-3d; /* Y U need this Firefox?! */
-    -ms-transform-style:     preserve-3d;
-    -o-transform-style:      preserve-3d;
-    transform-style:         preserve-3d;
+    -moz-transform-style: preserve-3d;
+    /* Y U need this Firefox?! */
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
 }
-
 /*
     Below we position each word separately along Z axis and we want it to transition
     to default position in 0.5s when the step gets `present` class.
 
     Quite a simple idea, but lot's of styles and prefixes.
 */
-#its-in-3d span,
-#its-in-3d b {
+ #its-in-3d span, #its-in-3d b {
     display: inline-block;
     -webkit-transform: translateZ(40px);
-    -moz-transform:    translateZ(40px);
-    -ms-transform:     translateZ(40px);
-    -o-transform:      translateZ(40px);
-     transform:        translateZ(40px);
-
+    -moz-transform: translateZ(40px);
+    -ms-transform: translateZ(40px);
+    -o-transform: translateZ(40px);
+    transform: translateZ(40px);
     -webkit-transition: 0.5s;
-    -moz-transition:    0.5s;
-    -ms-transition:     0.5s;
-    -o-transition:      0.5s;
-    transition:         0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
 }
-
 #its-in-3d .have {
     -webkit-transform: translateZ(-40px);
-    -moz-transform:    translateZ(-40px);
-    -ms-transform:     translateZ(-40px);
-    -o-transform:      translateZ(-40px);
-    transform:         translateZ(-40px);
+    -moz-transform: translateZ(-40px);
+    -ms-transform: translateZ(-40px);
+    -o-transform: translateZ(-40px);
+    transform: translateZ(-40px);
 }
-
 #its-in-3d .you {
     -webkit-transform: translateZ(20px);
-    -moz-transform:    translateZ(20px);
-    -ms-transform:     translateZ(20px);
-    -o-transform:      translateZ(20px);
-    transform:         translateZ(20px);
+    -moz-transform: translateZ(20px);
+    -ms-transform: translateZ(20px);
+    -o-transform: translateZ(20px);
+    transform: translateZ(20px);
 }
-
 #its-in-3d .noticed {
     -webkit-transform: translateZ(-40px);
-    -moz-transform:    translateZ(-40px);
-    -ms-transform:     translateZ(-40px);
-    -o-transform:      translateZ(-40px);
-    transform:         translateZ(-40px);
+    -moz-transform: translateZ(-40px);
+    -ms-transform: translateZ(-40px);
+    -o-transform: translateZ(-40px);
+    transform: translateZ(-40px);
 }
-
 #its-in-3d .its {
     -webkit-transform: translateZ(60px);
-    -moz-transform:    translateZ(60px);
-    -ms-transform:     translateZ(60px);
-    -o-transform:      translateZ(60px);
-    transform:         translateZ(60px);
+    -moz-transform: translateZ(60px);
+    -ms-transform: translateZ(60px);
+    -o-transform: translateZ(60px);
+    transform: translateZ(60px);
 }
-
 #its-in-3d .in {
     -webkit-transform: translateZ(-10px);
-    -moz-transform:    translateZ(-10px);
-    -ms-transform:     translateZ(-10px);
-    -o-transform:      translateZ(-10px);
-    transform:         translateZ(-10px);
+    -moz-transform: translateZ(-10px);
+    -ms-transform: translateZ(-10px);
+    -o-transform: translateZ(-10px);
+    transform: translateZ(-10px);
 }
-
 #its-in-3d .footnote {
     font-size: 32px;
-
     -webkit-transform: translateZ(-10px);
-    -moz-transform:    translateZ(-10px);
-    -ms-transform:     translateZ(-10px);
-    -o-transform:      translateZ(-10px);
-    transform:         translateZ(-10px);
+    -moz-transform: translateZ(-10px);
+    -ms-transform: translateZ(-10px);
+    -o-transform: translateZ(-10px);
+    transform: translateZ(-10px);
 }
-
-#its-in-3d.present span,
-#its-in-3d.present b {
+#its-in-3d.present span, #its-in-3d.present b {
     -webkit-transform: translateZ(0px);
-    -moz-transform:    translateZ(0px);
-    -ms-transform:     translateZ(0px);
-    -o-transform:      translateZ(0px);
-    transform:         translateZ(0px);
+    -moz-transform: translateZ(0px);
+    -ms-transform: translateZ(0px);
+    -o-transform: translateZ(0px);
+    transform: translateZ(0px);
 }
-
 /*
     The last step is an overview.
     There is no content in it, so we make sure it's not visible because we want
     to be able to click on other steps.
 
 */
-#overview { display: none }
-
+ #overview {
+    display: none
+}
 /*
     We also make other steps visible and give them a pointer cursor using the
     `impress-on-` class.
 */
-.impress-on-overview .step {
+ .impress-on-overview .step {
     opacity: 1;
     cursor: pointer;
 }
-
 .hint {
-
-display: none;
-position: fixed;
-left: 0;
-right: 0;
-bottom: 200px;
-background: rgba(0,0,0,0.5);
-color: #EEE;
-text-align: center;
-font-size: 40px;
-padding: 20px;
-z-index: 100;
-opacity: 0;
--webkit-transform: translateY(400px);
--moz-transform: translateY(400px);
--ms-transform: translateY(400px);
--o-transform: translateY(400px);
-transform: translateY(400px);
--webkit-transition: opacity 1s, -webkit-transform 0.5s 1s;
--moz-transition: opacity 1s, -moz-transform 0.5s 1s;
--ms-transition: opacity 1s, -ms-transform 0.5s 1s;
--o-transition: opacity 1s, -o-transform 0.5s 1s;
-transition: opacity 1s, transform 0.5s 1s;
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 200px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #EEE;
+    text-align: center;
+    font-size: 40px;
+    padding: 20px;
+    z-index: 100;
+    opacity: 0;
+    -webkit-transform: translateY(400px);
+    -moz-transform: translateY(400px);
+    -ms-transform: translateY(400px);
+    -o-transform: translateY(400px);
+    transform: translateY(400px);
+    -webkit-transition: opacity 1s, -webkit-transform 0.5s 1s;
+    -moz-transition: opacity 1s, -moz-transform 0.5s 1s;
+    -ms-transition: opacity 1s, -ms-transform 0.5s 1s;
+    -o-transition: opacity 1s, -o-transform 0.5s 1s;
+    transition: opacity 1s, transform 0.5s 1s;
 }
-.impress-enabled .hint { display: block }
-
+.impress-enabled .hint {
+    display: block
+}
 /*
     ... and we will show it when the first step (with id 'bored') is active.
 */
-.impress-on-slogan .hint {
+ .impress-on-slogan .hint {
     opacity: 1;
     -webkit-transform: translateY(150px);
-    -moz-transform:    translateY(150px);
-    -ms-transform:     translateY(150px);
-    -o-transform:      translateY(150px);
-    transform:         translateY(150px);
-    -webkit-transition: opacity 0,1s 0.5ss, -webkit-transform 1s 3s;
-    -moz-transition:    opacity 0,1s 0.5ss,    -moz-transform 1s 3s;
-    -ms-transition:     opacity 0,1s 0.5ss,     -ms-transform 1s 3s;
-    -o-transition:      opacity 0,1s 0.5ss,      -o-transform 1s 3s;
-    transition:         opacity 0,1s 0.5ss,         transform 1s 3s;
+    -moz-transform: translateY(150px);
+    -ms-transform: translateY(150px);
+    -o-transform: translateY(150px);
+    transform: translateY(150px);
+    -webkit-transition: opacity 0, 1s 0.5ss, -webkit-transform 1s 3s;
+    -moz-transition: opacity 0, 1s 0.5ss, -moz-transform 1s 3s;
+    -ms-transition: opacity 0, 1s 0.5ss, -ms-transform 1s 3s;
+    -o-transition: opacity 0, 1s 0.5ss, -o-transform 1s 3s;
+    transition: opacity 0, 1s 0.5ss, transform 1s 3s;
 }
-
 /*
     And as the last thing there is a workaround for quite strange bug.
     It happens a lot in Chrome. I don't remember if I've seen it in Firefox.
@@ -559,17 +484,25 @@ transition: opacity 1s, transform 0.5s 1s;
 
     So use it wisely ... or don't use at all.
 */
-.impress-enabled          { pointer-events: none }
-.impress-enabled #impress { pointer-events: auto }
-.impress-enabled #services, .impress-enabled #success_map {pointer-events:none;}
-.impress-enabled #tech {pointer-events:none;}
-.impress-enabled #success_logo {pointer-events:none;}
-
-
+ .impress-enabled {
+    pointer-events: none
+}
+.impress-enabled #impress {
+    pointer-events: auto
+}
+.impress-enabled #services, .impress-enabled #success_map {
+    pointer-events:none;
+}
+.impress-enabled #tech {
+    pointer-events:none;
+}
+.impress-enabled #success_logo {
+    pointer-events:none;
+}
 /*********************************************************************
                          by franco alvarez
 **********************************************************************/
-@font-face{
+ @font-face {
     font-family: Antipasto;
     src: url(../fonts/Antipasto_regular.otf);
 }
@@ -588,59 +521,50 @@ transition: opacity 1s, transform 0.5s 1s;
     position: relative;
     display: block;
 }
-
 .text.center {
     text-align: center;
 }
-
 /*#####################*/
+
 /* estilos del logo*/
-@font-face {
-	font-family: 'Arista';
-	font-style: normal;
-	font-weight: 700;
-	src: url(../fonts/Arista.ttf) format('truetype');
+ @font-face {
+    font-family:'Arista';
+    font-style: normal;
+    font-weight: 700;
+    src: url(../fonts/Arista.ttf) format('truetype');
 }
 .logo {
-	position: relative;
-	color: #000000;
+    position: relative;
+    color: #000000;
     font-size: 130px;
     line-height: 60px;
     position: relative;
     z-index: 2;
 }
 .logo:hover {
-	background-position: bottom;
+    background-position: bottom;
 }
-
 .logo:hover .logoI {
-	visibility: visible;
+    visibility: visible;
 }
-.logoMini{
-	font-family: 'Arista', 'Arial', sans-serif;
-	font-weight: bold;
-	font-size:1.5em;
-	color: #15a589;
+.logoMini {
+    font-family:'Arista', 'Arial', sans-serif;
+    font-weight: bold;
+    font-size:1.5em;
+    color: #15a589;
 }
 .logo .logoHolder {
-	font-family: 'Arista', 'Arial', sans-serif;
-	position: relative;
-	text-shadow: 0 0.032em 0 #b0b0b0, 0px 0.15em 0.11em rgba(0, 0, 0, 0.15),
-		0px 0.25em 0.021em rgba(0, 0, 0, 0.1), 0px 0.32em 0.32em
-		rgba(0, 0, 0, 0.1);
-	color: #2c3e50;
-	text-decoration: none;
+    font-family:'Arista', 'Arial', sans-serif;
+    position: relative;
+    text-shadow: 0 0.032em 0 #b0b0b0, 0px 0.15em 0.11em rgba(0, 0, 0, 0.15), 0px 0.25em 0.021em rgba(0, 0, 0, 0.1), 0px 0.32em 0.32em rgba(0, 0, 0, 0.1);
+    color: #2c3e50;
+    text-decoration: none;
 }
-
-
 .logo .logoI {
-	visibility: hidden;
+    visibility: hidden;
 }
-
-
-
 .logo .logoDot:hover {
-	visibility: visible;
+    visibility: visible;
 }
 .salmon {
     color: #f85d5d;
@@ -661,31 +585,29 @@ transition: opacity 1s, transform 0.5s 1s;
     font-size: 60px;
     text-align: center;
     -webkit-transform: scale(0);
-    -moz-transform:    scale(0);
-    -ms-transform:     scale(0);
-    -o-transform:      scale(0);
-    transform:         scale(0);       
-
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
 }
 .content-view {
     font-size: 40px;
-    text-align: center;    
+    text-align: center;
 }
 .icon-x4 {
     font-size: 130px
 }
-#services_tags{
+#services_tags {
     transition:1s !important;
 }
-.howitworks img{
- background-color: #fff;
+.howitworks img {
+    background-color: #fff;
 }
 .standGem {
     -webkit-transform: rotateY(0deg) rotateZ(0deg) translateY(-10000px);
     transition:1s !important;
     width: 1000px;
 }
-
 .tech-size {
     font-size: 70px;
     text-align: center;
@@ -700,7 +622,6 @@ transition: opacity 1s, transform 0.5s 1s;
     color: white;
     float: left;
     text-align: center;
-
 }
 .clip i {
     display: block;
@@ -711,14 +632,13 @@ transition: opacity 1s, transform 0.5s 1s;
     padding-top: 25px;
     display: block;
     margin:0 auto;
-
 }
 .img-circle {
     webkit-border-radius: 500px;
     -moz-border-radius: 500px;
     border-radius: 500px;
 }
-.title_sub_tech{
+.title_sub_tech {
     margin-top: 5px;
     font-size: 13px;
     color: white;
@@ -727,7 +647,7 @@ transition: opacity 1s, transform 0.5s 1s;
 }
 .compass {
     width: 65px;
-    height: 65px;  
+    height: 65px;
 }
 .text-center {
     text-align: center;
@@ -735,29 +655,29 @@ transition: opacity 1s, transform 0.5s 1s;
 .clear {
     clear: both;
 }
- .big_one {
+.big_one {
     position: relative;
     top: -30px;
- }
+}
 .img-routed {
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
-    border-radius: 6px;    
+    border-radius: 6px;
 }
 .clients-logos {
     width: 150px;
     padding: 30px 0;
-    background-color: #a1d9ce;
-    border: 1px solid #fff;
-    color: #323639;
+    background-color: #f86d6d;
+    border: 1px solid #f85d5d;
+    color: #fff;
     float: left;
     text-align: center;
     -webkit-transition:5s !important;
     -webkit-transform: scale(0.1);
-    -moz-transform:    scale(0.1);
-    -ms-transform:     scale(0.1);
-    -o-transform:      scale(0.1);
-    transform:         scale(0.1);       
+    -moz-transform: scale(0.1);
+    -ms-transform: scale(0.1);
+    -o-transform: scale(0.1);
+    transform: scale(0.1);
 }
 #success_map .map_bg .clients-logos img {
     width: 100%;
@@ -768,23 +688,30 @@ transition: opacity 1s, transform 0.5s 1s;
     display: block;
     position: relative;
     top: -15px;
-    color: #323639;
+    color: #fff;
     text-align: center;
     font-size: 20px;
-    font-family: Antipasto;
     margin: 0;
     padding: 0;
 }
 .map_bg {
     background: url(../img/prisma_howitworks.png) no-repeat center center;
-     background-size: 1024px;
+    background-size: 1024px;
     width: 1024px;
     height: 700px;
     margin-left: -512px;
     left: 50%;
     position: relative;
 }
-
+.map_bg2 {
+    background: url(../img/map.svg) no-repeat center center;
+    background-size: 1024px;
+    width: 1024px;
+    height: 700px;
+    margin-left: -512px;
+    left: 50%;
+    position: relative;
+}
 .california {
     -webkit-transform: translateY(140px) translateX(10px) scale(0.1);
     -moz-transform: translateY(140px) translateX(10px) scale(0.1);
@@ -804,7 +731,7 @@ transition: opacity 1s, transform 0.5s 1s;
     -moz-transform: translateY(220px) translateX(-30px) scale(0.1);
     -ms-transform: translateY(220px) translateX(-30px) scale(0.1);
     -o-transform: translateY(220px) translateX(-30px) scale(0.1);
-    transform: translateY(220px) translateX(-30px) scale(0.1);  
+    transform: translateY(220px) translateX(-30px) scale(0.1);
 }
 .atlantaMove {
     -webkit-transform: translateY(270px) translateX(110px) scale(1);
@@ -867,7 +794,7 @@ transition: opacity 1s, transform 0.5s 1s;
     -moz-transform: translateY(270px) translateX(-40px) scale(1);
     -ms-transform: translateY(270px) translateX(-40px) scale(1);
     -o-transform: translateY(270px) translateX(-40px) scale(1);
-     transform: translateY(220px) translateX(220px) scale(1);
+    transform: translateY(220px) translateX(220px) scale(1);
 }
 .margin-fix {
     margin-left: 125px;
@@ -883,12 +810,12 @@ transition: opacity 1s, transform 0.5s 1s;
     margin-left:60px;
 }
 .drop_box .dark {
-margin-left: 100px;
-margin-right: 100px;
-padding-bottom: -50px;
-	}
+    margin-left: 100px;
+    margin-right: 100px;
+    padding-bottom: -50px;
+}
 .drop_box .fa {
-	color: #2c3e50;
+    color: #2c3e50;
 }
 #drop_down {
     -vendor-animation-duration: 3s;
@@ -897,31 +824,30 @@ padding-bottom: -50px;
 }
 .animar ul li {
     -webkit-transform: scale(0);
-    -moz-transform:    scale(0);
-    -ms-transform:     scale(0);
-    -o-transform:      scale(0);
-    transform:         scale(0);    
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
 }
 .scaleZero {
     -webkit-transform: scale(0);
-    -moz-transform:    scale(0);
-    -ms-transform:     scale(0);
-    -o-transform:      scale(0);
-    transform:         scale(0);        
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
 }
 .upLine, .downLine {
     -webkit-transform: scale(0);
-    -moz-transform:    scale(0);
-    -ms-transform:     scale(0);
-    -o-transform:      scale(0);
-    transform:         scale(0);     
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
 }
 .hint p.mouse {
-background:url('../img/arrow.png') 30px 30px no-repeat;
-display: inline;
-padding: 20px 40px 20px 150px;
+    background:url('../img/arrow.png') 30px 30px no-repeat;
+    display: inline;
+    padding: 20px 40px 20px 150px;
 }
-
 .menu {
     text-align: right;
     position: absolute;
@@ -933,12 +859,9 @@ padding: 20px 40px 20px 150px;
     white-space: nowrap;
     padding: 90px 0px 0px 0px;
 }
-
 .menu:hover {
 }
-
 .menu ul {
-
 }
 .menu ul li {
     position: relative;
@@ -951,10 +874,10 @@ padding: 20px 40px 20px 150px;
     vertical-align: middle;
     display: block;
     -webkit-transition: 0.2s;
-    -moz-transition:    0.2s;
-    -ms-transition:     0.2s;
-    -o-transition:      0.2s;
-    transition:         0.2s;
+    -moz-transition: 0.2s;
+    -ms-transition: 0.2s;
+    -o-transition: 0.2s;
+    transition: 0.2s;
     -webkit-border-top-right-radius: 8px;
     -webkit-border-bottom-right-radius: 8px;
     -moz-border-radius-topright: 8px;
@@ -970,28 +893,27 @@ padding: 20px 40px 20px 150px;
     left: -5px;
 }
 .menu ul li:hover a {
-
 }
 .menu ul li:hover {
     opacity: 1;
     right: 0;
     background: #F85D5D;
     -webkit-transition: 0.4s;
-    -moz-transition:    0.4s;
-    -ms-transition:     0.4s;
-    -o-transition:      0.4s;
-    transition:         0.4s;
+    -moz-transition: 0.4s;
+    -ms-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
 }
 .menu ul li i {
     font-size: 32px;
     position: relative;
     top: 5px;
     left: 10px;
-
 }
-.impress-enabled          { pointer-events: none }
-.impress-enabled #impress,
-.impress-enabled .menu {
+.impress-enabled {
+    pointer-events: none
+}
+.impress-enabled #impress, .impress-enabled .menu {
     pointer-events: auto;
 }
 .navegate {
@@ -1003,24 +925,24 @@ padding: 20px 40px 20px 150px;
     top: 0;
     left: 20px;
     -webkit-transform: translateY(-400px);
--moz-transform: translateY(-400px);
--ms-transform: translateY(-400px);
--o-transform: translateY(-400px);
-transform: translateY(-400px);
--webkit-transition: opacity 1s, -webkit-transform 0.5s 1s;
--moz-transition: opacity 1s, -moz-transform 0.5s 1s;
--ms-transition: opacity 1s, -ms-transform 0.5s 1s;
--o-transition: opacity 1s, -o-transform 0.5s 1s;
-transition: opacity 1s, transform 0.5s 1s;
+    -moz-transform: translateY(-400px);
+    -ms-transform: translateY(-400px);
+    -o-transform: translateY(-400px);
+    transform: translateY(-400px);
+    -webkit-transition: opacity 1s, -webkit-transform 0.5s 1s;
+    -moz-transition: opacity 1s, -moz-transform 0.5s 1s;
+    -ms-transition: opacity 1s, -ms-transform 0.5s 1s;
+    -o-transition: opacity 1s, -o-transform 0.5s 1s;
+    transition: opacity 1s, transform 0.5s 1s;
 }
 .navegate .doodle-nav {
     display: block;
     margin-right: 25px;
     -webkit-transform: rotate(-10deg);
-    -moz-transform:    rotate(-10deg);
-    -ms-transform:     rotate(-10deg);
-    -o-transform:      rotate(-10deg);
-    transform:         rotate(-10deg);
+    -moz-transform: rotate(-10deg);
+    -ms-transform: rotate(-10deg);
+    -o-transform: rotate(-10deg);
+    transform: rotate(-10deg);
     font-size: 40px;
     float: right;
     margin-top: 5px;
@@ -1028,70 +950,118 @@ transition: opacity 1s, transform 0.5s 1s;
 .impress-on-slogan .navegate {
     opacity: 1;
     -webkit-transform: translateY(0px);
-    -moz-transform:    translateY(0px);
-    -ms-transform:     translateY(0px);
-    -o-transform:      translateY(0px);
-    transform:         translateY(0px);
-    -webkit-transition: opacity 0,1s 0.5ss, -webkit-transform 1s 3s;
-    -moz-transition:    opacity 0,1s 0.5ss,    -moz-transform 1s 3s;
-    -ms-transition:     opacity 0,1s 0.5ss,     -ms-transform 1s 3s;
-    -o-transition:      opacity 0,1s 0.5ss,      -o-transform 1s 3s;
-    transition:         opacity 0,1s 0.5ss,         transform 1s 3s;
+    -moz-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    -o-transform: translateY(0px);
+    transform: translateY(0px);
+    -webkit-transition: opacity 0, 1s 0.5ss, -webkit-transform 1s 3s;
+    -moz-transition: opacity 0, 1s 0.5ss, -moz-transform 1s 3s;
+    -ms-transition: opacity 0, 1s 0.5ss, -ms-transform 1s 3s;
+    -o-transition: opacity 0, 1s 0.5ss, -o-transform 1s 3s;
+    transition: opacity 0, 1s 0.5ss, transform 1s 3s;
 }
 #next {
     position: absolute;
     height: 100%;
     width: 8%;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0, 0, 0, 0.3);
     pointer-events: auto;
     top: 0;
     cursor: pointer;
     right: 0;
     border: none;
     -webkit-transition: 0.4s;
-    -moz-transition:    0.4s;
-    -ms-transition:     0.4s;
-    -o-transition:      0.4s;
-    transition:         0.4s;
+    -moz-transition: 0.4s;
+    -ms-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
     display: block;
 }
 #next:hover {
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
 }
-
 #next .icon-double-angle-right {
     font-size: 9em;
     position: relative;
     -webkit-transition: 0.4s;
-    -moz-transition:    0.4s;
-    -ms-transition:     0.4s;
-    -o-transition:      0.4s;
-    transition:         0.4s;
+    -moz-transition: 0.4s;
+    -ms-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
 }
-#next:hover .icon-double-angle-right{
+#next:hover .icon-double-angle-right {
     left: 10px;
     position: relative;
 }
-
 .next {
     vertical-align: middle;
     color: white;
-
 }
-.margin-center{
-  margin-left:25%;
+.margin-center {
+    margin-left:25%;
 }
-.massa{
- height: 700px;
- width: 850px;
+.massa {
+    height: 700px;
+    width: 850px;
 }
-.massa img{
+.massa img {
     margin-left: auto;
-height: 700px;
- width: 600px;
+    height: 700px;
+    width: 600px;
+}
+.diagram-zoom {
+    height: 1000px;
+    width: 1250px;
+}
+.diagram-zoom img {
+    margin-left: -500px;
+    height: 1000px;
+    width: 1250px;
+}
+.bt {
+    margin-bottom:600px;
+}
+.md {
+    margin-bottom:-200px;
+}
+.md2 {
+    margin-bottom:0px;
+}
+.top {
+    margin-bottom:-700px;
+}
+.massa {
+    height: 700px;
+    width: 850px;
+}
+.massa img {
+    margin-left: auto;
+    height: 700px;
+    width: 600px;
+}
+.ul-gracias{
+margin-left: 100px;
 }
 
-
+.clip2 {
+    margin: 15px;
+     margin-left: 35px;
+    width: 280px;
+    height: 280px;
+    background-color: #323639;
+    border: 1px solid #1f2224;
+    color: white;
+    float: left;
+    text-align: center;
+}
+.clip2 i {
+    display: block;
+    padding-top: 25px;
+    font-size: 1.3em;
+}
+.clip2 span {
+    font-size: 1.1em
+}
 
 
 
