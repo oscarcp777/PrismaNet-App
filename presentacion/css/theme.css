@@ -160,11 +160,10 @@ a:hover, a:focus {
     opacity:1;
 }
 .main-box {
-    background:#FFFFFF;
-    box-shadow:1px 1px 2px 0 #CCCCCC;
     margin-bottom:16px;
     border-radius:3px;
     background-clip:padding-box;
+    font-size:16px;
 }
 @media (max-width: 767px) {
     .main-box {
@@ -2748,13 +2747,14 @@ input[type="radio"] {
     padding-bottom:20px;
 }
 .pricing-package .pricing-package-inner {
+    background: #fff;
     color:#7d7d7d;
     position:relative;
     -webkit-transition:border-color 0.1s ease-in-out 0s, background-color 0.1s ease-in-out 0s;
     transition:border-color 0.1s ease-in-out 0s, background-color 0.1s ease-in-out 0s;
 }
 .pricing-package .pricing-star {
-    background:url(../../img/pricing-star.png) no-repeat;
+    background:url(../img/pricing-star.png) no-repeat;
     position:absolute;
     width:39px;
     height:40px;
