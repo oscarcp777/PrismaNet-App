@@ -42,7 +42,7 @@ $(function() {
 	  	next();
 	  });
 	window.addEventListener('impress:stepenter', function() {
-	/*	$('#what_content.active #timer').counter({});
+		$('#what_content.active #timer').counter({});
 		$('#what_content.active #person').counter({});
 		$('#what_content.active #otros').counterUp({
 			delay: 10,
@@ -56,7 +56,7 @@ $(function() {
 		$('#what_content.active #twitter').counterUp({
 			delay: 10,
 			time: 600000
-		});*/
+		});
 	});
 
 	//how we do
@@ -119,6 +119,15 @@ $(function() {
 	window.addEventListener('impress:stepenter', function() {
 	  $('#fourth.future p.tittle').removeClass('animated bounceInDown');
 	});
+	window.addEventListener('impress:stepenter', function() {
+		  $('#counts.active p.tittle').addClass('animated bounceInDown');
+		});
+		window.addEventListener('impress:stepenter', function() {
+		  $('#counts.past p.tittle').removeClass('animated bounceInDown');
+		});
+		window.addEventListener('impress:stepenter', function() {
+		  $('#counts.future p.tittle').removeClass('animated bounceInDown');
+		});
 
 	//Dreams
 
@@ -332,12 +341,19 @@ window.addEventListener('impress:stepenter', function() {
 	  	next();
 	  });
 	});
+
 	window.addEventListener('impress:stepenter', function() {
-	  $('#slogan-finish.past div.drop_box span#drop_down').removeClass('animated hinge');
+		$('#slogan-finish.past div.drop_box span#drop_down').delay(1000).queue(function(next){
+	  	$(this).removeClass('animated hinge');
+	  	next();
+	  });
 	});
 	window.addEventListener('impress:stepenter', function() {
-	  $('#slogan-finish.future div.drop_box span#drop_down').removeClass('animated hinge');
-	});			
+		$('#slogan-finish.future div.drop_box span#drop_down').delay(1000).queue(function(next){
+	  	$(this).removeClass('animated hinge');
+	  	next();
+	  });
+	});
 });
 
 

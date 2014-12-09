@@ -2745,6 +2745,7 @@ input[type="radio"] {
 .pricing-package {
     padding-top:20px;
     padding-bottom:20px;
+
 }
 .pricing-package .pricing-package-inner {
     background: #fff;
@@ -2772,7 +2773,7 @@ input[type="radio"] {
     background-clip:padding-box;
 }
 .pricing-package .package-header h3 {
-    height:36px;
+    height:76px;
     text-align:center;
     color:#fff;
     margin:0;
