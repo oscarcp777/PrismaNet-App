@@ -42,7 +42,7 @@ $(function() {
 	  	next();
 	  });
 	window.addEventListener('impress:stepenter', function() {
-		$('#what_content.active #timer').counter({});
+	/*	$('#what_content.active #timer').counter({});
 		$('#what_content.active #person').counter({});
 		$('#what_content.active #otros').counterUp({
 			delay: 10,
@@ -56,7 +56,7 @@ $(function() {
 		$('#what_content.active #twitter').counterUp({
 			delay: 10,
 			time: 600000
-		});
+		});*/
 	});
 
 	//how we do
