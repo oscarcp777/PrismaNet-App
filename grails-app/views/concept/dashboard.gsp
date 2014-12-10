@@ -122,8 +122,8 @@
 						class="ace-icon fa fa-facebook bigger-230"></i> ${postsTotal} <br>
 					<g:message code="dashborad.concept.post" />
 					</a>
-				</div>
-			</div>-->
+				</div>-->
+			</div>
 			<div class="col-lg-12 ">
 				<div class="hr hr32 hr-dotted"></div>
 			</div>

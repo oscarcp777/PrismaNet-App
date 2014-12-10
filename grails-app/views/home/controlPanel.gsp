@@ -34,11 +34,11 @@
 									<i class="ace-icon fa fa-group bigger-300"></i>
 									<g:message code="controlPanel.User" />
 								</g:link>
-								<g:link controller="accountType"
+	<!--  						<g:link controller="accountType"
 									class="btn btn-app btn-success panelButton-md">
 									<i class="ace-icon fa fa-money bigger-300"></i>
 									<g:message code="controlPanel.account.type" />
-								</g:link>
+								</g:link>-->	
 							</div>
 							<div class="col-xs-12 col-sm-12 center">
 								<g:link controller="facebookSetup"
