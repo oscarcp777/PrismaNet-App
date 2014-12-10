@@ -80,8 +80,10 @@
 								<div class="featurette container" style="margin-left:-60px;">
 									<img src="img/prisma_howitworks.png" alt="como trabaja">
 									<div class="video">
-										<a href="#" 
-											class="open-trailer"><i class="ace-icon fa fa-play"></i><span><g:message code="public.index.home.demo"/></span></a>
+										<a href="#video" data-toggle="modal" id="clickForVideo"
+											class="open-trailer"><i class="ace-icon fa fa-play"></i>
+											<span><g:message code="public.index.home.demo"/></span>
+										</a>
 									</div>
 								</div>
 							</section>
@@ -737,5 +739,31 @@
 	<!-- /wrapper -->
 </div>
     <r:require modules="indexjs" />
+	<div id="video" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<iframe width="860" height="430" ></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+<script>
+    $('#clickForVideo').click(function () {
+        var src = 'flash/demo.swf';
+        $('#video').modal('show');
+        $('#video iframe').attr('src', src);
+    });
+
+    $('#video button').click(function () {
+        $('#video iframe').removeAttr('src');
+    });
+</script>
+
 </body>
 </html>
