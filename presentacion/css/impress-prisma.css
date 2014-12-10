@@ -827,7 +827,7 @@ a:hover, a:focus {
     color: #2c3e50;
 }
 #drop_down {
-    -vendor-animation-duration: 3s;
+    -vendor-animation-duration: 2s;
     -vendor-animation-delay: 2s;
     -vendor-animation-iteration-count: infinite;
 }

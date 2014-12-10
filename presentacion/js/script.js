@@ -336,7 +336,7 @@ window.addEventListener('impress:stepenter', function() {
 	//animate finish
 
 	window.addEventListener('impress:stepenter', function() {
-		$('#slogan-finish.present div.drop_box span#drop_down').delay(3000).queue(function(next){
+		$('#slogan-finish.present div.drop_box span#drop_down').delay(15000).queue(function(next){
 	  	$(this).addClass('animated hinge');
 	  	next();
 	  });
