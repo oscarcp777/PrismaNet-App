@@ -539,7 +539,9 @@ a:hover {
 #section5 #footer p {
 	font-size: 14px; font-size: 1.4rem;
 }
-
+#section5 .control-group input,#section5 .control-group textarea{
+	color:#2D2D2D;
+}
 
 
 
