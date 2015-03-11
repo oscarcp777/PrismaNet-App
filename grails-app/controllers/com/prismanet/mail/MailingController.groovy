@@ -6,7 +6,8 @@ class MailingController {
 
 	def index() {
 		log.info "MailingController index params: " + params
-		def client=[name:params.name]
+		def nameUser=params.name==null?'':'Sres '+params.name
+		def client=[name:nameUser]
 		def data=getData()
 		render(view: "email-prisma", model: [client: client, data: data])
 	}

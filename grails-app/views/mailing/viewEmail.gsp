@@ -1,12 +1,9 @@
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="initial-scale=1.0" />
-  <meta name="format-detection" content="telephone=no" />
-  <title></title>
-  <style type="text/css">
+<meta name="layout" content="main" />
+<r:require modules="indexcss" />
+ <style type="text/css">
     body {
       width: 100%;
       margin: 0;
@@ -95,7 +92,6 @@
     }
   </style>
 </head>
-
 <body style="font-family: Arial, sans-serif; font-size:13px; color: #444444; min-height: 200px;" bgcolor="#E4E6E9" leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
   <table width="100%" height="100%" bgcolor="#E4E6E9" cellspacing="0" cellpadding="0" border="0">
     <tr>
@@ -103,14 +99,8 @@
         <table>
           <tr>
             <td class="table-td-wrap" align="center" width="608">
-              <div style="font-family: Arial, sans-serif; line-height: 32px; color: #444444; font-size: 13px;">
-                ¿Puede Leer este Email?
-                <a href="http://prisma-net.com.ar/mailing?name=${client.name}" style="color: #16a085; text-decoration: none; font-size: 14px; background-color: transparent;">
-                Ver Online &rarr;
-              </a>
-              </div>
 
-              <table class="table-row" style="border-top-left-radius:4px;border-top-right-radius:4px;table-layout: auto; padding-right: 0px; padding-left: 24px; width: 600px; background-color: #1abc9c;" bgcolor="#1abc9c" width="600" cellspacing="0" cellpadding="0"
+              <table class="table-row" style="border-top-left-radius:4px;border-top-right-radius:4px;table-layout: auto; padding-right: 24px; padding-left: 24px; width: 600px; background-color: #1abc9c;" bgcolor="#1abc9c" width="600" cellspacing="0" cellpadding="0"
               border="0">
                 <tbody>
                   <tr height="55px" style="font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; height: 55px;">
@@ -118,10 +108,6 @@
                       <a href="http://prisma-net.com.ar/" style="color: #f1f1f1; text-decoration: none; padding: 0px; font-size:22px; line-height: 20px; height: 50px; background-color: transparent;">
                         <span style="color:#2c3e50; font-weight:bold">Prisma</span><span style="font-weight:bold">-Net</span> &nbsp; Novedades
                       </a>
-                     </td>
-                    <td class="table-row-td" style="text-align:center;height: 55px; padding-right:0px; font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal; vertical-align: middle;" valign="middle" align="left">
-                    <a href="http://prisma-net.com.ar/" style="color: #16a085; text-decoration: none; margin: 0px; text-align: center; vertical-align: baseline; border-width: 1px 1px 2px; border-style: solid; border-color: #16a085; padding: 6px 12px; font-size: 14px; line-height: 20px; background-color: #ffffff;">&nbsp;&nbsp; &nbsp; 
-                    Ir a prisma-net.com.ar  » &nbsp; &nbsp;&nbsp;</a>
                     </td>
                   </tr>
                 </tbody>
@@ -149,7 +135,7 @@
                                   <tr>
                                     <td class="header-row-td" width="528" style="font-size: 28px; margin: 0px; font-family: Arial, sans-serif; font-weight: normal; line-height: 19px; color: #478fca; padding-bottom: 10px; padding-top: 15px;" valign="top"
                                     align="left">
-                                      Sres. ${client.name}</td>
+                                      ${client.name}</td>
                                   </tr>
                                 </tbody>
                               </table>
@@ -860,5 +846,4 @@
     </tr>
   </table>
 </body>
-
 </html>
