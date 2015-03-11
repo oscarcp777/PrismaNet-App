@@ -17,7 +17,7 @@ class PublicController {
 		mailService.sendMail{ 
 			async true
 			to "consultas@prisma-net.com.ar" 
-			from "sdonikian@prisma-net.com.ar"
+			from "info@prisma-net.com.ar"
 			cc "santiagodonikian@gmail.com"
 //			bcc "santiagodonikian@g2one.com" 
 			subject "Consulta desde el site" 
