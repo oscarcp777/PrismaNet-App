@@ -69,7 +69,7 @@ grails {
 	mail {
 		host = "smtp.zoho.com"
 		port = 465
-		username = "sdonikian@prisma-net.com.ar"
+		username = "info@prisma-net.com.ar"
 		password = "Temporal1"
 		props = ["mail.smtp.auth":"true",
 				 "mail.smtp.socketFactory.port":"465",

@@ -149,7 +149,7 @@
                                   <tr>
                                     <td class="header-row-td" width="528" style="font-size: 28px; margin: 0px; font-family: Arial, sans-serif; font-weight: normal; line-height: 19px; color: #478fca; padding-bottom: 10px; padding-top: 15px;" valign="top"
                                     align="left">
-                                      Sres. ${client.name}</td>
+                                      ${client.name}</td>
                                   </tr>
                                 </tbody>
                               </table>
@@ -157,7 +157,7 @@
                                 <tbody>
                                   <tr>
                                     <td class="header-row-td" width="528" style="font-family: Arial, sans-serif; font-weight: normal; line-height: 25px; color: #444444; margin: 0px; font-size: 16px; padding-top: 10px;" valign="top" align="left">
-                                      Que paso en las redes sociales en la última semana...del ${data.from} al ${data.to}
+                                      Le contamos que paso en las redes sociales en la última semana...(${data.from} al ${data.to})
                                     </td>
                                   </tr>
                                 </tbody>
@@ -223,6 +223,8 @@
                             <td class="table-col-td" width="80" style="padding:0 8px 0 8px; font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <img class="pull-left" src="https://pbs.twimg.com/profile_images/432981703720579072/csMdPWWk_400x400.jpeg" style="border-radius:4px;width:80px;border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 0px;" hspace="0" vspace="0"
                               border="0">
+                              <br>
+                              <b style="color: #000; font-size:10px;">@mauriciomacri</b>
                             </td>
                             <td class="table-col-td" width="70" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
@@ -241,23 +243,25 @@
                             <td class="table-col-td" width="140" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
                                 <b style="color: #000; font-size: 18px;">${data.day1}</b>
+                                <br>
+                                Dia Pico
                               </span>
                               <br>
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
+                              	<b style="font-size: 11px;">Palabras mas usadas:</b>
                                 <b style="color: #000; font-size: 10px;">${data.wordsDay1}</b>
-                                <br>
-                                Dia Pico
                               </span>
                             </td>
                             <td class="table-col-td" width="140" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
 							  <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
                                 <b style="color: #000; font-size: 18px;">${data.hour1}</b>
+                                <br>
+                                Hora Pico
                               </span>
 							  <br>
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
+                                <b style="font-size: 11px;">Palabras mas usadas:</b>
                                 <b style="color: #000; font-size: 10px;">${data.wordsHour1}</b>
-                                <br>
-                                Hora Pico
                               </span>
                             </td>
                           </tr>
@@ -293,6 +297,8 @@
                             <td class="table-col-td" width="80" style="padding:0 8px 0 8px; font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <img class="pull-left" src="https://pbs.twimg.com/profile_images/464829942862069760/U5j5Yg07_400x400.png" style="border-radius:4px;width:80px;border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 0px;" hspace="0" vspace="0"
                               border="0">
+                              <br>
+                              <b style="color: #000; font-size:10px;">@danielscioli</b>
                             </td>
                             <td class="table-col-td" width="70" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
@@ -311,23 +317,25 @@
                             <td class="table-col-td" width="140" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
                                 <b style="color: #000; font-size: 18px;">${data.day2}</b>
+                                <br>
+                                Dia Pico
                               </span>
                               <br>
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
+								<b style="font-size: 11px;">Palabras mas usadas:</b>
                                 <b style="color: #000; font-size: 10px;">${data.wordsDay2}</b>
-                                <br>
-                                Dia Pico
                               </span>
                             </td>
                             <td class="table-col-td" width="140" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
 							  <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
                                 <b style="color: #000; font-size: 18px;">${data.hour2}</b>
+                                <br>
+                                Hora Pico
                               </span>	
 							  <br>
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
+                                <b style="font-size: 11px;">Palabras mas usadas:</b>
                                 <b style="color: #000; font-size: 10px;">${data.wordsHour2}</b>
-                                <br>
-                                Hora Pico
                               </span>
                             </td>
                           </tr>
@@ -363,6 +371,8 @@
                             <td class="table-col-td" width="80" style="padding:0 8px 0 8px; font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <img class="pull-left" src="https://pbs.twimg.com/profile_images/514050895328206848/OC9qbmPb.jpeg" style="border-radius:4px;width:80px;border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 0px;" hspace="0" vspace="0"
                               border="0">
+                              <br>
+                              <b style="color: #000; font-size:10px;">@SergioMassa</b>
                             </td>
                             <td class="table-col-td" width="70" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
@@ -381,23 +391,25 @@
                             <td class="table-col-td" width="140" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
                                 <b style="color: #000; font-size: 18px;">${data.day3}</b>
+                                <br>
+                                Dia Pico
                               </span>
                               <br>
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
+                                <b style="font-size: 11px;">Palabras mas usadas:</b>
                                 <b style="color: #000; font-size: 10px;">${data.wordsDay3}</b>
-                                <br>
-                                Dia Pico
                               </span>
                             </td>
                             <td class="table-col-td" width="140" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
 							  <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
                                 <b style="color: #000; font-size: 18px;">${data.hour3}</b>
+                                <br>
+                                Hora Pico
                               </span>
 							  <br>
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
+                                <b style="font-size: 11px;">Palabras mas usadas:</b>
                                 <b style="color: #000; font-size: 10px;">${data.wordsHour3}</b>
-                                <br>
-                                Hora Pico
                               </span>
                             </td>
                           </tr>
@@ -411,6 +423,80 @@
                 <tbody>
                   <tr>
                     <td class="table-space-td" valign="middle" height="24" style="height: 24px; width: 600px; padding-left: 18px; padding-right: 18px; background-color: #ffffff;" width="600" bgcolor="#FFFFFF" align="center">&nbsp;
+                      <table bgcolor="#E8E8E8" height="0" width="100%" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td bgcolor="#E8E8E8" height="1" width="100%" style="height: 1px; font-size:0;" valign="top" align="left">&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- Randazzo-->
+              <table class="table-row" width="600" bgcolor="#FFFFFF" style="table-layout: fixed; background-color: #ffffff;" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td class="table-row-td" style="font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal; padding-left: 20px; padding-right: 20px;" valign="top" align="left">
+                      <table class="table-col-border" align="left" width="181" style="padding-right: 16px; table-layout: fixed;" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td class="table-col-td" width="80" style="padding:0 8px 0 8px; font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
+                              <img class="pull-left" src="https://pbs.twimg.com/profile_images/545905975564054529/x7FoJv4s_400x400.jpeg" style="border-radius:4px;width:80px;border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 0px;" hspace="0" vspace="0"
+                              border="0">
+                              <br>
+                              <b style="color: #000; font-size:10px;">@RandazzoF</b>
+                            </td>
+                            <td class="table-col-td" width="70" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
+                              <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
+                                <b style="color: #000; font-size:22px;">${data.tweets4}</b>
+                                <br>
+                                Tweets
+                              </span>
+                            </td>
+                            <td class="table-col-td" width="70" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
+                              <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
+                                <b style="color: #000; font-size: 22px;">${data.author4}</b>
+                                <br>
+                                Autores
+                              </span>
+                            </td>
+                            <td class="table-col-td" width="140" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
+                              <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
+                                <b style="color: #000; font-size: 18px;">${data.day4}</b>
+                                <br>
+                                Dia Pico
+                              </span>
+                              <br>
+                              <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
+                                <b style="font-size: 11px;">Palabras mas usadas:</b>
+                                <b style="color: #000; font-size: 10px;">${data.wordsDay4}</b>
+                              </span>
+                            </td>
+                            <td class="table-col-td" width="140" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
+							  <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
+                                <b style="color: #000; font-size: 18px;">${data.hour4}</b>
+                                <br>
+                                Hora Pico
+                              </span>
+							  <br>
+                              <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
+                                <b style="font-size: 11px;">Palabras mas usadas:</b>
+                                <b style="color: #000; font-size: 10px;">${data.wordsHour4}</b>
+                              </span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table-space" height="12" style="height: 12px; font-size: 0px; line-height: 0; width: 600px; background-color: #ffffff;" width="600" bgcolor="#FFFFFF" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td class="table-space-td" valign="middle" height="12" style="height: 12px; width: 600px; padding-left: 18px; padding-right: 18px; background-color: #ffffff;" width="600" bgcolor="#FFFFFF" align="center">&nbsp;
                       <table bgcolor="#E8E8E8" height="0" width="100%" cellspacing="0" cellpadding="0" border="0">
                         <tbody>
                           <tr>
@@ -611,6 +697,54 @@
                   </tr>
                 </tbody>
               </table>
+              <!-- Randazzo-->
+              <table class="table-row" width="600" bgcolor="#FFFFFF" style="table-layout: fixed; background-color: #ffffff;" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td class="table-row-td" style="font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal; padding-left: 20px; padding-right: 20px;" valign="top" align="left">
+                      <table class="table-col-border" align="left" width="181" style="padding-right: 16px; table-layout: fixed;" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td class="table-col-td" width="120" style="padding:0 8px 0 8px; font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
+                              <img class="pull-left" src="https://pbs.twimg.com/profile_images/545905975564054529/x7FoJv4s_400x400.jpeg" style="border-radius:4px;width:80px;border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 0px;" hspace="0" vspace="0"
+                              border="0">
+                            </td>
+							<td class="table-col-td" width="50" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
+                              <div style="width:0px;height:0px;border-left:18px solid transparent; border-right:18px solid transparent;border-bottom:18px solid #1abc9c;font-size:0px;line-height:0px;">
+
+                              </div >
+                              <div style="margin-left:9.3px;width:15px;height:25px;background:#1abc9c;">
+                              </div>
+                            </td>
+                            <td class="table-col-td" width="120" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
+                              <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
+                                <b style="color: #000; font-size:22px;">${data.tent4}</b>
+
+                              </span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table-space" height="12" style="height: 12px; font-size: 0px; line-height: 0; width: 600px; background-color: #ffffff;" width="600" bgcolor="#FFFFFF" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td class="table-space-td" valign="middle" height="12" style="height: 12px; width: 600px; padding-left: 18px; padding-right: 18px; background-color: #ffffff;" width="600" bgcolor="#FFFFFF" align="center">&nbsp;
+                      <table bgcolor="#E8E8E8" height="0" width="100%" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td bgcolor="#E8E8E8" height="1" width="100%" style="height: 1px; font-size:0;" valign="top" align="left">&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
 <!-- ################## facebook  ###########################-->
 <!-- ##################   ###########################-->
               <table class="table-row" width="600" bgcolor="#FFFFFF" style="table-layout: fixed; background-color: #ffffff;" cellspacing="0" cellpadding="0" border="0">
@@ -682,9 +816,9 @@
                               </span>
                             </td>
                             <td class="table-col-td" width="250" style="vertical-align:middle;padding:0 8px 5px 8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
-                              <img class="pull-left" width="150" src="${data.postPhoto1}"
+                              <a href="${data.postLink1}"><img class="pull-left" width="150" src="${data.postPhoto1}" 
                               style="margin-left:40px;border-radius:4px;width:150px;border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 0px;" hspace="0" vspace="0"
-                              border="0">
+                              border="0"></a>
                             </td>
                           </tr>
                         </tbody>
@@ -735,9 +869,9 @@
                               </span>
                             </td>
                             <td class="table-col-td" width="250" style="vertical-align:middle;padding:0 8px 3px 8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
-                              <img class="pull-left" width="150" src="${data.postPhoto2}"
+                              <a href="${data.postLink2}"><img class="pull-left" width="150" src="${data.postPhoto2}"
                               style="margin-left:40px;border-radius:4px;width:150px;border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 0px;" hspace="0" vspace="0"
-                              border="0">
+                              border="0"></a>
                             </td>
                           </tr>
                         </tbody>
@@ -788,9 +922,9 @@
                               </span>
                             </td>
                             <td class="table-col-td" width="250" style="vertical-align:middle;padding:0 8px 3px 8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
-                              <img class="pull-left" width="150" src="${data.postPhoto3}"
+                              <a href="${data.postLink3}"><img class="pull-left" width="150" src="${data.postPhoto3}"
                               style="margin-left:40px;border-radius:4px;width:150px;border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 0px;" hspace="0" vspace="0"
-                              border="0">
+                              border="0"></a>
                             </td>
 
                           </tr>
@@ -800,7 +934,62 @@
                   </tr>
                 </tbody>
               </table>
-              <table class="table-space" height="6" style="height: 6px; font-size: 0px; line-height: 0; width: 600px; background-color: #e4e6e9;" width="600" bgcolor="#E4E6E9" cellspacing="0" cellpadding="0" border="0">
+              <table class="table-space" height="12" style="height: 12px; font-size: 0px; line-height: 0; width: 600px; background-color: #ffffff;" width="600" bgcolor="#FFFFFF" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td class="table-space-td" valign="middle" height="12" style="height: 12px; width: 600px; padding-left: 18px; padding-right: 18px; background-color: #ffffff;" width="600" bgcolor="#FFFFFF" align="center">&nbsp;
+                      <table bgcolor="#E8E8E8" height="0" width="100%" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td bgcolor="#E8E8E8" height="1" width="100%" style="height: 1px; font-size:0;" valign="top" align="left">&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- Randazzo-->
+              <table class="table-row" width="600" bgcolor="#FFFFFF" style="table-layout: fixed; background-color: #ffffff;" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td class="table-row-td" style="font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal; padding-left: 20px; padding-right: 20px;" valign="top" align="left">
+                      <table class="table-col-border" align="left" width="181" style="padding-right: 16px; table-layout: fixed;" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td class="table-col-td" width="120" style="padding:0 8px 0 8px; font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
+                              <img class="pull-left" src="https://pbs.twimg.com/profile_images/545905975564054529/x7FoJv4s_400x400.jpeg" style="border-radius:4px;width:80px;border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 0px;" hspace="0" vspace="0"
+                              border="0">
+                            </td>
+                            <td class="table-col-td" width="100" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
+                              <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
+                                <b style="color: #000; font-size:22px;">${data.postLikes4}</b>
+                                <br>
+                                Likes
+                              </span>
+                            </td>
+                            <td class="table-col-td" width="100" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
+                              <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
+                                <b style="color: #000; font-size: 22px;">${data.postComments4}</b>
+                                <br>
+                                Comentarios
+                              </span>
+                            </td>
+                            <td class="table-col-td" width="250" style="vertical-align:middle;padding:0 8px 5px 8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
+                              <a href="${data.postLink4}"><img class="pull-left" width="150" src="${data.postPhoto4}" 
+                              style="margin-left:40px;border-radius:4px;width:150px;border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 0px;" hspace="0" vspace="0"
+                              border="0"></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+<%--###############################--%>
+			 <table class="table-space" height="6" style="height: 6px; font-size: 0px; line-height: 0; width: 600px; background-color: #e4e6e9;" width="600" bgcolor="#E4E6E9" cellspacing="0" cellpadding="0" border="0">
                 <tbody>
                   <tr>
                     <td class="table-space-td" valign="middle" height="6" style="height: 6px; width: 600px; background-color: #e4e6e9;" width="600" bgcolor="#E4E6E9" align="left">&nbsp;</td>
