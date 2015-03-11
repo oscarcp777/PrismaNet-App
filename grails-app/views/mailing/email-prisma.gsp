@@ -222,36 +222,36 @@
                             </td>
                             <td class="table-col-td" width="70" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size:22px;">${data.tweets}</b>
+                                <b style="color: #000; font-size:22px;">${data.tweets1}</b>
                                 <br>
                                 Tweets
                               </span>
                             </td>
                             <td class="table-col-td" width="70" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 22px;">${data.author}</b>
+                                <b style="color: #000; font-size: 22px;">${data.author1}</b>
                                 <br>
                                 Autores
                               </span>
                             </td>
                             <td class="table-col-td" width="140" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 18px;">17/02</b>
+                                <b style="color: #000; font-size: 18px;">${data.day1}</b>
                               </span>
                               <br>
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 10px;">{ladron, facho, derecha}</b>
+                                <b style="color: #000; font-size: 10px;">${data.wordsDay1}</b>
                                 <br>
                                 Dia Pico
                               </span>
                             </td>
                             <td class="table-col-td" width="140" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
 							  <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 18px;">12/02 12:00</b>
+                                <b style="color: #000; font-size: 18px;">${data.hour1}</b>
                               </span>
 							  <br>
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 10px;">{ladron, facho, derecha}</b>
+                                <b style="color: #000; font-size: 10px;">${data.wordsHour1}</b>
                                 <br>
                                 Hora Pico
                               </span>
@@ -292,36 +292,36 @@
                             </td>
                             <td class="table-col-td" width="70" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size:22px;">52890</b>
+                                <b style="color: #000; font-size:22px;">${data.tweets2}</b>
                                 <br>
                                 Tweets
                               </span>
                             </td>
                             <td class="table-col-td" width="70" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 22px;">30234</b>
+                                <b style="color: #000; font-size: 22px;">${data.author2}</b>
                                 <br>
                                 Autores
                               </span>
                             </td>
                             <td class="table-col-td" width="140" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 18px;">17/02</b>
+                                <b style="color: #000; font-size: 18px;">${data.day2}</b>
                               </span>
                               <br>
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 10px;">{ladron, facho, derecha}</b>
+                                <b style="color: #000; font-size: 10px;">${data.wordsDay2}</b>
                                 <br>
                                 Dia Pico
                               </span>
                             </td>
                             <td class="table-col-td" width="140" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
 							  <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 18px;">12/02 12:00</b>
+                                <b style="color: #000; font-size: 18px;">${data.hour2}</b>
                               </span>	
 							  <br>
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 10px;">{ladron, facho, derecha}</b>
+                                <b style="color: #000; font-size: 10px;">${data.wordsHour2}</b>
                                 <br>
                                 Hora Pico
                               </span>
@@ -362,36 +362,36 @@
                             </td>
                             <td class="table-col-td" width="70" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size:22px;">52890</b>
+                                <b style="color: #000; font-size:22px;">${data.tweets3}</b>
                                 <br>
                                 Tweets
                               </span>
                             </td>
                             <td class="table-col-td" width="70" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 22px;">30234</b>
+                                <b style="color: #000; font-size: 22px;">${data.author3}</b>
                                 <br>
                                 Autores
                               </span>
                             </td>
                             <td class="table-col-td" width="140" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 18px;">17/02</b>
+                                <b style="color: #000; font-size: 18px;">${data.day3}</b>
                               </span>
                               <br>
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 10px;">{ladron, facho, derecha}</b>
+                                <b style="color: #000; font-size: 10px;">${data.wordsDay3}</b>
                                 <br>
                                 Dia Pico
                               </span>
                             </td>
                             <td class="table-col-td" width="140" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
 							  <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 18px;">12/02 12:00</b>
+                                <b style="color: #000; font-size: 18px;">${data.hour3}</b>
                               </span>
 							  <br>
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 10px;">{ladron, facho, derecha}</b>
+                                <b style="color: #000; font-size: 10px;">${data.wordsHour3}</b>
                                 <br>
                                 Hora Pico
                               </span>
@@ -435,7 +435,7 @@
                                     align="left">
                                       <a href="#" style="color: #b7837a; text-decoration: none; margin: 0px; text-align: center; vertical-align: baseline; border-width: 1px 1px 2px; border-style: solid; border-color: #b7837a; padding: 6px 12px; font-size: 14px; line-height: 20px; background-color: #ffffff;">
                                           Tendencias</a>
-                                      Comparando las semanas (14/2/15 y 7/02/15)
+                                      Comparado a la semana anterior (${data.tentFrom}-${data.tentTo})
                                     </td>
                                   </tr>
                                 </tbody>
@@ -476,16 +476,17 @@
                               <img class="pull-left" src="https://pbs.twimg.com/profile_images/432981703720579072/csMdPWWk_400x400.jpeg" style="border-radius:4px;width:80px;border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 0px;" hspace="0" vspace="0"
                               border="0">
                             </td>
-                            <td class="table-col-td" width="50" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
-                              <div style="width:0px;height:0px;border-left:18px solid transparent; border-right:18px solid transparent;border-bottom:18px solid #1abc9c;font-size:0px;line-height:0px;">
+							<td class="table-col-td" width="50" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
+
+                              <div style="margin-left:9.3px;width:15px;height:25px;background:#d15b47;">
+                              </div>
+                              <div style="width:0px;height:0px;border-left:18px solid transparent; border-right:18px solid transparent;border-top:18px solid #d15b47;font-size:0px;line-height:0px;">
 
                               </div >
-                              <div style="margin-left:9.3px;width:15px;height:25px;background:#1abc9c;">
-                              </div>
                             </td>
                             <td class="table-col-td" width="120" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size:22px;">18%</b>
+                                <b style="color: #000; font-size:22px;">${data.tent1}</b>
 
                               </span>
                             </td>
@@ -524,15 +525,15 @@
                               border="0">
                             </td>
                             <td class="table-col-td" width="50" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
-                              <div style="width:0px;height:0px;border-left:18px solid transparent; border-right:18px solid transparent;border-bottom:18px solid #428bca;font-size:0px;line-height:0px;">
+                              <div style="width:0px;height:0px;border-left:18px solid transparent; border-right:18px solid transparent;border-bottom:18px solid #1abc9c;font-size:0px;line-height:0px;">
 
                               </div >
-                              <div style="margin-left:9.3px;width:15px;height:25px;background:#428bca;">
+                              <div style="margin-left:9.3px;width:15px;height:25px;background:#1abc9c;">
                               </div>
                             </td>
                             <td class="table-col-td" width="120" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size:22px;">18%</b>
+                                <b style="color: #000; font-size:22px;">${data.tent2}</b>
 
                               </span>
                             </td>
@@ -580,7 +581,7 @@
                             </td>
                             <td class="table-col-td" width="120" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size:22px;">18%</b>
+                                <b style="color: #000; font-size:22px;">${data.tent3}</b>
 
                               </span>
                             </td>
@@ -664,20 +665,20 @@
                             </td>
                             <td class="table-col-td" width="100" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size:22px;">52890</b>
+                                <b style="color: #000; font-size:22px;">${data.postLikes1}</b>
                                 <br>
                                 Likes
                               </span>
                             </td>
                             <td class="table-col-td" width="100" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 22px;">30234</b>
+                                <b style="color: #000; font-size: 22px;">${data.postComments1}</b>
                                 <br>
                                 Comentarios
                               </span>
                             </td>
                             <td class="table-col-td" width="250" style="vertical-align:middle;padding:0 8px 5px 8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
-                              <img class="pull-left" width="150" src="https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xpf1/v/t1.0-9/p526x296/11018117_10153177435693478_1103276470035350718_n.jpg?oh=f16de4b7255058ce106cfa738742229f&amp;oe=558A7468&amp;__gda__=1434453886_9b0c2972ef4ad10baefc3631f6dfd447"
+                              <img class="pull-left" width="150" src="${data.postPhoto1}"
                               style="margin-left:40px;border-radius:4px;width:150px;border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 0px;" hspace="0" vspace="0"
                               border="0">
                             </td>
@@ -717,20 +718,20 @@
                             </td>
                             <td class="table-col-td" width="100" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color:#000; font-size:22px;">52890</b>
+                                <b style="color:#000; font-size:22px;">${data.postLikes2}</b>
                                 <br>
                                 Likes
                               </span>
                             </td>
                             <td class="table-col-td" width="100" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color:#000; font-size: 22px;">30234</b>
+                                <b style="color:#000; font-size: 22px;">${data.postComments2}</b>
                                 <br>
                                 Comentarios
                               </span>
                             </td>
                             <td class="table-col-td" width="250" style="vertical-align:middle;padding:0 8px 3px 8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
-                              <img class="pull-left" width="150" src="https://scontent-mia.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/p526x296/10982237_10153224338498787_7886544221110618329_n.jpg?oh=8809cfba75c4eb560d1d60aac4b81614&amp;oe=557AA463"
+                              <img class="pull-left" width="150" src="${data.postPhoto2}"
                               style="margin-left:40px;border-radius:4px;width:150px;border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 0px;" hspace="0" vspace="0"
                               border="0">
                             </td>
@@ -770,20 +771,20 @@
                             </td>
                             <td class="table-col-td" width="100" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size:22px;">52890</b>
+                                <b style="color: #000; font-size:22px;">${data.postLikes3}</b>
                                 <br>
                                 Likes
                               </span>
                             </td>
                             <td class="table-col-td" width="100" style="vertical-align:middle;padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
-                                <b style="color: #000; font-size: 22px;">30234</b>
+                                <b style="color: #000; font-size: 22px;">${data.postComments3}</b>
                                 <br>
                                 Comentarios
                               </span>
                             </td>
                             <td class="table-col-td" width="250" style="vertical-align:middle;padding:0 8px 3px 8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
-                              <img class="pull-left" width="150" src="https://scontent-mia.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/p235x350/10993480_10153314343219928_8403016632983771689_n.jpg?oh=d9bd4df844f6be3257a0f35b45a21c4c&amp;oe=55BCE728"
+                              <img class="pull-left" width="150" src="${data.postPhoto3}"
                               style="margin-left:40px;border-radius:4px;width:150px;border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 0px;" hspace="0" vspace="0"
                               border="0">
                             </td>
