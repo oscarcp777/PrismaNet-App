@@ -2,7 +2,7 @@ package com.prismanet.mail
 
 class MailingController {
 
-
+	def mailService
 
 	def index() {
 		log.info "MailingController index params: " + params
@@ -58,17 +58,18 @@ class MailingController {
 	}
 	def send={
 		log.info "MailingController send "
-		def clients = [[mail:"caceres.oscar7@gmail.com", name: "Oscar Caceres"]]
+		def clients = [[mail:"caceres.oscar7@gmail.com", name: "Oscar Caceres"],
+						[mail:"santiagodonikian@gmail.com", name: "Santiago Donikian"]]
 		def data=getData()
 		/*[[mail:"sdonikian@prisma-net.com.ar", name: "Santiago Donikian"],
 			           [mail:"santiagodonikian@gmail.com", name: "Santiago L Donikian"]]*/
 		for (def client : clients)
-			sendMail{
+			mailService.sendMail{
 				async true
 				to client.mail
 				from "sdonikian@prisma-net.com.ar"
 				//			cc "santiagodonikian@gmail.com"
-				subject "PrismaNet - Politicos en las redes sociales"
+				subject "Prisma-Net, Politicos en las redes sociales"
 				html view: "/mailing/email-prisma", model: [client: client, data: data]
 
 			}
