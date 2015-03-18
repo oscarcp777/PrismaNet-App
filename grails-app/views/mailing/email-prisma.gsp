@@ -567,12 +567,11 @@
                               border="0">
                             </td>
 							<td class="table-col-td" width="50" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
+                              <div style="width:0px;height:0px;border-left:18px solid transparent; border-right:18px solid transparent;border-bottom:18px solid #1abc9c;font-size:0px;line-height:0px;">
 
-                              <div style="margin-left:9.3px;width:15px;height:25px;background:#d15b47;">
                               </div>
-                              <div style="width:0px;height:0px;border-left:18px solid transparent; border-right:18px solid transparent;border-top:18px solid #d15b47;font-size:0px;line-height:0px;">
-
-                              </div >
+                              <div style="margin-left:9.3px;width:15px;height:25px;background:#1abc9c;">
+                              </div>
                             </td>
                             <td class="table-col-td" width="120" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
@@ -661,13 +660,12 @@
                               <img class="pull-left" src="https://pbs.twimg.com/profile_images/514050895328206848/OC9qbmPb.jpeg" style="border-radius:4px;width:80px;border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 0px;" hspace="0" vspace="0"
                               border="0">
                             </td>
-                            <td class="table-col-td" width="50" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
+							<td class="table-col-td" width="50" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
+                              <div style="width:0px;height:0px;border-left:18px solid transparent; border-right:18px solid transparent;border-bottom:18px solid #1abc9c;font-size:0px;line-height:0px;">
 
-                              <div style="margin-left:9.3px;width:15px;height:25px;background:#d15b47;">
                               </div>
-                              <div style="width:0px;height:0px;border-left:18px solid transparent; border-right:18px solid transparent;border-top:18px solid #d15b47;font-size:0px;line-height:0px;">
-
-                              </div >
+                              <div style="margin-left:9.3px;width:15px;height:25px;background:#1abc9c;">
+                              </div>
                             </td>
                             <td class="table-col-td" width="120" style="vertical-align:middle; padding:8px;font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                               <span style="font-family: Arial, sans-serif; line-height: 19px; color: #737373; font-size: 13px;">
@@ -987,8 +985,7 @@
                   </tr>
                 </tbody>
               </table>
-              
-<%--###############################--%>
+
 			 <table class="table-space" height="6" style="height: 6px; font-size: 0px; line-height: 0; width: 600px; background-color: #e4e6e9;" width="600" bgcolor="#E4E6E9" cellspacing="0" cellpadding="0" border="0">
                 <tbody>
                   <tr>
