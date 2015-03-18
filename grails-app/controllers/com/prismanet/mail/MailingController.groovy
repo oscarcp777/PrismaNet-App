@@ -52,8 +52,8 @@ class MailingController {
 		data.postLikes3=6175
 		data.postComments3=422
 		data.postLink3='https://www.facebook.com/374082229927/posts/10153338282869928'
-		data.postPhoto3='https://scontent-gru.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/s851x315/11073573_10153338282549928_8990146294847614603_n.jpg?oh=93ed2528d29c54406671a188a25d4686&oe=55B3BCDDoh=4053c0e188d5bcd8de6a712010d4f8e7&oe=55897884&__gda__=1433997691_6224f1962eb207537995727fa6ea4dce'
-
+		data.postPhoto3='https://scontent-gru.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/s851x315/11073573_10153338282549928_8990146294847614603_n.jpg?oh=93ed2528d29c54406671a188a25d4686&oe=55B3BCDD'
+		
 		data.tweets4=26213
 		data.author4=8612
 		data.day4='12/03'
