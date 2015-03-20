@@ -71,10 +71,16 @@ class MailingController {
 	}
 	def send={
 		log.info "MailingController send "
-		def clients = [[mail:"caceres.oscar7@gmail.com", name: "Sr. Oscar Caceres"],
-						[mail:"santiagodonikian@gmail.com", name: "Sr. Santiago Donikian"]
-						/*,
-						[mail:"raularagon@raularagon.com.ar", name: "Sr. Raúl Aragón"]*/
+		def clients = [
+						[mail:"santiagodonikian@gmail.com", name: "Sr. Santiago Donikian"],
+						[mail:"caceres.oscar7@gmail.com", name: "Sr. Oscar Caceres"],
+						[mail:"info@ibarometro.com", name: "Sr. Ignacio Ramirez"],
+						[mail:"aresco@aresco.com", name: "Sr. Julio Aurelio Aresco"],
+						[mail:"info@myfconsultora.com.ar", name: "Sres. MyF Consultora"],
+						[mail:"alejandra.litterio@gmail.com", name: "Sra. Alejandra Litterio"],
+						[mail:"info@carlosfarayasoc.com.ar", name: "Sres. Carlos Fara y Asociados"],
+						[mail:"mendezgustavoe@gmail.com", name: "Sr. Gustavo Mendez"],
+						[mail:"raularagon@raularagon.com.ar", name: "Sr. Raúl Aragón"]
 						]
 		def data=getData()
 		/*[[mail:"sdonikian@prisma-net.com.ar", name: "Santiago Donikian"],
