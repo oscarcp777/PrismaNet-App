@@ -110,20 +110,23 @@
               </a>
               </div>
 
-              <table class="table-row" style="border-top-left-radius:4px;border-top-right-radius:4px;table-layout: auto; padding-right: 0px; padding-left: 24px; width: 600px; background-color: #1abc9c;" bgcolor="#1abc9c" width="600" cellspacing="0" cellpadding="0"
+              <table class="table-row" style="border-top-left-radius:4px;border-top-right-radius:4px;table-layout: auto; padding-right: 0px; padding-left: 24px; width: 600px; background-color: #1abc9c; padding-bottom:10px;" bgcolor="#1abc9c" width="600" cellspacing="0" cellpadding="0"
               border="0">
                 <tbody>
                   <tr height="55px" style="font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; height: 55px;">
                     <td class="table-row-td" style="text-align:center;height: 55px; padding-right: 16px; font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal; vertical-align: middle;" valign="middle" align="left">
                       <a href="http://prisma-net.com.ar/" style="color: #f1f1f1; text-decoration: none; padding: 0px; font-size:22px; line-height: 20px; height: 50px; background-color: transparent;">
-                        <span style="color:#2c3e50; font-weight:bold">Prisma</span><span style="font-weight:bold">-Net</span> &nbsp; Novedades
+                        <img alt="" src="http://localhost:8080/PrismaNet/img/public/logo-prisma-sm.png"> 
+                       
                       </a>
                      </td>
                     <td class="table-row-td" style="text-align:center;height: 55px; padding-right:0px; font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal; vertical-align: middle;" valign="middle" align="left">
-                    <a href="http://prisma-net.com.ar/" style="color: #16a085; text-decoration: none; margin: 0px; text-align: center; vertical-align: baseline; border-width: 1px 1px 2px; border-style: solid; border-color: #16a085; padding: 6px 12px; font-size: 14px; line-height: 20px; background-color: #ffffff;">&nbsp;&nbsp; &nbsp; 
+                    <a href="http://prisma-net.com.ar/" target="_blanck" style="color: #16a085; text-decoration: none; margin: 0px; text-align: center; vertical-align: baseline; border-width: 1px 1px 2px; border-style: solid; border-color: #16a085; padding: 6px 12px; font-size: 14px; line-height: 20px; background-color: #ffffff;">&nbsp;&nbsp; &nbsp; 
                     Ir a prisma-net.com.ar  » &nbsp; &nbsp;&nbsp;</a>
                     </td>
                   </tr>
+				<tr><td colspan="2" style="color:#fff;font-size:13px;font-weight: bold;">Somos una plataforma para el análisis de audiencias, conversaciones y visualización de tendencias en medios sociales en tiempo real y a gran escala.
+					</td></tr>
                 </tbody>
               </table>
               <table class="table-space" height="16" style="height: 16px; font-size: 0px; line-height: 0; width: 600px; background-color: #ffffff;" width="600" bgcolor="#FFFFFF" cellspacing="0" cellpadding="0" border="0">
@@ -144,20 +147,15 @@
                         <tbody>
                           <tr>
                             <td class="table-col-td" width="528" style="font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
-                              <table class="header-row" width="528" cellspacing="0" cellpadding="0" border="0" style="table-layout: fixed;">
-                                <tbody>
-                                  <tr>
-                                    <td class="header-row-td" width="528" style="font-size: 28px; margin: 0px; font-family: Arial, sans-serif; font-weight: normal; line-height: 19px; color: #478fca; padding-bottom: 10px; padding-top: 15px;" valign="top"
-                                    align="left">
-                                      ${client.name}</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                              <table class="header-row" width="528" cellspacing="0" cellpadding="0" border="0" style="table-layout: fixed;">
+                             <table class="header-row" width="528" cellspacing="0" cellpadding="0" border="0" 
+                             style="table-layout: fixed;"><tbody><tr><td class="header-row-td" width="267" style="font-size: 28px; margin: 0px; font-family: Arial, sans-serif; font-weight: normal; line-height: 19px; color: #478fca; padding-bottom: 10px; padding-top: 15px;" valign="top" align="left">
+                             ${client.name}</td></tr></tbody></table>
+                              <table class="header-row" width="528" cellspacing="0" cellpadding="0" border="0" 
+                              style="table-layout: fixed;">
                                 <tbody>
                                   <tr>
                                     <td class="header-row-td" width="528" style="font-family: Arial, sans-serif; font-weight: normal; line-height: 25px; color: #444444; margin: 0px; font-size: 16px; padding-top: 10px;" valign="top" align="left">
-                                      Le contamos que paso en las redes sociales en la última semana...(${data.from} al ${data.to})
+                                        Le mostramos el minitoreo de los principales candidatos presidenciales por nuestra plataforma  en la última semana...(${data.from} al ${data.to})
                                     </td>
                                   </tr>
                                 </tbody>
