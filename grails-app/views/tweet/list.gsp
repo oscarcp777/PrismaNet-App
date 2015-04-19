@@ -83,11 +83,18 @@
 		
 	</div>
 	<script type="text/javascript">
-	activeItemMenuLevel2('${concept.id}','${concept.id}-tweet','${concept.conceptName}');
-	
+	var id='${concept.id}';
+	activeItemMenuLevel2(id,'${concept.id}-tweet','${concept.conceptName}');
+	var params="${params}";
+	var listParams=params.replace(/:/g,',').replace(/ /g,'').replace('[','').replace(']','').split(',');
+	var data={"div":'#cloudWords',"conceptsId":id};
+	for (i = 0; i < listParams.length-1; i++) { 
+		data[listParams[i]]=listParams[i+1]
+		i++;
+	}
 		jQuery(function($) {
 			$(".tooltips").tooltip();
- 			getWordsCloud('#cloudWords','${concept.id}');
+ 			getWordsCloud(data);
 		});
 	</script>
 </body>

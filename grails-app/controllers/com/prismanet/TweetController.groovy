@@ -49,8 +49,8 @@ class TweetController extends MentionController{
 		  session.relevantWords=[]
 		}
 		
-		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"], 
-			relevantWords:session.relevantWords, dateCreated:params.dateCreated]
+		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, 
+		 tweetMinute:params["tweetMinute"], dateCreated:params.dateCreated,tweetsPickert:'tweetsPickert']
 	}
 	
 	def randomList(){

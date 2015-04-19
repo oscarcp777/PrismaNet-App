@@ -123,8 +123,7 @@ function printWordCloud(data){
 	$(data.div).empty();
 	WordCloud($(data.div)[0], { list: data.json } );
 }
-function getWordsCloud(div,id){
-	var data = {"div":div,'conceptsId':id}
+function getWordsCloud(data){
 	doRequest('wordsCloud',data,printWordCloud, null, 'GET');
 }
 function getGroupedPosts(data){
