@@ -99,14 +99,16 @@ class MentionController extends GenericController{
 	}
 	
 	def wordsCloud() {
-		log.debug "tweetController->wordsCloud params: " + params
-		Concept concept =chooseConcept(params)
-		
+		log.info "tweetController->wordsCloud params: " + params
 		def listWords=[]
 		int counter=0
-		def relevantWords = session.relevantWords
 		
-		def maxPercent = 40, minPercent = 20
+		
+		if(session.relevantWords?.empty)
+			session.relevantWords= tweetService.getRelevantWords(loadSolrFilters())
+		
+		def relevantWords = session.relevantWords
+		def maxPercent = 45, minPercent = 7
 		def max =1 ,min = 0
 		if (relevantWords){
 			max = relevantWords.get(0).size
@@ -125,7 +127,7 @@ class MentionController extends GenericController{
 		}
 		if (listWords.size() == 0)
 			render  "No se encontraron terminos"
-		def mapJson=[div:params['div'],json:listWords]
+		def mapJson=[div:params['div'],json:listWords,mapWords:relevantWords]
 		render  mapJson as JSON
 	}
 

@@ -46,7 +46,7 @@ class TweetController extends MentionController{
 			tweetService.loadAvatarUsers(tweets.resultList)
 		
 		if(params.offset==null){
-		session.relevantWords=tweetService.getRelevantWords(loadSolrFilters())
+		  session.relevantWords=[]
 		}
 		
 		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, tweetMinute:params["tweetMinute"], 

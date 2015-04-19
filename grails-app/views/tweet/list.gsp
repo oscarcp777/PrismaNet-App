@@ -25,8 +25,8 @@
 					</div>
 
 					<div class="widget-body">
-						<div class="widget-main">
-						<div  id="cloudWords" style="min-height:320px;"> 
+						<div class="widget-main" style="position: relative;">
+						<div  id="cloudWords" style="min-height:400px;"> 
 						</div>
 						</div>
 						</div>
@@ -68,15 +68,8 @@
 									</tr>
 								</thead>
 
-								<tbody>
-									<g:each in="${relevantWords}" status="i" var="tweet">
-										<tr class="blue">
-											<td>
-												${tweet.text}
-											</td><td>
-											${tweet.size}</td>
-										</tr>
-									</g:each>
+								<tbody id="tableWords">
+								<tr><td></td></tr>
 								</tbody>
 							</table>
 						</div>
@@ -94,7 +87,7 @@
 	
 		jQuery(function($) {
 			$(".tooltips").tooltip();
- 			getWordsCloud('#cloudWords');
+ 			getWordsCloud('#cloudWords','${concept.id}');
 		});
 	</script>
 </body>

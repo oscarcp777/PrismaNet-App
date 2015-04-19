@@ -176,23 +176,22 @@ if (!window.clearImmediate) {
     /* Default values to be overwritten by options object */
     var settings = {
       list: [],
-      fontFamily: '"Trebuchet MS", "Heiti TC", "微軟正黑體", ' +
-                  '"Arial Unicode MS", "Droid Fallback Sans", sans-serif',
-      fontWeight: 'normal',
-      color: 'random-dark',
+      fontFamily: 'Impact, Times, serif',
+      fontWeight: 'bold',
+      weightFactor: 2,
+      color: 'random-light',
       minSize: 0, // 0 to disable
-      weightFactor: 1,
       clearCanvas: true,
       backgroundColor: '#fff',  // opaque white = rgba(255, 255, 255, 1)
 
-      gridSize: 8,
+      gridSize: 18,
       origin: null,
 
       drawMask: false,
-      maskColor: 'rgba(255,0,0,0.3)',
+      maskColor: 'rgba(0,255,0, 0.3)',
       maskGapWidth: 0.3,
 
-      wait: 0,
+      wait: 200,
       abortThreshold: 0, // disabled
       abort: function noop() {},
 
@@ -200,13 +199,13 @@ if (!window.clearImmediate) {
       maxRotation: Math.PI / 2,
 
       shuffle: true,
-      rotateRatio: 0.1,
+      rotateRatio: 0,
 
       shape: 'circle',
       ellipticity: 0.65,
 
       hover: null,
-      click: null
+      click:null
     };
 
     if (options) {
@@ -735,10 +734,15 @@ if (!window.clearImmediate) {
             'msTransformOrigin': '50% 40%'
           };
           span.textContent = word;
+          span.id = word;
           for (var cssProp in styleRules) {
             span.style[cssProp] = styleRules[cssProp];
           }
           el.appendChild(span);
+          
+          span.title=$('#'+word+'TB').text();
+          $(span).addClass('tooltip-info');
+    	  $(span).tooltip();
         }
       });
     };

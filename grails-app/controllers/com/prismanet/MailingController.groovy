@@ -1,20 +1,113 @@
-package com.prismanet.mail
+package com.prismanet
+
+import org.springframework.dao.DataIntegrityViolationException
 
 class MailingController {
 
-	def mailService
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-	def index() {
-		log.info "MailingController index params: " + params
+    def index() {
+       	log.info "MailingController index params: " + params
 		def nameUser=params.name==null?'':params.name
 		def client=[name:nameUser]
 		def data=getData()
 		render(view: "email-prisma", model: [client: client, data: data])
-	}
+    }
+
+    def list(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        [mailingInstanceList: Mailing.list(params), mailingInstanceTotal: Mailing.count()]
+    }
+
+    def create() {
+        [mailingInstance: new Mailing(params)]
+    }
+
+    def save() {
+        def mailingInstance = new Mailing(params)
+        if (!mailingInstance.save(flush: true)) {
+            render(view: "create", model: [mailingInstance: mailingInstance])
+            return
+        }
+
+        flash.message = message(code: 'default.created.message', args: [message(code: 'mailing.label', default: 'Mailing'), mailingInstance.id])
+        redirect(action: "show", id: mailingInstance.id)
+    }
+
+    def show(Long id) {
+        def mailingInstance = Mailing.get(id)
+        if (!mailingInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'mailing.label', default: 'Mailing'), id])
+            redirect(action: "list")
+            return
+        }
+
+        [mailingInstance: mailingInstance]
+    }
+
+    def edit(Long id) {
+        def mailingInstance = Mailing.get(id)
+        if (!mailingInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'mailing.label', default: 'Mailing'), id])
+            redirect(action: "list")
+            return
+        }
+
+        [mailingInstance: mailingInstance]
+    }
+
+    def update(Long id, Long version) {
+        def mailingInstance = Mailing.get(id)
+        if (!mailingInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'mailing.label', default: 'Mailing'), id])
+            redirect(action: "list")
+            return
+        }
+
+        if (version != null) {
+            if (mailingInstance.version > version) {
+                mailingInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                          [message(code: 'mailing.label', default: 'Mailing')] as Object[],
+                          "Another user has updated this Mailing while you were editing")
+                render(view: "edit", model: [mailingInstance: mailingInstance])
+                return
+            }
+        }
+
+        mailingInstance.properties = params
+
+        if (!mailingInstance.save(flush: true)) {
+            render(view: "edit", model: [mailingInstance: mailingInstance])
+            return
+        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'mailing.label', default: 'Mailing'), mailingInstance.id])
+        redirect(action: "show", id: mailingInstance.id)
+    }
+
+    def delete(Long id) {
+        def mailingInstance = Mailing.get(id)
+        if (!mailingInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'mailing.label', default: 'Mailing'), id])
+            redirect(action: "list")
+            return
+        }
+
+        try {
+            mailingInstance.delete(flush: true)
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'mailing.label', default: 'Mailing'), id])
+            redirect(action: "list")
+        }
+        catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'mailing.label', default: 'Mailing'), id])
+            redirect(action: "show", id: id)
+        }
+    }
 	private def getData(){
 		def data =[:]
-		data.from='11/03'
-		data.to='17/03'
+		data.type='week'
+		data.fromDate='11/03'
+		data.toDate='17/03'
 		data.tentFrom='04/03'
 		data.tentTo='10/03'
 		
@@ -25,7 +118,7 @@ class MailingController {
 		data.hour1='16/03 12hs'
 		data.wordsHour1='cambio, sanzernesto, elisacarrio, mariuvidal, presidente, proargentina, mauricioyvos, futuro, pro, equipo, horaciorlarreta'
 		data.tent1='55%'
-		data.postLikes1=38356 
+		data.postLikes1=38356
 		data.postComments1=1823
 		data.postLink1='https://www.facebook.com/55432788477/posts/10153193620693478'
 		data.postPhoto1='https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-xpa1/v/t1.0-9/s480x480/10420753_10153193617358478_4227045661516428873_n.jpg?oh=b1498f9bf36a5523a5c036312c0ae827&oe=55B62173&__gda__=1437524364_3fb489fcfce8bd3e37053807b5fa965d'
@@ -84,7 +177,7 @@ class MailingController {
 						]
 		def data=getData()
 		/*[[mail:"sdonikian@prisma-net.com.ar", name: "Santiago Donikian"],
-			           [mail:"santiagodonikian@gmail.com", name: "Santiago L Donikian"]]*/
+					   [mail:"santiagodonikian@gmail.com", name: "Santiago L Donikian"]]*/
 		for (def client : clients)
 			mailService.sendMail{
 				async true
