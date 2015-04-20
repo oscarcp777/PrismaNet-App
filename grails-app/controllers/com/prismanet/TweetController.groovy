@@ -38,9 +38,9 @@ class TweetController extends MentionController{
 		
 		log.info "tweetController->list params: " + params
 		Concept concept =chooseConcept(params)
-		def filters = loadMentionFilters()
+		def map = loadMentionFilters()
 		params.max = Math.min(max ?: 6, 100)
-		def tweets = tweetService.getTweets(filters,params)
+		def tweets = tweetService.getTweets(map.filters,params)
 //		def relevantWords = tweetService.getRelevantWords(loadSolrFilters())
 		if(!grailsApplication.config.grails.twitter.offline)
 			tweetService.loadAvatarUsers(tweets.resultList)
@@ -50,7 +50,7 @@ class TweetController extends MentionController{
 		}
 		
 		[tweetInstanceList: tweets.resultList, tweetInstanceTotal: tweets.totalCount, concept: concept, 
-		 tweetMinute:params["tweetMinute"], dateCreated:params.dateCreated,tweetsPickert:'tweetsPickert']
+		 tweetMinute:params["tweetMinute"], dateCreated:params.dateCreated,dateFrom:map.dateFrom,dateTo:map.dateTo]
 	}
 	
 	def randomList(){

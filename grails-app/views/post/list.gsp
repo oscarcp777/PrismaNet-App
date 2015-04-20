@@ -16,6 +16,31 @@
 		<g:render contextPath="../concept" template="tabFacebook"  model="['concept':concept,'tabMain':'','tabPosts':'active','tabChar':'','tabSentimental':'']"></g:render>
 		<div class="row well ">
 				<div class="col-xs-12" >
+		   <div class="alert alert-info">
+			<button type="button" class="close" data-dismiss="alert">
+				<i class="ace-icon fa fa-times"></i>
+			</button>
+			<h4>Filtros Aplicados</h4>
+		     <p>
+				<span class="label label-xlg label-primary arrowed-in-right arrowed">
+				<i class="ace-icon fa fa-check-square-o bigger-120"></i>
+				Concepto: ${concept.conceptName}
+				</span></p> 
+				<p>
+				<span class="label label-xlg label-primary arrowed-in-right arrowed">
+				<i class="ace-icon fa fa-check-square-o bigger-120"></i>
+				 Fecha desde :  <span id="dateFrom"><g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${dateFrom}" /></span>
+				</span>			
+				</p>
+				<p>
+				<span class="label label-xlg label-primary arrowed-in-right arrowed">
+				<i class="ace-icon fa fa-check-square-o bigger-120"></i>
+				 Fecha Hasta :  <span id="dateTo"><g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${dateTo}" /></span>
+				</span>			
+				</p>
+
+			<br>
+		</div>
 		<div class="widget-box widget-color-blue">
 					<div class="widget-header">
 						<h5 class="widget-title">
@@ -31,8 +56,8 @@
 					</div>
 
 					<div class="widget-body">
-						<div class="widget-main">
-						<div  id="cloudWords" style="min-height:320px;"> 
+						<div class="widget-main" style="position: relative;">
+						<div  id="cloudWordsFB" style="min-height:400px;"> 
 						</div>
 						</div>
 						</div>
@@ -74,15 +99,8 @@
 									</tr>
 								</thead>
 
-								<tbody>
-									<g:each in="${relevantWords}" status="i" var="tweet">
-										<tr class="blue">
-											<td>
-												${tweet.text}
-											</td><td>
-											${tweet.size}</td>
-										</tr>
-									</g:each>
+								<tbody id="tableWords">
+								<tr><td></td></tr>
 								</tbody>
 							</table>
 						</div>
@@ -97,10 +115,12 @@
 	</div>
 	</div>
 	<script type="text/javascript">
+	var id='${concept.id}';
+	var params='${params}';
 	activeItemMenuLevel2('${concept.id}','${concept.id}-face','${concept.conceptName}');
 	  jQuery(function($) {
 		  $(".tooltips").tooltip();
-		  getWordsCloud('#cloudWords');
+		  getWordsCloud(getParamsCloud(params,'#cloudWordsFB',id));
 		  });
 	</script>
 </body>

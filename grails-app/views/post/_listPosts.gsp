@@ -24,21 +24,21 @@
 														<div class="grid3">
 															<span class="line-height-1 bigger-110 "> 100 </span> <br>
 															<span class="line-height-1 bigger-100 grey">
-																<g:message code="tweets.list.tweets"/> </span>
+																Likes</span>
 														</div>
 
 														<div class="grid3">
 
 															<span class="line-height-1 bigger-110 "> 10  </span> <br>
 															<span class="line-height-1 bigger-100 grey">
-																<g:message code="tweets.list.followers"/> </span>
+																Post </span>
 														</div>
 
 														<div class="grid3">
 
 															<span class="line-height-1 bigger-110 "> 20 </span> <br>
 															<span class="line-height-1 bigger-100 grey">
-																<g:message code="tweets.list.followings"/> </span>
+																Comentarios </span>
 														</div>
 													</div>
 										</div>
@@ -108,7 +108,7 @@
 
 				<div class="col-lg-8" style="text-align: center;">
 					<ul class="pagination pagination-sm">
-						<li><g:paginate total="${postTotal}" id="${concept.id}" params="${params}"  /></li>
+						<li><g:paginate total="${postTotal}" params="${params}"  /></li>
 					</ul>
 				</div>
 				

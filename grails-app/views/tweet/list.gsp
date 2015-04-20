@@ -10,6 +10,31 @@
 		<g:render contextPath="../concept" template="tabTwitter"  model="['concept':concept,'tabMain':'','tabTweets':'active','tabChar':'','tabSentimental':'']"></g:render>
 		<div class="row well ">
 				<div class="col-xs-12" >
+	   <div class="alert alert-info">
+			<button type="button" class="close" data-dismiss="alert">
+				<i class="ace-icon fa fa-times"></i>
+			</button>
+			<h4>Filtros Aplicados</h4>
+		     <p>
+				<span class="label label-xlg label-primary arrowed-in-right arrowed">
+				<i class="ace-icon fa fa-check-square-o bigger-120"></i>
+				Concepto: ${concept.conceptName}
+				</span></p> 
+				<p>
+				<span class="label label-xlg label-primary arrowed-in-right arrowed">
+				<i class="ace-icon fa fa-check-square-o bigger-120"></i>
+				 Fecha desde :  <span id="dateFrom"><g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${dateFrom}" /></span>
+				</span>			
+				</p>
+				<p>
+				<span class="label label-xlg label-primary arrowed-in-right arrowed">
+				<i class="ace-icon fa fa-check-square-o bigger-120"></i>
+				 Fecha Hasta :  <span id="dateTo"><g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${dateTo}" /></span>
+				</span>			
+				</p>
+
+			<br>
+		</div>
 		<div class="widget-box widget-color-blue">
 					<div class="widget-header">
 						<h5 class="widget-title">
@@ -26,7 +51,7 @@
 
 					<div class="widget-body">
 						<div class="widget-main" style="position: relative;">
-						<div  id="cloudWords" style="min-height:400px;"> 
+						<div  id="cloudWordsTW" style="min-height:400px;"> 
 						</div>
 						</div>
 						</div>
@@ -85,16 +110,10 @@
 	<script type="text/javascript">
 	var id='${concept.id}';
 	activeItemMenuLevel2(id,'${concept.id}-tweet','${concept.conceptName}');
-	var params="${params}";
-	var listParams=params.replace(/:/g,',').replace(/ /g,'').replace('[','').replace(']','').split(',');
-	var data={"div":'#cloudWords',"conceptsId":id};
-	for (i = 0; i < listParams.length-1; i++) { 
-		data[listParams[i]]=listParams[i+1]
-		i++;
-	}
+	var params='${params}';
 		jQuery(function($) {
 			$(".tooltips").tooltip();
- 			getWordsCloud(data);
+ 			getWordsCloud(getParamsCloud(params,'#cloudWordsTW',id));
 		});
 	</script>
 </body>

@@ -176,7 +176,7 @@ if (!window.clearImmediate) {
     /* Default values to be overwritten by options object */
     var settings = {
       list: [],
-      fontFamily: 'Impact, Times, serif',
+      fontFamily: 'Times, serif',
       fontWeight: 'bold',
       weightFactor: 2,
       color: 'random-light',
@@ -199,7 +199,7 @@ if (!window.clearImmediate) {
       maxRotation: Math.PI / 2,
 
       shuffle: true,
-      rotateRatio: 0,
+      rotateRatio: 0.1,
 
       shape: 'circle',
       ellipticity: 0.65,

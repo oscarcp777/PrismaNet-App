@@ -279,7 +279,7 @@ class ConceptController extends GenericController{
 		def series=[[name:concept.conceptName,data:listRealTime]]
 		def json =[series:series,"container":container,id:params.id,title:"Comentarios por minuto",
 			subTitle:"Actualizacion en tiempo Real de la cantidad de Comentarios" ,
-			titleY:'Cantidad de Comentarios',titleX:'Minutos',dateProp:"postMinute",
+			titleY:'Cantidad de Comentarios',titleX:'Minutos',dateProp:"dateMinute",
 			cursorEvent:"../../post/list?conceptsId=",ajaxMethodReload:'../postRealTimeForOneMinute']
 		
 		render json as JSON
