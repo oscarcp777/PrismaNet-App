@@ -54,7 +54,7 @@ class TweetController extends MentionController{
 	}
 	
 	def randomList(){
-		def filters = loadMentionFilters()
+		def filters = loadMentionFilters().filters
 	}
 	
 	def saveOpinion(){
@@ -89,7 +89,7 @@ class TweetController extends MentionController{
 		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
 		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
 		log.info "samplingStep1 params: " + params
-		def filters = loadMentionFilters()
+		def filters = loadMentionFilters().filters
 		filters.addAll(getService().getFilterList(dateFrom, dateTo, "created", false))
 		def samplings = tweetService.getSamplingTweets(filters, params)
 		//TODO guardo en session la muestra ver
@@ -132,7 +132,7 @@ class TweetController extends MentionController{
 	def samplingTweets(){
 		log.debug "tweetController->samplingTweets params: " + params
 		Concept concept =chooseConcept(params)
-		def filters = loadMentionFilters()
+		def filters = loadMentionFilters().filters
 		
 		def samplingTweets = tweetService.getSamplingTweets(filters, params)
 		
