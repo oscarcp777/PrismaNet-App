@@ -164,10 +164,11 @@ class TweetService extends MentionService{
 		def samplingSize = getSamplingSize(tweets.totalCount)
 		Random rand = new Random(tweets.totalCount)
 		def randomIntegerList = []
-		(1..samplingSize).each {
-			resultList.add(tweets.resultList.get(rand.nextInt(tweets.totalCount)))
+		if(tweets.totalCount >0){
+			(1..samplingSize).each {
+				resultList.add(tweets.resultList.get(rand.nextInt(tweets.totalCount)))
+			}
 		}
-		
 		//codigo para validar que sea diferente
 //		resultList.sort{it.tweet.id}
 //		resultList.eachWithIndex{ obj , i->
