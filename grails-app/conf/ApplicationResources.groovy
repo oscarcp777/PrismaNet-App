@@ -60,7 +60,7 @@ modules = {
 		resource url:'js/jquery.backstretch.min.js',disposition: 'head'
 	}
 	paginate{
-		resource url:'js/jquery.quick.pagination.js'
+		resource url:'js/jquery.bootpag.min.js'
 	}
 	
 }

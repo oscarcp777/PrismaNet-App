@@ -84,6 +84,13 @@ class TweetController extends MentionController{
 		}
 		render "ok"
 	}
+     private void loadTweets(parcialList){
+		 parcialList.each {it ->
+			 it.tweet.refresh()
+		 }
+		 if(!grailsApplication.config.grails.twitter.offline)
+		 tweetService.loadAvatarUsers(parcialList)
+	 }
 	def samplingStep1(){
 		def container = params.div
 		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
@@ -99,10 +106,27 @@ class TweetController extends MentionController{
 	}
 	def samplingStep2(){
 		Concept concept =getConcept(session.conceptsId)
-		session.samplingTweets.each {it ->
-			it.tweet.refresh()
+		
+		def totalPage=(session.samplingTweets.size()%10 == 0)?(int)session.samplingTweets.size()/10:(session.samplingTweets.size()/10).setScale(0, BigDecimal.ROUND_DOWN)+1
+		print totalPage
+		def end=totalPage >1?9:session.samplingTweets.size()-1
+		def parcialList=totalPage==0?session.samplingTweets:session.samplingTweets[0..end]
+		loadTweets(parcialList)
+		render(template: "samplingTweets", model: [tweetList:parcialList,concept:concept,totalPage:totalPage])
+		
+	}
+	def samplingTweetsPage(){
+		Concept concept =getConcept(session.conceptsId)
+		def from=0,to=session.samplingTweets.size()-1
+		if(params.init!='-1'){
+			from=params.init.toInteger()
 		}
-		render(template: "samplingTweets", model: [tweetList:session.samplingTweets,concept:concept])
+		if(params.end!='-1'){
+			to=params.end.toInteger()
+		}
+		def parcialList=session.samplingTweets[from..to]
+		loadTweets(parcialList)
+		render(template: "ulListTweets", model: [tweetList:parcialList,concept:concept])
 	}
 	def samplingStep3(){
 		def tweets=[]

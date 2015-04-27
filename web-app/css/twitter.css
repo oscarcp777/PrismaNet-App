@@ -216,3 +216,6 @@
 .tweets li .reply-icons a.last {
 	margin-right: 0px;
 }
+.pag-content .pagination{
+	display: inline-flex;	
+}

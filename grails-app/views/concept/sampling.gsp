@@ -61,7 +61,7 @@
 											</div>
 										</div>
 
-										<div class="step-pane" id="step2" style="min-height:1700px;">
+										<div class="step-pane" id="step2" style="display: inline-block;min-height:inherit;">
 											<div class="center" id="samplingStep2">
 												
 											</div>
@@ -78,7 +78,7 @@
 									<hr >
 									<div class="wizard-actions" id="buttons">
 
-										<button class="btn btn-info btn-next" data-last="Finish">
+										<button class="btn btn-info btn-next" data-last="Finish" id="btn-next">
 											<g:message code="sampling.tweets.first.next"/> <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
 										</button>
 									</div>
@@ -113,8 +113,7 @@
 		     getSamplingStep1(data);
 		}
 		function loadSamplingStep1(data){
-			$("#samplingStep1").html(data);
-			 $('#buttons').show();
+			 $("#samplingStep1").html(data);
 		}
 		function getSamplingStep1(data){
 			doRequest('../../tweet/samplingStep1',data,loadSamplingStep1, null, 'GET');
@@ -134,7 +133,9 @@
 					getSamplingStep2(data);
 				}
 				if(info.step==2){
+					$('#step2').empty();
 					loadCharPieOpinion();
+					 $('#buttons').hide();
 				}
 			})
 			.on('finished', function(e) {

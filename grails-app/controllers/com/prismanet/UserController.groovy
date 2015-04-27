@@ -226,7 +226,7 @@ class UserController extends GenericController{
 		
 		def dateList = userService.getMentionsBy(filters,from,to);
 		def resultMap = getChartLineFormat(dateList, 2, container, DateTypes.MINUTE_PERIOD,
-			strings[sourceType].name + ' por minuto','Minutos','Cantidad de ' + strings[sourceType].name, strings[sourceType].controller ? "../"+strings[sourceType].controller+"/list?id=" : "#")
+			strings[sourceType].name + ' por minuto','Minutos','Cantidad de ' + strings[sourceType].name, strings[sourceType].controller ? "../"+strings[sourceType].controller+"/list?conceptId=" : "#")
 		loadZerosForMinute(resultMap["series"],from,to)
 		addConceptsEmpty(resultMap["series"],springSecurityService.currentUser,from,to)
 		resultMap["series"]=resultMap["series"].sort{a,b -> a[1] <=> b[1] }

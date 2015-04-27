@@ -1,4 +1,14 @@
-
+<script type="text/javascript">
+ var sampling=parseInt("${sampling}");
+ 
+	$(function() {
+		if(sampling==0){
+			$('#buttons').hide();
+		}else{
+			 $('#buttons').show();
+		}
+	});
+	</script>
 <div class="widget-box transparent" id="samplingInit">
 	<div class="widget-header widget-header-large">
 		<h3 class="widget-title grey lighter">

@@ -14,7 +14,7 @@
       pageSize: 10,  // How many items you want to show per page.
       currentPage: 1,  // Starting page... normally you would probably leave this alone.
       holder: null,  // Container to place the navigation.
-      pagerLocation: "after",  // possible values are "before,after,both".  Will not do anything if you specified a container in the holder option.
+      pagerLocation: "both",  // possible values are "before,after,both".  Will not do anything if you specified a container in the holder option.
       transitionSpeed: null // Changes the speed items are faded in and out.  If left null then no transitions will happen.
     };
     options = $.extend(defaults, options);
