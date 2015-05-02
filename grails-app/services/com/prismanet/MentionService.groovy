@@ -48,6 +48,10 @@ class MentionService extends GenericCoreService{
 	}
 	
 	def getMentions(filters, parameters, context, mentionType){
+		getMentions(filters, parameters, context, mentionType, [[attribute:"id",value:OrderType.DESC]]) 
+	}
+	
+	def getMentions(filters, parameters, context, mentionType, orders){
 		
 		def conceptId
 		filters.each {
@@ -59,7 +63,7 @@ class MentionService extends GenericCoreService{
 		if (conceptId)
 			concept = Concept.get(conceptId)
 			
-		def auxList =	list(mentionType, context, filters, parameters, [[attribute:"id",value:OrderType.DESC]])
+		def auxList =	list(mentionType, context, filters, parameters, orders)
 		for (mention in auxList.results){
 			def opValue
 			if (conceptId){

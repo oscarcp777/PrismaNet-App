@@ -18,10 +18,11 @@ import twitter4j.internal.org.json.JSONObject
 
 import com.mongodb.BasicDBObject
 import com.prismanet.GenericService.FilterType
+import com.prismanet.GenericService.OrderType
 import com.prismanet.context.Filter
 import com.prismanet.context.TweetAttributeContext
 import com.prismanet.exception.ApplicationException
-import com.prismanet.sentiment.Opinion;
+import com.prismanet.sentiment.Opinion
 import com.prismanet.sentiment.OpinionValue
 
 class TweetService extends MentionService{
@@ -158,23 +159,46 @@ class TweetService extends MentionService{
 		getMentions(filters, parameters, new TweetAttributeContext(), Tweet)
 	}
 	
-	def getSamplingTweets(filters, parameters){
-		def tweets = getTweets(filters, parameters)
-		def resultList = []
-		def samplingSize = getSamplingSize(tweets.totalCount)
-		Random rand = new Random(tweets.totalCount)
-		def randomIntegerList = []
-		if(tweets.totalCount >0){
-			(1..samplingSize).each {
-				resultList.add(tweets.resultList.get(rand.nextInt(tweets.totalCount)))
-			}
+	def getSamplingTweets(filters, parameters, SamplingType type){
+		getSamplingTweets(filters, parameters, type, 50)
+	}
+	
+	def getSamplingTweets(filters, parameters, SamplingType type, Integer maxSamplingSize){
+		
+		def tweets = getMentions(filters, parameters, new TweetAttributeContext(), Tweet)
+		parameters.max = maxSamplingSize
+		
+		switch (type){
+			case SamplingType.RANDOM:
+				def resultList = []
+				def samplingSize = tweets.totalCount != 0 ? getSamplingSize(tweets.totalCount) : 0
+				Random rand = new Random(tweets.totalCount)
+				def randomIntegerList = []
+				if (samplingSize > 0)
+				(1..samplingSize).each {
+					resultList.add(tweets.resultList.get(rand.nextInt(tweets.totalCount)))
+				}
+			
+				//codigo para validar que sea diferente
+				//		resultList.sort{it.tweet.id}
+				//		resultList.eachWithIndex{ obj , i->
+				//			println i +"-"+ obj.tweet.id
+				//		}
+				return [resultList:resultList,totalSampling:samplingSize,totalDemo:tweets.totalCount]
+			break;
+			case SamplingType.TOP_RELEVANT_AUTHORS:
+				def samplingTweets = getMentions(filters, parameters, new TweetAttributeContext(), Tweet, [[attribute:"authorFollowers",value:OrderType.DESC]])
+				return [resultList:samplingTweets.resultList,totalSampling:samplingTweets.totalCount,totalDemo:tweets.totalCount]
+			break;
+			case SamplingType.TOP_RETWEETS:
+				def samplingTweets = getMentions(filters, parameters, new TweetAttributeContext(), Tweet, [[attribute:"retweetCount",value:OrderType.DESC]])
+				return [resultList:samplingTweets.resultList,totalSampling:samplingTweets.totalCount,totalDemo:tweets.totalCount]
+			break;
+			case SamplingType.TOP_FAVS:
+				def samplingTweets = getMentions(filters, parameters, new TweetAttributeContext(), Tweet, [[attribute:"favoriteCount",value:OrderType.DESC]])
+				return [resultList:samplingTweets.resultList,totalSampling:samplingTweets.totalCount,totalDemo:tweets.totalCount]
+			break;
 		}
-		//codigo para validar que sea diferente
-//		resultList.sort{it.tweet.id}
-//		resultList.eachWithIndex{ obj , i->
-//			println i +"-"+ obj.tweet.id
-//		}
-		[resultList:resultList,totalSampling:samplingSize,totalDemo:tweets.totalCount]
 	}
 	
 	private def getSamplingSize(poblationNumber){
@@ -249,5 +273,12 @@ class TweetService extends MentionService{
 				return "tweetPeriod"
 		}
 		return null
+	}
+	
+	public enum SamplingType{
+		RANDOM,
+		TOP_RELEVANT_AUTHORS,
+		TOP_RETWEETS,
+		TOP_FAVS;
 	}
 }
