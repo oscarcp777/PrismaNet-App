@@ -4,6 +4,7 @@ import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
 import grails.plugins.springsecurity.SpringSecurityService
 
+import com.prismanet.TweetService.SamplingType;
 import com.prismanet.sentiment.Opinion
 import com.prismanet.sentiment.OpinionValue
 import com.prismanet.utils.DateTypes
@@ -98,7 +99,7 @@ class TweetController extends MentionController{
 		log.info "samplingStep1 params: " + params
 		def filters = loadMentionFilters().filters
 		filters.addAll(getService().getFilterList(dateFrom, dateTo, "created", false))
-		def samplings = tweetService.getSamplingTweets(filters, params)
+		def samplings = tweetService.getSamplingTweets(filters, params, SamplingType.TOP_FAVS)
 		//TODO guardo en session la muestra ver
 		session.conceptsId=params.conceptsId
 		session.samplingTweets=samplings.resultList
