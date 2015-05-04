@@ -1,5 +1,6 @@
 package com.prismanet
-
+import grails.plugins.springsecurity.Secured
+@Secured(['ROLE_ADMIN'])
 class TwitterSetupController {
 	
 	def scaffold = true

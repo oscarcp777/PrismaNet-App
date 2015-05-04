@@ -1,6 +1,6 @@
 package com.prismanet
-
-
+import grails.plugins.springsecurity.Secured
+@Secured(['ROLE_USER','ROLE_USER_ADVANCE'])
 class PostController extends MentionController{
 
 	def facebookCommentService

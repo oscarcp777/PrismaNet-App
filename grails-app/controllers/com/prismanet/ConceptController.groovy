@@ -1,6 +1,7 @@
 package com.prismanet
 import grails.converters.*
 import grails.plugins.springsecurity.Secured
+import org.springframework.dao.DataIntegrityViolationException
 
 import com.prismanet.GenericService.FilterType
 import com.prismanet.GenericService.ProjectionType
@@ -11,7 +12,7 @@ import com.prismanet.sentiment.Opinion
 import com.prismanet.sentiment.OpinionValue
 import com.prismanet.utils.DateTypes
 import com.prismanet.utils.DateUtils
-@Secured(['ROLE_USER'])
+@Secured(['ROLE_USER','ROLE_USER_ADVANCE'])
 class ConceptController extends GenericController{
 
 	def scaffold = true
@@ -365,5 +366,113 @@ class ConceptController extends GenericController{
 		}
 		def resultMap = [container:container,data:dateList,title:'Porcentajes de Opiniones',name : 'Opinion']
 		render resultMap as JSON
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def create() {
+		def concept=new Concept(params);
+		concept.setTwitterSetup(new TwitterSetup(params))
+		concept.setFacebookSetup(new FacebookSetup(params))
+		[conceptInstance: new Concept(params)]
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def save() {
+		def conceptInstance = new Concept(params)
+		def fcSetup=new FacebookSetup(params)
+		def twSetup=new TwitterSetup(params)
+		conceptInstance.setTwitterSetup(twSetup)
+		conceptInstance.setFacebookSetup(fcSetup)
+		if (!conceptInstance.save(flush: true)) {
+			conceptInstance.errors.each {
+				log.info it
+			}
+			render(view: "create", model: [conceptInstance: conceptInstance])
+			return
+		}
+
+		flash.message = message(code: 'default.created.message', args: [message(code: 'concept.label', default: 'Concept'), conceptInstance.id])
+		redirect(action: "show", id: conceptInstance.id)
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def update(Long id, Long version) {
+		def conceptInstance = Concept.get(id)
+		if (!conceptInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'concept.label', default: 'Concept'), id])
+			redirect(action: "list")
+			return
+		}
+
+		if (version != null) {
+			if (conceptInstance.version > version) {
+				conceptInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+						  [message(code: 'concept.label', default: 'Concept')] as Object[],
+						  "Another user has updated this Concept while you were editing")
+				render(view: "edit", model: [conceptInstance: conceptInstance])
+				return
+			}
+		}
+
+		conceptInstance.properties = params
+		conceptInstance.twitterSetup.properties = params
+		conceptInstance.facebookSetup.properties = params
+		if (!conceptInstance.save(flush: true)) {
+			render(view: "edit", model: [conceptInstance: conceptInstance])
+			return
+		}
+
+		flash.message = message(code: 'default.updated.message', args: [message(code: 'concept.label', default: 'Concept'), conceptInstance.id])
+		redirect(action: "show", id: conceptInstance.id)
+	}
+	@Secured(['ROLE_ADMIN'])
+	def index() {
+		redirect(action: "list", params: params)
+	}
+	@Secured(['ROLE_ADMIN'])
+	def list(Integer max) {
+		params.max = Math.min(max ?: 10, 100)
+		[conceptInstanceList: Concept.list(params), conceptInstanceTotal: Concept.count()]
+	}
+	@Secured(['ROLE_ADMIN'])
+	def show(Long id) {
+		def conceptInstance = Concept.get(id)
+		if (!conceptInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'concept.label', default: 'Concept'), id])
+			redirect(action: "list")
+			return
+		}
+
+		[conceptInstance: conceptInstance]
+	}
+	@Secured(['ROLE_ADMIN'])
+	def edit(Long id) {
+		def conceptInstance = Concept.get(id)
+		if (!conceptInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'concept.label', default: 'Concept'), id])
+			redirect(action: "list")
+			return
+		}
+
+		[conceptInstance: conceptInstance]
+	}
+	@Secured(['ROLE_ADMIN'])
+	def delete(Long id) {
+		def conceptInstance = Concept.get(id)
+		if (!conceptInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'concept.label', default: 'Concept'), id])
+			redirect(action: "list")
+			return
+		}
+
+		try {
+			conceptInstance.delete(flush: true)
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'concept.label', default: 'Concept'), id])
+			redirect(action: "list")
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'concept.label', default: 'Concept'), id])
+			redirect(action: "show", id: id)
+		}
 	}
 }

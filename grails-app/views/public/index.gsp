@@ -5,6 +5,7 @@
 <r:require modules="indexcss" />
 </head>
 <body >
+<g:set var="appName" value="${grailsApplication.config.app.name}" />
 <div class="landing">
 	<div id="wrapper">
 		<div id="sidebar">
@@ -18,8 +19,9 @@
 					<li data-section="2" class=""><i class="ace-icon fa fa-clock-o"></i> <span><g:message code="public.index.real.time"/></span></li>
 					<li data-section="3" class=""><i class="ace-icon fa fa-laptop"></i> <span><g:message code="public.index.ideal.for"/></span></li>
 					<li data-section="4" class=""><i class="ace-icon fa fa-pencil"></i> <span><g:message code="public.index.features"/></span></li>
-					<li data-section="5" class="last"><i class="ace-icon fa fa-envelope"></i>
-						<span><g:message code="public.index.tellme"/></span></li>
+					<g:if test="${grailsApplication.config.app.partner.trim() == "N"}">
+					<li data-section="5" class="last"><i class="ace-icon fa fa-envelope"></i><span><g:message code="public.index.tellme"/></span></li>
+				   </g:if>
 				</ul>
 			</nav>
 			<!-- /nav -->
@@ -43,12 +45,7 @@
 									</button>
 
 									<div class="brand">
-										<a class="logoHolder" title="return to home page" href="#">
-											<span class="logoFirst">
-											<i class="ace-icon fa fa-filter" style="font-weight:bold;font-size:0.8em;"></i>
-											<g:message code="general.title.prism"/></span><g:message code="general.title.net"/>
-											
-										</a>
+										 <g:render template="logo" ></g:render>
 									</div>
 
 								</div>
@@ -75,16 +72,18 @@
 
 
 								</h1>
-								<h2> <g:message code="public.index.home.sub.title"/> </h2>
+								<h2> <g:message code="public.index.home.sub.title" args="[appName]" /> </h2>
 									</div>
 								<div class="featurette container" style="margin-left:-60px;">
 									<img src="img/prisma_howitworks.png" alt="como trabaja">
+									<g:if test="${grailsApplication.config.app.partner.trim() == "N"}">
 									<div class="video">
 										<a href="#video" data-toggle="modal" id="clickForVideo"
 											class="open-trailer"><i class="ace-icon fa fa-play"></i>
 											<span><g:message code="public.index.home.demo"/></span>
 										</a>
 									</div>
+									</g:if>
 								</div>
 							</section>
 						</div>
@@ -376,7 +375,7 @@
 							<div class="col-md-4">
 								<h2><g:message code="public.index.home.carousel1.title1"/></h2>
 								<h3><g:message code="public.index.home.carousel1.title2"/> </h3>
-								<p><g:message code="public.index.home.carousel1.desc"/></p>
+								<p><g:message code="public.index.home.carousel1.desc"  args="[appName]" /></p>
 							</div>
 							<div class="col-md-8">
 								<div>
@@ -406,9 +405,9 @@
 								<h2></h2>
 								<h3></h3>
 								<p></p>
-								<h2><g:message code="public.index.home.carousel2.title1"/></h2>
-								<h3><g:message code="public.index.home.carousel2.title2"/> </h3>
-								<p><g:message code="public.index.home.carousel2.desc"/></p>
+								<h2><g:message code="public.index.home.carousel3.title1"/></h2>
+								<h3><g:message code="public.index.home.carousel3.title2"/> </h3>
+								<p><g:message code="public.index.home.carousel3.desc" args="[appName]" /></p>
 									
 							</div>
 							<div class="col-md-8">
@@ -442,7 +441,7 @@
 					<!-- /row-fluid -->
 					<div class="desc row">
 						<div class="col-sm-8 col-md-8">
-							<p><g:message code="public.index.home.features.desc"/> </p>
+							<p><g:message code="public.index.home.features.desc" args="[appName]"/> </p>
 						</div>
 						<!-- /span8 -->
 					</div>
@@ -586,8 +585,7 @@
 				</div>
 				<!-- /container -->
 			</section>
-
-
+		<g:if test="${grailsApplication.config.app.partner.trim() == "N"}">
 			<section class="section" id="section5" data-section="5">
 				<div class="container">
 					<div class="row title">
@@ -652,6 +650,7 @@
 				<!-- /container -->
 
 			</section>
+		</g:if>
 		</div>
 		<!-- /container -->
 	</div>

@@ -1,13 +1,13 @@
 package com.prismanet
 
 import grails.converters.JSON
+
 import groovy.time.TimeCategory
 
 import com.prismanet.GenericService.FilterType
 import com.prismanet.context.Filter
 import com.prismanet.utils.DateTypes
 import com.prismanet.utils.DateUtils
-
 class MentionController extends GenericController{
 	
 	protected MentionService getService(){

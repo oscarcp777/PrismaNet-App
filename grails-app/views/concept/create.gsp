@@ -37,6 +37,10 @@
 				
 			</g:if>
 			<g:hasErrors bean="${conceptInstance}">
+			<div class="alert alert-block alert-danger">
+				<button type="button" class="close" data-dismiss="alert">
+					<i class="ace-icon fa fa-remove"></i>
+				</button>
 				<ul class="errors" role="alert">
 					<g:eachError bean="${conceptInstance}" var="error">
 						<li
@@ -44,6 +48,8 @@
 								error="${error}" /></li>
 					</g:eachError>
 				</ul>
+			   <br>
+			</div>
 			</g:hasErrors>
 			<g:form class="form-horizontal" action="save">
 				<div class="form">

@@ -4,16 +4,12 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-<title><g:layoutTitle default="Prisma-Net" /></title>
-<link rel="shortcut icon"
-	href="${resource(dir: 'img', file: 'favicon.png')}" type="image/png">
-<link rel="icon" href="${resource(dir: 'img', file: 'favicon.png')}"
-	type="image/png">
-<link rel="stylesheet"
-	href="http://fonts.googleapis.com/css?family=Open+Sans:400,300">
+<title><g:layoutTitle default="${grailsApplication.config.app.name}" /></title>
+<link rel="shortcut icon" href="${resource(dir: 'img', file: 'favicon.png')}" type="image/png">
+<link rel="icon" href="${resource(dir: 'img', file: 'favicon.png')}" type="image/png">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300">
 <r:require modules="core,highcharts,datepicker,editable,ace" />
 
 <g:layoutHead />
@@ -39,12 +35,7 @@
 			</button>
 			<div class="navbar-header pull-left">
 				<div class="logo">
-
-					<a class="logoHolder" title="return to home page" href="#"> <span
-						class="logoFirst"> <i class="ace-icon fa fa-filter"
-							style="font-weight: bold; font-size: 0.9em;"></i><g:message
-								code="general.title.prism" /></span><g:message code="general.title.net" />
-					</a>
+				<g:render contextPath="../public" template="logo" ></g:render>
 				</div>
 				<!-- /.brand -->
 				<!-- /.navbar-header -->
@@ -63,9 +54,15 @@
 
 						<ul
 							class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="#"> <i class="ace-icon fa fa-cog"></i> <g:message
-										code="home.user.settings" />
-							</a></li>
+							
+						   <sec:access expression="hasRole('ROLE_USER_ADVANCE')">
+							<li ><g:link controller='concept' action='list'>
+									<i class="ace-icon fa fa-cog"></i>
+									<g:message code="home.user.settings" />
+								</g:link>
+							</li>
+						  </sec:access>
+					
 
 							<li><a href="#"> <i class="ace-icon fa fa-user"></i> <g:message
 										code="home.user.profile" />
@@ -142,6 +139,8 @@
 												code="home.menu.begin" /> </span>
 									</g:link> <b class="arrow"></b>
 								</li>
+								
+							<g:if test="${session.user.concepts}">
 								<g:each in="${session.concepts.sort{it.conceptName}}" status="i"
 									var="conceptInstance">
 									<li id="${conceptInstance.id}" class="hsub">
@@ -175,6 +174,7 @@
 												</g:link> <b class="arrow"></b></li>
 										</ul></li>
 								</g:each>
+								</g:if>
 								<sec:access expression="hasRole('ROLE_ADMIN')">
 									<li id="admin"><g:link controller='home'
 											action='controlPanel'>
@@ -257,10 +257,9 @@
 					<div class="footer-content">
 						<span class="bigger-120"> 
 						<span class="bolder logoMini">
-							<i class="ace-icon fa fa-filter"></i> 
-				<g:message code="general.title.prism" /><span style="color:#dcdcdc;"><g:message code="general.title.net" /></span>
-
-					</span> Derechos reservados © 2013-2014
+						${raw(grailsApplication.config.app.logo)}
+						</span> 
+					Derechos reservados © 2013-2015
 						</span> &nbsp; &nbsp; <span class="action-buttons"> <a href="#">
 								<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
 						</a> <a href="#"> <i

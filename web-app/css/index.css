@@ -1003,7 +1003,9 @@ a:hover {
 .hd_navbar .brand .logoFirst {
 	color:#16a085;
 }
-
+.hd_navbar .brand .logoFirst i{
+  font-weight:bold;font-size:0.8em;
+}
 .hd_navbar .brand .logoI {
 	visibility: hidden;
 }

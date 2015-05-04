@@ -121,7 +121,9 @@
 .logo .logoFirst {
 	color: #1abc9c!important;//#dd5a43
 }
-
+.logo .logoFirst i{
+  font-weight:bold;font-size:0.8em;
+}
 .logo .logoI {
 	visibility: hidden;
 }

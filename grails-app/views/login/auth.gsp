@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
 <meta name='layout' content='main' />
 <title><g:message code="springSecurity.login.title" /></title>
@@ -12,10 +13,7 @@
 	<div id='login' >
 	
 				<div class="logo">
-					<a class="logoHolder" title="return to home page" href="#"> <span class="logoFirst"> 
-					<i class="ace-icon fa fa-filter" style="font-weight: bold; font-size: 0.9em;"></i> 
-					<g:message code="general.title.prism"/></span><g:message code="general.title.net"/>
-					</a>
+				<g:render contextPath="../public" template="logo" ></g:render>
 				</div>
 		<div class='container'>
 

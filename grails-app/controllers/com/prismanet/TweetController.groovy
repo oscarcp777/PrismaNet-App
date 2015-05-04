@@ -9,7 +9,7 @@ import com.prismanet.sentiment.Opinion
 import com.prismanet.sentiment.OpinionValue
 import com.prismanet.utils.DateTypes
 import com.prismanet.utils.DateUtils
-@Secured(['ROLE_USER'])
+@Secured(['ROLE_USER','ROLE_USER_ADVANCE'])
 class TweetController extends MentionController{
 	static scaffold = true
 	SpringSecurityService springSecurityService;

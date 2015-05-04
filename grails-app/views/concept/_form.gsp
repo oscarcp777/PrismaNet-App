@@ -1,5 +1,6 @@
 <%@ page import="com.prismanet.Concept"%>
-
+<%@ page import="com.prismanet.FacebookSetup"%>
+<%@ page import="com.prismanet.TwitterSetup"%>
 
 
 
@@ -43,44 +44,121 @@
 
 
 				<div class="space"></div>
-				<h4 class="header blue bolder smaller">Social</h4>
+				<h4 class="header blue bolder smaller">Facebook</h4>
 
-				<div
-					class="form-group fieldcontain ${hasErrors(bean: conceptInstance, field: 'facebookSetup', 'error')}">
-					<label class="col-sm-3 control-label no-padding-right"
-						for="facebookSetup"> <g:message
-							code="concept.facebookSetup.label" default="Facebook Setup" /></label>
-
-					<div class="col-sm-9">
-						<span class="input-icon"> <g:select class="form-control"
-								id="facebookSetup" name="facebookSetup.id"
-								from="${com.prismanet.FacebookSetup.list()}" optionKey="id"
-								value="${conceptInstance?.facebookSetup?.id}"
-								 noSelection="['null': '']" /><i
-							class="ace-icon fa fa-facebook blue"></i>
-						</span>
-					</div>
+				<div class="form-group fieldcontain ${hasErrors(bean: facebookSetup, field: 'keywords', 'error')} ">
+				<label class="col-sm-3 control-label no-padding-right" for="keywords">
+					<g:message code="facebookSetup.keywords.label" default="Keywords" />
+	
+				</label>
+	
+				<div class="col-sm-9">
+					<span class="input-icon input-icon-right"> <g:textField
+							name="keywords" value="${conceptInstance?.facebookSetup?.keywords}" />
+					</span>
 				</div>
+			 </div>
 
 				<div class="space-4"></div>
 
-				<div
-					class="form-group fieldcontain ${hasErrors(bean: conceptInstance, field: 'facebookSetup', 'error')}">
-					<label class="col-sm-3 control-label no-padding-right"
-						for="twitterSetup"> <g:message
-							code="concept.twitterSetup.label" default="Twitter Setup" /></label>
+								<div class="space"></div>
+				<h4 class="header blue bolder smaller">Twitter</h4>
+			<div
+				class="form-group fieldcontain ${hasErrors(bean: twitterSetup, field: 'includedAccounts', 'error')} ">
+				<label class="col-sm-3 control-label no-padding-right"
+					for="includedAccounts"> <g:message
+						code="twitterSetup.includedAccounts.label"
+						default="Included Accounts" />
 
-					<div class="col-sm-9">
-						<span class="input-icon"> <g:select class="form-control" style="padding-left=10px;"
-								id="twitterSetup" name="twitterSetup.id"
-								from="${com.prismanet.TwitterSetup.list()}" optionKey="id"
-								value="${conceptInstance?.twitterSetup?.id}" 
-								noSelection="['null': '']" /> <i
-							class="ace-icon fa fa-twitter light-blue"></i>
+				</label>
+				<div class="col-sm-9">
+						<span class="input-icon input-icon-right"> 
+					<g:textField name="includedAccounts"
+					value="${conceptInstance?.twitterSetup?.includedAccounts}" />
 						</span>
 					</div>
-				</div>
+				
+			</div>
 
-</div>
-				</div>
+			<div
+				class="form-group fieldcontain ${hasErrors(bean: twitterSetup, field: 'excludedAccounts', 'error')} ">
+				<label class="col-sm-3 control-label no-padding-right"
+					for="excludedAccounts"> <g:message
+						code="twitterSetup.excludedAccounts.label"
+						default="Excluded Accounts" />
+
+				</label>
+				
+					<div class="col-sm-9">
+						<span class="input-icon input-icon-right"> 
+					<g:textField name="excludedAccounts"
+					value="${conceptInstance?.twitterSetup?.excludedAccounts}" />
+						</span>
+					</div>
+			</div>
+
+			<div
+				class="form-group fieldcontain ${hasErrors(bean: twitterSetup, field: 'keywords', 'error')} ">
+				<label class="col-sm-3 control-label no-padding-right"
+					for="keywords"> <g:message
+						code="twitterSetup.keywords.label" default="Keywords" />
+
+				</label>
+			
+					<div class="col-sm-9">
+						<span class="input-icon input-icon-right"> 
+						<g:textField name="keywords"
+					value="${conceptInstance?.twitterSetup?.keywords}" />
+						</span>
+					</div>
+			</div>
+			<div class="form-group fieldcontain ${hasErrors(bean: twitterSetup, field: 'neutralHashtags', 'error')} ">
+				<label class="col-sm-3 control-label no-padding-right"
+					for="neutralHashtags"> <g:message
+						code="twitterSetup.neutralHashtags.label" default="neutralHashtags" />
+
+				</label>
+			
+					<div class="col-sm-9">
+						<span class="input-icon input-icon-right"> 
+						<g:textField name="neutralHashtags"
+					value="${conceptInstance?.twitterSetup?.neutralHashtags}" />
+						</span>
+					</div>
+			</div>
+			<div
+				class="form-group fieldcontain ${hasErrors(bean: twitterSetup, field: 'positiveHashtags', 'error')} ">
+				<label class="col-sm-3 control-label no-padding-right"
+					for="positiveHashtags"> <g:message
+						code="twitterSetup.positiveHashtags.label" default="positiveHashtags" />
+
+				</label>
+			
+					<div class="col-sm-9">
+						<span class="input-icon input-icon-right"> 
+						<g:textField name="positiveHashtags"
+					value="${conceptInstance?.twitterSetup?.positiveHashtags}" />
+						</span>
+					</div>
+			</div>
+				<div
+				class="form-group fieldcontain ${hasErrors(bean: twitterSetup, field: 'negativeHashtags', 'error')} ">
+				<label class="col-sm-3 control-label no-padding-right"
+					for="negativeHashtags"> <g:message
+						code="twitterSetup.negativeHashtags.label" default="negativeHashtags" />
+
+				</label>
+			
+					<div class="col-sm-9">
+						<span class="input-icon input-icon-right"> 
+						<g:textField name="negativeHashtags"
+					value="${conceptInstance?.twitterSetup?.negativeHashtags}" />
+						</span>
+					</div>
+			</div>
+
+
+
+			</div>
+	</div>
 				
