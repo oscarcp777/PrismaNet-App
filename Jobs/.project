@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>PrismaNet</name>
+	<name>PrismaNet-jobs</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -26,7 +26,7 @@
 		<link>
 			<name>.link_to_grails_plugins</name>
 			<type>2</type>
-			<location>/Users/oscar/workspace/Prisma-net/PrismaNet-App/Web/target/work/plugins</location>
+			<location>/Users/oscar/workspace/Prisma-net/PrismaNet-jobs/target/work/plugins</location>
 		</link>
 	</linkedResources>
 </projectDescription>
