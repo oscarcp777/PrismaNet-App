@@ -1,0 +1,51 @@
+<plugin name='prisma-net-core' version='0.1' grailsVersion='2.3.7 &gt; *'>
+  <author>Your name</author>
+  <title>Prisma Net Core Plugin</title>
+  <description>Brief summary/description of the plugin.
+</description>
+  <documentation>http://grails.org/plugin/prisma-net-core</documentation>
+  <type>PrismaNetCoreGrailsPlugin</type>
+  <resources>
+    <resource>com.prismanet.AccountType</resource>
+    <resource>com.prismanet.Author</resource>
+    <resource>com.prismanet.Concept</resource>
+    <resource>com.prismanet.FacebookAuthor</resource>
+    <resource>com.prismanet.FacebookSetup</resource>
+    <resource>com.prismanet.HistoricalTwitterAccount</resource>
+    <resource>com.prismanet.Mention</resource>
+    <resource>com.prismanet.FAcebookComment</resource>
+    <resource>com.prismanet.Tweet</resource>
+    <resource>com.prismanet.TwitterAccount</resource>
+    <resource>com.prismanet.TwitterAuthor</resource>
+    <resource>com.prismanet.TwitterSetup</resource>
+    <resource>com.prismanet.User</resource>
+    <resource>com.prismanet.model.security.SecRole</resource>
+    <resource>com.prismanet.model.security.SecUser</resource>
+    <resource>com.prismanet.model.security.SecUserSecRole</resource>
+    <resource>com.prismanet.sentiment.Opinion</resource>
+    <resource>com.prismanet.ConceptService</resource>
+    <resource>com.prismanet.FacebookSetupService</resource>
+    <resource>com.prismanet.GenericCoreService</resource>
+    <resource>com.prismanet.GenericService</resource>
+    <resource>com.prismanet.MentionService</resource>
+    <resource>com.prismanet.FacebookCommentService</resource>
+    <resource>com.prismanet.TweetService</resource>
+    <resource>com.prismanet.TwitterSetupService</resource>
+    <resource>com.prismanet.UserService</resource>
+    <resource>com.prismanet.sentiment.OpinionService</resource>
+    <resource>com.prismanet.TwitterAccountConstraint</resource>
+    <resource>com.prismanet.TwitterHashtagConstraint</resource>
+    <resource>com.prismanet.WordSetupConstraint</resource>
+    <resource>com.prismanet.context.AttributeContext</resource>
+    <resource>com.prismanet.context.ConceptAttributeContext</resource>
+    <resource>com.prismanet.context.FacebookSetupAttributeContext</resource>
+    <resource>com.prismanet.context.Filter</resource>
+    <resource>com.prismanet.context.MentionAttributeContext</resource>
+    <resource>com.prismanet.context.OpinionAttributeContext</resource>
+    <resource>com.prismanet.context.FacebookCommentAttributeContext</resource>
+    <resource>com.prismanet.context.TweetAttributeContext</resource>
+    <resource>com.prismanet.context.TwitterAuthorAttributeContext</resource>
+    <resource>com.prismanet.context.TwitterSetupAttributeContext</resource>
+    <resource>com.prismanet.context.UserAttributeContext</resource>
+  </resources>
+</plugin>
