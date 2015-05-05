@@ -1,0 +1,221 @@
+.post-well {
+	background-color: #ffffff;
+	border-radius: 5px 5px 5px 5px;
+	padding: 5px;
+}
+.hr-face{
+	background-color:  #d0d4e4;
+}
+.hr-face:hover{
+	background-color:  #ffffff;
+}
+.tweet-group {
+	padding: 2px;
+}
+
+.tweets {
+	margin: 0;
+	font-size: 16px;
+}
+.box-user-twitter{
+	border-top: 1px solid #e8e8e8;
+	border-radius: 5px 5px 5px 5px;
+	background: #ffffff;
+}
+.avatar {
+	border-top: 1px solid #e8e8e8;
+	border-radius: 5px 5px 5px 5px;
+	background: #ffffff;
+	width: 64px;
+	height: 64px;
+	float: left;
+	margin: 0px 10px 0px 10px;
+}
+
+.tweets li {
+	border: 1px solid #e8e8e8;
+	border-radius: 5px 5px 5px 5px;
+	background: #ffffff;
+}
+.post li{
+	border: 1px solid #d0d4e4;
+	background: #ffffff;
+	border-radius: 3px 3px 3px 3px;
+}
+
+.tweets li:hover{
+	background: #ffffff;
+}
+.post li:hover{
+	background: #e7ebf2;
+}
+.tweets li a {
+	color: #428bca;
+}
+
+.tweets li.in img.avatar {
+	margin-right: 10px;
+	float: left;
+}
+
+.tweets li .name {
+	color: #e89344;
+	font-weight: 400;
+}
+
+.tweets li .name .descrip{
+	color: black;
+	font-weight: bold;
+	text-decoration: none;
+	font-weight: bold;
+}
+.post li .name .descrip{
+	color: #3b5998;
+	cursor:pointer;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.tweets li .date-time {
+	color: #1a1a1a;
+	font-size: 14px;
+	font-weight: 400;
+	float: right;
+}
+.post li .date-time {
+	color: #898f9c;
+	font-size: 12px;
+	font-weight: 400;
+	float:none;
+	margin: 0 !important
+}
+
+.tweets li.out .author{
+	float: left;
+}
+.tweets li.out .author .info{
+	font-size: 10px;
+}
+.tweets li.out img.avatar {
+	float: left;
+	border-radius: 5px;
+	width: 64px;
+	height: 64px;
+	margin-left: 20px;
+	margin-top: 20px;
+	background: #fafafa;
+}
+
+.tweets li .message {
+	display: block;
+	padding: 5px 15px;
+	position: relative;
+}
+
+.tweets li .content {
+	font-family: "Helvetica Neue", Arial, sans-serif;
+	min-height:55px;
+}
+
+.tweets li.in .message {
+	text-align: left;
+	margin-left: 10px;
+}
+
+.tweets li.in .message hr {
+	margin: 10px 0;
+	border: 0;
+	border-top: 1px solid #eeeeee;
+	border-bottom: 1px solid white;
+}
+
+.tweets li.out .message {
+	margin-left: 90px;
+	/* 	background: #e9f2f9; */
+}
+
+.tweets li.out .message .up-arrow {
+	display: block;
+	position: absolute;
+	top: 10px;
+	left: -10px;
+	width: 0px;
+	height: 0px;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	border-right: 10px solid #e9f2f9;
+}
+
+.tweets li.out .message hr {
+	margin: 7px 0;
+	border: 0;
+		border-top: 1px solid #eee;
+}
+
+.tweets li.out .name {
+	color: #428bca;
+	font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.tweets li.out .delete-icon .fs1 {
+	font-size: 18px;
+	color: #e89344;
+}
+
+.tweets li .message .body {
+	display: block;
+}
+
+.tweets li:last-child {
+	margin-bottom: 0;
+}
+
+.tweets li:first-child {
+	margin-top: 0;
+}
+.post li:first-child {
+	margin-bottom:2px;
+}
+.tweets li .reply-icons a.icon {
+	float: left;
+	margin: 0 7px;
+	color: #404040;
+}
+
+.tweets li .reply-icons a.icon .fs1 {
+	font-size: 18px;
+}
+
+.tweets li .reply-icons a.icon .fs1:hover {
+	color: #e89344;
+}
+
+.tweets li .reply-icons a.icon.selectedPOS {
+	color:#18bc9c!important;
+}
+.tweets li .reply-icons a.icon.selectedNEQ {
+	 color:#f77!important
+}
+.tweets li .reply-icons a.icon.selectedNEU {
+	color:#478fca!important;
+}
+.tweets li .reply-icons a.icon.more {
+	position: relative;
+	margin-right: 0;
+}
+
+.tweets li .reply-icons a.icon .overlay {
+	background: #f7f7f7;
+	width: 8px;
+	height: 8px;
+	position: absolute;
+	top: 6px;
+	right: 0;
+}
+
+.tweets li .reply-icons a.last {
+	margin-right: 0px;
+}
+.pag-content .pagination{
+	display: inline-flex;	
+}
