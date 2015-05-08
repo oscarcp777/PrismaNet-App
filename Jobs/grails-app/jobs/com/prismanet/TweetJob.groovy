@@ -6,11 +6,14 @@ import org.apache.commons.io.IOUtils
 
 import com.mongodb.DBCursor
 import com.prismanet.importer.MongoTweetsImporter
+import com.prismanet.job.JobState
+import com.prismanet.job.JobType
 
 class TweetJob {
 	def grailsApplication
 	def tweetService
 	def twitterSetupService
+	def jobStateService
 	def group = "tweetsJobs"
 	def pathCommand=""
 	static triggers = {
@@ -18,21 +21,37 @@ class TweetJob {
 	}
 
 	def execute() {
-		if(grailsApplication.config.jobs.twitter.disable)
-		 return
-		 if(grailsApplication.config.jobs.exec.jar.tomcat){
-			 def catalina_base = System.getProperty('catalina.base')
-			 pathCommand=catalina_base+"/webapps/PrismaNet-jobs/WEB-INF/lib/"
-			 log.info "path para correr jar" +pathCommand
-		 }
-		
-		log.info "TweetJob ejecutado: " + new Date()
-		MongoTweetsImporter importer = new MongoTweetsImporter("mongodb://localhost")
 		
 		use(TimeCategory){
+
+			if(grailsApplication.config.jobs.twitter.disable)
+				return
+			if(grailsApplication.config.jobs.exec.jar.tomcat){
+				def catalina_base = System.getProperty('catalina.base')
+				pathCommand=catalina_base+"/webapps/PrismaNet-jobs/WEB-INF/lib/"
+				log.info "path para correr jar" +pathCommand
+			}
+			
+			Date currentMinute = new Date()
+			Date previousMinute
+			JobState state = jobStateService.getLastUpdate(JobType.TWITTER)
+			if (!state){
+				previousMinute = currentMinute-1.minute+1.second
+				state = new JobState(type:JobType.TWITTER,lastUpdate:currentMinute)
+			}else
+				previousMinute = state.lastUpdate +1.second
+				
+			state.lastUpdate = currentMinute
+			jobStateService.save(state)
+			log.info "TweetJob ejecutado: " + currentMinute
+			log.info "Proceso tweets de " + previousMinute + " hasta " + currentMinute
+				
+			MongoTweetsImporter importer = new MongoTweetsImporter("mongodb://localhost")
+
+
 			// Determino la fecha de ultima actualizacion de una configuracion de twitter
 			Date lastUpdate = twitterSetupService.getLastUpdated()
-			
+
 			List<String> result
 			try {
 				// Determino si el proceso esta corriendo
@@ -50,7 +69,8 @@ class TweetJob {
 			}
 			
 			// Si la ultima actualizacion de una configuracion fue en el último minuto reinicio el proceso
-			if (lastUpdate.after(new Date()-1.minute)){
+			if (lastUpdate.after(previousMinute)){
+				log.info "Se reinicia proceso por actualizacion de la configuracion"
 				// Detencion del proceso actual
 				try {
 					ProcessBuilder kill = new ProcessBuilder("/bin/sh", "-c", "kill -9 " + result.get(0)[0..4])
@@ -68,10 +88,10 @@ class TweetJob {
 			
 			def d1 = new GregorianCalendar(2013, Calendar.OCTOBER, 27,11,00)
 //			def d2 = new GregorianCalendar(2013, Calendar.OCTOBER, 14,1,36)
-			Date filteredDate = new Date()-1.minute
 			
 			def dates = [:]
-			dates.put("dateFrom",filteredDate)
+			dates.put("dateFrom",previousMinute)
+			dates.put("dateTo",currentMinute)
 //			dates.put("dateFrom",d1.time)
 //			dates.put("dateTo",d2.time)
 			
@@ -108,9 +128,8 @@ class TweetJob {
 				log.info "Cursor Tweets cerrado"
 				tweets.close()
 			}
+			importer.close()
 		}
-		importer.close()
 	}
-	
 	
 }
