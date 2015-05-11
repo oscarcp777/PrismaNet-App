@@ -4,7 +4,7 @@ modules = {
 		resource url:'css/bootstrap/bootstrap.css'
 		resource url:'js/jquery.js' , disposition: 'head'
 		resource url:'js/bootstrap/bootstrap.js'
-		resource url:'css/font-awesome.css'
+		resource url:'css/font-awesome.css' 
 	}
 	ace{
 		resource url:'css/ace/ace.min.css'
@@ -28,6 +28,7 @@ modules = {
 		resource url:'css/bootstrap/bootstrap-editable.css'
 		resource url:'js/bootstrap/bootstrap-editable.js'
 		resource url:'js/bootstrap/bootbox.js'
+		resource url:'js/jquery.autosize.js'
 	}
 	highcharts {
 		dependsOn 'core'

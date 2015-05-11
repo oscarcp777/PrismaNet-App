@@ -425,6 +425,9 @@ class ConceptController extends GenericController{
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'concept.label', default: 'Concept'), conceptInstance.id])
 		redirect(action: "show", id: conceptInstance.id)
 	}
+	
+
+	
 	@Secured(['ROLE_ADMIN'])
 	def index() {
 		redirect(action: "list", params: params)
@@ -474,5 +477,30 @@ class ConceptController extends GenericController{
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'concept.label', default: 'Concept'), id])
 			redirect(action: "show", id: id)
 		}
+	}
+	
+	@Secured(['ROLE_USER_ADVANCE'])
+	def listAdvance(Integer max) {
+		params.max = Math.min(max ?: 10, 100)
+		[conceptList: session.concepts, conceptTotal: session.concepts.size()]
+	}
+	@Secured(['ROLE_USER_ADVANCE'])
+	def createAdvance() {
+		def concept=new Concept(params);
+		concept.setTwitterSetup(new TwitterSetup(params))
+		concept.setFacebookSetup(new FacebookSetup(params))
+		[conceptInstance: new Concept(params)]
+	}
+	def changeStatus(){
+		def concept = Concept.get(params.id)
+		concept.active=!concept.active
+		if (concept.save(flush: true)) {
+			loadConceptsSession()
+			render(template: "tableConcepts", model: [conceptList:session.concepts])
+		}else{
+		    def resultMap = [error:'error-save',id:params.id,status:params.active]
+		    render resultMap as JSON
+		}
+		
 	}
 }

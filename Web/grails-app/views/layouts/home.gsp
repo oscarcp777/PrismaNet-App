@@ -56,7 +56,7 @@
 							class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 							
 						   <sec:access expression="hasRole('ROLE_USER_ADVANCE')">
-							<li ><g:link controller='concept' action='list'>
+							<li ><g:link controller='concept' action='listAdvance'>
 									<i class="ace-icon fa fa-cog"></i>
 									<g:message code="home.user.settings" />
 								</g:link>
@@ -141,7 +141,7 @@
 								</li>
 								
 							<g:if test="${session.user.concepts}">
-								<g:each in="${session.concepts.sort{it.conceptName}}" status="i"
+								<g:each in="${session.concepts}" status="i"
 									var="conceptInstance">
 									<li id="${conceptInstance.id}" class="hsub">
 									<a href="#"
@@ -240,7 +240,7 @@
 
 				<div class="page-content">
 					<div class="row">
-						<div class="col-xs-12">
+						<div class="col-xs-12" id="layoutBody">
 							<g:layoutBody />
 							<r:layoutResources />
 							<!-- PAGE CONTENT ENDS -->
@@ -280,11 +280,17 @@
 			<!-- 	</div> -->
 			<!-- basic scripts -->
 	<script type="text/javascript">
+	
 			function changeStateMenu(state){
 				var context='${request.contextPath}';
 				setDataMenu(context,state);
 			}
 			$(document).ready(function() {
+				$(".tooltips").tooltip();
+				$(".help").popover();
+				bootbox.setDefaults({
+					  locale: "es"
+					});
 			var menuState='${session.menu}';
 			if (menuState == "collapsed") {
 				$("#sidebar-collapse").click();

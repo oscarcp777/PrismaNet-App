@@ -9,14 +9,7 @@ import grails.plugins.springsecurity.SpringSecurityService
 class HomeController extends GenericController{
 	
     def index() {
-		if(!session.user){
-			session.user=springSecurityService.currentUser
-		}
-		
-
-		if(!session.user.concepts.isEmpty() && !session.concepts){
-			session.concepts=springSecurityService.currentUser.concepts
-		}
+		loadDataSession()
 		redirect action: 'stats', controller: 'user'
 	}
 	

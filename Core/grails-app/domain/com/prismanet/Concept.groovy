@@ -14,6 +14,9 @@ class Concept {
 	FacebookSetup facebookSetup
 	static hasMany = [mentions:Mention, posts:Post]
 	User user
+	Boolean active = Boolean.TRUE
+	Country country
+	Languages lang
 
     static constraints = {
 		conceptName(nullable:false)
@@ -22,6 +25,8 @@ class Concept {
 		posts()
 		twitterSetup(nullable:true)
 		facebookSetup(nullable:true)
+		country(nullable:true)
+		lang(nullable:true)
     }
 	
 	static mapping = {

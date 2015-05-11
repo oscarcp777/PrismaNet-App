@@ -112,7 +112,6 @@
 	activeItemMenuLevel2(id,'${concept.id}-tweet','${concept.conceptName}');
 	var params='${params}';
 		jQuery(function($) {
-			$(".tooltips").tooltip();
  			getWordsCloud(getParamsCloud(params,'#cloudWordsTW',id));
 		});
 	</script>

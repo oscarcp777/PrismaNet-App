@@ -38,6 +38,25 @@ body{
 .breadcrumb>li.active a{
 	text-decoration: none;
 }
+
+.table thead tr {
+    color:#2679b5;
+    font-weight:bold;
+    background:#fff;
+    background-image:none;
+   
+}
+
+.table-striped > tbody > tr:nth-of-type(odd){
+	background:#fafbfc;
+}
+.table-hover > tbody > tr:hover{
+	background:#fafbfc;
+}
+.table>thead>tr>th{
+	padding: 14px 8px;
+}
+
 /*#####################*/
 /* estilos del logo*/
 @font-face {
@@ -162,3 +181,41 @@ body{
 .btn-help{
   padding: 3px 8px !important;
 }
+
+.modal-dialog,.modal-content{
+	border-radius:6px; 
+}
+
+/* .form-horizontal .control-label{ */
+/* 	font-weight: bold; */
+/* } */
+textarea, input[type="text"], 
+input[type="password"], 
+input[type="datetime"], 
+input[type="datetime-local"], 
+input[type="date"], input[type="month"], 
+input[type="time"], input[type="week"], 
+input[type="number"], input[type="email"], 
+input[type="url"], input[type="search"], 
+input[type="tel"], input[type="color"]{
+	border-radius:4px !important;
+}
+.input-icon{
+	width: 100%;
+}
+.help-input{
+	margin-left: 8px;
+}
+.input-inline{
+	display: inline-flex;
+}
+
+.input-icon>textArea{
+	padding-left:24px;
+    padding-right:6px
+}
+
+
+
+
+

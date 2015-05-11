@@ -10,12 +10,22 @@ import com.prismanet.utils.DateUtils
 class GenericController {
 	
 	static listMethods = ["max", "offset", "order", "sort", "ignoreCase", "fetch", "readOnly", "fetchSize", "flushMode", "timeout"]
-			SpringSecurityService springSecurityService;
+	SpringSecurityService springSecurityService;
+	
 	def beforeInterceptor = {
+		loadDataSession();
+	}
+	protected void loadDataSession(){
 		if(!session.user){
 			session.user=springSecurityService.currentUser
-			session.concepts=springSecurityService.currentUser.concepts
+			loadConceptsSession();
 		}
+		if(!session.user.concepts.isEmpty() && !session.concepts){
+			loadConceptsSession()
+		}
+	}
+	protected void loadConceptsSession(){
+		session.concepts=springSecurityService.currentUser.concepts.sort{it.id}
 	}
 	def getConcept(id){
 		def concept
