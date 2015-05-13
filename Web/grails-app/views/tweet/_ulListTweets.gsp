@@ -92,9 +92,9 @@
 									<div class="grid3 pull-right">
 										<div class="reply-icons pull-right">
 
-											<a href="" class="icon hide_tweet" data-original-title="">
+											<a href="javascript:void(0)" class="icon hide_tweet" data-original-title="">
 												${tweet.tweet.retweetCount} <i class="ace-icon fa fa-retweet fs1" title="retweet"></i>
-											</a> <a href="" class="icon last" data-original-title=""> 
+											</a> <a href="javascript:void(0)" class="icon last" data-original-title=""> 
 												${tweet.tweet.favoriteCount}<i class="ace-icon fa fa-star fs1" title="favorito"></i>
 											</a>
 										</div>

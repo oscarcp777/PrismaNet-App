@@ -141,7 +141,7 @@
 								</li>
 								
 							<g:if test="${session.user.concepts}">
-								<g:each in="${session.concepts}" status="i"
+								<g:each in="${session.concepts.sort{it.id}}" status="i"
 									var="conceptInstance">
 									<li id="${conceptInstance.id}" class="hsub">
 									<a href="#"

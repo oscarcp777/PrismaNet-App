@@ -6,20 +6,19 @@
 				<i class="ace-icon  fa-lg fa fa-${icon}"> </i>
 				<label id="title-${callback}"> <g:message code="${titleChar}" /></label>
 			</h5>
-
+			<div class="widget-toolbar">
+				<a href="#" data-action="collapse"> <i
+					class="1 bigger-125 ace-icon fa fa-chevron-up"></i>
+				</a>
+			</div>
 			<g:if test="${divPickert != 'disable'}">
-			<div class="widget-toolbar input-group ">
+			<div class="widget-toolbar input-group blue-active">
 				<div id="${divPickert}" class="btn btn-primary date-picker">
 					<i class="ace-icon fa fa-calendar"></i> <span class="date-range"></span>
 					<i class="ace-icon fa fa-chevron-down"></i>
 				</div>
 			</div>
 			</g:if>
-			<div class="widget-toolbar">
-				<a href="#" data-action="collapse"> <i
-					class="1 bigger-125 ace-icon fa fa-chevron-up"></i>
-				</a>
-			</div>
 			<g:if test="${callback != 'disable'}"> 
 			<g:render template="chooseChannel"  bean="${callback}"></g:render>
 			</g:if>

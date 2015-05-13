@@ -94,12 +94,13 @@ class TweetController extends MentionController{
 	 }
 	def samplingStep1(){
 		def container = params.div
+		def samplingType = params.samplingType as SamplingType
 		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
 		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
 		log.info "samplingStep1 params: " + params
 		def filters = loadMentionFilters().filters
 		filters.addAll(getService().getFilterList(dateFrom, dateTo, "created", false))
-		def samplings = tweetService.getSamplingTweets(filters, params, SamplingType.TOP_FAVS)
+		def samplings = tweetService.getSamplingTweets(filters, params, samplingType)
 		//TODO guardo en session la muestra ver
 		session.conceptsId=params.conceptsId
 		session.samplingTweets=samplings.resultList
@@ -109,7 +110,6 @@ class TweetController extends MentionController{
 		Concept concept =getConcept(session.conceptsId)
 		
 		def totalPage=(session.samplingTweets.size()%10 == 0)?(int)session.samplingTweets.size()/10:(session.samplingTweets.size()/10).setScale(0, BigDecimal.ROUND_DOWN)+1
-		print totalPage
 		def end=totalPage >1?9:session.samplingTweets.size()-1
 		def parcialList=totalPage==0?session.samplingTweets:session.samplingTweets[0..end]
 		loadTweets(parcialList)

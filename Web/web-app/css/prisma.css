@@ -150,24 +150,32 @@ body{
     border-bottom-right-radius:4px !important;
     border-top-right-radius:4px !important
 }
-.btn-primary.active {
+.btn-group .btn-primary.active {
     background-color:#1b6aaa!important;
     border-color:#ffcb05;
 }
-.btn-info.active {
+.btn-group .btn-info.active {
     background-color:#4f99c6!important;
     border-color:#ffcb05;
 
 }
-.btn-danger.active {
+.btn-group .btn-danger.active {
     background-color:#b74635!important;
     border-color:#ffcb05;
+}
+.btn-group .btn-yellow.active {
+    background-color:#e59729 !important;
+    border-color:#ffb752;
+    color: #fff !important;
 }
 .btn.active:after{
 	border-bottom:white;
 }
 .blue-active {
-    background-color:#1b6aaa!important
+    background-color:#1b6aaa!important;
+    line-height: 41px;
+    border:1px solid #fff;
+    border-width:0 1px 0 0
 }
 .btn.btn-app {
 	width:120px;
@@ -215,7 +223,9 @@ input[type="tel"], input[type="color"]{
     padding-right:6px
 }
 
-
+.widget-toolbar{
+	line-height:40px;
+}
 
 
 

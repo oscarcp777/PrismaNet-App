@@ -1,5 +1,6 @@
 <%@ page import="com.prismanet.sentiment.OpinionValue"%>
 <%@ page import="com.prismanet.sentiment.Opinion"%>
+<%@page import="com.prismanet.TweetService.SamplingType"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,28 +12,81 @@
 <g:set var="conceptName" value="${concept.conceptName}" />
 	<g:render template="tabTwitter"  model="['concept':concept,'tabMain':'','tabTweets':'','tabChar':'','tabSentimental':'','tabSampling':'active']"></g:render>
 		<div class="row">
-		<g:render contextPath="../user" template="headerHelp" model="['mainMessage':'dashborad.tab.samplings.desc']"></g:render>
-		   			<div class="col-lg-12">
-						<div class="widget-box widget-color-blue">
-							<div class="widget-header">
-								<h5 class="widget-title">
-								<i class="fa fa-random"></i>
-								<g:message code="sampling.tweets.title"/> </h5>
+		<div class="col-lg-12">
+		 <div class="widget-box transparent">
+			<div class="widget-header" style="margin:0 30px 0 30px;">
+				<h4 class="widget-title lighter"><g:message code="label.help"/></h4>
 
-							<div class="widget-toolbar input-group">
+				<div class="widget-toolbar no-border">
+					<a href="#" data-action="collapse">
+						<i class="ace-icon fa fa-chevron-up bigger-125"></i>
+					</a>
+
+					<a href="#" data-action="close">
+						<i class="ace-icon fa fa-times bigger-125"></i>
+					</a>
+				</div>
+			</div>
+		   <div class="widget-body" >
+		     <div class="widget-main">
+		      <g:render contextPath="../user" template="headerHelp" model="['mainMessage':'dashborad.tab.samplings.desc']"></g:render>
+		     </div>
+		   </div>
+		</div>
+		
+		</div>
+		</div>
+		<div class="space-24"></div>
+		<div class="row">
+	   <div class="col-lg-12">
+	   <div class="space-4"></div>
+				<div class="widget-box widget-color-blue">
+					<div class="widget-header">
+						<h5 class="widget-title"><i class="fa fa-random"></i> <g:message code="sampling.tweets.title"/> </h5>
+						<div class="widget-toolbar">
+
+							<a href="javascript:void(0);" data-action="collapse"> <i
+								class="1 bigger-125 ace-icon fa fa-chevron-up"></i>
+							</a>
+						</div>
+						<div class="widget-toolbar input-group blue-active">
 							<div id="pickertSampling" class="btn btn-info date-picker">
 								<i class="ace-icon fa fa-calendar"></i> <span class="date-range"></span>
 								<i class="ace-icon fa fa-chevron-down"></i>
 							</div>
+						</div>
+						<div class="widget-toolbar blue-active" >
+						      <div class="btn-group  btn-corner" style="display: none;" id="refresh-sampling">
+								<g:link class="btn btn-info active tooltips" controller="concept" action="sampling" id="${concept.id}" 
+								   data-original-title="reiniciar el muestreo">
+									<i class="ace-icon fa fa-refresh icon-only bigger-150"></i>
+								</g:link>
+							  </div>
+								<div class="btn-group  btn-corner" data-toggle="buttons" id="samplingType">
+								  <label  class="btn btn-info active tooltips" 
+								  data-original-title="${g.message (code: 'sampling.tweets.random')}">
+								    <input type="radio" checked name="options" id="option1" value="${SamplingType.RANDOM}">
+								     <i class="ace-icon fa fa-random align-top bigger-125"></i>
+								  </label>
+								    <label class="btn btn-info tooltips" 
+								  data-original-title="${g.message (code: 'sampling.tweets.author')}">
+								    <input type="radio" name="options" id="option2" value="${SamplingType.TOP_RELEVANT_AUTHORS}">
+								     <i class="ace-icon fa fa-users align-top bigger-125"></i>
+								  </label>
+								    <label class="btn btn-info tooltips" 
+								  data-original-title="${g.message (code: 'sampling.tweets.retweet')}">
+								    <input type="radio" name="options" id="option3" value="${SamplingType.TOP_RETWEETS}">
+								     <i class="ace-icon fa fa-retweet align-top bigger-125"></i>
+								  </label>								  
+								  <label class="btn btn-info tooltips " 
+								  data-original-title="${g.message (code: 'sampling.tweets.fav')}">
+								    <input type="radio" name="options" id="option4" value="${SamplingType.TOP_FAVS}">
+								    <i class="ace-icon fa fa-star align-top bigger-125"></i>
+								  </label>
+								
 								</div>
-<!-- 							<div class="widget-toolbar blue-active"> -->
-<!-- 							   <div class="btn-group  btn-corner"> -->
-<!-- 								<a href="javascripts:void(0);" id="help-samplings" class="btn btn-grey btn-help" >  -->
-<!-- 								<i class="ace-icon fa fa-question-circle fa-2x"></i> -->
-<!-- 								</a> -->
-<!-- 							   </div> -->
-<!-- 							</div> -->
 							</div>
+					 </div>
 
 							<div class="widget-body" >
 								<div class="widget-main">
@@ -62,7 +116,7 @@
 										</div>
 
 										<div class="step-pane" id="step2" style="display: inline-block;min-height:inherit;">
-											<div class="center" id="samplingStep2">
+											<div class="center" id="samplingStep2" >
 												
 											</div>
 										</div>
@@ -109,7 +163,9 @@
 		}
 		function loadPickertSampling(start, end, rangeSelect) {
 	    	 $('#pickertSampling span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
-		     var data = {"conceptsId":${concept.id},"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm'),'div':'#samplingStep1'};
+	    	 var type=$("#samplingType input[type='radio']:checked").val();
+		     var data = {"conceptsId":${concept.id},"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm'),
+		    		      'div':'#samplingStep1','samplingType':type};
 		     getSamplingStep1(data);
 		}
 		function loadSamplingStep1(data){
@@ -131,6 +187,11 @@
 				if(info.step==1){
 					var data = {'div':'#samplingStep2'};
 					getSamplingStep2(data);
+					$('#samplingStep2').css({ 'min-height':'200px'});
+					$('#samplingType').hide();
+					$('#pickertSampling').hide();
+					$('#refresh-sampling').show();
+					
 				}
 				if(info.step==2){
 					$('#step2').empty();
@@ -149,16 +210,7 @@
 			 var id='${concept.id}';
 			 loadDatepicker('pickertSampling',loadPickertSampling);
 			  activeItemMenuLevel2(id,id+'-tweet','${concept.conceptName}');
-			  
-			  var contentHelp='<g:message code="sampling.tweets.help" />';
-		    	 $('#help-samplings').popover({
-		    		 content:contentHelp,
-		    		 html:true,
-		    		 placement:'top',
-		    		 title:'¿Qué es esto?',
-		    		 container:'body',
-		    		 trigger:'hover'
-		    	 });
+
 			});
 	</script>
 </body>
