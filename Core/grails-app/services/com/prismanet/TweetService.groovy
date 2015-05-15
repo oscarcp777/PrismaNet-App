@@ -188,15 +188,15 @@ class TweetService extends MentionService{
 			break;
 			case SamplingType.TOP_RELEVANT_AUTHORS:
 				def samplingTweets = getMentions(filters, parameters, new TweetAttributeContext(), Tweet, [[attribute:"authorFollowers",value:OrderType.DESC]])
-				return [resultList:samplingTweets.resultList,totalSampling:samplingTweets.totalCount,totalDemo:tweets.totalCount]
+				return [resultList:samplingTweets.resultList,totalSampling:samplingTweets.resultList.list.size(),totalDemo:tweets.totalCount]
 			break;
 			case SamplingType.TOP_RETWEETS:
 				def samplingTweets = getMentions(filters, parameters, new TweetAttributeContext(), Tweet, [[attribute:"retweetCount",value:OrderType.DESC]])
-				return [resultList:samplingTweets.resultList,totalSampling:samplingTweets.totalCount,totalDemo:tweets.totalCount]
+				return [resultList:samplingTweets.resultList,totalSampling:samplingTweets.resultList.list.size(),totalDemo:tweets.totalCount]
 			break;
 			case SamplingType.TOP_FAVS:
 				def samplingTweets = getMentions(filters, parameters, new TweetAttributeContext(), Tweet, [[attribute:"favoriteCount",value:OrderType.DESC]])
-				return [resultList:samplingTweets.resultList,totalSampling:samplingTweets.totalCount,totalDemo:tweets.totalCount]
+				return [resultList:samplingTweets.resultList,totalSampling:samplingTweets.resultList.list.size(),totalDemo:tweets.totalCount]
 			break;
 		}
 	}
