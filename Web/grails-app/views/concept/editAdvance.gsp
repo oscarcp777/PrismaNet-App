@@ -40,15 +40,8 @@
 				<g:hiddenField name="id" value="${conceptInstance?.id}" />
 				<g:hiddenField name="version" value="${conceptInstance?.version}" />
 				<div class="form">
-				<div class="tabbable">
-						<ul class="nav nav-tabs padding-16">
-							<li class="active"><a data-toggle="tab" href="#edit-basic">
-									<i class="green fa fa-edit bigger-125"></i> <g:message
-										code="form.edit.concept" />
-							</a></li>
-						</ul>
+				
 					<g:render template="formAdvance"/>
-					</div>
 				</div>
 				<div class="clearfix form-actions">
 					<div class="col-md-offset-3 col-md-9">

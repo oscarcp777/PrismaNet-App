@@ -111,18 +111,6 @@
 			<div class="profile-info-row">
 					<div class="profile-info-name">
 					  <span id="twitterSetup-label" class="property-label">
-					    <g:message code="twitterSetup.includedAccounts.label" />
-				      </span>
-					</div>
-				    <div class="profile-info-value">
-						<span class="property-value" aria-labelledby="twitterSetup-label">
-						<g:fieldValue bean="${conceptInstance?.twitterSetup}" field="includedAccounts"/>
-						</span>
-					</div>
-			</div>
-			<div class="profile-info-row">
-					<div class="profile-info-name">
-					  <span id="twitterSetup-label" class="property-label">
 					    <g:message code="twitterSetup.keywords.label" />
 				      </span>
 					</div>
