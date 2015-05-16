@@ -39,76 +39,67 @@ class TweetService extends MentionService{
 		for (BasicDBObject tweetObj : tweets){
 			JSONObject obj = new JSONObject(tweetObj)
 			Status status = new StatusJSONImpl(obj)
-			StopWatch timer = new StopWatch()
-			timer.start()
-			Author author = TwitterAuthor.findByAccountName("@"+status.getUser().getScreenName())
-			if (!author){
-				author = new TwitterAuthor(name: status.getUser().getName(), twitterAuthorId: status.getUser().getId(), accountName:"@"+status.getUser().getScreenName(), followers:status.getUser().getFollowersCount(), sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()).save(validate:false)
-				if (!author.id){
-					author.discard()
-					throw ApplicationException.create(author)
-				}
-			}
-			else{
-				author.followers = status.getUser().getFollowersCount()
-				author.profileImage = status.getUser().getProfileImageURL()
-			}
-			timer.stop()
-			log.info "tiempo autor: " + timer.getTotalTimeMillis()
-			timer = new StopWatch()
-			timer.start()
+			StopWatch timer
 			def retCount = 0
 			def favCount = 0
+			def retweet = false
+			def retweetId = null
 			if (status.getRetweetedStatus()){
 				retCount = status.getRetweetedStatus().getRetweetCount()
 				favCount = status.getRetweetedStatus().getFavoriteCount()
+				retweet = true
+				retweetId = status.getRetweetedStatus().getId()
 			}
 			Tweet tweet = new Tweet(content:status.getText(),
-			author:author,
 			created:status.getCreatedAt(),
 			tweetId:status.getId(),
 			retweetCount:retCount,
-			favoriteCount:favCount)
+			favoriteCount:favCount,
+			retweet:retweet,
+			retweetId:retweetId)
 
 			concepts.each(){ concept->
+				timer = new StopWatch()
+				timer.start()
+//				log.info "status.lang " + status.getIsoLanguageCode()
+//				log.info "concept.lang " + concept.lang
+//				if (!concept.lang || status.getIsoLanguageCode() == concept.lang)
 				if (concept.testAddTweet(tweet)){
 					log.info "valido para concepto: " +  concept
 					if (!tweet.id){
+						Author author = TwitterAuthor.findByAccountName("@"+status.getUser().getScreenName())
+						if (!author){
+							author = new TwitterAuthor(name: status.getUser().getName(), twitterAuthorId: status.getUser().getId(), accountName:"@"+status.getUser().getScreenName(), followers:status.getUser().getFollowersCount(), sex: Sex.M, userSince:status.getUser().getCreatedAt(), profileImage:status.getUser().getProfileImageURL()).save(validate:false)
+							if (!author.id){
+								author.discard()
+								throw ApplicationException.create(author)
+							}
+						}
+						else{
+							author.followers = status.getUser().getFollowersCount()
+							author.profileImage = status.getUser().getProfileImageURL()
+						}
+						tweet.author = author
 						tweet.save(validate:false)
 						log.info "Tweet guardado con ID :  " + tweet.id
-						timer.stop()
-						log.info "tiempo tweet: " + timer.getTotalTimeMillis()
 					}
 					if (!tweet.id){
 						tweet.discard()
+						timer.stop()
 						throw ApplicationException.create(tweet)
 					}
-					if (timer.isRunning()){
-						log.info "no estopeo"
-						timer.stop()
-					}
-					timer = new StopWatch()
-					timer.start()
 					def sql = new Sql(sessionFactory.currentSession.connection())
 					sql.execute("insert into concept_mentions values(?,?)", [concept.id, tweet.id])
 //					concept.doAddToMentions(tweet)
-					timer.stop()
-					log.info  "tiempo concept: " + timer.getTotalTimeMillis()
 					if (concept.twitterSetup.isPositiveHashtag(tweet)){
-						timer = new StopWatch()
-						timer.start()
 						opinionService.addOpinion(concept, tweet, OpinionValue.POSITIVE)
-						timer.stop()
-						log.info  "tiempo opinion: " + timer.getTotalTimeMillis()
 					}
 					if (concept.twitterSetup.isNegativeHashtag(tweet)){
-						timer = new StopWatch()
-						timer.start()
 						opinionService.addOpinion(concept, tweet, OpinionValue.NEGATIVE)
-						timer.stop()
-						log.info  "tiempo opinion: " + timer.getTotalTimeMillis()
 					}
 				}
+				timer.stop()
+				log.info "tiempo tweet: " + timer.getTotalTimeMillis()
 			}
 			
 		}

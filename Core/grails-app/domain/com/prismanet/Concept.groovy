@@ -64,23 +64,54 @@ class Concept {
 	
 	public boolean testAddTweet(Tweet tweet){
 		def add = false
+		for (String excludedWord in this.twitterSetup?.excludedAccounts?.split(',')) {
+			if (tweet.content.contains(excludedWord)){
+				return false
+			}
+		}
 		for (String twitterAccount in this.twitterSetup?.includedAccounts?.split(',')) {
 			if (tweet.content.contains(twitterAccount)){
 				add = true
 			}
 		}
-		for (String keyword in this.twitterSetup?.keywords?.split(',')) {
-			if (tweet.content.contains(keyword)){
+		if (!add)
+			for (String neutralHashtag in this.twitterSetup?.neutralHashtags?.split(',')) {
+				if (tweet.content.contains(neutralHashtag)){
+					add = true
+				}
+			}
+		if (!add)
+			if(this.twitterSetup?.isPositiveHashtag(tweet) || this.twitterSetup?.isNegativeHashtag(tweet)){
 				add = true
 			}
-		}
-		for (String neutralHashtag in this.twitterSetup?.neutralHashtags?.split(',')) {
-			if (tweet.content.contains(neutralHashtag)){
-				add = true
+		if (!add){
+			def expressions = this.twitterSetup?.keywords?.split(',')
+			if (expressions && expressions.size()>0){
+				int i=0
+				// Loop de OR corta cuando encuentra el primer verdadero
+				while (i<expressions.size() && !add){
+					def isValid = true
+					expressions[i] = expressions[i].trim()
+					// Frases textuales
+					if (expressions[i][0]=='\"' && expressions[i][expressions[i].size()-1]=='\"'){
+						if (!tweet.content.contains(expressions[i][1..-2])){
+							isValid = false
+						}
+					}else{
+						def words = expressions[i].split(' ')
+						int j=0
+						// Loop de AND corta cuando encuentra el primer falso
+						while (j<words.size() && isValid){
+							if (!tweet.content.contains(words[j]))
+								isValid = false
+							j++
+						}
+					}
+					if (isValid)
+						add = true
+					i++
+				}
 			}
-		}
-		if(this.twitterSetup?.isPositiveHashtag(tweet) || this.twitterSetup?.isNegativeHashtag(tweet)){
-			add = true
 		}
 		return add
 	}

@@ -7,11 +7,13 @@ class Tweet extends Mention{
 	Long retweetCount = 0
 	Long favoriteCount = 0
 	Long tweetId
+	Long retweetId
 	
 	static transients = ['contentHtml']
     static constraints = {
 		retweet(nullable:true)
 		tweetId(nullable:true)
+		retweetId(nullable:true)
 	}
 	
 	
