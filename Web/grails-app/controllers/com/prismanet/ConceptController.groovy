@@ -482,6 +482,7 @@ class ConceptController extends GenericController{
 	@Secured(['ROLE_USER_ADVANCE'])
 	def listAdvance(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
+		loadConceptsSession()
 		[conceptList: session.concepts, conceptTotal: session.concepts.size()]
 	}
 	@Secured(['ROLE_USER_ADVANCE'])
