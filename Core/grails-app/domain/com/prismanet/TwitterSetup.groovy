@@ -21,12 +21,12 @@ class TwitterSetup {
 
 	static constraints = {
 		// Ver constraint twitterAccount en TwitterAccountConstraint (usa plugin)
-		includedAccounts(nullable:true, twitterAccount:true)
-		excludedAccounts(nullable:true, twitterAccount:true)
-		keywords(nullable:true, wordSetup:true)
-		neutralHashtags(nullable:true, twitterHashtag:true)
-		positiveHashtags(nullable:true, twitterHashtag:true)
-		negativeHashtags(nullable:true, twitterHashtag:true)
+		includedAccounts(nullable:true, twitterAccount:true, maxSize: 1000)
+		excludedAccounts(nullable:true, wordSetup:true, maxSize: 1000)
+		keywords(nullable:true, wordSetup:true, maxSize: 1000)
+		neutralHashtags(nullable:true, twitterHashtag:true, maxSize: 1000)
+		positiveHashtags(nullable:true, twitterHashtag:true, maxSize: 1000)
+		negativeHashtags(nullable:true, twitterHashtag:true, maxSize: 1000)
 		lastUpdated(nullable:true)
 	}
 
