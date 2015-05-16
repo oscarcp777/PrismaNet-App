@@ -57,7 +57,6 @@
 						</div>
 					</div>
 		</div>
-		
        <g:render template="listTweets" model="['concept':concept,'tweetList':tweetInstanceList,'tweetTotal':tweetInstanceTotal]"></g:render>			
 
 			<div class="col-xs-4">

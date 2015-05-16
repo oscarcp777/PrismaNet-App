@@ -4,6 +4,7 @@ PATH_WEBAPPS="/home/prismanet/tomcat-7/webapps"
 PATH_PRISMA="/home/prismanet/PrismaNet-App"
 PATH_BACKUP="/home/prismanet/backup-war"
 
+
 echo -e  "1.- detengo el tomcat"
 rm $PATH_TOMCAT/pids/*
 cd $PATH_TOMCAT/bin
