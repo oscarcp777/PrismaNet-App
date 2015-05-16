@@ -505,10 +505,14 @@ class ConceptController extends GenericController{
 	}
 	@Secured(['ROLE_USER_ADVANCE'])
 	def saveAdvance() {
+		log.info "params: " + params
+		
 		def conceptInstance = new Concept(params)
 		conceptInstance.user=session.user
 		def fcSetup=new FacebookSetup(params)
+		fcSetup.keywords=params.keywordsFace
 		def twSetup=new TwitterSetup(params)
+		twSetup.keywords=params.keywordsTw
 		conceptInstance.setTwitterSetup(twSetup)
 		conceptInstance.setFacebookSetup(fcSetup)
 		if (!conceptInstance.save(flush: true)) {
@@ -554,7 +558,9 @@ class ConceptController extends GenericController{
 
 		conceptInstance.properties = params
 		conceptInstance.twitterSetup.properties = params
+		conceptInstance.twitterSetup.keywords=params.keywordsTw
 		conceptInstance.facebookSetup.properties = params
+		conceptInstance.facebookSetup.keywords=params.keywordsface
 		if (!conceptInstance.save(flush: true)) {
 			render(view: "editAdvance", model: [conceptInstance: conceptInstance])
 			return

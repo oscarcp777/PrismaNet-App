@@ -40,13 +40,14 @@
 		<h4 class="header blue bolder smaller">Facebook</h4>
 
 		<div class="form-group fieldcontain ${hasErrors(bean: facebookSetup, field: 'keywords', 'error')} ">
-		<label class="col-sm-3 control-label no-padding-right" for="keywords">
+		<label class="col-sm-3 control-label no-padding-right" for="keywordsFace">
 			<g:message code="facebookSetup.keywords.label" default="Keywords" />
 		</label>
 
 		<div class="col-sm-4 input-inline">
 			<span class="input-icon">
-				<g:textArea name="keywords" class="autosize-transition form-control" value="${conceptInstance?.facebookSetup?.keywords}" placeholder="${message(code: 'facebookSetup.keywords.label')}"/>
+				<g:textArea name="keywordsFace"  class="autosize-transition form-control" 
+				value="${conceptInstance?.facebookSetup?.keywords}" placeholder="${message(code: 'facebookSetup.keywords.label')}"/>
 				<i class="ace-icon fa fa-facebook blue"></i>
 			</span>
 			<span class="help-input help" data-rel="popover" data-trigger="hover" data-placement="left" data-content="${message(code: 'concept.user.advance.help.facebook')}" title="" data-original-title="${message(code: 'label.help')}">
@@ -59,12 +60,12 @@
 	
 
 	<div class="form-group fieldcontain ${hasErrors(bean: twitterSetup, field: 'keywords', 'error')} ">
-		<label class="col-sm-3 control-label no-padding-right" for="keywords">
-			 <g:message code="twitterSetup.keywords.label" default="Keywords" />
+		<label class="col-sm-3 control-label no-padding-right" for="keywordsTw">
+			 <g:message code="twitterSetup.keywords.label"  />
 		</label>
 		<div class="col-sm-4 input-inline">
 			<span class="input-icon">
-				<g:textArea name="keywords" class="autosize-transition form-control" 
+				<g:textArea name="keywordsTw"  class="autosize-transition form-control" 
 				value="${conceptInstance?.twitterSetup?.keywords}" placeholder="${message(code: 'twitterSetup.keywords.label')}"/>
 				<i class="ace-icon fa fa-plus blue"></i>
 			</span>
