@@ -485,11 +485,82 @@ class ConceptController extends GenericController{
 		[conceptList: session.concepts, conceptTotal: session.concepts.size()]
 	}
 	@Secured(['ROLE_USER_ADVANCE'])
+	def editAdvance(Long id) {
+		def conceptInstance = Concept.get(id)
+		if (!conceptInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'concept.label', default: 'Concept'), id])
+			redirect(action: "listAdvance")
+			return
+		}
+
+		[conceptInstance: conceptInstance]
+	}
+	@Secured(['ROLE_USER_ADVANCE'])
 	def createAdvance() {
 		def concept=new Concept(params);
 		concept.setTwitterSetup(new TwitterSetup(params))
 		concept.setFacebookSetup(new FacebookSetup(params))
 		[conceptInstance: new Concept(params)]
+	}
+	@Secured(['ROLE_USER_ADVANCE'])
+	def saveAdvance() {
+		def conceptInstance = new Concept(params)
+		conceptInstance.user=session.user
+		def fcSetup=new FacebookSetup(params)
+		def twSetup=new TwitterSetup(params)
+		conceptInstance.setTwitterSetup(twSetup)
+		conceptInstance.setFacebookSetup(fcSetup)
+		if (!conceptInstance.save(flush: true)) {
+			conceptInstance.errors.each {
+				log.info it
+			}
+			render(view: "createAdvance", model: [conceptInstance: conceptInstance])
+			return
+		}
+
+		flash.message = message(code: 'concept.user.advance.created.ok', args: [conceptInstance.conceptName])
+		redirect(action: "showAdvance", id: conceptInstance.id)
+	}
+	@Secured(['ROLE_USER_ADVANCE'])
+	def showAdvance(Long id) {
+		def conceptInstance = Concept.get(id)
+		if (!conceptInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'concept.label', default: 'Concept'), id])
+			redirect(action: "listAdvance")
+			return
+		}
+
+		[conceptInstance: conceptInstance]
+	}
+	@Secured(['ROLE_USER_ADVANCE'])
+	def updateAdvance(Long id, Long version) {
+		def conceptInstance = Concept.get(id)
+		if (!conceptInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'concept.label', default: 'Concept'), id])
+			redirect(action: "list")
+			return
+		}
+
+		if (version != null) {
+			if (conceptInstance.version > version) {
+				conceptInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+						  [message(code: 'concept.label', default: 'Concept')] as Object[],
+						  "Another user has updated this Concept while you were editing")
+				render(view: "edit", model: [conceptInstance: conceptInstance])
+				return
+			}
+		}
+
+		conceptInstance.properties = params
+		conceptInstance.twitterSetup.properties = params
+		conceptInstance.facebookSetup.properties = params
+		if (!conceptInstance.save(flush: true)) {
+			render(view: "editAdvance", model: [conceptInstance: conceptInstance])
+			return
+		}
+
+		flash.message = message(code: 'default.updated.message', args: [message(code: 'concept.label', default: 'Concept'), conceptInstance.id])
+		redirect(action: "showAdvance", id: conceptInstance.id)
 	}
 	def changeStatus(){
 		def concept = Concept.get(params.id)

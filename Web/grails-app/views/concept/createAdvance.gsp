@@ -15,7 +15,6 @@
 		</div>
 		<div class="nav" role="navigation">
 			<g:link class="btn btn-white btn-info btn-bold btn-round" action="listAdvance">
-				
 				<i class="ace-icon fa fa-list-ol bigger-120 blue"></i> 
 				<g:message code="concept.user.advance.go.list"/> <i class="ace-icon fa fa-arrow-right bigger-120 blue"></i> 
 			</g:link>
@@ -39,28 +38,25 @@
 				<button type="button" class="close" data-dismiss="alert">
 					<i class="ace-icon fa fa-remove"></i>
 				</button>
-				<ul class="errors" role="alert">
+				<ul class="fa-ul" >
 					<g:eachError bean="${conceptInstance}" var="error">
-						<li
-							<g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message
-								error="${error}" /></li>
+						<li 
+							<g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"
+							</g:if>>
+							<i class="fa-li ace-icon fa fa-times"></i> <g:message	error="${error}" />
+						</li>
 					</g:eachError>
 				</ul>
 			   <br>
 			</div>
 			</g:hasErrors>
-			<g:form class="form-horizontal" action="save">
-				
-						<g:render template="formAdvance" />
-					
-
-
+			<g:form class="form-horizontal" action="saveAdvance">
+				<g:render template="formAdvance" />
 				<div class="clearfix form-actions">
 					<div class="col-md-offset-3 col-md-9">
-						<button class="btn btn-info" type="submit" name="create">
+						<button class="btn btn-info" type="submit" name="createAdvance">
 							<i class="ace-icon fa fa-check bigger-110"></i>
 							<g:message code="default.button.create.label" default="Create" />
-
 						</button>
 
 

@@ -226,6 +226,8 @@ input[type="tel"], input[type="color"]{
 .widget-toolbar{
 	line-height:40px;
 }
-
+.profile-info-name{
+	width:180px;
+}
 
 

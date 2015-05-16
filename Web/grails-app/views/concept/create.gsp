@@ -41,11 +41,13 @@
 				<button type="button" class="close" data-dismiss="alert">
 					<i class="ace-icon fa fa-remove"></i>
 				</button>
-				<ul class="errors" role="alert">
+				<ul class="fa-ul" >
 					<g:eachError bean="${conceptInstance}" var="error">
-						<li
-							<g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message
-								error="${error}" /></li>
+						<li 
+							<g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"
+							</g:if>>
+							<i class="fa-li ace-icon fa fa-times"></i> <g:message	error="${error}" />
+						</li>
 					</g:eachError>
 				</ul>
 			   <br>
@@ -69,7 +71,7 @@
 				<div class="clearfix form-actions">
 					<div class="col-md-offset-3 col-md-9">
 						<button class="btn btn-info" type="submit" name="create">
-							<i class="ace-icon fa fa-ok bigger-110"></i>
+							<i class="ace-icon fa fa-check bigger-110"></i>
 							<g:message code="default.button.create.label" default="Create" />
 
 						</button>
