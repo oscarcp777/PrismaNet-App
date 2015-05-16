@@ -92,7 +92,7 @@ class GenericService {
 			}
 			
 		}
-		[results: results, totalCount: results.list.size()]
+		[results: results, totalCount: results.totalCount]
 		
 	}
 	
