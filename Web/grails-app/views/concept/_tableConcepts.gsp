@@ -10,6 +10,9 @@
 						<th >
 						<g:message code="label.edit"/>
 						</th>
+						<th >
+						<g:message code="label.show"/>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -31,11 +34,18 @@
 					    </td>
 					   <td>
 					   <div class="hidden-sm hidden-xs action-buttons">
-							<a class="blue tooltips tooltip-info" href="#" title='${message(code: 'concept.user.advance.edit')}'>
+							<g:link class="blue tooltips tooltip-info" action="editAdvance" title='${message(code: 'concept.user.advance.edit')}'>
 								<i class="ace-icon fa fa-pencil-square-o bigger-200"></i>
-							</a>
+							</g:link>
 						</div>
 					   </td>
+					    <td>
+					   <div class="hidden-sm hidden-xs action-buttons">
+							<g:link class="blue tooltips tooltip-info" action="showAdvance" title='${message(code: 'concept.user.advance.edit')}'>
+								<i class="ace-icon fa fa-search-plus bigger-200"></i>
+							</g:link>
+						</div>
+					   </td>					   
 					</tr>
 				</g:each>
 				</tbody>

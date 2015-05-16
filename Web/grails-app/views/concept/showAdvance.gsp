@@ -90,42 +90,85 @@
 		<h4 class="header blue bolder smaller">Facebook</h4>	
 		<div class="profile-user-info profile-user-info-striped property-list concept">			
 				
-				<div class="profile-info-row">
-					<div class="profile-info-name"><span id="twitterSetup-label" class="property-label">
-					<g:message code="facebookSetup.keywords.label" default="Keywords" />
-				    </span>
+			<div class="profile-info-row">
+					<div class="profile-info-name">
+					  <span id="twitterSetup-label" class="property-label">
+					    <g:message code="facebookSetup.keywords.label" default="Keywords" />
+				      </span>
 					</div>
-				<div class="profile-info-value">
-					
+				    <div class="profile-info-value">
 						<span class="property-value" aria-labelledby="twitterSetup-label">
-						
-						<g:link class="btn btn-xs btn-info" controller="twitterSetup" action="show" id="${conceptInstance?.twitterSetup?.id}">${conceptInstance?.twitterSetup?.encodeAsHTML()}
-						<i class="ace-icon fa fa-arrow-right "></i>
-						</g:link>
+						<g:fieldValue bean="${conceptInstance?.facebookSetup}" field="keywords"/>
 						</span>
-					
 					</div>
-					</div>
+			</div>
 				
 		</div>
 		</g:if>
-	<g:if test="${conceptInstance?.facebookSetup}">
+	<g:if test="${conceptInstance?.twitterSetup}">
 				<h4 class="header blue bolder smaller">Twitter</h4>	
 				<div class="profile-user-info profile-user-info-striped property-list concept">		
-				<div class="profile-info-row">
-					<div class="profile-info-name"><span id="facebookSetup-label" class="property-label">
-					<g:message code="concept.facebookSetup.label" default="Facebook Setup" />
-				    </span>
+			<div class="profile-info-row">
+					<div class="profile-info-name">
+					  <span id="twitterSetup-label" class="property-label">
+					    <g:message code="twitterSetup.includedAccounts.label" />
+				      </span>
 					</div>
-				<div class="profile-info-value">
-					
-						<span class="property-value" aria-labelledby="facebookSetup-label">
-						<g:link class="btn btn-xs btn-info" controller="facebookSetup" action="show" id="${conceptInstance?.facebookSetup?.id}">${conceptInstance?.facebookSetup?.encodeAsHTML()}
-						<i class="ace-icon fa fa-arrow-right "></i>
-						</g:link></span>
-					
+				    <div class="profile-info-value">
+						<span class="property-value" aria-labelledby="twitterSetup-label">
+						<g:fieldValue bean="${conceptInstance?.twitterSetup}" field="includedAccounts"/>
+						</span>
 					</div>
+			</div>
+			<div class="profile-info-row">
+					<div class="profile-info-name">
+					  <span id="twitterSetup-label" class="property-label">
+					    <g:message code="twitterSetup.keywords.label" />
+				      </span>
 					</div>
+				    <div class="profile-info-value">
+						<span class="property-value" aria-labelledby="twitterSetup-label">
+						<g:fieldValue bean="${conceptInstance?.twitterSetup}" field="keywords"/>
+						</span>
+					</div>
+			</div>
+			<div class="profile-info-row">
+					<div class="profile-info-name">
+					  <span id="twitterSetup-label" class="property-label">
+					    <g:message code="twitterSetup.excludedAccounts.label" />
+				      </span>
+					</div>
+				    <div class="profile-info-value">
+						<span class="property-value" aria-labelledby="twitterSetup-label">
+						<g:fieldValue bean="${conceptInstance?.twitterSetup}" field="excludedAccounts"/>
+						</span>
+					</div>
+			</div>
+			<div class="profile-info-row">
+					<div class="profile-info-name">
+					  <span id="twitterSetup-label" class="property-label">
+					    <g:message code="twitterSetup.positiveHashtags.label" />
+				      </span>
+					</div>
+				    <div class="profile-info-value">
+						<span class="property-value" aria-labelledby="twitterSetup-label">
+						<g:fieldValue bean="${conceptInstance?.twitterSetup}" field="positiveHashtags"/>
+						</span>
+					</div>
+			</div>
+			<div class="profile-info-row">
+					<div class="profile-info-name">
+					  <span id="twitterSetup-label" class="property-label">
+					    <g:message code="twitterSetup.negativeHashtags.label" />
+				      </span>
+					</div>
+				    <div class="profile-info-value">
+						<span class="property-value" aria-labelledby="twitterSetup-label">
+						<g:fieldValue bean="${conceptInstance?.twitterSetup}" field="negativeHashtags"/>
+						</span>
+					</div>
+			</div>
+																			
 			</div>
 	</g:if>
 	</div>
