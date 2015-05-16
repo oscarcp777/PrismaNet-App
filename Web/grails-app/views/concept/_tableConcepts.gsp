@@ -3,8 +3,7 @@
 					<tr>
 					   <th> # </th>
 					   <th><g:message code="concept.conceptName.label" /></th>
-						<th><g:message code="concept.twitterSetup.label"/></th>
-						<th><g:message code="concept.facebookSetup.label"/></th>
+						<th><g:message code="concept.lang.label"/></th>
 						<th><g:message code="concept.dateCreated.label"/></th>
 						<th><g:message code="concept.status.label"/></th>
 						<th >
@@ -20,10 +19,15 @@
 					<tr>
 					    <td>${i+1}</td>
 						<td>${fieldValue(bean: concept, field: "conceptName")}</td>
+						<td>
+					     <g:if test="${concept.lang}">
+					        ${fieldValue(bean: concept, field: "lang")}
+					     </g:if>
+					      <g:if test="${!concept.lang}">
+					       ${message(code: 'concept.user.advance.lenguage.all')}
+					     </g:if>
+						</td>
 					
-						<td>${fieldValue(bean: concept, field: "twitterSetup")}</td>
-					
-						<td>${fieldValue(bean: concept, field: "facebookSetup")}</td>
 					
 						<td><g:formatDate date="${concept.dateCreated}" format="dd/MM/yyyy HH:mm"/></td>
 					    <td>
@@ -42,7 +46,7 @@
 					   </td>
 					    <td>
 					   <div class="hidden-sm hidden-xs action-buttons">
-							<g:link class="blue tooltips tooltip-info" action="showAdvance" title='${message(code: 'concept.user.advance.edit')}'
+							<g:link class="blue tooltips tooltip-info" action="showAdvance" title='${message(code: 'concept.user.advance.show')}'
 							id="${concept.id}">
 								<i class="ace-icon fa fa-search-plus bigger-200"></i>
 							</g:link>

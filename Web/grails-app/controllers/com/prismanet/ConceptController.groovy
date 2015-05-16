@@ -557,8 +557,14 @@ class ConceptController extends GenericController{
 		}
 
 		conceptInstance.properties = params
+		if(conceptInstance.twitterSetup==null){
+			conceptInstance.twitterSetup=new TwitterSetup()
+		}
 		conceptInstance.twitterSetup.properties = params
 		conceptInstance.twitterSetup.keywords=params.keywordsTw
+		if(conceptInstance.facebookSetup==null){
+			conceptInstance.facebookSetup=new FacebookSetup()
+		}
 		conceptInstance.facebookSetup.properties = params
 		conceptInstance.facebookSetup.keywords=params.keywordsface
 		if (!conceptInstance.save(flush: true)) {

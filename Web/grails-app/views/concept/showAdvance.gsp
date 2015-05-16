@@ -28,9 +28,8 @@
 					<button type="button" class="close" data-dismiss="alert">
 						<i class="ace-icon fa fa-remove"></i>
 					</button>
-					<div class="message" role="status">
-						${flash.message}
-					</div>
+					<i class="ace-ion fa fa-check icon.lg"></i>
+					El Concepto  <g:fieldValue bean="${conceptInstance}" field="conceptName"/> ha sido actulizado satisfactoriamente
 					<br>
 				</div>
 
@@ -106,8 +105,20 @@
 		</div>
 		</g:if>
 	<g:if test="${conceptInstance?.twitterSetup}">
-				<h4 class="header blue bolder smaller">Twitter</h4>	
-				<div class="profile-user-info profile-user-info-striped property-list concept">		
+		<h4 class="header blue bolder smaller">Twitter</h4>	
+		<div class="profile-user-info profile-user-info-striped property-list concept">	
+			<div class="profile-info-row">
+					<div class="profile-info-name">
+					  <span id="twitterSetup-label" class="property-label">
+					    <g:message code="twitterSetup.includedAccounts.label" />
+				      </span>
+					</div>
+				    <div class="profile-info-value">
+						<span class="property-value" aria-labelledby="twitterSetup-label">
+						<g:fieldValue bean="${conceptInstance?.twitterSetup}" field="includedAccounts"/>
+						</span>
+					</div>
+			</div>	
 			<div class="profile-info-row">
 					<div class="profile-info-name">
 					  <span id="twitterSetup-label" class="property-label">

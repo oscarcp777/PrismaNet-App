@@ -166,7 +166,8 @@ class UserController extends GenericController{
 		session.concepts=springSecurityService.currentUser.concepts
 		def usersName=[]
 		session.concepts.each {
-			usersName.add(it.twitterSetup.includedAccounts.replace("@",""))
+			if(!it.twitterSetup.includedAccounts)
+			   usersName.add(it.twitterSetup.includedAccounts.replace("@",""))
 		}
 		if(!grailsApplication.config.grails.twitter.offline){
 		Twitter twitter = new TwitterFactory().getInstance();

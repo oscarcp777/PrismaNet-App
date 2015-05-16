@@ -58,7 +58,22 @@
 			
 		<h4 class="header blue bolder smaller">Twitter</h4>
 	
-
+	<div class="form-group fieldcontain ${hasErrors(bean: twitterSetup, field: 'includedAccounts', 'error')} ">
+		<label class="col-sm-3 control-label no-padding-right" for="includedAccounts"> 
+			<g:message code="twitterSetup.includedAccounts.label" />
+		</label>
+		<div class="col-sm-4 input-inline">
+			<span class="input-icon">
+				<g:textArea name="includedAccounts" class="autosize-transition form-control" 
+				value="${conceptInstance?.twitterSetup?.includedAccounts}" placeholder="${message(code: 'twitterSetup.includedAccounts.label')}"/>
+				<i class="ace-icon fa fa-twitter blue"></i>
+			</span>
+			<span class="help-input help" data-rel="popover" data-trigger="hover" data-placement="left" 
+			data-content="${message(code: 'concept.user.advance.help.facebook')}" title="" data-original-title="${message(code: 'label.help')}">
+			<i class="ace-icon fa fa-question-circle blue fa-2x"></i>
+			</span>
+		</div>
+	</div>
 	<div class="form-group fieldcontain ${hasErrors(bean: twitterSetup, field: 'keywords', 'error')} ">
 		<label class="col-sm-3 control-label no-padding-right" for="keywordsTw">
 			 <g:message code="twitterSetup.keywords.label"  />
