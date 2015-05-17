@@ -73,7 +73,7 @@
 		</div>
 				<div class="clearfix form-actions">
 					<div class="col-md-offset-5 col-md-9">
-						<button class="btn btn-info" type="submit" name="createAdvance">
+						<button class="btn btn-info" type="submit" name="changePassword">
 							<i class="ace-icon fa fa-key bigger-110"></i>
 							<g:message code="user.change.password.title"  />
 						</button>

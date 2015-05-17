@@ -312,12 +312,16 @@ class UserController extends GenericController{
 		String password = params.password
 		String newPassword = params.passwordNew
 		String newPassword2 = params.passwordConfirm
-		if (!password || !newPassword || !newPassword2 || newPassword != newPassword2) {
-		   flash.message = 'Por favor su Clave actual y una nueva Clave válida'
+		if (!password || !newPassword || !newPassword2) {
+		   flash.message = 'Por favor ingrese su Clave actual y una nueva Clave válida'
 		   render view: 'changePassword', model:[user: session.user]
 		   return
 		}
-	 
+		if (newPassword != newPassword2) {
+			flash.message = 'La Clave Nueva y su  confirmacion no coinciden'
+			render view: 'changePassword', model:[user: session.user]
+			return
+		 }
 		if (springSecurityService.encodePassword(password) != user.password) {
 		   flash.message = 'La Clave actual ingresada es incorrecta'
 		   render view: 'changePassword', model:[user: session.user]
@@ -339,7 +343,7 @@ class UserController extends GenericController{
 			 render view: 'changePassword',model: [user: session.user]
 			return
 		}
-	 
+		session.invalidate()
 		redirect controller: 'login', action: 'auth'
 	 }
 	@Secured(['ROLE_ADMIN'])
