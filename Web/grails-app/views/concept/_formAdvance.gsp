@@ -69,7 +69,8 @@
 				<i class="ace-icon fa fa-twitter blue"></i>
 			</span>
 			<span class="help-input help" data-rel="popover" data-trigger="hover" data-placement="left" 
-			data-content="${message(code: 'concept.user.advance.help.facebook')}" title="" data-original-title="${message(code: 'label.help')}">
+			data-content="${message(code: 'concept.user.advance.help.includedAccounts')}" title="" 
+			data-original-title="${message(code: 'label.help')}">
 			<i class="ace-icon fa fa-question-circle blue fa-2x"></i>
 			</span>
 		</div>
@@ -84,7 +85,8 @@
 				value="${conceptInstance?.twitterSetup?.keywords}" placeholder="${message(code: 'twitterSetup.keywords.label')}"/>
 				<i class="ace-icon fa fa-plus blue"></i>
 			</span>
-			<span class="help-input help" data-rel="popover" data-trigger="hover" data-placement="left" data-content="${message(code: 'concept.user.advance.help.facebook')}" title="" data-original-title="${message(code: 'label.help')}">
+			<span class="help-input help" data-rel="popover" data-trigger="hover" data-placement="left"
+			 data-content="${message(code: 'concept.user.advance.help.keywords')}" title="" data-original-title="${message(code: 'label.help')}">
 			<i class="ace-icon fa fa-question-circle blue fa-2x"></i>
 			</span>
 		</div>
@@ -100,7 +102,8 @@
 				value="${conceptInstance?.twitterSetup?.excludedAccounts}" placeholder="${message(code: 'twitterSetup.excludedAccounts.label')}"/>
 				<i class="ace-icon fa fa-minus blue"></i>
 			</span>
-			<span class="help-input help" data-rel="popover" data-trigger="hover" data-placement="left" data-content="${message(code: 'concept.user.advance.help.facebook')}" title="" data-original-title="${message(code: 'label.help')}">
+			<span class="help-input help" data-rel="popover" data-trigger="hover" data-placement="left"
+			 data-content="${message(code: 'concept.user.advance.help.excludedAccounts')}" title="" data-original-title="${message(code: 'label.help')}">
 			<i class="ace-icon fa fa-question-circle blue fa-2x"></i>
 			</span>
 		</div>
@@ -118,7 +121,8 @@
 				value="${conceptInstance?.twitterSetup?.positiveHashtags}" placeholder="${message(code: 'twitterSetup.positiveHashtags.label')}"/>
 				<i class="ace-icon blue">#</i>
 			</span>
-			<span class="help-input help" data-rel="popover" data-trigger="hover" data-placement="left" data-content="${message(code: 'concept.user.advance.help.facebook')}" title="" data-original-title="${message(code: 'label.help')}">
+			<span class="help-input help" data-rel="popover" data-trigger="hover" data-placement="left" 
+			data-content="${message(code: 'concept.user.advance.help.positiveHashtags')}" title="" data-original-title="${message(code: 'label.help')}">
 			<i class="ace-icon fa fa-question-circle blue fa-2x"></i>
 			</span>
 		</div>
@@ -134,7 +138,8 @@
 				value="${conceptInstance?.twitterSetup?.negativeHashtags}" placeholder="${message(code: 'twitterSetup.negativeHashtags.label')}"/>
 				<i class="ace-icon blue">#</i>
 			</span>
-			<span class="help-input help" data-rel="popover" data-trigger="hover" data-placement="left" data-content="${message(code: 'concept.user.advance.help.facebook')}" title="" data-original-title="${message(code: 'label.help')}">
+			<span class="help-input help" data-rel="popover" data-trigger="hover" data-placement="left" 
+			data-content="${message(code: 'concept.user.advance.help.negativeHashtags')}" title="" data-original-title="${message(code: 'label.help')}">
 			<i class="ace-icon fa fa-question-circle blue fa-2x"></i>
 			</span>
 		</div>
