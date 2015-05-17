@@ -64,28 +64,23 @@ class TweetJob {
 			
 			if (result == null || result.size()<2){
 				//No esta corriendo por lo tanto lo ejecuto
-				Runtime.getRuntime().exec("java -jar "+pathCommand+"prismanet-twitter-api.jar")
-				log.info "Proceso api-twitter iniciado, ultima modificacion a las : " + lastUpdate
-			}
-			
-			// Si la ultima actualizacion de una configuracion fue en el último minuto reinicio el proceso
-			if (lastUpdate.after(previousMinute)){
-				log.info "Se reinicia proceso por actualizacion de la configuracion"
-				// Detencion del proceso actual
-				try {
-					ProcessBuilder kill = new ProcessBuilder("/bin/sh", "-c", "kill -9 " + result.get(0)[0..4])
-					kill.start()
-					log.info "Kill proceso: " + result.get(0)[0..4]
-				} catch (Exception e) {
-					log.error "error ProcessBuilder",e
+				initProcess(importer, lastUpdate)
+			}else{
+				// Si la ultima actualizacion de una configuracion fue en el último minuto reinicio el proceso
+				if (lastUpdate.after(previousMinute)){
+					log.info "Se reinicia proceso por actualizacion de la configuracion"
+					// Detencion del proceso actual
+					try {
+						ProcessBuilder kill = new ProcessBuilder("/bin/sh", "-c", "kill -9 " + result.get(0)[0..4])
+						kill.start()
+						log.info "Kill proceso: " + result.get(0)[0..4]
+					} catch (Exception e) {
+						log.error "error ProcessBuilder",e
+					}
+					// Re-ejecuto proceso
+					initProcess(importer, lastUpdate)
 				}
-				// Actualizo config. de mongo
-				importer.setConfiguration(twitterSetupService.getConfiguration())
-				// Re-ejecuto proceso
-				Runtime.getRuntime().exec("java -jar prismanet-twitter-api.jar")
-				log.info "Proceso api-twitter reiniciado por modificacion a las : " + lastUpdate
 			}
-			
 			def d1 = new GregorianCalendar(2013, Calendar.OCTOBER, 27,11,00)
 //			def d2 = new GregorianCalendar(2013, Calendar.OCTOBER, 14,1,36)
 			
@@ -130,6 +125,14 @@ class TweetJob {
 			}
 			importer.close()
 		}
+	}
+	
+	
+	private initProcess(MongoTweetsImporter importer, Date lastUpdate){
+		// Actualizo config. de mongo
+		importer.setConfiguration(twitterSetupService.getConfiguration())
+		Runtime.getRuntime().exec("java -jar "+pathCommand+"prismanet-twitter-api.jar")
+		log.info "Proceso api-twitter iniciado, ultima modificacion a las : " + lastUpdate
 	}
 	
 }
