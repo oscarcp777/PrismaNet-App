@@ -229,5 +229,7 @@ input[type="tel"], input[type="color"]{
 .profile-info-name{
 	width:180px;
 }
-
+.form-control-static{
+	padding-top: 4px;
+}
 

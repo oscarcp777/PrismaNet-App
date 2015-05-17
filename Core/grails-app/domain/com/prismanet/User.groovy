@@ -14,6 +14,7 @@ class User extends SecUser{
 	String lastName
 	Date dateCreated
 	AccountType account
+	String passwordTemp
 	static hasMany = [ concepts : Concept, twitterAccounts:TwitterAccount ]
 
     static constraints = {

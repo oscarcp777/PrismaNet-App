@@ -27,7 +27,7 @@
 					</div>
 		</div>
 		<div class="form-group">
-					<label class="col-sm-3 control-label no-padding-right" for="lang">
+					<label class="col-sm-3 control-label no-padding-right" for="country">
 						<g:message code="concept.country.label" />
 					</label>
 					<div class="col-sm-4">

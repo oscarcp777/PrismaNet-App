@@ -29,7 +29,8 @@
 						<i class="ace-icon fa fa-remove"></i>
 					</button>
 					<i class="ace-ion fa fa-check icon.lg"></i>
-					El Concepto  <g:fieldValue bean="${conceptInstance}" field="conceptName"/> ha sido actulizado satisfactoriamente
+					
+					 ${flash.message} 
 					<br>
 				</div>
 
@@ -49,6 +50,19 @@
 					</div>
 					</div>
 				</g:if>
+				<g:if test="${conceptInstance?.active}">
+				   <div class="profile-info-row">
+					<div class="profile-info-name"><span id="dateCreated-label" class="property-label">
+					<g:message code="concept.status.label"/>
+				    </span>
+					</div>
+				   <div class="profile-info-value">
+						<span class="property-value" aria-labelledby="dateCreated-label">
+						${conceptInstance.active?'Activo':'Desactivado'}
+						</span>
+					</div>
+					</div>
+				</g:if>				
 				<g:if test="${conceptInstance?.dateCreated}">
 				   <div class="profile-info-row">
 					<div class="profile-info-name"><span id="dateCreated-label" class="property-label">
@@ -96,7 +110,7 @@
 				      </span>
 					</div>
 				    <div class="profile-info-value">
-						<span class="property-value" aria-labelledby="twitterSetup-label">
+						<span class="property-value" >
 						<g:fieldValue bean="${conceptInstance?.facebookSetup}" field="keywords"/>
 						</span>
 					</div>

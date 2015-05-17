@@ -2,7 +2,7 @@ package com.prismanet
 import grails.converters.*
 import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
-
+import org.springframework.web.servlet.support.RequestContextUtils
 import com.prismanet.GenericService.FilterType
 import com.prismanet.GenericService.ProjectionType
 import com.prismanet.context.ConceptAttributeContext
@@ -506,6 +506,9 @@ class ConceptController extends GenericController{
 	@Secured(['ROLE_USER_ADVANCE'])
 	def saveAdvance() {
 		log.info "params: " + params
+		print session
+		def localeResolver = RequestContextUtils.getLocaleResolver(request)
+		print localeResolver
 		
 		def conceptInstance = new Concept(params)
 		conceptInstance.user=session.user
@@ -524,6 +527,7 @@ class ConceptController extends GenericController{
 		}
 
 		flash.message = message(code: 'concept.user.advance.created.ok', args: [conceptInstance.conceptName])
+		loadConceptsSession()
 		redirect(action: "showAdvance", id: conceptInstance.id)
 	}
 	@Secured(['ROLE_USER_ADVANCE'])
@@ -539,6 +543,8 @@ class ConceptController extends GenericController{
 	}
 	@Secured(['ROLE_USER_ADVANCE'])
 	def updateAdvance(Long id, Long version) {
+		log.info "params: " + params
+		
 		def conceptInstance = Concept.get(id)
 		if (!conceptInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'concept.label', default: 'Concept'), id])
@@ -566,13 +572,13 @@ class ConceptController extends GenericController{
 			conceptInstance.facebookSetup=new FacebookSetup()
 		}
 		conceptInstance.facebookSetup.properties = params
-		conceptInstance.facebookSetup.keywords=params.keywordsface
+		conceptInstance.facebookSetup.keywords=params.keywordsFace
 		if (!conceptInstance.save(flush: true)) {
 			render(view: "editAdvance", model: [conceptInstance: conceptInstance])
 			return
 		}
 
-		flash.message = message(code: 'default.updated.message', args: [message(code: 'concept.label', default: 'Concept'), conceptInstance.id])
+		flash.message = message(code: 'concept.user.advance.update.ok', args: [message(code: 'concept.label', default: 'Concept'), conceptInstance.conceptName])
 		redirect(action: "showAdvance", id: conceptInstance.id)
 	}
 	def changeStatus(){

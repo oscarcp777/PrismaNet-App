@@ -62,12 +62,11 @@
 								</g:link>
 							</li>
 						  </sec:access>
-					
-
-							<li><a href="#"> <i class="ace-icon fa fa-user"></i> <g:message
-										code="home.user.profile" />
-							</a></li>
-
+							<li ><g:link controller='user' action='changePassword'>
+								<i class="ace-icon fa fa-user"></i> 
+								<g:message code="home.user.profile" />
+								</g:link>
+							</li>
 							<li class="divider"></li>
 
 							<li><sec:ifLoggedIn>

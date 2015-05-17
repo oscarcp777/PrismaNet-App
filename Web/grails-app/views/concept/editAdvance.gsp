@@ -36,7 +36,7 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form method="post" class="form-horizontal">
+			<g:form  class="form-horizontal" action="updateAdvance">
 				<g:hiddenField name="id" value="${conceptInstance?.id}" />
 				<g:hiddenField name="version" value="${conceptInstance?.version}" />
 				<div class="form">
@@ -45,7 +45,12 @@
 				</div>
 				<div class="clearfix form-actions">
 					<div class="col-md-offset-3 col-md-9">
-					<g:actionSubmit class="btn btn-info" action="updateAdvance" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+					<button class="btn btn-info" type="submit" name="updateAdvance">
+							<i class="ace-icon fa fa-check bigger-110"></i>
+					<g:message code="default.button.update.label" default="Create" />
+				</button>
+				
+				
 				</div>
 				</div>
 			</g:form>

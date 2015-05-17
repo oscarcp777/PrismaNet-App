@@ -166,7 +166,7 @@ class UserController extends GenericController{
 		session.concepts=springSecurityService.currentUser.concepts
 		def usersName=[]
 		session.concepts.each {
-			if(!it.twitterSetup.includedAccounts)
+			if(it.twitterSetup.includedAccounts!=null)
 			   usersName.add(it.twitterSetup.includedAccounts.replace("@",""))
 		}
 		if(!grailsApplication.config.grails.twitter.offline){
@@ -299,11 +299,56 @@ class UserController extends GenericController{
 		}
 		render resultMap as JSON
 	}
-	
+	def changePassword() {
+		[user: session.user]
+	}
+	def updatePassword() {
+		def user = springSecurityService.currentUser
+		if (!user) {
+		   flash.message = 'Disculpe, ha ocurrido un error'
+		   redirect controller: 'login', action: 'auth'
+		   return
+		}
+		String password = params.password
+		String newPassword = params.passwordNew
+		String newPassword2 = params.passwordConfirm
+		if (!password || !newPassword || !newPassword2 || newPassword != newPassword2) {
+		   flash.message = 'Por favor su Clave actual y una nueva Clave válida'
+		   render view: 'changePassword', model:[user: session.user]
+		   return
+		}
+	 
+		if (springSecurityService.encodePassword(password) != user.password) {
+		   flash.message = 'La Clave actual ingresada es incorrecta'
+		   render view: 'changePassword', model:[user: session.user]
+		   return
+		}
+	 
+		if (springSecurityService.encodePassword(newPassword)== user.password) {
+		   flash.message = 'Por favor elija una Clave diferente a la actual'
+		   render view: 'changePassword',model: [user: session.user]
+		   return
+		}
+	 
+		user.password = newPassword
+		user.passwordTemp = newPassword
+		if (!user.save(flush: true)) {
+			user.errors.each {
+				log.info it
+			}
+			 render view: 'changePassword',model: [user: session.user]
+			return
+		}
+	 
+		redirect controller: 'login', action: 'auth'
+	 }
 	@Secured(['ROLE_ADMIN'])
 	def save(){
 		log.info "user save params: " + params
 		def user = new User (params)
+		//TODO temporal despues sacar
+		user.passwordTemp=params.password
+		 
 		if (!user.save(flush: true)) {
 			user.errors.each {
 				log.info it
