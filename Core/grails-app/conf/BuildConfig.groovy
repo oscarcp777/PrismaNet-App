@@ -39,10 +39,10 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
         runtime 'mysql:mysql-connector-java:5.1.27'
-		compile 'org.twitter4j:twitter4j-core:3.0.4-SNAPSHOT'
-		compile 'org.twitter4j:twitter4j-async:3.0.4-SNAPSHOT'
-		compile 'org.twitter4j:twitter4j-stream:3.0.4-SNAPSHOT'
-		compile 'org.twitter4j:twitter4j-media-support:3.0.4-SNAPSHOT'
+		compile 'org.twitter4j:twitter4j-core:4.0.3'
+		compile 'org.twitter4j:twitter4j-async:4.0.3'
+		compile 'org.twitter4j:twitter4j-stream:4.0.3'
+		compile 'org.twitter4j:twitter4j-media-support:4.0.3'
 		compile 'org.grails:grails-datastore-gorm:3.0.4.RELEASE'
   		compile 'org.grails:grails-datastore-core:3.0.4.RELEASE'
   		test 'org.grails:grails-datastore-simple:3.0.4.RELEASE'

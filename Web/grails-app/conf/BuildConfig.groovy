@@ -51,10 +51,10 @@ grails.project.dependency.resolution = {
 	dependencies {
 		// specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
 		runtime 'mysql:mysql-connector-java:5.1.29'
-		compile 'org.twitter4j:twitter4j-core:3.0.4-SNAPSHOT'
-		compile 'org.twitter4j:twitter4j-async:3.0.4-SNAPSHOT'
-		compile 'org.twitter4j:twitter4j-stream:3.0.4-SNAPSHOT'
-		compile 'org.twitter4j:twitter4j-media-support:3.0.4-SNAPSHOT'
+		compile 'org.twitter4j:twitter4j-core:4.0.3'
+		compile 'org.twitter4j:twitter4j-async:4.0.3'
+		compile 'org.twitter4j:twitter4j-stream:4.0.3'
+		compile 'org.twitter4j:twitter4j-media-support:4.0.3'
 		compile 'org.facebook4j:facebook4j-core:2.2.1-Prisma-SNAPSHOT'
 	}
 plugins {

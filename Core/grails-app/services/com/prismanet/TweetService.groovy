@@ -6,15 +6,15 @@ import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.StopWatch
 
 import twitter4j.FilterQuery
+import twitter4j.JSONObject
 import twitter4j.ResponseList
 import twitter4j.Status
+import twitter4j.StatusJSONImpl
 import twitter4j.StatusListener
 import twitter4j.Twitter
 import twitter4j.TwitterFactory
 import twitter4j.TwitterStream
 import twitter4j.TwitterStreamFactory
-import twitter4j.internal.json.StatusJSONImpl
-import twitter4j.internal.org.json.JSONObject
 
 import com.mongodb.BasicDBObject
 import com.prismanet.GenericService.FilterType
@@ -61,9 +61,9 @@ class TweetService extends MentionService{
 			concepts.each(){ concept->
 				timer = new StopWatch()
 				timer.start()
-//				log.info "status.lang " + status.getIsoLanguageCode()
-//				log.info "concept.lang " + concept.lang
-//				if (!concept.lang || status.getIsoLanguageCode() == concept.lang)
+		
+				if (evaluateLanguage(concept, status))
+				if (evaluateCountry(concept, status))
 				if (concept.testAddTweet(tweet)){
 					log.info "valido para concepto: " +  concept
 					if (!tweet.id){
@@ -106,6 +106,38 @@ class TweetService extends MentionService{
 		}
 		cleanUpGorm()
 	}
+	
+	private boolean evaluateLanguage(Concept concept, Status tweet){
+		boolean result = false
+		log.info "status.lang " + tweet.getLang()
+		log.info "concept.lang " + concept.lang?.code
+		if (!concept.lang || tweet.getLang() == concept.lang.code)
+			result = true
+		log.info "Evaluacion lenguaje: " + result
+		result
+	}
+	
+	private boolean evaluateCountry(Concept concept, Status tweet){
+		boolean result = false
+		log.info "status.timezone " + tweet.getUser().getTimeZone()
+		log.info "status.place " + tweet.getPlace()
+		log.info "concept.country " + concept.country?.code
+		if (!concept.country)
+			result = true
+		else	
+			if (tweet.getPlace()){
+				if(tweet.getPlace().getCountryCode() == concept.country?.code)
+					result = true
+			}else{	
+				if (!tweet.getUser().getTimeZone() || 
+					!tweet.getUser().getTimeZone() == 'Buenos Aires' ||
+					!tweet.getUser().getTimeZone() == 'Brasilia')
+						result = true
+			}		
+		log.info "Evaluacion pais: " + result
+		result
+	}
+
 	
 	
 	def streamConection(StatusListener listener){
