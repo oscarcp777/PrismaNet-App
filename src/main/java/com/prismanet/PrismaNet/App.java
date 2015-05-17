@@ -19,6 +19,7 @@ import twitter4j.StallWarning;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
 import twitter4j.StatusListener;
+import twitter4j.TwitterObjectFactory;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 import twitter4j.json.DataObjectFactory;
@@ -128,7 +129,7 @@ public class App implements StatusListener
 	}
 
 	private void saveTweet(Status status){
-		DBObject tweet = (DBObject) JSON.parse(DataObjectFactory.getRawJSON(status));
+		DBObject tweet = (DBObject) JSON.parse(TwitterObjectFactory.getRawJSON(status));
 		Object id = tweet.get("id");
 //		tweet.removeField("id");
 		tweet.put("_id",id);
@@ -155,7 +156,6 @@ public class App implements StatusListener
 	}
 
 	public void onStatus(Status status) {
-		logger.info("@" + status.getUser().getScreenName() + " - " + status.getText());
 		this.saveTweet(status);
 	}
 
