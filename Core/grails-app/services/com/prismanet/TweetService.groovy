@@ -130,8 +130,9 @@ class TweetService extends MentionService{
 					result = true
 			}else{	
 				if (!tweet.getUser().getTimeZone() || 
-					!tweet.getUser().getTimeZone() == 'Buenos Aires' ||
-					!tweet.getUser().getTimeZone() == 'Brasilia')
+					tweet.getUser().getTimeZone().trim() == 'Buenos Aires' ||
+					tweet.getUser().getTimeZone().trim() == 'Brasilia' ||
+					tweet.getUser().getTimeZone().trim() == 'America/Argentina/Buenos_Aires')
 						result = true
 			}		
 		log.info "Evaluacion pais: " + result
