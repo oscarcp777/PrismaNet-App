@@ -1,5 +1,7 @@
 package com.prismanet
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * Representa un concepto/idea a ser analizada
  * @author santiago
@@ -65,18 +67,18 @@ class Concept {
 	public boolean testAddTweet(Tweet tweet){
 		def add = false
 		for (String excludedWord in this.twitterSetup?.excludedAccounts?.split(',')) {
-			if (tweet.content.contains(excludedWord)){
+			if (StringUtils.containsIgnoreCase(tweet.content,excludedWord)){
 				return false
 			}
 		}
 		for (String twitterAccount in this.twitterSetup?.includedAccounts?.split(',')) {
-			if (tweet.content.contains(twitterAccount)){
+			if (StringUtils.containsIgnoreCase(tweet.content,twitterAccount)){
 				add = true
 			}
 		}
 		if (!add)
 			for (String neutralHashtag in this.twitterSetup?.neutralHashtags?.split(',')) {
-				if (tweet.content.contains(neutralHashtag)){
+				if (StringUtils.containsIgnoreCase(tweet.content,neutralHashtag)){
 					add = true
 				}
 			}
@@ -94,7 +96,7 @@ class Concept {
 					expressions[i] = expressions[i].trim()
 					// Frases textuales
 					if (expressions[i][0]=='\"' && expressions[i][expressions[i].size()-1]=='\"'){
-						if (!tweet.content.contains(expressions[i][1..-2])){
+						if (!StringUtils.containsIgnoreCase(tweet.content,expressions[i][1..-2])){
 							isValid = false
 						}
 					}else{
@@ -102,7 +104,7 @@ class Concept {
 						int j=0
 						// Loop de AND corta cuando encuentra el primer falso
 						while (j<words.size() && isValid){
-							if (!tweet.content.contains(words[j]))
+							if (!StringUtils.containsIgnoreCase(tweet.content,words[j]))
 								isValid = false
 							j++
 						}

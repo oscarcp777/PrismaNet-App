@@ -99,7 +99,8 @@ class TweetService extends MentionService{
 					}
 				}
 				timer.stop()
-				log.info "tiempo tweet: " + timer.getTotalTimeMillis()
+				if (timer.getTotalTimeMillis()>100)
+					log.info "tiempo tweet: " + timer.getTotalTimeMillis()
 			}
 			
 		}

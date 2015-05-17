@@ -1,5 +1,7 @@
 package com.prismanet
 
+import org.apache.commons.lang.StringUtils
+
 class TwitterSetup {
 
 	static belongsTo = Concept
@@ -35,11 +37,41 @@ class TwitterSetup {
 		return includedAccounts
 	}
 	
+	void setIncludedAccounts(String includedAccounts){
+		this.includedAccounts = trimInput(includedAccounts)
+	 }
+	
+	void setKeywords(String keywords){
+	   this.keywords = trimInput(keywords)
+	}
+	
+	void setNeutralHashtags(String neutralHashtags){
+		this.neutralHashtags = trimInput(neutralHashtags)
+	}
+	
+	void setPositiveHashtags(String positiveHashtags){
+		this.positiveHashtags = trimInput(positiveHashtags)
+	}
+	
+	void setNegativeHashtags(String negativeHashtags){
+		this.negativeHashtags = trimInput(negativeHashtags)
+	}
+	
+	private String trimInput(String input){
+		if (input && input.length()>0){
+			String finalText = ""
+			for (String term in input.split(',')) {
+				finalText = finalText + term.trim()+","
+			}
+			return finalText[0..-2]
+		}else
+			return input
+	}
 	
 	public boolean isPositiveHashtag(Tweet tweet){
 		def add = false
 		for (String positiveHashtag in this.positiveHashtags?.split(',')) {
-			if (tweet.content.contains(positiveHashtag)){
+			if (StringUtils.containsIgnoreCase(tweet.content,positiveHashtag)){
 				add = true
 			}
 		}
@@ -49,7 +81,7 @@ class TwitterSetup {
 	public boolean isNegativeHashtag(Tweet tweet){
 		def add = false
 		for (String negativeHashtag in this.negativeHashtags?.split(',')) {
-			if (tweet.content.contains(negativeHashtag)){
+			if (StringUtils.containsIgnoreCase(tweet.content,negativeHashtag)){
 				add = true
 			}
 		}
