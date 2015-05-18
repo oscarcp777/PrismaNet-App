@@ -40,6 +40,7 @@
 			}else{
 				$("#table-concept").html(data);
 				bootbox.alert("Se actualizo correctamente su concepto");
+				document.location.href='listAdvance';
 			}
 			
 		}

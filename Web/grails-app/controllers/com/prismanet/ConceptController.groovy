@@ -483,8 +483,9 @@ class ConceptController extends GenericController{
 	@Secured(['ROLE_USER_ADVANCE'])
 	def listAdvance(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
-		loadConceptsSession()
-		[conceptList: session.concepts, conceptTotal: session.concepts.size()]
+		def listAll=springSecurityService.currentUser.concepts.sort{it.id}
+		def results = Concept.findAllByUser(session.user,params)
+		[conceptList: results, conceptTotal: listAll.size()]
 	}
 	@Secured(['ROLE_USER_ADVANCE'])
 	def editAdvance(Long id) {

@@ -13,7 +13,9 @@ class GenericController {
 	SpringSecurityService springSecurityService;
 	
 	def beforeInterceptor = {
-		loadDataSession();
+		if(!session.concepts){
+			loadConceptsSession()
+		}
 	}
 	protected void loadDataSession(){
 		if(!session.user){
@@ -25,8 +27,10 @@ class GenericController {
 		}
 	}
 	protected void loadConceptsSession(){
-		session.concepts=springSecurityService.currentUser.concepts.sort{it.id}
+		def listAll=springSecurityService.currentUser.concepts.sort{it.id}
+		session.concepts =listAll.findAll { it.active }
 	}
+	
 	def getConcept(id){
 		def concept
 		session.concepts.each{

@@ -146,7 +146,6 @@ class UserController extends GenericController{
 	}
 	def getTotalikes(container){
 		def dateList =[]
-		session.concepts=springSecurityService.currentUser.concepts
 		def usersName=[]
 		session.concepts.each {
 			if(it.facebookSetup !=null ){
@@ -163,8 +162,8 @@ class UserController extends GenericController{
 	}
 	def getTotalFollowers(container){
 		def dateList =[]
-		session.concepts=springSecurityService.currentUser.concepts
 		def usersName=[]
+		loadConceptsSession()
 		session.concepts.each {
 			if(it.twitterSetup.includedAccounts!=null)
 			   usersName.add(it.twitterSetup.includedAccounts.replace("@",""))
