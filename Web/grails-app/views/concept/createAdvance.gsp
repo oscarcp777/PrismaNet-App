@@ -64,10 +64,6 @@
 				</div>
 			</g:form>
 		</div>
-<script type="text/javascript">
-	$(function() {
-	$('textarea[class*=autosize]').autosize({append: "\n"});
-	});
-</script>
+
 </body>
 </html>

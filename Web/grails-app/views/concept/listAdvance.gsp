@@ -30,6 +30,7 @@
 		
 		</div>
 		<script type="text/javascript">
+		activeItemMenuLevel1('home');
 		var msgEnableConcept='${message(code: 'concept.user.advance.enable.msg')}';
 		var msgDisableConcept='${message(code: 'concept.user.advance.disable.msg')}';
 		function loadTableConcepts(data){

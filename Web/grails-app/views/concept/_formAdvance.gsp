@@ -20,7 +20,7 @@
 						<g:message code="concept.lang.label" />
 					</label>
 					<div class="col-sm-4">
-						<g:select class="form-control" id="lang" name="lang.id"
+						<g:select class="form-control" name="language.id" 
 								from="${com.prismanet.Languages.list()}" optionKey="id"
 								value="${conceptInstance?.lang?.id}" 
 								noSelection="['null': 'Seleccione un Idioma']" />
@@ -144,3 +144,9 @@
 			</span>
 		</div>
 	</div>
+<script type="text/javascript">
+	$(function() {
+	$('textarea[class*=autosize]').autosize({append: "\n"});
+	activeItemMenuLevel1('home');
+	});
+</script>

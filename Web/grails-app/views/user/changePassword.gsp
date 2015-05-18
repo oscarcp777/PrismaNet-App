@@ -81,5 +81,10 @@
 				</div>
 			</g:form>
 		</div>
+		<script type="text/javascript">
+	$(function() {
+	activeItemMenuLevel1('home');
+	});
+</script>
 	</body>
 </html>

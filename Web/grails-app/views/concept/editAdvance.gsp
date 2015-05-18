@@ -1,6 +1,6 @@
 <%@ page import="com.prismanet.Concept" %>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 	<head>
 		<meta name="layout" content="home">
 	</head>

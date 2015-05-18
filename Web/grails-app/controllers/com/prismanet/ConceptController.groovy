@@ -1,11 +1,12 @@
 package com.prismanet
 import grails.converters.*
 import grails.plugins.springsecurity.Secured
+
 import org.springframework.dao.DataIntegrityViolationException
-import org.springframework.web.servlet.support.RequestContextUtils
+import org.springframework.web.servlet.support.RequestContextUtils as RCU
+
 import com.prismanet.GenericService.FilterType
 import com.prismanet.GenericService.ProjectionType
-import com.prismanet.context.ConceptAttributeContext
 import com.prismanet.context.Filter
 import com.prismanet.context.OpinionAttributeContext
 import com.prismanet.sentiment.Opinion
@@ -493,9 +494,9 @@ class ConceptController extends GenericController{
 			redirect(action: "listAdvance")
 			return
 		}
-
 		[conceptInstance: conceptInstance]
 	}
+	
 	@Secured(['ROLE_USER_ADVANCE'])
 	def createAdvance() {
 		def concept=new Concept(params);
@@ -506,11 +507,8 @@ class ConceptController extends GenericController{
 	@Secured(['ROLE_USER_ADVANCE'])
 	def saveAdvance() {
 		log.info "params: " + params
-		print session
-		def localeResolver = RequestContextUtils.getLocaleResolver(request)
-		print localeResolver
 		
-		def conceptInstance = new Concept(params)
+		def conceptInstance = new Concept(getParamsConcept(params))
 		conceptInstance.user=session.user
 		def fcSetup=new FacebookSetup(params)
 		fcSetup.keywords=params.keywordsFace
@@ -541,6 +539,11 @@ class ConceptController extends GenericController{
 
 		[conceptInstance: conceptInstance]
 	}
+	private Map getParamsConcept(params){
+		def map2 = params.clone()
+		map2.lang=params.language
+		map2
+	}
 	@Secured(['ROLE_USER_ADVANCE'])
 	def updateAdvance(Long id, Long version) {
 		log.info "params: " + params
@@ -562,7 +565,7 @@ class ConceptController extends GenericController{
 			}
 		}
 
-		conceptInstance.properties = params
+		conceptInstance.properties = getParamsConcept(params)
 		if(conceptInstance.twitterSetup==null){
 			conceptInstance.twitterSetup=new TwitterSetup()
 		}
@@ -578,7 +581,7 @@ class ConceptController extends GenericController{
 			return
 		}
 
-		flash.message = message(code: 'concept.user.advance.update.ok', args: [message(code: 'concept.label', default: 'Concept'), conceptInstance.conceptName])
+		flash.message = message(code: 'concept.user.advance.update.ok', args: [conceptInstance.conceptName])
 		redirect(action: "showAdvance", id: conceptInstance.id)
 	}
 	def changeStatus(){
