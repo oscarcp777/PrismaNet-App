@@ -35,10 +35,12 @@ class TwitterSetupService extends GenericCoreService {
 	
 	private String addTerms(String finalConfig, String terms){
 		terms?.split(',').each{ term ->
-			if (term[0]=='\"' && term[term.length()-1]=='\"')
-				term = term[1..-2]
-			if (!StringUtils.containsIgnoreCase(finalConfig,term))
-				finalConfig += term + ","
+			if (term.length()>2){
+				if (term[0]=='\"' && term[term.length()-1]=='\"')
+					term = term[1..-2]
+				if (!StringUtils.containsIgnoreCase(finalConfig,term))
+					finalConfig += term + ","
+			}	
 		}
 		return finalConfig
 	}
