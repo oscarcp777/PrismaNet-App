@@ -508,12 +508,12 @@ class ConceptController extends GenericController{
 	@Secured(['ROLE_USER_ADVANCE'])
 	def saveAdvance() {
 		log.info "params: " + params
-		
-		def conceptInstance = new Concept(getParamsConcept(params))
+		def customParams=getParamsConcept(params)
+		def conceptInstance = new Concept(customParams)
 		conceptInstance.user=session.user
-		def fcSetup=new FacebookSetup(params)
+		def fcSetup=new FacebookSetup(customParams)
 		fcSetup.keywords=params.keywordsFace
-		def twSetup=new TwitterSetup(params)
+		def twSetup=new TwitterSetup(customParams)
 		twSetup.keywords=params.keywordsTw
 		conceptInstance.setTwitterSetup(twSetup)
 		conceptInstance.setFacebookSetup(fcSetup)
@@ -541,7 +541,10 @@ class ConceptController extends GenericController{
 		[conceptInstance: conceptInstance]
 	}
 	private Map getParamsConcept(params){
-		def map2 = params.clone()
+		def map2 =[:]
+		 params.each { 
+				map2[it.key]=it.value?it.value:null
+		 }
 		map2.lang=params.language
 		map2
 	}
@@ -565,18 +568,20 @@ class ConceptController extends GenericController{
 				return
 			}
 		}
+		
+		def customParams=getParamsConcept(params)
 
-		conceptInstance.properties = getParamsConcept(params)
+				conceptInstance.properties = customParams
 		if(conceptInstance.twitterSetup==null){
 			conceptInstance.twitterSetup=new TwitterSetup()
 		}
-		conceptInstance.twitterSetup.properties = params
-		conceptInstance.twitterSetup.keywords=params.keywordsTw
+		conceptInstance.twitterSetup.properties = customParams
+		conceptInstance.twitterSetup.keywords=customParams.keywordsTw
 		if(conceptInstance.facebookSetup==null){
 			conceptInstance.facebookSetup=new FacebookSetup()
 		}
-		conceptInstance.facebookSetup.properties = params
-		conceptInstance.facebookSetup.keywords=params.keywordsFace
+		conceptInstance.facebookSetup.properties = customParams
+		conceptInstance.facebookSetup.keywords=customParams.keywordsFace
 		if (!conceptInstance.save(flush: true)) {
 			render(view: "editAdvance", model: [conceptInstance: conceptInstance])
 			return

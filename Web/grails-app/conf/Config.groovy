@@ -210,3 +210,6 @@ grails.plugins.springsecurity.authority.className = 'com.prismanet.model.securit
 grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/home'
 grails.plugins.springsecurity.securityConfigType = "Annotation"
 
+//para cambiar string vacios por null
+grails.databinding.trimStrings = true
+grails.databinding.convertEmptyStringsToNull = true

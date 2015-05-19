@@ -196,4 +196,6 @@ grails.gorm.default.mapping = {
 	  dynamicUpdate true
 }
 
-
+//para cambiar string vacios por null
+grails.databinding.trimStrings = true
+grails.databinding.convertEmptyStringsToNull = true

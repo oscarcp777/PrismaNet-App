@@ -30,9 +30,7 @@ class GenericController {
 		springSecurityService.currentUser.refresh()
 		session.user=springSecurityService.currentUser
 		def listAll=springSecurityService.currentUser.concepts.sort{it.id}
-		print listAll
 		session.concepts =listAll.findAll { it.active }
-		print  session.concepts
 	}
 	
 	def getConcept(id){
