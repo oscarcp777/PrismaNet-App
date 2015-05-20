@@ -63,22 +63,24 @@ class Concept {
 		mentions.add(mention)
 	}
 	
+	Map rowToMap(List row) { row.collectEntries{[it, it]} }​
 	
 	public boolean testAddTweet(Tweet tweet){
 		def add = false
+		def tweetTokenized = rowToMap(tweet.content.replace(',',' ').replace('.',' '​​)​​​​​.toLowerCase().tokenize())
 		for (String excludedWord in this.twitterSetup?.excludedAccounts?.split(',')) {
-			if (StringUtils.containsIgnoreCase(tweet.content,excludedWord)){
+			if (tweetTokenized[excludedWord.toLowerCase()]){
 				return false
 			}
 		}
 		for (String twitterAccount in this.twitterSetup?.includedAccounts?.split(',')) {
-			if (StringUtils.containsIgnoreCase(tweet.content,twitterAccount)){
+			if (tweetTokenized[twitterAccount.toLowerCase()]){
 				add = true
 			}
 		}
 		if (!add)
 			for (String neutralHashtag in this.twitterSetup?.neutralHashtags?.split(',')) {
-				if (StringUtils.containsIgnoreCase(tweet.content,neutralHashtag)){
+				if (tweetTokenized[neutralHashtag.toLowerCase()]){
 					add = true
 				}
 			}
@@ -96,7 +98,7 @@ class Concept {
 					expressions[i] = expressions[i].trim()
 					// Frases textuales
 					if (expressions[i][0]=='\"' && expressions[i][expressions[i].size()-1]=='\"'){
-						if (!StringUtils.containsIgnoreCase(tweet.content,expressions[i][1..-2])){
+						if (!tweetTokenized[expressions[i][1..-2].toLowerCase()]){
 							isValid = false
 						}
 					}else{
@@ -104,7 +106,7 @@ class Concept {
 						int j=0
 						// Loop de AND corta cuando encuentra el primer falso
 						while (j<words.size() && isValid){
-							if (!StringUtils.containsIgnoreCase(tweet.content,words[j]))
+							if (!tweetTokenized[words[j].toLowerCase()])
 								isValid = false
 							j++
 						}
