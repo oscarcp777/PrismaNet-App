@@ -8,6 +8,7 @@ import com.mongodb.DBCursor
 import com.prismanet.importer.MongoTweetsImporter
 import com.prismanet.job.JobState
 import com.prismanet.job.JobType
+import org.springframework.util.StopWatch
 
 class TweetJob {
 	def grailsApplication
@@ -83,6 +84,9 @@ class TweetJob {
 			}
 			def d1 = new GregorianCalendar(2013, Calendar.OCTOBER, 27,11,00)
 //			def d2 = new GregorianCalendar(2013, Calendar.OCTOBER, 14,1,36)
+
+			StopWatch timer = new StopWatch()
+			timer.start()
 			
 			def dates = [:]
 			dates.put("dateFrom",previousMinute)
@@ -124,6 +128,8 @@ class TweetJob {
 				tweets.close()
 			}
 			importer.close()
+			timer.stop()
+			log.info "tiempo tweetJob: " + timer.getTotalTimeMillis()
 		}
 	}
 	
