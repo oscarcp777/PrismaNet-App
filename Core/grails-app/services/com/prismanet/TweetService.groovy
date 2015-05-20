@@ -109,19 +109,19 @@ class TweetService extends MentionService{
 	
 	private boolean evaluateLanguage(Concept concept, Status tweet){
 		boolean result = false
-		log.info "status.lang " + tweet.getLang()
-		log.info "concept.lang " + concept.lang?.code
+		log.debug "status.lang " + tweet.getLang()
+		log.debug "concept.lang " + concept.lang?.code
 		if (!concept.lang || tweet.getLang() == concept.lang.code)
 			result = true
-		log.info "Evaluacion lenguaje: " + result
+		log.debug "Evaluacion lenguaje: " + result
 		result
 	}
 	
 	private boolean evaluateCountry(Concept concept, Status tweet){
 		boolean result = false
-		log.info "status.timezone " + tweet.getUser().getTimeZone()
-		log.info "status.place " + tweet.getPlace()
-		log.info "concept.country " + concept.country?.code
+		log.debug "status.timezone " + tweet.getUser().getTimeZone()
+		log.debug "status.place " + tweet.getPlace()
+		log.debug "concept.country " + concept.country?.code
 		if (!concept.country)
 			result = true
 		else	
@@ -136,7 +136,7 @@ class TweetService extends MentionService{
 					tweet.getUser().getTimeZone().trim() == 'America/Argentina/Buenos_Aires')))
 						result = true
 			}		
-		log.info "Evaluacion pais: " + result
+		log.debug "Evaluacion pais: " + result
 		result
 	}
 
