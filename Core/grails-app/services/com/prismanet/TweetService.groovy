@@ -65,7 +65,7 @@ class TweetService extends MentionService{
 				if (evaluateLanguage(concept, status))
 				if (evaluateCountry(concept, status))
 				if (concept.testAddTweet(tweet)){
-					log.info "valido para concepto: " +  concept
+					log.debug "valido para concepto: " +  concept
 					if (!tweet.id){
 						Author author = TwitterAuthor.findByAccountName("@"+status.getUser().getScreenName())
 						if (!author){

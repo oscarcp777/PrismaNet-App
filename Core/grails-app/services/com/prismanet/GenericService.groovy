@@ -28,7 +28,7 @@ class GenericService {
 			sessionFactory.currentSession.flush()
 			sessionFactory.currentSession.clear()
 			propertyInstanceMap.get().clear()
-			log.info "Gorm clean"
+			log.debug "Gorm clean"
 		} catch (Exception e) {
 			log.error e.getCause()
 		}

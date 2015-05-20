@@ -115,6 +115,7 @@ environments {
         grails.logging.jul.usebridge = true
 		// log4j configuration
 		log4j = {
+			debug = false
 		   appenders {
 				console name: 'stdout', layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2}] %m%n')
 		

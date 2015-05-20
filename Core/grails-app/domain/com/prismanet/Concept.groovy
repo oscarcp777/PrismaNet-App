@@ -63,11 +63,14 @@ class Concept {
 		mentions.add(mention)
 	}
 	
-	Map rowToMap(List row) { row.collectEntries{[it, it]} }​
 	
 	public boolean testAddTweet(Tweet tweet){
 		def add = false
-		def tweetTokenized = rowToMap(tweet.content.replace(',',' ').replace('.',' '​​)​​​​​.toLowerCase().tokenize())
+		def listnew=tweet.content.replace(',',' ')
+		listnew=listnew.replace('.',' ').toLowerCase()
+		def listMap=listnew.tokenize()
+		def tweetTokenized = listMap.collectEntries{[it, it]}
+		
 		for (String excludedWord in this.twitterSetup?.excludedAccounts?.split(',')) {
 			if (tweetTokenized[excludedWord.toLowerCase()]){
 				return false

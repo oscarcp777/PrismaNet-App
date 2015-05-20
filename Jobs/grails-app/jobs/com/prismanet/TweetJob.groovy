@@ -104,7 +104,7 @@ class TweetJob {
 				i++
 				try {
 					if (i % 25 == 0){
-						log.info "Nuevo Lote Tweets"
+						log.debug "Nuevo Lote Tweets"
 						i = 0
 						tweetService.saveTweets(partialList)
 						partialList.clear();
