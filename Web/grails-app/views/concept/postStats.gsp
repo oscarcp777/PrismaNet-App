@@ -38,17 +38,17 @@
 		    
 	  $(function() {
 		  var id='${concept.id}';
-		  loadDatepicker('postPickert',loadChartLineForPostPickert);
-		  loadDatepicker('pickertPostMoreLikes',loadPostMoreLikesPickert);
+		  loadDatepicker('postPickert',loadChartLineForPostPickert,setDatesHtml);
+		  loadDatepicker('pickertPostMoreLikes',loadPostMoreLikesPickert,setDatesHtml);
 		  
 		  activeItemMenuLevel2(id,id+'-face','${concept.conceptName}');
 		  
 		   getPostRealTime(${concept.id}, '#postRealTimeChar','../');
 		   
-		   var dataPosts = {"id":${concept.id}, "div":'#postsChart',"dateFrom":moment().subtract('days', 7).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+		   var dataPosts = {"id":${concept.id}, "div":'#postsChart',"dateFrom":getDateFromLHH(),"dateTo":getDateNowLHH()};
 		   getGroupedPosts(dataPosts);
 		   
-		   var data = {"id":${concept.id}, "div":'#postMoreLikes',"dateFrom":moment().subtract('days', 7).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+		   var data = {"id":${concept.id}, "div":'#postMoreLikes',"dateFrom":getDateFromLHH(),"dateTo":getDateNowLHH()};
   	       getPostMoreLikes(data);
 
 		});

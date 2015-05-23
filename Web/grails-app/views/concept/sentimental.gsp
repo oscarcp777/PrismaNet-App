@@ -28,10 +28,10 @@
 
 		 $(function() {
 			 var id='${concept.id}';
-			  loadDatepicker('sentimentalPickert',loadChartLineForSentimentalPickert);
+			  loadDatepicker('sentimentalPickert',loadChartLineForSentimentalPickert,setDatesHtml);
 			  activeItemMenuLevel2(id,id+'-tweet','${concept.conceptName}');
 			   
-			  var dataSentiment = {"id":id, "div":'#sentimentalChart',"dateFrom":moment().subtract('days', 29).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+			  var dataSentiment = {"id":id, "div":'#sentimentalChart',"dateFrom":getDateFromLHH(),"dateTo":getDateNowLHH()};
 			  getSentimentalAnalitycs(dataSentiment);
 			  getSentimentChartPie(id, '#sentimentChartPie');
 			

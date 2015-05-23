@@ -15,6 +15,7 @@ var doRequest = function(url,data,callback, errorHandler, method) {
 	      $.ajax({
 	              url: url,
 	              type: method,
+	              div:data.div,
 	              data: data,
 	              cache: false,
 	              beforeSend: function( xhr ) {
@@ -73,38 +74,38 @@ function getGroupedWeight(data){
 	doRequest('../getGroupedWeight',data,paintCharLine, null, 'GET');
 }
 function getRelevantAuthors(data){
-	doRequest('../getRelevantAuthors',data,loadAuthors, null, 'GET');
+	doRequest('../getRelevantAuthors',data,loadHtmlTable, null, 'GET');
 }
 function getUserGroupedTweets(data){
 	doRequest('getGroupedTweets',data,paintCharLine, null, 'GET');
 }
 
-function loadMonthStatsData(channel){
-	loadDatepicker('pickertStatsMonth',loadStatsMonthPickert);
-	var data = {"channel":channel, "div":'#monthStats', "dateFrom":moment().subtract('days', 7).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
-	getMonthStats(data);
-	$('#monthStats').data('channel',channel);
+function loadMentionAuthorData(channel){
+	loadDatepicker('pickertMentionAuthor',loadMentionAuthorPickert,setDatesHtml);
+	var data = {"channel":channel, "div":'#mentionAuthor', "dateFrom":getDateFromLHH(),"dateTo":getDateNowLHH()};
+	getMentionAuthor(data);
+	$('#mentionAuthor').data('channel',channel);
 }
 
 function loadPostStatsData(){
-	loadDatepicker('pickertStatsPost',loadStatsPostPickert);
-	var data = {"div":'#postStats', "dateFrom":moment().subtract('days', 7).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+	loadDatepicker('pickertStatsPost',loadStatsPostPickert,setDatesHtml);
+	var data = {"div":'#postStats', "dateFrom":getDateFromLHH(),"dateTo":getDateNowLHH()};
 	getPostStats(data);
 }
 
 
-function getMonthStats(data){
-	doRequest('monthStats',data,loadMonthStats, null, 'GET');
+function getMentionAuthor(data){
+	doRequest('mentionAuthor',data,loadHtmlTable, null, 'GET');
 }
 
 function getPostStats(data){
-	doRequest('postsStats',data,loadPostStats, null, 'GET');
+	doRequest('postsStats',data,loadHtmlTable, null, 'GET');
 }
 
-function loadStatsMonthPickert(start, end, rangeSelect) {
+function loadMentionAuthorPickert(start, end, rangeSelect) {
     $('#pickertStatsMonth span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
-    var data = {"div":'#monthStats',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
-    getMonthStats(data);
+    var data = {"div":'#mentionAuthor',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
+    getMentionAuthor(data);
 }
 
 function loadStatsPostPickert(start, end, rangeSelect) {
@@ -130,7 +131,7 @@ function getGroupedPosts(data){
 	doRequest('../getGroupedPosts',data,paintCharLine, null, 'GET');
 }
 function getPostMoreLikes(data){
-	doRequest('../getPostMoreLikes',data,loadPostMoreLikes, null, 'GET');
+	doRequest('../getPostMoreLikes',data,loadHtmlTable, null, 'GET');
 }
 
 function getSentimentalAnalitycs(data){
@@ -138,8 +139,8 @@ function getSentimentalAnalitycs(data){
 }
 function loadTweetCharPie(channel){
 	changeTitle(channel,'#title-loadTweetCharPie');
-	loadDatepicker('pickertTweetConcept',loadTweetCharPiePickert);
-	var data = {'channel':channel, "div":'#tweetCharPie',"dateFrom":moment().subtract('days', 7).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
+	loadDatepicker('pickertTweetConcept',loadTweetCharPiePickert,setDatesHtml);
+	var data = {'channel':channel, "div":'#tweetCharPie',"dateFrom":getDateFromLHH(),"dateTo":getDateNowLHH()};
 	getTweetCharPie(data);
 	$('#tweetCharPie').data('channel',channel);
 }
@@ -179,15 +180,12 @@ function lineaChartUser(start, end,rangeSelect) {
     var data = { 'channel':$('#lineaChartUser').data('channel'),"div":'#lineaChartUser',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
     getUserGroupedTweets(data);
 }
-function loadUserGroupedData(channel){
-	changeTitle(channel,'#title-loadUserGroupedData');
-	loadDatepicker('pickertUser',lineaChartUser);
-	var data = {'channel':channel, "div":'#lineaChartUser',"dateFrom":moment().subtract('days', 7).format('L HH:mm'),"dateTo":moment().format('L HH:mm')};
-	getUserGroupedTweets(data);
-	$('#lineaChartUser').data('channel',channel);
-}
+
 
 function paintCharPie(dataJson) {
+	if(dataJson.data.length==0){
+		$(dataJson.container+'-up').trigger("click");
+	}
 	$(dataJson.container)
 			.highcharts(
 					   {
@@ -316,6 +314,9 @@ function printRealTimeChar(data){
 }
 
 function paintCharLine(data){
+	if(data.series.length==0){
+		$(data.container+'-up').trigger("click");
+	}
 	Highcharts.setOptions({
         global: {
             useUTC: false
@@ -436,20 +437,14 @@ function paintCharLine(data){
 }
 
 
-function loadMonthStats(data){
-	$("#monthStats").html(data);
+function loadHtmlTable(data) {
+	if($.trim($(data).find("tbody").html())==''){
+		$(this.div+'-up').trigger("click");
+	}
+	$(this.div).html(data);
 }
 
-function loadPostStats(data){
-	$("#postStats").html(data);
-}
-function loadPostMoreLikes(data){
-	$("#postMoreLikes").html(data);
-}
-
-function loadAuthors(data){
-	$("#relevantAuthors").html(data);
-}	
+	
 function getParamsCloud(params,div,id){
 	var listParams=params.replace(/:/g,',').replace(/ /g,'').replace('[','').replace(']','').split(',');
 	var data={"div":div,"conceptsId":id};

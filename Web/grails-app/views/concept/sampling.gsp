@@ -11,31 +11,8 @@
 <body>
 <g:set var="conceptName" value="${concept.conceptName}" />
 	<g:render template="tabTwitter"  model="['concept':concept,'tabMain':'','tabTweets':'','tabChar':'','tabSentimental':'','tabSampling':'active']"></g:render>
-		<div class="row">
-		<div class="col-lg-12">
-		 <div class="widget-box transparent">
-			<div class="widget-header" style="margin:0 30px 0 30px;">
-				<h4 class="widget-title lighter"><g:message code="label.help"/></h4>
-
-				<div class="widget-toolbar no-border">
-					<a href="#" data-action="collapse">
-						<i class="ace-icon fa fa-chevron-up bigger-125"></i>
-					</a>
-
-					<a href="#" data-action="close">
-						<i class="ace-icon fa fa-times bigger-125"></i>
-					</a>
-				</div>
-			</div>
-		   <div class="widget-body" >
-		     <div class="widget-main">
-		      <g:render contextPath="../user" template="headerHelp" model="['mainMessage':'dashborad.tab.samplings.desc']"></g:render>
-		     </div>
-		   </div>
-		</div>
 		
-		</div>
-		</div>
+		 <g:render contextPath="../user" template="headerHelp" model="['mainMessage':'dashborad.tab.samplings.desc']"></g:render>
 		<div class="space-24"></div>
 		<div class="row">
 	   <div class="col-lg-12">
@@ -208,7 +185,7 @@
 		 $(function() {
 			 $('#buttons').hide();
 			 var id='${concept.id}';
-			 loadDatepicker('pickertSampling',loadPickertSampling);
+			 loadDatepicker('pickertSampling',loadPickertSampling,setDatesHtml);
 			  activeItemMenuLevel2(id,id+'-tweet','${concept.conceptName}');
 
 			});

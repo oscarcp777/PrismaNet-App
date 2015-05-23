@@ -25,6 +25,9 @@ body{
 .widget-body {
     border-radius:0 0 5px 5px;
 }
+input[type=checkbox].ace.ace-switch.ace-switch-5 + .lbl::before {
+    content:"\a0SI\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0NO"
+}
 .breadcrumb{
 	font-size: 14px;
 }

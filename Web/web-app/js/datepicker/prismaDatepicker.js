@@ -67,9 +67,9 @@
         }
     });
    
-function loadDatepicker(container,callBack){
+function loadDatepicker(container,callBack,setDateCallBack){
 	$('#'+container).daterangepicker({
-        startDate: moment().subtract('days', 7),
+        startDate: moment().subtract( 7,'days'),
         endDate: moment(),
         showDropdowns: true,
         showWeekNumbers: true,
@@ -78,12 +78,12 @@ function loadDatepicker(container,callBack){
         timePicker12Hour: false,
         ranges: {
             'Hoy': [moment().startOf('day'), moment().endOf('day'),'Hoy'],
-            'Ayer': [moment().subtract('days', 1).startOf('day'), moment().subtract('days', 1).endOf('day'),'Ayer'],
-            'Ultimos 7 dias': [moment().subtract('days', 6), moment(),'Ultimos 7 dias'],
-            'Ultimos 30 dias': [moment().subtract('days', 29), moment(),'Ultimos 30 dias'],
+            'Ayer': [moment().subtract(1,'days').startOf('day'), moment().subtract( 1,'days').endOf('day'),'Ayer'],
+            'Ultimos 7 dias': [moment().subtract( 6,'days'), moment(),'Ultimos 7 dias'],
+            'Ultimos 30 dias': [moment().subtract(29,'days'), moment(),'Ultimos 30 dias'],
 //            'Presente Mes': [moment().startOf('month'), moment().endOf('month'),'Presente Mes'],
-            'Mes Pasado': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month'),'Mes Pasado'],
-            'Ultimos 90 dias': [moment().subtract('days', 89), moment(),'Ultimos 90 dias']
+            'Mes Pasado': [moment().subtract( 1,'month').startOf('month'), moment().subtract(1,'month').endOf('month'),'Mes Pasado'],
+            'Ultimos 90 dias': [moment().subtract(89,'days'), moment(),'Ultimos 90 dias']
         },
         opens: 'left',
         buttonClasses: ['btn btn-default'],
@@ -105,9 +105,32 @@ function loadDatepicker(container,callBack){
     callBack
 );
 //Set the initial state of the picker label
-	$('#'+container+' span').html(moment().subtract('days', 7).format('LLL') + ' - ' + moment().format('LLLL'));
+	setDateCallBack(container);
 }
-
+function setDatesHtml(container){
+	$('#'+container+' span').html( getDateFromLLL()+ ' - ' + getDateNowLLL());	
+}
+function setDatesHtmlOne(container){
+	$('#'+container+' span').html( getDateSubtractLLL(1)+ ' - ' + getDateNowLLL());	
+}
+function getDateFromLLL(){
+	return getDateSubtractLLL(7);
+}
+function getDateSubtractLLL(days){
+	return moment().subtract( days,'days').format('LLL');
+}
+function getDateSubtract(days){
+	return moment().subtract( days,'days').format('L HH:mm');
+}
+function getDateNowLLL(){
+	return moment().format('LLLL');
+}
+function getDateFromLHH(){
+	return getDateSubtract(7);
+}
+function getDateNowLHH(){
+	return moment().format('L HH:mm');
+}
 
 //Moment.js Time Display
 var datetime = null,

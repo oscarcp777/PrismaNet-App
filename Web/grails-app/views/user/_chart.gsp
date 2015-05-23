@@ -7,7 +7,7 @@
 				<label id="title-${callback}"> <g:message code="${titleChar}" /></label>
 			</h5>
 			<div class="widget-toolbar">
-				<a href="#" data-action="collapse"> <i
+				<a href="#" data-action="collapse" id="${div}-up"> <i
 					class="1 bigger-125 ace-icon fa fa-chevron-up"></i>
 				</a>
 			</div>

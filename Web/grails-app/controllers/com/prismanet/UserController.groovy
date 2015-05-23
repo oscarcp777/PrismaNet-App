@@ -73,7 +73,7 @@ class UserController extends GenericController{
 		[user: session.user]
 	}
 		
-	def monthStats = {
+	def mentionAuthor = {
 		def groupList = ["conceptsName"]
 		def sourceType = params.channel as MentionType
 		def filters = loadFilters([sourceType:sourceType, userId:session.user.id])
@@ -91,7 +91,7 @@ class UserController extends GenericController{
 		
 		def statsList = userService.groupBy(User, new UserAttributeContext(), groupList, filters, projection,[[attribute:"mentionId",value:OrderType.DESC]])
 		
-		render(template: "monthStats", model: [statsList:statsList])
+		render(template: "mentionAuthor", model: [statsList:statsList])
 	}
 	
 	
