@@ -41,6 +41,10 @@ class TwitterSetup {
 		this.includedAccounts = trimInput(includedAccounts)
 	 }
 	
+	void setExcludedAccounts(String excludedAccounts){
+		this.excludedAccounts = trimInput(excludedAccounts)
+	 } 
+	
 	void setKeywords(String keywords){
 	   this.keywords = trimInput(keywords)
 	}
