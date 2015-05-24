@@ -6,10 +6,8 @@
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'twitter.css')}" type="text/css">
 </head>
 <body>
-	<div class="page-content">
 		<g:render contextPath="../concept" template="tabTwitter"  model="['concept':concept,'tabMain':'','tabTweets':'active','tabChar':'','tabSentimental':'']"></g:render>
-		<div class="row well ">
-				<div class="col-xs-12" >
+<div class="well row well-tw">
 	   <div class="alert alert-info">
 			<button type="button" class="close" data-dismiss="alert">
 				<i class="ace-icon fa fa-times"></i>
@@ -35,6 +33,7 @@
 
 			<br>
 		</div>
+		<div class="col-xs-9" style="padding-left:0px;padding-right:0px;">
 		<div class="widget-box widget-color-blue">
 					<div class="widget-header">
 						<h5 class="widget-title">
@@ -51,22 +50,16 @@
 
 					<div class="widget-body">
 						<div class="widget-main" style="position: relative;">
-						<div  id="cloudWordsTW" style="min-height:400px;"> 
+						<div  id="cloudWordsTW" style="min-height:350px;"> 
 						</div>
 						</div>
 						</div>
 					</div>
+	 <g:render template="listTweets" model="['concept':concept,'tweetList':tweetInstanceList,'tweetTotal':tweetInstanceTotal]"></g:render>
 		</div>
-       <g:render template="listTweets" model="['concept':concept,'tweetList':tweetInstanceList,'tweetTotal':tweetInstanceTotal]"></g:render>			
-
-			<div class="col-xs-4">
+		<div class="col-xs-3" style="padding-left:1px;">
 				<div class="widget-box widget-color-blue">
 					<div class="widget-header">
-						<h5 class="widget-title">
-							<i class="ace-icon fa  fa-cloud"></i> 
-							<g:message code="tweets.list.cloud.more.words"/> <g:message code="dashborad.concept.tweets"/>
-						</h5>
-
 						<div class="widget-toolbar">
 							<a href="#" data-action="collapse"> <i
 								class="ace-icon fa fa-chevron-up"></i>
@@ -76,7 +69,7 @@
 
 					<div class="widget-body">
 						<div class="widget-main no-padding">
-							<table class="table table-bordered table-striped">
+							<table class="table table-bordered table-striped table-condensed table-hover">
 								<thead >
 									<tr >
 										<th style="background-color: white;"><i class="ace-icon fa fa-caret-right blue"></i>
@@ -103,15 +96,14 @@
 				</div>
 				<!-- /.widget-box -->
 			</div>
-		</div>
-		
-	</div>
+      			
+</div>
 	<script type="text/javascript">
 	var id='${concept.id}';
 	activeItemMenuLevel2(id,'${concept.id}-tweet','${concept.conceptName}');
 	var params='${params}';
 		jQuery(function($) {
- 			getWordsCloud(getParamsCloud(params,'#cloudWordsTW',id));
+ 			//getWordsCloud(getParamsCloud(params,'#cloudWordsTW',id));
 		});
 	</script>
 </body>

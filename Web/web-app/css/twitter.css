@@ -15,7 +15,7 @@
 
 .tweets {
 	margin: 0;
-	font-size: 16px;
+	font-size: 14px;
 }
 .box-user-twitter{
 	border-top: 1px solid #e8e8e8;
@@ -108,10 +108,14 @@
 
 .tweets li .message {
 	display: block;
-	padding: 5px 15px;
+	padding: 5px 15px 0;
 	position: relative;
 }
 
+.tweets li .message .btn-group .reply-icons{
+	font-size: 2em;
+	line-height: 14px;
+}
 .tweets li .content {
 	font-family: "Helvetica Neue", Arial, sans-serif;
 	min-height:55px;
@@ -128,10 +132,11 @@
 	border-top: 1px solid #eeeeee;
 	border-bottom: 1px solid white;
 }
-
+.tweets li.out:hover {
+	border-color: rgba(0,132,180,0.5);
+}
 .tweets li.out .message {
 	margin-left: 90px;
-	/* 	background: #e9f2f9; */
 }
 
 .tweets li.out .message .up-arrow {
@@ -153,8 +158,9 @@
 }
 
 .tweets li.out .name {
-	color: #428bca;
+	color:#8899a6;
 	font-family: "Helvetica Neue", Arial, sans-serif;
+	font-size: 13px;
 }
 
 .tweets li.out .delete-icon .fs1 {
@@ -178,18 +184,34 @@
 }
 .tweets li .reply-icons a.icon {
 	float: left;
-	margin: 0 7px;
+	margin: 0 2px;
 	color: #404040;
 }
-
-.tweets li .reply-icons a.icon .fs1 {
+.tweets li .reply-icons a.icon-mini {
+	margin: 0 7px;
+	color: #8899a6;
+}
+.tweets li .reply-icons a.icon-mini .fs1 {
 	font-size: 18px;
 }
-
-.tweets li .reply-icons a.icon .fs1:hover {
-	color: #e89344;
+.tweets li .reply-icons a.tw {
+	margin-left: 10px;
 }
-
+.tweets li .reply-icons a.retweet:hover {
+	color: rgb(92,145,59);
+}
+.tweets li .reply-icons a.last:hover {
+	color: rgb(255,172,51);
+}
+.tweets li .reply-icons a.pos:hover {
+	color:#18bc9c!important;
+}
+.tweets li .reply-icons a.neg:hover {
+	color:#f77!important
+}
+.tweets li .reply-icons a.neu:hover {
+	color:#478fca!important;
+}
 .tweets li .reply-icons a.icon.selectedPOS {
 	color:#18bc9c!important;
 }

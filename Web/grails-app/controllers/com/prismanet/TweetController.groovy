@@ -40,7 +40,7 @@ class TweetController extends MentionController{
 		log.info "tweetController->list params: " + params
 		Concept concept =chooseConcept(params)
 		def map = loadMentionFilters()
-		params.max = Math.min(max ?: 6, 100)
+		params.max = Math.min(max ?: 10, 100)
 		def tweets = tweetService.getTweets(map.filters,params)
 //		def relevantWords = tweetService.getRelevantWords(loadSolrFilters())
 		if(!grailsApplication.config.grails.twitter.offline)

@@ -8,8 +8,7 @@
 	<g:set var="conceptName" value="${concept.conceptName}" />
 	<g:render template="tabTwitter" model="['concept':concept,'tabMain':'','tabTweets':'','tabChar':'active','tabSentimental':'','tabSampling':'']"></g:render>
   
-	<div class="page-content">
-		<div class="row">
+
 		  <g:render contextPath="../user" template="headerHelp" model="['mainMessage':'dashborad.tab.tweets.desc']"></g:render>
 			<div class="col-lg-12">
 				<g:render contextPath="../user" template="chart" model="['divPickert':'disable','callback':'disable','titleChar':'user.stats.tweets.real.time','div':'realTimeChar','contentHelp':'user.stats.tweets.real.time.help2','icon':'line-chart']"></g:render>
@@ -17,8 +16,7 @@
 				<g:render contextPath="../user" template="chart" model="['divPickert':'weightPickert','callback':'disable','titleChar':'concept.stats.scope.date','div':'weightChart','contentHelp':'concept.stats.scope.date.help','icon':'line-chart']"></g:render>
 				<g:render contextPath="../user" template="chart" model="['divPickert':'authorPickert','callback':'disable','titleChar':'concept.author.more.followers','div':'relevantAuthors','contentHelp':'concept.author.more.followers.help','icon':'table']"></g:render>
 			</div>
-		</div>
-	</div>
+		
 
 
 	<script type="text/javascript">

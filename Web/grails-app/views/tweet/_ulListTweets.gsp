@@ -46,56 +46,61 @@
 								<span class="arrow"></span>
 								<div>
 
-									<a
-										href="https://twitter.com/${fieldValue(bean: tweet.tweet.author, field: "accountNameSingle")}"
-										target="_blanck" class="name" data-original-title=""> 
+									<a href="https://twitter.com/${fieldValue(bean: tweet.tweet.author, field: "accountNameSingle")}"
+										target="_blanck" class="name btn-link" > 
 										<span class="bigger lighter descrip">${fieldValue(bean: tweet.tweet.author, field: "name")}</span>
-										${fieldValue(bean: tweet.tweet.author, field: "accountName")}
 									</a>
-									 <span class="date-time widget-toolbar no-border"> <g:formatDate
-											date="${tweet.tweet.created}" type="datetime"
-											style="short" />
-									</span>
+									<a href="https://twitter.com/${fieldValue(bean: tweet.tweet.author, field: "accountNameSingle")}"
+										target="_blanck" class="name btn-link" > 
+										${fieldValue(bean: tweet.tweet.author, field: "accountName")} &nbsp;·&nbsp;
+									</a>
+									<a href="https://twitter.com/${fieldValue(bean: tweet.tweet.author, field: "accountNameSingle")}/status/${tweet.tweet.tweetId.toString()}"
+										target="_blanck" class="name btn-link" > 
+										<g:formatDate date="${tweet.tweet.created}" type="datetime" style="LONG" timeStyle="SHORT" />
+									</a>
 								</div>
 
 								<p class="body no-margin content">
 									${raw(tweet.tweet.contentHtml)}
 								</p>
-								<div class="hr hr8 hr-double"></div>
 								<div class="clearfix ">
-									<div class="btn-group">
-										<div class="reply-icons pull-right" style="font-size: 2em;"
-											id="${tweet.tweet.id}">
+									<div class="grid3 ">
+										<div class="reply-icons">
+
+											<a href="javascript:void(0)" class="icon-mini retweet tooltips" title="retweets">
+												<span>${tweet.tweet.retweetCount}</span>  <i class="ace-icon fa fa-retweet fs1" title="retweet"></i>
+											</a> 
+											<a href="javascript:void(0)" class="icon-mini last tooltips" title="Favoritos"> 
+												<span>${tweet.tweet.favoriteCount}</span> <i class="ace-icon fa fa-star fs1" title="favorito"></i>
+											</a>
+											<a href="https://twitter.com/${fieldValue(bean: tweet.tweet.author, field: "accountNameSingle")}/status/${tweet.tweet.tweetId.toString()}"
+												target="_blanck" class="icon-mini tw tooltips btn btn-link" title="Ver en  Twitter"> 
+												 <i class="ace-icon fa fa-external-link fs1" title="favorito"></i>
+											</a>											
+										</div>
+									</div>
+									<div class="btn-group pull-right">
+										<div class="reply-icons pull-right" id="${tweet.tweet.id}">
 											<a href=" javascript:void(0);"  id="${tweet.tweet.id}Pos" 
-												class="icon last tooltips" 
+												class="icon pos tooltips" 
 												onclick="changeState('${tweet.tweet.id}Pos','${createLink(controller:'tweet', action:'saveOpinion')}','${tweet.tweet.id}','${concept.id}', 'POS');"  
-												data-original-title="" 
+												 
 												title="Positivo"> 
 												<i class="ace-icon fa fa-check-square" title="Positivo" ></i>
 											</a>
 											<a href=" javascript:void(0);"  id="${tweet.tweet.id}Neg" 
-												class="icon last tooltips" 
+												class="icon neg tooltips" 
 												onclick="changeState('${tweet.tweet.id}Neg', '${createLink(controller:'tweet', action:'saveOpinion')}','${tweet.tweet.id}','${concept.id}','NEG');" 
-												data-original-title="" 
+												 
 												title="Negativo"> 
 												<i class="ace-icon fa fa-minus-square" ></i>
 											</a>
 			     							<a href="javascript:void(0);" id="${tweet.tweet.id}Que" 
-			     								class="icon last tooltips" 
+			     								class="icon neu tooltips" 
 			     								onclick="changeState('${tweet.tweet.id}Que', '${createLink(controller:'tweet', action:'saveOpinion')}','${tweet.tweet.id}','${concept.id}','NEU');" 
-			     								data-original-title="" 
+			     								 
 			     								title="Indefinido"> 
 												<i class="ace-icon fa fa-question-circle"></i>
-											</a>
-										</div>
-									</div>
-									<div class="grid3 pull-right">
-										<div class="reply-icons pull-right">
-
-											<a href="javascript:void(0)" class="icon hide_tweet" data-original-title="">
-												${tweet.tweet.retweetCount} <i class="ace-icon fa fa-retweet fs1" title="retweet"></i>
-											</a> <a href="javascript:void(0)" class="icon last" data-original-title=""> 
-												${tweet.tweet.favoriteCount}<i class="ace-icon fa fa-star fs1" title="favorito"></i>
 											</a>
 										</div>
 									</div>
