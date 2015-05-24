@@ -11,7 +11,7 @@
 									<div>
 										<div class="inline position-relative">
 											<a href=" javascript:void(0);" class="btn btn-link dropdown-toggle"
-												data-toggle="dropdown"> <i
+												data-toggle="dropdown" style="padding:0px 0px  0px 4px!important; font-size:12px;"> <i
 												class="ace-icon fa fa-plus-circle bigger-120 blue"></i> <g:message code="tweets.list.more.data"/>
 											</a>
 

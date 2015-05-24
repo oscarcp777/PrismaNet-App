@@ -23,7 +23,6 @@
 	background: #ffffff;
 }
 .avatar {
-	border-top: 1px solid #e8e8e8;
 	border-radius: 5px 5px 5px 5px;
 	background: #ffffff;
 	width: 64px;
@@ -99,16 +98,16 @@
 .tweets li.out img.avatar {
 	float: left;
 	border-radius: 5px;
-	width: 64px;
-	height: 64px;
-	margin-left: 20px;
+	width: 48px;
+	height: 48px;
+	margin-left: 15px;
 	margin-top: 20px;
 	background: #fafafa;
 }
 
 .tweets li .message {
 	display: block;
-	padding: 5px 15px 0;
+	padding: 5px 15px 0 0;
 	position: relative;
 }
 
@@ -136,7 +135,7 @@
 	border-color: rgba(0,132,180,0.5);
 }
 .tweets li.out .message {
-	margin-left: 90px;
+	margin-left:60px;
 }
 
 .tweets li.out .message .up-arrow {
