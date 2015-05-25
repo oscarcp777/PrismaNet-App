@@ -111,7 +111,7 @@ class TweetService extends MentionService{
 		boolean result = false
 		log.debug "status.lang " + tweet.getLang()
 		log.debug "concept.lang " + concept.lang?.code
-		if (!concept.lang || tweet.getLang() == concept.lang.code)
+		if (!concept.lang || (tweet.getLang() == concept.lang.code && tweet.getUser().getLang() && tweet.getUser().getLang() == concept.lang.code))
 			result = true
 		log.debug "Evaluacion lenguaje: " + result
 		result
@@ -183,6 +183,11 @@ class TweetService extends MentionService{
 	def getTweets(filters, parameters){
 		filters.add(new Filter(attribute:"sourceType",value:Tweet.class, type:FilterType.EQ))
 		getMentions(filters, parameters, new TweetAttributeContext(), Tweet)
+	}
+	
+	def getTweets(filters, parameters, orders){
+		filters.add(new Filter(attribute:"sourceType",value:Tweet.class, type:FilterType.EQ))
+		getMentions(filters, parameters, new TweetAttributeContext(), Tweet, orders)
 	}
 	
 	def getSamplingTweets(filters, parameters, SamplingType type){
@@ -307,4 +312,5 @@ class TweetService extends MentionService{
 		TOP_RETWEETS,
 		TOP_FAVS;
 	}
+	
 }
