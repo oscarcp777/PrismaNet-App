@@ -14,15 +14,14 @@
 			</h1>
 			
 		</div>
+
+		<div class="row">
+			<div class="col-lg-12">
 <div class="alert alert-block alert-warning">
 
 								<i class="ace-icon fa fa-exclamation-triangle fa-2x pull-left fa-border" style="border: solid 0.08em #fcf8e3;color:red;"></i>
 								<g:message code='concept.general.edition'/> 
 							</div>
-	<div class="page-content">
-		<div class="row">
-			<div class="col-lg-12">
-
 				<div class="col-md-6">
 					<div class="profile-user-info profile-user-info-striped">
 						<div class="profile-info-row">
@@ -128,7 +127,6 @@
 				<div class="hr hr32 hr-dotted"></div>
 			</div>
 		</div>
-	</div>
 	<script type="text/javascript">
 	        var id='${concept.id}';
 	        var idTS='${twSetup.id}'

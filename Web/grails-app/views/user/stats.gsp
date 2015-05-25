@@ -18,9 +18,10 @@
 			</h1>
 			
 		</div>
-		<div class="row" >
-		<g:render template="headerHelp" model="['mainMessage':'dashborad.tab.main.desc']"></g:render>
+		<div class="row bg-well" >
+		
 		<div class="col-lg-12" >
+		<g:render template="headerHelp" model="['mainMessage':'dashborad.tab.main.desc']"></g:render>
 			<sec:access expression="hasRole('ROLE_USER_ADVANCE')">
 			   <g:render template="chart" model="['divPickert':'pickertUser','callback':'loadUserGroupedData','titleChar':'user.stats.tweets.date','div':'lineaChartUser','contentHelp':'user.stats.tweets.date.help','icon':'line-chart']"></g:render>	
 		      	<script type="text/javascript">

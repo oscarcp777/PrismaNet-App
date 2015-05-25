@@ -1,6 +1,6 @@
 
 <div class="col-lg-12">
-	<div class="widget-box widget-color-blue">
+	<div class="widget-box widget-prisma">
 		<div class="widget-header">
 			<h5 class="widget-title">
 				<i class="ace-icon  fa-lg fa fa-${icon}"> </i>
@@ -13,7 +13,7 @@
 			</div>
 			<g:if test="${divPickert != 'disable'}">
 			<div class="widget-toolbar input-group blue-active">
-				<div id="${divPickert}" class="btn btn-primary date-picker">
+				<div id="${divPickert}" class="btn btn-white btn-primary btn-round date-picker">
 					<i class="ace-icon fa fa-calendar"></i> <span class="date-range"></span>
 					<i class="ace-icon fa fa-chevron-down"></i>
 				</div>
@@ -24,7 +24,7 @@
 			</g:if>
 			<div class="widget-toolbar blue-active">
 			   <div class="btn-group  btn-corner">
-				<a href="javascript:void(0);" id="help-${div}" class="btn btn-grey btn-help" > 
+				<a href="javascript:void(0);" id="help-${div}" class="btn btn-white btn-grey btn-help" > 
 				<i class="ace-icon fa fa-question-circle fa-2x"></i>
 				</a>
 			   </div>

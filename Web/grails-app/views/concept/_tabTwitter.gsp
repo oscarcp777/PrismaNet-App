@@ -1,5 +1,5 @@
 		
-		<div class="page-header">
+		<div class="page-header ph-tab">
 			<h1 id="headerMain">
 				<i class="ace-icon glyphicon glyphicon-cloud-download"></i> ${concept.conceptName}
 				
@@ -40,11 +40,10 @@
 		</li>
 		<li class="${tabSampling}">
 			<g:link  controller="concept" action="sampling" id="${concept.id}" >
-				<i class="blue glyphicon glyphicon-stats bigger-120"></i> 
+				<i class="blue fa fa-pie-chart bigger-120"></i> 
 				<g:message code="dashborad.tab.sampling"/>
 			</g:link>
 		</li>
 	</ul>
-	<br>
 
 		

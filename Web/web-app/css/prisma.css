@@ -4,10 +4,32 @@
 body{
 	font-size:14px;
 }
-
+.page-content{
+  padding-left:2px;
+}
+.page-header{
+	margin: 0px;
+	border-bottom:1px solid #cfdbe2;
+	margin-right:-15px;
+}
+.ph-tab{
+	border-bottom:0;
+}
+.page-header{
+  padding-left: 25px;
+}
+.bg-well{
+	background-color: #F5F7FA;
+}
 .ace-nav>li>a:hover, .ace-nav>li>a:focus{
 	background-color:#15a589;
     color:#FFF;
+}
+.ace-nav>li>a{
+	background-color:#18BC9C;
+}
+.ace-nav>li> .date-time:hover{
+	background-color:#18BC9C;
 }
 .ace-nav>li.open>a {
     background-color:#15a589!important;
@@ -19,11 +41,32 @@ body{
     border-radius:5px 5px 0 0 !important;
     }
    .widget-box {
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 5px;
+    box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);
+    transition:0.02s padding cubic-bezier(0.35, 0, 0.25, 1);
+    border-top-width:4px;
+    border-color:#cfdbe2;
    }
-    
+.widget-prisma .widget-header{
+	background:#fff;
+	border-bottom: 1px solid #fff;
+	color:#2679b5;
+	border-radius: 5px;
+}  
+.widget-header>.widget-title{
+	font-size: 16px;
+}
+.widget-box.transparent{
+	box-shadow:none;
+}
+.widget-box.transparent .widget-header{
+	border-bottom: 0;
+}
 .widget-body {
     border-radius:0 0 5px 5px;
+}
+.widget-main{
+	padding: 2px;
 }
 input[type=checkbox].ace.ace-switch.ace-switch-5 + .lbl::before {
     content:"\a0SI\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0NO"
@@ -175,9 +218,9 @@ input[type=checkbox].ace.ace-switch.ace-switch-5 + .lbl::before {
 	border-bottom:white;
 }
 .blue-active {
-    background-color:#1b6aaa!important;
+    background-color:#fff!important;
     line-height: 41px;
-    border:1px solid #fff;
+    border:1px solid #D9D9D9;
     border-width:0 1px 0 0
 }
 .btn.btn-app {

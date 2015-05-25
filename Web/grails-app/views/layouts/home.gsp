@@ -40,21 +40,17 @@
 				<!-- /.brand -->
 				<!-- /.navbar-header -->
 			</div>
-			<div class="navbar-buttons navbar-header pull-right"
-				role="navigation">
+			<div class="navbar-buttons navbar-header pull-right" role="navigation">
 				<ul class="nav ace-nav">
-					<li><a class="dropdown-toggle" href="javascript:void(0);">
-							<span id="datetime"> </span>
-					</a></li>
-					<li><a data-toggle="dropdown" href="#" class="dropdown-toggle">
-							<span class="user-info"> <small><g:message
-										code="home.user.wellcome" /> </small> <sec:username />
+					<li><a class="date-time" href="javascript:void(0);"><span id="datetime"> </span></a>
+					</li>
+					<li>
+						<a data-toggle="dropdown" href="javascript:void(0);" class="dropdown-toggle" aria-expanded="false">
+							<span class="user-info"> <small>
+							<g:message code="home.user.wellcome" /> </small> <sec:username />
 						</span> <i class="ace-icon fa fa-caret-down"></i>
-					</a>
-
-						<ul
-							class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							
+						</a>
+						<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 						   <sec:access expression="hasRole('ROLE_USER_ADVANCE')">
 							<li ><g:link controller='concept' action='listAdvance'>
 									<i class="ace-icon fa fa-cog"></i>
@@ -76,7 +72,8 @@
 										<g:message code="home.user.logout" />
 									</g:link>
 								</sec:ifLoggedIn></li>
-						</ul></li>
+						</ul>
+					</li>
 				</ul>
 
 			</div>
@@ -238,16 +235,13 @@
 				</div>
 
 				<div class="page-content">
-					<div class="row">
-						<div class="col-xs-12" id="layoutBody">
+					
 							<g:layoutBody />
 							<r:layoutResources />
 							<!-- PAGE CONTENT ENDS -->
 						</div>
 						<!-- /.col -->
-					</div>
-					<!-- /.row -->
-				</div>
+					
 				<!-- /.page-content -->
 			</div>
 			<!-- /.main-content -->

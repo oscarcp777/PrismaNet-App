@@ -35,8 +35,10 @@
 		$('#btn-next').html('Generar Gráfico <i class="ace-icon fa fa-pie-chart icon-on-right"></i>');
 	});
 </script>
-<div class="col-xs-8 col-md-offset-2" id="content">
+<div class="col-xs-12" id="content">
+    <div class="center-tweets">
 	<g:render template="ulListTweets"></g:render>
+	</div>
 </div>
 
 <div id="pagination" class="pag-content col-xs-8 col-md-offset-2"></div>

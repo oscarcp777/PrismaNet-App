@@ -8,7 +8,7 @@ modules = {
 	}
 	ace{
 		resource url:'css/ace/ace.min.css'
-		resource url:'css/ace/ace-skins.min.css' 
+		resource url:'css/ace/ace-skins.css' 
 		resource url:'css/prisma.css'
 		resource url:'js/ace/ace-extra.min.js' ,disposition: 'head'
 		resource url:'js/ace/fuelux.wizard.min.js' 

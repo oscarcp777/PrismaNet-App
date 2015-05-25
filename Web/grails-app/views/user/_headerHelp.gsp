@@ -18,7 +18,6 @@
 
 
 		   <div class="widget-body" >
-				<blockquote>
 					<div class="alert alert-info fade in">
 						<i class="fa fa-info-circle fa-lg fa-border"></i>
 						<g:message code="${mainMessage}" args="[conceptName]"/>
@@ -26,7 +25,6 @@
 						<g:message code="dashborad.tab.main.desc.help" />
 						<i class="fa fa-question-circle fa-lg fa-border"></i>
 					</div>
-				</blockquote>
 		   </div>
 		</div>
 </div>

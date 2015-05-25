@@ -11,13 +11,11 @@
 <body>
 <g:set var="conceptName" value="${concept.conceptName}" />
 	<g:render template="tabTwitter"  model="['concept':concept,'tabMain':'','tabTweets':'','tabChar':'','tabSentimental':'','tabSampling':'active']"></g:render>
-		
+	  <div class="row bg-well">
+		<div class="col-lg-12">
 		 <g:render contextPath="../user" template="headerHelp" model="['mainMessage':'dashborad.tab.samplings.desc']"></g:render>
-		<div class="space-24"></div>
-		<div class="row">
-	   <div class="col-lg-12">
-	   <div class="space-4"></div>
-				<div class="widget-box widget-color-blue">
+		<div class="col-lg-12">
+				<div class="widget-box widget-prisma">
 					<div class="widget-header">
 						<h5 class="widget-title"><i class="fa fa-random"></i> <g:message code="sampling.tweets.title"/> </h5>
 						<div class="widget-toolbar">
@@ -27,7 +25,7 @@
 							</a>
 						</div>
 						<div class="widget-toolbar input-group blue-active">
-							<div id="pickertSampling" class="btn btn-info date-picker">
+							<div id="pickertSampling" class="btn btn-white btn-info date-picker">
 								<i class="ace-icon fa fa-calendar"></i> <span class="date-range"></span>
 								<i class="ace-icon fa fa-chevron-down"></i>
 							</div>
@@ -68,15 +66,17 @@
 							<div class="widget-body" >
 								<div class="widget-main">
 								<div id="divSampling" >
-									<div id="fuelux-wizard" data-target="#step-container">
-										<ul class="wizard-steps">
-											<li data-target="#step1" class="active"><span
-												class="step">1</span> <span class="title"><g:message code="sampling.tweets.first.step"/> </span></li>
+									<div id="fuelux-wizard-container" >
+									<div>
+										<ul class="steps">
+											<li data-step="1" class="active">
+											<span class="step">1</span> 
+											<span class="title"><g:message code="sampling.tweets.first.step"/> </span></li>
 
-											<li data-target="#step2" class=""><span
+											<li data-step="2" class=""><span
 												class="step">2</span> <span class="title"><g:message code="sampling.tweets.second.step"/></span></li>
 
-											<li data-target="#step3" class=""><span
+											<li data-step="3" class=""><span
 												class="step">3</span> <span class="title"><g:message code="sampling.tweets.three.step"/></span></li>
 
 										</ul>
@@ -85,27 +85,27 @@
 									<hr>
 
 									<div class="step-content pos-rel" id="step-container">
-										<div class="step-pane active" id="step1">
+										<div class="step-pane active" data-step="1" id="step1">
 										<div class="center" id="samplingStep1">
 												<h1 id="titleSampling"> <g:message code="sampling.tweets.zero.step.message"/></h1>
 
 											</div>
 										</div>
 
-										<div class="step-pane" id="step2" style="display: inline-block;min-height:inherit;">
+										<div class="step-pane" data-step="2" id="step2" style="display: inline-block;min-height:inherit;">
 											<div class="center" id="samplingStep2" >
 												
 											</div>
 										</div>
 
-										<div class="step-pane" id="step3">
+										<div class="step-pane" data-step="3" id="step3">
 											<div class="center" id="samplingStep3">
 											<div id="charPieOpinion" style=" min-height: 400px; min-width: 310px;margin: 0 auto"></div>
 											</div>
 										</div>
 
 									</div>
-
+								</div>
 									<hr >
 									<div class="wizard-actions" id="buttons">
 
@@ -119,16 +119,12 @@
 							</div>
 							<!-- /.widget-body -->
 						</div>
-
+         </div>
 		
 					</div>
 		</div>
-	<div class="page-content">
-		<div class="row">
-			<div class="col-lg-12">
-		   </div>
-		</div>
-	</div>
+	
+		
 	
 	<script type="text/javascript">
 		function loadCharPieOpinion(){
@@ -157,17 +153,19 @@
 		function getSamplingStep2(data){
 			doRequest('../../tweet/samplingStep2',data,loadSamplingStep2, null, 'GET');
 		}
-		window.onload = function () {
-			$('#fuelux-wizard')
+		jQuery(function($) {
+			$('#fuelux-wizard-container')
 			.ace_wizard({})
-			.on('change' , function(e, info){
+			.on('actionclicked.fu.wizard' , function(e, info){
 				if(info.step==1){
+					
 					var data = {'div':'#samplingStep2'};
 					getSamplingStep2(data);
 					$('#samplingStep2').css({ 'min-height':'200px'});
 					$('#samplingType').hide();
 					$('#pickertSampling').hide();
 					$('#refresh-sampling').show();
+					$('#step1').empty();
 					
 				}
 				if(info.step==2){
@@ -176,12 +174,11 @@
 					 $('#buttons').hide();
 				}
 			})
-			.on('finished', function(e) {
-				console.log('fin')
-			}).on('stepclick', function(e){
-				console.log('paso c');
+			.on('finished.fu.wizard', function(e) {
+			}).on('stepclick.fu.wizard', function(e){
 			});
-		}
+		
+		});
 		 $(function() {
 			 $('#buttons').hide();
 			 var id='${concept.id}';

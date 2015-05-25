@@ -10,13 +10,11 @@
 <g:set var="conceptName" value="${concept.conceptName}" />
 	<g:render template="tabTwitter"  model="['concept':concept,'tabMain':'','tabTweets':'','tabChar':'','tabSentimental':'active','tabSampling':'']"></g:render>
 
-	<div class="page-content">
-		<div class="row">
+	  <div class="row bg-well">
+		<div class="col-lg-12">
 		<g:render contextPath="../user" template="headerHelp" model="['mainMessage':'dashborad.tab.sentimental.desc']"></g:render>
-			<div class="col-lg-12">
 				<g:render contextPath="../user" template="chart" model="['divPickert':'sentimentalPickert','callback':'disable','titleChar':'dashborad.tab.sentimental.line','div':'sentimentalChart','contentHelp':'dashborad.tab.sentimental.line.help','icon':'line-chart']"></g:render>
 				<g:render contextPath="../user" template="chart" model="['divPickert':'disable','callback':'disable','titleChar':'dashborad.tab.sentimental.pie','div':'sentimentChartPie','contentHelp':'dashborad.tab.sentimental.pie.help','icon':'pie-chart']"></g:render>
-		   </div>
 		</div>
 	</div>
 	<script type="text/javascript">

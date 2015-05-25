@@ -1,4 +1,4 @@
-			<div class="page-header">
+			<div class="page-header ph-tab">
 			<h1 id="headerMain">
 				<i class="ace-icon glyphicon glyphicon-cloud-download"></i> ${concept.conceptName}
 				
@@ -38,4 +38,3 @@
 <%--		</li>--%>
 		
 	</ul>
-	<br>
