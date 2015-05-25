@@ -148,7 +148,7 @@
 		$('#'+container+' span').html(moment(dateFrom,"YYYY-MM-DD HH:mm:ss").format('LLL')+ ' - ' + moment(dateTo,"YYYY-MM-DD HH:mm:ss").format('LLL'));	
 	}
 		jQuery(function($) {
- 			//getWordsCloud(getParamsCloud(params,'#cloudWordsTW',id));
+ 			getWordsCloud(getParamsCloud(params,'#cloudWordsTW',id));
 			 loadDatepicker('pickertListTweets',loadPickertListTweets,setDatesCustom);
 		});
 	</script>
