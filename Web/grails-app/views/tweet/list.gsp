@@ -144,8 +144,9 @@
 	function loadPickertListTweets(start, end, rangeSelect) {
    	 $('#pickertListTweets span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
    	 var type=$("#samplingType input[type='radio']:checked").val();
-	 var data = {"conceptsId":${concept.id},"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm'),
-	    		      'div':'#divListTweets','samplingType':type};
+	 var data = {"id":${concept.id},"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm'),
+	    		      'div':'#divListTweets','type':type};
+	 document.location.href =encodeURI('list?conceptsId='+data.id+'&dateFrom='+data.dateFrom+'&dateTo='+data.dateTo+'&type='+data.type);
 	}
 	
 	function setDatesCustom(container){
