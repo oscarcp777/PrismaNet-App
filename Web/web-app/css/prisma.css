@@ -19,7 +19,7 @@ body{
   padding-left: 25px;
 }
 .bg-well{
-	background-color:#ededed;
+	background-color:#FAFAFA;
 }
 .ace-nav>li>a:hover, .ace-nav>li>a:focus{
 	background-color:#15a589;
@@ -40,27 +40,35 @@ body{
     .nav-tabs>li>a, .nav-tabs>li>a:focus {
     border-radius:5px 5px 0 0 !important;
     }
-   .widget-box {
-    border-radius: 5px;
-    box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);
-    transition:0.02s padding cubic-bezier(0.35, 0, 0.25, 1);
-    border-top-width:4px;
-    border-color:#d5d4d4;
+.widget-box {
+    border-radius:  6px 6px 0 0;
+    box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);
+    transition:all 0.3s ease-out;
+    border-top-width:1px;
+    border-color:#d6d6d6;
+    margin-bottom: 20px;
    }
+.widget-box:hover {
+	box-shadow:0 12px 15px rgba(0, 0, 0, 0.24), 0 17px 50px rgba(0, 0, 0, 0.19);
+	 border-top-width:1px;
+	 
+}
 .widget-prisma .widget-header{
-	background:#fff;
+	background:#FAFAFA;
 	border-bottom: 1px solid #fff;
-	color:#2679b5;
-	border-radius: 5px;
+	color:#4C8FBD;
+	border-radius:  6px 6px 0 0;
 }  
-.widget-header>.widget-title{
+.widget-header>.widget-title label{
 	font-size: 16px;
 }
 .widget-box.transparent{
 	box-shadow:none;
+	margin-bottom: 0px;
 }
 .widget-box.transparent .widget-header{
 	border-bottom: 0;
+	background-color: transparent !important;
 }
 .widget-body {
     border-radius:0 0 5px 5px;
@@ -199,15 +207,18 @@ input[type=checkbox].ace.ace-switch.ace-switch-5 + .lbl::before {
 .btn-group .btn-primary.active {
     background-color:#1b6aaa!important;
     border-color:#ffcb05;
+    color: #fff !important;
 }
 .btn-group .btn-info.active {
     background-color:#4f99c6!important;
     border-color:#ffcb05;
+     color: #fff !important;
 
 }
 .btn-group .btn-danger.active {
     background-color:#b74635!important;
     border-color:#ffcb05;
+     color: #fff !important;
 }
 .btn-group .btn-yellow.active {
     background-color:#e59729 !important;
@@ -218,7 +229,6 @@ input[type=checkbox].ace.ace-switch.ace-switch-5 + .lbl::before {
 	border-bottom:white;
 }
 .blue-active {
-    background-color:#fff!important;
     line-height: 41px;
     border:1px solid #D9D9D9;
     border-width:0 1px 0 0

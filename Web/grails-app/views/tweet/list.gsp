@@ -11,8 +11,8 @@
 <div class="row bg-well">
 <div class="col-lg-12">
    <g:render contextPath="../user" template="headerHelp" model="['mainMessage':'dashborad.tab.tweets.desc']"></g:render>
-    <div class="col-lg-9 no-padding">
-   <div class="widget-box widget-prisma">
+<div class="col-lg-12" id="cloudWordsDiv" style="display:none; ">
+				<div class="widget-box widget-prisma">
 					<div class="widget-header">
 						<h5 class="widget-title">
 							<i class="ace-icon fa  fa-cloud"></i> 
@@ -33,17 +33,75 @@
 						</div>
 						</div>
 					</div>
-	</div>
-				<div class="col-xs-3 no-padding" >
+</div>
+		
+   
+    <div class="col-lg-8 no-padding">
+		<div class="widget-box widget-prisma">
+			<div class="widget-header">
+
+						<div class="widget-toolbar input-group blue-active">
+							<div id="pickertListTweets" class="btn btn-info btn-white date-picker">
+								<i class="ace-icon fa fa-calendar"></i> <span class="date-range"></span>
+								<i class="ace-icon fa fa-chevron-down"></i>
+							</div>
+						</div>
+						<div class="widget-toolbar blue-active" >
+								<div class="btn-group  btn-corner" data-toggle="buttons" id="samplingType">
+								  <label  class="btn btn-info  active btn-white tooltips" 
+								  data-original-title="${g.message (code: 'sampling.tweets.date')}">
+								    <input type="radio" checked name="options" id="option1" value="${SamplingType.RANDOM}">
+								     <i class="ace-icon fa fa-calendar align-top bigger-150"></i>
+								  </label>
+								    <label class="btn btn-info btn-white tooltips" 
+								  data-original-title="${g.message (code: 'sampling.tweets.author')}">
+								    <input type="radio" name="options" id="option2" value="${SamplingType.TOP_RELEVANT_AUTHORS}">
+								     <i class="ace-icon fa fa-users align-top bigger-150"></i>
+								  </label>
+								    <label class="btn btn-info btn-white tooltips" 
+								  data-original-title="${g.message (code: 'sampling.tweets.retweet')}">
+								    <input type="radio" name="options" id="option3" value="${SamplingType.TOP_RETWEETS}">
+								     <i class="ace-icon fa fa-retweet align-top bigger-150"></i>
+								  </label>								  
+								  <label class="btn btn-info btn-white tooltips " 
+								  data-original-title="${g.message (code: 'sampling.tweets.fav')}">
+								    <input type="radio" name="options" id="option4" value="${SamplingType.TOP_FAVS}">
+								    <i class="ace-icon fa fa-star align-top bigger-150"></i>
+								  </label>
+								
+								</div>
+							</div>
+
+			</div>
+		<div class="widget-body" >
+			<div class="widget-main">
+			<div id="divListTweets" class="center-tweets" >
+			 <g:render template="listTweets" model="['concept':concept,'tweetList':tweetInstanceList,'tweetTotal':tweetInstanceTotal]"></g:render>
+			</div>
+		 </div>
+		</div>
+		</div>
+</div>
+		<div class="col-xs-4 no-padding" >
 				<div class="widget-box widget-prisma">
 					<div class="widget-header">
+						<h5 class="widget-title">
+							<i class="ace-icon fa  fa-cloud"></i> 
+							<g:message code="tweets.list.cloud.more.words"/> <g:message code="dashborad.concept.tweets"/>
+						</h5>
 						<div class="widget-toolbar">
 							<a href="#" data-action="collapse"> <i
 								class="ace-icon fa fa-chevron-up"></i>
 							</a>
 						</div>
+					<div class="widget-toolbar">
+					 <div class="btn-group  btn-corner" >
+						<a class="btn btn-info tooltips" href="javascrip:void(0);" data-original-title="Ver en forma de Nube">
+							<i class="ace-icon fa fa-cloud icon-only bigger-180"></i>
+						</a>
+					  </div>
 					</div>
-
+					</div>
 					<div class="widget-body">
 						<div class="widget-main no-padding">
 							<table class="table table-bordered table-striped table-condensed table-hover">
@@ -73,60 +131,6 @@
 				</div>
 				<!-- /.widget-box -->
 			</div>
-   
-    <div class="col-lg-12">
-		<div class="widget-box widget-prisma">
-			<div class="widget-header">
-				<h5 class="widget-title"><i class="fa fa-filter"></i> Filtros Aplicados </h5>
-
-						<div class="widget-toolbar input-group blue-active">
-							<div id="pickertListTweets" class="btn btn-info btn-white date-picker">
-								<i class="ace-icon fa fa-calendar"></i> <span class="date-range"></span>
-								<i class="ace-icon fa fa-chevron-down"></i>
-							</div>
-						</div>
-						<div class="widget-toolbar blue-active" >
-						      <div class="btn-group  btn-corner" style="display: none;" id="refresh-sampling">
-								<g:link class="btn btn-info active tooltips" controller="concept" action="sampling" id="${concept.id}" 
-								   data-original-title="reiniciar el muestreo">
-									<i class="ace-icon fa fa-refresh icon-only bigger-150"></i>
-								</g:link>
-							  </div>
-								<div class="btn-group  btn-corner" data-toggle="buttons" id="samplingType">
-								  <label  class="btn btn-info active tooltips" 
-								  data-original-title="${g.message (code: 'sampling.tweets.random')}">
-								    <input type="radio" checked name="options" id="option1" value="${SamplingType.RANDOM}">
-								     <i class="ace-icon fa fa-random align-top bigger-125"></i>
-								  </label>
-								    <label class="btn btn-info tooltips" 
-								  data-original-title="${g.message (code: 'sampling.tweets.author')}">
-								    <input type="radio" name="options" id="option2" value="${SamplingType.TOP_RELEVANT_AUTHORS}">
-								     <i class="ace-icon fa fa-users align-top bigger-125"></i>
-								  </label>
-								    <label class="btn btn-info tooltips" 
-								  data-original-title="${g.message (code: 'sampling.tweets.retweet')}">
-								    <input type="radio" name="options" id="option3" value="${SamplingType.TOP_RETWEETS}">
-								     <i class="ace-icon fa fa-retweet align-top bigger-125"></i>
-								  </label>								  
-								  <label class="btn btn-info tooltips " 
-								  data-original-title="${g.message (code: 'sampling.tweets.fav')}">
-								    <input type="radio" name="options" id="option4" value="${SamplingType.TOP_FAVS}">
-								    <i class="ace-icon fa fa-star align-top bigger-125"></i>
-								  </label>
-								
-								</div>
-							</div>
-
-			</div>
-		<div class="widget-body" >
-			<div class="widget-main">
-			<div id="divListTweets" class="center-tweets" >
-			 <g:render template="listTweets" model="['concept':concept,'tweetList':tweetInstanceList,'tweetTotal':tweetInstanceTotal]"></g:render>
-			</div>
-		 </div>
-		</div>
-		</div>
-</div>
 	</div>	
 </div>
 	<script type="text/javascript">
@@ -148,6 +152,7 @@
 		$('#'+container+' span').html(moment(dateFrom,"YYYY-MM-DD HH:mm:ss").format('LLL')+ ' - ' + moment(dateTo,"YYYY-MM-DD HH:mm:ss").format('LLL'));	
 	}
 		jQuery(function($) {
+			
  			getWordsCloud(getParamsCloud(params,'#cloudWordsTW',id));
 			 loadDatepicker('pickertListTweets',loadPickertListTweets,setDatesCustom);
 		});

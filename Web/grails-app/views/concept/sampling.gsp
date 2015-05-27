@@ -34,29 +34,29 @@
 						      <div class="btn-group  btn-corner" style="display: none;" id="refresh-sampling">
 								<g:link class="btn btn-info active tooltips" controller="concept" action="sampling" id="${concept.id}" 
 								   data-original-title="reiniciar el muestreo">
-									<i class="ace-icon fa fa-refresh icon-only bigger-150"></i>
+									<i class="ace-icon fa fa-refresh icon-only bigger-180"></i>
 								</g:link>
 							  </div>
 								<div class="btn-group  btn-corner" data-toggle="buttons" id="samplingType">
-								  <label  class="btn btn-info active tooltips" 
+								  <label  class="btn btn-info btn-white active tooltips" 
 								  data-original-title="${g.message (code: 'sampling.tweets.random')}">
 								    <input type="radio" checked name="options" id="option1" value="${SamplingType.RANDOM}">
-								     <i class="ace-icon fa fa-random align-top bigger-125"></i>
+								     <i class="ace-icon fa fa-random align-top bigger-150"></i>
 								  </label>
-								    <label class="btn btn-info tooltips" 
+								    <label class="btn btn-info btn-white tooltips" 
 								  data-original-title="${g.message (code: 'sampling.tweets.author')}">
 								    <input type="radio" name="options" id="option2" value="${SamplingType.TOP_RELEVANT_AUTHORS}">
-								     <i class="ace-icon fa fa-users align-top bigger-125"></i>
+								     <i class="ace-icon fa fa-users align-top bigger-150"></i>
 								  </label>
-								    <label class="btn btn-info tooltips" 
+								    <label class="btn btn-info btn-white tooltips" 
 								  data-original-title="${g.message (code: 'sampling.tweets.retweet')}">
 								    <input type="radio" name="options" id="option3" value="${SamplingType.TOP_RETWEETS}">
-								     <i class="ace-icon fa fa-retweet align-top bigger-125"></i>
+								     <i class="ace-icon fa fa-retweet align-top bigger-150"></i>
 								  </label>								  
-								  <label class="btn btn-info tooltips " 
+								  <label class="btn btn-info btn-white tooltips " 
 								  data-original-title="${g.message (code: 'sampling.tweets.fav')}">
 								    <input type="radio" name="options" id="option4" value="${SamplingType.TOP_FAVS}">
-								    <i class="ace-icon fa fa-star align-top bigger-125"></i>
+								    <i class="ace-icon fa fa-star align-top bigger-150"></i>
 								  </label>
 								
 								</div>
