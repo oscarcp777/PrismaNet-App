@@ -72,6 +72,7 @@ class Concept {
 		def tweetTokenized = listMap.collectEntries{[it, it]}
 		
 		for (String excludedWord in this.twitterSetup?.excludedAccounts?.split(',')) {
+			// Solo excluye palabras, no aplica para frases
 			if (tweetTokenized[excludedWord.toLowerCase()]){
 				return false
 			}
@@ -101,9 +102,17 @@ class Concept {
 					expressions[i] = expressions[i].trim()
 					// Frases textuales
 					if (expressions[i][0]=='\"' && expressions[i][expressions[i].size()-1]=='\"'){
-						if (!tweetTokenized[expressions[i][1..-2].toLowerCase()]){
-							isValid = false
-						}
+						if(expressions[i][1..-2].tokenize().size()>1){
+							// Si son varias palabras busca el texto ignorando mayusculas/minusculas
+							if (!StringUtils.containsIgnoreCase(tweet.content.expressions[i][1..-2])){
+							  isValid = false
+							 }
+						 }else{
+						 	// Si es una palabra compara con map 
+						  	if (!tweetTokenized[expressions[i][1..-2].toLowerCase()]){
+							  isValid = false
+							}
+						 }
 					}else{
 						def words = expressions[i].split(' ')
 						int j=0
