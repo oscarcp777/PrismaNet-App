@@ -310,7 +310,8 @@ class TweetService extends MentionService{
 		RANDOM,
 		TOP_RELEVANT_AUTHORS,
 		TOP_RETWEETS,
-		TOP_FAVS;
+		TOP_FAVS,
+		DATE_ORDER;
 	}
 	
 }

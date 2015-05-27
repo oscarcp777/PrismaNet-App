@@ -1,3 +1,4 @@
+
 <%@ page import="com.prismanet.MentionType"%>
 <script type="text/javascript">
   $('#loadTotalFollowers').hide();
@@ -5,7 +6,7 @@
 </script>
 <div class="widget-toolbar blue-active" >
 <div class="btn-group  btn-corner" data-toggle="buttons">
-  <a href="javascript:void(0);" id="${callback}" class="btn btn-danger btn-white tooltips" onclick="${callback}('${MentionType.ALL}');"
+  <a href="javascript:void(0);" id="${callback}" class="btn btn-success btn-white tooltips" onclick="${callback}('${MentionType.ALL}');"
   data-original-title="${g.message (code: 'choose.channel.view.all')}">
     <input type="radio" name="options" id="option3">
      <i class="ace-icon fa fa-comments align-top bigger-180"></i>

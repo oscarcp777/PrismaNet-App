@@ -205,7 +205,7 @@ input[type=checkbox].ace.ace-switch.ace-switch-5 + .lbl::before {
     border-top-right-radius:4px !important
 }
 .btn-group .btn-primary.active {
-    background-color:#1b6aaa!important;
+    background-color:#428BCA!important;
     border-color:#ffcb05;
     color: #fff !important;
 }
@@ -213,10 +213,11 @@ input[type=checkbox].ace.ace-switch.ace-switch-5 + .lbl::before {
     background-color:#4f99c6!important;
     border-color:#ffcb05;
      color: #fff !important;
+     border-radius:0 0 4px 4px;; 
 
 }
-.btn-group .btn-danger.active {
-    background-color:#b74635!important;
+.btn-group .btn-success.active {
+    background-color:#87B87F!important;
     border-color:#ffcb05;
      color: #fff !important;
 }
@@ -291,4 +292,10 @@ input[type="tel"], input[type="color"]{
 
 .well-tw{
 	background-color: #F5F8FA;
+}
+.table-header{
+	background-color: #7DB4D8;
+}
+.header-gray{
+	background-color: #FAFAFA;
 }

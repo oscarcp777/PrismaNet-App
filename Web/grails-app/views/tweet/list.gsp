@@ -11,16 +11,16 @@
 <div class="row bg-well">
 <div class="col-lg-12">
    <g:render contextPath="../user" template="headerHelp" model="['mainMessage':'dashborad.tab.tweets.desc']"></g:render>
-<div class="col-lg-12" id="cloudWordsDiv" style="display:none; ">
+<div class="col-lg-12" id="cloudWordsDiv" >
 				<div class="widget-box widget-prisma">
 					<div class="widget-header">
 						<h5 class="widget-title">
 							<i class="ace-icon fa  fa-cloud"></i> 
-							<g:message code="tweets.list.cloud.more.words"/> <g:message code="dashborad.concept.tweets"/>
+							<g:message code="tweets.list.cloud.words.cloud"/> <g:message code="dashborad.concept.tweets"/>
 						</h5>
 
 						<div class="widget-toolbar">
-							<a href="#" data-action="collapse"> <i
+							<a href="javascript:void(0);" data-action="collapse" id="btn-collapse"> <i
 								class="ace-icon fa fa-chevron-up"></i>
 							</a>
 						</div>
@@ -36,7 +36,7 @@
 </div>
 		
    
-    <div class="col-lg-8 no-padding">
+    <div class="col-lg-12 no-padding">
 		<div class="widget-box widget-prisma">
 			<div class="widget-header">
 
@@ -50,7 +50,7 @@
 								<div class="btn-group  btn-corner" data-toggle="buttons" id="samplingType">
 								  <label  class="btn btn-info  active btn-white tooltips" 
 								  data-original-title="${g.message (code: 'sampling.tweets.date')}">
-								    <input type="radio" checked name="options" id="option1" value="${SamplingType.RANDOM}">
+								    <input type="radio" checked name="options" id="option1" value="${SamplingType.DATE_ORDER}">
 								     <i class="ace-icon fa fa-calendar align-top bigger-150"></i>
 								  </label>
 								    <label class="btn btn-info btn-white tooltips" 
@@ -71,66 +71,52 @@
 								
 								</div>
 							</div>
+							<div class="widget-toolbar blue-active" >
+						      <div class="btn-group  btn-corner">
+								<a class="btn btn-primary btn-white tooltips" id="btn-show-cloud" href="javascritp:void(0)" 
+								   data-original-title="Ver en Nube de Palabras" onclick="showCloud();">
+									<i class="ace-icon fa fa-cloud icon-only bigger-180"></i>
+								</a>
+							  </div>
+							 </div>
 
 			</div>
 		<div class="widget-body" >
-			<div class="widget-main">
-			<div id="divListTweets" class="center-tweets" >
-			 <g:render template="listTweets" model="['concept':concept,'tweetList':tweetInstanceList,'tweetTotal':tweetInstanceTotal]"></g:render>
+			<div class="widget-main row">
+			<div class="col-lg-8">
+			   <div id="divListTweets" class="center-tweets" >
+			    <g:render template="listTweets" model="['concept':concept,'tweetList':tweetInstanceList,'tweetTotal':tweetInstanceTotal]"></g:render>
+			  </div>
+			 </div>
+			 <div class="col-lg-4">
+			 <div class="table-header">
+				<g:message code="tweets.list.cloud.more.words"/> <g:message code="dashborad.concept.tweets"/>
 			</div>
+				<table class="table table-bordered table-striped table-condensed table-hover">
+					<thead >
+						<tr >
+							<th ><i class="ace-icon fa fa-caret-right blue"></i>
+							<g:message code="tweets.list.cloud.words"/>
+							
+							</th>
+
+							<th ><i class="ace-icon fa fa-caret-right blue"></i>
+							<g:message code="tweets.list.cloud.appearances"/>
+							</th>
+
+
+						</tr>
+					</thead>
+
+					<tbody id="tableWords">
+					<tr><td></td><td></td></tr>
+					</tbody>
+				</table>
+			 </div>
 		 </div>
 		</div>
 		</div>
 </div>
-		<div class="col-xs-4 no-padding" >
-				<div class="widget-box widget-prisma">
-					<div class="widget-header">
-						<h5 class="widget-title">
-							<i class="ace-icon fa  fa-cloud"></i> 
-							<g:message code="tweets.list.cloud.more.words"/> <g:message code="dashborad.concept.tweets"/>
-						</h5>
-						<div class="widget-toolbar">
-							<a href="#" data-action="collapse"> <i
-								class="ace-icon fa fa-chevron-up"></i>
-							</a>
-						</div>
-					<div class="widget-toolbar">
-					 <div class="btn-group  btn-corner" >
-						<a class="btn btn-info tooltips" href="javascrip:void(0);" data-original-title="Ver en forma de Nube">
-							<i class="ace-icon fa fa-cloud icon-only bigger-180"></i>
-						</a>
-					  </div>
-					</div>
-					</div>
-					<div class="widget-body">
-						<div class="widget-main no-padding">
-							<table class="table table-bordered table-striped table-condensed table-hover">
-								<thead >
-									<tr >
-										<th style="background-color: white;"><i class="ace-icon fa fa-caret-right blue"></i>
-										<g:message code="tweets.list.cloud.words"/>
-										
-										</th>
-
-										<th style="background-color: white;"><i class="ace-icon fa fa-caret-right blue"></i>
-										<g:message code="tweets.list.cloud.appearances"/>
-										</th>
-
-
-									</tr>
-								</thead>
-
-								<tbody id="tableWords">
-								<tr><td></td></tr>
-								</tbody>
-							</table>
-						</div>
-						<!-- /.widget-main -->
-					</div>
-					<!-- /.widget-body -->
-				</div>
-				<!-- /.widget-box -->
-			</div>
 	</div>	
 </div>
 	<script type="text/javascript">
@@ -140,7 +126,11 @@
 	var id='${concept.id}';
 	activeItemMenuLevel2(id,'${concept.id}-tweet','${concept.conceptName}');
 	var params='${params}';
-	
+	function showCloud(){
+		if(!$('#cloudWordsDiv').hasClass('collapsed')) {
+			$('#btn-collapse').click();
+		}
+	}
 	function loadPickertListTweets(start, end, rangeSelect) {
    	 $('#pickertListTweets span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
    	 var type=$("#samplingType input[type='radio']:checked").val();
@@ -156,6 +146,8 @@
 			
  			getWordsCloud(getParamsCloud(params,'#cloudWordsTW',id));
 			 loadDatepicker('pickertListTweets',loadPickertListTweets,setDatesCustom);
+			
+			 
 		});
 	</script>
 </body>

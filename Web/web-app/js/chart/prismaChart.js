@@ -116,13 +116,16 @@ function loadStatsPostPickert(start, end, rangeSelect) {
 
 
 function printWordCloud(data){
-	var htmlTable;
-	for (i = 0; i < data.mapWords.length; i++) { 
-		htmlTable +='<tr><td>'+data.mapWords[i].text + "</td><td id="+data.mapWords[i].text+'TB'+">"+data.mapWords[i].size+'</tr></td>';
+	if(data.json.length>0){
+		var htmlTable;
+		for (i = 0; i < data.mapWords.length; i++) { 
+			htmlTable +='<tr><td>'+data.mapWords[i].text + "</td><td id="+data.mapWords[i].text+'TB'+">"+data.mapWords[i].size+'</tr></td>';
+		}
+		$('#tableWords').html(htmlTable);
+		$(data.div).empty();
+		WordCloud($(data.div)[0], { list: data.json } );
+		 $('#btn-collapse').click();
 	}
-	$('#tableWords').html(htmlTable);
-	$(data.div).empty();
-	WordCloud($(data.div)[0], { list: data.json } );
 }
 function getWordsCloud(data){
 	doRequest('wordsCloud',data,printWordCloud, null, 'GET');
