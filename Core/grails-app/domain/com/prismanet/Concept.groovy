@@ -104,7 +104,7 @@ class Concept {
 					if (expressions[i][0]=='\"' && expressions[i][expressions[i].size()-1]=='\"'){
 						if(expressions[i][1..-2].tokenize().size()>1){
 							// Si son varias palabras busca el texto ignorando mayusculas/minusculas
-							if (!StringUtils.containsIgnoreCase(tweet.content.expressions[i][1..-2])){
+							if (!StringUtils.containsIgnoreCase(tweet.content,expressions[i][1..-2])){
 							  isValid = false
 							 }
 						 }else{
