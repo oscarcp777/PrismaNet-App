@@ -89,8 +89,12 @@ class MentionService extends GenericCoreService{
 		query.setFacetLimit(16)
 		query.addFacetField("mentionContent")
 		query.setRows(1)
-		
+		def between = [:]
 		filters?.each { filter ->
+			if (filter.attribute ==  "dateFrom")
+				between.from = filter.value
+			if (filter.attribute ==  "dateTo")
+				between.to = filter.value
 			if (context.hasPropertyRelationForAttribute(filter.attribute)) {
 				if (filter.attribute == 'conceptsId')
 					query.addFilterQuery("conceptId:" + filter.value)
@@ -100,9 +104,11 @@ class MentionService extends GenericCoreService{
 					query.addFilterQuery("date:\"" + filter.value+"\"")
 				if (filter.attribute ==  "dateHour")
 					query.addFilterQuery("dateByHour:\"" + filter.value+"\"")
-				
 			}
 		}
+		if (between.from && between.to)
+			query.addFilterQuery("dateByMinute:[\"" + between.from+
+				"\" TO \"" + between.to + "\"]")
 		log.info "solrQuery: " + query
 		QueryResponse respSolr
 		def result = []

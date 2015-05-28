@@ -220,7 +220,7 @@ class GenericService {
 	 * Enumeracion que contiene los distintos tipos de Operadores de Filtros. 
 	 *
 	 */
-	protected enum FilterType{
+	public enum FilterType{
 		EQ,			// Igual a
 		NE,			// No Igual a
 		GT, 		// Mayor que

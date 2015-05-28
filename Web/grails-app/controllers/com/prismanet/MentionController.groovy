@@ -19,8 +19,17 @@ class MentionController extends GenericController{
 		def filters=[]
 		def cal = new GregorianCalendar()
 		Concept concept =chooseConcept(params)
-		Date dateFrom=concept.dateCreated
-		Date dateTo=cal.getTime()
+		Date dateFrom, dateTo = cal.getTime()
+		use (TimeCategory){
+			dateFrom=dateTo -1.day
+		}
+		if (params["dateFrom"] && params["dateTo"] && !(params["dateMinute"] || params["dateCreated"] || params["dateHour"] || params["datePeriod"])){
+			dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
+			dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
+			
+			filters.addAll(getService().getFilterList(dateFrom, dateTo, "created", false))
+		}
+
 		if (params["conceptsId"])
 			filters.add(new Filter(attribute:"conceptsId",value: params.conceptsId.toLong(), type:FilterType.EQ))
 		else{
@@ -72,6 +81,12 @@ class MentionController extends GenericController{
 	
 	protected def loadSolrFilters(){
 		def filters=[]
+		
+		if (params["dateFrom"] && params["dateTo"] && !(params["dateMinute"] || params["dateCreated"] || params["dateHour"] || params["datePeriod"])){
+			filters.add(new Filter(attribute:"dateFrom",value: params.dateFrom, type:FilterType.GE))
+			
+			filters.add(new Filter(attribute:"dateTo",value: params.dateTo, type:FilterType.LE))
+		}
 
 		if (params["conceptsId"])
 			filters.add(new Filter(attribute:"conceptsId",value: params.conceptsId.toLong(), type:FilterType.EQ))

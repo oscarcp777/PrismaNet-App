@@ -2,6 +2,7 @@ package com.prismanet
 
 import groovy.sql.Sql
 
+import org.junit.After;
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.StopWatch
 
@@ -185,9 +186,24 @@ class TweetService extends MentionService{
 		getMentions(filters, parameters, new TweetAttributeContext(), Tweet)
 	}
 	
-	def getTweets(filters, parameters, orders){
+	def getTweets(filters, parameters, SamplingType type){
 		filters.add(new Filter(attribute:"sourceType",value:Tweet.class, type:FilterType.EQ))
-		getMentions(filters, parameters, new TweetAttributeContext(), Tweet, orders)
+		getMentions(filters, parameters, new TweetAttributeContext(), Tweet, getOrder(type))
+	}
+	
+	private def getOrder(SamplingType type){
+		switch (type){
+			case SamplingType.TOP_RELEVANT_AUTHORS:
+				return [[attribute:"authorFollowers",value:OrderType.DESC]]
+			break
+			case SamplingType.TOP_RETWEETS:
+				return [[attribute:"retweetCount",value:OrderType.DESC]]
+			break
+			case SamplingType.TOP_FAVS:
+				return [[attribute:"favoriteCount",value:OrderType.DESC]]
+			break
+		}
+		return [[attribute:"id",value:OrderType.DESC]]
 	}
 	
 	def getSamplingTweets(filters, parameters, SamplingType type){
@@ -218,15 +234,9 @@ class TweetService extends MentionService{
 				return [resultList:resultList,totalSampling:samplingSize,totalDemo:tweets.totalCount]
 			break;
 			case SamplingType.TOP_RELEVANT_AUTHORS:
-				def samplingTweets = getMentions(filters, parameters, new TweetAttributeContext(), Tweet, [[attribute:"authorFollowers",value:OrderType.DESC]])
-				return [resultList:samplingTweets.resultList,totalSampling:samplingTweets.resultList.list.size(),totalDemo:tweets.totalCount]
-			break;
 			case SamplingType.TOP_RETWEETS:
-				def samplingTweets = getMentions(filters, parameters, new TweetAttributeContext(), Tweet, [[attribute:"retweetCount",value:OrderType.DESC]])
-				return [resultList:samplingTweets.resultList,totalSampling:samplingTweets.resultList.list.size(),totalDemo:tweets.totalCount]
-			break;
 			case SamplingType.TOP_FAVS:
-				def samplingTweets = getMentions(filters, parameters, new TweetAttributeContext(), Tweet, [[attribute:"favoriteCount",value:OrderType.DESC]])
+				def samplingTweets = getMentions(filters, parameters, new TweetAttributeContext(), Tweet, getOrder(type))
 				return [resultList:samplingTweets.resultList,totalSampling:samplingTweets.resultList.list.size(),totalDemo:tweets.totalCount]
 			break;
 		}

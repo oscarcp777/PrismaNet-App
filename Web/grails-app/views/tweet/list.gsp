@@ -132,7 +132,7 @@
 		}
 	}
 	function getParamsCloud(params,div,id,dateFrom,dateTo,type){
-		var listParams=params.replace(/ /g,'').replace('[','{"').replace(']','"}').replace('","').split(',');
+		var listParams=params.replace('[','{"').replace(']','"}').replace('","').split(',');
 		var data={"div":div,"conceptsId":id};
 		var jsonNew='';
 		for (i = 0; i < listParams.length; i++) { 
@@ -152,7 +152,7 @@
 	    	 data["dateTo"]=moment(dateTo,"YYYY-MM-DD HH:mm:ss").format('L HH:mm');
 	    }
 	    if(data.type==null){
-	    	 data["dateTo"]=typeSampling;
+	    	 data["type"]=typeSampling;
 	    }
 		return data;
 	}
