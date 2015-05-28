@@ -448,17 +448,17 @@ function loadHtmlTable(data) {
 }
 
 	
-function getParamsCloud(params,div,id){
-	var listParams=params.replace(/:/g,',').replace(/ /g,'').replace('[','').replace(']','').split(',');
-	var data={"div":div,"conceptsId":id};
-	for (i = 0; i < listParams.length-1; i++) { 
-		if(listParams[i]!='id'){
-		   data[listParams[i]]=listParams[i+1]
-		}
-		i++;
-	}
-	return data
-}
+//function getParamsCloud(params,div,id){
+//	var listParams=params.replace(/:/g,',').replace(/ /g,'').replace('[','').replace(']','').split(',');
+//	var data={"div":div,"conceptsId":id};
+//	for (i = 0; i < listParams.length-1; i++) { 
+//		if(listParams[i]!='id'){
+//		   data[listParams[i]]=listParams[i+1]
+//		}
+//		i++;
+//	}
+//	return data
+//}
 
 
 

@@ -48,26 +48,26 @@
 						</div>
 						<div class="widget-toolbar blue-active" >
 								<div class="btn-group  btn-corner" data-toggle="buttons" id="samplingType">
-								  <label  class="btn btn-info  active btn-white tooltips" 
-								  data-original-title="${g.message (code: 'sampling.tweets.date')}">
-								    <input type="radio" checked name="options" id="option1" value="${SamplingType.DATE_ORDER}">
+								  <a href="javascript:void(0);"  class="btn btn-info  active btn-white tooltips" 
+								  data-original-title="${g.message (code: 'sampling.tweets.date')}" onclick="gotToList('${SamplingType.DATE_ORDER}');">
+								    <g:radio name="${SamplingType.DATE_ORDER}"  value="${SamplingType.DATE_ORDER}"/>
 								     <i class="ace-icon fa fa-calendar align-top bigger-150"></i>
-								  </label>
-								    <label class="btn btn-info btn-white tooltips" 
-								  data-original-title="${g.message (code: 'sampling.tweets.author')}">
-								    <input type="radio" name="options" id="option2" value="${SamplingType.TOP_RELEVANT_AUTHORS}">
+								  </a>
+								    <a href="javascript:void(0);" class="btn btn-info btn-white tooltips" 
+								  data-original-title="${g.message (code: 'sampling.tweets.author')}" onclick="gotToList('${SamplingType.TOP_RELEVANT_AUTHORS}');">
+								     <g:radio name="${SamplingType.TOP_RELEVANT_AUTHORS}" value="${SamplingType.TOP_RELEVANT_AUTHORS}"/>
 								     <i class="ace-icon fa fa-users align-top bigger-150"></i>
-								  </label>
-								    <label class="btn btn-info btn-white tooltips" 
-								  data-original-title="${g.message (code: 'sampling.tweets.retweet')}">
-								    <input type="radio" name="options" id="option3" value="${SamplingType.TOP_RETWEETS}">
+								  </a>
+								    <a href="javascript:void(0);"class="btn btn-info btn-white tooltips" 
+								  data-original-title="${g.message (code: 'sampling.tweets.retweet')}" onclick="gotToList('${SamplingType.TOP_RETWEETS}');">
+								     <g:radio name="${SamplingType.TOP_RETWEETS}" checked="true" value="${SamplingType.TOP_RETWEETS}"/>
 								     <i class="ace-icon fa fa-retweet align-top bigger-150"></i>
-								  </label>								  
-								  <label class="btn btn-info btn-white tooltips " 
-								  data-original-title="${g.message (code: 'sampling.tweets.fav')}">
-								    <input type="radio" name="options" id="option4" value="${SamplingType.TOP_FAVS}">
+								  </a>								  
+								 <a href="javascript:void(0);" class="btn btn-info btn-white tooltips " 
+								  data-original-title="${g.message (code: 'sampling.tweets.fav')}" onclick="gotToList('${SamplingType.TOP_FAVS}');">
+								     <g:radio name="${SamplingType.TOP_FAVS}"  value="${SamplingType.TOP_FAVS}"/>
 								    <i class="ace-icon fa fa-star align-top bigger-150"></i>
-								  </label>
+								  </a>
 								
 								</div>
 							</div>
@@ -122,8 +122,8 @@
 	<script type="text/javascript">
 	var dateFrom="<g:formatDate format='yyyy-MM-dd HH:mm:ss' date='${dateFrom}' />"
 	var dateTo="<g:formatDate format='yyyy-MM-dd HH:mm:ss' date='${dateTo}' />"
-	console.log(dateFrom);
 	var id='${concept.id}';
+	var typeSampling='${type}';
 	activeItemMenuLevel2(id,'${concept.id}-tweet','${concept.conceptName}');
 	var params='${params}';
 	function showCloud(){
@@ -131,23 +131,53 @@
 			$('#btn-collapse').click();
 		}
 	}
+	function getParamsCloud(params,div,id,dateFrom,dateTo,type){
+		var listParams=params.replace(/ /g,'').replace('[','{"').replace(']','"}').replace('","').split(',');
+		var data={"div":div,"conceptsId":id};
+		var jsonNew='';
+		for (i = 0; i < listParams.length; i++) { 
+			jsonNew +=listParams[i].replace(':','":"');
+			if(i!=listParams.length-1){
+				jsonNew+='","'
+			}
+			
+		}
+		var data=$.parseJSON(jsonNew);
+	    data["div"]=div;
+	    data["conceptsId"]=id;
+	    if(data.dateFrom==null){
+	    	 data["dateFrom"]=moment(dateFrom,"YYYY-MM-DD HH:mm:ss").format('L HH:mm');
+	    }
+	    if(data.dateTo==null){
+	    	 data["dateTo"]=moment(dateTo,"YYYY-MM-DD HH:mm:ss").format('L HH:mm');
+	    }
+	    if(data.type==null){
+	    	 data["dateTo"]=typeSampling;
+	    }
+		return data;
+	}
+	function gotToList(type){
+		var data = {"id":${concept.id},"dateFrom":moment(dateFrom,"YYYY-MM-DD HH:mm:ss").format('L HH:mm'),
+				"dateTo":moment(dateTo,"YYYY-MM-DD HH:mm:ss").format('L HH:mm'),'div':'#divListTweets','type':type};
+		 document.location.href =encodeURI('list?conceptsId='+data.id+'&dateFrom='+data.dateFrom+'&dateTo='+data.dateTo+'&type='+data.type);
+	}
 	function loadPickertListTweets(start, end, rangeSelect) {
    	 loadFormatLLL('#pickertListTweets',start, end, rangeSelect);
    	 var type=$("#samplingType input[type='radio']:checked").val();
-	 var data = {"id":${concept.id},"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm'),
-	    		      'div':'#divListTweets','type':type};
+	 var data = {"id":${concept.id},"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm'),'div':'#divListTweets','type':type};
 	 document.location.href =encodeURI('list?conceptsId='+data.id+'&dateFrom='+data.dateFrom+'&dateTo='+data.dateTo+'&type='+data.type);
 	}
+	
 	
 	function setDatesCustom(container){
 		$('#'+container+' span').html(moment(dateFrom,"YYYY-MM-DD HH:mm:ss").format('LLL')+ ' - ' + moment(dateTo,"YYYY-MM-DD HH:mm:ss").format('LLL'));	
 	}
-		jQuery(function($) {
-			
- 			getWordsCloud(getParamsCloud(params,'#cloudWordsTW',id));
+	$(function(){
+ 			getWordsCloud(getParamsCloud(params,'#cloudWordsTW',id,dateFrom,dateTo,typeSampling));
 			 loadDatepicker('pickertListTweets',loadPickertListTweets,setDatesCustom);
-			
-			 
+			console.log(typeSampling);
+			$('#'+typeSampling).prop('checked',true);
+			$('#'+typeSampling).parent().addClass('active').siblings().removeClass('active');
 		});
 	</script>
 </body>
