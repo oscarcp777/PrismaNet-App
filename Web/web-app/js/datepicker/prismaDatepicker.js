@@ -79,9 +79,9 @@ function loadDatepicker(container,callBack,setDateCallBack){
         ranges: {
             'Hoy': [moment().startOf('day'), moment().endOf('day'),'Hoy'],
             'Ayer': [moment().subtract(1,'days').startOf('day'), moment().subtract( 1,'days').endOf('day'),'Ayer'],
+            'Ultimas 24 horas': [moment().subtract(24, 'hours'), moment(),'Ultimas 24 horas'],
             'Ultimos 7 dias': [moment().subtract( 6,'days'), moment(),'Ultimos 7 dias'],
             'Ultimos 30 dias': [moment().subtract(29,'days'), moment(),'Ultimos 30 dias'],
-//            'Presente Mes': [moment().startOf('month'), moment().endOf('month'),'Presente Mes'],
             'Mes Pasado': [moment().subtract( 1,'month').startOf('month'), moment().subtract(1,'month').endOf('month'),'Mes Pasado'],
             'Ultimos 90 dias': [moment().subtract(89,'days'), moment(),'Ultimos 90 dias']
         },
@@ -123,7 +123,10 @@ function getDateSubtract(days){
 	return moment().subtract( days,'days').format('L HH:mm');
 }
 function getDateNowLLL(){
-	return moment().format('LLLL');
+	return moment().format('LLL');
+}
+function loadFormatLLL(div,start, end, rangeSelect){
+	$(div+' span').html(rangeSelect+' - '+start.format('LLL') + ' - ' + end.format('LLL'));
 }
 function getDateFromLHH(){
 	return getDateSubtract(7);

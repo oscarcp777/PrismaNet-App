@@ -135,7 +135,7 @@
 			doRequest('../../tweet/samplingStep3',data,paintCharPie, null, 'GET');
 		}
 		function loadPickertSampling(start, end, rangeSelect) {
-	    	 $('#pickertSampling span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
+	    	 loadFormatLLL('#pickertSampling',start, end, rangeSelect);
 	    	 var type=$("#samplingType input[type='radio']:checked").val();
 		     var data = {"conceptsId":${concept.id},"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm'),
 		    		      'div':'#samplingStep1','samplingType':type};

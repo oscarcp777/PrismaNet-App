@@ -23,13 +23,13 @@
 	<script type="text/javascript">
 
 		function loadChartLineForPostPickert(start, end, rangeSelect) {
-		     $('#postPickert span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
-   		     var data = {"id":${concept.id}, "div":'#postsChart',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
+		     loadFormatLLL('#postPickert',start, end, rangeSelect);
+		     var data = {"id":${concept.id}, "div":'#postsChart',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
    		 	 getGroupedPosts(data);
 		}
 		function loadPostMoreLikesPickert(start, end, rangeSelect) {
-		     $('#pickertPostMoreLikes span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
-  		     var data = {"id":${concept.id}, "div":'#postMoreLikes',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
+		     loadFormatLLL('#pickertPostMoreLikes',start, end, rangeSelect);
+		     var data = {"id":${concept.id}, "div":'#postMoreLikes',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
   		 	 getPostMoreLikes(data);
 		}
 

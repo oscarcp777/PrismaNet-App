@@ -103,13 +103,13 @@ function getPostStats(data){
 }
 
 function loadMentionAuthorPickert(start, end, rangeSelect) {
-    $('#pickertStatsMonth span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
+    loadFormatLLL('#pickertStatsMonth',start, end, rangeSelect);
     var data = {"div":'#mentionAuthor',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
     getMentionAuthor(data);
 }
 
 function loadStatsPostPickert(start, end, rangeSelect) {
-    $('#pickertStatsPost span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
+    loadFormatLLL('#pickertStatsPost',start, end, rangeSelect);
     var data = {"div":'#postStats',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
     getPostStats(data);
 }
@@ -148,7 +148,7 @@ function loadTweetCharPie(channel){
 	$('#tweetCharPie').data('channel',channel);
 }
 function loadTweetCharPiePickert(start, end,rangeSelect) {
-    $('#pickertTweetConcept span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
+    loadFormatLLL('#pickertTweetConcept',start, end, rangeSelect);
     var data = { 'channel':$('#tweetCharPie').data('channel'),"div":'#tweetCharPie',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
     getTweetCharPie(data);
 }
@@ -179,7 +179,7 @@ function loadTotalFollowers(channel){
 	getTotalFollowers(data);
 }
 function lineaChartUser(start, end,rangeSelect) {
-    $('#pickertUser span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
+    loadFormatLLL('#pickertUser',start, end, rangeSelect);
     var data = { 'channel':$('#lineaChartUser').data('channel'),"div":'#lineaChartUser',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
     getUserGroupedTweets(data);
 }

@@ -132,7 +132,7 @@
 		}
 	}
 	function loadPickertListTweets(start, end, rangeSelect) {
-   	 $('#pickertListTweets span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
+   	 loadFormatLLL('#pickertListTweets',start, end, rangeSelect);
    	 var type=$("#samplingType input[type='radio']:checked").val();
 	 var data = {"id":${concept.id},"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm'),
 	    		      'div':'#divListTweets','type':type};

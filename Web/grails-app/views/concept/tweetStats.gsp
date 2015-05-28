@@ -21,20 +21,20 @@
 	<script type="text/javascript">
 
 		function loadChartLineForTweetPickert(start, end, rangeSelect) {
-		     $('#tweetPickert span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
-   		     var data = {"id":${concept.id}, "div":'#tweetsChart',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
+		     loadFormatLLL('#tweetPickert',start, end, rangeSelect);
+		     var data = {"id":${concept.id}, "div":'#tweetsChart',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
    		 	 getGroupedTweets(data);
 		}
 
 		function loadChartLineForWeightPickert(start, end, rangeSelect) {
-		     $('#weightPickert span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
-  		     var data = {"id":${concept.id}, "div":'#weightChart',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
+		     loadFormatLLL('#weightPickert',start, end, rangeSelect);
+		     var data = {"id":${concept.id}, "div":'#weightChart',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
   		   	 getGroupedWeight(data);
 		}
 
 		function loadAuthorPickert(start, end, rangeSelect) {
-		     $('#authorPickert span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
- 		     var data = {"id":${concept.id}, "div":'#relevantAuthors',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
+		     loadFormatLLL('#authorPickert',start, end, rangeSelect);
+		     var data = {"id":${concept.id}, "div":'#relevantAuthors',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
  		     getRelevantAuthors(data);
 		}
     

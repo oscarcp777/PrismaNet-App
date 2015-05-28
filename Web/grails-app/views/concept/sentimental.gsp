@@ -19,8 +19,8 @@
 	</div>
 	<script type="text/javascript">
 		function loadChartLineForSentimentalPickert(start, end, rangeSelect) {
-	    	 $('#sentimentalPickert span').html(rangeSelect+' - '+start.format('LLLL') + ' - ' + end.format('LLLL'));
-		     var data = {"id":${concept.id}, "div":'#sentimentalChart',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
+	    	 loadFormatLLL('#sentimentalPickert',start, end, rangeSelect);
+	    	 var data = {"id":${concept.id}, "div":'#sentimentalChart',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
 		     getSentimentalAnalitycs(data);
 		}
 
