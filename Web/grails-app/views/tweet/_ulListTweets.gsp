@@ -28,14 +28,14 @@
 
 															<span class="line-height-1 bigger-110 "> ${fieldValue(bean: tweet.tweet.author, field: "followers")}  </span> <br>
 															<span class="line-height-1 bigger-100 grey">
-																<g:message code="tweets.list.followers"/> </span>
+																<g:message code="tweets.list.followings"/> </span>
 														</div>
 
 														<div class="grid3">
 
 															<span class="line-height-1 bigger-110 "> ${fieldValue(bean: tweet.tweet.author, field: "following")}  </span> <br>
 															<span class="line-height-1 bigger-100 grey">
-																<g:message code="tweets.list.followings"/> </span>
+																<g:message code="tweets.list.followers"/> </span>
 														</div>
 													</div>
 										</div>
