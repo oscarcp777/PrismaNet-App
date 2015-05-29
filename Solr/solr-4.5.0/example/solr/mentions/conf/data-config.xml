@@ -1,0 +1,51 @@
+<dataConfig>
+<dataSource driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/prismanet" user="root" password="fiuba"/>
+    <document name="mention">
+	<entity name="mention" pk="id" query="
+		select 
+			concat(cast(CM.concept_id as char(50)), '_',cast(CM.mention_id as char(50))) AS id,
+			CM.concept_id as conceptId,
+			CM.mention_id as mentionId
+		from prismanet.concept_mentions CM"
+		deltaImportQuery="select 
+			concat(cast(CM.concept_id as char(50)), '_',cast(CM.mention_id as char(50))) AS id,
+			CM.concept_id as conceptId,
+			CM.mention_id as mentionId
+				 from prismanet.concept_mentions CM where mention_id='${dih.delta.id}'"
+		deltaQuery="select 
+			CM.mention_id AS id
+ from prismanet.concept_mentions CM where mention_id in 
+(select id as id from mention where created>'${dih.last_index_time}')"
+		>
+
+			<field column="id" name="id" />
+            		<field column="conceptId" name="conceptId" />
+			<field column="mentionId" name="mentionId" />	     
+			<entity name="m" query="
+				select 
+					M.content AS content, 
+					M.created AS created,
+					M.date AS date,
+					M.date_by_hour AS dateByHour,
+					M.date_by_minute AS dateByMinute
+				from prismanet.mention M
+				where M.id = ${mention.mentionId}">
+		
+			        <field column="content" name="mentionContent" />
+        	    		<field column="created" name="created"/>
+        	    		<field column="date" name="date"/>
+        	    		<field column="dateByMinute" name="dateByMinute"/>
+        	    		<field column="dateByHour" name="dateByHour"/>
+	        	</entity>
+			<entity name="item" query="
+				select 
+					concept_name 
+				from prismanet.concept C
+				where C.id = ${mention.conceptId}">
+		
+		        	<field column="concept_name" name="conceptName" />
+	        	</entity>	    
+	</entity>
+    </document>
+</dataConfig>
+
