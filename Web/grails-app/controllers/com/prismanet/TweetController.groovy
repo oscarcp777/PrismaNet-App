@@ -3,7 +3,7 @@ package com.prismanet
 import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
 import grails.plugins.springsecurity.SpringSecurityService
-
+import groovy.time.TimeCategory
 import com.prismanet.TweetService.SamplingType;
 import com.prismanet.sentiment.Opinion
 import com.prismanet.sentiment.OpinionValue
@@ -36,7 +36,15 @@ class TweetController extends MentionController{
 	}
 	
 	def list(Integer max) {
-		
+		Date dateFrom=new Date();
+		use (TimeCategory){
+			dateFrom=dateFrom -1.day
+		}
+		if (!params.dateFrom)
+		   params.dateFrom=DateUtils.getDateFormat(DateTypes.MINUTE_PERIOD, dateFrom)
+	    if (!params.dateTo)
+		    params.dateTo=DateUtils.getDateFormat(DateTypes.MINUTE_PERIOD, new Date())
+
 		log.info "tweetController->list params: " + params
 		Concept concept =chooseConcept(params)
 		def map = loadMentionFilters()
@@ -44,7 +52,7 @@ class TweetController extends MentionController{
 		SamplingType orderType = SamplingType.TOP_RELEVANT_AUTHORS
 		if (params.type)
 			orderType = params.type as SamplingType
-			
+
 		params.max = Math.min(max ?: 10, 100)
 		tweets = tweetService.getTweets(map.filters, params, orderType)
 		

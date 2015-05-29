@@ -157,8 +157,8 @@
 													<g:message code="home.menu.concept.dashboard" />
 												</g:link> <b class="arrow"></b></li>
 											<li id="${conceptInstance.id}-tweet"><g:link
-													controller="concept" action="tweetStats"
-													id="${conceptInstance.id}">
+													controller="tweet" action="list"
+													 params="[conceptsId:conceptInstance.id]">
 													<i class="menu-icon fa fa-caret-right"></i>
 													<g:message code="home.menu.concept.twitter" />
 												</g:link> <b class="arrow"></b></li>

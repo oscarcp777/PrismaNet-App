@@ -109,9 +109,11 @@ function loadDatepicker(container,callBack,setDateCallBack){
 }
 function setDatesHtml(container){
 	$('#'+container+' span').html( getDateFromLLL()+ ' - ' + getDateNowLLL());	
+	setDateRange('#'+container,moment().subtract( 7,'days'), moment());
 }
 function setDatesHtmlOne(container){
 	$('#'+container+' span').html( getDateSubtractLLL(1)+ ' - ' + getDateNowLLL());	
+	setDateRange('#'+container,moment().subtract( 1,'days'), moment());
 }
 function getDateFromLLL(){
 	return getDateSubtractLLL(7);
@@ -125,7 +127,12 @@ function getDateSubtract(days){
 function getDateNowLLL(){
 	return moment().format('LLL');
 }
+function setDateRange(div,start, end){
+	$(div).data('daterangepicker').setStartDate(start);
+	$(div).data('daterangepicker').setEndDate(end);
+}
 function loadFormatLLL(div,start, end, rangeSelect){
+	setDateRange(div,start, end);
 	$(div+' span').html(rangeSelect+' - '+start.format('LLL') + ' - ' + end.format('LLL'));
 }
 function getDateFromLHH(){

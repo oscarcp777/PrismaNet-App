@@ -103,7 +103,7 @@ function getPostStats(data){
 }
 
 function loadMentionAuthorPickert(start, end, rangeSelect) {
-    loadFormatLLL('#pickertStatsMonth',start, end, rangeSelect);
+    loadFormatLLL('#pickertMentionAuthor',start, end, rangeSelect);
     var data = {"div":'#mentionAuthor',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
     getMentionAuthor(data);
 }

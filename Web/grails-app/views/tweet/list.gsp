@@ -175,7 +175,6 @@
 	$(function(){
  			getWordsCloud(getParamsCloud(params,'#cloudWordsTW',id,dateFrom,dateTo,typeSampling));
 			 loadDatepicker('pickertListTweets',loadPickertListTweets,setDatesCustom);
-			console.log(typeSampling);
 			$('#'+typeSampling).prop('checked',true);
 			$('#'+typeSampling).parent().addClass('active').siblings().removeClass('active');
 		});
