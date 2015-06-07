@@ -26,7 +26,7 @@ class GenericCoreService extends GenericService {
 	 * @return filtro obtenido
 	 */
 	def getFilterList(dateFrom, dateTo){
-		getFilterList(dateFrom, dateTo, "created")
+		getFilterList(dateFrom, dateTo, "created", false)
 	}
 	
 	def getFilterList(dateFrom, dateTo, attributeName){
