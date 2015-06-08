@@ -96,4 +96,12 @@ class ConceptService extends GenericCoreService {
 		return null
 	}
 	
+	
+	def List<Concept> getActiveConcepts(){
+		def queryConcept = Concept.where{
+			active == Boolean.TRUE
+		}
+		def List<Concept> concepts = queryConcept.list()
+	}
+	
 }

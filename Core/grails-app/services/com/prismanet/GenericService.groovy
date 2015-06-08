@@ -18,6 +18,7 @@ class GenericService {
 	GenericService(){
 	}
 	
+	@Deprecated
 	GenericService(def domainClass,AttributeContext context){
 		this.domainClass = domainClass
 		this.context = context

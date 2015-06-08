@@ -16,10 +16,11 @@ class ConceptIntegrationTests {
 		def setup = new TwitterSetup(includedAccounts:"@CFKArgentina,@twitter2", keywords:"politica,filmus").save()
 		def author = new TwitterAuthor(name:"@oscar", accountName:"@oscar", followers:10, userSince:new Date(), sex: Sex.M).save()
 		def account = new AccountType(type:'free').save()
-		def user = new User(username: 'oscar', password: 'fiuba', firstName:'oscar', lastName:'Caceres',account:account).save()
+		def user = new User(username: 'oscar', password: 'fiuba', passwordTemp:'', firstName:'oscar', lastName:'Caceres',
+			dateCreated:new Date(), account:account, enabled:true, accountExpired:false, accountLocked:false, passwordExpired:false).save(validate:false)
 		def tweet = new Tweet(content:"@CFKArgentina", author:author, created:new Date(), tweetId:1l, retweet:false).save()
 		def concept = new Concept(conceptName: 'Filmus',twitterSetup:setup, user: user).save()
-		concept.addToTweets(tweet)
+		concept.addToMentions(tweet)
 		def opinion = new Opinion(concept:concept, tweet:tweet, value:OpinionValue.POSITIVE).save()
     }
 
@@ -79,8 +80,8 @@ class ConceptIntegrationTests {
 		def concept = new Concept(conceptName:"Filmus",twitterSetup:twitterConfig, user:User.first()).save()
 		def tweet1 = new Tweet(content:"El @twitter1 no existe")
 		def tweet2 = new Tweet(content:"El @twitter2 no existe")
-		concept.addToTweets(tweet1)
-		concept.addToTweets(tweet2)
+		concept.addToMentions(tweet1)
+		concept.addToMentions(tweet2)
 
 		assertTrue concept.validate()
 		assertFalse concept.hasErrors()
@@ -89,7 +90,7 @@ class ConceptIntegrationTests {
 	
 	@Test
 	void testCategorizationByAuthorSexService(){
-		def quantityProjection = ["tweetsId" : ProjectionType.COUNT]
+		def quantityProjection = ["mentionId" : ProjectionType.COUNT]
 		def conceptService = new ConceptService()
 		def concept = new Concept(conceptName: 'Filmus', user:User.first())
 		assertNotNull concept.save()
@@ -106,9 +107,9 @@ class ConceptIntegrationTests {
 	
 	@Test
 	void testCategorizationByTweetDateService(){
-		def quantityProjection = ["tweetsId" : ProjectionType.COUNT]
+		def quantityProjection = ["mentionId" : ProjectionType.COUNT]
 		def conceptService = new ConceptService()
-		def groupList = ["tweetCreated"]
+		def groupList = ["dateCreated"]
 		def list = Concept.list()
 		def categoryList = conceptService.categoryStore(groupList, null, quantityProjection, null);
 		int j = 1
@@ -130,8 +131,8 @@ class ConceptIntegrationTests {
 		def tweet2 = new Tweet(content:"El @CFKArgentina no existe", author:author1)
 		
 		def concept = new Concept(conceptName: 'Filmus',twitterSetup:twitterConfig)
-		concept.addToTweets(tweet1)
-		concept.addToTweets(tweet2)
+		concept.addToMentions(tweet1)
+		concept.addToMentions(tweet2)
 		
 		assertTrue concept.hasErrors()
 		def errors = concept.errors
@@ -155,7 +156,7 @@ class ConceptIntegrationTests {
 		
 		testAuthor.save()
 		tweetIns1.save()
-		conceptIns.addToTweets(tweetIns1)
+		conceptIns.addToMentions(tweetIns1)
 		conceptIns.save()
 	}
 
@@ -167,7 +168,11 @@ class ConceptIntegrationTests {
 		assert conceptList.results.size() == 1
 	}
 	
-	
+	@Test
+	void testGetActiveConcepts(){
+		def conceptService = new ConceptService()
+		conceptService.getActiveConcepts()
+	}
 	
 	
 

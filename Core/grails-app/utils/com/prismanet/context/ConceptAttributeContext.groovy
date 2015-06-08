@@ -8,6 +8,7 @@ class ConceptAttributeContext extends AttributeContext {
 		addPropertyRelation("id", "id", null, null);
 		addPropertyRelation("conceptName", "conceptName", null, null);
 		
+		addPropertyRelation("authorId", "id", null, "mentions.author");
 		addPropertyRelation("sex", "sex", null, "mentions.author");
 		addPropertyRelation("authorFollowers", "followers", null, "mentions.author");
 		addPropertyRelation("dateCreated", "date", null, "mentions");
