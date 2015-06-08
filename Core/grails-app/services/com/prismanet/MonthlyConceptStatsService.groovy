@@ -5,6 +5,7 @@ import groovy.time.TimeCategory
 import com.prismanet.GenericService.FilterType
 import com.prismanet.GenericService.ProjectionType
 import com.prismanet.context.Filter
+import com.prismanet.context.MonthlyConceptStatsAttributeContext
 import com.prismanet.utils.DateTypes
 import com.prismanet.utils.DateUtils
 
@@ -16,6 +17,24 @@ class MonthlyConceptStatsService extends GenericCoreService{
 		super()
 	}
 	
+	def getStatsForUser(Integer userId){
+		use (TimeCategory){
+			Date dateProcess = new Date()
+			String periodProcess = DateUtils.getDateFormat(DateTypes.MONTH_PERIOD,dateProcess)
+			def filters = []
+			filters.add(new Filter(attribute:"userId", value:userId.longValue(), type:FilterType.EQ))
+			filters.add(new Filter(attribute:"period", value:periodProcess, type:FilterType.EQ))
+			def categories = ["userId"]
+			def projections = ["mentions" : ProjectionType.SUM, "authors":ProjectionType.SUM]
+			def result = groupBy(MonthlyConceptStats, new MonthlyConceptStatsAttributeContext(), categories, filters, projections, null)
+			def mentions = 0, authors = 0
+			if (result.size()>0){
+				mentions = result[0][1]
+				authors = result[0][2]
+			}
+			['mentions': mentions, 'authors': authors]
+		}
+	}
 	
 	def void loadStats(){
 		use (TimeCategory){

@@ -6,8 +6,12 @@ class MonthlyConceptStatsController {
 	def monthlyConceptStatsService
 	
 	def loadStats={
-		print "Entro"
 		monthlyConceptStatsService.loadStats()
 		render "Estadisticas cargadas correctamente"
+	}
+	
+	def statsForUser={
+		print monthlyConceptStatsService.getStatsForUser(1)
+		render "Estadisticas por usuario obtenidas"
 	}
 }

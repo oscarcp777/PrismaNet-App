@@ -35,7 +35,7 @@ class GenericService {
 		}
 	}
 	
-	
+	@Deprecated
 	def list(filters, parameters, orders){
 		list(domainClass, context, filters, parameters, orders)
 	}
@@ -97,6 +97,7 @@ class GenericService {
 		
 	}
 	
+	@Deprecated
 	def groupBy(groups, filters, projection, orders){
 		groupBy(domainClass, context, groups, filters, projection, orders)
 	}
