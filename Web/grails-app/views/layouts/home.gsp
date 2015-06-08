@@ -58,9 +58,15 @@
 								</g:link>
 							</li>
 						  </sec:access>
+							<li >
+								<g:link controller='user' action='infoAccount'>
+									<i class="ace-icon fa fa-user"></i> 
+									<g:message code="home.user.profile" />
+								</g:link>
+							</li>						  
 							<li ><g:link controller='user' action='changePassword'>
-								<i class="ace-icon fa fa-user"></i> 
-								<g:message code="home.user.profile" />
+								<i class="ace-icon fa fa-key"></i> 
+								<g:message code="home.user.change.key" />
 								</g:link>
 							</li>
 							<li class="divider"></li>

@@ -17,12 +17,12 @@ class MonthlyConceptStatsService extends GenericCoreService{
 		super()
 	}
 	
-	def getStatsForUser(Integer userId){
+	def getStatsForUser(Long userId){
 		use (TimeCategory){
 			Date dateProcess = new Date()
 			String periodProcess = DateUtils.getDateFormat(DateTypes.MONTH_PERIOD,dateProcess)
 			def filters = []
-			filters.add(new Filter(attribute:"userId", value:userId.longValue(), type:FilterType.EQ))
+			filters.add(new Filter(attribute:"userId", value:userId, type:FilterType.EQ))
 			filters.add(new Filter(attribute:"period", value:periodProcess, type:FilterType.EQ))
 			def categories = ["userId"]
 			def projections = ["mentions" : ProjectionType.SUM, "authors":ProjectionType.SUM]

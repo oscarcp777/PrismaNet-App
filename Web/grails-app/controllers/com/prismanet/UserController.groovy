@@ -1,5 +1,6 @@
 package com.prismanet
 import org.springframework.dao.DataIntegrityViolationException
+
 import twitter4j.ResponseList
 import twitter4j.Twitter
 import twitter4j.TwitterFactory
@@ -455,6 +456,17 @@ class UserController extends GenericController{
 			redirect(action: "show", id: id)
 		}
 	}
+	def monthlyConceptStatsService
 	
+	@Secured(['ROLE_USER_ADVANCE'])
+	def infoAccount() {
+		def mapStats= monthlyConceptStatsService.getStatsForUser(session.user.id)
+		def listConStats=MonthlyConceptStats.findAllByConceptInList(session.concepts)
+		def infoDate=new Date()
+		use ( TimeCategory ) {
+			infoDate = infoDate-1.day
+		 }
+		[totalMentions:mapStats.mentions,listConStats:listConStats,infoDate:infoDate]
+	}
 	
 }
