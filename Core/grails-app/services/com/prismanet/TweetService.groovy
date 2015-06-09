@@ -29,6 +29,7 @@ import com.prismanet.sentiment.OpinionValue
 class TweetService extends MentionService{
 	
 	def opinionService
+	def conceptService
 
 	TweetService(){
 		super(Tweet, new TweetAttributeContext())
@@ -36,7 +37,7 @@ class TweetService extends MentionService{
 	
 	@Transactional
 	def saveTweets(def tweets){
-		def List<Concept> concepts = Concept.list()
+		def List<Concept> concepts = conceptService.getActiveConcepts()
 		for (BasicDBObject tweetObj : tweets){
 			JSONObject obj = new JSONObject(tweetObj)
 			Status status = new StatusJSONImpl(obj)
@@ -58,7 +59,6 @@ class TweetService extends MentionService{
 			favoriteCount:favCount,
 			retweet:retweet,
 			retweetId:retweetId)
-
 			concepts.each(){ concept->
 				timer = new StopWatch()
 				timer.start()
@@ -146,7 +146,7 @@ class TweetService extends MentionService{
 	def streamConection(StatusListener listener){
 		String args;
 		Concept.withTransaction{
-			def List<Concept> concepts = Concept.list()
+			def List<Concept> concepts = conceptService.getActiveConcepts()
 			for (Concept concept in concepts){
 				for (String twitterAccount in concept.twitterSetup.includedAccounts.split(',')) {
 					if (!args)

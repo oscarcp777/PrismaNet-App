@@ -18,6 +18,8 @@ import groovy.sql.Sql
 
 class PostService extends GenericCoreService{
 	
+	def conceptService
+	
 	PostService(){
 		super(Post, new PostAttributeContext())
 	}
@@ -55,7 +57,7 @@ class PostService extends GenericCoreService{
 	
 	@Transactional
 	def savePosts(def posts){
-		def List<Concept> concepts = Concept.list()
+		def List<Concept> concepts = conceptService.getActiveConcepts()
 		for (BasicDBObject postObj : posts){
 			JSONObject obj = new JSONObject(postObj)
 			facebook4j.Post status = new PostJSONImpl(obj)
