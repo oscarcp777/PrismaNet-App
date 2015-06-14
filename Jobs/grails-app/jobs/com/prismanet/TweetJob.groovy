@@ -112,7 +112,7 @@ class TweetJob {
 				} catch (Exception e) {
 					log.error "Importación Fallida: " + e.getMessage()
 					log.error e.getCause()
-					log.error e.getStackTrace()
+					log.error e.printStackTrace()
 					partialList.clear();
 				}
 			}
@@ -122,7 +122,7 @@ class TweetJob {
 			} catch (Exception e) {
 				log.error "Importación Fallida: " + e.getMessage()
 				log.error e.getCause()
-				log.error e.getStackTrace()
+				log.error e.printStackTrace()
 			} finally {
 				log.info "Cursor Tweets cerrado"
 				tweets.close()
