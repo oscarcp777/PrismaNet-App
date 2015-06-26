@@ -20,6 +20,7 @@ var CompactCommand= function(){
         var commandStart = new Date(); // measure running time per collections
         var result =db.tweets.renameCollection("old_tweets");
         var result1 =db.createCollection("tweets");
+	var result4= db.tweets.ensureIndex({created_at:1});
         var result2 =db.old_tweets.drop();
         var result3=db.repairDatabase();
         var commandEnd = new Date();
