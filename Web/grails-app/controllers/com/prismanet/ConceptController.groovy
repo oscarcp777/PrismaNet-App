@@ -376,14 +376,38 @@ class ConceptController extends GenericController{
 		concept.setFacebookSetup(new FacebookSetup(params))
 		[conceptInstance: new Concept(params)]
 	}
-	
-	@Secured(['ROLE_ADMIN'])
-	def save() {
-		def conceptInstance = new Concept(params)
-		def fcSetup=new FacebookSetup(params)
-		def twSetup=new TwitterSetup(params)
+	private Concept loadConcept(params){
+		def customParams=getParamsConcept(params)
+		def conceptInstance = new Concept(customParams)
+		def fcSetup=new FacebookSetup(customParams)
+		fcSetup.keywords=params.keywordsFace
+		def twSetup=new TwitterSetup(customParams)
+		twSetup.keywords=params.keywordsTw
 		conceptInstance.setTwitterSetup(twSetup)
 		conceptInstance.setFacebookSetup(fcSetup)
+		conceptInstance
+	}
+	@Secured(['ROLE_USER_ADVANCE'])
+	def saveAdvance() {
+		log.info "params: " + params
+		def conceptInstance=loadConcept(params)
+		conceptInstance.user=session.user
+		if (!conceptInstance.save(flush: true)) {
+			conceptInstance.errors.each {
+				log.info it
+			}
+			render(view: "createAdvance", model: [conceptInstance: conceptInstance])
+			return
+		}
+
+		flash.message = message(code: 'concept.user.advance.created.ok', args: [conceptInstance.conceptName])
+		loadConceptsSession()
+		redirect(action: "showAdvance", id: conceptInstance.id)
+	}
+	@Secured(['ROLE_ADMIN'])
+	def save() {
+		log.info "params: " + params
+		def conceptInstance=loadConcept(params)
 		if (!conceptInstance.save(flush: true)) {
 			conceptInstance.errors.each {
 				log.info it
@@ -505,30 +529,7 @@ class ConceptController extends GenericController{
 		concept.setFacebookSetup(new FacebookSetup(params))
 		[conceptInstance: new Concept(params)]
 	}
-	@Secured(['ROLE_USER_ADVANCE'])
-	def saveAdvance() {
-		log.info "params: " + params
-		def customParams=getParamsConcept(params)
-		def conceptInstance = new Concept(customParams)
-		conceptInstance.user=session.user
-		def fcSetup=new FacebookSetup(customParams)
-		fcSetup.keywords=params.keywordsFace
-		def twSetup=new TwitterSetup(customParams)
-		twSetup.keywords=params.keywordsTw
-		conceptInstance.setTwitterSetup(twSetup)
-		conceptInstance.setFacebookSetup(fcSetup)
-		if (!conceptInstance.save(flush: true)) {
-			conceptInstance.errors.each {
-				log.info it
-			}
-			render(view: "createAdvance", model: [conceptInstance: conceptInstance])
-			return
-		}
-
-		flash.message = message(code: 'concept.user.advance.created.ok', args: [conceptInstance.conceptName])
-		loadConceptsSession()
-		redirect(action: "showAdvance", id: conceptInstance.id)
-	}
+	
 	@Secured(['ROLE_USER_ADVANCE'])
 	def showAdvance(Long id) {
 		def conceptInstance = Concept.get(id)

@@ -54,7 +54,7 @@
 	
 				<div class="col-sm-9">
 					<span class="input-icon input-icon-right"> <g:textField
-							name="keywords" value="${conceptInstance?.facebookSetup?.keywords}" />
+							name="keywordsFace" value="${conceptInstance?.facebookSetup?.keywords}" />
 					</span>
 				</div>
 			 </div>
@@ -107,7 +107,7 @@
 			
 					<div class="col-sm-9">
 						<span class="input-icon input-icon-right"> 
-						<g:textField name="keywords"
+						<g:textField name="keywordsTw"
 					value="${conceptInstance?.twitterSetup?.keywords}" />
 						</span>
 					</div>
