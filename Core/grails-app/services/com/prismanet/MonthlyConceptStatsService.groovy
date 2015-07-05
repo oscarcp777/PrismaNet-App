@@ -17,9 +17,8 @@ class MonthlyConceptStatsService extends GenericCoreService{
 		super()
 	}
 	
-	def getStatsForUser(Long userId){
+	def getStatsForUser(Long userId, Date dateProcess){
 		use (TimeCategory){
-			Date dateProcess = new Date()
 			String periodProcess = DateUtils.getDateFormat(DateTypes.MONTH_PERIOD,dateProcess)
 			def filters = []
 			filters.add(new Filter(attribute:"userId", value:userId, type:FilterType.EQ))
@@ -28,11 +27,14 @@ class MonthlyConceptStatsService extends GenericCoreService{
 			def projections = ["mentions" : ProjectionType.SUM, "authors":ProjectionType.SUM]
 			def result = groupBy(MonthlyConceptStats, new MonthlyConceptStatsAttributeContext(), categories, filters, projections, null)
 			def mentions = 0, authors = 0
+			
+			categories = ["conceptName"]
+			def resultByConcept = groupBy(MonthlyConceptStats, new MonthlyConceptStatsAttributeContext(), categories, filters, projections, null)
 			if (result.size()>0){
 				mentions = result[0][1]
 				authors = result[0][2]
 			}
-			['mentions': mentions, 'authors': authors]
+			['mentions': mentions, 'authors': authors, 'resultByConcept':resultByConcept]
 		}
 	}
 	
@@ -57,8 +59,6 @@ class MonthlyConceptStatsService extends GenericCoreService{
 				if (result.size()>0){
 					mentions = result[0][1]
 					authors = result[0][2]
-					log.debug "menciones: " + mentions
-					log.debug "autores: " + authors
 				}
 				def monthlyStats = MonthlyConceptStats.findByConceptAndPeriod(concept,periodProcess)
 				if (!monthlyStats){
@@ -96,9 +96,7 @@ class MonthlyConceptStatsService extends GenericCoreService{
 		cal.set(Calendar.MILLISECOND, 0);
 		cal.set(Calendar.DAY_OF_MONTH, 1);
 		Date dateFrom = cal.getTime();
-		println("Desde: "+dateFrom)
 		log.debug("Desde: "+dateFrom)
-		println("Hasta: "+dateTo)
 		log.debug("Hasta: "+dateTo)
 		
 		getFilterList(dateFrom, dateTo)

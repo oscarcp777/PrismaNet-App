@@ -11,7 +11,7 @@ class MonthlyConceptStatsController {
 	}
 	
 	def statsForUser={
-		print monthlyConceptStatsService.getStatsForUser(1)
-		render "Estadisticas por usuario obtenidas"
+		def result = monthlyConceptStatsService.getStatsForUser(1, new Date())
+		render "Estadisticas por usuario obtenidas: " + result
 	}
 }

@@ -460,7 +460,7 @@ class UserController extends GenericController{
 	
 	@Secured(['ROLE_USER_ADVANCE'])
 	def infoAccount() {
-		def mapStats= monthlyConceptStatsService.getStatsForUser(session.user.id)
+		def mapStats= monthlyConceptStatsService.getStatsForUser(session.user.id, new Date())
 		def listConStats=MonthlyConceptStats.findAllByConceptInList(session.concepts)
 		def infoDate=new Date()
 		use ( TimeCategory ) {
