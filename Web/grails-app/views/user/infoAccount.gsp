@@ -5,6 +5,7 @@
 		<meta name="layout" content="home">
 	</head>
 	<body>
+	
 	<div class="page-content">
 	<div class="page-header">
 		<h1>
@@ -28,20 +29,31 @@
         </ul>
       </div>
      </div>
-	<div class="col-lg-6">
-	<div class="profile-user-info profile-user-info-striped">
-	   <g:each in="${listConStats}" status="i" var="conStat">
-		<div class="profile-info-row">
-			<div class="profile-info-name"> ${conStat.concept?.conceptName} </div>
-			<div class="profile-info-value"><span>${conStat.mentions} </span></div>
-		</div>
-		</g:each>
-		<div class="profile-info-row">
-			<div class="profile-info-name"> Total de menciones </div>
-			<div class="profile-info-value"><span>${totalMentions} </span></div>
-		</div>
+    
+ <div class="form-horizontal col-sm-12">
+  <div class="form-group">
+	<label class="col-sm-3 control-label" for="form-field-1"> Seleccione el periodo a mostrar</label>
+	<div class="col-sm-3">
+		<g:select class="form-control" name="info-period" from="${listPeriod}" 
+		optionKey="periodDesc" optionValue="periodDate"/>
+	</div>
+</div>
+</div>    
+     
+     <div id="infoConcepts">
+	<g:render template="infoConcepts"></g:render>
 	</div>
 	</div>
-	</div>
+<script type="text/javascript">
+function loadInfoPeriod(data) {
+	$('#infoConcepts').html(data);
+}
+	$(function() {
+	$('#info-period').change(function() {
+	   var data = {"period":$(this).val()};
+		doRequest('infoConcepts',data,loadInfoPeriod, null, 'GET');
+	});
+	});
+</script>
 	</body>
 </html>

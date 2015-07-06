@@ -22,6 +22,7 @@ import grails.converters.*
 import grails.plugins.springsecurity.Secured
 import grails.plugins.springsecurity.SpringSecurityService
 import groovy.time.TimeCategory
+import java.text.SimpleDateFormat
 @Secured(['ROLE_USER','ROLE_USER_ADVANCE'])
 class UserController extends GenericController{
 	
@@ -460,13 +461,21 @@ class UserController extends GenericController{
 	
 	@Secured(['ROLE_USER_ADVANCE'])
 	def infoAccount() {
+		def listPeriod=[]
 		def mapStats= monthlyConceptStatsService.getStatsForUser(session.user.id, new Date())
-		def listConStats=MonthlyConceptStats.findAllByConceptInList(session.concepts)
+		def period=monthlyConceptStatsService.getPeriods()
+		 period.each {
+			 listPeriod.add([periodDesc:it,
+				 periodDate:g.formatDate(date: Date.parse( 'yyyyMM', it ), format: 'MMMM - yyyy')])
+		 }
 		def infoDate=new Date()
 		use ( TimeCategory ) {
 			infoDate = infoDate-1.day
 		 }
-		[totalMentions:mapStats.mentions,listConStats:listConStats,infoDate:infoDate]
+		[totalMentions:mapStats.mentions,listConStats:mapStats.resultByConcept,infoDate:infoDate,listPeriod:listPeriod]
 	}
-	
+	def infoConcepts() {
+		def mapStats= monthlyConceptStatsService.getStatsForUser(session.user.id, Date.parse( 'yyyyMM', params.period ))
+		render(template: "infoConcepts", model: [totalMentions:mapStats.mentions,listConStats:mapStats.resultByConcept])
+		}
 }

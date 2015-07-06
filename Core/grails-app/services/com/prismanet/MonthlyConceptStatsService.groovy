@@ -17,6 +17,14 @@ class MonthlyConceptStatsService extends GenericCoreService{
 		super()
 	}
 	
+	def getPeriods(){
+		def results = MonthlyConceptStats.withCriteria {
+			projections {
+			  distinct("period")
+			}
+		  }
+		results
+	}
 	def getStatsForUser(Long userId, Date dateProcess){
 		use (TimeCategory){
 			String periodProcess = DateUtils.getDateFormat(DateTypes.MONTH_PERIOD,dateProcess)
