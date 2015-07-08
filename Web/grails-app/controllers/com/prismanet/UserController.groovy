@@ -465,9 +465,11 @@ class UserController extends GenericController{
 		def mapStats= monthlyConceptStatsService.getStatsForUser(session.user.id, new Date())
 		def period=monthlyConceptStatsService.getPeriods()
 		 period.each {
-			 listPeriod.add([periodDesc:it,
+			 def sub= it[4..5] as int
+			 listPeriod.add([id:sub,periodDesc:it,
 				 periodDate:g.formatDate(date: Date.parse( 'yyyyMM', it ), format: 'MMMM - yyyy')])
 		 }
+		 listPeriod.sort{-it.id}
 		def infoDate=new Date()
 		use ( TimeCategory ) {
 			infoDate = infoDate-1.day
