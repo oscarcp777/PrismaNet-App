@@ -234,4 +234,51 @@ class GenericController {
 		'https://www.facebook.com/'+values[0]+'/posts/'+values[1]
 	}
 	
+	
+	protected def loadSolrFilters(Map parameters){
+		def filters=[]
+		
+		if (parameters["dateFrom"] && parameters["dateTo"] && !(parameters["dateMinute"] || parameters["dateCreated"] || parameters["dateHour"] || parameters["datePeriod"])){
+			filters.add(new Filter(attribute:"dateFrom",value: parameters.dateFrom, type:FilterType.GE))
+			
+			filters.add(new Filter(attribute:"dateTo",value: parameters.dateTo, type:FilterType.LE))
+		}
+
+		if (parameters["conceptsId"])
+			filters.add(new Filter(attribute:"conceptsId",value: parameters.conceptsId.toLong(), type:FilterType.EQ))
+		else{
+				Concept concept =chooseConcept(parameters)
+				filters.add(new Filter(attribute:"conceptsId",value: concept.id, type:FilterType.EQ))
+		}
+		if (parameters["dateMinute"]){
+			def cal = new GregorianCalendar()
+			cal.setTimeInMillis(parameters["dateMinute"] as Long)
+			def minuteFilter=DateUtils.getDateFormat(DateTypes.MINUTE_PERIOD, cal.time)
+			filters.add(new Filter(attribute:"dateMinute",value: minuteFilter, type:FilterType.EQ))
+		}
+
+		if (parameters["dateCreated"]){
+			def cal = new GregorianCalendar()
+			cal.setTimeInMillis(parameters["dateCreated"] as Long)
+			def day = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, cal.time)
+			filters.add(new Filter(attribute:"dateCreated",value: day, type:FilterType.EQ))
+		}
+
+		if (parameters["dateHour"]){
+			def cal = new GregorianCalendar()
+			cal.setTimeInMillis(parameters["dateHour"] as Long)
+			def hourFilter=DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, cal.time)
+			filters.add(new Filter(attribute:"dateHour",value: hourFilter, type:FilterType.EQ))
+		}
+		
+		if (parameters["datePeriod"]){
+			def cal = new GregorianCalendar()
+			cal.setTime(DateUtils.parseDate(DateTypes.MONTH_PERIOD, parameters.datePeriod))
+			def periodFilter=DateUtils.getDateFormat(DateTypes.MONTH_PERIOD, cal.time)
+			filters.add(new Filter(attribute:"datePeriod",value: periodFilter, type:FilterType.EQ))
+		}
+		filters
+	}
+
+	
 }
