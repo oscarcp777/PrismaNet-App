@@ -6,6 +6,7 @@ import com.prismanet.Concept
 import com.prismanet.GenericCoreService
 import com.prismanet.Tweet
 import com.prismanet.GenericService.FilterType
+import com.prismanet.GenericService.OrderType
 import com.prismanet.GenericService.ProjectionType
 import com.prismanet.TweetService.SamplingType
 import com.prismanet.context.Filter
@@ -22,16 +23,17 @@ class HourlyConceptStatsService extends GenericCoreService{
 		super()
 	}
 	
-	def getStatsForUser(Long userId){
+	def getStatsForUser(Long userId, Date dateProcess){
+		getStatsForUser(userId, dateProcess, [:])
+	}
+	
+	def getStatsForUser(Long userId, Date dateProcess, Map parameters){
 		use (TimeCategory){
-//			Date dateProcess = new Date()
-			GregorianCalendar d1 = new GregorianCalendar(2015, Calendar.JUNE, 7,21,00)
-			Date dateProcess = d1.getTime()
 			String hourProcess = DateUtils.getDateFormat(DateTypes.HOUR_PERIOD,dateProcess)
 			def filters = []
 			filters.add(new Filter(attribute:"userId", value:userId, type:FilterType.EQ))
 			filters.add(new Filter(attribute:"hour", value:hourProcess, type:FilterType.EQ))
-			def result = list(HourlyConceptStats, new HourlyConceptStatsAttributeContext(), filters, [:], null)
+			def result = list(HourlyConceptStats, new HourlyConceptStatsAttributeContext(), filters, parameters, [[attribute:"mentions",value:OrderType.DESC]])
 			['result':result.results]
 		}
 	}
