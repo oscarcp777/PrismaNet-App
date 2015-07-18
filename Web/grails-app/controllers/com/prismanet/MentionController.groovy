@@ -79,51 +79,7 @@ class MentionController extends GenericController{
 		mapResult
 	}
 	
-	protected def loadSolrFilters(){
-		def filters=[]
 		
-		if (params["dateFrom"] && params["dateTo"] && !(params["dateMinute"] || params["dateCreated"] || params["dateHour"] || params["datePeriod"])){
-			filters.add(new Filter(attribute:"dateFrom",value: params.dateFrom, type:FilterType.GE))
-			
-			filters.add(new Filter(attribute:"dateTo",value: params.dateTo, type:FilterType.LE))
-		}
-
-		if (params["conceptsId"])
-			filters.add(new Filter(attribute:"conceptsId",value: params.conceptsId.toLong(), type:FilterType.EQ))
-		else{
-				Concept concept =chooseConcept(params)
-				filters.add(new Filter(attribute:"conceptsId",value: concept.id, type:FilterType.EQ))
-		}
-		if (params["dateMinute"]){
-			def cal = new GregorianCalendar()
-			cal.setTimeInMillis(params["dateMinute"] as Long)
-			def minuteFilter=DateUtils.getDateFormat(DateTypes.MINUTE_PERIOD, cal.time)
-			filters.add(new Filter(attribute:"dateMinute",value: minuteFilter, type:FilterType.EQ))
-		}
-
-		if (params["dateCreated"]){
-			def cal = new GregorianCalendar()
-			cal.setTimeInMillis(params["dateCreated"] as Long)
-			def day = DateUtils.getDateFormat(DateTypes.DAY_PERIOD, cal.time)
-			filters.add(new Filter(attribute:"dateCreated",value: day, type:FilterType.EQ))
-		}
-
-		if (params["dateHour"]){
-			def cal = new GregorianCalendar()
-			cal.setTimeInMillis(params["dateHour"] as Long)
-			def hourFilter=DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, cal.time)
-			filters.add(new Filter(attribute:"dateHour",value: hourFilter, type:FilterType.EQ))
-		}
-		
-		if (params["datePeriod"]){
-			def cal = new GregorianCalendar()
-			cal.setTime(DateUtils.parseDate(DateTypes.MONTH_PERIOD, params.datePeriod))
-			def periodFilter=DateUtils.getDateFormat(DateTypes.MONTH_PERIOD, cal.time)
-			filters.add(new Filter(attribute:"datePeriod",value: periodFilter, type:FilterType.EQ))
-		}
-		filters
-	}
-	
 	def wordsCloud() {
 		log.info "tweetController->wordsCloud params: " + params
 		def listWords=[]
@@ -131,7 +87,7 @@ class MentionController extends GenericController{
 		
 		
 		if(session.relevantWords?.empty)
-			session.relevantWords= getService().getRelevantWords(loadSolrFilters())
+			session.relevantWords= getService().getRelevantWords(loadSolrFilters(params))
 		
 		def relevantWords = session.relevantWords
 		def maxPercent = 35, minPercent = 9

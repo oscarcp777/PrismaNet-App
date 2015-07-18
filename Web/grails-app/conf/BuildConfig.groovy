@@ -81,6 +81,7 @@ plugins {
 		compile ":mail:1.0.7"
 		compile ":spring-security-core:1.2.7.3"
 		compile ":spring-security-ui:0.2"
+		compile ":less-resources:1.3.3.2"
 		
 		
 		
