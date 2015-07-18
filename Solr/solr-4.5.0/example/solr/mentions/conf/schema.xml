@@ -127,14 +127,16 @@
        "content_type": From the HTTP headers of incoming stream
        "resourcename": From SolrCell request param resource.name
    -->
-   <field name="conceptId" type="int" indexed="true" stored="false"/>
-   <field name="mentionId" type="int" indexed="true" stored="false"/>
+   <field name="conceptId" type="int" indexed="true" stored="true"/>
+   <field name="mentionId" type="int" indexed="true" stored="true"/>
+   <field name="authorId" type="int" indexed="true" stored="true"/>
    <field name="conceptName" type="string" indexed="true" stored="false"/>
    <field name="mentionContent" type="text_general_facet" indexed="true" stored="true"/>
-   <field name="created" type="date" indexed="true" stored="false"/>
+   <field name="created" type="date" indexed="true" stored="true"/>
    <field name="date" type="string" indexed="true" stored="false"/>
    <field name="dateByMinute" type="string" indexed="true" stored="false"/>
    <field name="dateByHour" type="string" indexed="true" stored="false"/>
+
    
 
    <!-- Main body of document extracted by SolrCell.

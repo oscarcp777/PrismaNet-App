@@ -25,6 +25,7 @@
 				select 
 					M.content AS content, 
 					M.created AS created,
+					M.author_id AS authorId,
 					M.date AS date,
 					M.date_by_hour AS dateByHour,
 					M.date_by_minute AS dateByMinute
@@ -33,6 +34,7 @@
 		
 			        <field column="content" name="mentionContent" />
         	    		<field column="created" name="created"/>
+        	    		<field column="authorId" name="authorId"/>
         	    		<field column="date" name="date"/>
         	    		<field column="dateByMinute" name="dateByMinute"/>
         	    		<field column="dateByHour" name="dateByHour"/>
