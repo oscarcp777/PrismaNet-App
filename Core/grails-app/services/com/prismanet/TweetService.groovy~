@@ -2,7 +2,6 @@ package com.prismanet
 
 import groovy.sql.Sql
 
-import org.junit.After;
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.StopWatch
 
@@ -29,7 +28,6 @@ import com.prismanet.sentiment.OpinionValue
 class TweetService extends MentionService{
 	
 	def opinionService
-	def conceptService
 
 	TweetService(){
 		super(Tweet, new TweetAttributeContext())
@@ -37,7 +35,7 @@ class TweetService extends MentionService{
 	
 	@Transactional
 	def saveTweets(def tweets){
-		def List<Concept> concepts = conceptService.getActiveConcepts()
+		def List<Concept> concepts = Concept.list()
 		for (BasicDBObject tweetObj : tweets){
 			JSONObject obj = new JSONObject(tweetObj)
 			Status status = new StatusJSONImpl(obj)
@@ -59,6 +57,7 @@ class TweetService extends MentionService{
 			favoriteCount:favCount,
 			retweet:retweet,
 			retweetId:retweetId)
+
 			concepts.each(){ concept->
 				timer = new StopWatch()
 				timer.start()
@@ -66,7 +65,7 @@ class TweetService extends MentionService{
 				if (evaluateLanguage(concept, status))
 				if (evaluateCountry(concept, status))
 				if (concept.testAddTweet(tweet)){
-					log.debug "valido para concepto: " +  concept
+					log.info "valido para concepto: " +  concept
 					if (!tweet.id){
 						Author author = TwitterAuthor.findByAccountName("@"+status.getUser().getScreenName())
 						if (!author){
@@ -110,19 +109,19 @@ class TweetService extends MentionService{
 	
 	private boolean evaluateLanguage(Concept concept, Status tweet){
 		boolean result = false
-		log.debug "status.lang " + tweet.getLang()
-		log.debug "concept.lang " + concept.lang?.code
-		if (!concept.lang || (tweet.getLang() == concept.lang.code && tweet.getUser().getLang() && tweet.getUser().getLang() == concept.lang.code))
+		log.info "status.lang " + tweet.getLang()
+		log.info "concept.lang " + concept.lang?.code
+		if (!concept.lang || tweet.getLang() == concept.lang.code)
 			result = true
-		log.debug "Evaluacion lenguaje: " + result
+		log.info "Evaluacion lenguaje: " + result
 		result
 	}
 	
 	private boolean evaluateCountry(Concept concept, Status tweet){
 		boolean result = false
-		log.debug "status.timezone " + tweet.getUser().getTimeZone()
-		log.debug "status.place " + tweet.getPlace()
-		log.debug "concept.country " + concept.country?.code
+		log.info "status.timezone " + tweet.getUser().getTimeZone()
+		log.info "status.place " + tweet.getPlace()
+		log.info "concept.country " + concept.country?.code
 		if (!concept.country)
 			result = true
 		else	
@@ -131,13 +130,12 @@ class TweetService extends MentionService{
 					result = true
 			}else{	
 				if (!tweet.getUser().getTimeZone() || 
-					(concept.country?.code == 'AR' &&
-					(tweet.getUser().getTimeZone().trim() == 'Buenos Aires' ||
+					tweet.getUser().getTimeZone().trim() == 'Buenos Aires' ||
 					tweet.getUser().getTimeZone().trim() == 'Brasilia' ||
-					tweet.getUser().getTimeZone().trim() == 'America/Argentina/Buenos_Aires')))
+					tweet.getUser().getTimeZone().trim() == 'America/Argentina/Buenos_Aires')
 						result = true
 			}		
-		log.debug "Evaluacion pais: " + result
+		log.info "Evaluacion pais: " + result
 		result
 	}
 
@@ -146,7 +144,7 @@ class TweetService extends MentionService{
 	def streamConection(StatusListener listener){
 		String args;
 		Concept.withTransaction{
-			def List<Concept> concepts = conceptService.getActiveConcepts()
+			def List<Concept> concepts = Concept.list()
 			for (Concept concept in concepts){
 				for (String twitterAccount in concept.twitterSetup.includedAccounts.split(',')) {
 					if (!args)
@@ -186,26 +184,6 @@ class TweetService extends MentionService{
 		getMentions(filters, parameters, new TweetAttributeContext(), Tweet)
 	}
 	
-	def getTweets(filters, parameters, SamplingType type){
-		filters.add(new Filter(attribute:"sourceType",value:Tweet.class, type:FilterType.EQ))
-		getMentions(filters, parameters, new TweetAttributeContext(), Tweet, getOrder(type))
-	}
-	
-	private def getOrder(SamplingType type){
-		switch (type){
-			case SamplingType.TOP_RELEVANT_AUTHORS:
-				return [[attribute:"authorFollowers",value:OrderType.DESC]]
-			break
-			case SamplingType.TOP_RETWEETS:
-				return [[attribute:"retweetCount",value:OrderType.DESC]]
-			break
-			case SamplingType.TOP_FAVS:
-				return [[attribute:"favoriteCount",value:OrderType.DESC]]
-			break
-		}
-		return [[attribute:"id",value:OrderType.DESC]]
-	}
-	
 	def getSamplingTweets(filters, parameters, SamplingType type){
 		getSamplingTweets(filters, parameters, type, 50)
 	}
@@ -234,9 +212,15 @@ class TweetService extends MentionService{
 				return [resultList:resultList,totalSampling:samplingSize,totalDemo:tweets.totalCount]
 			break;
 			case SamplingType.TOP_RELEVANT_AUTHORS:
+				def samplingTweets = getMentions(filters, parameters, new TweetAttributeContext(), Tweet, [[attribute:"authorFollowers",value:OrderType.DESC]])
+				return [resultList:samplingTweets.resultList,totalSampling:samplingTweets.resultList.list.size(),totalDemo:tweets.totalCount]
+			break;
 			case SamplingType.TOP_RETWEETS:
+				def samplingTweets = getMentions(filters, parameters, new TweetAttributeContext(), Tweet, [[attribute:"retweetCount",value:OrderType.DESC]])
+				return [resultList:samplingTweets.resultList,totalSampling:samplingTweets.resultList.list.size(),totalDemo:tweets.totalCount]
+			break;
 			case SamplingType.TOP_FAVS:
-				def samplingTweets = getMentions(filters, parameters, new TweetAttributeContext(), Tweet, getOrder(type))
+				def samplingTweets = getMentions(filters, parameters, new TweetAttributeContext(), Tweet, [[attribute:"favoriteCount",value:OrderType.DESC]])
 				return [resultList:samplingTweets.resultList,totalSampling:samplingTweets.resultList.list.size(),totalDemo:tweets.totalCount]
 			break;
 		}
@@ -250,7 +234,7 @@ class TweetService extends MentionService{
 		
 		def usersName=[]
 		authors.each {it ->
-			usersName.add(it.author.accountNameSingle)
+			usersName.add(it.accountNameSingle)
 		}
 		Twitter twitter = new TwitterFactory().getInstance();
 		ResponseList<twitter4j.User> users = null
@@ -258,7 +242,7 @@ class TweetService extends MentionService{
 			users = twitter.lookupUsers((String[])usersName.toArray());
 		if (users != null)
 		for (twitter4j.User user : users) {
-			TwitterAuthor author=authors.find {it.author.accountNameSingle == user.screenName}
+			TwitterAuthor author=authors.find {it.accountNameSingle == user.screenName}
 			if (author){
 				author.profileImage=user.profileImageURL
 				author.followers=user.followersCount
@@ -320,8 +304,6 @@ class TweetService extends MentionService{
 		RANDOM,
 		TOP_RELEVANT_AUTHORS,
 		TOP_RETWEETS,
-		TOP_FAVS,
-		DATE_ORDER;
+		TOP_FAVS;
 	}
-	
 }

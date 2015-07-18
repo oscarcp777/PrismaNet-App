@@ -3,8 +3,8 @@ import grails.converters.*
 import grails.plugins.springsecurity.Secured
 
 import org.springframework.dao.DataIntegrityViolationException
-import org.springframework.web.servlet.support.RequestContextUtils as RCU
 
+import com.prismanet.ConceptService.AuthorOrderType
 import com.prismanet.GenericService.FilterType
 import com.prismanet.GenericService.ProjectionType
 import com.prismanet.context.Filter
@@ -232,11 +232,15 @@ class ConceptController extends GenericController{
 		def filters = []
 		filters.add(new Filter(attribute:"conceptId",value:concept.id, type:FilterType.EQ))
 		
+		AuthorOrderType orderType = AuthorOrderType.BY_TWEET_QUANTITY
+		if (params.type)
+			orderType = params.type as AuthorOrderType
+		
 		Date dateFrom = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateFrom)
 		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
 		
 		// Obtengo autores
-		def authorsList = conceptService.getRelevantAuthors(filters, dateFrom, dateTo, 10)
+		def authorsList = conceptService.getRelevantAuthors(filters, dateFrom, dateTo, 10, orderType)
 		if(!grailsApplication.config.grails.twitter.offline)
 			tweetService.loadDataAuthors(authorsList)
 		render(template: "author", model: [authors:authorsList])

@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional
 import com.prismanet.GenericService.FilterType
 import com.prismanet.GenericService.OrderType
 import com.prismanet.GenericService.ProjectionType
+import com.prismanet.TweetService.SamplingType;
 import com.prismanet.context.TwitterAuthorAttributeContext
 import com.prismanet.context.ConceptAttributeContext
 import com.prismanet.context.Filter
@@ -67,19 +68,40 @@ class ConceptService extends GenericCoreService {
 	}
 	
 	
-	def getRelevantAuthors(filters, dateFrom, dateTo, maxAuthors){
+	def getRelevantAuthors(filters, dateFrom, dateTo, maxAuthors, AuthorOrderType orderType){
 		// No lo hago con un select porque duplica los autores (un autor tiene puede
 		// tener muchas menciones de un concepto)
-		def groups = ["id", "accountName","followers"]
+		def groups = ["id"]
 		filters.addAll(getFilterList(dateFrom, dateTo))
 		def authorsList =groupBy(TwitterAuthor, new TwitterAuthorAttributeContext(),
-				groups, filters, [:],
-				[[attribute:"followers",value:OrderType.DESC]], [max:maxAuthors]);
-		def listids=[]
+				groups, filters, ["tweetsId" : ProjectionType.COUNT],
+				getAuthorOrder(orderType), [max:maxAuthors]);
+		def result = []
 		authorsList.each {
-			listids.add(it[0].toLong())
+			def item = [:]
+			item.author = TwitterAuthor.findById(it[0].toLong())
+			item.quantity = it[1]
+			result.add(item)
 		}
-		TwitterAuthor.findAllByIdInList(listids,[sort: "followers", order: "desc"])
+		result
+	}
+	
+	
+	private def getAuthorOrder(AuthorOrderType type){
+		switch (type){
+			case AuthorOrderType.BY_RELEVANT_AUTHORS:
+				return [[attribute:"followers",value:OrderType.DESC]]
+			break
+			case AuthorOrderType.BY_TWEET_QUANTITY:
+				return [[attribute:"tweetsId",value:OrderType.DESC]]
+			break
+		}
+		return [[attribute:"id",value:OrderType.DESC]]
+	}
+	
+	public enum AuthorOrderType{
+		BY_RELEVANT_AUTHORS,
+		BY_TWEET_QUANTITY;
 	}
 	
 	public String getDateGroupProperty(DateServiceType type){
