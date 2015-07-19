@@ -1,3 +1,4 @@
+<%@ page import="com.prismanet.ConceptService.AuthorOrderType"%>
 <html>
 <head>
 <meta name="layout" content="home" />
@@ -34,10 +35,14 @@
 
 		function loadAuthorPickert(start, end, rangeSelect) {
 		     loadFormatLLL('#authorPickert',start, end, rangeSelect);
-		     var data = {"id":${concept.id}, "div":'#relevantAuthors',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm')};
+		     var data = {"id":${concept.id}, "div":'#relevantAuthors',"dateFrom":start.format('L HH:mm'),"dateTo":end.format('L HH:mm'),"type":$('input[name=filterAuthor]:checked').val()};
  		     getRelevantAuthors(data);
 		}
-    
+		function loadDataAuthor(type){
+			var drp = $('#authorPickert').data('daterangepicker');
+			  var dataAuthors = {"id":${concept.id}, "div":'#relevantAuthors',"dateFrom":drp.startDate.format('L HH:mm'),"dateTo":drp.endDate.format('L HH:mm'),"type":type};
+		 	   getRelevantAuthors(dataAuthors);
+		  }
 	  $(function() {
 		  var id='${concept.id}';
 		  loadDatepicker('tweetPickert',loadChartLineForTweetPickert,setDatesHtml);
@@ -51,7 +56,7 @@
 		   getGroupedTweets(dataTweets);
 		   var dataWeight = {"id":id, "div":'#weightChart',"dateFrom":getDateFromLHH(),"dateTo":getDateNowLHH()};
 		   getGroupedWeight(dataWeight);
-		   var dataAuthors = {"id":id, "div":'#relevantAuthors',"dateFrom":getDateFromLHH(),"dateTo":getDateNowLHH()};
+		   var dataAuthors = {"id":id, "div":'#relevantAuthors',"dateFrom":getDateFromLHH(),"dateTo":getDateNowLHH(),"type":'${AuthorOrderType.BY_RELEVANT_AUTHORS}'};
 		   getRelevantAuthors(dataAuthors);
 
 		});

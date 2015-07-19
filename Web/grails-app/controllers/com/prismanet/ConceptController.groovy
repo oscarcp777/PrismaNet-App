@@ -240,9 +240,10 @@ class ConceptController extends GenericController{
 		Date dateTo = DateUtils.parseDate(DateTypes.MINUTE_PERIOD, params.dateTo)
 		
 		// Obtengo autores
-		def authorsList = conceptService.getRelevantAuthors(filters, dateFrom, dateTo, 10, orderType)
-		if(!grailsApplication.config.grails.twitter.offline)
+		def authorsList = conceptService.getRelevantAuthors(filters, dateFrom, dateTo, 15, orderType)
+		if(!grailsApplication.config.grails.twitter.offline){
 			tweetService.loadDataAuthors(authorsList)
+		}
 		render(template: "author", model: [authors:authorsList])
 	}
 	

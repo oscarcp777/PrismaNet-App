@@ -22,6 +22,9 @@
 			<g:if test="${callback != 'disable'}"> 
 			<g:render template="chooseChannel"  bean="${callback}"></g:render>
 			</g:if>
+			<g:if test="${divPickert == 'authorPickert'}"> 
+			<g:render template="filterAuthor" ></g:render>
+			</g:if>
 			<div class="widget-toolbar blue-active">
 			   <div class="btn-group  btn-corner">
 				<a href="javascript:void(0);" id="help-${div}" class="btn btn-white btn-grey btn-help" > 

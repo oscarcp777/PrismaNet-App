@@ -15,7 +15,7 @@ class TwitterAuthor extends Author{
 	}
 	
 	def getAccountNameSingle(){
-		accountName.replace("@","")
+		accountName.trim().replace("@","")
 	}
 	
 	public getRatio(){
