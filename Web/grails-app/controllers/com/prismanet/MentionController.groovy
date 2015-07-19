@@ -30,6 +30,9 @@ class MentionController extends GenericController{
 			filters.addAll(getService().getFilterList(dateFrom, dateTo, "created", false))
 		}
 
+		if (params["authorId"])
+			filters.add(new Filter(attribute:"authorId",value: params.authorId.toLong(), type:FilterType.EQ))
+		
 		if (params["conceptsId"])
 			filters.add(new Filter(attribute:"conceptsId",value: params.conceptsId.toLong(), type:FilterType.EQ))
 		else{

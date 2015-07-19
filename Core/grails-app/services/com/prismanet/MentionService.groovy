@@ -98,6 +98,8 @@ class MentionService extends GenericCoreService{
 			if (context.hasPropertyRelationForAttribute(filter.attribute)) {
 				if (filter.attribute == 'conceptsId')
 					query.addFilterQuery("conceptId:" + filter.value)
+				if (filter.attribute == 'authorId')
+					query.addFilterQuery("authorId:" + filter.value)
 				if (filter.attribute == "dateMinute")
 					query.addFilterQuery("dateByMinute:\"" + filter.value +"\"")
 				if (filter.attribute ==  "dateCreated")

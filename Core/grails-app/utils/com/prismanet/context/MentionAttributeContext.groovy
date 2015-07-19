@@ -7,6 +7,7 @@ class MentionAttributeContext extends AttributeContext {
 	protected void initializeRelations() {
 		addPropertyRelation("id", "id", null, null);
 		addPropertyRelation("sex", "sex", null, "author");
+		addPropertyRelation("authorId", "id", null, "author");
 		addPropertyRelation("dateCreated", "date", null, null);
 		addPropertyRelation("datePeriod", "period", null, null);
 		addPropertyRelation("dateYear", "year", null, null);
