@@ -6,7 +6,8 @@ class TwitterAuthor extends Author{
 	Integer following
 	Integer tweetsCount
 	Long twitterAuthorId
-	
+	Integer quantity
+	static transients = ['quantity']
 	static constraints = {
 		followers(nullable:true, min: 0)
 		following(nullable:true, min: 0)

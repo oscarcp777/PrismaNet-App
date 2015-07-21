@@ -78,10 +78,9 @@ class ConceptService extends GenericCoreService {
 				getAuthorOrder(orderType), [max:maxAuthors]);
 		def result = []
 		authorsList.each {
-			def item = [:]
-			item.author = TwitterAuthor.findById(it[0].toLong())
-			item.quantity = it[1]
-			result.add(item)
+			def author = TwitterAuthor.findById(it[0].toLong())
+			author.quantity = it[1]
+			result.add(author)
 		}
 		result
 	}

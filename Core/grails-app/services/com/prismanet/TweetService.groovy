@@ -247,18 +247,18 @@ class TweetService extends MentionService{
 		numerator.divide(0.03**2*(poblationNumber-1)+1.96**2*0.05*0.95, 0, BigDecimal.ROUND_HALF_UP)
 	}
 	def loadDataAuthors(authors){
-		
 		def usersName=[]
 		authors.each {it ->
-			usersName.add(it.author.accountNameSingle)
+			usersName.add(it.accountNameSingle)
 		}
 		Twitter twitter = new TwitterFactory().getInstance();
 		ResponseList<twitter4j.User> users = null
 		if (usersName.size()>0)
 			users = twitter.lookupUsers((String[])usersName.toArray());
-		if (users != null)
+		if (users != null){
 		for (twitter4j.User user : users) {
-			TwitterAuthor author=authors.find {it.author.accountNameSingle == user.screenName}
+			TwitterAuthor author=authors.find {it.accountNameSingle == user.screenName}
+			
 			if (author){
 				author.profileImage=user.profileImageURL
 				author.followers=user.followersCount
@@ -266,7 +266,7 @@ class TweetService extends MentionService{
 				author.tweetsCount=user.statusesCount
 				author.name=user.name
 			}
-			
+			}
 		}
 	}
 	def getOpinionsByTweets(tweets){

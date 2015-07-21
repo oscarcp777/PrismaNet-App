@@ -241,9 +241,11 @@ class ConceptController extends GenericController{
 		
 		// Obtengo autores
 		def authorsList = conceptService.getRelevantAuthors(filters, dateFrom, dateTo, 15, orderType)
+		
 		if(!grailsApplication.config.grails.twitter.offline){
 			tweetService.loadDataAuthors(authorsList)
 		}
+		
 		render(template: "author", model: [authors:authorsList])
 	}
 	

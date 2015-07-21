@@ -6,7 +6,6 @@
 			<th>Nombre</th>
 			<th>Seguidores</th>
 			<th>Tweets</th>
-			<th>Alcance Potencial</th>
 			
 		</tr>
 	</thead>
@@ -14,24 +13,22 @@
 		<g:each in="${authors}" var="curr">
 			<tr>
 				<td><img class="avatar" style="width: 30px; height: 30px;"
-					alt="${curr.author?.accountName}" src="${curr.author?.profileImage}">
+					alt="${curr.accountName}" src="${curr.profileImage}">
 				  
-				  <a href="https://twitter.com/${curr.author?.accountName}"target="_blanck" class="btn-link" >
-					${curr.author?.accountName}
+				  <a href="https://twitter.com/${curr?.accountName}"target="_blanck" class="btn-link" >
+					${curr.accountName}
 					</a>
 				</td>
 				<td>
-					${curr.author?.name}
+					${curr.name}
 				</td>
 				<td>
-					${curr.author?.followers}
+					${curr.followers}
 				</td>
 				<td>
 					${curr.quantity}
 				</td>
-				<td>
-					<g:formatNumber number="${curr.author?.followers*((Integer)curr.quantity)}" type="number" maxFractionDigits="2" />
-				</td>
+				
 			</tr>
 		</g:each>
 	</tbody>
