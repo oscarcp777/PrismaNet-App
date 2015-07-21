@@ -245,8 +245,7 @@ class ConceptController extends GenericController{
 		if(!grailsApplication.config.grails.twitter.offline){
 			tweetService.loadDataAuthors(authorsList)
 		}
-		
-		render(template: "author", model: [authors:authorsList])
+		render(template: "author", model: [authors:authorsList,conceptId:concept.id,dateFrom:DateUtils.getDateFormat(DateTypes.MINUTE_PERIOD, dateFrom),dateTo:DateUtils.getDateFormat(DateTypes.MINUTE_PERIOD, dateTo)])
 	}
 	
 	

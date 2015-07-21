@@ -6,7 +6,7 @@
 			<th>Nombre</th>
 			<th>Seguidores</th>
 			<th>Tweets</th>
-			
+			<th>Ver tweets</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -28,7 +28,12 @@
 				<td>
 					${curr.quantity}
 				</td>
-				
+				<td>
+				<g:link controller="tweet" action="list" class="btn btn-white btn-info btn-round"
+					 params="[conceptsId:conceptId,authorId:curr.id,dateTo:dateTo,dateFrom:dateFrom]">
+					<i class="ace-icon fa fa-external-link bigger-160 blue"></i>
+				</g:link>
+				</td>
 			</tr>
 		</g:each>
 	</tbody>
