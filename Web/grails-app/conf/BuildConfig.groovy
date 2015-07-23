@@ -1,4 +1,4 @@
-grails.servlet.version = "3.0" // Change depending on target container compliance (2.5 or 3.0)
+  grails.servlet.version = "3.0" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
@@ -81,7 +81,6 @@ plugins {
 		compile ":mail:1.0.7"
 		compile ":spring-security-core:1.2.7.3"
 		compile ":spring-security-ui:0.2"
-		compile ":less-resources:1.3.3.2"
 		
 		
 		
