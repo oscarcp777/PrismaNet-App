@@ -1,5 +1,10 @@
 <%@ page import="com.prismanet.Author"%>
-<table class="table table-striped table-bordered table-hover table-condensed">
+<script type="text/javascript">
+        $(function () {
+			$('#authorRelevants').footable();
+        });
+</script>
+<table id="authorRelevants" class="table table-striped table-bordered table-hover table-condensed" data-page-navigation=".paginate">
 	<thead>
 		<tr>
 			<th>Usuario</th>
@@ -29,12 +34,19 @@
 					${curr.quantity}
 				</td>
 				<td>
-				<g:link controller="tweet" action="list" class="btn btn-white btn-info btn-round"
+				<g:link controller="tweet" action="list" class="btn btn-sm btn-white btn-info btn-round"
 					 params="[conceptsId:conceptId,authorId:curr.id,dateTo:dateTo,dateFrom:dateFrom]">
-					<i class="ace-icon fa fa-external-link bigger-160 blue"></i>
+					<i class="ace-icon fa fa-external-link bigger-140 blue icon-only"></i>
 				</g:link>
 				</td>
 			</tr>
 		</g:each>
 	</tbody>
+	<tfoot class="hide-if-no-paging">
+		<tr>
+			<td colspan="5">
+				<div class="paginate text-center"></div>
+			</td>
+		</tr>
+	</tfoot>
 </table>

@@ -63,5 +63,10 @@ modules = {
 	paginate{
 		resource url:'js/jquery.bootpag.min.js'
 	}
-	
+	footable{
+		resource url:'js/footable/footable.min.js'
+		resource url:'js/footable/footable.paginate.min.js'
+		resource url:'css/footable.core.min.css'
+		
+	}
 }

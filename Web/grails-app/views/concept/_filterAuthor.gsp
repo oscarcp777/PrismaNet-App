@@ -13,4 +13,5 @@
 		      <i class="ace-icon fa fa-twitter align-top bigger-150"></i>
 		  </a>
 		</div>
+		<g:select id="cantReg" name="cantReg"from="${['20','50','100']}" class="tooltips tooltip-info" data-original-title="${g.message (code: 'concept.author.more.cant.reg')}"/>
 </div>
