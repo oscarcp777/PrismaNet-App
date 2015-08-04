@@ -109,7 +109,7 @@ class MentionService extends GenericCoreService{
 			}
 		}
 		if (between.from && between.to)
-			query.addFilterQuery("dateByMinute:[\"" + between.from+
+			query.addFilterQuery("created:[\"" + between.from+
 				"\" TO \"" + between.to + "\"]")
 		log.info "solrQuery: " + query
 		QueryResponse respSolr

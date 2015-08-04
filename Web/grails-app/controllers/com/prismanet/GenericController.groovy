@@ -238,9 +238,8 @@ class GenericController {
 	protected def loadSolrFilters(Map parameters){
 		def filters=[]
 		if (parameters["dateFrom"] && parameters["dateTo"] && !(parameters["dateMinute"] || parameters["dateCreated"] || parameters["dateHour"] || parameters["datePeriod"])){
-			filters.add(new Filter(attribute:"dateFrom",value: parameters.dateFrom, type:FilterType.GE))
-			
-			filters.add(new Filter(attribute:"dateTo",value: parameters.dateTo, type:FilterType.LE))
+			filters.add(new Filter(attribute:"dateFrom",value: DateUtils.toSolrDate(parameters.dateFrom), type:FilterType.GE))
+			filters.add(new Filter(attribute:"dateTo",value: DateUtils.toSolrDate(parameters.dateTo), type:FilterType.LE))
 		}
 		if (parameters["authorId"])
 			filters.add(new Filter(attribute:"authorId",value: parameters.authorId.toLong(), type:FilterType.EQ))

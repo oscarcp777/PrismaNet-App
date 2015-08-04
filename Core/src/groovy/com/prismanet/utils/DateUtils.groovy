@@ -4,6 +4,8 @@ import groovy.time.TimeCategory
 
 import java.text.SimpleDateFormat
 
+import org.apache.solr.common.util.DateUtil
+
 enum DateTypes {
 	// Unicos en el tiempo, una vez que pasan no se repiten
 	final static String YEAR = "yyyy"
@@ -89,5 +91,22 @@ class DateUtils {
 		return year.toString()+ sMonth
 	}
 
+	
+	static String toSolrDate(String dateStr) {
+		def dateFormats = [DateTypes.MINUTE_PERIOD];
+		try {
+			Date date
+			use ( TimeCategory ) {
+				date = DateUtil.parseDate(dateStr, dateFormats)
+				date = date + 4.hours
+			}
+			String result = DateUtil.getThreadLocalDateFormat().format(date)
+			return result;
+		} catch (Exception ignore) {
+			throw new IllegalArgumentException("Invalid date: " + dateStr);
+		}
+
+		throw new IllegalArgumentException("Invalid date: " + dateStr);
+	}
 	
 }
