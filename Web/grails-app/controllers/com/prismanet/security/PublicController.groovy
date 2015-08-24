@@ -1,5 +1,6 @@
 package com.prismanet.security
 import com.prismanet.Contact
+import grails.converters.JSON
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 class PublicController {
 
@@ -12,7 +13,24 @@ class PublicController {
         }
 		[contact:new Contact ()]
     }
-	
+	def angular() {
+		print "pasoooo"
+	}
+	def conceptTab(){
+		render(template: "concept-tab")
+	}
+	def listTweets(){
+		render(template: "list-tweets")
+	}
+	def dataJson(){
+		def list=["title":"Politicos mas mencionados de la hora",
+			      "categories":["CFK","Macri","Scioli"],
+				  "xAxis":'Presidenciales',"yAxis":'Cantidad',
+				  "series":[['name': 'Tweets',data: [107, 31, 635]],
+					       ['name': 'Autores',data: [33, 10, 200,]]]
+				  ]
+		render list as JSON
+	}
 	def save(){
 		mailService.sendMail{ 
 			async true

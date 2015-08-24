@@ -1,0 +1,69 @@
+.header{
+	min-height:65px;
+}
+.hd_navbar {
+	background-color:#ffffff;
+	margin-left:40px;
+/* 	border-top: 8px solid #16a085; */
+	border-bottom: 1px solid #cccccc;
+	opacity: 0.0096;
+	filter: alpha(opacity =  0.96);
+	-webkit-opacity: 0.96;
+	-moz-opacity: 0.96;
+	-o-opacity: 0.96;
+	-khtml-opacity: 0.96;
+	opacity: 0.96;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=96)";
+	filter: alpha(opacity =  96);
+}
+
+.hd_navbar .brand {
+	margin-top:15px;
+	position: relative;
+	color: #000000;
+	font-size: 40px;
+	display: block;
+}
+
+.hd_navbar .brand:hover {
+	background-position: bottom;
+}
+
+.hd_navbar .brand:hover .logoI {
+	visibility: visible;
+}
+
+.hd_navbar .brand .logoHolder {
+	font-family: "arista";
+	font-weight:600;
+	position: absolute;
+	text-shadow: 0 0.032em 0 #b0b0b0, 0px 0.15em 0.11em rgba(0, 0, 0, 0.15),
+		0px 0.25em 0.021em rgba(0, 0, 0, 0.1), 0px 0.32em 0.32em
+		rgba(0, 0, 0, 0.1);
+	color:#f9f9f9;
+	width: 500px;
+	text-decoration: none;
+}
+
+.hd_navbar .brand .logoFirst {
+	color:#16a085;
+}
+.hd_navbar .brand .logoFirst i{
+  font-weight:bold;font-size:0.8em;
+}
+.hd_navbar .brand .logoI {
+	visibility: hidden;
+}
+
+.hd_navbar .brand .logoDot {
+	color: #000000;
+	position: absolute;
+	z-index: 10;
+/* 	top:11px; */
+	left: 119px;
+	font-size: 35px;
+}
+
+.hd_navbar .brand .logoDot:hover {
+	visibility: visible;
+}

@@ -6,7 +6,7 @@
 <title><g:layoutTitle default="${grailsApplication.config.app.name}" /></title>
 <link rel="shortcut icon" href="${resource(dir: 'img', file: 'favicon.png')}" type="image/png">
 <link rel="icon" href="${resource(dir: 'img', file: 'favicon.png')}" type="image/png">
-<r:require module="core" />
+<r:require modules="core" />
 <g:layoutHead />
 <r:layoutResources />
 </head>

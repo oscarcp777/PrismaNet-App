@@ -12,9 +12,7 @@ class HomeController extends GenericController{
 		loadDataSession()
 		redirect action: 'stats', controller: 'user'
 	}
-	def angular() {
-		print "pasoooo"
-	}
+	
 	@Secured(['ROLE_ADMIN'])
 	def controlPanel(){
 		print 'entro al panel'

@@ -49,6 +49,16 @@ modules = {
 		dependsOn 'core'
 		resource url:'css/index.css'
 	}
+	
+	angular{
+		dependsOn 'core'
+		resource url:'js/angular/angular.min.js'
+		resource url:'js/angular/angular-resource.min.js'
+		resource url:'js/angular/highcharts-ng.min.js'
+		resource url:'js/angular/app.js'
+		resource url:'css/report.css'
+		resource url:'css/twitter.css'
+	}
 	indexjs {
 		resource url:'js/jquery.easing.js'
 		resource url:'js/modernizr.js'
@@ -69,4 +79,5 @@ modules = {
 		resource url:'css/footable.core.min.css'
 		
 	}
+	
 }

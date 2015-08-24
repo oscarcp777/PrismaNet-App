@@ -40,7 +40,7 @@ class HourlyConceptStatsService extends GenericCoreService{
 	
 	def void loadStats(){
 		use (TimeCategory){
-			GregorianCalendar d1 = new GregorianCalendar(2015, Calendar.JUNE, 7,21,00)
+			GregorianCalendar d1 = new GregorianCalendar(2015, Calendar.MAY, 20,21,00)
 			Date dateProcess = d1.getTime()
 //			Date dateProcess = new Date()-1.hour
 			String hourProcess = DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, dateProcess)
@@ -66,12 +66,13 @@ class HourlyConceptStatsService extends GenericCoreService{
 				if (!hourlyStats){
 					// Creo nueva estadistica mensual
 					hourlyStats = new HourlyConceptStats(concept:concept, hour:hourProcess)
+					hourlyStats.save(validate:false)
 				}
 				
 				// Obtengo top 3 tweets mas importantes por cant de seguidores
 				SamplingType orderType = SamplingType.TOP_RELEVANT_AUTHORS
 				def parameters = [:]
-				parameters.max = 3
+				parameters.max = 10
 				def tweetFilters = []
 				tweetFilters.addAll(filters)
 				tweetFilters.add(new Filter(attribute:"conceptsId", value:concept.id, type:FilterType.EQ))
@@ -82,12 +83,13 @@ class HourlyConceptStatsService extends GenericCoreService{
 						retweet:tweet.retweet,
 						retweetCount:tweet.retweetCount,
 						favoriteCount:tweet.favoriteCount,
-						tweetId:tweet.tweetId,
+						tweetId:tweet.id,
 						retweetId:tweet.retweetId,
 						content:tweet.content,
 						created:tweet.created)
 					hT.author = tweet.getAuthor()
 					hourlyStats.addToTweets(hT)
+					print hourlyStats
 					hT.save(validate:false)
 				}
 				// Actualizo estadistica mensual
