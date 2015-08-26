@@ -13,8 +13,9 @@ class PublicController {
         }
 		[contact:new Contact ()]
     }
-	def angular() {
-		print "pasoooo"
+	def report={
+		print "pasoooo"+ params
+		[dateReport:params.dt]
 	}
 	def conceptTab(){
 		render(template: "concept-tab")

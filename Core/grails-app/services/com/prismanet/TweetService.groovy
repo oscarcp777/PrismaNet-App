@@ -279,10 +279,8 @@ class TweetService extends MentionService{
 	def loadAvatarUsers(tweets){
 		
 		def usersName=[]
-		def tweetsTemp=[]
 		tweets.each {it -> 
-			usersName.add(it.tweet.author.accountNameSingle)
-			tweetsTemp.add(it.tweet)
+			usersName.add(it.author.accountNameSingle)
 		}
 		Twitter twitter = new TwitterFactory().getInstance();
 		ResponseList<twitter4j.User> users = null
@@ -290,7 +288,7 @@ class TweetService extends MentionService{
 			users = twitter.lookupUsers((String[])usersName.toArray());
 		if (users != null)	
 		for (twitter4j.User user : users) {
-			Tweet tweet=tweetsTemp.find {it.author.accountNameSingle == user.screenName}
+			Tweet tweet=tweets.find {it.author.accountNameSingle == user.screenName}
 			if (tweet && tweet.author){
 				tweet.author.profileImage=user.profileImageURL
 				tweet.author.followers=user.followersCount

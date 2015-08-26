@@ -1,19 +1,32 @@
 
-var app =angular.module('prismaApp', ["highcharts-ng"]);
+var app =angular.module('prismaApp', ["highcharts-ng",'ngSanitize']);
  
- app.controller('ReportTweetCtrl', function($scope,$http){
+ app.controller('ReportTweetCtrl', function($scope,$rootScope,$http){
+	 $rootScope.dateReport=dateReport;
 	    var self=this;
-	 	$http.get('../hourlyConceptStats/statsForUser').success(function(data) {
+	 	$http.get('../hourlyConceptStats/statsForUser?dateReport='+dateReport).success(function(data) {
 	        $scope.chartConfig = getCharColumn(data.charData);
 	        self.concepts=data.concepts
-	        self.mapTweets=data.mapTweets
+	        self.mapTweets=data.topTweets
+	        $scope.listTweets=data.listTweets
+	        self.checkConcept=data.defConcept
 	    });
+	 	
+	 	this.isSet = function(checkConcept) {
+            return this.checkConcept === checkConcept;
+        };
+        this.setConcept = function(concept) {
+            this.checkConcept = concept;
+            $rootScope.concept=concept;
+        };
 	  });
  app.directive("conceptTab", function() {
 	    return {
 	      restrict: 'E',
 	      templateUrl: "conceptTab",
 	      controller: function() {
+	    	  
+	    	  
               this.tab = 1;
               this.isSet = function(checkTab) {
                   return this.tab === checkTab;

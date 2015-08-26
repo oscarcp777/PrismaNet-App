@@ -1,14 +1,21 @@
 <section>
     <ul class="nav nav-tabs padding-12 tab-color-blue background-blue">
-        <li ng-class="{ active:tab.isSet($index +1) }" ng-repeat='(key, value) in report.mapTweets'>
-            <a href ng-click="tab.setTab($index +1)">{{key}}</a>
+        <li ng-class="{ active:tab.isSet(1) }">
+            <a href ng-click="tab.setTab(1)">Tweets más relevantes</a>
+        </li>
+        <li ng-class="{ active:tab.isSet(2) }">
+            <a href ng-click="tab.setTab(2)">Nube de palabras</a>
         </li>
     </ul>
 </section>
 
 <div class="tab-content">
-	<div ng-show="tab.isSet($index +1)" ng-class="{ tab-pane active:tab.isSet($index +1) }" 
-		 ng-repeat='(key, listTweets) in report.mapTweets'>
+	<div class="tab-pane" ng-show="tab.isSet(1)" ng-class="{active:tab.isSet(1) }">
+		 <div class="center-block size-list">
 	     <list-tweets ></list-tweets>
+	     </div>
+	</div>
+	<div class="tab-pane" ng-show="tab.isSet(2)" ng-class="{active:tab.isSet(2) }">
+		 <h1>bune</h1>
 	</div>
 </div>

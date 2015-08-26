@@ -67,3 +67,9 @@
 .hd_navbar .brand .logoDot:hover {
 	visibility: visible;
 }
+.size-list{
+	width: 700px;
+}
+.align-middle{
+	vertical-align: middle;
+}

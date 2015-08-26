@@ -11,8 +11,7 @@ import com.prismanet.utils.DateUtils
 class HourlyConceptStatsController extends GenericController {
 
 	def hourlyConceptStatsService
-	def mentionService
-	
+	def tweetService
 	def beforeInterceptor = {
 		print "pasoo"
 	}
@@ -24,7 +23,7 @@ class HourlyConceptStatsController extends GenericController {
 	
 	def statsForUser={
 		
-		
+		print params.dateReport
 		/*
 		 * [ dateFrom:15/06/2015 16:29,  dateTo:14/07/2015 16:29, conceptsId:23]
 		 */
@@ -36,6 +35,7 @@ class HourlyConceptStatsController extends GenericController {
 		GregorianCalendar d1 = new GregorianCalendar(2015, Calendar.MAY, 20,21,00)
 		Date dateProcess = d1.getTime()
 		String hourProcess = DateUtils.getDateFormat(DateTypes.HOUR_PERIOD,dateProcess)
+		//TODO hardcodeado el user
 		def result = hourlyConceptStatsService.getStatsForUser(Long.valueOf(11), dateProcess, parameters)
 		def categories = []
 		def dataTws=[]
@@ -43,6 +43,7 @@ class HourlyConceptStatsController extends GenericController {
 		def series = [['name': 'Tweets',data: dataTws],['name': 'Autores',data: dataAut]]
 		def topTweets = [:]
 		def topWords = [:]
+		def defConcept=''
 		result.result.each{
 			categories.add(it.concept.conceptName)
 			dataTws.add(it.mentions)
@@ -50,7 +51,7 @@ class HourlyConceptStatsController extends GenericController {
 			topTweets.put(it.concept.conceptName, it.tweets.tweetId)
 			solrFilters['conceptsId'] = it.concept.id
 			def listWords=[]
-			def relevantWords = mentionService.getRelevantWords(loadSolrFilters(solrFilters))
+			def relevantWords = tweetService.getRelevantWords(loadSolrFilters(solrFilters))
 			def maxPercent = 35, minPercent = 9
 			def max =1 ,min = 0
 			if (relevantWords){
@@ -68,16 +69,23 @@ class HourlyConceptStatsController extends GenericController {
 				int size = minPercent + ((max-(max-(var.size-min)) +1 )*multiplier);
 				listWords.add([var.text,size]);
 			}
+			if(defConcept ==''){
+				defConcept=it.concept.conceptName
+			}
 			topWords.put(it.concept.conceptName, listWords)
 		}
 		def map = [title: "Politicos mas mencionados de la hora"
 			       ,categories:categories,
 				   series:series,
 				   "xAxis":'Presidenciales',"yAxis":'Cantidad']
-		def mapTweets=[:]
+		def newList=[]
 		topTweets.each{ iter -> 
+			if(defConcept==iter.key){
 			def parcialList=Tweet.getAll(iter.value)
-			def newList=[]
+			if(!grailsApplication.config.grails.twitter.offline)
+				tweetService.loadAvatarUsers(parcialList)
+			
+			
 				parcialList.each{
 					def tweet=[:]
 					def author=[:]
@@ -97,10 +105,10 @@ class HourlyConceptStatsController extends GenericController {
 					tweet.id=it.id
 					newList.add(tweet)
 				}
-			mapTweets.putAt(iter.key, newList) 
+			}
 		}
 		
-		def finalResult = [charData:map,'topWords':topWords ,mapTweets:mapTweets]
+		def finalResult = [charData:map,'topWords':topWords,topTweets:topTweets ,listTweets:newList,defConcept:defConcept]
 		render finalResult as JSON
 	}
 	
