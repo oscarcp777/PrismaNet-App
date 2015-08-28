@@ -6,10 +6,13 @@ var app =angular.module('prismaApp', ["highcharts-ng",'ngSanitize']);
 	    var self=this;
 	 	$http.get('../hourlyConceptStats/statsForUser?dateReport='+dateReport).success(function(data) {
 	        $scope.chartConfig = getCharColumn(data.charData);
-	        self.concepts=data.concepts
-	        self.mapTweets=data.topTweets
-	        $scope.listTweets=data.listTweets
-	        self.checkConcept=data.defConcept
+	        self.concepts=data.concepts;
+	        self.mapTweets=data.topTweets;
+	        $scope.listTweets=data.listTweets;
+	        self.checkConcept=data.defConcept;
+	        $rootScope.concept=data.defConcept;
+	        $('#cloudWordsTW').empty();
+			WordCloud($('#cloudWordsTW')[0], { list: data.listWords } );
 	    });
 	 	
 	 	this.isSet = function(checkConcept) {
@@ -18,15 +21,18 @@ var app =angular.module('prismaApp', ["highcharts-ng",'ngSanitize']);
         this.setConcept = function(concept) {
             this.checkConcept = concept;
             $rootScope.concept=concept;
+            $http.get('../hourlyConceptStats/dataForConcept?concept='+concept).success(function(data) {
+    	        $scope.listTweets=data.listTweets
+    	        $('#cloudWordsTW').empty();
+    			WordCloud($('#cloudWordsTW')[0], { list: data.listWords } );
+    	    });
         };
 	  });
  app.directive("conceptTab", function() {
 	    return {
 	      restrict: 'E',
 	      templateUrl: "conceptTab",
-	      controller: function() {
-	    	  
-	    	  
+	      controller: function($http,$rootScope) {
               this.tab = 1;
               this.isSet = function(checkTab) {
                   return this.tab === checkTab;
@@ -34,6 +40,12 @@ var app =angular.module('prismaApp', ["highcharts-ng",'ngSanitize']);
 
               this.setTab = function(activeTab) {
                   this.tab = activeTab;
+				if(activeTab==2) {
+					$http.get('../hourlyConceptStats/dataForConcept?concept='+$rootScope.concept).success(function(data) {
+		    	        $('#cloudWordsTW').empty();
+		    			WordCloud($('#cloudWordsTW')[0], { list: data.listWords } );
+		    	    });
+				}                 
               };
           },
           controllerAs: "tab"

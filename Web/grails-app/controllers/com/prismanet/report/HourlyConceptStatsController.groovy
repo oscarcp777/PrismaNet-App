@@ -13,7 +13,7 @@ class HourlyConceptStatsController extends GenericController {
 	def hourlyConceptStatsService
 	def tweetService
 	def beforeInterceptor = {
-		print "pasoo"
+		
 	}
 	
 	def loadStats={
@@ -30,7 +30,7 @@ class HourlyConceptStatsController extends GenericController {
 		
 		def parameters = [:]
 		parameters.max = 3
-		def solrFilters = [dateFrom:"20/05/2015 21:00", dateTo:"20/05/2015 21:59"]
+		def solrFilters = [dateFrom:"10/05/2015 21:00", dateTo:"20/07/2015 21:59"]
 		//Date dateProcess = new Date()
 		GregorianCalendar d1 = new GregorianCalendar(2015, Calendar.MAY, 20,21,00)
 		Date dateProcess = d1.getTime()
@@ -74,43 +74,58 @@ class HourlyConceptStatsController extends GenericController {
 			}
 			topWords.put(it.concept.conceptName, listWords)
 		}
+		def listWords=topWords[defConcept]
+		
 		def map = [title: "Politicos mas mencionados de la hora"
 			       ,categories:categories,
 				   series:series,
 				   "xAxis":'Presidenciales',"yAxis":'Cantidad']
 		def newList=[]
+		def mapTweets=[:]
 		topTweets.each{ iter -> 
-			if(defConcept==iter.key){
 			def parcialList=Tweet.getAll(iter.value)
-			if(!grailsApplication.config.grails.twitter.offline)
-				tweetService.loadAvatarUsers(parcialList)
-			
-			
-				parcialList.each{
-					def tweet=[:]
-					def author=[:]
-					author.profileImage=it.author.profileImage
-					author.tweetsCount=it.author.tweetsCount
-					author.followers=it.author.followers
-					author.following=it.author.following
-					author.accountNameSingle=it.author.accountNameSingle
-					author.accountName=it.author.accountName
-					
-					tweet.author=author
-					tweet.tweetId=it.tweetId
-					tweet.created=g.formatDate( date:it.created, type:"datetime", style:"LONG", timeStyle:"SHORT")
-					tweet.content=it.contentHtml
-					tweet.retweetCount=it.retweetCount
-					tweet.favoriteCount=it.favoriteCount
-					tweet.id=it.id
-					newList.add(tweet)
-				}
+			def tempList=loadDataTweets(parcialList)
+			if(defConcept==iter.key){
+				newList=tempList
 			}
+			mapTweets.putAt(iter.key, tempList)
 		}
-		
-		def finalResult = [charData:map,'topWords':topWords,topTweets:topTweets ,listTweets:newList,defConcept:defConcept]
+		session.mapTweets=mapTweets
+		session.topWords=topWords;
+		def finalResult = [charData:map,'topWords':topWords,topTweets:topTweets ,listTweets:newList,listWords:listWords,defConcept:defConcept]
+		render finalResult as JSON
+	}
+	def dataForConcept(){
+		def newList=session.mapTweets[params.concept]
+		def listWords=session.topWords[params.concept]
+		def finalResult =[listTweets:newList,listWords:listWords]
 		render finalResult as JSON
 	}
 	
-	
+	def loadDataTweets(tweets){
+		def newList=[]
+		if(!grailsApplication.config.grails.twitter.offline)
+		tweetService.loadAvatarUsers(tweets)
+		
+		tweets.each{
+			def tweet=[:]
+			def author=[:]
+			author.profileImage=it.author.profileImage
+			author.tweetsCount=it.author.tweetsCount
+			author.followers=it.author.followers
+			author.following=it.author.following
+			author.accountNameSingle=it.author.accountNameSingle
+			author.accountName=it.author.accountName
+			
+			tweet.author=author
+			tweet.tweetId=it.tweetId
+			tweet.created=g.formatDate( date:it.created, type:"datetime", style:"LONG", timeStyle:"SHORT")
+			tweet.content=it.contentHtml
+			tweet.retweetCount=it.retweetCount
+			tweet.favoriteCount=it.favoriteCount
+			tweet.id=it.id
+			newList.add(tweet)
+		}
+		newList
+	} 
 }

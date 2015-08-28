@@ -16,6 +16,6 @@
 	     </div>
 	</div>
 	<div class="tab-pane" ng-show="tab.isSet(2)" ng-class="{active:tab.isSet(2) }">
-		 <h1>bune</h1>
+		 <div id="cloudWordsTW" style="min-height:350px;"></div>
 	</div>
 </div>

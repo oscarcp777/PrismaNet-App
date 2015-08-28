@@ -14,7 +14,6 @@ class PublicController {
 		[contact:new Contact ()]
     }
 	def report={
-		print "pasoooo"+ params
 		[dateReport:params.dt]
 	}
 	def conceptTab(){

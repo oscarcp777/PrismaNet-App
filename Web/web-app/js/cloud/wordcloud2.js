@@ -154,6 +154,8 @@ if (!window.clearImmediate) {
   };
 
   var WordCloud = function WordCloud(elements, options) {
+	  
+	  
     if (!isSupported) {
       return;
     }
