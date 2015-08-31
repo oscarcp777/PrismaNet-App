@@ -23,20 +23,15 @@ class HourlyConceptStatsController extends GenericController {
 	
 	def statsForUser={
 		
-		print params.dateReport
-		/*
-		 * [ dateFrom:15/06/2015 16:29,  dateTo:14/07/2015 16:29, conceptsId:23]
-		 */
-		
+		Date dateReport = DateUtils.parseDate(DateTypes.HOUR_SIMPLIFIED, params.dateReport)
+//		def hourFilter=DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, dateReport)
+//		print "hourFilter: " + hourFilter
 		def parameters = [:]
 		parameters.max = 3
-		def solrFilters = [dateFrom:"10/05/2015 21:00", dateTo:"20/07/2015 21:59"]
-		//Date dateProcess = new Date()
-		GregorianCalendar d1 = new GregorianCalendar(2015, Calendar.MAY, 20,21,00)
-		Date dateProcess = d1.getTime()
-		String hourProcess = DateUtils.getDateFormat(DateTypes.HOUR_PERIOD,dateProcess)
+		def solrFilters = [dateHour:dateReport.getTime()]
+		
 		//TODO hardcodeado el user
-		def result = hourlyConceptStatsService.getStatsForUser(Long.valueOf(11), dateProcess, parameters)
+		def result = hourlyConceptStatsService.getStatsForUser(Long.valueOf(3), dateReport, parameters)
 		def categories = []
 		def dataTws=[]
 		def dataAut=[]
@@ -95,6 +90,7 @@ class HourlyConceptStatsController extends GenericController {
 		def finalResult = [charData:map,'topWords':topWords,topTweets:topTweets ,listTweets:newList,listWords:listWords,defConcept:defConcept]
 		render finalResult as JSON
 	}
+
 	def dataForConcept(){
 		def newList=session.mapTweets[params.concept]
 		def listWords=session.topWords[params.concept]
@@ -128,4 +124,10 @@ class HourlyConceptStatsController extends GenericController {
 		}
 		newList
 	} 
+	
+	def sendTweets={
+		tweetService.sendTweet(
+			"Mira que paso en la última hora en al ambiente político info.prisma-net.com.ar/public/report")
+		render "ok"
+	}
 }

@@ -12,6 +12,7 @@ enum DateTypes {
 	final static String MONTH_PERIOD = "yyyyMM"
 	final static String DAY_PERIOD = "dd/MM/yyyy"
 	final static String HOUR_PERIOD = "dd/MM/yyyy HH"
+	final static String HOUR_SIMPLIFIED = "yyMMddHH"
 	final static String MINUTE_PERIOD = "dd/MM/yyyy HH:mm"
 	
 	

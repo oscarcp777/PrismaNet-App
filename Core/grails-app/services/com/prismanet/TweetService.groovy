@@ -314,6 +314,12 @@ class TweetService extends MentionService{
 		return null
 	}
 	
+	def void sendTweet(String text){
+		Twitter twitter = new TwitterFactory().getInstance();
+		Status status = twitter.updateStatus(text);
+	}
+
+	
 	public enum SamplingType{
 		RANDOM,
 		TOP_RELEVANT_AUTHORS,

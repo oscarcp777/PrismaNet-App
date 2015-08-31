@@ -96,6 +96,7 @@ jobs.twitter.disable = false
 jobs.facebook.disable = false
 jobs.solr.disable = false
 jobs.facebookPost.disable = false
+jobs.hourlyConceptStats.disable = true
 
 environments {
     development {
