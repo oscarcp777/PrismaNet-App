@@ -15,7 +15,7 @@ class MonthlyConceptStatsJob {
 	def monthlyConceptStatsService
 	def group = "monthlyConceptStatsJobs"
 	static triggers = {
-		cron name: 'customTrigger', cronExpression: "0 30 02 ? * MON-SUN"
+		cron name: 'monthlyTrigger', cronExpression: "0 30 02 ? * MON-SUN"
 	}
 
 	def execute() {

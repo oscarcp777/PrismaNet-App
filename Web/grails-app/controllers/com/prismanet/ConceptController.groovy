@@ -383,6 +383,7 @@ class ConceptController extends GenericController{
 		concept.setFacebookSetup(new FacebookSetup(params))
 		[conceptInstance: new Concept(params)]
 	}
+
 	private Concept loadConcept(params){
 		def customParams=getParamsConcept(params)
 		def conceptInstance = new Concept(customParams)
@@ -536,7 +537,6 @@ class ConceptController extends GenericController{
 		concept.setFacebookSetup(new FacebookSetup(params))
 		[conceptInstance: new Concept(params)]
 	}
-	
 	@Secured(['ROLE_USER_ADVANCE'])
 	def showAdvance(Long id) {
 		def conceptInstance = Concept.get(id)
@@ -552,6 +552,7 @@ class ConceptController extends GenericController{
 		def map2 =[:]
 		 params.each { 
 				map2[it.key]=it.value?it.value:null
+				map2[it.key]=it.value!=''?it.value:null
 		 }
 		map2.lang=params.language
 		map2
