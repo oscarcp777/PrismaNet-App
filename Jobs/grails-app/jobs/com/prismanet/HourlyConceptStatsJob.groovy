@@ -27,7 +27,7 @@ class HourlyConceptStatsJob {
 		String hourParameter = DateUtils.getDateFormat(DateTypes.HOUR_SIMPLIFIED, currentDate)
 		tweetService.sendTweet(
 			"Mira que paso en la última hora en al ambiente político "+
-				"info.prisma-net.com.ar/public/report?"+hourParameter
+				"info.prisma-net.com.ar/public/report?dt="+hourParameter
 		)
 	}
 	
