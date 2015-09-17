@@ -34,7 +34,11 @@ class HourlyConceptStatsService extends GenericCoreService{
 			filters.add(new Filter(attribute:"userId", value:userId, type:FilterType.EQ))
 			filters.add(new Filter(attribute:"hour", value:hourProcess, type:FilterType.EQ))
 			def result = list(HourlyConceptStats, new HourlyConceptStatsAttributeContext(), filters, parameters, [[attribute:"mentions",value:OrderType.DESC]])
-			['result':result.results]
+			def orderTweets = [:]
+			result.results.each{con ->
+				orderTweets.put(con.id, con.tweets.sort{-it.author.followers})
+			}
+			['result':result.results, 'orderTweets':orderTweets]
 		}
 	}
 	

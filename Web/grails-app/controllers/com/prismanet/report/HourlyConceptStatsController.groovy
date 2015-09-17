@@ -43,7 +43,7 @@ class HourlyConceptStatsController extends GenericController {
 			categories.add(it.concept.conceptName)
 			dataTws.add(it.mentions)
 			dataAut.add(it.authors)
-			topTweets.put(it.concept.conceptName, it.tweets.tweetId)
+			topTweets.put(it.concept.conceptName, result.orderTweets[it.id].tweetId)
 			solrFilters['conceptsId'] = it.concept.id
 			def listWords=[]
 			def relevantWords = tweetService.getRelevantWords(loadSolrFilters(solrFilters))
