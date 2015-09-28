@@ -9,6 +9,7 @@ var app =angular.module('prismaApp', ["highcharts-ng",'ngSanitize']);
 	        self.concepts=data.concepts;
 	        self.mapTweets=data.topTweets;
 	        $scope.listTweets=data.listTweets;
+	        $scope.hourReport=data.hourReport
 	        self.checkConcept=data.defConcept;
 	        $rootScope.concept=data.defConcept;
 	        $('#cloudWordsTW').empty();
@@ -78,7 +79,7 @@ function getCharColumn(data){
               text: data.title
           },
           subtitle: {
-              text: 'Source: <a href="http://prisma-net.com.ar"/>prisma-net.com.ar</a>'
+              text: 'Fuente: <a href="http://prisma-net.com.ar"/>prisma-net.com.ar</a>'
           },
           xAxis: {
               categories: data.categories,

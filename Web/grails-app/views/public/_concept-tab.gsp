@@ -1,7 +1,7 @@
 <section>
     <ul class="nav nav-tabs padding-12 tab-color-blue background-blue">
         <li ng-class="{ active:tab.isSet(1) }">
-            <a href ng-click="tab.setTab(1)">Tweets más relevantes</a>
+            <a href ng-click="tab.setTab(1)">Tweets más relevantes por Author</a>
         </li>
         <li ng-class="{ active:tab.isSet(2) }">
             <a href ng-click="tab.setTab(2)">Nube de palabras</a>

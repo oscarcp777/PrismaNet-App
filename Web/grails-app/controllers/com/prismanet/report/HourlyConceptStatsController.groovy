@@ -71,10 +71,10 @@ class HourlyConceptStatsController extends GenericController {
 		}
 		def listWords=topWords[defConcept]
 		
-		def map = [title: "Politicos mas mencionados de la hora"
+		def map = [title: "Políticos más mencionados de la hora"
 			       ,categories:categories,
 				   series:series,
-				   "xAxis":'Presidenciales',"yAxis":'Cantidad']
+				   "xAxis":'Políticos',"yAxis":'Cantidad']
 		def newList=[]
 		def mapTweets=[:]
 		topTweets.each{ iter -> 
@@ -87,7 +87,7 @@ class HourlyConceptStatsController extends GenericController {
 		}
 		session.mapTweets=mapTweets
 		session.topWords=topWords;
-		def finalResult = [charData:map,'topWords':topWords,topTweets:topTweets ,listTweets:newList,listWords:listWords,defConcept:defConcept]
+		def finalResult = [hourReport:dateReport.time,charData:map,'topWords':topWords,topTweets:topTweets ,listTweets:newList,listWords:listWords,defConcept:defConcept]
 		render finalResult as JSON
 	}
 

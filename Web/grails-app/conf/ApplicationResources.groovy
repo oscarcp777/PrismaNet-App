@@ -56,6 +56,7 @@ modules = {
 		resource url:'js/angular/angular-resource.min.js'
 		resource url:'js/angular/angular-sanitize.min.js'
 		resource url:'js/angular/highcharts-ng.min.js'
+		resource url:'js/angular/angular-locale_es-ar.js'
 		resource url:'js/angular/app.js'
 		resource url:'css/report.css'
 		resource url:'css/twitter.css'

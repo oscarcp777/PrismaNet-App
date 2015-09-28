@@ -11,7 +11,7 @@
 <div ng-app="prismaApp" class="skin-1">
 <div  ng-controller="ReportTweetCtrl as report">
   <div class="row" style="background-color: #FAFAFA;">
-		<div class="navbar navbar-default navbar-fixed-top" id="navbar" style="min-height:65px;">
+		<div class="navbar navbar-default navbar-fixed-top" id="navbar" >
 				<script type="text/javascript">
 						try {
 						ace.settings.check('navbar', 'fixed')
@@ -26,13 +26,23 @@
 								</a>
 							</div>
 						</div>
+						<div class="navbar-buttons navbar-header pull-right">
+							<ul class="nav ace-nav">
+								<li class="grey">
+								<a href="${createLink(uri: '/#section5')}" class="btn btn-inverse btn-round" style="line-height: 25px;height: 80%;margin-top: 5px; ">
+								   Solictad Demo
+								</a>
+								</li>
+							</ul>
+							
+						</div>
 					</div>
 				</div>
 				<div class="container " style="margin-top: 70px; background-color: white;">
 				  <div class="">
-					<div class="page-header " style="margin-top: 20px;">
+					<div class="page-header " style="margin-top: 20px;text-align: center">
 						<h1>
-							Cantidad de menciones en Twitter <i class="fa fa-angle-double-right"></i><small> En este grafico podes observar los candidatos</small>
+							Políticos más mencionados en Twitter el {{hourReport | date : "d MMMM, 'a las' H:mm" }} horas
 						</h1>
 					</div>
 					<section class="col-sm-12">

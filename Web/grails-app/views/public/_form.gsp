@@ -72,6 +72,6 @@
 		<!-- /row -->
 
 		<button type="submit" class="btn-inverse pull-right">
-			 <g:message code="public.index..home.contact.send"/><span><g:message code="public.index..home.contact.message"/></span> <i class="ace-icon fa fa-arrow-circle-right"></i>
+			<span> <g:message code="public.index..home.contact.send"/> <g:message code="public.index..home.contact.message"/></span> <i class="ace-icon fa fa-arrow-circle-right"></i>
 		</button>
 	</g:form>
