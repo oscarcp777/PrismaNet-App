@@ -24,7 +24,7 @@ class HourlyConceptStatsJob {
 		String tweetText
 		use(TimeCategory){
 			currentDate = currentDate - 1.hour
-			tweetText = getRandomText(currentDate[Calendar.HOUR].toString())
+			tweetText = getRandomText(currentDate[Calendar.HOUR_OF_DAY].toString())
 		}
 		String hourParameter = DateUtils.getDateFormat(DateTypes.HOUR_SIMPLIFIED, currentDate)
 		tweetService.sendTweet(tweetText +

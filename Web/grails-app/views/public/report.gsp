@@ -30,7 +30,7 @@
 							<ul class="nav ace-nav">
 								<li class="grey">
 								<a href="${createLink(uri: '/#section5')}" class="btn btn-inverse btn-round" style="line-height: 25px;height: 80%;margin-top: 5px; ">
-								   Solictad Demo
+								   Solicitar Demo
 								</a>
 								</li>
 							</ul>
