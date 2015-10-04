@@ -12,7 +12,7 @@ dataSource {
     driverClassName = "com.mysql.jdbc.Driver"
 	username = "root"
 	password = "fiuba"
-	logSql = true
+	logSql = false
 }
 hibernate {
 	cache.use_second_level_cache = false
