@@ -38,12 +38,6 @@
 						<div class="navbar" style="margin-bottom:7px;">
 							<div class="container">
 								<div class="navbar-header">
-									<button type="button" class="navbar-toggle"
-										data-toggle="collapse" data-target=".navbar-collapse">
-										<span class="ace-icon fa fa-bar"></span> <span class="ace-icon fa fa-bar"></span>
-										<span class="ace-icon fa fa-bar"></span>
-									</button>
-
 									<div class="brand">
 										 <g:render template="logo" ></g:render>
 									</div>

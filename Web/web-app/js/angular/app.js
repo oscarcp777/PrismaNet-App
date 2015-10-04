@@ -13,6 +13,7 @@ var app =angular.module('prismaApp', ["highcharts-ng",'ngSanitize']);
 	        self.checkConcept=data.defConcept;
 	        $rootScope.concept=data.defConcept;
 	        $('#cloudWordsTW').empty();
+	        if(data.listWords != null)
 			WordCloud($('#cloudWordsTW')[0], { list: data.listWords } );
 	    });
 	 	

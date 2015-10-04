@@ -299,3 +299,13 @@ input[type="tel"], input[type="color"]{
 .header-gray{
 	background-color: #FAFAFA;
 }
+.label-inv-white{
+	background-color: #fff;
+	color: #777;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+.label-inv-white.arrowed:before{
+	border-right-color:#fff;
+}
+

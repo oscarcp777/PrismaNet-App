@@ -1,46 +1,16 @@
 <!DOCTYPE html>
 <html lang="es" >
 <head>
-<meta name="layout" content="main" />
-<r:require modules="ace" />
+<meta name="layout" content="public" />
 </head>
 <body >
 <script type="text/javascript">
  var dateReport='${dateReport}';
 </script>
-<div ng-app="prismaApp" class="skin-1">
+<div ng-app="prismaApp" >
 <div  ng-controller="ReportTweetCtrl as report">
-  <div class="row" style="background-color: #FAFAFA;">
-		<div class="navbar navbar-default navbar-fixed-top" id="navbar" >
-				<script type="text/javascript">
-						try {
-						ace.settings.check('navbar', 'fixed')
-					} catch (e) {
-					}
-				</script>
-					<div class="navbar-container" id="navbar-container">
-						<div class="navbar-header pull-left">
-							<div class="logo">
-								<a class="logoHolder" href="javascript:void(0);"> <span
-									class="logoFirst"><i class="ace-icon fa fa-filter"></i>Prisma</span>-Net
-								</a>
-							</div>
-						</div>
-						<div class="navbar-buttons navbar-header pull-right">
-							<ul class="nav ace-nav">
-								<li class="grey">
-								<a href="${createLink(uri: '/#section5')}" class="btn btn-inverse btn-round" style="line-height: 25px;height: 80%;margin-top: 5px; ">
-								   Solicitar Demo
-								</a>
-								</li>
-							</ul>
-							
-						</div>
-					</div>
-				</div>
-				<div class="container " style="margin-top: 70px; background-color: white;">
-				  <div class="">
-					<div class="page-header " style="margin-top: 20px;text-align: center">
+ 
+					<div class="page-header " style="text-align: center">
 						<h1>
 							Políticos más mencionados en Twitter el {{hourReport | date : "d MMMM, 'a las' H:mm" }} horas
 						</h1>
@@ -70,9 +40,7 @@
 					</div>
 					
 				</div>
-	</div>
-</div>
+
 <r:require modules="highcharts,angular" />
-</div>
 </body>
 </html>

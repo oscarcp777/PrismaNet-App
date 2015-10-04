@@ -70,8 +70,11 @@
 			<!-- /span12 -->
 		</div>
 		<!-- /row -->
-
-		<button type="submit" class="btn-inverse pull-right">
+		<div class="row">
+		<div class="col-md-12">
+		<button type="submit" class="btn btn-lg btn-block btn-inverse">
 			<span> <g:message code="public.index..home.contact.send"/> <g:message code="public.index..home.contact.message"/></span> <i class="ace-icon fa fa-arrow-circle-right"></i>
 		</button>
+		</div>
+		</div>
 	</g:form>

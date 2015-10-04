@@ -627,6 +627,7 @@ a:hover {
 
 @media screen and (max-width: 979px) {
 	
+	
 	.section h2 {
 	    font-size: 48px; font-size: 4.8rem;
 	    line-height: 58px;
@@ -757,10 +758,19 @@ a:hover {
 	.section{
 		padding: 80px 0;
 	}
-	
+	#sidebar {
+	  display: none;
+	}
+	.landing .featurette {
+		margin-left:-20px;
+	}
+	.hd_hero h1{
+	margin: 50px 0 20px 0;
+	}
 	#section1 {
 	    background-size: 1024px auto;
-	    padding: 60px 0;
+	    padding: 0;
+	    margin-left: -40px !important;
 	}
 	
 	#section1 .intro {
@@ -920,7 +930,9 @@ a:hover {
 	height: 100%;
 	margin: 0 auto -45px;
 }
-
+#section5 input{
+	border-radius:4px; 
+}
 #section1>.hd_wrapInner {
 	padding-top: 80px;
 }
@@ -1280,5 +1292,67 @@ a:hover {
 	margin: 0;
 	max-width: 15rem
 }
+
+@media screen and (max-width: 480px) {
+	 .section{
+	  padding: 40px 0;
+	 }
+	
+	#sidebar {
+	  display: none;
+	}
+	.landing .featurette {
+		margin-left:-40px !important;
+		padding-bottom: 90px;
+	}
+	.landing .featurette img{
+	  margin: 20px 0;
+	}
+	.landing .featurette .col-md-8 img{
+	  margin-left: 40px;
+	}
+	.hd_hero h1{
+	margin: 20px 10px 20px -30px;
+	}
+	.hd_hero h2{
+	margin: 20px 10px 20px -20px;
+	}
+	
+	#section1>.hd_wrapInner{
+	  padding-top: 0px;
+	}
+	#section1 {
+	    background-size: 1024px auto;
+	    padding: 0;
+	    margin-left: -40px !important;
+	}
+	.carousel-indicators{
+	   width: 50%
+	}
+	.landing .featurette h3{
+	  margin: 20px 10px 0px 40px;
+	}
+	.landing .featurette p{
+	  margin:20px 20px 0px 30px;
+	}
+	
+	.hd_navbar{
+	  margin-left: 0px;
+	}
+	.hd_navbar .navbar{
+	margin-left:60px;
+	}
+	#section5 input,#section5 textarea{
+	   width: 88%
+	}
+	.section .title hr{
+	  margin-top:0px;
+	}
+}
+
+
+
+
+
 
 

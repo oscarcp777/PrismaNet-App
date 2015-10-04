@@ -1,4 +1,4 @@
-<a class="logoHolder" href="javascript:void(0);">
+<a class="logoHolder" href="${createLink(uri: '/')}">
 	${raw(grailsApplication.config.app.logo)}
 </a>
 
