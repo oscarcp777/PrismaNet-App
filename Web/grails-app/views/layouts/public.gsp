@@ -10,7 +10,7 @@
 <link rel="shortcut icon" href="${resource(dir: 'img', file: 'favicon.png')}" type="image/png">
 <link rel="icon" href="${resource(dir: 'img', file: 'favicon.png')}" type="image/png">
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300">
-<r:require modules="core,ace" />
+<r:require modules="core" />
 
 <g:layoutHead />
 <r:layoutResources />

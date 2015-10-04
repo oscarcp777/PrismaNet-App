@@ -2,6 +2,7 @@
 <html lang="es" >
 <head>
 <meta name="layout" content="public" />
+<r:require modules="ace" />
 </head>
 <body >
 <script type="text/javascript">
@@ -10,7 +11,10 @@
 <div ng-app="prismaApp" >
 <div  ng-controller="ReportTweetCtrl as report">
  
-					<div class="page-header " style="text-align: center">
+	
+				
+				  <div class="">
+					<div class="page-header " style="margin-top: 20px;text-align: center">
 						<h1>
 							Políticos más mencionados en Twitter el {{hourReport | date : "d MMMM, 'a las' H:mm" }} horas
 						</h1>
@@ -39,8 +43,10 @@
 						</div>
 					</div>
 					
-				</div>
-
+				
+	
+</div>
 <r:require modules="highcharts,angular" />
+</div>
 </body>
 </html>

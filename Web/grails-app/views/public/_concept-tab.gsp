@@ -38,6 +38,6 @@
           </li>
         </ul>
       </div>
-		 <div id="cloudWordsTW" style="min-height:350px;"></div>
+		 <div id="cloudWordsTW" style="min-height:350px;position: relative;"></div>
 	</div>
 </div>

@@ -31,7 +31,7 @@ class HourlyConceptStatsController extends GenericController {
 		def solrFilters = [dateHour:dateReport.getTime()]
 		
 		//TODO hardcodeado el user
-		def result = hourlyConceptStatsService.getStatsForUser(Long.valueOf(3), dateReport, parameters)
+		def result = hourlyConceptStatsService.getStatsForUser(Long.valueOf(11), dateReport, parameters)
 		def categories = []
 		def dataTws=[]
 		def dataAut=[]
