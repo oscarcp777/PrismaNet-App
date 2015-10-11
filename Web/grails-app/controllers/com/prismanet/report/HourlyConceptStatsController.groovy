@@ -24,8 +24,6 @@ class HourlyConceptStatsController extends GenericController {
 	
 	def statsForUser={
 		Date dateReport = DateUtils.parseDate(DateTypes.HOUR_SIMPLIFIED, params.dateReport)
-//		def hourFilter=DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, dateReport)
-//		print "hourFilter: " + hourFilter
 		def parameters = [:]
 		parameters.max = 3
 		def solrFilters = [dateHour:dateReport.getTime()]

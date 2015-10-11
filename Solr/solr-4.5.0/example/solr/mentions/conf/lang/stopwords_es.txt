@@ -348,6 +348,7 @@ tenidas
 tened
 
 http
+https
 rt
 t.co
 
@@ -356,3 +357,4 @@ dice
 q
 si
 no
+

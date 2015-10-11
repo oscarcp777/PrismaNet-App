@@ -28,6 +28,8 @@ class HourlyConceptStatsService extends GenericCoreService{
 	}
 	
 	def getStatsForUser(Long userId, Date dateProcess, Map parameters){
+//		GregorianCalendar d1 = new GregorianCalendar(2015, Calendar.OCTOBER, 1,17,00)
+//		dateProcess = d1.getTime()
 		use (TimeCategory){
 			String hourProcess = DateUtils.getDateFormat(DateTypes.HOUR_PERIOD,dateProcess)
 			def filters = []
@@ -35,10 +37,12 @@ class HourlyConceptStatsService extends GenericCoreService{
 			filters.add(new Filter(attribute:"hour", value:hourProcess, type:FilterType.EQ))
 			def result = list(HourlyConceptStats, new HourlyConceptStatsAttributeContext(), filters, parameters, [[attribute:"mentions",value:OrderType.DESC]])
 			def orderTweets = [:]
+			def accountsNames = []
 			result.results.each{con ->
 				orderTweets.put(con.id, con.tweets.sort{-it.author.followers})
+				accountsNames.add(con?.concept.twitterSetup?.includedAccounts)
 			}
-			['result':result.results, 'orderTweets':orderTweets]
+			['result':result.results, 'orderTweets':orderTweets,'accountNames':accountsNames]
 		}
 	}
 	

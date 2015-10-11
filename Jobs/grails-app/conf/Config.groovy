@@ -98,6 +98,7 @@ jobs.solr.disable = false
 jobs.facebookPost.disable = false
 jobs.monthlyConceptStats.disable = false
 jobs.hourlyConceptStats.disable = false
+jobs.hourlyTweet.disable = false
 
 environments {
     development {
