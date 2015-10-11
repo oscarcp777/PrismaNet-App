@@ -245,3 +245,31 @@
 .pag-content .pagination{
 	display: inline-flex;	
 }
+.more-data{
+	width: 400px;
+}
+@media only screen and (max-width:479px) {
+  .tweets li.out img.avatar{
+     margin:0;
+  }
+  #moreData{
+    display: none;
+  }
+  .author a i {
+    font-size: 2em !important;
+  }
+  .tweets{
+    line-height: 18px;
+  }
+  .tweets li .message{
+     padding: 0;
+  }
+  .grid2, .grid3, .grid4{
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .more-data{
+	width: 300px;
+}
+}
+

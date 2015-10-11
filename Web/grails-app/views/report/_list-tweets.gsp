@@ -8,9 +8,9 @@
 						<a href=" javascript:void(0);" class="btn btn-link dropdown-toggle" data-toggle="dropdown"
 							style="padding: 0px 0px 0px 4px !important; font-size: 12px;">
 							<i class="ace-icon fa fa-plus-circle bigger-120 blue"></i> 
-							<g:message code="tweets.list.more.data" />
+							<span id="moreData"><g:message code="tweets.list.more.data" /></span>
 						</a>
-						<div class="clearfix center dropdown-menu dropdown-caret dropdown-lighter" style="width: 400px;">
+						<div class="clearfix center dropdown-menu dropdown-caret dropdown-lighter more-data">
 							<div class="grid3">
 								<span class="line-height-1 bigger-110 "> {{tweet.author.tweetsCount}}
 								</span> <br> 

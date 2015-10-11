@@ -15,6 +15,7 @@ class PublicController {
     }
 	def report={
 		[dateReport:params.dt]
+		redirect  (controller: "report" , action:"reportPublic")
 	}
 	def conceptTab(){
 		render(template: "concept-tab")

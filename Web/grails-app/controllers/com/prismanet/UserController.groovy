@@ -170,7 +170,7 @@ class UserController extends GenericController{
 			if(it.twitterSetup.includedAccounts!=null)
 			   usersName.add(it.twitterSetup.includedAccounts.replace("@",""))
 		}
-		if(!grailsApplication.config.grails.twitter.offline){
+		if(getConfig('api.twitter.offline')!='true'){
 		Twitter twitter = new TwitterFactory().getInstance();
 		ResponseList<twitter4j.User> users = null
 		if (usersName.size>0)

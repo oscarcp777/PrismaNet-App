@@ -3,7 +3,8 @@ package com.prismanet.report
 import grails.converters.JSON
 
 import com.prismanet.GenericController
-import com.prismanet.Tweet;
+import com.prismanet.Tweet
+import com.prismanet.ParamConfig
 import com.prismanet.utils.DateTypes
 import com.prismanet.utils.DateUtils
 
@@ -22,16 +23,15 @@ class HourlyConceptStatsController extends GenericController {
 	}
 	
 	def statsForUser={
-		
 		Date dateReport = DateUtils.parseDate(DateTypes.HOUR_SIMPLIFIED, params.dateReport)
 //		def hourFilter=DateUtils.getDateFormat(DateTypes.HOUR_PERIOD, dateReport)
 //		print "hourFilter: " + hourFilter
 		def parameters = [:]
 		parameters.max = 3
 		def solrFilters = [dateHour:dateReport.getTime()]
-		
 		//TODO hardcodeado el user
-		def result = hourlyConceptStatsService.getStatsForUser(Long.valueOf(3), dateReport, parameters)
+		def idUser=getConfig('user.report.id')
+		def result = hourlyConceptStatsService.getStatsForUser(Long.valueOf(idUser), dateReport, parameters)
 		def categories = []
 		def dataTws=[]
 		def dataAut=[]
@@ -100,9 +100,9 @@ class HourlyConceptStatsController extends GenericController {
 	
 	def loadDataTweets(tweets){
 		def newList=[]
-		if(!grailsApplication.config.grails.twitter.offline)
+		if(getConfig('api.twitter.offline')!='true'){
 		tweetService.loadAvatarUsers(tweets)
-		
+		}
 		tweets.each{
 			def tweet=[:]
 			def author=[:]

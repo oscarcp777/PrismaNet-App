@@ -32,7 +32,9 @@ class GenericController {
 		def listAll=springSecurityService.currentUser.concepts.sort{it.id}
 		session.concepts =listAll.findAll { it.active }
 	}
-	
+	def getConfig(key){
+		ParamConfig.get(1).config[key]
+	}
 	def getConcept(id){
 		def concept
 		session.concepts.each{

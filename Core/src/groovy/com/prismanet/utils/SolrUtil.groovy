@@ -2,7 +2,7 @@ package com.prismanet.utils
 
 import org.apache.solr.client.solrj.SolrServer
 import org.apache.solr.client.solrj.impl.HttpSolrServer
-
+import com.prismanet.ParamConfig
 class SolrUtil {
 				
 	private static solrServer = [:]
@@ -12,7 +12,8 @@ class SolrUtil {
 	}
 	
 	public static SolrServer getSolrServerInstance() {
-		getSolrServerInstance(grails.util.Holders.getGrailsApplication().config.solr.server.url)
+		def url=ParamConfig.get(1).config['solr.server.url']
+		getSolrServerInstance(url)
 	}
 	
 	public static SolrServer getSolrServerInstance(String solrServerUrl) {

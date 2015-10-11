@@ -308,4 +308,14 @@ input[type="tel"], input[type="color"]{
 .label-inv-white.arrowed:before{
 	border-right-color:#fff;
 }
-
+@media only screen and (max-width:479px) {
+	.page-content {
+		padding: 0;
+	}
+	.page-header{
+	  margin-right: 0;
+	}
+	.tab-content{
+	padding:16px 0;
+	}
+}

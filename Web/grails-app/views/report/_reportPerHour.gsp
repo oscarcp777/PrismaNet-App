@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="es" >
-<head>
-<meta name="layout" content="public" />
-<r:require modules="ace" />
-</head>
-<body >
 <script type="text/javascript">
  var dateReport='${dateReport}';
 </script>
@@ -37,7 +30,7 @@
 					</div>
 					<div class=" hr hr-double hr-dotted hr18"></div>
 					</div>
-					<div class="col-sm-12">
+					<div class="col-sm-12 pad-0">
 						<div class="tabbable">
 							<concept-tab></concept-tab>
 						</div>
@@ -48,5 +41,3 @@
 </div>
 <r:require modules="highcharts,angular" />
 </div>
-</body>
-</html>

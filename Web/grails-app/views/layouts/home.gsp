@@ -36,6 +36,7 @@
 			<div class="navbar-header pull-left">
 				<div class="logo">
 				<g:render contextPath="../public" template="logo" ></g:render>
+				<i class="fa fa-amazon"></i>
 				</div>
 				<!-- /.brand -->
 				<!-- /.navbar-header -->
@@ -141,7 +142,12 @@
 												code="home.menu.begin" /> </span>
 									</g:link> <b class="arrow"></b>
 								</li>
-								
+								<li class="" id="reports">
+								 <g:link controller="report" action="reports">
+										<i class="menu-icon fa fa-calendar-check-o"></i>
+										<span class="menu-text"><g:message code="home.menu.report" /> </span>
+								</g:link> <b class="arrow"></b>
+								</li>
 							<g:if test="${session.user.concepts}">
 								<g:each in="${session.concepts.sort{it.id}}" status="i"
 									var="conceptInstance">

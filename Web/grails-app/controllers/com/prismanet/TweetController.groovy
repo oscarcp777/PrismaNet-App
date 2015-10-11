@@ -62,7 +62,7 @@ class TweetController extends MentionController{
 		tweets.resultList.each {it ->
 			tweetsTemp.add(it.tweet)
 		}
-		if(!grailsApplication.config.grails.twitter.offline)
+		if(getConfig('api.twitter.offline')!='true')
 			tweetService.loadAvatarUsers(tweetsTemp)
 		
 		if(params.offset==null){
@@ -109,7 +109,7 @@ class TweetController extends MentionController{
 		 parcialList.each {it ->
 			 it.tweet.refresh()
 		 }
-		 if(!grailsApplication.config.grails.twitter.offline)
+		 if(getConfig('api.twitter.offline')!='true')
 		 tweetService.loadAvatarUsers(parcialList)
 	 }
 	def samplingStep1(){
