@@ -14,8 +14,9 @@ function activeItemMenuLevel3(item,level1,level2,nameItem){
 	editClassItem(level2,'active','active');
 	$('#nameItem').text(nameItem);
 }
-function activeItemMenuLevel1(item){
+function activeItemMenuLevel1(item,name){
 	editClassItem(item,'active','active');
+	$('#level1').text(name);
 }
 function editClassItem(item,classRemove,classNew){
 	$("#"+item).siblings('.'+classRemove).removeClass(classRemove);

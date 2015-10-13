@@ -13,16 +13,7 @@ class PublicController {
         }
 		[contact:new Contact ()]
     }
-	def report={
-		[dateReport:params.dt]
-		redirect  (controller: "report" , action:"reportPublic")
-	}
-	def conceptTab(){
-		render(template: "concept-tab")
-	}
-	def listTweets(){
-		render(template: "list-tweets")
-	}
+	
 	def dataJson(){
 		def list=["title":"Politicos mas mencionados de la hora",
 			      "categories":["CFK","Macri","Scioli"],

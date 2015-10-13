@@ -36,7 +36,6 @@
 			<div class="navbar-header pull-left">
 				<div class="logo">
 				<g:render contextPath="../public" template="logo" ></g:render>
-				<i class="fa fa-amazon"></i>
 				</div>
 				<!-- /.brand -->
 				<!-- /.navbar-header -->

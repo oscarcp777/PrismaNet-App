@@ -13,8 +13,10 @@ class GenericController {
 	SpringSecurityService springSecurityService;
 	
 	def beforeInterceptor = {
-		if(!session.concepts){
-			loadConceptsSession()
+		if (springSecurityService.isLoggedIn()) {
+			if(!session.concepts){
+				loadConceptsSession()
+			}
 		}
 	}
 	protected void loadDataSession(){

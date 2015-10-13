@@ -51,7 +51,7 @@
 		$(function() {
 			$('#liLevel2').hide();
 			inicializeColorChar();
-			activeItemMenuLevel1('home');
+			activeItemMenuLevel1('home','Principal');
 			//real time
 			loadRealTime('${MentionType.TWITTER}');
 			//Followers y likes por concepto

@@ -57,9 +57,12 @@ modules = {
 		resource url:'js/angular/angular-sanitize.min.js'
 		resource url:'js/angular/highcharts-ng.min.js'
 		resource url:'js/angular/angular-locale_es-ar.js'
+		resource url:'js/angular/ui-bootstrap-tpls-0.14.1.js'		
+		resource url:'js/angular/isteven-multi-select.js'
 		resource url:'js/angular/app.js'
 		resource url:'css/report.css'
 		resource url:'css/twitter.css'
+		resource url:'css/isteven-multi-select.css'
 	}
 	indexjs {
 		resource url:'js/jquery.easing.js'

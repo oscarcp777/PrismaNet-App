@@ -84,3 +84,8 @@
 .align-middle{
 	vertical-align: middle;
 }
+.timePickert{ 
+	height: 110px;
+	border: none !important;
+}
+

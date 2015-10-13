@@ -13,23 +13,28 @@ class HourlyConceptStatsController extends GenericController {
 
 	def hourlyConceptStatsService
 	def tweetService
-	def beforeInterceptor = {
-		
-	}
 	
 	def loadStats={
 		hourlyConceptStatsService.loadStats()
 		render "Estadisticas cargadas correctamente"
 	}
 	
+	def getIdUser(){
+		def idUser=Long.valueOf(getConfig('user.report.id'))
+		if(session.user){
+			idUser=session.user.id
+		}
+		idUser
+	}
 	def statsForUser={
+		print params.dateReport
 		Date dateReport = DateUtils.parseDate(DateTypes.HOUR_SIMPLIFIED, params.dateReport)
 		def parameters = [:]
 		parameters.max = 3
 		def solrFilters = [dateHour:dateReport.getTime()]
 		//TODO hardcodeado el user
 		def idUser=getConfig('user.report.id')
-		def result = hourlyConceptStatsService.getStatsForUser(Long.valueOf(idUser), dateReport, parameters)
+		def result = hourlyConceptStatsService.getStatsForUser(getIdUser(), dateReport, parameters)
 		def categories = []
 		def dataTws=[]
 		def dataAut=[]
@@ -68,8 +73,8 @@ class HourlyConceptStatsController extends GenericController {
 			topWords.put(it.concept.conceptName, listWords)
 		}
 		def listWords=topWords[defConcept]
-		
-		def map = [title: "Políticos más mencionados de la hora"
+		def title= !session.user?"Políticos más mencionados en la hora":"Conceptos con más menciones en la hora"
+		def map = [title: title
 			       ,categories:categories,
 				   series:series,
 				   "xAxis":'Políticos',"yAxis":'Cantidad']

@@ -3,15 +3,18 @@
 </script>
 <div ng-app="prismaApp" >
 <div  ng-controller="ReportTweetCtrl as report">
- 
-	
-				
+		<sec:ifLoggedIn>
+            <div class="col-xs-offset-7 col-sm-5 " >
+			<div class="form-inline timePickert">
+				<div class="form-group timePickert">
+				 <label ><b>Cambiar hora del reporte:</b></label>
+				 <uib-timepicker  class="form-control timePickert" ng-change="report.changed()" ng-model="timeReport"  show-meridian="false" hour-step="1" minute-step="60" ></uib-timepicker>
+				</div>
+				 <button type="submit" class="btn btn-info" ng-click="report.changedTime();">Cambiar</button>
+			</div>
+			</div>
+		</sec:ifLoggedIn>
 				  <div class="">
-					<div class="page-header " style="margin-top: 20px;text-align: center">
-						<h1>
-							Políticos más mencionados en Twitter el {{hourReport | date : "d MMMM, 'a las' H:mm" }} horas
-						</h1>
-					</div>
 					<section class="col-sm-12">
 						<highchart id="chart1" config="chartConfig" class="col-sm-12"></highchart>
 					</section>
@@ -32,7 +35,7 @@
 					</div>
 					<div class="col-sm-12 pad-0">
 						<div class="tabbable">
-							<concept-tab></concept-tab>
+						<concept-tab></concept-tab>
 						</div>
 					</div>
 					

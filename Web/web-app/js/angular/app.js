@@ -1,25 +1,25 @@
 
-var app =angular.module('prismaApp', ["highcharts-ng",'ngSanitize']);
+var app =angular.module('prismaApp', ["highcharts-ng",'ngSanitize','ui.bootstrap']);
  
- app.controller('ReportTweetCtrl', function($scope,$rootScope,$http){
+
+ app.controller('ReportTweetCtrl', function($scope,$rootScope,$http,$filter){
 	 $rootScope.dateReport=dateReport;
 	    var self=this;
-	 	$http.get('../hourlyConceptStats/statsForUser?dateReport='+dateReport).success(function(data) {
-	        $scope.chartConfig = getCharColumn(data.charData);
-	        self.concepts=data.concepts;
-	        self.mapTweets=data.topTweets;
-	        $scope.listTweets=data.listTweets;
-	        $scope.hourReport=data.hourReport
-	        self.checkConcept=data.defConcept;
-	        $rootScope.concept=data.defConcept;
-	        $('#cloudWordsTW').empty();
-	        if(data.listWords != null)
-			WordCloud($('#cloudWordsTW')[0], { list: data.listWords } );
-	    });
-	 	
+	    loadDataCtrl(self,$scope,$rootScope,$http,dateReport);
+	    
+	 	this.changedTime = function() {
+	 		timeReport=$filter('date')($scope.timeReport, 'yyMMddHH', '-0300');
+	 	    loadDataCtrl(self,$scope,$rootScope,$http,timeReport);
+	 	};
 	 	this.isSet = function(checkConcept) {
             return this.checkConcept === checkConcept;
         };
+        this.isUser = function() {
+            return this.isUser;
+        };
+        this.changed = function () {
+            console.log('Time changed to: ' + $scope.timeReport);
+          };
         this.setConcept = function(concept) {
             this.checkConcept = concept;
             $rootScope.concept=concept;
@@ -30,6 +30,21 @@ var app =angular.module('prismaApp', ["highcharts-ng",'ngSanitize']);
     	    });
         };
 	  });
+ function loadDataCtrl(self,$scope,$rootScope,$http,dateReport){
+	 $http.get('../hourlyConceptStats/statsForUser?dateReport='+dateReport).success(function(data) {
+	        $scope.chartConfig = getCharColumn(data.charData);
+	        self.concepts=data.concepts;
+	        self.mapTweets=data.topTweets;
+	        $scope.listTweets=data.listTweets;
+	        $scope.hourReport=data.hourReport;
+	        $scope.timeReport=data.hourReport;
+	        self.checkConcept=data.defConcept;
+	        $rootScope.concept=data.defConcept;
+	        $('#cloudWordsTW').empty();
+	        if(data.listWords != null)
+			WordCloud($('#cloudWordsTW')[0], { list: data.listWords } );
+	    });
+ }
  app.directive("conceptTab", function() {
 	    return {
 	      restrict: 'E',
