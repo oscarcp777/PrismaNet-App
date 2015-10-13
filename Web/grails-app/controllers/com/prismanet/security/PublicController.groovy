@@ -1,7 +1,11 @@
 package com.prismanet.security
-import com.prismanet.Contact
 import grails.converters.JSON
+
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+
+import com.prismanet.Contact
+import com.prismanet.utils.DateTypes
+import com.prismanet.utils.DateUtils
 class PublicController {
 
     def springSecurityService
@@ -13,7 +17,9 @@ class PublicController {
         }
 		[contact:new Contact ()]
     }
-	
+	def report(){
+		redirect(controller: "report",action: "reportPublic", params: [dt:params.dt])
+	}
 	def dataJson(){
 		def list=["title":"Politicos mas mencionados de la hora",
 			      "categories":["CFK","Macri","Scioli"],

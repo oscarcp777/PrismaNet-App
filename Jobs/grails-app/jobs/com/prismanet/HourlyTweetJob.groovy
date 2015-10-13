@@ -32,7 +32,7 @@ class HourlyTweetJob {
 		String hourParameter = DateUtils.getDateFormat(DateTypes.HOUR_SIMPLIFIED, currentDate)
 		tweetService.sendTweet(
 		tweetText +
-				" info.prisma-net.com.ar/public/report?dt="+hourParameter
+				" info.prisma-net.com.ar/report/reportPublic?dt="+hourParameter
 		)
 	}
 	
