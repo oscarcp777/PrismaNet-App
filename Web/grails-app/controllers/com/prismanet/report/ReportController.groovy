@@ -27,7 +27,7 @@ class ReportController  extends GenericController{
 		}
 		log.info "Report : " + currentDate
 		String hourParameter = DateUtils.getDateFormat(DateTypes.HOUR_SIMPLIFIED, currentDate)
-		hourParameter='15052021'
+//		hourParameter='15052021'
 		[dateReport:hourParameter,dateShow:currentDate]
 	}
 	def reportPublic={
