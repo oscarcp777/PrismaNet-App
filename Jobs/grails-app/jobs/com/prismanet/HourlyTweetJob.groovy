@@ -26,7 +26,7 @@ class HourlyTweetJob {
 			currentDate = currentDate - 1.hour
 			def parameters = [:]
 			parameters.max = 3
-			def result = hourlyConceptStatsService.getStatsForUser(ParamConfig.get(1).config['user.report.id'], currentDate, parameters)
+			def result = hourlyConceptStatsService.getStatsForUser(Long.valueOf(ParamConfig.get(1).config['user.report.id']), currentDate, parameters)
 			tweetText = getRandomText(currentDate[Calendar.HOUR_OF_DAY].toString(), result.accountNames)
 		}
 		String hourParameter = DateUtils.getDateFormat(DateTypes.HOUR_SIMPLIFIED, currentDate)
