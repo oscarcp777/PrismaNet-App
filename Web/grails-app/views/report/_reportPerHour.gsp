@@ -4,13 +4,22 @@
 <div ng-app="prismaApp" >
 <div  ng-controller="ReportTweetCtrl as report">
 		<sec:ifLoggedIn>
-            <div class="col-xs-offset-7 col-sm-5 " >
-			<div class="form-inline timePickert">
-				<div class="form-group timePickert">
-				 <label ><b>Cambiar hora del reporte:</b></label>
-				 <uib-timepicker  class="form-control timePickert" ng-change="report.changed()" ng-model="timeReport"  show-meridian="false" hour-step="1" minute-step="60" ></uib-timepicker>
+            <div class="col-xs-offset-2 col-sm-10 " >
+            <div class="form-inline">
+				 <label style="margin-right: 10px;"><b> Cambiar hora del reporte: </b></label>
+				<div class="input-group">
+					 <input type="text" class="form-control date-picker col-xs-2" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="dt" 
+					 is-open="status.opened" max-date="maxDate" close-text="Cerrar" current-text="Hoy"   clear-text="Limpiar"/>
+					<span class="input-group-btn">
+					<button class="btn btn-sm btn-info" type="button" ng-click="report.open($event)">
+						<i class="ace-icon fa fa-calendar bigger-110"></i>
+					</button>
+				</span>
 				</div>
-				 <button type="submit" class="btn btn-info" ng-click="report.changedTime();">Cambiar</button>
+				<uib-timepicker  class="form-control timePickert" ng-change="report.changed()" ng-model="timeReport"  show-meridian="false" hour-step="1" minute-step="60" ></uib-timepicker>
+				<button type="button" class="btn btn-info btn-sm" ng-click="report.changedTime();">
+					<i class="ace-icon fa fa-key bigger-110"></i>Cambiar
+				</button>
 			</div>
 			</div>
 		</sec:ifLoggedIn>

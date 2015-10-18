@@ -6,9 +6,13 @@ var app =angular.module('prismaApp', ["highcharts-ng",'ngSanitize','ui.bootstrap
 	 $rootScope.dateReport=dateReport;
 	    var self=this;
 	    loadDataCtrl(self,$scope,$rootScope,$http,dateReport);
-	    
+	    $scope.dt=new Date();
+	    $scope.maxDate = new Date();
 	 	this.changedTime = function() {
-	 		timeReport=$filter('date')($scope.timeReport, 'yyMMddHH', '-0300');
+	 		var dt = moment($scope.dt);
+	 		var time = moment($scope.timeReport);
+	 		dt=dt.set('hour',time.hours());
+	 		timeReport=$filter('date')(dt.format('x'), 'yyMMddHH', '-0300');
 	 	    loadDataCtrl(self,$scope,$rootScope,$http,timeReport);
 	 	};
 	 	this.isSet = function(checkConcept) {
@@ -17,9 +21,13 @@ var app =angular.module('prismaApp', ["highcharts-ng",'ngSanitize','ui.bootstrap
         this.isUser = function() {
             return this.isUser;
         };
-        this.changed = function () {
-            console.log('Time changed to: ' + $scope.timeReport);
+        $scope.status = {
+        	    opened: false
+        };
+        this.open = function($event) {
+            $scope.status.opened = true;
           };
+        
         this.setConcept = function(concept) {
             this.checkConcept = concept;
             $rootScope.concept=concept;
