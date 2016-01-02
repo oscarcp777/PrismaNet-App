@@ -378,6 +378,7 @@ class ConceptController extends GenericController{
 	
 	@Secured(['ROLE_ADMIN'])
 	def create() {
+		//POR AHORA NO VEO Q SE USE
 		def concept=new Concept(params);
 		concept.setTwitterSetup(new TwitterSetup(params))
 		concept.setFacebookSetup(new FacebookSetup(params))
@@ -385,16 +386,48 @@ class ConceptController extends GenericController{
 	}
 
 	private Concept loadConcept(params){
-		def customParams=getParamsConcept(params)
+		def customParams = getParamsConcept(params)
 		def conceptInstance = new Concept(customParams)
-		def fcSetup=new FacebookSetup(customParams)
-		fcSetup.keywords=params.keywordsFace
-		def twSetup=new TwitterSetup(customParams)
-		twSetup.keywords=params.keywordsTw
-		conceptInstance.setTwitterSetup(twSetup)
+		
+		def fcSetup = getFacebookSetup(customParams)
 		conceptInstance.setFacebookSetup(fcSetup)
+
+		def twSetup = getTwitterSetup(customParams)
+		conceptInstance.setTwitterSetup(twSetup)
+		
 		conceptInstance
 	}
+	
+	/**
+	 * Valida parametros, si no hay nada seteado para facebook devuelve null
+	 * @param parameters
+	 * @return
+	 */
+	private FacebookSetup getFacebookSetup(parameters){
+		def fcSetup=new FacebookSetup(parameters)
+		if (parameters.keywordsFace)
+			fcSetup.keywords=parameters.keywordsFace
+		else
+			fcSetup = null
+		fcSetup
+	}
+	
+	/**
+	 * Valida parametros, si no hay nada seteado para twitter devuelve null
+	 * @param parameters
+	 * @return
+	 */
+	private TwitterSetup getTwitterSetup(parameters){
+		def twSetup=new TwitterSetup(parameters)
+		if (!parameters.keywordsTw && !parameters.keywordsTw &&
+			!parameters.negativeHashtags && !parameters.excludedAccounts &&
+			 !parameters.includedAccounts && !parameters.neutralHashtags && !parameters.positiveHashtags)
+			twSetup = null
+		else
+			twSetup.keywords=parameters.keywordsTw
+		twSetup
+	}
+	
 	@Secured(['ROLE_USER_ADVANCE'])
 	def saveAdvance() {
 		log.info "params: " + params
@@ -447,14 +480,28 @@ class ConceptController extends GenericController{
 			}
 		}
 
-		conceptInstance.properties = params
-		conceptInstance.twitterSetup.properties = params
-		conceptInstance.facebookSetup.properties = params
+				def customParams=getParamsConcept(params)
+		conceptInstance.properties = customParams
+		
+		if(conceptInstance.twitterSetup == null){
+			conceptInstance.twitterSetup = getTwitterSetup(customParams)
+		}else{
+			conceptInstance.twitterSetup.properties = customParams
+			conceptInstance.twitterSetup.keywords=customParams.keywordsTw
+		}
+		
+		if(conceptInstance.facebookSetup == null){
+			conceptInstance.facebookSetup = getFacebookSetup(customParams)
+		}else{
+			conceptInstance.facebookSetup.properties = customParams
+			conceptInstance.facebookSetup.keywords=customParams.keywordsFace
+		}
+
 		if (!conceptInstance.save(flush: true)) {
 			render(view: "edit", model: [conceptInstance: conceptInstance])
 			return
 		}
-
+		log.info "El concepto " + id + " se actualizo con valores: " + customParams
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'concept.label', default: 'Concept'), conceptInstance.id])
 		redirect(action: "show", id: conceptInstance.id)
 	}
@@ -532,6 +579,7 @@ class ConceptController extends GenericController{
 	
 	@Secured(['ROLE_USER_ADVANCE'])
 	def createAdvance() {
+		//POR AHORA NO VEO Q SE USE
 		def concept=new Concept(params);
 		concept.setTwitterSetup(new TwitterSetup(params))
 		concept.setFacebookSetup(new FacebookSetup(params))
@@ -559,8 +607,6 @@ class ConceptController extends GenericController{
 	}
 	@Secured(['ROLE_USER_ADVANCE'])
 	def updateAdvance(Long id, Long version) {
-		log.info "params: " + params
-		
 		def conceptInstance = Concept.get(id)
 		if (!conceptInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'concept.label', default: 'Concept'), id])
@@ -579,29 +625,36 @@ class ConceptController extends GenericController{
 		}
 		
 		def customParams=getParamsConcept(params)
-
-				conceptInstance.properties = customParams
-		if(conceptInstance.twitterSetup==null){
-			conceptInstance.twitterSetup=new TwitterSetup()
+		conceptInstance.properties = customParams
+		
+		if(conceptInstance.twitterSetup == null){
+			conceptInstance.twitterSetup = getTwitterSetup(customParams)
+		}else{
+			conceptInstance.twitterSetup.properties = customParams
+			conceptInstance.twitterSetup.keywords=customParams.keywordsTw
 		}
-		conceptInstance.twitterSetup.properties = customParams
-		conceptInstance.twitterSetup.keywords=customParams.keywordsTw
-		if(conceptInstance.facebookSetup==null){
-			conceptInstance.facebookSetup=new FacebookSetup()
+		
+		if(conceptInstance.facebookSetup == null){
+			conceptInstance.facebookSetup = getFacebookSetup(customParams)
+		}else{
+			conceptInstance.facebookSetup.properties = customParams
+			conceptInstance.facebookSetup.keywords=customParams.keywordsFace
 		}
-		conceptInstance.facebookSetup.properties = customParams
-		conceptInstance.facebookSetup.keywords=customParams.keywordsFace
+		
 		if (!conceptInstance.save(flush: true)) {
 			render(view: "editAdvance", model: [conceptInstance: conceptInstance])
 			return
 		}
-
+		log.info "El concepto " + id + " se actualizo con valores: " + customParams
 		flash.message = message(code: 'concept.user.advance.update.ok', args: [conceptInstance.conceptName])
 		redirect(action: "showAdvance", id: conceptInstance.id)
 	}
 	def changeStatus(){
-		def concept = Concept.get(params.id)
+		Concept concept = Concept.get(params.id)
 		concept.active=!concept.active
+		def date = new Date()
+		concept.twitterSetup?.lastUpdated = date
+		concept.facebookSetup?.lastUpdated = date
 		if (concept.save(flush: true)) {
 			loadConceptsSession()
 			render(template: "tableConcepts", model: [conceptList:session.concepts])

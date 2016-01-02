@@ -7,6 +7,8 @@ class TwitterSetupController {
 	def index() {
 		redirect action: 'list', controller: 'twitterSetup'
 	}
+	
+	@Secured(['ROLE_USER','ROLE_USER_ADVANCE','ROLE_ADMIN'])
 	def update(Long id, Long version) {
         def twitterSetup = TwitterSetup.get(id)
         if (!twitterSetup) {
