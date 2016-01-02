@@ -11,6 +11,7 @@ import facebook4j.FacebookFactory
 class FacebookSetupService extends GenericCoreService {
 		
 	def messageSource
+	def conceptService
 	
 	def getLastUpdated(){
 		def filters = []
@@ -22,13 +23,14 @@ class FacebookSetupService extends GenericCoreService {
 	}
 	
 	def getConfiguration(){
-		def configs = FacebookSetup.findAll()
+		def concepts = conceptService.getActiveConcepts()
 		def stringConfig = ""
-		configs.each{ FacebookSetup setup ->
-			if (setup.keywords && !stringConfig.contains(setup.keywords))
-				stringConfig += setup.keywords + ","
+		concepts.each{ Concept c ->
+			if (c.facebookSetup?.keywords && !stringConfig.contains(c.facebookSetup?.keywords))
+				stringConfig += c.facebookSetup.keywords + ","
 		}
-		stringConfig = stringConfig[0..-2]
+		if (stringConfig.size() > 0)
+			stringConfig = stringConfig[0..-2]
 		log.info "la configuracion de facebook es: " + stringConfig
 		stringConfig
 	}

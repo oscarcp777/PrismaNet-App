@@ -8,6 +8,7 @@ import com.prismanet.context.TwitterSetupAttributeContext
 
 class TwitterSetupService extends GenericCoreService {
 		
+	def conceptService
 	
 	def getLastUpdated(){
 		def filters = []
@@ -19,16 +20,19 @@ class TwitterSetupService extends GenericCoreService {
 	}
 	
 	def getConfiguration(){
-		def configs = TwitterSetup.findAll()
+		def concepts = conceptService.getActiveConcepts()
 		String stringConfig = ""
-		configs.each{ TwitterSetup setup ->
-			stringConfig = addTerms(stringConfig, setup.includedAccounts)
-			stringConfig = addTerms(stringConfig, setup.keywords)
-			stringConfig = addTerms(stringConfig, setup.neutralHashtags)
-			stringConfig = addTerms(stringConfig, setup.positiveHashtags)
-			stringConfig = addTerms(stringConfig, setup.negativeHashtags)
+		concepts.each{ Concept c ->
+			if (c.twitterSetup){
+				stringConfig = addTerms(stringConfig, c.twitterSetup.includedAccounts)
+				stringConfig = addTerms(stringConfig, c.twitterSetup.keywords)
+				stringConfig = addTerms(stringConfig, c.twitterSetup.neutralHashtags)
+				stringConfig = addTerms(stringConfig, c.twitterSetup.positiveHashtags)
+				stringConfig = addTerms(stringConfig, c.twitterSetup.negativeHashtags)
+			}
 		}
-		stringConfig = stringConfig[0..-2]
+		if (stringConfig.size() > 0)
+			stringConfig = stringConfig[0..-2]
 		log.info "la configuracion es: " + stringConfig
 		stringConfig
 	}
