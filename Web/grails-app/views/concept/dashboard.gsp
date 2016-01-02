@@ -17,12 +17,12 @@
 
 		<div class="row">
 			<div class="col-lg-12">
-<div class="alert alert-block alert-warning">
+<%--<div class="alert alert-block alert-warning">
 
 								<i class="ace-icon fa fa-exclamation-triangle fa-2x pull-left fa-border" style="border: solid 0.08em #fcf8e3;color:red;"></i>
 								<g:message code='concept.general.edition'/> 
 							</div>
-				<div class="col-md-6">
+				--%><div class="col-md-6">
 					<div class="profile-user-info profile-user-info-striped">
 						<div class="profile-info-row">
 							<div class="profile-info-name">
@@ -46,7 +46,7 @@
 							</div>
 
 							<div class="profile-info-value">
-								<span > ${twSetup.includedAccounts}
+								<span class="editable editable-click" id="includedAccounts" data-value='${twSetup.includedAccounts}'> ${twSetup.includedAccounts}
 								</span>
 							</div>
 						</div>
@@ -131,11 +131,26 @@
 	        var id='${concept.id}';
 	        var idTS='${twSetup.id}'
 			activeItemMenuLevel2(id,id+'-dash','${concept.conceptName}');
+	        var titleAccounts='${message(code: "dashborad.config.twitter.included.accounts")}';
 			var titleKeywords='${message(code: "dashborad.config.twitter.keywords")}';
 			var titleNeutral='${message(code: "dashborad.config.twitter.neutral.hashtags")}';
 			var titlePositive='${message(code: "dashborad.config.twitter.positive.hashtags")}';
 			var titleNegative='${message(code: "dashborad.config.twitter.negative.hashtags")}';
-			
+
+
+			function validateAccounts(value){
+		    	var values=$.trim(value).split(',');
+		    	var re = new RegExp('^@[0-9A-Za-z_]+');
+		    	for (var i = 0; i < values.length; i++) {
+		    		var val=values[i];
+		    		 if(val.length > 1 &&  val.length < 4) {
+				            return 'Debe ingresar una cuenta de mas de 3 letras';
+				     }else if(val.length > 1 && !val.match(re)){
+				    	 return 'Debe tener un formato de Cuenta valido (@ejemplo)';
+				     }
+		    	}
+		       
+			}
 			function validateHash(value){
 			    	var values=$.trim(value).split(',');
 			    	var re = new RegExp('^#[0-9A-Za-z_]+');
@@ -164,7 +179,7 @@
 			function editField(id,title,validateCall){
 				$('#'+id).editable({
 					type:'text',
-					emptytext:'Ingrese valor',
+					emptytext:'Ingrese valor (o valores separados por comas)',
 					title: title,
 					success: function(response, newValue) {
 						bootbox.confirm("Esta seguro cambiar a ' "+newValue+" '?", function(result) {
@@ -186,6 +201,7 @@
 			});
 			}
 			$(function() {
+				editField('includedAccounts',titleAccounts,validateAccounts);
 				editField('keywords',titleKeywords,validateKeywords);
 				editField('neutralHashtags',titleNeutral,validateHash);
 				editField('positiveHashtags',titlePositive,validateHash);
