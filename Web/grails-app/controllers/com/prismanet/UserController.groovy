@@ -72,6 +72,7 @@ class UserController extends GenericController{
 	
 	
 	def stats = {
+		log.info "Usuario logueado: " + session.user
 		[user: session.user]
 	}
 		

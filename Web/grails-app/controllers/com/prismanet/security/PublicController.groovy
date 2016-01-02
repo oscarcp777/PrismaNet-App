@@ -6,6 +6,7 @@ import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import com.prismanet.Contact
 import com.prismanet.utils.DateTypes
 import com.prismanet.utils.DateUtils
+
 class PublicController {
 
     def springSecurityService
