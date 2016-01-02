@@ -136,9 +136,14 @@ class TweetJob {
 	
 	private initProcess(MongoTweetsImporter importer, Date lastUpdate){
 		// Actualizo config. de mongo
-		importer.setConfiguration(twitterSetupService.getConfiguration())
-		Runtime.getRuntime().exec("java -jar "+pathCommand+"prismanet-twitter-api.jar")
-		log.info "Proceso api-twitter iniciado, ultima modificacion a las : " + lastUpdate
+		String config = twitterSetupService.getConfiguration()
+		if (config.size() >0){
+			importer.setConfiguration(config)
+			Runtime.getRuntime().exec("java -jar "+pathCommand+"prismanet-twitter-api.jar")
+			log.info "Proceso api-twitter iniciado, ultima modificacion a las : " + lastUpdate
+		}else{
+			log.info "El proceso api-twitter no se inicio porque no hay conceptos configurados"
+		}
 	}
 	
 }
