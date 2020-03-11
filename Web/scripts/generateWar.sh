@@ -1,5 +1,5 @@
 # !/bin/bash.
-URL_GIT="https://oscarcp777:m0t0r014@github.com/sdonik"
+URL_GIT="https://github.com/sdonik"
 PATH_PRISMA="/home/prismanet/PrismaNet-App"
 
 echo -e  "1.-Bajo los ultimos cambios del repositorio"
